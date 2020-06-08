@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "deepmagic:deep_crystal_block" }
+    }
+}

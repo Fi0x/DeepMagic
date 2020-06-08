@@ -1,0 +1,53 @@
+//General
+itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
+itemGroup.deepmagic_items_tab=Deep Magic Items
+
+//Items
+item.deep_crystal.name=Deep Crystal
+item.compressed_deep_crystal.name=Compressed Deep Crystal
+item.deep_crystal_powder.name=Deep Crystal Powder
+item.teleportation_crystal.name=Teleportation Crystal
+item.mana_booster.name=Mana Booster
+item.mana_waster.name=Mana Waster
+item.mana_monitor.name=Mana Monitor
+
+//Blocks
+tile.deep_crystal_ore.name=Deep Crystal Ore
+tile.deep_crystal_nether_ore.name=Deep Crystal Ore
+tile.deep_crystal_end_ore.name=Deep Crystal Ore
+tile.deep_crystal_block.name=Deep Crystal Block
+tile.ore_crusher.name=Ore Crusher
+tile.crystal_presser.name=Crystal Presser
+tile.insanity_stone.name=Insanity Stone
+tile.insanity_dirt.name=Insanity Dirt
+tile.insanity_grass.name=Insanity Grass
+tile.insanity_wood.name=Insanity Wood Log
+tile.insanity_planks.name=Insanity Planks
+tile.insanity_leaves.name=Insanity Leaves
+tile.insanity_tree_sapling.name=Insanity Tree Sapling
+tile.insanity_flower.name=Insanity Flower
+tile.dungeon_brick.name=Dungeon Brick
+
+//Vegetation
+
+//Tools
+item.deep_crystal_sword.name=Deep Crystal Sword
+item.deep_crystal_shovel.name=Deep Crystal Shovel
+item.deep_crystal_hoe.name=Deep Crystal Hoe
+item.deep_crystal_axe.name=Deep Crystal Axe
+item.deep_crystal_pickaxe.name=Deep Crystal Pickaxe
+
+//Armor
+item.deep_crystal_helmet.name=Deep Crystal Helmet
+item.deep_crystal_chestplate.name=Deep Crystal Chestplate
+item.deep_crystal_leggings.name=Deep Crystal Leggings
+item.deep_crystal_boots.name=Deep Crystal Boots
+
+//Food
+item.crystal_infused_apple.name=Crystal Infused Apple
+
+//TileEntities
+container.ore_crusher=Ore Crusher
+
+//Mobs
+entity.insanity_cow.name=Insanity Cow

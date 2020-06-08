@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "C C",
+        "CCC",
+        "CCC"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:deep_crystal"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:deep_crystal_chestplate",
+        "count": 1
+    }
+}

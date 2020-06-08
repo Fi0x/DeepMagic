@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "C",
+        "C",
+        "S"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:deep_crystal"
+        },
+        "S":
+        {
+            "item": "minecraft:stick"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:deep_crystal_sword",
+        "count": 1
+    }
+}

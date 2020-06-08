@@ -1,0 +1,11 @@
+{
+   "parent": "block/cube",
+   "textures": {
+       "up": "deepmagic:blocks/insanity_grass_top",
+       "down": "deepmagic:blocks/insanity_dirt",
+       "north": "deepmagic:blocks/insanity_grass_side",
+       "east": "deepmagic:blocks/insanity_grass_side",
+       "south": "deepmagic:blocks/insanity_grass_side",
+       "west": "deepmagic:blocks/insanity_grass_side"
+   }
+}

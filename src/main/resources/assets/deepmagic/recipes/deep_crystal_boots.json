@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "C C",
+        "C C"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:deep_crystal"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:deep_crystal_boots",
+        "count": 1
+    }
+}

@@ -1,0 +1,17 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "deepmagic:deep_crystal_block"
+    }
+    ],
+
+    "result": 
+    {
+        "item": "deepmagic:deep_crystal",
+        "count": 9
+    }
+}

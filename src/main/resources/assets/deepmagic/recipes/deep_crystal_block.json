@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RRR",
+        "RRR",
+        "RRR"
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+            "item": "deepmagic:deep_crystal"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:deep_crystal_block",
+        "count": 1
+    }
+}

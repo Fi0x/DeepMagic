@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "deepmagic:items/deep_crystal_shovel"
+   }
+}
