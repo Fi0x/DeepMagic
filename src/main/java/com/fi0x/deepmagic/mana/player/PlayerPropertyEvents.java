@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.mana;
+package com.fi0x.deepmagic.mana.player;
 
 import com.fi0x.deepmagic.util.Reference;
 
@@ -34,6 +34,7 @@ public class PlayerPropertyEvents
             {
                 PlayerMana oldStore = event.getOriginal().getCapability(PlayerProperties.PLAYER_MANA, null);
                 PlayerMana newStore = PlayerProperties.getPlayerMana(event.getEntityPlayer());
+                assert oldStore != null;
                 newStore.copyFrom(oldStore);
             }
         }
@@ -43,7 +44,8 @@ public class PlayerPropertyEvents
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
     	PlayerMana playermana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
-    	playermana.addMana(0.1);
+        assert playermana != null;
+        playermana.addMana(0.1);
     	
     }
 }

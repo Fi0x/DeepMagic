@@ -11,11 +11,12 @@ Insanity Dimension
 		safe oasis (has no insanity blocks)
 		shrines (for levelups)
 		dragon lair
+	    add structure loot tables
 	rotate structures randomly
 	add mobs to structures
 
 Mobs
-	Bosses (Dragons?)
+	Bosses
 		Nether (Worm)
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))
@@ -25,10 +26,11 @@ Mobs
 		Cyclopse
 	Passives
 		Insanity Cow
-			fix everything (make them insane again)
+		    add custom sound
+		    create loottable
 
 Mana1System
-	add manabar in hud
+	add manabar in hud (GuiManaRenderOverlay)
 ManaLevel
     levelup with mana-experience or mechanic (rituals/items)
     levelup gives skillpoints for skilltrees
