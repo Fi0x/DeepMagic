@@ -44,9 +44,7 @@ Implement Spells
 
 Classes:
     uncomment InsanityCow in RenderHandler
-    Add BiomeInit in init
-    Add DimensionInit in init
+    uncomment InsanityCow in BiomeInsanity
     Add EntityInit in init
     Recreate Main class
     Add entities classes
-    Add world classes and packages
