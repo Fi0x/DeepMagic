@@ -11,6 +11,7 @@ Insanity Dimension
 		safe oasis (has no insanity blocks)
 		shrines (for levelups)
 		dragon lair
+	    add structure loot tables
 	rotate structures randomly
 	add mobs to structures
 
@@ -25,9 +26,8 @@ Mobs
 		Cyclopse
 	Passives
 		Insanity Cow
-		    add animations
-		    add sound
-		    add ai
+		    add custom sound
+		    create loottable
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
