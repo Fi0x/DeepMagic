@@ -1,30 +1,43 @@
 package com.fi0x.deepmagic;
 
-import net.minecraft.init.Blocks;
+import com.fi0x.deepmagic.proxy.CommonProxy;
+import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = "deepmagic", name = "Deep Magic", version = "1.0")
+@Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class Main
 {
-	public static final String MODID = "examplemod";
-	public static final String NAME = "Example Mod";
-	public static final String VERSION = "1.0";
+	@Mod.Instance
+	public static Main instance;
 
-	private static Logger logger;
+	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
+	public static CommonProxy proxy;
 
 	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event)
+	public static void preInit(FMLPreInitializationEvent event)
 	{
-		logger = event.getModLog();
 	}
 
 	@Mod.EventHandler
-	public void init(FMLInitializationEvent event)
+	public static void init(FMLInitializationEvent event)
 	{
-		// some example code
-		logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+	}
+
+	@Mod.EventHandler
+	public static void PostInit(FMLPostInitializationEvent event)
+	{
+	}
+
+	@Mod.EventHandler
+	public static void serverInit(FMLServerStartingEvent event)
+	{
+		RegistryHandler.serverRegistries(event);
 	}
 }
