@@ -1,0 +1,43 @@
+Insanity Biome:
+	Place custom flowers
+	Add custom trees
+	place custom trees
+	Add custom Water
+	Make a good Spawnlist
+Insanity Dimension
+	create potion effects
+	add structures
+		dungeons
+		safe oasis
+		shrines (for levelups)
+		rotate structures randomly
+Teleportation Crystal
+	Add costs for using the crystal (Cooldown, Durability, Mana)
+Mobs
+	Bosses
+		Nether (Worm)
+		Overworld (Spawnable)
+		Insanity Dimension (Dragon (in Dragon Lair))
+	Hostiles
+		Griffin
+		Zentaur
+		Cyclopse
+	Passives
+		Insanity Cow
+			fix head
+Implement Mana
+	Mana Bar
+		sync bar with value
+Implement passive Skilltree
+	increased mana generation
+	increase max mana
+	increase health
+	increase regeneration
+	reduce mana consumption
+Implement active Skills
+	flight for mana consumption
+	regeneration effect for mana consumption
+	2nd chance
+	spells tier 1-10
+Implement Spells
+	use mana
