@@ -28,6 +28,9 @@ Mobs
 		Insanity Cow
 		    add custom sound
 		    create loottable
+		Spiky Slime
+		    create loottable
+		    change particle effects
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
