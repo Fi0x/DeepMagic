@@ -1,15 +1,23 @@
 package com.fi0x.deepmagic;
 
+import com.fi0x.deepmagic.mana.PlayerMana;
+import com.fi0x.deepmagic.mana.PlayerPropertyEvents;
 import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.RegistryHandler;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import javax.annotation.Nullable;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class Main
@@ -23,6 +31,19 @@ public class Main
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
+		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
+		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
+			@Nullable
+			@Override
+			public NBTBase writeNBT(Capability<PlayerMana> capability, PlayerMana instance, EnumFacing side) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void readNBT(Capability<PlayerMana> capability, PlayerMana instance, EnumFacing side, NBTBase nbt) {
+				throw new UnsupportedOperationException();
+			}
+		}, () -> null);
 	}
 
 	@Mod.EventHandler
