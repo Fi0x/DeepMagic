@@ -44,7 +44,7 @@ public class PlayerMana
 			return false;
 		}
 		mana -= (value/Math.pow(1.1, manaEfficiency));
-		player.sendMessage(new TextComponentString(TextFormatting.GREEN + "Mana consumed: " + (value/Math.pow(1.1, manaEfficiency))));
+		player.sendMessage(new TextComponentString(TextFormatting.GOLD + "Mana consumed: " + (value/Math.pow(1.1, manaEfficiency))));
 		return true;
 	}
 	public double getMaxMana()
@@ -80,7 +80,7 @@ public class PlayerMana
 	{
 		if(!world.isRemote)
 		{
-			player.sendMessage(new TextComponentString("Mana: " + (int) mana + " / " + (int) maxMana));
+			player.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana: " + (int) mana + " / " + (int) maxMana));
 		}
 	}
 	
