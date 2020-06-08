@@ -41,10 +41,3 @@ Implement active Skills
 	spells tier 1-10
 Implement Spells
 	use mana
-
-Classes:
-    uncomment InsanityCow in RenderHandler
-    uncomment InsanityCow in BiomeInsanity
-    Add EntityInit in init
-    Recreate Main class
-    Add entities classes

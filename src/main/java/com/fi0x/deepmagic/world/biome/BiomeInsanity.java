@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.world.biome;
 
 import java.util.Random;
 
+import com.fi0x.deepmagic.entities.EntityInsanityCow;
 import com.fi0x.deepmagic.init.ModBlocks;
 
 import net.minecraft.block.Block;
@@ -38,7 +39,7 @@ public class BiomeInsanity extends Biome
 		
 		decorator = new DecoratorInsanityBiome();
 		
-//		this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 20, 1, 5));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 20, 1, 5));
 	}
 	
 	@Override
