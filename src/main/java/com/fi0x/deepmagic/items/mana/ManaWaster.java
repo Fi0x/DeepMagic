@@ -41,7 +41,6 @@ public class ManaWaster extends Item implements IHasModel
         ItemStack stack = playerIn.getHeldItem(handIn);
         if(!worldIn.isRemote)
         {
-            stack = new ItemStack(Blocks.AIR, 0);
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
             if(playerMana.removeMana(10, playerIn))
