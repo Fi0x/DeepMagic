@@ -2,6 +2,7 @@ package com.fi0x.deepmagic;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.DimensionInit;
+import com.fi0x.deepmagic.init.EntityInit;
 import com.fi0x.deepmagic.init.ModRecipes;
 import com.fi0x.deepmagic.mana.PlayerMana;
 import com.fi0x.deepmagic.mana.PlayerPropertyEvents;
@@ -9,6 +10,7 @@ import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.RegistryHandler;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
+import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,6 +41,9 @@ public class Main
 		BiomeInit.registerBiomes();
 		DimensionInit.registerDimensions();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
+		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
+		EntityInit.registerEntities();
+
 		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
 		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
 			@Nullable

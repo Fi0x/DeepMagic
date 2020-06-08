@@ -31,7 +31,6 @@ public class TeleportationCrystal extends Item implements IHasModel
 		setRegistryName(name);
 		setCreativeTab(DeepMagicTab.ITEMS);
 		setMaxStackSize(1);
-		setMaxDamage(10);
 		
 		ModItems.ITEMS.add(this);
 	}
