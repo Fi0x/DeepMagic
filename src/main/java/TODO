@@ -15,7 +15,7 @@ Insanity Dimension
 	add mobs to structures
 
 Mobs
-	Bosses (Dragons?)
+	Bosses
 		Nether (Worm)
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))
@@ -25,10 +25,9 @@ Mobs
 		Cyclopse
 	Passives
 		Insanity Cow
-			fix everything (make them insane again)
 
 Mana1System
-	add manabar in hud
+	add manabar in hud (GuiManaRenderOverlay)
 ManaLevel
     levelup with mana-experience or mechanic (rituals/items)
     levelup gives skillpoints for skilltrees

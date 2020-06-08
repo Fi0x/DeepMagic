@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.world.biome;
 
 import java.util.Random;
 
-import com.fi0x.deepmagic.entities.EntityInsanityCow;
 import com.fi0x.deepmagic.init.ModBlocks;
 
 import net.minecraft.block.Block;
@@ -15,6 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+
+import javax.annotation.Nonnull;
 
 public class BiomeInsanity extends Biome
 {
@@ -38,12 +39,10 @@ public class BiomeInsanity extends Biome
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
 		
 		decorator = new DecoratorInsanityBiome();
-		
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 20, 1, 5));
 	}
 	
 	@Override
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    public void genTerrainBlocks(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
         this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
@@ -143,7 +142,7 @@ public class BiomeInsanity extends Biome
 		return false;
 	}
 	@Override
-	public int getFoliageColorAtPos(BlockPos pos)
+	public int getFoliageColorAtPos(@Nonnull BlockPos pos)
 	{
 		return FOLIAGE_COLOR;
 	}

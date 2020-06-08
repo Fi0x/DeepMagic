@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.mana;
+package com.fi0x.deepmagic.mana.player;
 
 //import com.fi0x.deepmagic.util.Reference;
 //

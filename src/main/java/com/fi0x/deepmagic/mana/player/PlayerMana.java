@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.mana;
+package com.fi0x.deepmagic.mana.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
