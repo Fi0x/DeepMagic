@@ -2,12 +2,14 @@ package com.fi0x.deepmagic;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.DimensionInit;
+import com.fi0x.deepmagic.init.EntityInit;
 import com.fi0x.deepmagic.init.ModRecipes;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerPropertyEvents;
 import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.RegistryHandler;
+import com.fi0x.deepmagic.util.handlers.RenderHandler;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
 import net.minecraft.nbt.NBTBase;
@@ -37,6 +39,8 @@ public class Main
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
+		EntityInit.registerEntities();
+		RenderHandler.registerEntityRenders();
 		BiomeInit.registerBiomes();
 		DimensionInit.registerDimensions();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);

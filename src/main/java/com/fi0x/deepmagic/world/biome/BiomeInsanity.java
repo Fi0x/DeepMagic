@@ -2,12 +2,14 @@ package com.fi0x.deepmagic.world.biome;
 
 import java.util.Random;
 
+import com.fi0x.deepmagic.entities.EntityInsanityCow;
 import com.fi0x.deepmagic.init.ModBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -34,6 +36,8 @@ public class BiomeInsanity extends Biome
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
+
+		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
 		
 		this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);

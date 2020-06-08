@@ -25,6 +25,9 @@ Mobs
 		Cyclopse
 	Passives
 		Insanity Cow
+		    add animations
+		    add sound
+		    add ai
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
