@@ -8,10 +8,16 @@ import net.minecraft.world.World;
 
 public class PlayerMana
 {
+	//Mana System
 	private double mana = 0;
 	private double maxMana = 100;
+
+	//Skills
 	private double manaRegenRate = 0;
 	private double manaEfficiency = 0;
+	private int maxManaMultiplier = 0;
+	private int addedHP = 0;
+	private int hpRegeneration = 0;
 	
 	public PlayerMana() {}
 	
@@ -25,11 +31,11 @@ public class PlayerMana
 	}
 	public boolean addMana(double value)
 	{
-		if(mana+(value*Math.pow(1.1, manaRegenRate)) > maxMana && mana < maxMana)
+		if(mana+(value*Math.pow(1.1, manaRegenRate)) > maxMana*Math.pow(1.1, maxManaMultiplier) && mana < maxMana*Math.pow(1.1, maxManaMultiplier))
 		{
-			mana = maxMana;
+			mana = maxMana*Math.pow(1.1, maxManaMultiplier);
 			return false;
-		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= maxMana)
+		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= maxMana*Math.pow(1.1, maxManaMultiplier))
 		{
 			mana += (value*Math.pow(1.1, manaRegenRate));
 			return true;
@@ -49,7 +55,7 @@ public class PlayerMana
 	}
 	public double getMaxMana()
 	{
-		return maxMana;
+		return maxMana*Math.pow(1.1, maxManaMultiplier);
 	}
 	public void setMaxMana(double maxMana)
 	{
@@ -57,7 +63,7 @@ public class PlayerMana
 	}
 	public double getManaPercentage()
 	{
-		if(mana <= maxMana) return (100/maxMana)*mana;
+		if(mana <= maxMana) return (100/maxMana*Math.pow(1.1, maxManaMultiplier))*mana;
 		return 100;
 	}
 	public void setManaRegenRate(double manaRegenRate)
@@ -80,7 +86,7 @@ public class PlayerMana
 	{
 		if(!world.isRemote)
 		{
-			player.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana: " + (int) mana + " / " + (int) maxMana));
+			player.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana: " + (int) mana + " / " + (int) maxMana*Math.pow(1.1, maxManaMultiplier)));
 		}
 	}
 	
@@ -90,6 +96,9 @@ public class PlayerMana
 		maxMana = source.maxMana;
 		manaRegenRate = source.manaRegenRate;
 		manaEfficiency = source.manaEfficiency;
+		maxManaMultiplier = source.maxManaMultiplier;
+		addedHP = source.addedHP;
+		hpRegeneration = source.hpRegeneration;
 	}
 	public void saveNBTData(NBTTagCompound compound)
 	{
@@ -97,6 +106,9 @@ public class PlayerMana
 		compound.setDouble("maxMana", maxMana);
 		compound.setDouble("manaRegenerationRate", manaRegenRate);
 		compound.setDouble("manaEfficiency", manaEfficiency);
+		compound.setInteger("maxManaMultiplier", maxManaMultiplier);
+		compound.setInteger("addedHP", addedHP);
+		compound.setInteger("hpRegeneration", hpRegeneration);
 	}
 	public void loadNBTData(NBTTagCompound compound)
 	{
@@ -104,5 +116,8 @@ public class PlayerMana
 		maxMana = compound.getDouble("maxMana");
 		manaRegenRate = compound.getDouble("manaRegenerationRate");
 		manaEfficiency = compound.getDouble("manaEfficiency");
+		maxManaMultiplier = compound.getInteger("maxManaMultiplier");
+		addedHP = compound.getInteger("addedHP");
+		hpRegeneration = compound.getInteger("hpRegeneration");
 	}
 }

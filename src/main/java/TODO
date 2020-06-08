@@ -28,6 +28,10 @@ Mobs
 		Insanity Cow
 		    add custom sound
 		    create loottable
+		Spiky Slime
+		    create loottable
+		    fix texture
+		    change particle effects
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
@@ -35,14 +39,10 @@ ManaLevel
     levelup with mana-experience or mechanic (rituals/items)
     levelup gives skillpoints for skilltrees
 Implement passive Skilltree
-	increased mana generation
-	increase max mana
-	increase health
-	increase regeneration
-	reduce mana consumption
 	increased saturation
 	increased resistances
 	potion effects
+	Gui to use skillpoints
 Implement active Skills
 	flight for mana consumption
 	regeneration effect for mana consumption
