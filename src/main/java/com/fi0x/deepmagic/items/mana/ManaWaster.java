@@ -22,6 +22,7 @@ public class ManaWaster extends Item implements IHasModel
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(DeepMagicTab.ITEMS);
+		setMaxStackSize(1);
 		
 		ModItems.ITEMS.add(this);
 	}

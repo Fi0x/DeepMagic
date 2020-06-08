@@ -2,7 +2,7 @@
 {
   "modid": "deepmagic",
   "name": "Deep Magic",
-  "description": "Mod that uses magic from the depths of the world.",
+  "description": "Mod that uses magic from the depths of the world. (And maybe from the dead)",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
