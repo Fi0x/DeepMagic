@@ -40,7 +40,7 @@ public class EntitySpikySlime extends EntitySlime
     @Override
     protected int getJumpDelay()
     {
-        return this.rand.nextInt(60);
+        return this.rand.nextInt(200);
     }
     @Override
     protected boolean canDamagePlayer()
