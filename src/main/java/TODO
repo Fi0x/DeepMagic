@@ -33,6 +33,7 @@ Mobs
 		    create loottable
 		    fix texture
 		    change particle effects
+		    add custom sound
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
@@ -42,7 +43,18 @@ ManaLevel
 Implement passive Skilltree
 	increased saturation
 	increased resistances
+	    fire, explosion, drowning, arrow, meele, ...
 	potion effects
+	permanent xp boost
+	increased damage
+	    meele
+	    ranged
+	    magic
+	increased armor
+	feather fall
+	jump height
+	tool speed
+	weapon speed
 	Gui to use skillpoints
 Implement active Skills (With Scrolls?)
     Weather control
@@ -51,6 +63,9 @@ Implement active Skills (With Scrolls?)
 	flight for mana consumption
 	regeneration effect for mana consumption
 	2nd chance
+	silk touch
+	fortune
+	auto smelting
 	spells tier 1-10
 Implement Spells
 	use mana

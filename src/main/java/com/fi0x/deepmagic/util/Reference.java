@@ -11,4 +11,5 @@ public class Reference
 	
 	public static final int DIMENSION_ID = 42;
 	public static final int ENTITY_INSANITY_COW = 1764;
+	public static final int ENTITY_SPIKY_SLIME = 1765;
 }
