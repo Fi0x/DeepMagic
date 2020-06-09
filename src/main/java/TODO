@@ -5,6 +5,7 @@ Insanity Biome
 	Add custom Water
 	keep Spawnlist up-to-date
 Insanity Dimension
+    enable rain
 	create potion effects
 	add structures
 		dungeons (with riddles)
@@ -30,8 +31,8 @@ Mobs
 		    create loottable
 		Spiky Slime
 		    create loottable
-		    change particle effects
 		    fix texture
+		    change particle effects
 		    add custom sound
 
 Mana1System
@@ -40,11 +41,6 @@ ManaLevel
     levelup with mana-experience or mechanic (rituals/items)
     levelup gives skillpoints for skilltrees
 Implement passive Skilltree
-	increased mana generation
-	increase max mana
-	increase health
-	increase regeneration
-	reduce mana consumption
 	increased saturation
 	increased resistances
 	    fire, explosion, drowning, arrow, meele, ...
@@ -59,7 +55,11 @@ Implement passive Skilltree
 	jump height
 	tool speed
 	weapon speed
-Implement active Skills
+	Gui to use skillpoints
+Implement active Skills (With Scrolls?)
+    Weather control
+    Time control
+    World control
 	flight for mana consumption
 	regeneration effect for mana consumption
 	2nd chance
@@ -91,3 +91,9 @@ Items
     End-game-armor
         as strong as draconic evolution
         uses mana(1 or 2)
+
+Blocks
+    Weather/Time/World controller
+        controls world events
+    Altar of Knowledge
+        opens skill tree
