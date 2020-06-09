@@ -42,11 +42,25 @@ Implement passive Skilltree
 	reduce mana consumption
 	increased saturation
 	increased resistances
+	    fire, explosion, drowning, arrow, meele, ...
 	potion effects
+	permanent xp boost
+	increased damage
+	    meele
+	    ranged
+	    magic
+	increased armor
+	feather fall
+	jump height
+	tool speed
+	weapon speed
 Implement active Skills
 	flight for mana consumption
 	regeneration effect for mana consumption
 	2nd chance
+	silk touch
+	fortune
+	auto smelting
 	spells tier 1-10
 Implement Spells
 	use mana
