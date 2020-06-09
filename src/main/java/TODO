@@ -25,15 +25,22 @@ Mobs
 		Griffin
 		Zentaur
 		Cyclopse
+		Hovering Orb
+		    add ai
+		    add sound
+		    add loottable
+		    add worldspawn
+		    add animations
 	Passives
 		Insanity Cow
 		    add custom sound
 		    create loottable
 		Spiky Slime
-		    create loottable
-		    fix texture
-		    change particle effects
 		    add custom sound
+		    create loottable
+		    fix textures
+		    fix particle effect
+		Friendly Floating Orb
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
@@ -41,6 +48,11 @@ ManaLevel
     levelup with mana-experience or mechanic (rituals/items)
     levelup gives skillpoints for skilltrees
 Implement passive Skilltree
+	increased mana generation
+	increase max mana
+	increase health
+	increase regeneration
+	reduce mana consumption
 	increased saturation
 	increased resistances
 	    fire, explosion, drowning, arrow, meele, ...
@@ -91,7 +103,6 @@ Items
     End-game-armor
         as strong as draconic evolution
         uses mana(1 or 2)
-
 Blocks
     Weather/Time/World controller
         controls world events
