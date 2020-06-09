@@ -5,6 +5,7 @@ Insanity Biome
 	Add custom Water
 	keep Spawnlist up-to-date
 Insanity Dimension
+    enable rain
 	create potion effects
 	add structures
 		dungeons (with riddles)
@@ -43,7 +44,10 @@ Implement passive Skilltree
 	increased resistances
 	potion effects
 	Gui to use skillpoints
-Implement active Skills
+Implement active Skills (With Scrolls?)
+    Weather control
+    Time control
+    World control
 	flight for mana consumption
 	regeneration effect for mana consumption
 	2nd chance
@@ -72,3 +76,9 @@ Items
     End-game-armor
         as strong as draconic evolution
         uses mana(1 or 2)
+
+Blocks
+    Weather/Time/World controller
+        controls world events
+    Altar of Knowledge
+        opens skill tree
