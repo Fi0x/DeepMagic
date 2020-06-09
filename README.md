@@ -149,6 +149,11 @@ Deep Crystal Ore
 - Ore that drops Deep Crystals
 - Overworld, Nether and End-versions
 
+Altar of Knowledge
+
+- Can be used to access a players Skilltree
+- Spawns in the world
+
 ##Commands
 
 /tpdim
