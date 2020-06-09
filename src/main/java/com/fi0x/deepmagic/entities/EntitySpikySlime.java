@@ -97,6 +97,13 @@ public class EntitySpikySlime extends EntitySlime
     {
         super.setSlimeSize(size, resetHealth);
     }
+
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        return true;
+    }
+
     @Nonnull
     @Override
     protected EntitySpikySlime createInstance()

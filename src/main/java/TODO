@@ -31,6 +31,8 @@ Mobs
 		Spiky Slime
 		    create loottable
 		    change particle effects
+		    fix texture
+		    add custom sound
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
