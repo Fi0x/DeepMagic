@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.world.biome;
 import java.util.Random;
 
 import com.fi0x.deepmagic.entities.EntityInsanityCow;
+import com.fi0x.deepmagic.entities.EntitySpikySlime;
 import com.fi0x.deepmagic.init.ModBlocks;
 
 import net.minecraft.block.Block;
@@ -38,6 +39,7 @@ public class BiomeInsanity extends Biome
 		this.spawnableWaterCreatureList.clear();
 
 		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
+		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySpikySlime.class, 10, 4, 10));
 		
 		this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);

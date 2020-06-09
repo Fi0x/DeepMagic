@@ -18,7 +18,7 @@ Insanity-dimension
 ### Biomes
 Insanity-biome
 - Very flat
-- Insanity mobs spawn here
+- Mob mobs spawn here
 - Has its own flowers
 
 ### Structures
@@ -36,6 +36,10 @@ Insanity Cow
 - Has chicken-wings attached
 - 2 cat-tails
 - 2 heads
+
+Spiky Slime
+- Slime with Spikes
+- Deals increased damage
 
 ## Items
 ### Armor
