@@ -20,6 +20,8 @@ tile.insanity_planks.name=Insanity Planks
 tile.insanity_flower.name=Insanity Flower
 tile.altar_of_knowledge.name=Altar of Knowledge
 
+fluid.insanity_water=Insanity Water
+
 item.deep_crystal_sword.name=Deep Crystal Sword
 item.deep_crystal_shovel.name=Deep Crystal Shovel
 item.deep_crystal_hoe.name=Deep Crystal Hoe

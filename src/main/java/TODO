@@ -2,10 +2,10 @@ Fix IDE Texture Bug
 Insanity Biome
 	Add custom trees
 	place custom trees
-	Add custom Water
+	Replace Water with Insanity Water
 	keep Spawnlist up-to-date
 Insanity Dimension
-    enable rain
+    custom music
 	create potion effects
 	add structures
 		dungeons (with riddles)
@@ -117,3 +117,5 @@ Blocks
         blocks mobs from walking on it
     Speed Stone
         Gives a speedboost when walking over
+    Insanity Water
+        Change properties to make it more insane
