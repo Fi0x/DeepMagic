@@ -1,4 +1,5 @@
 Fix IDE Texture Bug
+
 Insanity Biome
 	Add custom trees
 	place custom trees
@@ -18,10 +19,9 @@ Insanity Dimension
 Mobs
 	Bosses
 		Nether worm
-		    add sounds
-		    make aggressive
+		    make aggressive and optimize AI
 		    create loottable
-		    add ai
+		    optimize hitbox
 		    customize stats
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))

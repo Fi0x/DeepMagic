@@ -21,47 +21,51 @@ public class EntityNetherWorm extends EntityMob
     public EntityNetherWorm(World worldIn)
     {
         super(worldIn);
-        setSize(1F, 2F);
+        setSize(1F, 1F);
     }
 
     @Override
     protected void initEntityAI()
     {
-        this.tasks.addTask(6, new EntityAILookIdle(this));
+        this.tasks.addTask(0, new EntityAILeapAtTarget(this, 1F));
+        this.tasks.addTask(0, new EntityAIAttackMelee(this, 2, false));
+        this.tasks.addTask(0, new EntityAIWander(this, 1));
+        this.tasks.addTask(0, new EntityAILookIdle(this));
     }
     @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16);
-        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27);
-        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
-        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
+        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4);
+        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
+        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(100.0D);
     }
     @Override
     public float getEyeHeight()
     {
-        return 0.8F;
+        return 0.9F;
     }
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return SoundsHandler.ENTITY_HOVERING_ORB_AMBIENT;
+        return SoundsHandler.ENTITY_NETHER_WORM_AMBIENT;
     }
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource source)
     {
-        return SoundsHandler.ENTITY_HOVERING_ORB_HURT;
+        return SoundsHandler.ENTITY_NETHER_WORM_HURT;
     }
     @Override
     protected SoundEvent getDeathSound()
     {
-        return SoundsHandler.ENTITY_HOVERING_ORB_DEATH;
+        return SoundsHandler.ENTITY_NETHER_WORM_DEATH;
     }
 
     @Override
     protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
     {
+        this.playSound(SoundsHandler.ENTITY_NETHER_WORM_STEP, 1F, 1F);
     }
 
     @Override

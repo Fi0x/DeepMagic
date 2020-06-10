@@ -79,7 +79,7 @@ public class EntityHoveringOrb extends EntityMob
     @Override
     protected float getSoundVolume()
     {
-        return 1F;
+        return 2F;
     }
     @Nullable
     @Override
