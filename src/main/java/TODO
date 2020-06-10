@@ -13,7 +13,6 @@ Insanity Dimension
 		shrines (for levelups)
 		dragon lair
 	    add structure loot tables
-	rotate structures randomly
 	add mobs to structures
 
 Mobs
@@ -27,7 +26,6 @@ Mobs
 		Cyclopse
 		Hovering Orb
 		    optimize hitbox
-		    add sound
 		    add loottable
 		    optimize animations
 		    add aggressiveness

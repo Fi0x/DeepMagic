@@ -10,6 +10,7 @@ import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.RegistryHandler;
 import com.fi0x.deepmagic.util.handlers.RenderHandler;
+import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
 import net.minecraft.nbt.NBTBase;
@@ -65,6 +66,7 @@ public class Main
 	public static void init(FMLInitializationEvent event)
 	{
 		ModRecipes.init();
+		SoundsHandler.registerSounds();
 	}
 
 	@Mod.EventHandler

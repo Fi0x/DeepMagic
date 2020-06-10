@@ -1,0 +1,29 @@
+{
+  "entity.hovering_orb.ambient":
+  {
+    "category": "entity",
+    "subtitle": "entity.hovering_orb.ambient",
+    "sounds": [{ "name": "deepmagic:entity/hovering_orb/ambient", "stream": true}]
+  },
+
+  "entity.hovering_orb.hurt":
+  {
+    "category": "entity",
+    "subtitle": "entity.hovering_orb.hurt",
+    "sounds": [{ "name": "deepmagic:entity/hovering_orb/hurt", "stream": true}]
+  },
+
+  "entity.hovering_orb.death":
+  {
+    "category": "entity",
+    "subtitle": "entity.hovering_orb.death",
+    "sounds": [{ "name": "deepmagic:entity/hovering_orb/death", "stream": true}]
+  },
+
+  "entity.hovering_orb.step":
+  {
+    "category": "entity",
+    "subtitle": "entity.hovering_orb.step",
+    "sounds": [{ "name": "deepmagic:entity/hovering_orb/step", "stream": true}]
+  }
+}
