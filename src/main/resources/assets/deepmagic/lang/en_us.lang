@@ -18,7 +18,6 @@ tile.insanity_dirt.name=Insanity Dirt
 tile.insanity_grass.name=Insanity Grass
 tile.insanity_planks.name=Insanity Planks
 tile.insanity_flower.name=Insanity Flower
-tile.altar_of_knowledge.name=Altar of Knowledge
 
 item.deep_crystal_sword.name=Deep Crystal Sword
 item.deep_crystal_shovel.name=Deep Crystal Shovel
@@ -34,5 +33,3 @@ item.deep_crystal_boots.name=Deep Crystal Boots
 item.crystal_infused_apple.name=Crystal Infused Apple
 
 entity.insanity_cow.name=Insanity Cow
-entity.spiky_slime.name=Spiky Slime
-entity.hovering_orb.name=Hovering Orb

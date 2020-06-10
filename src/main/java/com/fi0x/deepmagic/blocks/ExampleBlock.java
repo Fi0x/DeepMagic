@@ -8,8 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
-import javax.annotation.Nonnull;
-
 public class ExampleBlock extends BlockBase
 {
 	public ExampleBlock(String name, Material material)
@@ -22,17 +20,16 @@ public class ExampleBlock extends BlockBase
 		setLightLevel(15.0F);
 		setLightOpacity(1);
 		setBlockUnbreakable();
-		setDefaultSlipperiness(0.6F);
+		setDefaultSlipperiness(1);
 	}
 	
-	@Nonnull
 	@Override
-	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(Blocks.COBBLESTONE);
 	}
 	@Override
-	public int quantityDropped(@Nonnull Random random)
+	public int quantityDropped(Random random)
 	{
 		return 64;
 	}
