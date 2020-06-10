@@ -17,7 +17,12 @@ Insanity Dimension
 
 Mobs
 	Bosses
-		Nether (Worm)
+		Nether worm
+		    add sounds
+		    make aggressive
+		    create loottable
+		    add ai
+		    customize stats
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))
 	Hostiles
@@ -26,7 +31,6 @@ Mobs
 		Cyclopse
 		Hovering Orb
 		    optimize hitbox
-		    add loottable
 		    add animation when standing around
 		    add aggressiveness
 		    shrink
@@ -34,7 +38,6 @@ Mobs
 		Insanity Cow
 		    add custom sound
 		    create loottable
-		    fix ears
 		Spiky Slime
 		    un-comment in EntityInit
 		    un-comment in BiomeInsanity
