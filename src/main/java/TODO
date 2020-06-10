@@ -26,21 +26,26 @@ Mobs
 		Zentaur
 		Cyclopse
 		Hovering Orb
-		    add ai
+		    optimize hitbox
 		    add sound
 		    add loottable
-		    add worldspawn
-		    add animations
+		    optimize animations
+		    add aggressiveness
+		    shrink
 	Passives
 		Insanity Cow
 		    add custom sound
 		    create loottable
+		    fix ears
 		Spiky Slime
+		    un-comment in EntityInit
+		    un-comment in BiomeInsanity
 		    add custom sound
 		    create loottable
 		    fix textures
 		    fix particle effect
 		Friendly Floating Orb
+		    like normal floating orb without spikes
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
@@ -108,3 +113,7 @@ Blocks
         controls world events
     Altar of Knowledge
         opens skill tree
+    BarrierStone
+        blocks mobs from walking on it
+    Speed Stone
+        Gives a speedboost when walking over

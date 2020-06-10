@@ -14,7 +14,7 @@ public class EntityInit
     public static void registerEntities()
     {
         registerEntity("insanity_cow", EntityInsanityCow.class, Reference.ENTITY_INSANITY_COW, 50, 12925456, 12960970);
-        registerEntity("spiky_slime", EntitySpikySlime.class, Reference.ENTITY_SPIKY_SLIME, 50, 7864320, 2818048);
+//        registerEntity("spiky_slime", EntitySpikySlime.class, Reference.ENTITY_SPIKY_SLIME, 50, 7864320, 2818048);
         registerEntity("hovering_orb", EntityHoveringOrb.class, Reference.ENTITY_HOVERING_ORB, 50, 3132202, 6371343);
     }
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)
