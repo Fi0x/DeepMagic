@@ -20,12 +20,14 @@ public class RenderHoveringOrb extends RenderLiving<EntityHoveringOrb>
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(@Nonnull EntityHoveringOrb entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityHoveringOrb entity)
+    {
         return TEXTURES;
     }
 
     @Override
-    protected void applyRotations(@Nonnull EntityHoveringOrb entityLiving, float p_77043_2_, float rotationYaw, float partialTicks) {
+    protected void applyRotations(@Nonnull EntityHoveringOrb entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
+    {
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
 }
