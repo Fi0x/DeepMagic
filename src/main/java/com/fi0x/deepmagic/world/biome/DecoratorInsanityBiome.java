@@ -1,33 +1,18 @@
 package com.fi0x.deepmagic.world.biome;
 
-import java.util.Random;
-
-import com.fi0x.deepmagic.blocks.insanity.InsanityFlower;
 import com.fi0x.deepmagic.init.ModBlocks;
-
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenBigMushroom;
-import net.minecraft.world.gen.feature.WorldGenBush;
-import net.minecraft.world.gen.feature.WorldGenCactus;
-import net.minecraft.world.gen.feature.WorldGenClay;
-import net.minecraft.world.gen.feature.WorldGenDeadBush;
-import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenLiquids;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenPumpkin;
-import net.minecraft.world.gen.feature.WorldGenReed;
-import net.minecraft.world.gen.feature.WorldGenSand;
-import net.minecraft.world.gen.feature.WorldGenWaterlily;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class DecoratorInsanityBiome extends BiomeDecorator
 {
@@ -70,7 +55,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     public int bigMushroomsPerChunk;
     public boolean generateFalls = true;
 
-    public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
+    public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
         if (this.decorating)
         {
@@ -82,9 +67,9 @@ public class DecoratorInsanityBiome extends BiomeDecorator
             this.chunkPos = pos;
             this.dirtGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
             this.gravelOreGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);
-            this.graniteGen = new WorldGenMinable(ModBlocks.INSANITY_STONE.getDefaultState(), this.chunkProviderSettings.graniteSize);
-            this.dioriteGen = new WorldGenMinable(ModBlocks.INSANITY_STONE.getDefaultState(), this.chunkProviderSettings.dioriteSize);
-            this.andesiteGen = new WorldGenMinable(ModBlocks.INSANITY_STONE.getDefaultState(), this.chunkProviderSettings.andesiteSize);
+            this.graniteGen = new WorldGenMinable(ModBlocks.INSANITY_WATER.getDefaultState(), this.chunkProviderSettings.graniteSize);
+            this.dioriteGen = new WorldGenMinable(ModBlocks.INSANITY_WATER.getDefaultState(), this.chunkProviderSettings.dioriteSize);
+            this.andesiteGen = new WorldGenMinable(ModBlocks.INSANITY_WATER.getDefaultState(), this.chunkProviderSettings.andesiteSize);
             this.coalGen = new WorldGenMinable(Blocks.COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
             this.ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
             this.goldGen = new WorldGenMinable(Blocks.GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);
@@ -96,7 +81,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         }
     }
 
-    protected void genDecorations(Biome biomeIn, World worldIn, Random random)
+    protected void genDecorations(@Nonnull Biome biomeIn, @Nonnull World worldIn, @Nonnull Random random)
     {
         net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos); // actual ChunkPos instead of BlockPos, used for events
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
@@ -373,7 +358,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
-    protected void generateOres(World worldIn, Random random)
+    protected void generateOres(@Nonnull World worldIn, @Nonnull Random random)
     {
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Pre(worldIn, random, chunkPos));
         if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dirtGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT))
@@ -401,7 +386,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Post(worldIn, random, chunkPos));
     }
 
-    protected void genStandardOre1(World worldIn, Random random, int blockCount, WorldGenerator generator, int minHeight, int maxHeight)
+    protected void genStandardOre1(@Nonnull World worldIn, @Nonnull Random random, int blockCount, @Nonnull WorldGenerator generator, int minHeight, int maxHeight)
     {
         if (maxHeight < minHeight)
         {
@@ -428,7 +413,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         }
     }
 
-    protected void genStandardOre2(World worldIn, Random random, int blockCount, WorldGenerator generator, int centerHeight, int spread)
+    protected void genStandardOre2(@Nonnull World worldIn, @Nonnull Random random, int blockCount, @Nonnull WorldGenerator generator, int centerHeight, int spread)
     {
         for (int i = 0; i < blockCount; ++i)
         {
