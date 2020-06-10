@@ -14,6 +14,8 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 
+import javax.annotation.Nonnull;
+
 public class DimensionInsanity extends WorldProvider
 {
 	public DimensionInsanity()
@@ -21,11 +23,13 @@ public class DimensionInsanity extends WorldProvider
 		this.biomeProvider = new BiomeProviderSingle(BiomeInit.INSANITY);
 	}
 	
+	@Nonnull
 	@Override
 	public DimensionType getDimensionType()
 	{
 		return DimensionInit.INSANITY;
 	}
+	@Nonnull
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
@@ -47,12 +51,13 @@ public class DimensionInsanity extends WorldProvider
 		return 0.1;
 	}
 	@Override
-	public boolean shouldMapSpin(String entity, double x, double z, double rotation)
+	public boolean shouldMapSpin(@Nonnull String entity, double x, double z, double rotation)
 	{
 		return true;
 	}
+	@Nonnull
 	@Override
-	public WorldSleepResult canSleepAt(EntityPlayer player, BlockPos pos)
+	public WorldSleepResult canSleepAt(@Nonnull EntityPlayer player, @Nonnull BlockPos pos)
 	{
 		return WorldSleepResult.ALLOW;
 	}
@@ -81,6 +86,7 @@ public class DimensionInsanity extends WorldProvider
 	{
 		return 4;
 	}
+	@Nonnull
 	@Override
 	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
 	{
@@ -93,7 +99,7 @@ public class DimensionInsanity extends WorldProvider
         f1 = f1 * (f * 0.94F + 0.06F);
         f2 = f2 * (f * 0.94F + 0.06F);
         f3 = f3 * (f * 0.91F + 0.09F);
-        return new Vec3d((double)f1, (double)f2, (double)f3);
+        return new Vec3d(f1, f2, f3);
 	}
 	@Override
 	public boolean doesXZShowFog(int x, int z)
@@ -103,13 +109,14 @@ public class DimensionInsanity extends WorldProvider
 	@Override
 	public boolean doesWaterVaporize()
 	{
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isDaytime()
 	{
 		return false;
 	}
+	@Nonnull
 	@Override
 	public Vec3d getCloudColor(float partialTicks)
 	{
@@ -124,14 +131,14 @@ public class DimensionInsanity extends WorldProvider
         f3 = f3 * (f1 * 0.9F + 0.1F);
         f4 = f4 * (f1 * 0.85F + 0.15F);
 
-        return new Vec3d((double)f2, (double)f3, (double)f4);
+        return new Vec3d(f2, f3, f4);
 	}
 	@Override
-	public void onPlayerAdded(EntityPlayerMP player)
+	public void onPlayerAdded(@Nonnull EntityPlayerMP player)
 	{
 	}
 	@Override
-	public void onPlayerRemoved(EntityPlayerMP player)
+	public void onPlayerRemoved(@Nonnull EntityPlayerMP player)
 	{
 	}
 	@Override
