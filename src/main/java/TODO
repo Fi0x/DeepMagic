@@ -5,6 +5,7 @@ Insanity Biome
 	Add custom Water
 	keep Spawnlist up-to-date
 Insanity Dimension
+    enable rain
 	create potion effects
 	add structures
 		dungeons (with riddles)
@@ -24,10 +25,27 @@ Mobs
 		Griffin
 		Zentaur
 		Cyclopse
+		Hovering Orb
+		    optimize hitbox
+		    add sound
+		    add loottable
+		    optimize animations
+		    add aggressiveness
+		    shrink
 	Passives
 		Insanity Cow
 		    add custom sound
 		    create loottable
+		    fix ears
+		Spiky Slime
+		    un-comment in EntityInit
+		    un-comment in BiomeInsanity
+		    add custom sound
+		    create loottable
+		    fix textures
+		    fix particle effect
+		Friendly Floating Orb
+		    like normal floating orb without spikes
 
 Mana1System
 	add manabar in hud (GuiManaRenderOverlay)
@@ -42,11 +60,29 @@ Implement passive Skilltree
 	reduce mana consumption
 	increased saturation
 	increased resistances
+	    fire, explosion, drowning, arrow, meele, ...
 	potion effects
-Implement active Skills
+	permanent xp boost
+	increased damage
+	    meele
+	    ranged
+	    magic
+	increased armor
+	feather fall
+	jump height
+	tool speed
+	weapon speed
+	Gui to use skillpoints
+Implement active Skills (With Scrolls?)
+    Weather control
+    Time control
+    World control
 	flight for mana consumption
 	regeneration effect for mana consumption
 	2nd chance
+	silk touch
+	fortune
+	auto smelting
 	spells tier 1-10
 Implement Spells
 	use mana
@@ -72,3 +108,12 @@ Items
     End-game-armor
         as strong as draconic evolution
         uses mana(1 or 2)
+Blocks
+    Weather/Time/World controller
+        controls world events
+    Altar of Knowledge
+        opens skill tree
+    BarrierStone
+        blocks mobs from walking on it
+    Speed Stone
+        Gives a speedboost when walking over

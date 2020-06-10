@@ -104,7 +104,6 @@ public class ModelInsanityCow extends ModelBase {
         GlStateManager.translate(-this.rightHead.rotationPointX * f5, -this.rightHead.rotationPointY * f5, -this.rightHead.rotationPointZ * f5);
         this.rightHead.render(f5);
         GlStateManager.popMatrix();
-        this.leftHeadEar1.render(f5);
         this.legBackRight.render(f5);
         this.body.render(f5);
         this.tailThickLeft.render(f5);
@@ -117,15 +116,16 @@ public class ModelInsanityCow extends ModelBase {
         this.leftHead.render(f5);
         GlStateManager.popMatrix();
         this.legFrontLeft.render(f5);
-        this.rightHeadEar1.render(f5);
         this.legFrontRight.render(f5);
         this.tailThickRight.render(f5);
-        this.leftHeadEar2.render(f5);
         this.legBackLeft.render(f5);
         this.wingLeft.render(f5);
         this.wingRight.render(f5);
         this.tailThinRight.render(f5);
         this.tailThinLeft.render(f5);
+        this.leftHeadEar1.render(f5);
+        this.leftHeadEar2.render(f5);
+        this.rightHeadEar1.render(f5);
         this.rightHeadEar2.render(f5);
     }
 
@@ -153,5 +153,13 @@ public class ModelInsanityCow extends ModelBase {
         this.rightHead.rotateAngleY = netHeadYaw * 0.017453292F;
         this.leftHead.rotateAngleX = headPitch * 0.017453292F;
         this.rightHead.rotateAngleX = headPitch * 0.017453292F;
+        this.leftHeadEar1.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.rightHeadEar1.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.leftHeadEar1.rotateAngleX = headPitch * 0.017453292F;
+        this.rightHeadEar1.rotateAngleX = headPitch * 0.017453292F;
+        this.leftHeadEar2.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.rightHeadEar2.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.leftHeadEar2.rotateAngleX = headPitch * 0.017453292F;
+        this.rightHeadEar2.rotateAngleX = headPitch * 0.017453292F;
     }
 }
