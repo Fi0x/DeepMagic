@@ -27,7 +27,7 @@ Mobs
 		Hovering Orb
 		    optimize hitbox
 		    add loottable
-		    optimize animations
+		    add animation when standing around
 		    add aggressiveness
 		    shrink
 	Passives

@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -84,6 +85,6 @@ public class EntityHoveringOrb extends EntityMob
     @Override
     protected ResourceLocation getLootTable()
     {
-        return super.getLootTable();
+        return LootTableHandler.HOVERING_ORB;
     }
 }
