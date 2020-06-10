@@ -421,8 +421,8 @@ public class ModelHoveringOrb extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entityIn)
     {
-        this.topBody.rotateAngleY = limbSwing*limbSwingAmount;
-        this.bottomBody.rotateAngleY = -limbSwing*limbSwingAmount;
+        this.topBody.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.bottomBody.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
     }
     @Override
     public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)

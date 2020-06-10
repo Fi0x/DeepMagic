@@ -1,14 +1,18 @@
 package com.fi0x.deepmagic.init;
 
-import com.fi0x.deepmagic.blocks.AltarOfKnowledge;
-import com.fi0x.deepmagic.blocks.DeepCrystalBlock;
-import com.fi0x.deepmagic.blocks.DeepCrystalOre;
-import com.fi0x.deepmagic.blocks.insanity.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fi0x.deepmagic.blocks.DeepCrystalBlock;
+import com.fi0x.deepmagic.blocks.DeepCrystalOre;
+import com.fi0x.deepmagic.blocks.insanity.InsanityDirt;
+import com.fi0x.deepmagic.blocks.insanity.InsanityFlower;
+import com.fi0x.deepmagic.blocks.insanity.InsanityGrass;
+import com.fi0x.deepmagic.blocks.insanity.InsanityPlanks;
+import com.fi0x.deepmagic.blocks.insanity.InsanityStone;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 
 public class ModBlocks
 {
@@ -24,6 +28,5 @@ public class ModBlocks
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
 	public static final Block INSANITY_PLANKS = new InsanityPlanks("insanity_planks", Material.WOOD);
 	public static final Block INSANITY_FLOWER = new InsanityFlower("insanity_flower", Material.PLANTS);
-
-	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
+	
 }

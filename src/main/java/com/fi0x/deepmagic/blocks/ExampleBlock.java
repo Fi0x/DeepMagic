@@ -22,7 +22,7 @@ public class ExampleBlock extends BlockBase
 		setLightLevel(15.0F);
 		setLightOpacity(1);
 		setBlockUnbreakable();
-		setDefaultSlipperiness(0.6F);
+		setDefaultSlipperiness(1);
 	}
 	
 	@Nonnull
