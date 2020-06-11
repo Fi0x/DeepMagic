@@ -8,7 +8,6 @@ import com.fi0x.deepmagic.util.IHasModel;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,13 +26,13 @@ public class InsanityLog extends BlockLog implements IHasModel
 {
     public InsanityLog(String name)
     {
+        super();
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(DeepMagicTab.BLOCKS);
 
         setSoundType(SoundType.WOOD);
         setHardness(2.1F);
-        setResistance(5.0F);
         setHarvestLevel("axe", 0);
 
         setDefaultState(getBlockState().getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
@@ -90,7 +89,7 @@ public class InsanityLog extends BlockLog implements IHasModel
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[]{LOG_AXIS});
+        return new BlockStateContainer(this, LOG_AXIS);
     }
 
     @Nonnull
