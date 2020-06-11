@@ -64,7 +64,7 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
-        return Item.getItemFromBlock(ModBlocks.DEEP_CRYSTAL_BLOCK);
+        return Item.getItemFromBlock(ModBlocks.INSANITY_SAPLING);
     }
     @Override
     public boolean isOpaqueCube(@Nonnull IBlockState state)

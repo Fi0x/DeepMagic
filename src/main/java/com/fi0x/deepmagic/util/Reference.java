@@ -10,7 +10,7 @@ public class Reference
 	public static final String COMMON_PROXY_CLASS = "com.fi0x.deepmagic.proxy.CommonProxy";
 
 	//Dimension IDs
-	public static final int DIMENSION_ID = 42;
+	public static final int DIMENSION_ID_INSANITY = 42;
 
 	//Entity IDs
 	public static final int ENTITY_INSANITY_COW = 1764;
@@ -20,4 +20,9 @@ public class Reference
 
 	//Gui IDs
 	public static final int GUI_SKILLTREE = 74088;
+
+	//IDs from other mods
+	public static final int DIMENSION_ID_DEEPDARK = -100;
+	public static final int DIMENSION_ID_TWILIGHTFOREST = 7;
+	public static final int DIMENSION_ID_AROMAMININGWORLD = 6;
 }

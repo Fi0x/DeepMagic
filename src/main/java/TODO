@@ -1,8 +1,6 @@
 Fix IDE Texture Bug
 Insanity Biome {
-	Add custom trees
-	place custom trees
-	Add custom Water
+    remove default trees from generation
 	keep Spawnlist up-to-date
 }
 Insanity Dimension {
@@ -128,7 +126,7 @@ Blocks {
 }
     InsanityLeaves
         change the apple-drop to a special apple
-        change drop item to insanity sapling
+        change texture to be less transparent
 Fluids {
     Insanity Water
         Increase flow range
