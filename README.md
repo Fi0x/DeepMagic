@@ -90,8 +90,8 @@ Compressed Deep Crystal
 
 Deep Crystal Powder
 
-## Blocks
-### Insanity Blocks
+## Blocks / Fluids
+### Insanity Blocks / Fluids
 Insanity Dirt
 - Like normal Dirt
 - Texture is more red
@@ -110,6 +110,10 @@ Insanity Planks
 Insanity Stone
 - Like regular stone
 - Texture is more red
+
+Insanity Water
+- Like regular Water
+- Texture is more purple
 
 ### Other
 Deep Crystal Block
