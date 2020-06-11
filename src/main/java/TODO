@@ -116,9 +116,10 @@ Blocks
         blocks mobs from walking on it
     Speed Stone
         Gives a speedboost when walking over
-    InsanityLeaves
+    Insanity Leaves
         change the apple-drop to a special apple
-        change drop item to insanity sapling
+    Insanity Sapling
+        Un-comment tree generator lines
 Fluids
     Insanity Water
         Increase flow range
