@@ -26,7 +26,7 @@ public class BiomeInsanity extends Biome
 	
 	public BiomeInsanity()
 	{
-		super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setRainDisabled().setWaterColor(7094447));
+		super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
 		topBlock = TOP_BLOCK.getDefaultState();
 		fillerBlock = FILLER_BLOCK.getDefaultState();
 		
