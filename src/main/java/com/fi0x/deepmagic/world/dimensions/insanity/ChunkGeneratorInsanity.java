@@ -1,11 +1,7 @@
 package com.fi0x.deepmagic.world.dimensions.insanity;
 
-import java.util.List;
-import java.util.Random;
-
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
-
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -23,15 +19,21 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
+
 public class ChunkGeneratorInsanity implements IChunkGenerator
 {
 	
 	private final World world;
 	private final WorldType terrainType;
 	private final Random rand;
-	private NoiseGeneratorOctaves minLimitPerlinNoise, maxLimitPerlinNoise, mainPerlinNoise;
+	private final NoiseGeneratorOctaves minLimitPerlinNoise;
+	private final NoiseGeneratorOctaves maxLimitPerlinNoise;
+	private final NoiseGeneratorOctaves mainPerlinNoise;
 	public NoiseGeneratorOctaves scaleNoise, depthNoise;
-	private NoiseGeneratorPerlin surfaceNoise;
+	private final NoiseGeneratorPerlin surfaceNoise;
 	private double[] depthBuffer = new double[256];
 	private final double[] heightMap;
 	private Biome generatedBiome;
@@ -60,7 +62,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 	}
 	
 	public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome biome) {
-		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(x * 16), (double)(z * 16), 16, 16, .0625D, .0625D, 1D);
+		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, x * 16, z * 16, 16, 16, .0625D, .0625D, 1D);
 		
 		for(int i = 0; i < 16; ++i) {
 			for(int j = 0; j < 16; ++j) {
@@ -69,6 +71,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 		}
 	}
 	
+	@Nonnull
 	@Override
 	public Chunk generateChunk(int x, int z) {
 		this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
@@ -87,7 +90,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 	}
 	
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer) {
-		this.generateHeightmap(x * 4, 0, z * 4);
+		this.generateHeightmap(x * 4, z * 4);
 		
 		for(int i = 0; i < 4; ++i) {
 			int j = i * 5,
@@ -126,7 +129,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 								if((lvt_45_1 += d16) > 0.0D)
 									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, ModBlocks.INSANITY_STONE.getDefaultState());
 								else if (i2 * 8 + j2 < 63)
-									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.WATER.getDefaultState());
+									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, ModBlocks.INSANITY_WATER.getDefaultState());
 							}
 							
 							d10 += d12;
@@ -143,13 +146,13 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 		}
 	}
 	
-	private void generateHeightmap(int x, int y, int z) {
+	private void generateHeightmap(int x, int z) {
 		this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, x, z, 5, 5, 200F, 200F, .5F);
 		float f = 684.412F,
 			  f1 = 684.412F;
-		this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, x, y, z, 5, 33, 5, (double)(f / 80.0F), (double)(f1 / 160.0F), (double)(f / 80.0F));
-		this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, x, y, z, 5, 33, 5, (double)f, (double)f1, (double)f);
-		this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, x, y, z, 5, 33, 5, (double)f, (double)f1, (double)f);
+		this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, x, 0, z, 5, 33, 5, f / 80.0F, f1 / 160.0F, f / 80.0F);
+		this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, x, 0, z, 5, 33, 5, f, f1, f);
+		this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, x, 0, z, 5, 33, 5, f, f1, f);
 		int i = 0,
 			j = 0;
 		
@@ -200,8 +203,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 				}
 				
 				++j;
-				double d8 = (double)f3,
-					   d9 = (double)f2;
+				double d8 = f3,
+					   d9 = f2;
 				d8 = d8 + d7 * .2D;
 				d8 = d8 * 8.5D / 8.0D;
 				double d0 = 8.5D + d8 * 4D;
@@ -217,7 +220,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 						   d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
 					
 					if (l1 > 29) {
-						double d6 = (double)((float)(l1 - 29) / 3F);
+						double d6 = (float)(l1 - 29) / 3F;
 						d5 = d5 * (1D - d6) + -10D * d6;
 					}
 					
@@ -252,27 +255,28 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 	}
 
 	@Override
-	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+	public boolean generateStructures(@Nonnull Chunk chunkIn, int x, int z) {
 		return false;
 	}
 
+	@Nonnull
 	@Override
-	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+	public List<SpawnListEntry> getPossibleCreatures(@Nonnull EnumCreatureType creatureType, @Nonnull BlockPos pos) {
 		Biome biome = this.world.getBiome(pos);
 		return biome.getSpawnableList(creatureType);
 	}
 
 	@Override
-	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+	public BlockPos getNearestStructurePos(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos position, boolean findUnexplored) {
 		return null;
 	}
 
 	@Override
-	public void recreateStructures(Chunk chunkIn, int x, int z) {
+	public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z) {
 	}
 
 	@Override
-	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+	public boolean isInsideStructure(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos pos) {
 		return false;
 	}
 }

@@ -8,6 +8,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public interface IStructure
 {
-	public static final WorldServer worldServer = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(Reference.DIMENSION_ID);
+	public static final WorldServer worldServer = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(Reference.DIMENSION_ID_INSANITY);
 	public static final PlacementSettings settings = (new PlacementSettings().setChunk(null).setIgnoreEntities(false).setIgnoreStructureBlock(false).setMirror(Mirror.NONE).setRotation(Rotation.NONE));
 }

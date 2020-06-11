@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.blocks.AltarOfKnowledge;
+import com.fi0x.deepmagic.blocks.BlockFluid;
 import com.fi0x.deepmagic.blocks.DeepCrystalBlock;
 import com.fi0x.deepmagic.blocks.DeepCrystalOre;
 import com.fi0x.deepmagic.blocks.insanity.*;
@@ -24,6 +25,10 @@ public class ModBlocks
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
 	public static final Block INSANITY_PLANKS = new InsanityPlanks("insanity_planks", Material.WOOD);
 	public static final Block INSANITY_FLOWER = new InsanityFlower("insanity_flower", Material.PLANTS);
+	public static final Block INSANITY_LOG = new InsanityLog("insanity_log");
+	public static final Block INSANITY_LEAVES = new InsanityLeaves("insanity_leaves");
+	public static final Block INSANITY_SAPLING = new InsanitySapling("insanity_sapling", Material.PLANTS);
+	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
 
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
 }

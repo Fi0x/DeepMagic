@@ -18,7 +18,12 @@ tile.insanity_dirt.name=Insanity Dirt
 tile.insanity_grass.name=Insanity Grass
 tile.insanity_planks.name=Insanity Planks
 tile.insanity_flower.name=Insanity Flower
+tile.insanity_log.name=Insanity Log
+tile.insanity_leaves.name=Insanity Leaves
+tile.insanity_sapling.name=InsanitySapling
 tile.altar_of_knowledge.name=Altar of Knowledge
+
+fluid.insanity_water=Insanity Water
 
 item.deep_crystal_sword.name=Deep Crystal Sword
 item.deep_crystal_shovel.name=Deep Crystal Shovel

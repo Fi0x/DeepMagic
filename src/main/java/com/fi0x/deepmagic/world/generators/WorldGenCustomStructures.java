@@ -1,13 +1,8 @@
 package com.fi0x.deepmagic.world.generators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.world.biome.BiomeInsanity;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,6 +10,10 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class WorldGenCustomStructures implements IWorldGenerator
 {
@@ -24,7 +23,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if(world.provider.getDimension() == Reference.DIMENSION_ID)
+		if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
 		{
 			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 500, BiomeInsanity.class);//increase the chance number to decrease spawn rate
 			generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 1000, BiomeInsanity.class);//increase the chance number to decrease spawn rate
@@ -33,7 +32,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	
 	private void generateStructure(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int yOffset, int chance, Class<?>... classes)
 	{
-		ArrayList<Class<?>> classesList = new ArrayList<Class<?>>(Arrays.asList(classes));
+		ArrayList<Class<?>> classesList = new ArrayList<>(Arrays.asList(classes));
 		
 		int x = (chunkX * 16) + random.nextInt(15);
 		int z = (chunkZ * 16) + random.nextInt(15);

@@ -30,7 +30,7 @@ public class BiomeInsanity extends Biome
 	
 	public BiomeInsanity()
 	{
-		super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setRainDisabled().setWaterColor(7094447));
+		super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
 		topBlock = TOP_BLOCK.getDefaultState();
 		fillerBlock = FILLER_BLOCK.getDefaultState();
 		
@@ -41,7 +41,7 @@ public class BiomeInsanity extends Biome
 
 		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
 //		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySpikySlime.class, 20, 4, 10));
-		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
+		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
 		
 		this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
