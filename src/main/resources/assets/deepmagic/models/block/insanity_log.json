@@ -1,11 +1,7 @@
 {
-   "parent": "block/cube",
+   "parent": "block/cube_column",
    "textures": {
-       "up": "deepmagic:blocks/insanity_log_top",
-       "down": "deepmagic:blocks/insanity_log_top",
-       "north": "deepmagic:blocks/insanity_log_side",
-       "east": "deepmagic:blocks/insanity_log_side",
-       "south": "deepmagic:blocks/insanity_log_side",
-       "west": "deepmagic:blocks/insanity_log_side"
+       "end": "deepmagic:blocks/insanity_log_top",
+       "side": "deepmagic:blocks/insanity_log_side"
    }
 }

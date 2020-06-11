@@ -1,7 +1,9 @@
 {
+	"forge_marker": 1,
 	"variants": {
-		"normal": {
-			"model": "deepmagic:insanity_log"
-		}
+		"axis=x": {"model": "deepmagic:insanity_log", "x": 90, "y": 90},
+		"axis=y": {"model": "deepmagic:insanity_log"},
+		"axis=z": {"model": "deepmagic:insanity_log", "x": 90},
+		"axis=none": {"model": "deepmagic:insanity_log"}
 	}
 }
