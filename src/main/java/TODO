@@ -123,10 +123,10 @@ Blocks {
         blocks mobs from walking on it
     Speed Stone
         Gives a speedboost when walking over
-}
     InsanityLeaves
         change the apple-drop to a special apple
         change texture to be less transparent
+}
 Fluids {
     Insanity Water
         Increase flow range
