@@ -1,10 +1,7 @@
 package com.fi0x.deepmagic.world.generators;
 
-import java.util.Random;
-
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -15,6 +12,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 public class ModWorldGen implements IWorldGenerator
 {
@@ -30,16 +29,16 @@ public class ModWorldGen implements IWorldGenerator
 		} else if(world.provider.getDimension() == 1)
 		{
 			generateEnd(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-		} else if(world.provider.getDimension() == -100)
+		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_DEEPDARK)
 		{
 			generateDeepDark(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-		} else if(world.provider.getDimension() == 7)
+		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_TWILIGHTFOREST)
 		{
 			generateTwilightForest(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-		} else if(world.provider.getDimension() == 6)
+		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_AROMAMININGWORLD)
 		{
 			generateAromaMiningWorld(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-		} else if(world.provider.getDimension() == Reference.DIMENSION_ID)
+		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
 		{
 			generateInsanityDimension(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
 		} else

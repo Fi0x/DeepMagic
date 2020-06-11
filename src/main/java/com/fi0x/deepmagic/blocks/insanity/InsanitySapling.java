@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.IHasModel;
+import com.fi0x.deepmagic.world.generators.ModTreeGenerator;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import javax.annotation.Nonnull;
@@ -52,10 +54,10 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     public void generateTree(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-//        WorldGenerator worldGenerator = new ModWorldGenTrees(true);
+        WorldGenerator worldGenerator = new ModTreeGenerator(true);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-//        worldGenerator.generate(world, rand, pos);
+        worldGenerator.generate(world, rand, pos);
     }
 
     @Override

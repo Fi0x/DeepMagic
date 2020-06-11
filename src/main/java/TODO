@@ -1,7 +1,6 @@
 Fix IDE Texture Bug
 Insanity Biome
-	Add insanity trees
-	generate insanity trees
+    remove default trees from generation
 	keep Spawnlist up-to-date
 Insanity Dimension
     custom music
@@ -118,8 +117,7 @@ Blocks
         Gives a speedboost when walking over
     Insanity Leaves
         change the apple-drop to a special apple
-    Insanity Sapling
-        Un-comment tree generator lines
+        change texture to be less transparent
 Fluids
     Insanity Water
         Increase flow range

@@ -9,6 +9,7 @@ import com.fi0x.deepmagic.util.handlers.RegistryHandler;
 import com.fi0x.deepmagic.util.handlers.RenderHandler;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
+import com.fi0x.deepmagic.world.generators.WorldGenCustomTrees;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,6 +51,7 @@ public class Main
 		DimensionInit.registerDimensions();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
+		WorldGenCustomTrees.register();
 
 		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
 		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
