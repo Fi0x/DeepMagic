@@ -9,9 +9,12 @@ public class SoundsHandler
 {
     public static SoundEvent ENTITY_HOVERING_ORB_AMBIENT, ENTITY_HOVERING_ORB_HURT, ENTITY_HOVERING_ORB_DEATH, ENTITY_HOVERING_ORB_STEP;
     public static SoundEvent ENTITY_NETHER_WORM_AMBIENT, ENTITY_NETHER_WORM_HURT, ENTITY_NETHER_WORM_DEATH, ENTITY_NETHER_WORM_STEP;
+    public static SoundEvent MUSIC_INSANITY_DIMENSION;
 
     public static void registerSounds()
     {
+        MUSIC_INSANITY_DIMENSION = registerSound("music.insanity_dimension");
+
         ENTITY_HOVERING_ORB_AMBIENT = registerSound("entity.hovering_orb.ambient");
         ENTITY_HOVERING_ORB_HURT = registerSound("entity.hovering_orb.hurt");
         ENTITY_HOVERING_ORB_DEATH = registerSound("entity.hovering_orb.death");

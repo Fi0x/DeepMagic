@@ -1,4 +1,17 @@
 {
+  "music.insanity_dimension":
+  {
+    "category": "music",
+    "subtitle": "music.insanity_dimension",
+    "sounds":
+    [
+      { "name": "deepmagic:music/insanity_dimension/ambient1", "stream": true, "weight": 1},
+      { "name": "deepmagic:music/insanity_dimension/ambient2", "stream": true, "weight": 1},
+      { "name": "deepmagic:music/insanity_dimension/ambient3", "stream": true, "weight": 1},
+      { "name": "deepmagic:music/insanity_dimension/ambient4", "stream": true, "weight": 1}
+    ]
+  },
+
   "entity.hovering_orb.ambient":
   {
     "category": "entity",
