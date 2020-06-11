@@ -1,4 +1,5 @@
 Fix IDE Texture Bug
+
 Insanity Biome
 	Add insanity trees
 	generate insanity trees
@@ -12,12 +13,15 @@ Insanity Dimension
 		shrines (for levelups)
 		dragon lair
 	    add structure loot tables
-	rotate structures randomly
 	add mobs to structures
 
 Mobs
 	Bosses
-		Nether (Worm)
+		Nether worm
+		    make aggressive and optimize AI
+		    create loottable
+		    optimize hitbox
+		    customize stats
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))
 	Hostiles
@@ -26,16 +30,13 @@ Mobs
 		Cyclopse
 		Hovering Orb
 		    optimize hitbox
-		    add sound
-		    add loottable
-		    optimize animations
+		    add animation when standing around
 		    add aggressiveness
 		    shrink
 	Passives
 		Insanity Cow
 		    add custom sound
 		    create loottable
-		    fix ears
 		Spiky Slime
 		    un-comment in EntityInit
 		    un-comment in BiomeInsanity

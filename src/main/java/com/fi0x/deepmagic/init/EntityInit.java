@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.init;
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.entities.EntityHoveringOrb;
 import com.fi0x.deepmagic.entities.EntityInsanityCow;
+import com.fi0x.deepmagic.entities.EntityNetherWorm;
 import com.fi0x.deepmagic.entities.EntitySpikySlime;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.entity.Entity;
@@ -16,6 +17,7 @@ public class EntityInit
         registerEntity("insanity_cow", EntityInsanityCow.class, Reference.ENTITY_INSANITY_COW, 50, 12925456, 12960970);
 //        registerEntity("spiky_slime", EntitySpikySlime.class, Reference.ENTITY_SPIKY_SLIME, 50, 7864320, 2818048);
         registerEntity("hovering_orb", EntityHoveringOrb.class, Reference.ENTITY_HOVERING_ORB, 50, 3132202, 6371343);
+        registerEntity("nether_worm", EntityNetherWorm.class, Reference.ENTITY_NETHER_WORM, 100, 10158080, 4980736);
     }
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)
     {
