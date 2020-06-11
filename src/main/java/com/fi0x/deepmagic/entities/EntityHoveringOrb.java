@@ -1,24 +1,16 @@
 package com.fi0x.deepmagic.entities;
 
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
+import com.fi0x.deepmagic.util.handlers.LootTableHandler;
+import com.fi0x.deepmagic.util.handlers.SoundsHandler;
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityBat;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -65,27 +57,34 @@ public class EntityHoveringOrb extends EntityMob
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return super.getAmbientSound();
+        return SoundsHandler.ENTITY_HOVERING_ORB_AMBIENT;
     }
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource source)
     {
-        return super.getHurtSound(source);
+        return SoundsHandler.ENTITY_HOVERING_ORB_HURT;
     }
     @Override
     protected SoundEvent getDeathSound()
     {
-        return super.getDeathSound();
+        return SoundsHandler.ENTITY_HOVERING_ORB_DEATH;
     }
+
+    @Override
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
+    {
+        this.playSound(SoundsHandler.ENTITY_HOVERING_ORB_STEP, 1F, 1F);
+    }
+
     @Override
     protected float getSoundVolume()
     {
-        return 0.5F;
+        return 2F;
     }
     @Nullable
     @Override
     protected ResourceLocation getLootTable()
     {
-        return super.getLootTable();
+        return LootTableHandler.HOVERING_ORB;
     }
 }
