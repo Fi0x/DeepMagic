@@ -57,7 +57,7 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
     {
         if(worldIn.rand.nextInt(chance) == 0)
         {
-            spawnAsEntity(worldIn, pos, new ItemStack(Items.APPLE));
+            spawnAsEntity(worldIn, pos, new ItemStack(ModItems.INSANITY_APPLE));
         }
     }
     @Nonnull

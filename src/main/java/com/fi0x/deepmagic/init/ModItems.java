@@ -1,8 +1,5 @@
 package com.fi0x.deepmagic.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fi0x.deepmagic.items.ArmorBase;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
@@ -10,26 +7,19 @@ import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaMonitor;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
-import com.fi0x.deepmagic.items.tools.ToolAxe;
-import com.fi0x.deepmagic.items.tools.ToolHoe;
-import com.fi0x.deepmagic.items.tools.ToolPickaxe;
-import com.fi0x.deepmagic.items.tools.ToolSpade;
-import com.fi0x.deepmagic.items.tools.ToolSword;
+import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
-
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.util.EnumHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModItems
 {
@@ -63,4 +53,5 @@ public class ModItems
 	
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true));
+	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false));
 }
