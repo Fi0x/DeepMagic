@@ -31,7 +31,11 @@ Mobs {
 		    add animation when standing around
 		    add aggressiveness
 		    shrink
+		Giants
+		    Add ai
+		    add sounds (zombie?)
 	Passives
+	    Mage of the Dephts
 		Insanity Cow
 		    add custom sound
 		    create loottable
@@ -119,6 +123,8 @@ Blocks {
             add buttons to skilltree gui (https://jabelarminecraft.blogspot.com/p/minecraft-modding-block-with-simple-gui.html)
             un-comment open gui line in AltarOfKnowledge
             fix texture
+    Insanity Grass
+        reset to insanity dirt instead of normal dirt
 }
 Fluids {
     Insanity Water
