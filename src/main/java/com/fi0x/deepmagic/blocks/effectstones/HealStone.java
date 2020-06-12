@@ -1,5 +1,6 @@
-package com.fi0x.deepmagic.blocks;
+package com.fi0x.deepmagic.blocks.effectstones;
 
+import com.fi0x.deepmagic.blocks.BlockBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -11,9 +12,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class SpeedStone extends BlockBase
+public class HealStone extends BlockBase
 {
-    public SpeedStone(String name, Material material)
+    public HealStone(String name, Material material)
     {
         super(name, material);
         setSoundType(SoundType.STONE);
@@ -26,7 +27,7 @@ public class SpeedStone extends BlockBase
     {
         if(entity instanceof EntityPlayer)
         {
-            ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.SPEED, 2*20, 1, false, false));
+            ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 2*20, 0, false, false));
         }
     }
 }

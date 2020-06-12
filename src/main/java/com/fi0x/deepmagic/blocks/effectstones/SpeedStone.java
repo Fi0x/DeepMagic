@@ -1,19 +1,20 @@
-package com.fi0x.deepmagic.blocks;
+package com.fi0x.deepmagic.blocks.effectstones;
 
+import com.fi0x.deepmagic.blocks.BlockBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class AttackStone extends BlockBase
+public class SpeedStone extends BlockBase
 {
-    public AttackStone(String name, Material material)
+    public SpeedStone(String name, Material material)
     {
         super(name, material);
         setSoundType(SoundType.STONE);
@@ -24,9 +25,9 @@ public class AttackStone extends BlockBase
     @Override
     public void onEntityWalk(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entity)
     {
-        if(!(entity instanceof EntityPlayer) && !(entity instanceof EntityAnimal))
+        if(entity instanceof EntityPlayer)
         {
-            entity.attackEntityFrom(DamageSource.MAGIC, 1);
+            ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.SPEED, 2*20, 0, false, false));
         }
     }
 }

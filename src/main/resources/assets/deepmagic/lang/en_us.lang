@@ -16,6 +16,10 @@ tile.deep_crystal_block.name=Deep Crystal Block
 tile.defence_stone.name=Defence Stone
 tile.attack_stone.name=Attack Stone
 tile.speed_stone.name=Speed Stone
+tile.heal_stone.name=Heal Stone
+tile.vision_stone.name=Vision Stone
+tile.saturation_stone.name=Saturation Stone
+tile.levitation_stone.name=Levitation Stone
 
 tile.insanity_stone.name=Insanity Stone
 tile.insanity_dirt.name=Insanity Dirt

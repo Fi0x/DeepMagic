@@ -2,10 +2,10 @@ package com.fi0x.deepmagic.entities.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.MathHelper;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -427,5 +427,7 @@ public class ModelHoveringOrb extends ModelBase {
     @Override
     public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
     {
+        this.topBody.rotateAngleY = limbSwing*limbSwingAmount;
+        this.bottomBody.rotateAngleY = -limbSwing*limbSwingAmount;
     }
 }

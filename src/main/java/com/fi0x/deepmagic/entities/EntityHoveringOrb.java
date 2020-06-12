@@ -69,7 +69,6 @@ public class EntityHoveringOrb extends EntityMob
     {
         return SoundsHandler.ENTITY_HOVERING_ORB_DEATH;
     }
-
     @Override
     protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
     {
