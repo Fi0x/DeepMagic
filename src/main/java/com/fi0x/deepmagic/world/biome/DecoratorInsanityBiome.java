@@ -41,8 +41,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     public WorldGenerator cactusGen = new WorldGenCactus();
     public WorldGenerator waterlilyGen = new WorldGenWaterlily();
     public int waterlilyPerChunk;
-    public int treesPerChunk;
-    public float extraTreeChance = 0.1F;
     public int flowersPerChunk = 2;
     public int grassPerChunk = 1;
     public int deadBushPerChunk;
@@ -53,7 +51,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     public int sandPatchesPerChunk = 3;
     public int clayPerChunk = 1;
     public int bigMushroomsPerChunk;
-    public boolean generateFalls = true;
+    public boolean generateFalls = false;
 
     public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
@@ -109,28 +107,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
             int i2 = random.nextInt(16) + 8;
             int j6 = random.nextInt(16) + 8;
             this.gravelGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(i2, 0, j6)));
-        }
-
-        int k1 = this.treesPerChunk;
-
-        if (random.nextFloat() < this.extraTreeChance)
-        {
-            ++k1;
-        }
-
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.TREE))
-        for (int j2 = 0; j2 < k1; ++j2)
-        {
-            int k6 = random.nextInt(16) + 8;
-            int l = random.nextInt(16) + 8;
-            WorldGenAbstractTree worldgenabstracttree = biomeIn.getRandomTreeFeature(random);
-            worldgenabstracttree.setDecorationDefaults();
-            BlockPos blockpos = worldIn.getHeight(this.chunkPos.add(k6, 0, l));
-
-            if (worldgenabstracttree.generate(worldIn, random, blockpos))
-            {
-                worldgenabstracttree.generateSaplings(worldIn, random, blockpos);
-            }
         }
 
         if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.BIG_SHROOM))
