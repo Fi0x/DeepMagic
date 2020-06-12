@@ -14,7 +14,7 @@ Insanity-dimension
 - Only generates the Insanity-biome
 - Intended to drive you insane
 - Mod-structures spawn here
-- Insanity trees spawn here
+- Insanity trees and Flowers spawn here
 
 ### Biomes
 Insanity-biome
@@ -56,6 +56,10 @@ Hovering Orb
 - looks like a spiky dirt block
 - hovers over the ground
 - rotates its top and bottom half in opposite directions
+
+Giant
+- Like the normal Minecraft Giant
+- Has an AI
 
 ## Items
 ### Armor
@@ -151,6 +155,16 @@ Deep Crystal Block
 Deep Crystal Ore
 - Ore that drops Deep Crystals
 - Overworld, Nether and End-versions
+
+Effect-Stones
+- Stones with several Potion or other effects
+- Defence: Pushes mobs away
+- Attack: Damages mobs
+- Speed: Speed Buff to players
+- Heal: Regeneration effect to players
+- Vision: Night vision to players
+- Saturation: Saturation effect to players
+- Levitation: Propells players up
 
 ##Commands
 /tpdim
