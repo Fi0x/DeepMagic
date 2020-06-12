@@ -119,12 +119,8 @@ Blocks {
         controls world events
     Altar of Knowledge
         opens skill tree
-    BarrierStone
-        blocks mobs from walking on it
-    Attack Stone
-        damages mobs that walk on it
-    Speed Stone
-        Gives a speedboost when walking over
+    Element Stones
+        Apply different potion effects on entities
 }
 Fluids {
     Insanity Water
