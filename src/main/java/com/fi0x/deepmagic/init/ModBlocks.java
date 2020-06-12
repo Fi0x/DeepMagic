@@ -17,6 +17,8 @@ public class ModBlocks
 	public static final Block DEEP_CRYSTAL_END_ORE = new DeepCrystalOre("deep_crystal_end_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_BLOCK = new DeepCrystalBlock("deep_crystal_block", Material.IRON);
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
+	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
+	public static final Block SPEED_STONE = new SpeedStone("speed_stone", Material.ROCK);
 	
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);
