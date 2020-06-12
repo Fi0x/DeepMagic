@@ -1,9 +1,6 @@
 package com.fi0x.deepmagic.init;
 
-import com.fi0x.deepmagic.blocks.AltarOfKnowledge;
-import com.fi0x.deepmagic.blocks.BlockFluid;
-import com.fi0x.deepmagic.blocks.DeepCrystalBlock;
-import com.fi0x.deepmagic.blocks.DeepCrystalOre;
+import com.fi0x.deepmagic.blocks.*;
 import com.fi0x.deepmagic.blocks.insanity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,6 +16,7 @@ public class ModBlocks
 	public static final Block DEEP_CRYSTAL_NETHER_ORE = new DeepCrystalOre("deep_crystal_nether_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_END_ORE = new DeepCrystalOre("deep_crystal_end_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_BLOCK = new DeepCrystalBlock("deep_crystal_block", Material.IRON);
+	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);

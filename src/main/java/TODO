@@ -121,6 +121,8 @@ Blocks {
             fix texture
     BarrierStone
         blocks mobs from walking on it
+    Attack Stone
+        damages mobs that walk on it
     Speed Stone
         Gives a speedboost when walking over
 }
