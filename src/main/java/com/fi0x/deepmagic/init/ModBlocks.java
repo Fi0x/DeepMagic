@@ -4,10 +4,14 @@ import com.fi0x.deepmagic.blocks.AltarOfKnowledge;
 import com.fi0x.deepmagic.blocks.BlockFluid;
 import com.fi0x.deepmagic.blocks.DeepCrystalBlock;
 import com.fi0x.deepmagic.blocks.DeepCrystalOre;
-import com.fi0x.deepmagic.blocks.effectstones.*;
+import com.fi0x.deepmagic.blocks.effectstones.AttackStone;
+import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
+import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
+import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.MobEffects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +26,10 @@ public class ModBlocks
 	public static final Block DEEP_CRYSTAL_BLOCK = new DeepCrystalBlock("deep_crystal_block", Material.IRON);
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
-	public static final Block SPEED_STONE = new SpeedStone("speed_stone", Material.ROCK);
-	public static final Block HEAL_STONE = new HealStone("heal_stone", Material.ROCK);
-	public static final Block VISION_STONE = new VisionStone("vision_stone", Material.ROCK);
-	public static final Block SATURATION_STONE = new SaturationStone("saturation_stone", Material.ROCK);
+	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3);
+	public static final Block HEAL_STONE = new PotionEffectStone("heal_stone", Material.ROCK, MobEffects.REGENERATION, 2, 3);
+	public static final Block VISION_STONE = new PotionEffectStone("vision_stone", Material.ROCK, MobEffects.NIGHT_VISION, 11, 1);
+	public static final Block SATURATION_STONE = new PotionEffectStone("saturation_stone", Material.ROCK, MobEffects.SATURATION, 60, 3);
 	public static final Block LEVITATION_STONE = new LevitationStone("levitation_stone", Material.ROCK);
 	
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
