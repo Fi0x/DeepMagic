@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.util.handlers;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class SoundsHandler
@@ -14,6 +15,7 @@ public class SoundsHandler
     public static void registerSounds()
     {
         MUSIC_INSANITY_DIMENSION = registerSound("music.insanity_dimension");
+        EnumHelperClient.addMusicType("INSANITY_DIMENSION", MUSIC_INSANITY_DIMENSION, 0, 1);
 
         ENTITY_HOVERING_ORB_AMBIENT = registerSound("entity.hovering_orb.ambient");
         ENTITY_HOVERING_ORB_HURT = registerSound("entity.hovering_orb.hurt");

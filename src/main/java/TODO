@@ -1,10 +1,8 @@
 Fix IDE Texture Bug
 Insanity Biome {
-    remove default trees from generation
 	keep Spawnlist up-to-date
 }
 Insanity Dimension {
-
     custom music
 	create potion effects
 	add structures
@@ -48,7 +46,7 @@ Mobs {
 		    like normal floating orb without spikes
 }
 Mana1System {
-	add manabar in hud (GuiManaRenderOverlay)
+	add manabar in hud (GuiManaRenderOverlay) (message / packet from server)
 }
 ManaLevel {
     levelup with mana-experience or mechanic (rituals/items)
@@ -74,7 +72,6 @@ Implement passive Skilltree {
 	jump height
 	tool speed
 	weapon speed
-	Gui to use skillpoints
 }
 Implement active Skills (With Scrolls?) {
     Weather control
@@ -119,8 +116,9 @@ Blocks {
         controls world events
     Altar of Knowledge
         opens skill tree
-    Element Stones
-        Apply different potion effects on entities
+            add buttons to skilltree gui (https://jabelarminecraft.blogspot.com/p/minecraft-modding-block-with-simple-gui.html)
+            un-comment open gui line in AltarOfKnowledge
+            fix texture
 }
 Fluids {
     Insanity Water
