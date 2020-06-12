@@ -31,9 +31,10 @@ Mobs {
 		    add animation when standing around
 		    add aggressiveness
 		    shrink
-		Giants
-		    Add ai
-		    add sounds (zombie?)
+		Giant
+		    sounds work
+		    create loottable
+		    fix hitbox
 	Passives
 	    Mage of the Dephts
 		Insanity Cow

@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.biome;
 
+import com.fi0x.deepmagic.entities.EntityGiant;
 import com.fi0x.deepmagic.entities.EntityHoveringOrb;
 import com.fi0x.deepmagic.entities.EntityInsanityCow;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -7,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -39,7 +39,7 @@ public class BiomeInsanity extends Biome
 		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
 //		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySpikySlime.class, 20, 4, 10));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
-		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityGiantZombie.class, 5, 1, 2));
+		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 5, 1, 2));
 		
 		this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
