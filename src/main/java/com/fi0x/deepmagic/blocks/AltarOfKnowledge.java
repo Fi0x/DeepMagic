@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.Main;
-import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +28,11 @@ public class AltarOfKnowledge extends BlockBase
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        playerIn.openGui(Main.instance, Reference.GUI_SKILLTREE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        if(!worldIn.isRemote)
+        {
+            Main.proxy.openSkilltreeGui();
+        }
+//        playerIn.openGui(Main.instance, Reference.GUI_SKILLTREE, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 }
