@@ -13,6 +13,14 @@ tile.deep_crystal_ore.name=Deep Crystal Ore
 tile.deep_crystal_nether_ore.name=Deep Crystal Ore
 tile.deep_crystal_end_ore.name=Deep Crystal Ore
 tile.deep_crystal_block.name=Deep Crystal Block
+tile.defence_stone.name=Defence Stone
+tile.attack_stone.name=Attack Stone
+tile.speed_stone.name=Speed Stone
+tile.heal_stone.name=Heal Stone
+tile.vision_stone.name=Vision Stone
+tile.saturation_stone.name=Saturation Stone
+tile.levitation_stone.name=Levitation Stone
+
 tile.insanity_stone.name=Insanity Stone
 tile.insanity_dirt.name=Insanity Dirt
 tile.insanity_grass.name=Insanity Grass
@@ -37,6 +45,7 @@ item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
 
 item.crystal_infused_apple.name=Crystal Infused Apple
+item.insanity_apple.name=Insanity Apple
 
 entity.insanity_cow.name=Insanity Cow
 entity.spiky_slime.name=Spiky Slime

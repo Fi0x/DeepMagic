@@ -14,6 +14,7 @@ Insanity-dimension
 - Only generates the Insanity-biome
 - Intended to drive you insane
 - Mod-structures spawn here
+- Insanity trees spawn here
 
 ### Biomes
 Insanity-biome
@@ -26,9 +27,19 @@ Mage house
 - 2 floor house
 - Has a tower
 - Contains loot
+
 Small mage house
 - Single floor with cellar
 - Contains loot
+
+###Plants
+Insanity Tree
+- Like an oak tree that grows higher
+- Has insanity log and leaves instead of normal blocks
+- Can grow out of an insanity sapling
+
+Insanity Flower
+- See blocks section
 
 ## Mobs
 Insanity Cow
@@ -37,9 +48,14 @@ Insanity Cow
 - 2 cat-tails
 - 2 heads
 
-Spiky Slime
+Spiky Slime (currently disabled)
 - Slime with Spikes
 - Deals increased damage
+
+Hovering Orb
+- looks like a spiky dirt block
+- hovers over the ground
+- rotates its top and bottom half in opposite directions
 
 ## Items
 ### Armor
@@ -83,6 +99,10 @@ Crystal Infused Apple
 - Food value is worse than from a normal apple
 - Adds a strength potion effect
 
+Insanity Apple
+- like a normal apple
+- gives nausea effect
+
 ### Other
 Deep Crystal
 
@@ -110,6 +130,15 @@ Insanity Planks
 Insanity Stone
 - Like regular stone
 - Texture is more red
+
+Insanity Wood
+- part of the insanity tree
+
+Insanity Leaves
+- part of the insanity tree
+
+Insanity Sapling
+- grows into an insanity tree
 
 Insanity Water
 - Like regular Water

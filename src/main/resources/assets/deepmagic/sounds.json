@@ -16,7 +16,7 @@
   {
     "category": "entity",
     "subtitle": "entity.hovering_orb.ambient",
-    "sounds": [{ "name": "deepmagic:entity/hovering_orb/ambient", "stream": true}]
+    "sounds": [{ "name": "deepmagic:entity/hovering_orb/ambient", "stream": true, "volume": "0.2"}]
   },
 
   "entity.hovering_orb.hurt":
