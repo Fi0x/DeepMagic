@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "deepmagic:vision_stone"
+		}
+	}
+}

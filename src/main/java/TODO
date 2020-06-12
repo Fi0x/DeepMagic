@@ -119,12 +119,6 @@ Blocks {
             add buttons to skilltree gui (https://jabelarminecraft.blogspot.com/p/minecraft-modding-block-with-simple-gui.html)
             un-comment open gui line in AltarOfKnowledge
             fix texture
-    BarrierStone
-        blocks mobs from walking on it
-    Attack Stone
-        damages mobs that walk on it
-    Speed Stone
-        Gives a speedboost when walking over
 }
 Fluids {
     Insanity Water
