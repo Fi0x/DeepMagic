@@ -9,6 +9,8 @@ import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
 import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
+import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
+import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.MobEffects;
@@ -43,4 +45,6 @@ public class ModBlocks
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
 
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
+	public static final Block WEATHER_CONTROLLER = new WeatherController("weather_controller", Material.IRON);
+	public static final Block TIME_CONTROLLER = new TimeController("time_controller", Material.IRON);
 }
