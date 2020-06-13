@@ -22,6 +22,7 @@ public class EntityNetherWorm extends EntityMob
     {
         super(worldIn);
         setSize(1F, 1F);
+        this.isImmuneToFire = true;
     }
 
     @Override

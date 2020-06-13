@@ -45,6 +45,7 @@ public class EntityGiant extends EntityMob
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(50.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
     }
 
     @Nullable
@@ -57,12 +58,12 @@ public class EntityGiant extends EntityMob
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn)
     {
-        return SoundsHandler.ENTITY_GIANT_AMBIENT;
+        return SoundsHandler.ENTITY_GIANT_HURT;
     }
     @Override
     protected SoundEvent getDeathSound()
     {
-        return SoundsHandler.ENTITY_GIANT_AMBIENT;
+        return SoundsHandler.ENTITY_GIANT_DEATH;
     }
     @Override
     protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)

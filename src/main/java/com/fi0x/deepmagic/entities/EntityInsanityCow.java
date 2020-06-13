@@ -1,19 +1,17 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.util.handlers.SoundsHandler;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -55,17 +53,22 @@ public class EntityInsanityCow extends EntityCow
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return super.getAmbientSound();
+        return SoundsHandler.ENTITY_INSANITY_COW_AMBIENT;
     }
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource source)
     {
-        return super.getHurtSound(source);
+        return SoundsHandler.ENTITY_INSANITY_COW_HURT;
     }
     @Override
     protected SoundEvent getDeathSound()
     {
-        return super.getDeathSound();
+        return SoundsHandler.ENTITY_INSANITY_COW_DEATH;
+    }
+    @Override
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
+    {
+        this.playSound(SoundsHandler.ENTITY_INSANITY_COW_STEP, 1, 1);
     }
     @Override
     protected float getSoundVolume()

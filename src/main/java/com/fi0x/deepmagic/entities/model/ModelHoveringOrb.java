@@ -151,7 +151,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike48.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike48.addBox(3.6F, 2.9F, -10.0F, 1, 1, 2, 0.0F);
         this.centerBody = new ModelRenderer(this, 0, 23);
-        this.centerBody.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.centerBody.setRotationPoint(0.0F, 16.0F, 0.0F);
         this.centerBody.addBox(-6.0F, -3.0F, -6.0F, 12, 6, 12, 0.0F);
         this.spike12 = new ModelRenderer(this, 66, 5);
         this.spike12.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -172,7 +172,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike64.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike64.addBox(3.4F, 5.8F, 8.0F, 1, 1, 2, 0.0F);
         this.eyeExtenderRight = new ModelRenderer(this, 2, 11);
-        this.eyeExtenderRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.eyeExtenderRight.setRotationPoint(0.0F, 16.0F, 0.0F);
         this.eyeExtenderRight.addBox(2.0F, -0.4F, -9.8F, 1, 1, 4, 0.8F);
         this.spike42 = new ModelRenderer(this, 78, 2);
         this.spike42.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -211,7 +211,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike51.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike51.addBox(-5.7F, -2.8F, 8.0F, 1, 1, 2, 0.0F);
         this.topBody = new ModelRenderer(this, 0, 0);
-        this.topBody.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.topBody.setRotationPoint(0.0F, 16.0F, 0.0F);
         this.topBody.addBox(-8.0F, -7.5F, -8.0F, 16, 7, 16, 0.0F);
         this.spike45 = new ModelRenderer(this, 96, 7);
         this.spike45.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -247,7 +247,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike3.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike3.addBox(8.0F, -6.0F, -2.2F, 2, 1, 1, 0.0F);
         this.bottomBody = new ModelRenderer(this, 48, 7);
-        this.bottomBody.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.bottomBody.setRotationPoint(0.0F, 16.0F, 0.0F);
         this.bottomBody.addBox(-8.0F, 0.5F, -8.0F, 16, 7, 16, 0.0F);
         this.spike19 = new ModelRenderer(this, 84, 0);
         this.spike19.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -304,7 +304,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike24.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike24.addBox(-10.0F, -6.2F, 1.9F, 2, 1, 1, 0.0F);
         this.eyeExtenderLeft = new ModelRenderer(this, 110, 10);
-        this.eyeExtenderLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.eyeExtenderLeft.setRotationPoint(0.0F, 16.0F, 0.0F);
         this.eyeExtenderLeft.addBox(-3.0F, -0.4F, -9.8F, 1, 1, 4, 0.8F);
         this.spike65 = new ModelRenderer(this, 102, 10);
         this.spike65.setRotationPoint(0.0F, 0.0F, 0.0F);
