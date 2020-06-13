@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -13,22 +14,26 @@ public class GuiSkilltree extends GuiScreen
 {
     private final int backgroundHeight = 256;
     private final int backgroundWidth = 256;
-    private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background");
+    private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background.png");
+    private GuiButton buttonExit;
 
-    public GuiSkilltree(){ }
+    public GuiSkilltree()
+    {
+    }
 
     @Override
     public void initGui()
     {
         buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        //TODO: Buttons erstellen
+        buttonExit = new GuiButton(0, width/2 -20, (height-backgroundHeight)/2 + backgroundHeight-30, 40, 20, I18n.format("Exit", new Object[0]));
+        buttonList.add(buttonExit);
     }
 
     @Override
     public void updateScreen()
     {
-        //TODO: set button visibility to true or false
+        buttonExit.visible = true;
     }
 
     @Override
@@ -48,7 +53,11 @@ public class GuiSkilltree extends GuiScreen
     @Override
     protected void actionPerformed(@Nonnull GuiButton button)
     {
-        //TODO: Button uses
+        if(button == buttonExit)
+        {
+            mc.displayGuiScreen((GuiScreen) null);
+        }
+        //TODO: send server packet if button is a skillpoint adder to change values on serverside
     }
 
     @Override
@@ -57,6 +66,6 @@ public class GuiSkilltree extends GuiScreen
     @Override
     public boolean doesGuiPauseGame()
     {
-        return true;
+        return false;
     }
 }

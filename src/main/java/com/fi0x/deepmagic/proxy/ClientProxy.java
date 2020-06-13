@@ -18,6 +18,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void openSkilltreeGui()
 	{
-		Minecraft.getMinecraft().displayGuiScreen(new GuiSkilltree());
+		Minecraft.getMinecraft().addScheduledTask( () -> Minecraft.getMinecraft().displayGuiScreen(new GuiSkilltree()));
 	}
 }

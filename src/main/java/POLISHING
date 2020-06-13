@@ -3,13 +3,11 @@ Structures
 Sounds
 Loottables
 Balance Mob stats
-
-Clear TODOS
-    GuiSkilltree.java
+GUIs
 
 Repair Farmland on Mage House Structure (Crops get dropped on structure-spawn)
 Rotate generated Structures randomly
 Increase Flow Range of Insanity Water
-change insanity leaves texture to be less transparent
+change insanity leaves texture to render behind other leaves
 change shape of insanity trees
 change item model of insanity sapling and flower to normal item
