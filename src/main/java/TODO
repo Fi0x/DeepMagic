@@ -115,9 +115,9 @@ Blocks {
         controls world events
     Altar of Knowledge
         opens skill tree
-            add buttons to skilltree gui (https://jabelarminecraft.blogspot.com/p/minecraft-modding-block-with-simple-gui.html)
+            add buttons to skilltree gui
             un-comment open gui line in AltarOfKnowledge
-            fix texture
+            send and receive server messages
     Insanity Grass
         reset to insanity dirt instead of normal dirt
     Insanity Leaves
