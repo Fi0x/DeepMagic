@@ -16,7 +16,7 @@
   {
     "category": "entity",
     "subtitle": "entity.hovering_orb.ambient",
-    "sounds": [{ "name": "deepmagic:entity/hovering_orb/ambient", "stream": true, "volume": "0.2"}]
+    "sounds": [{ "name": "deepmagic:entity/hovering_orb/ambient", "stream": true}]
   },
 
   "entity.hovering_orb.hurt":
@@ -66,5 +66,61 @@
     "category": "entity",
     "subtitle": "entity.nether_worm.step",
     "sounds": [{ "name": "deepmagic:entity/nether_worm/step", "stream": true}]
+  },
+
+  "entity.giant.ambient":
+  {
+    "category": "entity",
+    "subtitle": "entity.giant.ambient",
+    "sounds": [{ "name": "deepmagic:entity/giant/ambient", "stream": true}]
+  },
+
+  "entity.giant.hurt":
+  {
+    "category": "entity",
+    "subtitle": "entity.giant.hurt",
+    "sounds": [{ "name": "deepmagic:entity/giant/hurt", "stream": true}]
+  },
+
+  "entity.giant.death":
+  {
+    "category": "entity",
+    "subtitle": "entity.giant.death",
+    "sounds": [{ "name": "deepmagic:entity/giant/death", "stream": true}]
+  },
+
+  "entity.giant.step":
+  {
+    "category": "entity",
+    "subtitle": "entity.giant.step",
+    "sounds": [{ "name": "deepmagic:entity/giant/step", "stream": true}]
+  },
+
+  "entity.insanity_cow.ambient":
+  {
+    "category": "entity",
+    "subtitle": "entity.insanity_cow.ambient",
+    "sounds": [{ "name": "deepmagic:entity/insanity_cow/ambient", "stream": true}]
+  },
+
+  "entity.insanity_cow.hurt":
+  {
+    "category": "entity",
+    "subtitle": "entity.insanity_cow.hurt",
+    "sounds": [{ "name": "deepmagic:entity/insanity_cow/hurt", "stream": true}]
+  },
+
+  "entity.insanity_cow.death":
+  {
+    "category": "entity",
+    "subtitle": "entity.insanity_cow.death",
+    "sounds": [{ "name": "deepmagic:entity/insanity_cow/death", "stream": true}]
+  },
+
+  "entity.insanity_cow.step":
+  {
+    "category": "entity",
+    "subtitle": "entity.insanity_cow.step",
+    "sounds": [{ "name": "deepmagic:entity/insanity_cow/step", "stream": true}]
   }
 }

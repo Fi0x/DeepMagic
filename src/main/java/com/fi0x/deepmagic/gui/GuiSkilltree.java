@@ -8,13 +8,12 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 
 public class GuiSkilltree extends GuiScreen
 {
     private final int backgroundHeight = 256;
     private final int backgroundWidth = 256;
-    private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID, "textures/gui/skilltree_background");
+    private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background");
 
     public GuiSkilltree(){ }
 
@@ -47,7 +46,7 @@ public class GuiSkilltree extends GuiScreen
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){ }
 
     @Override
-    protected void actionPerformed(@Nonnull GuiButton button) throws IOException
+    protected void actionPerformed(@Nonnull GuiButton button)
     {
         //TODO: Button uses
     }

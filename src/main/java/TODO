@@ -15,10 +15,10 @@ Insanity Dimension {
 }
 Mobs {
 	Bosses
-		Nether worm
-		    make aggressive and optimize AI
+		Nether worm (remake required)
+		    optimize AI
 		    create loottable
-		    optimize hitbox
+		    fix hitbox (split in multiple parts)
 		    customize stats
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))
@@ -26,18 +26,13 @@ Mobs {
 		Griffin
 		Zentaur
 		Cyclopse
-		Hovering Orb
-		    optimize hitbox
-		    add animation when standing around
-		    add aggressiveness
-		    shrink
-		Giants
-		    Add ai
-		    add sounds (zombie?)
+		Giant
+		    create loottable
+		    fix hitbox or remake model
 	Passives
+	    Troll
 	    Mage of the Dephts
 		Insanity Cow
-		    add custom sound
 		    create loottable
 		Spiky Slime
 		    un-comment in EntityInit
@@ -125,6 +120,8 @@ Blocks {
             fix texture
     Insanity Grass
         reset to insanity dirt instead of normal dirt
+    Insanity Leaves
+        render texture correctly
 }
 Fluids {
     Insanity Water
