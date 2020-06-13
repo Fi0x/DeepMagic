@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.MathHelper;
 
 import javax.annotation.Nonnull;
 
@@ -107,9 +108,9 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike62 = new ModelRenderer(this, 48, 10);
         this.spike62.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike62.addBox(0.0F, 4.8F, 8.0F, 1, 1, 2, 0.0F);
-        this.topCover = new ModelRenderer(this, 38, 30);
+        this.topCover = new ModelRenderer(this, 38, 31);
         this.topCover.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.topCover.addBox(-5.0F, -9.5F, -5.0F, 10, 2, 10, 0.0F);
+        this.topCover.addBox(-5.0F, -8.5F, -5.0F, 10, 4, 10, 0.0F);
         this.spike8 = new ModelRenderer(this, 0, 5);
         this.spike8.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike8.addBox(8.0F, 1.3F, -6.7F, 2, 1, 1, 0.0F);
@@ -151,7 +152,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike48.addBox(3.6F, 2.9F, -10.0F, 1, 1, 2, 0.0F);
         this.centerBody = new ModelRenderer(this, 0, 23);
         this.centerBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.centerBody.addBox(-6.0F, -1.0F, -6.0F, 12, 2, 12, 0.0F);
+        this.centerBody.addBox(-6.0F, -3.0F, -6.0F, 12, 6, 12, 0.0F);
         this.spike12 = new ModelRenderer(this, 66, 5);
         this.spike12.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike12.addBox(8.0F, 5.5F, -2.7F, 2, 1, 1, 0.0F);
@@ -227,9 +228,9 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike60 = new ModelRenderer(this, 0, 9);
         this.spike60.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike60.addBox(-3.2F, 3.3F, 8.0F, 1, 1, 2, 0.0F);
-        this.bottomCover = new ModelRenderer(this, 78, 30);
+        this.bottomCover = new ModelRenderer(this, 78, 31);
         this.bottomCover.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.bottomCover.addBox(-5.0F, 7.5F, -5.0F, 10, 2, 10, 0.0F);
+        this.bottomCover.addBox(-5.0F, 4.5F, -5.0F, 10, 4, 10, 0.0F);
         this.spike2 = new ModelRenderer(this, 6, 0);
         this.spike2.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike2.addBox(8.0F, -3.6F, 3.8F, 2, 1, 1, 0.0F);
@@ -421,13 +422,28 @@ public class ModelHoveringOrb extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entityIn)
     {
-        this.topBody.rotateAngleY = limbSwing*limbSwingAmount;
-        this.bottomBody.rotateAngleY = -limbSwing*limbSwingAmount;
+        float f = MathHelper.sin(this.swingProgress * (float)Math.PI);
+        float f1 = MathHelper.sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float)Math.PI);
+        float f2 = -(float) Math.PI / 2.25F;
+        this.topBody.rotateAngleY = f2;
+        this.bottomBody.rotateAngleY = f2;
+        this.topBody.rotateAngleY += f * 1.2F - f1 * 0.4F;
+        this.bottomBody.rotateAngleY += f * 1.2F - f1 * 0.4F;
+        this.topBody.offsetY = f * 1.2F - f1 * 0.4F;
+        this.bottomBody.offsetY = f * 1.2F - f1 * 0.4F;
+        this.topBody.rotateAngleY += (ageInTicks * 0.067F) * 10;
+        this.bottomBody.rotateAngleY -= (ageInTicks * 0.067F) * 10;
+        this.topBody.offsetY += MathHelper.cos(ageInTicks * 0.067F) * 0.03;
+        this.bottomBody.offsetY -= MathHelper.cos(ageInTicks * 0.067F) * 0.03;
+
+//        this.bottomBody.offsetY = 0;
+//        this.topBody.offsetY = 0;
+//        this.centerBody.offsetY = 0;
+//        this.eyeExtenderRight.offsetY = 0;
+//        this.eyeExtenderLeft.offsetY = 0;
     }
     @Override
     public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
     {
-        this.topBody.rotateAngleY = limbSwing*limbSwingAmount;
-        this.bottomBody.rotateAngleY = -limbSwing*limbSwingAmount;
     }
 }

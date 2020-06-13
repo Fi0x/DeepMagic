@@ -28,11 +28,8 @@ Mobs {
 		Cyclopse
 		Hovering Orb
 		    optimize hitbox
-		    add animation when standing around
-		    add aggressiveness
-		    shrink
 		Giant
-		    sounds work
+		    make sounds work
 		    create loottable
 		    fix hitbox
 	Passives
