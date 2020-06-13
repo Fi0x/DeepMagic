@@ -118,8 +118,6 @@ Blocks {
             add buttons to skilltree gui
             un-comment open gui line in AltarOfKnowledge
             send and receive server messages
-    Insanity Grass
-        reset to insanity dirt instead of normal dirt
     Insanity Leaves
         render texture correctly
 }
