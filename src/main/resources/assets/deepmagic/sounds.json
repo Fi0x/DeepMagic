@@ -122,5 +122,33 @@
     "category": "entity",
     "subtitle": "entity.insanity_cow.step",
     "sounds": [{ "name": "deepmagic:entity/insanity_cow/step", "stream": true}]
+  },
+
+  "entity.rock_troll.ambient":
+  {
+    "category": "entity",
+    "subtitle": "entity.rock_troll.ambient",
+    "sounds": [{ "name": "deepmagic:entity/rock_troll/ambient", "stream": true}]
+  },
+
+  "entity.rock_troll.hurt":
+  {
+    "category": "entity",
+    "subtitle": "entity.rock_troll.hurt",
+    "sounds": [{ "name": "deepmagic:entity/rock_troll/hurt", "stream": true}]
+  },
+
+  "entity.rock_troll.death":
+  {
+    "category": "entity",
+    "subtitle": "entity.rock_troll.death",
+    "sounds": [{ "name": "deepmagic:entity/rock_troll/death", "stream": true}]
+  },
+
+  "entity.rock_troll.step":
+  {
+    "category": "entity",
+    "subtitle": "entity.rock_troll.step",
+    "sounds": [{ "name": "deepmagic:entity/rock_troll/step", "stream": true}]
   }
 }

@@ -23,6 +23,7 @@ public class RenderHandler
         RenderingRegistry.registerEntityRenderingHandler(EntitySpikySlime.class, RenderSpikySlime::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityNetherWorm.class, RenderNetherWorm::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityGiant.class, RenderGiant::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityRockTroll.class, RenderRockTroll::new);
     }
 
     public static void registerCustomMeshesAndStates()

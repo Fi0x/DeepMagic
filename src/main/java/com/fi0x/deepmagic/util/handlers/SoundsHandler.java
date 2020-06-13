@@ -12,6 +12,7 @@ public class SoundsHandler
     public static SoundEvent ENTITY_NETHER_WORM_AMBIENT, ENTITY_NETHER_WORM_HURT, ENTITY_NETHER_WORM_DEATH, ENTITY_NETHER_WORM_STEP;
     public static SoundEvent ENTITY_GIANT_AMBIENT, ENTITY_GIANT_HURT, ENTITY_GIANT_DEATH, ENTITY_GIANT_STEP;
     public static SoundEvent ENTITY_INSANITY_COW_AMBIENT, ENTITY_INSANITY_COW_HURT, ENTITY_INSANITY_COW_DEATH, ENTITY_INSANITY_COW_STEP;
+    public static SoundEvent ENTITY_ROCK_TROLL_AMBIENT, ENTITY_ROCK_TROLL_HURT, ENTITY_ROCK_TROLL_DEATH, ENTITY_ROCK_TROLL_STEP;
     public static SoundEvent MUSIC_INSANITY_DIMENSION;
 
     public static void registerSounds()
@@ -38,6 +39,11 @@ public class SoundsHandler
         ENTITY_INSANITY_COW_HURT = registerSound("entity.insanity_cow.hurt");
         ENTITY_INSANITY_COW_DEATH = registerSound("entity.insanity_cow.death");
         ENTITY_INSANITY_COW_STEP = registerSound("entity.insanity_cow.step");
+
+        ENTITY_ROCK_TROLL_AMBIENT = registerSound("entity.rock_troll.ambient");
+        ENTITY_ROCK_TROLL_HURT = registerSound("entity.rock_troll.hurt");
+        ENTITY_ROCK_TROLL_DEATH = registerSound("entity.rock_troll.death");
+        ENTITY_ROCK_TROLL_STEP = registerSound("entity.rock_troll.step");
     }
     private static SoundEvent registerSound(String name)
     {
