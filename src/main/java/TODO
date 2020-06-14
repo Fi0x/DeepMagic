@@ -3,9 +3,8 @@ Insanity Biome {
 	keep Spawnlist up-to-date
 }
 Insanity Dimension {
-    custom music
 	add structures
-		dungeons (with riddles)
+		dungeons (with riddles) (random generated(look at woodland mansion))
 		safe oasis (has no insanity blocks)
 		shrines (for levelups)
 		dragon lair
