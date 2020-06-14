@@ -19,10 +19,8 @@ public class AltarOfKnowledge extends BlockBase
         super(name, material);
         setSoundType(SoundType.STONE);
         setHardness(3.0F);
-        setResistance(20.0F);
         setHarvestLevel("pickaxe", 3);
         setLightLevel(1.0F);
-        setDefaultSlipperiness(0.7F);
     }
 
     @Override

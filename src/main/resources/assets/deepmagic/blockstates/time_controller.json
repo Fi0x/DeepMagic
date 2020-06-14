@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "deepmagic:time_controller"
+		}
+	}
+}
