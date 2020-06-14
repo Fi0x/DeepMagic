@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.entities.ai.EntityAIDefence;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -23,7 +24,7 @@ import javax.annotation.Nullable;
 
 public class EntityRockTroll extends EntityCreature
 {
-    private boolean defenceState;
+    public boolean defenceState;
 
     public EntityRockTroll(World worldIn)
     {
@@ -37,6 +38,7 @@ public class EntityRockTroll extends EntityCreature
     @Override
     protected void initEntityAI()
     {
+        this.tasks.addTask(0, new EntityAIDefence(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
@@ -99,9 +101,9 @@ public class EntityRockTroll extends EntityCreature
     }
 
     @Override
-    public boolean getIsInvulnerable()
+    public boolean isEntityInvulnerable(@Nonnull DamageSource source)
     {
-        return defenceState;
+        return defenceState && !source.isCreativePlayer();
     }
 
     @Override
@@ -120,7 +122,7 @@ public class EntityRockTroll extends EntityCreature
 
         if (flag)
         {
-            if (i > 0 && entityIn instanceof EntityLivingBase)
+            if (i > 0)
             {
                 ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, MathHelper.sin(this.rotationYaw * 0.017453292F), -MathHelper.cos(this.rotationYaw * 0.017453292F));
                 this.motionX *= 0.6D;
