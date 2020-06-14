@@ -30,7 +30,10 @@ Mobs {
 		    create loottable
 		    fix hitbox or remake model
 	Passives
-	    Troll
+	    Rock Troll
+	        add defence mechanism to block ALL damage
+	        add to rocktroll cave
+	        fix standing still animation
 	    Mage of the Dephts
 		Insanity Cow
 		    create loottable

@@ -18,6 +18,7 @@ public class Reference
 	public static final int ENTITY_HOVERING_ORB = 1766;
 	public static final int ENTITY_NETHER_WORM = 1767;
 	public static final int ENTITY_GIANT = 1768;
+	public static final int ENTITY_ROCK_TROLL = 1769;
 
 	//Gui IDs
 	public static final int GUI_SKILLTREE = 74088;

@@ -435,12 +435,6 @@ public class ModelHoveringOrb extends ModelBase {
         this.bottomBody.rotateAngleY -= (ageInTicks * 0.067F) * 10;
         this.topBody.offsetY += MathHelper.cos(ageInTicks * 0.067F) * 0.03;
         this.bottomBody.offsetY -= MathHelper.cos(ageInTicks * 0.067F) * 0.03;
-
-//        this.bottomBody.offsetY = 0;
-//        this.topBody.offsetY = 0;
-//        this.centerBody.offsetY = 0;
-//        this.eyeExtenderRight.offsetY = 0;
-//        this.eyeExtenderLeft.offsetY = 0;
     }
     @Override
     public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
