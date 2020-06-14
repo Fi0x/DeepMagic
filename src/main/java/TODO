@@ -124,8 +124,7 @@ Blocks {
     Insanity Leaves
         render texture correctly
     CleanStoneSlabs
-        fix inventory texture
-        enable 2 slabs in 1 block
+        enable 2 slabs in 1 block placement
 }
 Fluids {
     Insanity Water

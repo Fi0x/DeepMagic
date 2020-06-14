@@ -20,6 +20,7 @@ tile.heal_stone.name=Heal Stone
 tile.vision_stone.name=Vision Stone
 tile.saturation_stone.name=Saturation Stone
 tile.levitation_stone.name=Levitation Stone
+tile.clean_stone_slab_half.name=Clean Stone Slab
 
 tile.insanity_stone.name=Insanity Stone
 tile.insanity_dirt.name=Insanity Dirt

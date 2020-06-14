@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks.slabs;
 
-import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import net.minecraft.block.BlockSlab;
@@ -12,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public abstract class SlabBase extends BlockSlab
@@ -21,7 +21,6 @@ public abstract class SlabBase extends BlockSlab
         super(materialIn);
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(DeepMagicTab.BLOCKS);
 
         IBlockState state = this.blockState.getBaseState();
         if(!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
@@ -32,30 +31,34 @@ public abstract class SlabBase extends BlockSlab
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
+    @Nonnull
     @Override
     public String getUnlocalizedName(int meta)
     {
         return this.getUnlocalizedName();
     }
 
+    @Nonnull
     @Override
     public IProperty<?> getVariantProperty()
     {
         return HALF;
     }
 
+    @Nonnull
     @Override
-    public Comparable<?> getTypeForItem(ItemStack stack)
+    public Comparable<?> getTypeForItem(@Nonnull ItemStack stack)
     {
         return EnumBlockHalf.BOTTOM;
     }
 
     @Override
-    public int damageDropped(IBlockState state)
+    public int damageDropped(@Nonnull IBlockState state)
     {
         return 0;
     }
 
+    @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -64,18 +67,20 @@ public abstract class SlabBase extends BlockSlab
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
+    public int getMetaFromState(@Nonnull IBlockState state)
     {
         if(this.isDouble()) return 0;
-        return ((EnumBlockHalf)state.getValue(HALF)).ordinal() + 1;
+        return state.getValue(HALF).ordinal() + 1;
     }
 
+    @Nonnull
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
         return Item.getItemFromBlock(ModBlocks.CLEAN_STONE_SLAB_HALF);
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState()
     {
