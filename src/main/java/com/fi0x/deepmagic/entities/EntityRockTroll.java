@@ -31,7 +31,6 @@ public class EntityRockTroll extends EntityCreature
         setSize(2F, 2.5F);
         this.isImmuneToFire = true;
         defenceState = false;
-        enablePersistence();
     }
 
     @Override

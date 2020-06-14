@@ -4,13 +4,12 @@ Insanity Biome {
 }
 Insanity Dimension {
     custom music
-	create potion effects
 	add structures
 		dungeons (with riddles)
 		safe oasis (has no insanity blocks)
 		shrines (for levelups)
 		dragon lair
-	    add structure loot tables
+	    create custom loot tables for structures
 	add mobs to structures
 }
 Mobs {
