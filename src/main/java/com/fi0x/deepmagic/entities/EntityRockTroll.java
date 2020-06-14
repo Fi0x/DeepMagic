@@ -3,9 +3,9 @@ package com.fi0x.deepmagic.entities;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityRockTroll extends EntityCreature
+public class EntityRockTroll extends EntityMob
 {
     public EntityRockTroll(World worldIn)
     {
@@ -41,6 +41,8 @@ public class EntityRockTroll extends EntityCreature
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
     }
     @Override
     public void onLivingUpdate()
@@ -82,6 +84,6 @@ public class EntityRockTroll extends EntityCreature
     @Override
     protected ResourceLocation getLootTable()
     {
-        return LootTableHandler.HOVERING_ORB;
+        return LootTableHandler.ROCK_TROLL;
     }
 }

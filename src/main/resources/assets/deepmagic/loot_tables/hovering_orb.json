@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "specialHoveringOrb",
+      "name": "special_hovering_orb",
       "rolls": 1,
       "entries": [
         {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "normalHoveringOrb",
+      "name": "normal_hovering_orb",
       "rolls": 1,
       "entries": [
         {

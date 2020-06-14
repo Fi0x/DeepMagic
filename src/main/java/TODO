@@ -31,10 +31,9 @@ Mobs {
 		    fix hitbox or remake model
 	Passives
 	    Rock Troll
-	        add custom sounds
-	        create custom loot table
 	        add defence mechanism to block ALL damage
-	        add to worldspawn or spawn in structure
+	        add to rocktroll cave
+	        fix standing still animation
 	    Mage of the Dephts
 		Insanity Cow
 		    create loottable
