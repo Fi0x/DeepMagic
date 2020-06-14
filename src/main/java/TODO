@@ -70,7 +70,7 @@ Implement passive Skilltree {
 	feather fall
 	jump height
 	tool speed
-	weapon speed
+	weapon speed (sword hit speed and bow draw speed)
 }
 Implement active Skills (With Scrolls?) {
     Weather control
@@ -111,8 +111,11 @@ Items {
         uses mana(1 or 2)
 }
 Blocks {
-    Weather/Time/World controller
-        controls world events
+    Add World controllers
+    Weather controller
+        add function
+    Time controller
+        add function
     Altar of Knowledge
         opens skill tree
             add buttons to skilltree gui
@@ -120,6 +123,9 @@ Blocks {
             send and receive server messages
     Insanity Leaves
         render texture correctly
+    CleanStoneSlabs
+        fix inventory texture
+        enable 2 slabs in 1 block
 }
 Fluids {
     Insanity Water
