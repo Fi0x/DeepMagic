@@ -31,8 +31,7 @@ Mobs {
 		    fix hitbox or remake model
 	Passives
 	    Rock Troll
-	        add defence mechanism to block ALL damage
-	        add to rocktroll cave
+	        add defence mechanism to block ALL damage (invulnerability method)
 	        fix standing still animation
 	    Mage of the Dephts
 		Insanity Cow

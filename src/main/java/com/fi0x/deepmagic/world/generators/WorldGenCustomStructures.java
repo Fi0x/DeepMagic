@@ -19,6 +19,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 {
 	public static final ModWorldGenStructure MAGE_HOUSE = new ModWorldGenStructure("mage_house");
 	public static final ModWorldGenStructure MAGE_HOUSE_SMALL = new ModWorldGenStructure("mage_house_small");
+	public static final ModWorldGenStructure INSANITY_ROCK_TROLL_CAVE = new ModWorldGenStructure("insanity_rock_troll_cave");
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
@@ -27,6 +28,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		{
 			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 500, BiomeInsanity.class);//increase the chance number to decrease spawn rate
 			generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 1000, BiomeInsanity.class);//increase the chance number to decrease spawn rate
+			generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 500, BiomeInsanity.class);
 		}
 	}
 	
