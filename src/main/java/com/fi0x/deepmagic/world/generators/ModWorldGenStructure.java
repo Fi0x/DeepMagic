@@ -57,7 +57,27 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 					{
 						if(entry2.getKey().getValueClass().equals(EnumFacing.class) && entry2.getKey().getName().equals("facing"))
 						{
-							state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
+							if(data.length > 2)
+							{
+								switch (data[2])
+								{
+									case "0":
+										state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
+										break;
+									case "1":
+										state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
+										break;
+									case "2":
+										state = state.withRotation(rotation.add(Rotation.COUNTERCLOCKWISE_90));
+										break;
+									case "3":
+										state = state.withRotation(rotation.add(Rotation.NONE));
+										break;
+								}
+							} else
+							{
+								state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
+							}
 							break;
 						}
 					}
@@ -67,10 +87,6 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 					if(te instanceof TileEntityLockableLoot) ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
 				} catch (Exception ignored) { }
 			}
-
-//			IBlockState state = world.getBlockState(pos);
-//			world.notifyBlockUpdate(pos, state, state, 3);
-//			template.addBlocksToWorldChunk(world, pos, settings);
 			return true;
 		}
 		return false;
