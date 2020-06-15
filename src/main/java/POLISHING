@@ -4,10 +4,10 @@ Sounds
 Loottables
 Balance Mob stats
 GUIs
+Insanity Biome Spawnlist
 
 change insanity leaves texture to render behind other leaves
 change shape of insanity trees
 change item model of insanity sapling and flower to normal item
 add custom music to insanity dimension
-fix TODOs in MobWorldGenStructure
 fix structures get destroyed by lake spawn

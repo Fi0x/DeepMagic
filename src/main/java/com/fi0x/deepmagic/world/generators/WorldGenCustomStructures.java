@@ -30,7 +30,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	{
 		if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
 		{
-			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 1, 500, BiomeInsanity.class);//increase the chance number to decrease spawn rate
+			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 1, 50, BiomeInsanity.class);//increase the chance number to decrease spawn rate
 			generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 2, 1000, BiomeInsanity.class);//increase the chance number to decrease spawn rate
 			generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 1, 500, BiomeInsanity.class);
 			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
@@ -50,7 +50,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 
 		Template template = ((WorldServer) world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(Reference.MOD_ID, ((ModWorldGenStructure) generator).structureName));
 		
-		if(classesList.contains(biome) && random.nextInt(chance) == 0 && y > 10 && template != null && canSpawnHere(template, world, pos, heightDifference))
+		if(classesList.contains(biome) && random.nextInt(chance) == 0 && y > 10 && template != null && canSpawnHere(template, pos, heightDifference))
 		{
 			generator.generate(world, random, pos);
 		}
@@ -69,14 +69,14 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		return y;
 	}
 
-	public static boolean canSpawnHere(Template template, World world, BlockPos pos, int heightDifference)
+	public static boolean canSpawnHere(Template template, BlockPos pos, int heightDifference)
 	{
-		return isCornerValid(world, pos, heightDifference)
-				&& isCornerValid(world, pos.add(template.getSize().getX(), 0, 0), heightDifference)
-				&& isCornerValid(world, pos.add(0, 0, template.getSize().getZ()), heightDifference)
-				&& isCornerValid(world, pos.add(template.getSize().getX(), 0, template.getSize().getZ()), heightDifference);
+		return isCornerValid(pos, heightDifference)
+				&& isCornerValid(pos.add(template.getSize().getX(), 0, 0), heightDifference)
+				&& isCornerValid(pos.add(0, 0, template.getSize().getZ()), heightDifference)
+				&& isCornerValid(pos.add(template.getSize().getX(), 0, template.getSize().getZ()), heightDifference);
 	}
-	private static boolean isCornerValid(World world, BlockPos pos, int heightDifference)
+	private static boolean isCornerValid(BlockPos pos, int heightDifference)
 	{
 		return pos.getY() >= pos.getY() - heightDifference && pos.getY() <= pos.getY() + heightDifference;
 	}

@@ -6,8 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockableLoot;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -51,16 +53,21 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 				{
 					String[] data = entry.getValue().split(" ");
 					if(data.length < 1) continue;
-					IBlockState state = null;
+					IBlockState state;
 					if(data[0].equals("Spawner"))
 					{
+						world.setBlockState(entry.getKey(), Blocks.MOB_SPAWNER.getDefaultState());
+						TileEntityMobSpawner spawner = (TileEntityMobSpawner) world.getTileEntity(entry.getKey());
+						assert spawner != null;
+						MobSpawnerBaseLogic logic = spawner.getSpawnerBaseLogic();
 						if(data.length > 1)
 						{
-							state = createSpawner(data[1]);
+							logic.setEntityId(new ResourceLocation(data[1]));
 						} else
 						{
-							state = createSpawner();
+							logic.setEntityId(new ResourceLocation(getRandomSpawnEntity()));
 						}
+						spawner.update();
 					} else if(data.length > 1)
 					{
 						Block block = Block.getBlockFromName(data[0]);
@@ -94,12 +101,11 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 								break;
 							}
 						}
+						world.setBlockState(entry.getKey(), state, 3);
+						TileEntity te = world.getTileEntity(entry.getKey());
+						if(te == null) continue;
+						if(te instanceof TileEntityLockableLoot) ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
 					}
-					assert state != null;
-					world.setBlockState(entry.getKey(), state, 3);
-					TileEntity te = world.getTileEntity(entry.getKey());
-					if(te == null) continue;
-					if(te instanceof TileEntityLockableLoot) ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
 				} catch (Exception ignored) { }
 			}
 			return true;
@@ -107,15 +113,9 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 		return false;
 	}
 
-	private IBlockState createSpawner(String mobName)
+	private String getRandomSpawnEntity()
 	{
-		//TODO: set spawn type to mobname
-		return Blocks.MOB_SPAWNER.getDefaultState();
-	}
-	private IBlockState createSpawner()
-	{
-		//TODO: Add names to mobnames
-		String[] mobNames = new String[] {};
-		return createSpawner(mobNames[(int) (Math.random() * mobNames.length)]);
+		String[] possibleEntities = new String[] {"Zombie"};
+		return possibleEntities[(int) (Math.random() * possibleEntities.length)];
 	}
 }
