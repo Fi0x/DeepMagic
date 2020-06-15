@@ -5,8 +5,11 @@ import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockableLoot;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -49,46 +52,70 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 				try
 				{
 					String[] data = entry.getValue().split(" ");
-					if(data.length < 2) continue;
-					Block block = Block.getBlockFromName(data[0]);
-					assert block != null;
-					IBlockState state = block.getDefaultState();
-					for(Entry<IProperty<?>, Comparable<?>> entry2 : block.getDefaultState().getProperties().entrySet())
+					if(data.length < 1) continue;
+					IBlockState state;
+					if(data[0].equals("Spawner"))
 					{
-						if(entry2.getKey().getValueClass().equals(EnumFacing.class) && entry2.getKey().getName().equals("facing"))
+						world.setBlockState(entry.getKey(), Blocks.MOB_SPAWNER.getDefaultState());
+						TileEntityMobSpawner spawner = (TileEntityMobSpawner) world.getTileEntity(entry.getKey());
+						assert spawner != null;
+						MobSpawnerBaseLogic logic = spawner.getSpawnerBaseLogic();
+						if(data.length > 1)
 						{
-							if(data.length > 2)
-							{
-								switch (data[2])
-								{
-									case "0":
-										state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
-										break;
-									case "1":
-										state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
-										break;
-									case "2":
-										state = state.withRotation(rotation.add(Rotation.COUNTERCLOCKWISE_90));
-										break;
-									case "3":
-										state = state.withRotation(rotation.add(Rotation.NONE));
-										break;
-								}
-							} else
-							{
-								state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
-							}
-							break;
+							logic.setEntityId(new ResourceLocation(data[1]));
+						} else
+						{
+							logic.setEntityId(new ResourceLocation(getRandomSpawnEntity()));
 						}
+						spawner.update();
+					} else if(data.length > 1)
+					{
+						Block block = Block.getBlockFromName(data[0]);
+						assert block != null;
+						state = block.getDefaultState();
+						for(Entry<IProperty<?>, Comparable<?>> entry2 : block.getDefaultState().getProperties().entrySet())
+						{
+							if(entry2.getKey().getValueClass().equals(EnumFacing.class) && entry2.getKey().getName().equals("facing"))
+							{
+								if(data.length > 2)
+								{
+									switch (data[2])
+									{
+										case "0":
+											state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
+											break;
+										case "1":
+											state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
+											break;
+										case "2":
+											state = state.withRotation(rotation.add(Rotation.COUNTERCLOCKWISE_90));
+											break;
+										case "3":
+											state = state.withRotation(rotation.add(Rotation.NONE));
+											break;
+									}
+								} else
+								{
+									state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
+								}
+								break;
+							}
+						}
+						world.setBlockState(entry.getKey(), state, 3);
+						TileEntity te = world.getTileEntity(entry.getKey());
+						if(te == null) continue;
+						if(te instanceof TileEntityLockableLoot) ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
 					}
-					world.setBlockState(entry.getKey(), state, 3);
-					TileEntity te = world.getTileEntity(entry.getKey());
-					if(te == null) continue;
-					if(te instanceof TileEntityLockableLoot) ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
 				} catch (Exception ignored) { }
 			}
 			return true;
 		}
 		return false;
+	}
+
+	private String getRandomSpawnEntity()
+	{
+		String[] possibleEntities = new String[] {"Zombie"};
+		return possibleEntities[(int) (Math.random() * possibleEntities.length)];
 	}
 }
