@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockableLoot;
 import net.minecraft.util.EnumFacing;
@@ -49,38 +50,46 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 				try
 				{
 					String[] data = entry.getValue().split(" ");
-					if(data.length < 2) continue;
-					Block block = Block.getBlockFromName(data[0]);
-					assert block != null;
-					IBlockState state = block.getDefaultState();
-					for(Entry<IProperty<?>, Comparable<?>> entry2 : block.getDefaultState().getProperties().entrySet())
+					if(data.length < 1) continue;
+					IBlockState state = null;
+					if(data[0].equals("Spawner"))
 					{
-						if(entry2.getKey().getValueClass().equals(EnumFacing.class) && entry2.getKey().getName().equals("facing"))
+						state = createSpawner();
+					} else if(data.length > 1)
+					{
+						Block block = Block.getBlockFromName(data[0]);
+						assert block != null;
+						state = block.getDefaultState();
+						for(Entry<IProperty<?>, Comparable<?>> entry2 : block.getDefaultState().getProperties().entrySet())
 						{
-							if(data.length > 2)
+							if(entry2.getKey().getValueClass().equals(EnumFacing.class) && entry2.getKey().getName().equals("facing"))
 							{
-								switch (data[2])
+								if(data.length > 2)
 								{
-									case "0":
-										state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
-										break;
-									case "1":
-										state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
-										break;
-									case "2":
-										state = state.withRotation(rotation.add(Rotation.COUNTERCLOCKWISE_90));
-										break;
-									case "3":
-										state = state.withRotation(rotation.add(Rotation.NONE));
-										break;
+									switch (data[2])
+									{
+										case "0":
+											state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
+											break;
+										case "1":
+											state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
+											break;
+										case "2":
+											state = state.withRotation(rotation.add(Rotation.COUNTERCLOCKWISE_90));
+											break;
+										case "3":
+											state = state.withRotation(rotation.add(Rotation.NONE));
+											break;
+									}
+								} else
+								{
+									state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
 								}
-							} else
-							{
-								state = state.withRotation(rotation.add(Rotation.CLOCKWISE_90));
+								break;
 							}
-							break;
 						}
 					}
+					assert state != null;
 					world.setBlockState(entry.getKey(), state, 3);
 					TileEntity te = world.getTileEntity(entry.getKey());
 					if(te == null) continue;
@@ -90,5 +99,17 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 			return true;
 		}
 		return false;
+	}
+
+	private IBlockState createSpawner(String mobName)
+	{
+		//TODO: set spawn type to mobname
+		return Blocks.MOB_SPAWNER.getDefaultState();
+	}
+	private IBlockState createSpawner()
+	{
+		//TODO: Add names to mobnames
+		String[] mobNames = new String[] {};
+		return createSpawner(mobNames[(int) (Math.random() * mobNames.length)]);
 	}
 }

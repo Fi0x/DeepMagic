@@ -5,9 +5,8 @@ Loottables
 Balance Mob stats
 GUIs
 
-Repair Farmland on Mage House Structure (Crops get dropped on structure-spawn)
 change insanity leaves texture to render behind other leaves
-rotate chests in structures correctly
 change shape of insanity trees
 change item model of insanity sapling and flower to normal item
 add custom music to insanity dimension
+fix TODOs in MobWorldGenStructure
