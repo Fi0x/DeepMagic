@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIDefence;
+import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -33,6 +34,7 @@ public class EntityRockTroll extends EntityCreature
         this.isImmuneToFire = true;
         defenceState = false;
         enablePersistence();
+        this.setCustomNameTag(CustomNameGenerator.getRandomTrollName());
     }
 
     @Override
