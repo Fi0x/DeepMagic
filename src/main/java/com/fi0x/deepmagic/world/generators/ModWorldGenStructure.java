@@ -54,7 +54,13 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 					IBlockState state = null;
 					if(data[0].equals("Spawner"))
 					{
-						state = createSpawner();
+						if(data.length > 1)
+						{
+							state = createSpawner(data[1]);
+						} else
+						{
+							state = createSpawner();
+						}
 					} else if(data.length > 1)
 					{
 						Block block = Block.getBlockFromName(data[0]);

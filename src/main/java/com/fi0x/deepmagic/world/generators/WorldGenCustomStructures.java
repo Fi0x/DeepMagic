@@ -23,15 +23,17 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	public static final ModWorldGenStructure MAGE_HOUSE = new ModWorldGenStructure("mage_house");
 	public static final ModWorldGenStructure MAGE_HOUSE_SMALL = new ModWorldGenStructure("mage_house_small");
 	public static final ModWorldGenStructure INSANITY_ROCK_TROLL_CAVE = new ModWorldGenStructure("insanity_rock_troll_cave");
+	public static final ModWorldGenStructure SHRINE = new ModWorldGenStructure("shrine");
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
 		if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
 		{
-			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 1, 5, BiomeInsanity.class);//increase the chance number to decrease spawn rate
+			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 1, 500, BiomeInsanity.class);//increase the chance number to decrease spawn rate
 			generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 2, 1000, BiomeInsanity.class);//increase the chance number to decrease spawn rate
 			generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 1, 500, BiomeInsanity.class);
+			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 		}
 	}
 	

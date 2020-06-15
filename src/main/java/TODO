@@ -8,7 +8,6 @@ Insanity Dimension {
 		safe oasis (has no insanity blocks)
 		shrines (for levelups)
 		dragon lair
-	    create custom loot tables for structures
 	add mobs to structures
 }
 Mobs {
