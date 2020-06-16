@@ -1,4 +1,4 @@
-##Information for Testers
+## Information for Testers
 Please try to find any bugs or mistakes and report them in the GitHub Issues.
 
 **Things to find:**
@@ -9,27 +9,7 @@ Please try to find any bugs or mistakes and report them in the GitHub Issues.
 # DeepMagic
 This mod allows you to use the magic of the dephts (or the dead)
 
-## Magic
-Each Player has his own mana
-
-Mana can be used for items, spells and Skills
-
-Mana is regenerated over time and has a maximum that can be increased with levelups
-
 ## World-generation
-### Dimensions
-Insanity-dimension
-- Only generates the Insanity-biome
-- Intended to drive you insane
-- Mod-structures spawn here
-- Insanity trees and Flowers spawn here
-
-### Biomes
-Insanity-biome
-- Very flat
-- Mob mobs spawn here
-- Has its own flowers
-
 ### Structures
 Mage house
 - 2 floor house
@@ -39,15 +19,6 @@ Mage house
 Small mage house
 - Single floor with cellar
 - Contains loot
-
-###Plants
-Insanity Tree
-- Like an oak tree that grows higher
-- Has insanity log and leaves instead of normal blocks
-- Can grow out of an insanity sapling
-
-Insanity Flower
-- See blocks section
 
 ## Mobs
 Insanity Cow
@@ -124,23 +95,8 @@ Deep Crystal Powder
 
 ## Blocks / Fluids
 ### Insanity Blocks / Fluids
-Insanity Dirt
-- Like normal Dirt
-- Texture is more red
-
-Insanity Flower
-- Variant of the orchid
-
-Insanity Grass
-- Behaves like grass
-- Texture is more red
-
 Insanity Planks
 - Like Oak-Planks
-- Texture is more red
-
-Insanity Stone
-- Like regular stone
 - Texture is more red
 
 Insanity Wood
