@@ -1,17 +1,9 @@
 Fix IDE Texture Bug
-Insanity Biome {
-	keep Spawnlist up-to-date
-}
 Insanity Dimension {
-    custom music
-	create potion effects
 	add structures
-		dungeons (with riddles)
+		dungeons (with riddles) (random generated(look at woodland mansion))
 		safe oasis (has no insanity blocks)
-		shrines (for levelups)
 		dragon lair
-	    add structure loot tables
-	add mobs to structures
 }
 Mobs {
 	Bosses
