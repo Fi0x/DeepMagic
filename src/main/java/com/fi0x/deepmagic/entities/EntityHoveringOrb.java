@@ -52,6 +52,7 @@ public class EntityHoveringOrb extends EntityMob
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1);
     }
     @Override
     public void onLivingUpdate()
@@ -123,5 +124,11 @@ public class EntityHoveringOrb extends EntityMob
     {
         this.posY += 1;
         return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    @Override
+    public void spawnRunningParticles()
+    {
+        this.createRunningParticles();
     }
 }
