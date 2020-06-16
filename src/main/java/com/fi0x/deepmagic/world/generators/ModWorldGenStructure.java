@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.generators;
 
+import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.IStructure;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.Block;
@@ -60,12 +61,12 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 						TileEntityMobSpawner spawner = (TileEntityMobSpawner) world.getTileEntity(entry.getKey());
 						assert spawner != null;
 						MobSpawnerBaseLogic logic = spawner.getSpawnerBaseLogic();
-						if(data.length > 1)
+						if(data.length > 2)
 						{
-							logic.setEntityId(new ResourceLocation(data[1]));
+							logic.setEntityId(new ResourceLocation(data[1], data[2]));
 						} else
 						{
-							logic.setEntityId(new ResourceLocation(getRandomSpawnEntity()));
+							logic.setEntityId(CustomNameGenerator.getRandomSpawnableMob());
 						}
 						spawner.update();
 					} else if(data.length > 1)
@@ -111,11 +112,5 @@ public class ModWorldGenStructure extends WorldGenerator implements IStructure
 			return true;
 		}
 		return false;
-	}
-
-	private String getRandomSpawnEntity()
-	{
-		String[] possibleEntities = new String[] {"Zombie"};
-		return possibleEntities[(int) (Math.random() * possibleEntities.length)];
 	}
 }

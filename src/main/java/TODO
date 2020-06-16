@@ -19,7 +19,8 @@ Mobs {
 		Cyclopse
 		Giant
 		    create loottable
-		    fix hitbox or remake model
+		    shrink hitbox
+		    adjust eye height
 		Hovering Orb
 		    improve pathfinding (can't find path to target (due to hovering?))
 	Passives
@@ -106,7 +107,7 @@ Items {
         uses mana(1 or 2)
 }
 Blocks {
-    Add World controllers
+    Add more World controllers
     Weather controller
         add function
     Time controller
@@ -120,8 +121,12 @@ Blocks {
         render texture correctly
     CleanStoneSlabs
         enable 2 slabs in 1 block placement
+    CleanStoneStairs
+    InsanityStoneSlabs
+    InsanityStoneStairs
 }
 Fluids {
     Insanity Water
         Increase flow range
+    Insanity Lava
 }
