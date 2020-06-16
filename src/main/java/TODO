@@ -28,6 +28,8 @@ Mobs {
 		Giant
 		    create loottable
 		    fix hitbox or remake model
+		Hovering Orb
+		    improve pathfinding (can't find path to target (due to hovering?))
 	Passives
 	    Rock Troll
 	        add animation to defence mechanism
