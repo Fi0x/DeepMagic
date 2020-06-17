@@ -99,42 +99,10 @@ Deep Crystal Powder
 
 ## Blocks / Fluids
 ### Insanity Blocks / Fluids
-Insanity Planks (Block, Stairs, Slabs)
-- Like Oak-Planks
-- Texture is more red
-
-Insanity Wood
-- part of the insanity tree
-
-Insanity Leaves
-- part of the insanity tree
-
-Insanity Sapling
-- grows into an insanity tree
 
 Insanity Water
 - Like regular Water
 - Texture is more purple
-
-### Other
-Clean Stone Slabs and Stairs
-
-Deep Crystal Block
-- Block-version of the Deep Crystal
-
-Deep Crystal Ore
-- Ore that drops Deep Crystals
-- Overworld, Nether and End-versions
-
-Effect-Stones
-- Stones with several Potion or other effects
-- Defence: Pushes mobs away
-- Attack: Damages mobs
-- Speed: Speed Buff to players
-- Heal: Regeneration effect to players
-- Vision: Night vision to players
-- Saturation: Saturation effect to players
-- Levitation: Propells players up
 
 ##Commands
 /tpdim

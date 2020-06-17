@@ -22,6 +22,8 @@ Mobs {
 		    adjust eye height
 		Hovering Orb
 		    improve pathfinding (can't find path to target (due to hovering?))
+		        make EntityAIRandomFly work
+		        use EntityAIRandomFly
 	Passives
 	    Rock Troll
 	        add animation to defence mechanism

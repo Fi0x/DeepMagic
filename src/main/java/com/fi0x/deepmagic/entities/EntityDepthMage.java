@@ -50,8 +50,8 @@ public class EntityDepthMage extends EntityCreature
         super.applyEntityAttributes();
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6);
     }
@@ -87,7 +87,7 @@ public class EntityDepthMage extends EntityCreature
     @Override
     public float getEyeHeight()
     {
-        return 1.8F;
+        return 1.75F;
     }
 
     @Override

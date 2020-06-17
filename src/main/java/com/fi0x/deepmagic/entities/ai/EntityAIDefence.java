@@ -24,15 +24,17 @@ public class EntityAIDefence extends EntityAIBase
     public void startExecuting()
     {
         this.creature.defenceState = true;
+        this.creature.defenceTime = 5*20;
     }
 
     public boolean shouldContinueExecuting()
     {
-        if(creature.ticksExisted - startTick > 5*20)
+        if(creature.defenceTime <= 0)
         {
             creature.defenceState = false;
             return false;
         }
+        creature.defenceTime--;
         return true;
     }
 }
