@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"half=top": { "model": "deepmagic:insanity_planks" },
+		"half=bottom": { "model": "deepmagic:insanity_planks" }
+	}
+}

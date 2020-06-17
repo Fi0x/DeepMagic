@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"half=top": { "model": "deepmagic:insanity_stone" },
+		"half=bottom": { "model": "deepmagic:insanity_stone" }
+	}
+}

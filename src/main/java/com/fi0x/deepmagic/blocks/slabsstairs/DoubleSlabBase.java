@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.blocks.slabs;
+package com.fi0x.deepmagic.blocks.slabsstairs;
 
 import net.minecraft.block.material.Material;
 

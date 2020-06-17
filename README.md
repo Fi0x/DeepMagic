@@ -95,7 +95,7 @@ Deep Crystal Powder
 
 ## Blocks / Fluids
 ### Insanity Blocks / Fluids
-Insanity Planks
+Insanity Planks (Block, Stairs, Slabs)
 - Like Oak-Planks
 - Texture is more red
 
@@ -113,6 +113,8 @@ Insanity Water
 - Texture is more purple
 
 ### Other
+Clean Stone Slabs and Stairs
+
 Deep Crystal Block
 - Block-version of the Deep Crystal
 

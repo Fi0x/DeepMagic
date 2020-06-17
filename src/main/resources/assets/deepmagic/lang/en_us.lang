@@ -21,6 +21,7 @@ tile.vision_stone.name=Vision Stone
 tile.saturation_stone.name=Saturation Stone
 tile.levitation_stone.name=Levitation Stone
 tile.clean_stone_slab_half.name=Clean Stone Slab
+tile.clean_stone_stairs.name=Clean Stone Stairs
 
 tile.insanity_stone.name=Insanity Stone
 tile.insanity_dirt.name=Insanity Dirt
@@ -30,6 +31,10 @@ tile.insanity_flower.name=Insanity Flower
 tile.insanity_log.name=Insanity Log
 tile.insanity_leaves.name=Insanity Leaves
 tile.insanity_sapling.name=Insanity Sapling
+tile.insanity_stone_slab_half.name=Insanity Stone Slab
+tile.insanity_stone_stairs.name=Insanity Stone Stairs
+tile.insanity_wood_slab_half.name=Insanity Wood Slab
+tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
 tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
