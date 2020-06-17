@@ -20,7 +20,17 @@ public class GuiSkilltree extends GuiScreen
     private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background.png");
     private GuiButton buttonExit;
     private GuiButton buttonAddMaxMana;
+    private GuiButton buttonAddManaRegen;
+    private GuiButton buttonAddManaEfficiency;
+    private GuiButton buttonAddMaxHP;
+    private GuiButton buttonAddHealthRegen;
+
     private GuiLabel labelSkillpoints;
+    private GuiLabel labelMaxMana;
+    private GuiLabel labelManaRegen;
+    private GuiLabel labelManaEfficiency;
+    private GuiLabel labelMaxHP;
+    private GuiLabel labelHealthRegen;
 
     public GuiSkilltree()
     {
@@ -37,12 +47,35 @@ public class GuiSkilltree extends GuiScreen
         Keyboard.enableRepeatEvents(true);
         buttonExit = new GuiButton(0, width/2 -20, guiY + backgroundHeight-30, 40, 20, I18n.format("Exit"));
         buttonList.add(buttonExit);
-        buttonAddMaxMana = new GuiButton(1, guiX + 30, guiY + 30, 10, 10, I18n.format("+"));
+        buttonAddMaxMana = new GuiButton(1, guiX + 160, guiY + 40, 20, 20, I18n.format("+"));
         buttonList.add(buttonAddMaxMana);
+        buttonAddManaRegen = new GuiButton(2, guiX + 160, guiY + 60, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddManaRegen);
+        buttonAddManaEfficiency = new GuiButton(3, guiX + 160, guiY + 80, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddManaEfficiency);
+        buttonAddMaxHP = new GuiButton(4, guiX + 160, guiY + 100, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddMaxHP);
+        buttonAddHealthRegen = new GuiButton(5, guiX + 160, guiY + 120, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddHealthRegen);
 
-        labelSkillpoints = new GuiLabel(this.fontRenderer, 2, guiX + 5, guiY + 5, 100, 20, 255);
+        labelSkillpoints = new GuiLabel(this.fontRenderer, 100, guiX + 5, guiY + 5, 100, 20, 0);
         labelSkillpoints.addLine("Skillpoints: ");
         labelList.add(labelSkillpoints);
+        labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 40, 150, 20, 0);
+        labelMaxMana.addLine("Mana Capacity");
+        labelList.add(labelMaxMana);
+        labelManaRegen = new GuiLabel(this.fontRenderer, 102, guiX + 5, guiY + 60, 150, 20, 0);
+        labelManaRegen.addLine("Mana Regeneration");
+        labelList.add(labelManaRegen);
+        labelManaEfficiency = new GuiLabel(this.fontRenderer, 103, guiX + 5, guiY + 80, 150, 20, 0);
+        labelManaEfficiency.addLine("Mana Efficiency");
+        labelList.add(labelManaEfficiency);
+        labelMaxHP = new GuiLabel(this.fontRenderer, 104, guiX + 5, guiY + 100, 150, 20, 0);
+        labelMaxHP.addLine("Health Points");
+        labelList.add(labelMaxHP);
+        labelHealthRegen = new GuiLabel(this.fontRenderer, 105, guiX + 5, guiY + 120, 150, 20, 0);
+        labelHealthRegen.addLine("Health Regeneration");
+        labelList.add(labelHealthRegen);
     }
 
     @Override
