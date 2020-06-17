@@ -1,10 +1,14 @@
 ## Information for Testers
 Please try to find any bugs or mistakes and report them in the GitHub Issues.
 
-**Things to find:**
-- Bugs in-game regarding the mod
-- Missing or wrong descriptions
-- Features you would like to have but are not in the game
+**Things to report:**
+- In-game bugs
+  - Textures
+  - Hitbox (visible with F3+B)
+  - Texts
+- Feature requests
+- Things that are missing in the wiki
+- Things from the wiki that are not implemented
 
 # DeepMagic
 This mod allows you to use the magic of the dephts (or the dead)
