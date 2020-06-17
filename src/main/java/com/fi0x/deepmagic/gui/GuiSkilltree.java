@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -14,8 +15,12 @@ public class GuiSkilltree extends GuiScreen
 {
     private final int backgroundHeight = 256;
     private final int backgroundWidth = 256;
+    private int guiX;
+    private int guiY;
     private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background.png");
     private GuiButton buttonExit;
+    private GuiButton buttonAddMaxMana;
+    private GuiLabel labelSkillpoints;
 
     public GuiSkilltree()
     {
@@ -24,16 +29,28 @@ public class GuiSkilltree extends GuiScreen
     @Override
     public void initGui()
     {
+        guiX = (width - backgroundWidth) / 2;
+        guiY = (height - backgroundHeight) / 2;
+
         buttonList.clear();
+        labelList.clear();
         Keyboard.enableRepeatEvents(true);
-        buttonExit = new GuiButton(0, width/2 -20, (height-backgroundHeight)/2 + backgroundHeight-30, 40, 20, I18n.format("Exit", new Object[0]));
+        buttonExit = new GuiButton(0, width/2 -20, guiY + backgroundHeight-30, 40, 20, I18n.format("Exit"));
         buttonList.add(buttonExit);
+        buttonAddMaxMana = new GuiButton(1, guiX + 30, guiY + 30, 10, 10, I18n.format("+"));
+        buttonList.add(buttonAddMaxMana);
+
+        labelSkillpoints = new GuiLabel(this.fontRenderer, 2, guiX + 5, guiY + 5, 100, 20, 255);
+        labelSkillpoints.addLine("Skillpoints: ");
+        labelList.add(labelSkillpoints);
     }
 
     @Override
     public void updateScreen()
     {
         buttonExit.visible = true;
+        buttonAddMaxMana.visible = true;
+        labelSkillpoints.visible = true;
     }
 
     @Override
@@ -41,9 +58,7 @@ public class GuiSkilltree extends GuiScreen
     {
         GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.getTextureManager().bindTexture(backgroundTexture);
-        int offsetLeft = (width - backgroundWidth) / 2;
-        int offsetTop = (height - backgroundHeight) / 2;
-        drawTexturedModalRect(offsetLeft, offsetTop, 0, 0, backgroundWidth, backgroundHeight);
+        drawTexturedModalRect(guiX, guiY, 0, 0, backgroundWidth, backgroundHeight);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -55,7 +70,7 @@ public class GuiSkilltree extends GuiScreen
     {
         if(button == buttonExit)
         {
-            mc.displayGuiScreen((GuiScreen) null);
+            mc.displayGuiScreen(null);
         }
         //TODO: send server packet if button is a skillpoint adder to change values on serverside
     }

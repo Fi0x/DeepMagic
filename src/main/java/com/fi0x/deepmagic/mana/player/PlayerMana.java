@@ -12,6 +12,7 @@ public class PlayerMana
 	private double mana = 0;
 	private double maxMana = 100;
 
+	private int freeSkillpoints = 1;
 	//Skills
 	private double manaRegenRate = 0;
 	private double manaEfficiency = 0;
@@ -65,6 +66,23 @@ public class PlayerMana
 	{
 		if(mana <= maxMana) return (100/maxMana*Math.pow(1.1, maxManaMultiplier))*mana;
 		return 100;
+	}
+	public int getFreeSkillpoints()
+	{
+		return freeSkillpoints;
+	}
+	public void addSkillpoint()
+	{
+		freeSkillpoints++;
+	}
+	public boolean removeSkillpoint()
+	{
+		if(freeSkillpoints > 0)
+		{
+			freeSkillpoints--;
+			return true;
+		}
+		return false;
 	}
 	public void setManaRegenRate(double manaRegenRate)
 	{
