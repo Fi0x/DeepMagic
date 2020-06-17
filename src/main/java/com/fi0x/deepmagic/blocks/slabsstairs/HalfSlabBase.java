@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.blocks.slabs;
+package com.fi0x.deepmagic.blocks.slabsstairs;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.init.DeepMagicTab;

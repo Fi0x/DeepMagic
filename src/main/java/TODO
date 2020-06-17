@@ -2,7 +2,6 @@ Fix IDE Texture Bug
 Insanity Dimension {
 	add structures
 		dungeons (with riddles) (random generated(look at woodland mansion))
-		safe oasis (has no insanity blocks)
 		dragon lair
 }
 Mobs {
@@ -109,21 +108,16 @@ Items {
 Blocks {
     Add more World controllers
     Weather controller
-        add function
+        add costs
     Time controller
-        add function
+        add costs
     Altar of Knowledge
         opens skill tree
             add buttons to skilltree gui
             un-comment open gui line in AltarOfKnowledge
             send and receive server messages
-    Insanity Leaves
-        render texture correctly
-    CleanStoneSlabs
+    Slabs
         enable 2 slabs in 1 block placement
-    CleanStoneStairs
-    InsanityStoneSlabs
-    InsanityStoneStairs
 }
 Fluids {
     Insanity Water
