@@ -26,7 +26,10 @@ Mobs {
 	    Rock Troll
 	        add animation to defence mechanism
 	        fix standing still animation
-	    Mage of the Dephts
+	    Mage of the Depths
+	        create custom loottable
+	        optimize ai
+	        add custom sounds
 		Insanity Cow
 		    create loottable
 		Spiky Slime

@@ -81,6 +81,6 @@ public class EntityGiant extends EntityMob
     @Override
     public float getEyeHeight()
     {
-        return 10.3F;
+        return 3.6F;
     }
 }

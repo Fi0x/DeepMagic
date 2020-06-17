@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.biome;
 
+import com.fi0x.deepmagic.entities.EntityDepthMage;
 import com.fi0x.deepmagic.entities.EntityGiant;
 import com.fi0x.deepmagic.entities.EntityHoveringOrb;
 import com.fi0x.deepmagic.entities.EntityInsanityCow;
@@ -38,6 +39,7 @@ public class BiomeInsanity extends Biome
 
 		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
 //		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySpikySlime.class, 20, 4, 10));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 20, 1, 2));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 5, 1, 2));
 		

@@ -17,7 +17,8 @@ public class CustomNameGenerator
             {"minecraft", "Wither_Skeleton"},
             {"deepmagic", "Rock_Troll"},
             {"deepmagic", "Giant"},
-            {"deepmagic", "Hovering_Orb"}};
+            {"deepmagic", "Hovering_Orb"},
+            {"deepmagic", "Mage"}};
 
     public static String getRandomTrollName()
     {
