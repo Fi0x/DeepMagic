@@ -4,7 +4,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class CustomNameGenerator
 {
-    private static final String[] TROLL_NAMES = new String[] {"Kevin", "Bob", "Karl", "Bronn", "Mike", "Steve", "Jeff"};
+    private static final String[] TROLL_NAMES = new String[] {"Bob", "Brian", "Bronn", "Erik", "Jeff", "Karl", "Kevin", "Mike"};
+    private static final String[] MAGE_NAMES = new String[] {"Ali", "Gandalf", "Jeremy", "Merlin", "Sebastian", "Steve"};
 
     private static final String[][] SPAWNER_TYPES = new String[][] {
             {"minecraft", "Creeper"},
@@ -18,11 +19,16 @@ public class CustomNameGenerator
             {"deepmagic", "Rock_Troll"},
             {"deepmagic", "Giant"},
             {"deepmagic", "Hovering_Orb"},
-            {"deepmagic", "Mage"}};
+            {"deepmagic", "Depth_Mage"}};
 
     public static String getRandomTrollName()
     {
         return TROLL_NAMES[(int) (Math.random() * TROLL_NAMES.length)];
+    }
+
+    public static String getRandomMageName()
+    {
+        return MAGE_NAMES[(int) (Math.random() * MAGE_NAMES.length)];
     }
 
     public static ResourceLocation getRandomSpawnableMob()

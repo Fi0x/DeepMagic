@@ -12,4 +12,4 @@ change shape of insanity trees
 change item model of insanity sapling and flower to normal item
 add custom music to insanity dimension
 fix structures get destroyed by lake spawn
-fix todos in EntityAISpellAttack
+fix todos in EntityAISpellAttack and EntityDepthMage

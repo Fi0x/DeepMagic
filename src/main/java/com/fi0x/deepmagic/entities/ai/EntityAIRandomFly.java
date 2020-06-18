@@ -1,63 +1,62 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.util.math.Vec3d;
 
-import java.util.Random;
-
-public class EntityAIRandomFly extends EntityAIBase
+public class EntityAIRandomFly extends EntityAIWanderAvoidWater
 {
-    private EntityLiving entity;
-    private int destX;
-    private int destY;
-    private int destZ;
+    private final EntityLiving entity;
 
-    public EntityAIRandomFly(EntityLiving entity)
+    public EntityAIRandomFly(EntityLiving entity, double speed)
     {
+        super((EntityCreature) entity, speed);
         this.entity = entity;
+        this.executionChance = 50;
         this.setMutexBits(1);
     }
 
     @Override
     public boolean shouldExecute()
     {
-        return true;
+        if (!this.mustUpdate)
+        {
+            if (this.entity.getIdleTime() >= 100)
+            {
+                return false;
+            }
+
+            if (this.entity.getRNG().nextInt(this.executionChance) != 0)
+            {
+                return   false;
+            }
+        }
+
+        Vec3d vec3d = this.getPosition();
+
+        if (vec3d == null)
+        {
+            return   false;
+        }
+        else
+        {
+            this.x = vec3d.x;
+            this.y = vec3d.y;
+            this.z = vec3d.z;
+            this.mustUpdate = false;
+            return true;
+        }
     }
 
     @Override
     public boolean shouldContinueExecuting()
     {
-        if(entity.posX == destX && entity.posY == destY && entity.posZ == destZ)
-        {
-            System.out.println("Destination reached");
-            return false;
-        }
-        return true;
+        return super.shouldContinueExecuting();
     }
 
-    @Override
     public void startExecuting()
     {
-        Random random = this.entity.getRNG();
-        double d0 = this.entity.posX + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-        double d1 = this.entity.posY + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-        double d2 = this.entity.posZ + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-        if(getHeight(entity) > 5) d1 = this.entity.posY - Math.random() * getHeight(entity);
-
-        this.entity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-    }
-
-    private int getHeight(EntityLiving entity)
-    {
-        int height = 0;
-        BlockPos checkPos = entity.getPosition().down();
-        while(entity.world.getBlockState(checkPos) == Blocks.AIR)
-        {
-            height ++;
-            checkPos = checkPos.down();
-        }
-        return height;
+        this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
     }
 }
