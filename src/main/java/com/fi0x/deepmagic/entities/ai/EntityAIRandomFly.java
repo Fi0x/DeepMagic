@@ -1,0 +1,62 @@
+package com.fi0x.deepmagic.entities.ai;
+
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.util.math.Vec3d;
+
+public class EntityAIRandomFly extends EntityAIWanderAvoidWater
+{
+    private final EntityLiving entity;
+
+    public EntityAIRandomFly(EntityLiving entity, double speed)
+    {
+        super((EntityCreature) entity, speed);
+        this.entity = entity;
+        this.executionChance = 50;
+        this.setMutexBits(1);
+    }
+
+    @Override
+    public boolean shouldExecute()
+    {
+        if (!this.mustUpdate)
+        {
+            if (this.entity.getIdleTime() >= 100)
+            {
+                return false;
+            }
+
+            if (this.entity.getRNG().nextInt(this.executionChance) != 0)
+            {
+                return   false;
+            }
+        }
+
+        Vec3d vec3d = this.getPosition();
+
+        if (vec3d == null)
+        {
+            return   false;
+        }
+        else
+        {
+            this.x = vec3d.x;
+            this.y = vec3d.y;
+            this.z = vec3d.z;
+            this.mustUpdate = false;
+            return true;
+        }
+    }
+
+    @Override
+    public boolean shouldContinueExecuting()
+    {
+        return super.shouldContinueExecuting();
+    }
+
+    public void startExecuting()
+    {
+        this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
+    }
+}

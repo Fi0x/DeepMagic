@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.model;
 
+import com.fi0x.deepmagic.entities.EntityRockTroll;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -76,6 +77,8 @@ public class ModelRockTroll extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entityIn)
     {
+        EntityRockTroll creature = (EntityRockTroll) entityIn;
+
         this.legLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.legRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 

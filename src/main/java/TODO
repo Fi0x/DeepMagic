@@ -18,17 +18,16 @@ Mobs {
 		Cyclopse
 		Giant
 		    create loottable
-		    shrink hitbox
-		    adjust eye height
 		Hovering Orb
-		    improve pathfinding (can't find path to target (due to hovering?))
+		    EntityAIRandomFly
+		        make it work
 	Passives
 	    Rock Troll
 	        add animation to defence mechanism
 	        fix standing still animation
 	    Mage of the Depths
 	        create custom loottable
-	        optimize ai
+	        add different spells as attack
 	        add custom sounds
 		Insanity Cow
 		    create loottable

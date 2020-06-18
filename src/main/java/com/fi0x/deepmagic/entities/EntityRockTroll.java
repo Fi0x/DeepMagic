@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 public class EntityRockTroll extends EntityCreature
 {
     public boolean defenceState;
+    public int defenceTime;
 
     public EntityRockTroll(World worldIn)
     {
@@ -33,6 +34,7 @@ public class EntityRockTroll extends EntityCreature
         setSize(2F, 2.5F);
         this.isImmuneToFire = true;
         defenceState = false;
+        defenceTime = 0;
         this.setCustomNameTag(CustomNameGenerator.getRandomTrollName());
     }
 

@@ -1,13 +1,12 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.entities.projectiles.EntitySpellFireball;
+import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,22 +21,22 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityDepthMage extends EntityCreature
+public class EntityDepthMage extends EntityCreature implements IRangedAttackMob
 {
     public EntityDepthMage(World worldIn)
     {
         super(worldIn);
         this.setSize(1F, 2F);
+        this.setCustomNameTag(CustomNameGenerator.getRandomMageName());
     }
 
     @Override
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
-        this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        this.tasks.addTask(2, new EntityAIAttackRanged(this, 1.0D, 40, 20.0F));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityCreature.class, 8.0F));
+        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
         this.tasks.addTask(5, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
@@ -50,8 +49,8 @@ public class EntityDepthMage extends EntityCreature
         super.applyEntityAttributes();
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6);
     }
@@ -87,7 +86,7 @@ public class EntityDepthMage extends EntityCreature
     @Override
     public float getEyeHeight()
     {
-        return 1.8F;
+        return 1.75F;
     }
 
     @Override
@@ -142,5 +141,36 @@ public class EntityDepthMage extends EntityCreature
         }
 
         return flag;
+    }
+
+    @Override
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
+    {
+        launchProjectileToCoords(target.posX, target.posY + target.getEyeHeight()*0.5, target.posZ);
+    }
+
+    //TODO: Fill with Wither data
+    @Override
+    public void setSwingingArms(boolean swingingArms) {
+
+    }
+
+    private void launchProjectileToCoords(double x, double y, double z)
+    {
+        this.world.playEvent(null, 1024, new BlockPos(this), 0);
+        double d0 = getPosition().getX();
+        double d1 = getPosition().getY() + getEyeHeight();
+        double d2 = getPosition().getZ();
+        double d3 = x - d0;
+        double d4 = y - d1;
+        double d5 = z - d2;
+        EntitySpellFireball fireball = new EntitySpellFireball(world, this, d3, d4, d5);
+
+        fireball.setEntityInvulnerable(true);
+
+        fireball.posY = d1;
+        fireball.posX = d0;
+        fireball.posZ = d2;
+        this.world.spawnEntity(fireball);
     }
 }

@@ -35,8 +35,8 @@ public class EntityGiant extends EntityMob
         this.tasks.addTask(5, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityInsanityCow.class, true));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityDepthMage.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
 
     @Override
