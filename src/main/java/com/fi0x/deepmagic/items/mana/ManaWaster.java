@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
+import com.fi0x.deepmagic.util.IMagicItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class ManaWaster extends Item implements IHasModel
+public class ManaWaster extends Item implements IHasModel, IMagicItem
 {
     public ManaWaster(String name)
     {

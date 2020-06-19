@@ -1,10 +1,9 @@
 package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
-import com.fi0x.deepmagic.mana.player.GuiManaRenderOverlay;
+import com.fi0x.deepmagic.gui.GuiManaRenderOverlay;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -16,21 +15,14 @@ public class PacketReturnManaAmount implements IMessage
     private double currentMana;
     private double maxMana;
 
-    private String className;
-    private String currentManaName;
-    private String maxManaName;
-
     public PacketReturnManaAmount()
     {
         this.messageValid = false;
     }
-    public PacketReturnManaAmount(double currentMana, double maxMana, String className, String currentManaName, String maxManaName)
+    public PacketReturnManaAmount(double currentMana, double maxMana)
     {
         this.currentMana = currentMana;
         this.maxMana = maxMana;
-        this.className = className;
-        this.currentManaName = currentManaName;
-        this.maxManaName = maxManaName;
         messageValid = true;
     }
 
@@ -41,9 +33,6 @@ public class PacketReturnManaAmount implements IMessage
         {
             currentMana = buf.readDouble();
             maxMana = buf.readDouble();
-            className = ByteBufUtils.readUTF8String(buf);
-            currentManaName = ByteBufUtils.readUTF8String(buf);
-            maxManaName = ByteBufUtils.readUTF8String(buf);
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -57,9 +46,6 @@ public class PacketReturnManaAmount implements IMessage
         if(!messageValid) return;
         buf.writeDouble(currentMana);
         buf.writeDouble(maxMana);
-        ByteBufUtils.writeUTF8String(buf, className);
-        ByteBufUtils.writeUTF8String(buf, currentManaName);
-        ByteBufUtils.writeUTF8String(buf, maxManaName);
     }
 
     public static class Handler implements IMessageHandler<PacketReturnManaAmount, IMessage>
@@ -76,11 +62,6 @@ public class PacketReturnManaAmount implements IMessage
         {
             try
             {
-                Class cla = Class.forName(message.className);
-//                Field currentManaField = cla.getDeclaredField(message.currentManaName);
-//                Field maxManaField = cla.getDeclaredField(message.maxManaName);
-//                currentManaField.setDouble(cla, message.currentMana);
-//                maxManaField.setDouble(cla, message.maxMana);
                 GuiManaRenderOverlay.instance.setValues(message.currentMana, message.maxMana);
             } catch(Exception e)
             {

@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.proxy;
 
+import com.fi0x.deepmagic.gui.GuiManaRenderOverlay;
 import com.fi0x.deepmagic.gui.GuiSkilltree;
-import com.fi0x.deepmagic.mana.player.GuiManaRenderOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

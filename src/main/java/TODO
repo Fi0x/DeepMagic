@@ -41,9 +41,6 @@ Mobs {
 		Friendly Floating Orb
 		    like normal floating orb without spikes
 }
-Mana1System {
-	add manabar in hud (GuiManaRenderOverlay) (message / packet from server)
-}
 ManaLevel {
     levelup with mana-experience or mechanic (rituals/items)
     levelup gives skillpoints for skilltrees

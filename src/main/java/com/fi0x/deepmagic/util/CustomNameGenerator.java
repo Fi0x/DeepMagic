@@ -4,8 +4,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class CustomNameGenerator
 {
-    private static final String[] TROLL_NAMES = new String[] {"Bob", "Brian", "Bronn", "Erik", "Jeff", "Karl", "Kevin", "Mike"};
-    private static final String[] MAGE_NAMES = new String[] {"Ali", "Gandalf", "Jeremy", "Merlin", "Sebastian", "Steve"};
+    private static final String[] TROLL_NAMES = new String[] {"Ali", "Bob", "Brian", "Bronn", "Erik", "Jeff", "Jeremy", "Karl", "Kevin", "Mike", "Sebastian", "Steve"};
+    private static final String[] MAGE_NAMES = new String[] {"Anagast", "Astrea", "Dubin", "Durin", "Druviar", "Ebras", "Fharin", "Gandalf", "Kraldor", "Malfurion", "Masior", "Merlin", "Ogrus", "Orhan", "Seharis", "Tholyn", "Thrall", "Torin", "Udor", "Ugafeus", "Vogorim"};
 
     private static final String[][] SPAWNER_TYPES = new String[][] {
             {"minecraft", "Creeper"},

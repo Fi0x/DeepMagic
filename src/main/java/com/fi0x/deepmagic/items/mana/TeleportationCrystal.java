@@ -7,6 +7,7 @@ import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
+import com.fi0x.deepmagic.util.IMagicItem;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +26,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-public class TeleportationCrystal extends Item implements IHasModel
+public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 {
 	public TeleportationCrystal(String name)
 	{
