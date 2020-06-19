@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 public class PlayerMana
 {
 	//Mana System
-	private double mana = 0;
-	private double maxMana = 100;
+	public double mana = 0;
+	public double maxMana = 100;
 
 	private int freeSkillpoints = 1;
 	//Skills

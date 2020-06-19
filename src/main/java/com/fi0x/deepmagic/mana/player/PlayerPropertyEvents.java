@@ -1,7 +1,8 @@
 package com.fi0x.deepmagic.mana.player;
 
+import com.fi0x.deepmagic.network.PacketGetManaAmount;
+import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.util.Reference;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class PlayerPropertyEvents
 {
     public static PlayerPropertyEvents instance = new PlayerPropertyEvents();
+    private static int sync = 0;
     
     @SubscribeEvent
     public void onEntityConstructing(AttachCapabilitiesEvent<Entity> event)
@@ -46,6 +48,13 @@ public class PlayerPropertyEvents
     	PlayerMana playermana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playermana != null;
         playermana.addMana(0.1);
-    	
+
+        sync++;
+        sync %= 10;
+        if(sync == 0)
+        {
+            PlayerMana playerMana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
+            PacketHandler.INSTANCE.sendToServer(new PacketGetManaAmount(event.player.getName(), playerMana.getMana(), playerMana.getMaxMana(), PlayerMana.class.getName(), "mana", "maxMana"));
+        }
     }
 }
