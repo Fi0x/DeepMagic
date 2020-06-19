@@ -3,6 +3,7 @@ package com.fi0x.deepmagic;
 import com.fi0x.deepmagic.init.*;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerPropertyEvents;
+import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.RegistryHandler;
@@ -24,12 +25,16 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class Main
 {
+	private static org.apache.logging.log4j.Logger logger;
+
 	@Mod.Instance
 	public static Main instance;
 
@@ -44,6 +49,8 @@ public class Main
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
+		proxy.preInit(event);
+		PacketHandler.registerMessages(Reference.MOD_ID);
 		ModFluids.registerFluids();
 		EntityInit.registerEntities();
 		RenderHandler.registerEntityRenders();
@@ -85,5 +92,11 @@ public class Main
 	public static void serverInit(FMLServerStartingEvent event)
 	{
 		RegistryHandler.serverRegistries(event);
+	}
+
+	public static Logger getLogger()
+	{
+		if(logger == null) logger = LogManager.getFormatterLogger(Reference.MOD_ID);
+		return logger;
 	}
 }
