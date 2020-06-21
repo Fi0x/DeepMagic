@@ -76,7 +76,7 @@ public class EntityGiant extends EntityMob
     @Override
     protected ResourceLocation getLootTable()
     {
-        return LootTableHandler.HOVERING_ORB;
+        return LootTableHandler.GIANT;
     }
     @Override
     public float getEyeHeight()

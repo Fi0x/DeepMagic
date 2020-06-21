@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -79,6 +80,6 @@ public class EntityInsanityCow extends EntityCow
     @Override
     protected ResourceLocation getLootTable()
     {
-        return super.getLootTable();
+        return LootTableHandler.INSANITY_COW;
     }
 }
