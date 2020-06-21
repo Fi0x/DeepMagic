@@ -34,11 +34,6 @@ ManaLevel {
     levelup gives skillpoints for skilltrees
 }
 Implement passive Skilltree {
-	increased mana generation
-	increase max mana
-	increase health
-	increase regeneration
-	reduce mana consumption
 	increased saturation
 	increased resistances
 	    fire, explosion, drowning, arrow, meele, ...
@@ -60,7 +55,7 @@ Implement active Skills (With Scrolls?) {
     World control
 	flight for mana consumption
 	regeneration effect for mana consumption
-	2nd chance
+	2nd chance (don't die)
 	silk touch
 	fortune
 	auto smelting
@@ -100,9 +95,7 @@ Blocks {
         add costs
     Altar of Knowledge
         opens skill tree
-            add buttons to skilltree gui
-            un-comment open gui line in AltarOfKnowledge
-            send and receive server messages
+            un-comment client-server sync and fix it
     Slabs
         enable 2 slabs in 1 block placement
 }

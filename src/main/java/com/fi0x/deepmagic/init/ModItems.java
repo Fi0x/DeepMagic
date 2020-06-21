@@ -4,7 +4,6 @@ import com.fi0x.deepmagic.items.ArmorBase;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
-import com.fi0x.deepmagic.items.mana.ManaMonitor;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
 import com.fi0x.deepmagic.items.tools.*;
@@ -36,7 +35,6 @@ public class ModItems
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
 	public static final Item MANA_BOOSTER = new ManaBooster("mana_booster");
 	public static final Item MANA_WASTER = new ManaWaster("mana_waster");
-	public static final Item MANA_MONITOR = new ManaMonitor("mana_monitor");
 	
 	//Tools
 	public static final ItemSword DEEP_CRYSTAL_SWORD = new ToolSword("deep_crystal_sword", MATERIAL_DEEP_CRYSTAL);

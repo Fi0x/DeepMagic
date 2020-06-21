@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.gui;
 
+import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
@@ -13,6 +14,8 @@ import javax.annotation.Nonnull;
 
 public class GuiSkilltree extends GuiScreen
 {
+    PlayerMana playerMana;
+
     private final int backgroundHeight = 256;
     private final int backgroundWidth = 256;
     private int guiX;
@@ -32,8 +35,9 @@ public class GuiSkilltree extends GuiScreen
     private GuiLabel labelMaxHP;
     private GuiLabel labelHealthRegen;
 
-    public GuiSkilltree()
+    public GuiSkilltree(PlayerMana playerMana)
     {
+        this.playerMana = playerMana;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class GuiSkilltree extends GuiScreen
         buttonList.add(buttonAddHealthRegen);
 
         labelSkillpoints = new GuiLabel(this.fontRenderer, 100, guiX + 5, guiY + 5, 100, 20, 0);
-        labelSkillpoints.addLine("Skillpoints: ");
+        labelSkillpoints.addLine("Skillpoints: " + playerMana.getSkillpoints());
         labelList.add(labelSkillpoints);
         labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 40, 150, 20, 0);
         labelMaxMana.addLine("Mana Capacity");
