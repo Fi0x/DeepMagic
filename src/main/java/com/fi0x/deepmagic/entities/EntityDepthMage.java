@@ -59,29 +59,29 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return SoundsHandler.ENTITY_GIANT_AMBIENT;
+        return SoundsHandler.ENTITY_DEPTH_MAGE_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn)
     {
-        return SoundsHandler.ENTITY_GIANT_HURT;
+        return SoundsHandler.ENTITY_DEPTH_MAGE_HURT;
     }
     @Override
     protected SoundEvent getDeathSound()
     {
-        return SoundsHandler.ENTITY_GIANT_DEATH;
+        return SoundsHandler.ENTITY_DEPTH_MAGE_DEATH;
     }
     @Override
     protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
     {
-        this.playSound(SoundsHandler.ENTITY_GIANT_STEP, 1F, 1F);
+        this.playSound(SoundsHandler.ENTITY_DEPTH_MAGE_STEP, 1F, 1F);
     }
     @Nullable
     @Override
     protected ResourceLocation getLootTable()
     {
-        return LootTableHandler.HOVERING_ORB;
+        return LootTableHandler.DEPTH_MAGE;
     }
     @Override
     public float getEyeHeight()
@@ -149,10 +149,9 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob
         launchProjectileToCoords(target.posX, target.posY + target.getEyeHeight()*0.5, target.posZ);
     }
 
-    //TODO: Fill with Wither data
     @Override
-    public void setSwingingArms(boolean swingingArms) {
-
+    public void setSwingingArms(boolean swingingArms)
+    {
     }
 
     private void launchProjectileToCoords(double x, double y, double z)

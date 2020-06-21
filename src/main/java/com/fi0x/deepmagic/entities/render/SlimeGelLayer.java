@@ -1,7 +1,5 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntitySpikySlime;
-import com.fi0x.deepmagic.entities.model.ModelSpikySlime;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;

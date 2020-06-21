@@ -16,8 +16,6 @@ Mobs {
 	Hostiles
 		Zentaur
 		Cyclopse
-		Giant
-		    create loottable
 		Hovering Orb
 		    EntityAIRandomFly
 		        make it work
@@ -25,19 +23,9 @@ Mobs {
 	    Rock Troll
 	        add animation to defence mechanism
 	        fix standing still animation
-	    Mage of the Depths
-	        create custom loottable
+	    Depth Mage
 	        add different spells as attack
-	        add custom sounds
-		Insanity Cow
-		    create loottable
-		Spiky Slime
-		    un-comment in EntityInit
-		    un-comment in BiomeInsanity
-		    add custom sound
-		    create loottable
-		    fix textures
-		    fix particle effect
+	        add attack animation
 		Friendly Floating Orb
 		    like normal floating orb without spikes
 }
