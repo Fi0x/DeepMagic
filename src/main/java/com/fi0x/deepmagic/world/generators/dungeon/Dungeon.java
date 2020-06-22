@@ -7,21 +7,21 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Dungeon extends WorldGenerator implements IWorldGenerator
 {
-    private BlockPos dungeonStartPos;
     private boolean hasOpenEndings;
 
     private final DungeonPiece dungeonCore = new DungeonPiece("dungeon_entrance", 21, 9, 21, 1, 1, 1, 1, false);
 
-    private DungeonPiece[] corridorType = new DungeonPiece[] {
+    private final DungeonPiece[] corridorType = new DungeonPiece[] {
             new DungeonPiece("dungeon_corridor_short", 3, 5, 5, -1, 1, -1, 1),
             new DungeonPiece("dungeon_corridor_long", 11, 5, 5, -1, 1, -1, 1)};
 
-    private DungeonPiece[] roomType = new DungeonPiece[] {
+    private final DungeonPiece[] roomType = new DungeonPiece[] {
             new DungeonPiece("dungeon_room1", 11, 6, 11, 1, 1, 1, 1),
             new DungeonPiece("dungeon_room2", 7, 5, 7, 1, -1, -1, -1),
             new DungeonPiece("dungeon_room3", 9, 6, 9, 1, -1, -1, -1),
@@ -29,14 +29,13 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
             new DungeonPiece("dungeon_room5", 7, 6, 7, 1, -1, -1, -1),
             new DungeonPiece("dungeon_room6", 15, 8, 15, 1, -1, 1, -1)};
 
-    private ArrayList<DungeonPiece> dungeonRooms = new ArrayList<>();
+    private final ArrayList<DungeonPiece> dungeonRooms = new ArrayList<>();
 
     @Override
-    public boolean generate(World world, Random rand, BlockPos position)
+    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
     {
-        dungeonStartPos = position;
 
-        dungeonCore.generate(world, rand, dungeonStartPos);
+        dungeonCore.generate(world, rand, position);
         dungeonRooms.add(dungeonCore);
         hasOpenEndings = true;
 
@@ -52,38 +51,66 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
         DungeonPiece currentRoom = dungeonRooms.get(0);
         if(currentRoom.entranceHeightNorth >= 0)
         {
-            //TODO: select random corridor
-            //TODO: create corridor
+            DungeonPiece corridor = corridorType[rand.nextInt(corridorType.length)];
+            while(corridor.entranceHeightSouth == -1)
+            {
+                corridor.rotate90Deg();
+            }
+
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + currentRoom.sizeX / 2 - corridor.sizeX / 2, currentRoom.pos.getY() + currentRoom.entranceHeightNorth - corridor.entranceHeightSouth, currentRoom.pos.getZ() - corridor.sizeZ);
+            corridor.generate(world, rand, placementPosition);
+
             //TODO: select random new room
             //TODO: create room
-            //TODO: add room to roomlist
+            //TODO: add room to room-list
         }
 
         if(currentRoom.entranceHeightEast >= 0)
         {
-            //TODO: select random corridor
-            //TODO: create corridor
+            DungeonPiece corridor = corridorType[rand.nextInt(corridorType.length)];
+            while(corridor.entranceHeightWest == -1)
+            {
+                corridor.rotate90Deg();
+            }
+
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + currentRoom.sizeX, currentRoom.pos.getY() + currentRoom.entranceHeightEast - corridor.entranceHeightWest, currentRoom.pos.getZ() + currentRoom.sizeZ / 2 - corridor.sizeZ / 2);
+            corridor.generate(world, rand, placementPosition);
+
             //TODO: select random new room
             //TODO: create room
-            //TODO: add room to roomlist
+            //TODO: add room to room-list
         }
 
         if(currentRoom.entranceHeightSouth >= 0)
         {
-            //TODO: select random corridor
-            //TODO: create corridor
+            DungeonPiece corridor = corridorType[rand.nextInt(corridorType.length)];
+            while(corridor.entranceHeightNorth == -1)
+            {
+                corridor.rotate90Deg();
+            }
+
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + currentRoom.sizeX / 2 - corridor.sizeX / 2, currentRoom.pos.getY() + currentRoom.entranceHeightSouth - corridor.entranceHeightNorth, currentRoom.pos.getZ() + currentRoom.sizeZ);
+            corridor.generate(world, rand, placementPosition);
+
             //TODO: select random new room
             //TODO: create room
-            //TODO: add room to roomlist
+            //TODO: add room to room-list
         }
 
         if(currentRoom.entranceHeightWest >= 0)
         {
-            //TODO: select random corridor
-            //TODO: create corridor
+            DungeonPiece corridor = corridorType[rand.nextInt(corridorType.length)];
+            while(corridor.entranceHeightEast == -1)
+            {
+                corridor.rotate90Deg();
+            }
+
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() - corridor.sizeX, currentRoom.pos.getY() + currentRoom.entranceHeightWest - corridor.entranceHeightEast, currentRoom.pos.getZ() + currentRoom.sizeZ / 2 - corridor.sizeZ / 2);
+            corridor.generate(world, rand, placementPosition);
+
             //TODO: select random new room
             //TODO: create room
-            //TODO: add room to roomlist
+            //TODO: add room to room-list
         }
 
         dungeonRooms.remove(0);

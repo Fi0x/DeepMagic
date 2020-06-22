@@ -1,7 +1,8 @@
 Fix IDE Texture Bug
 Insanity Dimension {
 	add structures
-		dungeons (with riddles) (random generated(look at woodland mansion))
+		dungeons (with riddles) (random generated)
+		    fix corridors
 		dragon lair
 }
 Mobs {

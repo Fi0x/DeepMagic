@@ -13,12 +13,15 @@ import java.util.Random;
 public class DungeonPiece extends WorldGenerator implements IStructure
 {
     private final String templateName;
-    public int posX;
-    public int posY;
-    public int posZ;
-    public final int sizeX;
-    public final int sizeY;
-    public final int sizeZ;
+
+    public BlockPos pos;
+    private int offsetX;
+    private int offsetZ;
+
+    public int sizeX;
+    public int sizeY;
+    public int sizeZ;
+
     public int entranceHeightNorth;
     public int entranceHeightEast;
     public int entranceHeightSouth;
@@ -64,6 +67,43 @@ public class DungeonPiece extends WorldGenerator implements IStructure
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos pos)
     {
+        this.pos = pos;
+        this.pos.add(offsetX, 0, offsetZ);
+        if(requiresEntrance)
+        {
+            //TODO: Create tunnel to surface
+        }
         return GenerationHelper.templatePlacer(world, rand, pos, templateName, rotation);
+    }
+
+    public void rotate90Deg()
+    {
+        rotation = rotation.add(Rotation.CLOCKWISE_90);
+
+        int temp = entranceHeightNorth;
+        entranceHeightNorth = entranceHeightWest;
+        entranceHeightWest = entranceHeightSouth;
+        entranceHeightSouth = entranceHeightEast;
+        entranceHeightEast = temp;
+
+        switch(rotation)
+        {
+            case NONE:
+                offsetX = 0;
+                offsetZ = 0;
+                break;
+            case CLOCKWISE_90:
+                offsetX = sizeZ;
+                offsetZ = 0;
+                break;
+            case CLOCKWISE_180:
+                offsetX = sizeX;
+                offsetZ = sizeZ;
+                break;
+            case COUNTERCLOCKWISE_90:
+                offsetX = 0;
+                offsetZ = sizeX;
+                break;
+        }
     }
 }
