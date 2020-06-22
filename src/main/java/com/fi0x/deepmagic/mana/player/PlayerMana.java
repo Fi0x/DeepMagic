@@ -143,6 +143,8 @@ public class PlayerMana
 	{
 		compound.setDouble("mana", mana);
 		compound.setDouble("maxMana", maxMana);
+		compound.setDouble("skillXP", skillXP);
+		compound.setInteger("skillpoints", skillpoints);
 		compound.setDouble("manaRegenerationRate", manaRegenRate);
 		compound.setDouble("manaEfficiency", manaEfficiency);
 		compound.setInteger("maxManaMultiplier", maxManaMultiplier);
@@ -153,6 +155,8 @@ public class PlayerMana
 	{
 		mana = compound.getDouble("mana");
 		maxMana = compound.getDouble("maxMana");
+		skillXP = compound.getDouble("skillXP");
+		skillpoints = compound.getInteger("skillpoints");
 		manaRegenRate = compound.getDouble("manaRegenerationRate");
 		manaEfficiency = compound.getDouble("manaEfficiency");
 		maxManaMultiplier = compound.getInteger("maxManaMultiplier");
