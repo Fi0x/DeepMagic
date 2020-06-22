@@ -24,6 +24,7 @@ public class DungeonPiece extends WorldGenerator implements IStructure
     public int entranceHeightSouth;
     public int entranceHeightWest;
 
+    private final boolean requiresEntrance;
     public Rotation rotation;
 
     public DungeonPiece(String name, int sizeX, int sizeY, int sizeZ, int entranceHeightNorth, int entranceHeightEast, int entranceHeightSouth, int entranceHeightWest)
@@ -39,6 +40,24 @@ public class DungeonPiece extends WorldGenerator implements IStructure
         this.entranceHeightSouth = entranceHeightSouth;
         this.entranceHeightWest = entranceHeightWest;
 
+        this.requiresEntrance = false;
+        this.rotation = Rotation.NONE;
+    }
+
+    public DungeonPiece(String name, int sizeX, int sizeY, int sizeZ, int entranceHeightNorth, int entranceHeightEast, int entranceHeightSouth, int entranceHeightWest, boolean isEntrance)
+    {
+        this.templateName = name;
+
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.sizeZ = sizeZ;
+
+        this.entranceHeightNorth = entranceHeightNorth;
+        this.entranceHeightEast = entranceHeightEast;
+        this.entranceHeightSouth = entranceHeightSouth;
+        this.entranceHeightWest = entranceHeightWest;
+
+        this.requiresEntrance = isEntrance;
         this.rotation = Rotation.NONE;
     }
 
