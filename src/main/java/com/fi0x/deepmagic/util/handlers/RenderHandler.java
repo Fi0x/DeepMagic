@@ -20,7 +20,6 @@ public class RenderHandler
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityInsanityCow.class, RenderInsanityCow::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHoveringOrb.class, RenderHoveringOrb::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySpikySlime.class, RenderSpikySlime::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityNetherWorm.class, RenderNetherWorm::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityGiant.class, RenderGiant::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityRockTroll.class, RenderRockTroll::new);

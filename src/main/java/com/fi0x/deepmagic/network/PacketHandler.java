@@ -20,5 +20,8 @@ public class PacketHandler
 
         INSTANCE.registerMessage(PacketGetManaAmount.Handler.class, PacketGetManaAmount.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketReturnManaAmount.Handler.class, PacketReturnManaAmount.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketGetSkill.Handler.class, PacketGetSkill.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketReturnSkill.Handler.class, PacketReturnSkill.class, nextID(), Side.CLIENT);
     }
 }

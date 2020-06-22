@@ -28,9 +28,10 @@ public class AltarOfKnowledge extends BlockBase
     {
         if(!worldIn.isRemote)
         {
+//            PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
+//            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerIn.getName(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.maxManaMultiplier, playerMana.addedHP, playerMana.hpRegeneration));
             Main.proxy.openSkilltreeGui();
         }
-//        playerIn.openGui(Main.instance, Reference.GUI_SKILLTREE, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 }
