@@ -38,7 +38,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 	private final float[] biomeWeights;
 	double[] mainNoiseRegion, minLimitRegion, maxLimitRegion, depthRegion;
 	
-	public ChunkGeneratorInsanity(World world, boolean generateStructures, long seed) {
+	public ChunkGeneratorInsanity(World world, long seed) {
 		this.world = world;
 		this.terrainType = world.getWorldInfo().getTerrainType();
 		this.rand = new Random(seed);

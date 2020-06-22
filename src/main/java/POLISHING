@@ -11,5 +11,5 @@ change insanity leaves texture to render behind other leaves
 change shape of insanity trees
 change item model of insanity sapling and flower to normal item
 add custom music to insanity dimension
-fix structures get destroyed by lake spawn
 fix todos in GuiSkilltree
+fix rotation of armor stands in structures
