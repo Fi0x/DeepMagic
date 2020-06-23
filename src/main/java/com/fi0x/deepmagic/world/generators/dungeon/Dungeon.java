@@ -14,8 +14,9 @@ import java.util.Random;
 public class Dungeon extends WorldGenerator implements IWorldGenerator
 {
     private BlockPos dungeonCenter;
+    private final int maxDungeonRadius = 50;
 
-    private final DungeonPiece dungeonCore = new DungeonPiece("dungeon_entrance", 21, 9, 21, 1, 1, 1, 1, false);
+    private final DungeonPiece dungeonCore = new DungeonPiece("dungeon_entrance", 21, 9, 21, 1, 1, 1, 1, true);
     private final DungeonPiece[] corridorType = new DungeonPiece[] {
             new DungeonPiece("dungeon_corridor_short", 3, 5, 5, -1, 1, -1, 1),
             new DungeonPiece("dungeon_corridor_long", 11, 5, 5, -1, 1, -1, 1)};
@@ -57,17 +58,17 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
 
             corridor.generate(world, rand, new BlockPos(x, y, z));
 
-            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
-            while(newRoom.entranceHeightSouth == -1) newRoom.rotate90Deg();
-
-            x = corridor.pos.getX();
-            y = corridor.pos.getY() + corridor.entranceHeightNorth - newRoom.entranceHeightSouth;
-            z = corridor.pos.getZ() - Math.abs(corridor.offsetZ) - Math.abs(newRoom.offsetZ) - 1;
-
-            newRoom.generate(world, rand, new BlockPos(x, y, z));
-
-            newRoom.entranceHeightSouth = -1;
-            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < 100) dungeonRooms.add(newRoom);
+//            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
+//            while(newRoom.entranceHeightSouth == -1) newRoom.rotate90Deg();
+//
+//            x = corridor.pos.getX();
+//            y = corridor.pos.getY() + corridor.entranceHeightNorth - newRoom.entranceHeightSouth;
+//            z = corridor.pos.getZ() - Math.abs(corridor.offsetZ) - Math.abs(newRoom.offsetZ) - 1;
+//
+//            newRoom.generate(world, rand, new BlockPos(x, y, z));
+//
+//            newRoom.entranceHeightSouth = -1;
+//            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < maxDungeonRadius) dungeonRooms.add(newRoom);
         }
 
         if(currentRoom.entranceHeightEast >= 0)
@@ -81,17 +82,17 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
 
             corridor.generate(world, rand, new BlockPos(x, y, z));
 
-            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
-            while(newRoom.entranceHeightWest == -1) newRoom.rotate90Deg();
-
-            x = corridor.pos.getX() + Math.abs(corridor.offsetX) + Math.abs(newRoom.offsetX) + 1;
-            y = corridor.pos.getY() + corridor.entranceHeightEast - newRoom.entranceHeightWest;
-            z = corridor.pos.getZ();
-
-            newRoom.generate(world, rand, new BlockPos(x, y, z));
-
-            newRoom.entranceHeightWest = -1;
-            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < 100) dungeonRooms.add(newRoom);
+//            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
+//            while(newRoom.entranceHeightWest == -1) newRoom.rotate90Deg();
+//
+//            x = corridor.pos.getX() + Math.abs(corridor.offsetX) + Math.abs(newRoom.offsetX) + 1;
+//            y = corridor.pos.getY() + corridor.entranceHeightEast - newRoom.entranceHeightWest;
+//            z = corridor.pos.getZ();
+//
+//            newRoom.generate(world, rand, new BlockPos(x, y, z));
+//
+//            newRoom.entranceHeightWest = -1;
+//            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < maxDungeonRadius) dungeonRooms.add(newRoom);
         }
 
         if(currentRoom.entranceHeightSouth >= 0)
@@ -105,17 +106,17 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
 
             corridor.generate(world, rand, new BlockPos(x, y, z));
 
-            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
-            while(newRoom.entranceHeightNorth == -1) newRoom.rotate90Deg();
-
-            x = corridor.pos.getX();
-            y = corridor.pos.getY() + corridor.entranceHeightSouth - newRoom.entranceHeightNorth;
-            z = corridor.pos.getZ() + Math.abs(corridor.offsetZ) + Math.abs(newRoom.offsetZ) + 1;
-
-            newRoom.generate(world, rand, new BlockPos(x, y, z));
-
-            newRoom.entranceHeightNorth = -1;
-            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < 100) dungeonRooms.add(newRoom);
+//            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
+//            while(newRoom.entranceHeightNorth == -1) newRoom.rotate90Deg();
+//
+//            x = corridor.pos.getX();
+//            y = corridor.pos.getY() + corridor.entranceHeightSouth - newRoom.entranceHeightNorth;
+//            z = corridor.pos.getZ() + Math.abs(corridor.offsetZ) + Math.abs(newRoom.offsetZ) + 1;
+//
+//            newRoom.generate(world, rand, new BlockPos(x, y, z));
+//
+//            newRoom.entranceHeightNorth = -1;
+//            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < maxDungeonRadius) dungeonRooms.add(newRoom);
         }
 
         if(currentRoom.entranceHeightWest >= 0)
@@ -129,17 +130,17 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
 
             corridor.generate(world, rand, new BlockPos(x, y, z));
 
-            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
-            while(newRoom.entranceHeightEast == -1) newRoom.rotate90Deg();
-
-            x = corridor.pos.getX() - Math.abs(corridor.offsetX) - Math.abs(newRoom.offsetX) - 1;
-            y = corridor.pos.getY() + corridor.entranceHeightWest - newRoom.entranceHeightEast;
-            z = corridor.pos.getZ();
-
-            newRoom.generate(world, rand, new BlockPos(x, y, z));
-
-            newRoom.entranceHeightEast = -1;
-            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < 100) dungeonRooms.add(newRoom);
+//            DungeonPiece newRoom = roomType[rand.nextInt(roomType.length)];
+//            while(newRoom.entranceHeightEast == -1) newRoom.rotate90Deg();
+//
+//            x = corridor.pos.getX() - Math.abs(corridor.offsetX) - Math.abs(newRoom.offsetX) - 1;
+//            y = corridor.pos.getY() + corridor.entranceHeightWest - newRoom.entranceHeightEast;
+//            z = corridor.pos.getZ();
+//
+//            newRoom.generate(world, rand, new BlockPos(x, y, z));
+//
+//            newRoom.entranceHeightEast = -1;
+//            if(newRoom.pos.getDistance(dungeonCenter.getX(), dungeonCenter.getY(), dungeonCenter.getZ()) < maxDungeonRadius) dungeonRooms.add(newRoom);
         }
 
         dungeonRooms.remove(0);

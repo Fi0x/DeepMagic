@@ -17,7 +17,7 @@ public class DungeonPiece extends WorldGenerator implements IStructure
     public BlockPos pos;
 
     private int sizeX;
-    public int sizeY;
+    private int sizeY;
     private int sizeZ;
     public int offsetX;
     public int offsetZ;
@@ -73,7 +73,7 @@ public class DungeonPiece extends WorldGenerator implements IStructure
         this.pos = pos;
         if(requiresEntrance)
         {
-            digTunnelToSurface();
+            digTunnelToSurface(world);
         }
         return GenerationHelper.templatePlacer(world, rand, this.pos.add(offsetX, 0, offsetZ), templateName, rotation);
     }
@@ -108,8 +108,18 @@ public class DungeonPiece extends WorldGenerator implements IStructure
         }
     }
 
-    private void digTunnelToSurface()
+    private void digTunnelToSurface(World world)
     {
-        //TODO: Create tunnel to surface
+        BlockPos startPosition = this.pos.add(0, sizeY, 0);
+        for(int y = 70; y > startPosition.getY(); y--)
+        {
+            for(int x = -1; x <= 1; x++)
+            {
+                for(int z = -1; z <= 1; z++)
+                {
+                    world.setBlockToAir(startPosition.add(x, y, z));
+                }
+            }
+        }
     }
 }

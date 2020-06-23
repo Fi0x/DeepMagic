@@ -7,6 +7,8 @@ Insanity Dimension {
 		        treasures
 		        spawners
 		        traps
+		    un-comment room adds in Dungeon and fix it
+		    fix shaft entrance
 		dragon lair
 }
 Mobs {

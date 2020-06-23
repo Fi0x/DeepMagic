@@ -40,7 +40,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 			generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
 
-			if(chunkX % 20 == 0 && chunkZ % 20 == 0) DUNGEON.generate(world, random, new BlockPos(chunkX * 16, 80, chunkZ * 16));
+			if(chunkX % 20 == 0 && chunkZ % 20 == 0) DUNGEON.generate(world, random, new BlockPos(chunkX * 16, 20, chunkZ * 16));
 		}
 	}
 	
