@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.entities;
 
 import com.fi0x.deepmagic.entities.projectiles.EntitySpellFireball;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
+import com.fi0x.deepmagic.util.IMagicCreature;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityDepthMage extends EntityCreature implements IRangedAttackMob
+public class EntityDepthMage extends EntityCreature implements IRangedAttackMob, IMagicCreature
 {
     public EntityDepthMage(World worldIn)
     {

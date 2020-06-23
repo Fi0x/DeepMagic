@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIRandomFly;
+import com.fi0x.deepmagic.util.IMagicCreature;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityHoveringOrb extends EntityMob
+public class EntityHoveringOrb extends EntityMob implements IMagicCreature
 {
     public EntityHoveringOrb(World worldIn)
     {

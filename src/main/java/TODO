@@ -33,7 +33,6 @@ Mobs {
 		Giant Wolf
 		Spirits / Ghosts
 		Kraken?
-		Wyvern?
 		Leprechaun?
 		Pixie?
 	Passives
@@ -41,6 +40,8 @@ Mobs {
 	    Worms / serpents in the depths
 	    Goblin
 	    Dwarf
+	        customize ai
+	        add default stat values
 	    Rock Troll
 	        add animation to defence mechanism
 	        fix standing still animation

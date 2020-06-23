@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.util.IMagicCreature;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityNetherWorm extends EntityMob
+public class EntityNetherWorm extends EntityMob implements IMagicCreature
 {
     public EntityNetherWorm(World worldIn)
     {
