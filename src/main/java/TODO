@@ -12,6 +12,10 @@ Insanity Dimension {
 		dragon lair
 }
 Mobs {
+    Add more variants
+        Stone
+        Grass
+        Nether
 	Bosses
 		Nether worm (remake required)
 		    optimize AI
@@ -26,15 +30,33 @@ Mobs {
 		Hovering Orb
 		    EntityAIRandomFly
 		        make it work
+		Giant Wolf
+		Spirits / Ghosts
+		Kraken?
+		Wyvern?
+		Leprechaun?
+		Pixie?
 	Passives
+	    Elves
+	    Worms / serpents in the depths
+	    Goblin
+	    Dwarf
 	    Rock Troll
 	        add animation to defence mechanism
 	        fix standing still animation
 	    Depth Mage
 	        add different spells as attack
 	        add attack animation
+	        add different types
+	            healer
+	            attacker
+	            miner
+	            farmer
 		Friendly Floating Orb
 		    like normal floating orb without spikes
+		Giant chicken
+	Friendlys
+	    Mobs that can be tamed / pets
 }
 ManaLevel {
     levelup with mana-experience or mechanic (rituals/items)
@@ -93,6 +115,10 @@ Items {
     End-game-armor
         as strong as draconic evolution
         uses mana(1 or 2)
+    Food from the depths
+        Can be found in rocks
+        Needs some way to regenerate
+        Very effective food
 }
 Blocks {
     Add more World controllers
