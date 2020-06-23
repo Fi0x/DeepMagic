@@ -57,7 +57,7 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
                 corridor.rotate90Deg();
             }
 
-            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + currentRoom.sizeX / 2 - corridor.sizeX / 2, currentRoom.pos.getY() + currentRoom.entranceHeightNorth - corridor.entranceHeightSouth, currentRoom.pos.getZ() - corridor.sizeZ);
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX(), currentRoom.pos.getY() + currentRoom.entranceHeightNorth - corridor.entranceHeightSouth, currentRoom.pos.getZ() - Math.abs(currentRoom.offsetZ) - Math.abs(corridor.offsetZ) - 1);
             corridor.generate(world, rand, placementPosition);
 
             //TODO: select random new room
@@ -73,7 +73,7 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
                 corridor.rotate90Deg();
             }
 
-            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + currentRoom.sizeX, currentRoom.pos.getY() + currentRoom.entranceHeightEast - corridor.entranceHeightWest, currentRoom.pos.getZ() + currentRoom.sizeZ / 2 - corridor.sizeZ / 2);
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + Math.abs(currentRoom.offsetX) + Math.abs(corridor.offsetX) + 1, currentRoom.pos.getY() + currentRoom.entranceHeightEast - corridor.entranceHeightWest, currentRoom.pos.getZ());
             corridor.generate(world, rand, placementPosition);
 
             //TODO: select random new room
@@ -89,7 +89,7 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
                 corridor.rotate90Deg();
             }
 
-            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() + currentRoom.sizeX / 2 - corridor.sizeX / 2, currentRoom.pos.getY() + currentRoom.entranceHeightSouth - corridor.entranceHeightNorth, currentRoom.pos.getZ() + currentRoom.sizeZ);
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX(), currentRoom.pos.getY() + currentRoom.entranceHeightNorth - corridor.entranceHeightSouth, currentRoom.pos.getZ() + Math.abs(currentRoom.offsetZ) + Math.abs(corridor.offsetZ) + 1);
             corridor.generate(world, rand, placementPosition);
 
             //TODO: select random new room
@@ -105,7 +105,7 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
                 corridor.rotate90Deg();
             }
 
-            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() - corridor.sizeX, currentRoom.pos.getY() + currentRoom.entranceHeightWest - corridor.entranceHeightEast, currentRoom.pos.getZ() + currentRoom.sizeZ / 2 - corridor.sizeZ / 2);
+            BlockPos placementPosition = new BlockPos(currentRoom.pos.getX() - Math.abs(currentRoom.offsetX) - Math.abs(corridor.offsetX) - 1, currentRoom.pos.getY() + currentRoom.entranceHeightWest - corridor.entranceHeightEast, currentRoom.pos.getZ());
             corridor.generate(world, rand, placementPosition);
 
             //TODO: select random new room
