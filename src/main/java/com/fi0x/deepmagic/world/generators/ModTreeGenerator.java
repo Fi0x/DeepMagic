@@ -16,9 +16,8 @@ import java.util.Random;
 
 public class ModTreeGenerator extends WorldGenAbstractTree
 {
-    private IBlockState blockStateWood = ModBlocks.INSANITY_LOG.getDefaultState();
-    private IBlockState blockStateLeaves = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY,Boolean.valueOf(false));
-    private final int minTreeHeight = 8;
+    private final IBlockState blockStateWood = ModBlocks.INSANITY_LOG.getDefaultState();
+    private final IBlockState blockStateLeaves = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
 
     public ModTreeGenerator(boolean notify)
     {
@@ -28,41 +27,24 @@ public class ModTreeGenerator extends WorldGenAbstractTree
     @Override
     public boolean generate(@Nonnull World worldIn, Random rand, BlockPos pos)
     {
-        int minHeight = rand.nextInt(3) + minTreeHeight;
+        int minTreeHeight = 7;
+        int minHeight = rand.nextInt(5) + minTreeHeight;
 
-        // Check if tree fits in world
-        if (pos.getY() >= 1 && pos.getY() + minHeight + 1 <= worldIn.getHeight())
-        {
-            if (!isSuitableLocation(worldIn, pos, minHeight))
-            {
-                return false;
-            }
-            else
-            {
-                IBlockState state = worldIn.getBlockState(pos.down());
+        if (pos.getY() < 1 || pos.getY() + minHeight + 1 > worldIn.getHeight()) return false;
+        if (!isSuitableLocation(worldIn, pos, minHeight)) return false;
 
-                if (state.getBlock().canSustainPlant(state, worldIn, pos.down(), EnumFacing.UP, (IPlantable) Blocks.SAPLING) && pos.getY() < worldIn.getHeight() - minHeight - 1)
-                {
-                    state.getBlock().onPlantGrow(state, worldIn, pos.down(), pos);
-                    generateLeaves(worldIn, pos, minHeight, rand);
-                    generateTrunk(worldIn, pos, minHeight);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else
-        {
-            return false;
-        }
+        IBlockState state = worldIn.getBlockState(pos.down());
+        if (!state.getBlock().canSustainPlant(state, worldIn, pos.down(), EnumFacing.UP, (IPlantable) Blocks.SAPLING) || pos.getY() >= worldIn.getHeight() - minHeight - 1) return false;
+
+        state.getBlock().onPlantGrow(state, worldIn, pos.down(), pos);
+        generateLeaves(worldIn, pos, minHeight, rand);
+        generateTrunk(worldIn, pos, minHeight);
+        return true;
     }
 
     private void generateLeaves(World world, BlockPos pos, int height, Random rand)
     {
-        for (int foliageY = pos.getY() - 3 + height; foliageY <= pos.getY() + height; ++foliageY)
+        for (int foliageY = pos.getY() - rand.nextInt(3) + height - 2; foliageY <= pos.getY() + height; ++foliageY)
         {
             int foliageLayer = foliageY - (pos.getY() + height);
             int foliageLayerRadius = 1 - foliageLayer / 2;
@@ -112,7 +94,7 @@ public class ModTreeGenerator extends WorldGenAbstractTree
         for (int checkY = pos.getY(); checkY <= pos.getY() + 1 + minHeight; ++checkY)
         {
             // Handle increasing space towards top of tree
-            int extraSpaceNeeded = 1;
+            int extraSpaceNeeded = 2;
             // Handle base location
             if (checkY == pos.getY())
             {
@@ -121,7 +103,7 @@ public class ModTreeGenerator extends WorldGenAbstractTree
             // Handle top location
             if (checkY >= pos.getY() + 1 + minHeight - 2)
             {
-                extraSpaceNeeded = 2;
+                extraSpaceNeeded = 3;
             }
 
             BlockPos.MutableBlockPos blockPos = new BlockPos.MutableBlockPos();

@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.world.biome;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -33,7 +32,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     public WorldGenerator redstoneGen;
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
-    public WorldGenFlowers flowerGen = new WorldGenFlowers(Blocks.YELLOW_FLOWER, BlockFlower.EnumFlowerType.DANDELION);
     public WorldGenerator mushroomBrownGen = new WorldGenBush(Blocks.BROWN_MUSHROOM);
     public WorldGenerator mushroomRedGen = new WorldGenBush(Blocks.RED_MUSHROOM);
     public WorldGenerator bigMushroomGen = new WorldGenBigMushroom();
@@ -51,7 +49,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     public int sandPatchesPerChunk = 3;
     public int clayPerChunk = 1;
     public int bigMushroomsPerChunk;
-    public boolean generateFalls = false;
 
     public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
@@ -301,34 +298,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
             {
                 int j19 = random.nextInt(l16);
                 this.cactusGen.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
-            }
-        }
-
-        if (this.generateFalls)
-        {
-            if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.LAKE_WATER))
-            for (int k5 = 0; k5 < 50; ++k5)
-            {
-                int i10 = random.nextInt(16) + 8;
-                int l13 = random.nextInt(16) + 8;
-                int i17 = random.nextInt(248) + 8;
-
-                if (i17 > 0)
-                {
-                    int k19 = random.nextInt(i17);
-                    BlockPos blockpos6 = this.chunkPos.add(i10, k19, l13);
-                    (new WorldGenLiquids(Blocks.FLOWING_WATER)).generate(worldIn, random, blockpos6);
-                }
-            }
-
-            if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.LAKE_LAVA))
-            for (int l5 = 0; l5 < 20; ++l5)
-            {
-                int j10 = random.nextInt(16) + 8;
-                int i14 = random.nextInt(16) + 8;
-                int j17 = random.nextInt(random.nextInt(random.nextInt(240) + 8) + 8);
-                BlockPos blockpos3 = this.chunkPos.add(j10, j17, i14);
-                (new WorldGenLiquids(Blocks.FLOWING_LAVA)).generate(worldIn, random, blockpos3);
             }
         }
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));

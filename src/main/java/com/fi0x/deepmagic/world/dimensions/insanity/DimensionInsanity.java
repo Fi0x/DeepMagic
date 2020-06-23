@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.world.dimensions.insanity;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.DimensionInit;
-
 import net.minecraft.client.audio.MusicTicker.MusicType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,7 +32,7 @@ public class DimensionInsanity extends WorldProvider
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkGeneratorInsanity(world, true, world.getSeed());
+		return new ChunkGeneratorInsanity(world, world.getSeed());
 	}
 	@Override
 	public boolean canRespawnHere()

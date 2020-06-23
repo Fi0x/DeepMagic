@@ -4,7 +4,6 @@ import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -17,7 +16,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -40,7 +38,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 	private final float[] biomeWeights;
 	double[] mainNoiseRegion, minLimitRegion, maxLimitRegion, depthRegion;
 	
-	public ChunkGeneratorInsanity(World world, boolean generateStructures, long seed) {
+	public ChunkGeneratorInsanity(World world, long seed) {
 		this.world = world;
 		this.terrainType = world.getWorldInfo().getTerrainType();
 		this.rand = new Random(seed);
@@ -242,11 +240,6 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 		long k = this.rand.nextLong() / 2L * 2L + 1L,
 			 l = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed((long)x * k + (long)z * l ^ this.world.getSeed());
-		
-		int i1 = this.rand.nextInt(16) + 8,
-			j1 = this.rand.nextInt(256),
-			k1 = this.rand.nextInt(16) + 8;
-		(new WorldGenLakes(Blocks.WATER)).generate(world, rand, pos.add(i1, j1, k1));
 		
 		biome.decorate(world, rand, new BlockPos(i, 0, j));
 		WorldEntitySpawner.performWorldGenSpawning(world, biome, i + 8, j + 8, 16, 16, rand);
