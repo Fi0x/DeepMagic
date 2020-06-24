@@ -29,7 +29,7 @@ public class SpellHeal extends SpellBase
         assert playerMana != null;
         if(playerMana.removeMana(manaCost * Math.pow(2, tier - 1), playerIn))
         {
-            playerIn.heal(tier * 2);
+            playerIn.heal((int) Math.pow(2, tier));
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }

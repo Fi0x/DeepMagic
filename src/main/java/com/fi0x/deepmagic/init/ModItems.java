@@ -55,13 +55,14 @@ public class ModItems
 	public static final Item SKILLPOINT_MANA_EFFICIENCY = new SkillpointManaEfficiency("skillpoint_mana_efficiency");
 	public static final Item SKILLPOINT_MAX_HP = new SkillpointMaxHP("skillpoint_max_hp");
 	public static final Item SKILLPOINT_HP_REGEN = new SkillpointHPRegen("skillpoint_hp_regen");
+	public static final Item SKILLPOINT_SPELL_TIER = new SkillpointSpellTier("skillpoint_spell_tier");
 
 	//Spells
 	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);
 	public static final Item SPELL_HEAL_T2 = new SpellHeal("spell_heal_t2", 2);
+	public static final Item SPELL_HEAL_T3 = new SpellHeal("spell_heal_t3", 3);
 	public static final Item SPELL_HEAL_T4 = new SpellHeal("spell_heal_t4", 4);
-	public static final Item SPELL_HEAL_T8 = new SpellHeal("spell_heal_t8", 8);
-	public static final Item SPELL_HEAL_T16 = new SpellHeal("spell_heal_t16", 16);
+	public static final Item SPELL_HEAL_T5 = new SpellHeal("spell_heal_t5", 5);
 
 	public static final Item SPELL_TIME_DAY = new SpellTime("spell_time_day", 5000);
 	public static final Item SPELL_TIME_NIGHT = new SpellTime("spell_time_night", 17000);
