@@ -1,7 +1,13 @@
 {
   "forge_marker": 1,
-   "parent": "block/cube_all",
+   "parent": "block/cube",
    "textures": {
-       "all": "deepmagic:blocks/speed_stone"
+     "particle": "deepmagic:blocks/speed_stone",
+     "up": "deepmagic:blocks/functional_stone_top",
+     "down": "deepmagic:blocks/functional_stone_bottom",
+     "north": "deepmagic:blocks/speed_stone",
+     "east": "deepmagic:blocks/speed_stone",
+     "south": "deepmagic:blocks/speed_stone",
+     "west": "deepmagic:blocks/speed_stone"
    }
 }

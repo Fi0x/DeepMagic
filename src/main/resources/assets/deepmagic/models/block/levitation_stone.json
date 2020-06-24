@@ -1,7 +1,13 @@
 {
   "forge_marker": 1,
-   "parent": "block/cube_all",
+   "parent": "block/cube",
    "textures": {
-       "all": "deepmagic:blocks/levitation_stone"
+     "particle": "deepmagic:blocks/levitation_stone",
+     "up": "deepmagic:blocks/functional_stone_top",
+     "down": "deepmagic:blocks/functional_stone_bottom",
+     "north": "deepmagic:blocks/levitation_stone",
+     "east": "deepmagic:blocks/levitation_stone",
+     "south": "deepmagic:blocks/levitation_stone",
+     "west": "deepmagic:blocks/levitation_stone"
    }
 }

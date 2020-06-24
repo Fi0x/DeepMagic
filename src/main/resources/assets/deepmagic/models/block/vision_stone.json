@@ -1,7 +1,13 @@
 {
   "forge_marker": 1,
-   "parent": "block/cube_all",
+   "parent": "block/cube",
    "textures": {
-       "all": "deepmagic:blocks/vision_stone"
+     "particle": "deepmagic:blocks/vision_stone",
+     "up": "deepmagic:blocks/functional_stone_top",
+     "down": "deepmagic:blocks/functional_stone_bottom",
+     "north": "deepmagic:blocks/vision_stone",
+     "east": "deepmagic:blocks/vision_stone",
+     "south": "deepmagic:blocks/vision_stone",
+     "west": "deepmagic:blocks/vision_stone"
    }
 }

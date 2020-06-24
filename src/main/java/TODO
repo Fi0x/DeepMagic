@@ -65,7 +65,7 @@ Mobs {
 	    Mobs that can be tamed / pets
 }
 ManaLevel {
-    improve levelsystem
+    improve skill-xp-levelsystem
 }
 Implement passive Skilltree {
 	increased saturation
@@ -125,6 +125,8 @@ Blocks {
         add costs
     Quarry
         uses mana2
+    Altar of Knowledge
+        sync skill-gui with server
 }
 Fluids {
     Insanity Lava
