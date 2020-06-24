@@ -39,6 +39,7 @@ public class BiomeInsanity extends Biome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDwarf.class, 20, 2, 6));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 5, 1, 2));
+		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityDemon.class, 10, 1, 1));
 		
 		this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);

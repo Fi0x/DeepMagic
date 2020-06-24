@@ -25,6 +25,11 @@ Mobs {
 		Overworld (Spawnable)
 		Insanity Dimension (Dragon (in Dragon Lair))
 	Hostiles
+	    Demon
+	        optimize ai
+	        set stats / attributes
+	        add custom loot table
+	        add custom sounds
 		Zentaur
 		Cyclopse
 		Hovering Orb
