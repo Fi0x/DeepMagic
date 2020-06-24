@@ -31,15 +31,18 @@ public class SpellTime extends SpellBase
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
-        if(playerMana.removeMana(manaCost, playerIn))
+        if(playerMana.getSpellTier() >= tier)
         {
-            if(Math.random() > 0.5)
+            if(playerMana.removeMana(manaCost, playerIn))
             {
-                worldIn.setWorldTime(time);
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
+                if(Math.random() > 0.5)
+                {
+                    worldIn.setWorldTime(time);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
+                }
+                else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             }
-            else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        }
+        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 }
