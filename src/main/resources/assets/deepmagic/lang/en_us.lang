@@ -57,6 +57,10 @@ item.deep_crystal_boots.name=Deep Crystal Boots
 item.skillpoint_uncharged.name=Uncharged Skillpoint
 item.skillpoint_charged.name=Charged Skillpoint
 item.skillpoint_max_mana.name=Specified Skillpoint (Max Mana)
+item.skillpoint_mana_regen.name=Specified Skillpoint (Mana Regeneration)
+item.skillpoint_mana_efficiency.name=Specified Skillpoint (Mana Efficiency)
+item.skillpoint_max_hp.name=Specified Skillpoint (Max HP)
+item.skillpoint_hp_regen.name=Specified Skillpoint (HP Regeneration)
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple

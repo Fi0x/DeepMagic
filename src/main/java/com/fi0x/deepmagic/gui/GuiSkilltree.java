@@ -2,8 +2,6 @@ package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
-import com.fi0x.deepmagic.network.PacketGetPlayerMana;
-import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
@@ -22,7 +20,7 @@ public class GuiSkilltree extends GuiScreen
     PlayerMana playerMana;
 
     private final int backgroundHeight = 256;
-    private final int backgroundWidth = 256;
+    private final int backgroundWidth = 512;
     private int guiX;
     private int guiY;
     private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background.png");
@@ -38,10 +36,6 @@ public class GuiSkilltree extends GuiScreen
     {
         this.player = player;
         this.playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
-
-        PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
-        assert playerMana != null;
-        PacketHandler.INSTANCE.sendToServer(new PacketGetPlayerMana(player.getName(), playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration));
     }
 
     @Override
@@ -56,19 +50,19 @@ public class GuiSkilltree extends GuiScreen
         buttonExit = new GuiButton(0, width/2 -20, guiY + backgroundHeight-30, 40, 20, I18n.format("Exit"));
         buttonList.add(buttonExit);
 
-        labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 20, 150, 20, 0);
+        labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 5, 150, 20, 0);
         labelMaxMana.addLine("Mana Capacity: " + (int) playerMana.getMaxMana());
         labelList.add(labelMaxMana);
-        labelManaRegen = new GuiLabel(this.fontRenderer, 102, guiX + 5, guiY + 40, 150, 20, 0);
+        labelManaRegen = new GuiLabel(this.fontRenderer, 102, guiX + 5, guiY + 25, 150, 20, 0);
         labelManaRegen.addLine("Mana Regeneration: " + (int) playerMana.getManaRegenRate());
         labelList.add(labelManaRegen);
-        labelManaEfficiency = new GuiLabel(this.fontRenderer, 103, guiX + 5, guiY + 60, 150, 20, 0);
+        labelManaEfficiency = new GuiLabel(this.fontRenderer, 103, guiX + 5, guiY + 45, 150, 20, 0);
         labelManaEfficiency.addLine("Mana Efficiency: " + (int) playerMana.getManaEfficiency());
         labelList.add(labelManaEfficiency);
-        labelMaxHP = new GuiLabel(this.fontRenderer, 104, guiX + 5, guiY + 80, 150, 20, 0);
+        labelMaxHP = new GuiLabel(this.fontRenderer, 104, guiX + 5, guiY + 65, 150, 20, 0);
         labelMaxHP.addLine("Health Points: " + (playerMana.addedHP+20));
         labelList.add(labelMaxHP);
-        labelHealthRegen = new GuiLabel(this.fontRenderer, 105, guiX + 5, guiY + 100, 150, 20, 0);
+        labelHealthRegen = new GuiLabel(this.fontRenderer, 105, guiX + 5, guiY + 85, 150, 20, 0);
         labelHealthRegen.addLine("Health Regeneration: " + playerMana.hpRegeneration);
         labelList.add(labelHealthRegen);
     }

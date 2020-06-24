@@ -6,8 +6,7 @@ import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
-import com.fi0x.deepmagic.items.skillpoints.SkillpointBasic;
-import com.fi0x.deepmagic.items.skillpoints.SkillpointMaxMana;
+import com.fi0x.deepmagic.items.skillpoints.*;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -49,6 +48,10 @@ public class ModItems
 	public static final Item SKILLPOINT_UNCHARGED = new SkillpointBasic("skillpoint_uncharged");
 	public static final Item SKILLPOINT_CHARGED = new SkillpointBasic("skillpoint_charged");
 	public static final Item SKILLPOINT_MAX_MANA = new SkillpointMaxMana("skillpoint_max_mana");
+	public static final Item SKILLPOINT_MANA_REGEN = new SkillpointManaRegen("skillpoint_mana_regen");
+	public static final Item SKILLPOINT_MANA_EFFICIENCY = new SkillpointManaEfficiency("skillpoint_mana_efficiency");
+	public static final Item SKILLPOINT_MAX_HP = new SkillpointMaxHP("skillpoint_max_hp");
+	public static final Item SKILLPOINT_HP_REGEN = new SkillpointHPRegen("skillpoint_hp_regen");
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
