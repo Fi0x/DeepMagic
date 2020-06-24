@@ -14,12 +14,13 @@ public class Reference
 
 	//Entity IDs
 	public static final int ENTITY_INSANITY_COW = 1764;
-	public static final int ENTITY_SPIKY_SLIME = 1765;
+	public static final int ENTITY_DWARF = 1765;
 	public static final int ENTITY_HOVERING_ORB = 1766;
 	public static final int ENTITY_NETHER_WORM = 1767;
 	public static final int ENTITY_GIANT = 1768;
 	public static final int ENTITY_ROCK_TROLL = 1769;
 	public static final int ENTITY_DEPTH_MAGE = 1770;
+	public static final int ENTITY_DEMON = 1771;
 
 	//Gui IDs
 	public static final int GUI_SKILLTREE = 74088;

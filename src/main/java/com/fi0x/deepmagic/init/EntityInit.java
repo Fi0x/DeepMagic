@@ -17,6 +17,8 @@ public class EntityInit
         registerEntity("giant", EntityGiant.class, Reference.ENTITY_GIANT, 100, 6470009, 6436985);
         registerEntity("rock_troll", EntityRockTroll.class, Reference.ENTITY_ROCK_TROLL, 100, 12566463, 7697781);
         registerEntity("depth_mage", EntityDepthMage.class, Reference.ENTITY_DEPTH_MAGE, 50, 0, 3093042);
+        registerEntity("dwarf", EntityDwarf.class, Reference.ENTITY_DWARF, 50, 2555904, 8794643);
+        registerEntity("demon", EntityDemon.class, Reference.ENTITY_DEMON, 50, 2162688, 9109504);
     }
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)
     {

@@ -57,7 +57,7 @@ item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
 
 entity.insanity_cow.name=Insanity Cow
-entity.spiky_slime.name=Spiky Slime
+entity.dwarf.name=Dwarf
 entity.hovering_orb.name=Hovering Orb
 entity.nether_worm.name=Nether Worm
 entity.giant.name=Giant

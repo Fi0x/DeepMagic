@@ -24,6 +24,7 @@ public class RenderHandler
         RenderingRegistry.registerEntityRenderingHandler(EntityGiant.class, RenderGiant::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityRockTroll.class, RenderRockTroll::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDepthMage.class, RenderDepthMage::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDwarf.class, RenderDwarf::new);
     }
 
     public static void registerCustomMeshesAndStates()
