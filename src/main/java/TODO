@@ -125,6 +125,9 @@ Items {
         Can be found in rocks
         Needs some way to regenerate
         Very effective food
+    Skillpoints
+        Max Mana
+            fix *2 bug
 }
 Blocks {
     Add more World controllers
@@ -133,8 +136,7 @@ Blocks {
     Time controller
         add costs
     Altar of Knowledge
-        opens skill tree
-            un-comment client-server sync and fix it
+        change skilltree to skillinfo-display
     Slabs
         enable 2 slabs in 1 block placement
 }

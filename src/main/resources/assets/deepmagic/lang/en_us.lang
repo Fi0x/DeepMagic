@@ -37,6 +37,7 @@ tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
 tile.altar_of_knowledge.name=Altar of Knowledge
+tile.skill_manifester.name=Skill Manifester
 tile.weather_controller.name=Weather Controller
 tile.time_controller=Time Controller
 
@@ -53,6 +54,10 @@ item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
 
+item.skillpoint_uncharged.name=Uncharged Skillpoint
+item.skillpoint_charged.name=Charged Skillpoint
+item.skillpoint_max_mana.name=Specified Skillpoint (Max Mana)
+
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
 
@@ -63,3 +68,4 @@ entity.nether_worm.name=Nether Worm
 entity.giant.name=Giant
 entity.rock_troll.name=Rock Troll
 entity.depth_mage.name=Mage of the Depths
+entity.demon.name=Demon

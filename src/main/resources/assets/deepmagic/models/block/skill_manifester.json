@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+   "parent": "block/cube",
+   "textures": {
+       "particle": "deepmagic:blocks/skill_manifester_side",
+       "up": "deepmagic:blocks/skill_manifester_top",
+       "down": "deepmagic:blocks/skill_manifester_bottom",
+       "north": "deepmagic:blocks/skill_manifester_side",
+       "east": "deepmagic:blocks/skill_manifester_side",
+       "south": "deepmagic:blocks/skill_manifester_side",
+       "west": "deepmagic:blocks/skill_manifester_side"
+   }
+}

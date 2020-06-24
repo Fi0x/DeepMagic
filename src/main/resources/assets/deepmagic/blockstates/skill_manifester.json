@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "deepmagic:skill_manifester"
+		}
+	}
+}

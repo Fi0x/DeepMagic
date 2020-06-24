@@ -6,6 +6,8 @@ import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
+import com.fi0x.deepmagic.items.skillpoints.SkillpointBasic;
+import com.fi0x.deepmagic.items.skillpoints.SkillpointMaxMana;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -42,6 +44,11 @@ public class ModItems
 	public static final ItemPickaxe DEEP_CRYSTAL_PICKAXE = new ToolPickaxe("deep_crystal_pickaxe", MATERIAL_DEEP_CRYSTAL);
 	public static final ItemAxe DEEP_CRYSTAL_AXE = new ToolAxe("deep_crystal_axe", MATERIAL_DEEP_CRYSTAL);
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
+
+	//Skills
+	public static final Item SKILLPOINT_UNCHARGED = new SkillpointBasic("skillpoint_uncharged");
+	public static final Item SKILLPOINT_CHARGED = new SkillpointBasic("skillpoint_charged");
+	public static final Item SKILLPOINT_MAX_MANA = new SkillpointMaxMana("skillpoint_max_mana");
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
