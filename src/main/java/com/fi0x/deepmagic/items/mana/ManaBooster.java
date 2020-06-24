@@ -26,6 +26,7 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(DeepMagicTab.ITEMS);
+		setMaxStackSize(1);
 		
 		ModItems.ITEMS.add(this);
 	}
@@ -43,11 +44,10 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if(!worldIn.isRemote)
 		{
-			stack.setCount(stack.getCount() - 1);
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
 			playerMana.setMana(playerMana.getMana() + BOOST_AMOUNT);
-			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
 	}

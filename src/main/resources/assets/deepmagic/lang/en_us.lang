@@ -71,6 +71,10 @@ item.spell_heal_t16.name=Heal Spell T16
 item.spell_time_day.name=Day Spell
 item.spell_time_night.name=Night Spell
 
+item.spell_weather_t1.name=Weather Spell T1
+item.spell_weather_t2.name=Weather Spell T2
+item.spell_weather_t3.name=Weather Spell T3
+
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
 

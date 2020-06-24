@@ -13,14 +13,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class SpellTime extends SpellBase
+public class SpellWeather extends SpellBase
 {
-    private final int time;
-    public SpellTime(String name, int time)
+    public SpellWeather(String name, int tier)
     {
-        super(name, 0);
-        this.time = time;
-        this.manaCost = 500;
+        super(name, tier);
+        this.manaCost = 100;
     }
 
     @Nonnull
@@ -31,11 +29,11 @@ public class SpellTime extends SpellBase
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
-        if(playerMana.removeMana(manaCost, playerIn))
+        if(playerMana.removeMana(manaCost * tier, playerIn))
         {
-            if(Math.random() > 0.5)
+            if((int) (Math.random() * (5 + tier)) > 4)
             {
-                worldIn.setWorldTime(time);
+                worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
                 playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
             }
             else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));

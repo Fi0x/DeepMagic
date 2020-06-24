@@ -9,6 +9,7 @@ import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
 import com.fi0x.deepmagic.items.skillpoints.*;
 import com.fi0x.deepmagic.items.spells.SpellHeal;
 import com.fi0x.deepmagic.items.spells.SpellTime;
+import com.fi0x.deepmagic.items.spells.SpellWeather;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -64,6 +65,10 @@ public class ModItems
 
 	public static final Item SPELL_TIME_DAY = new SpellTime("spell_time_day", 5000);
 	public static final Item SPELL_TIME_NIGHT = new SpellTime("spell_time_night", 17000);
+
+	public static final Item SPELL_WEATHER_T1 = new SpellWeather("spell_weather_t1", 1);
+	public static final Item SPELL_WEATHER_T2 = new SpellWeather("spell_weather_t2", 2);
+	public static final Item SPELL_WEATHER_T3 = new SpellWeather("spell_weather_t3", 3);
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
