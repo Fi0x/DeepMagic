@@ -2,9 +2,6 @@ package com.fi0x.deepmagic.mana.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 
 public class PlayerMana
 {
@@ -48,11 +45,9 @@ public class PlayerMana
 	{
 		if(mana-(value/Math.pow(1.1, manaEfficiency)) < 0)
 		{
-			player.sendMessage(new TextComponentString(TextFormatting.RED + "Mana needed: " + (value/Math.pow(1.1, manaEfficiency))));
 			return false;
 		}
 		mana -= (value/Math.pow(1.1, manaEfficiency));
-		player.sendMessage(new TextComponentString(TextFormatting.GOLD + "Mana consumed: " + (value/Math.pow(1.1, manaEfficiency))));
 		return true;
 	}
 	public double getMaxMana()
@@ -120,13 +115,6 @@ public class PlayerMana
 	public double getManaEfficiency()
 	{
 		return manaEfficiency;
-	}
-	public void showMana(EntityPlayer player, World world)
-	{
-		if(!world.isRemote)
-		{
-			player.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana: " + (int) mana + " / " + (int) maxMana*Math.pow(1.1, maxManaMultiplier)));
-		}
 	}
 	
 	public void copyFrom(PlayerMana source)

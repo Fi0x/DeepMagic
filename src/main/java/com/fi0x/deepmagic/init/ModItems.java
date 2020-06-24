@@ -7,6 +7,8 @@ import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
 import com.fi0x.deepmagic.items.skillpoints.*;
+import com.fi0x.deepmagic.items.spells.SpellHeal;
+import com.fi0x.deepmagic.items.spells.SpellTime;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class ModItems
 {
-	public static final List<Item> ITEMS = new ArrayList<Item>();
+	public static final List<Item> ITEMS = new ArrayList<>();
 	
 	//Materials
 	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", 4, 1561, 10.0F, 4.0F, 10);
@@ -52,6 +54,16 @@ public class ModItems
 	public static final Item SKILLPOINT_MANA_EFFICIENCY = new SkillpointManaEfficiency("skillpoint_mana_efficiency");
 	public static final Item SKILLPOINT_MAX_HP = new SkillpointMaxHP("skillpoint_max_hp");
 	public static final Item SKILLPOINT_HP_REGEN = new SkillpointHPRegen("skillpoint_hp_regen");
+
+	//Spells
+	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);
+	public static final Item SPELL_HEAL_T2 = new SpellHeal("spell_heal_t2", 2);
+	public static final Item SPELL_HEAL_T4 = new SpellHeal("spell_heal_t4", 4);
+	public static final Item SPELL_HEAL_T8 = new SpellHeal("spell_heal_t8", 8);
+	public static final Item SPELL_HEAL_T16 = new SpellHeal("spell_heal_t16", 16);
+
+	public static final Item SPELL_TIME_DAY = new SpellTime("spell_time_day", 5000);
+	public static final Item SPELL_TIME_NIGHT = new SpellTime("spell_time_night", 17000);
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);

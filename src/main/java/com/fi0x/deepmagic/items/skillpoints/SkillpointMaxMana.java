@@ -8,6 +8,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class SkillpointMaxMana extends SkillpointBasic
 {
     public SkillpointMaxMana(String name)
@@ -15,12 +18,13 @@ public class SkillpointMaxMana extends SkillpointBasic
         super(name);
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn)
     {
         if(!worldIn.isRemote)
         {
-            playerIn.getCapability(PlayerProperties.PLAYER_MANA, null).maxManaMultiplier++;
+            Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).maxManaMultiplier++;
             return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));

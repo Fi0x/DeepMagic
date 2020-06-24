@@ -16,9 +16,9 @@ public class DungeonPiece extends WorldGenerator implements IStructure
 
     public BlockPos pos;
 
-    private int sizeX;
-    private int sizeY;
-    private int sizeZ;
+    private final int sizeX;
+    private final int sizeY;
+    private final int sizeZ;
     public int offsetX;
     public int offsetZ;
 

@@ -8,10 +8,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
+import java.util.Objects;
+
 public class Teleport extends Teleporter
 {
 	private final WorldServer world;
-	private double x, y, z;
+	private final double x;
+	private final double y;
+	private final double z;
 	
 	public Teleport(WorldServer worldIn, double x, double y, double z)
 	{
@@ -26,10 +30,10 @@ public class Teleport extends Teleporter
 	{
 		EntityPlayerMP entityPlayerMP = (EntityPlayerMP) player;
 		MinecraftServer server = player.getEntityWorld().getMinecraftServer();
+		assert server != null;
 		WorldServer worldServer = server.getWorld(dimension);
-		
-		if(worldServer == null || server == null) throw new IllegalArgumentException("Dimension " + dimension + " doesn't exist!");
-		worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension(entityPlayerMP, dimension, new Teleport(worldServer, x, y, z));
+
+		Objects.requireNonNull(worldServer.getMinecraftServer()).getPlayerList().transferPlayerToDimension(entityPlayerMP, dimension, new Teleport(worldServer, x, y, z));
 	}
 	
 	@Override

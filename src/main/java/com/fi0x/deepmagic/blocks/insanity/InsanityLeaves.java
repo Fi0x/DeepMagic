@@ -42,7 +42,7 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
         setSoundType(SoundType.PLANT);
         setHardness(0.3F);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+        setDefaultState(getBlockState().getBaseState().withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.valueOf(true)));
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
@@ -102,6 +102,7 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
         return NonNullList.withSize(1, new ItemStack(this));
     }
 
+    @Nonnull
     @Override
     public BlockPlanks.EnumType getWoodType(int meta)
     {
@@ -116,17 +117,17 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+        return getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY, (meta & 8) > 0);
     }
     @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
-        if(!state.getValue(DECAYABLE).booleanValue())
+        if(!state.getValue(DECAYABLE))
         {
             i |= 4;
         }
-        if(state.getValue(CHECK_DECAY).booleanValue())
+        if(state.getValue(CHECK_DECAY))
         {
             i |= 8;
         }

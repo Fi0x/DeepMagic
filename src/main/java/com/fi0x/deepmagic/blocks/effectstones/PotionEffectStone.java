@@ -14,9 +14,9 @@ import javax.annotation.Nonnull;
 
 public class PotionEffectStone extends BlockBase
 {
-    private Potion blockEffect;
-    private int duration;
-    private int amplifier;
+    private final Potion blockEffect;
+    private final int duration;
+    private final int amplifier;
 
     public PotionEffectStone(String name, Material material, Potion effect, int sDuration, int powerLevel)
     {

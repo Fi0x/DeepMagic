@@ -22,67 +22,67 @@ public class ModWorldGen implements IWorldGenerator
 	{
 		if(world.provider.getDimension() == 0)
 		{
-			generateOverworld(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateOverworld(random, chunkX, chunkZ, world);
 		} else if(world.provider.getDimension() == -1)
 		{
-			generateNether(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateNether(random, chunkX, chunkZ, world);
 		} else if(world.provider.getDimension() == 1)
 		{
-			generateEnd(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateEnd(random, chunkX, chunkZ, world);
 		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_DEEPDARK)
 		{
-			generateDeepDark(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateDeepDark(random, chunkX, chunkZ, world);
 		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_TWILIGHTFOREST)
 		{
-			generateTwilightForest(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateTwilightForest(random, chunkX, chunkZ, world);
 		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_AROMAMININGWORLD)
 		{
-			generateAromaMiningWorld(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateAromaMiningWorld(random, chunkX, chunkZ, world);
 		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
 		{
-			generateInsanityDimension(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateInsanityDimension(random, chunkX, chunkZ, world);
 		} else
 		{
-			generateDefaultDimension(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+			generateDefaultDimension(random, chunkX, chunkZ, world);
 		}
 	}
 	
-	private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateOverworld(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 12, random.nextInt(4) + 2, 10);
 	}
 	
-	private void generateNether(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateNether(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 200, random.nextInt(8) + 4, 10, Blocks.NETHERRACK);
 	}
 	
-	private void generateEnd(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateEnd(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 100, random.nextInt(4) + 2, 20, Blocks.END_STONE);
 	}
 	
-	private void generateDeepDark(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateDeepDark(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 64, random.nextInt(8) + 4, 20);
 	}
 	
-	private void generateTwilightForest(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateTwilightForest(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 12, random.nextInt(4) + 2, 8);
 	}
 	
-	private void generateAromaMiningWorld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateAromaMiningWorld(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 64, 1, 6);
 	}
 	
-	private void generateInsanityDimension(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateInsanityDimension(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 64, 8, 20);
 	}
 	
-	private void generateDefaultDimension(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	private void generateDefaultDimension(Random random, int chunkX, int chunkZ, World world)
 	{
 		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 12, 1, 10);
 	}

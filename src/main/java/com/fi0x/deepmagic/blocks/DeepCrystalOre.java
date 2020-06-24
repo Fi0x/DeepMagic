@@ -1,13 +1,13 @@
 package com.fi0x.deepmagic.blocks;
 
-import java.util.Random;
-
 import com.fi0x.deepmagic.init.ModItems;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class DeepCrystalOre extends BlockBase
 {
@@ -21,8 +21,9 @@ public class DeepCrystalOre extends BlockBase
 		setLightLevel(0.4F);
 	}
 	
+	@Nonnull
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return ModItems.DEEP_CRYSTAL_POWDER;
 	}
