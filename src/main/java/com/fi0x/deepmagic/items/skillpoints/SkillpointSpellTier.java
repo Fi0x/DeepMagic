@@ -7,13 +7,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class SkillpointHPRegen extends SkillpointBasic
+public class SkillpointSpellTier extends SkillpointBasic
 {
-    public SkillpointHPRegen(String name)
+    public SkillpointSpellTier(String name)
     {
         super(name);
     }
@@ -26,8 +28,8 @@ public class SkillpointHPRegen extends SkillpointBasic
         {
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
-            playerMana.hpRegeneration++;
-            return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
+            if(playerMana.addSpellTier()) return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
+            else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You are already at Tier 10"));
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
     }

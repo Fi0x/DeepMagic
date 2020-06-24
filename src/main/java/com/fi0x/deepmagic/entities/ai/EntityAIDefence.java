@@ -6,7 +6,6 @@ import net.minecraft.entity.ai.EntityAIBase;
 public class EntityAIDefence extends EntityAIBase
 {
     protected final EntityRockTroll creature;
-    private int startTick;
 
     public EntityAIDefence(EntityRockTroll creature)
     {
@@ -16,9 +15,7 @@ public class EntityAIDefence extends EntityAIBase
 
     public boolean shouldExecute()
     {
-        if (this.creature.getRevengeTarget() == null) return false;
-        startTick = creature.ticksExisted;
-        return true;
+        return this.creature.getRevengeTarget() != null;
     }
 
     public void startExecuting()

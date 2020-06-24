@@ -14,6 +14,9 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class SkillManifester extends BlockBase
 {
     public SkillManifester(String name, Material material)
@@ -25,13 +28,13 @@ public class SkillManifester extends BlockBase
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         if(!worldIn.isRemote)
         {
             if(playerIn.getHeldItemMainhand().getItem() == ModItems.SKILLPOINT_UNCHARGED)
             {
-                if(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null).removeSkillpoint())
+                if(Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).removeSkillpoint())
                 {
                     playerIn.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(ModItems.SKILLPOINT_CHARGED));
                 } else

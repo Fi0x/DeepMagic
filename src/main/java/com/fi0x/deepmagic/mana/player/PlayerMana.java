@@ -2,9 +2,6 @@ package com.fi0x.deepmagic.mana.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 
 public class PlayerMana
 {
@@ -14,12 +11,14 @@ public class PlayerMana
 
 	private double skillXP = 0;
 	private int skillpoints = 1;
+
 	//Skills
 	private double manaRegenRate = 0;
 	private double manaEfficiency = 0;
 	public int maxManaMultiplier = 0;
 	public int addedHP = 0;
 	public int hpRegeneration = 0;
+	private int spellTier = 1;
 	
 	public PlayerMana() {}
 	
@@ -48,11 +47,9 @@ public class PlayerMana
 	{
 		if(mana-(value/Math.pow(1.1, manaEfficiency)) < 0)
 		{
-			player.sendMessage(new TextComponentString(TextFormatting.RED + "Mana needed: " + (value/Math.pow(1.1, manaEfficiency))));
 			return false;
 		}
 		mana -= (value/Math.pow(1.1, manaEfficiency));
-		player.sendMessage(new TextComponentString(TextFormatting.GOLD + "Mana consumed: " + (value/Math.pow(1.1, manaEfficiency))));
 		return true;
 	}
 	public double getMaxMana()
@@ -121,12 +118,15 @@ public class PlayerMana
 	{
 		return manaEfficiency;
 	}
-	public void showMana(EntityPlayer player, World world)
+	public boolean addSpellTier()
 	{
-		if(!world.isRemote)
-		{
-			player.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana: " + (int) mana + " / " + (int) maxMana*Math.pow(1.1, maxManaMultiplier)));
-		}
+		if(spellTier >= 10) return false;
+		spellTier++;
+		return true;
+	}
+	public int getSpellTier()
+	{
+		return spellTier;
 	}
 	
 	public void copyFrom(PlayerMana source)
@@ -150,6 +150,7 @@ public class PlayerMana
 		compound.setInteger("maxManaMultiplier", maxManaMultiplier);
 		compound.setInteger("addedHP", addedHP);
 		compound.setInteger("hpRegeneration", hpRegeneration);
+		compound.setInteger("spellTier", spellTier);
 	}
 	public void loadNBTData(NBTTagCompound compound)
 	{
@@ -162,5 +163,6 @@ public class PlayerMana
 		maxManaMultiplier = compound.getInteger("maxManaMultiplier");
 		addedHP = compound.getInteger("addedHP");
 		hpRegeneration = compound.getInteger("hpRegeneration");
+		spellTier = compound.getInteger("spellTier");
 	}
 }

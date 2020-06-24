@@ -54,7 +54,8 @@ public class PlayerPropertyEvents
         if(sync == 0)
         {
             PlayerMana playerMana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
-            PacketHandler.INSTANCE.sendToServer(new PacketGetPlayerMana(event.player.getName(), playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration));
+            assert playerMana != null;
+            PacketHandler.INSTANCE.sendToServer(new PacketGetPlayerMana(event.player.getName(), playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
         }
     }
 }

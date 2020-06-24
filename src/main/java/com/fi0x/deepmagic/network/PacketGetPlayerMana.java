@@ -24,12 +24,13 @@ public class PacketGetPlayerMana implements IMessage
     private double manaEfficiency;
     private int addedHP;
     private int hpRegeneration;
+    private int spellTier;
 
     public PacketGetPlayerMana()
     {
         messageValid = false;
     }
-    public PacketGetPlayerMana(String playerName, double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration)
+    public PacketGetPlayerMana(String playerName, double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier)
     {
         this.playerName = playerName;
         this.currentMana = currentMana;
@@ -39,6 +40,7 @@ public class PacketGetPlayerMana implements IMessage
         this.manaEfficiency = manaEfficiency;
         this.addedHP = addedHP;
         this.hpRegeneration = hpRegeneration;
+        this.spellTier = spellTier;
 
         messageValid = true;
     }
@@ -56,6 +58,7 @@ public class PacketGetPlayerMana implements IMessage
             manaEfficiency = buf.readDouble();
             addedHP = buf.readInt();
             hpRegeneration = buf.readInt();
+            spellTier = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -75,6 +78,7 @@ public class PacketGetPlayerMana implements IMessage
         buf.writeDouble(manaEfficiency);
         buf.writeInt(addedHP);
         buf.writeInt(hpRegeneration);
+        buf.writeInt(spellTier);
     }
 
     public static class Handler implements IMessageHandler<PacketGetPlayerMana, IMessage>
@@ -95,7 +99,7 @@ public class PacketGetPlayerMana implements IMessage
             {
                 PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                PacketHandler.INSTANCE.sendTo(new PacketReturnPlayerMana(playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration), ctx.getServerHandler().player);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnPlayerMana(playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()), ctx.getServerHandler().player);
             }
         }
     }

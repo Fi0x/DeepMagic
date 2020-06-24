@@ -61,6 +61,20 @@ item.skillpoint_mana_regen.name=Specified Skillpoint (Mana Regeneration)
 item.skillpoint_mana_efficiency.name=Specified Skillpoint (Mana Efficiency)
 item.skillpoint_max_hp.name=Specified Skillpoint (Max HP)
 item.skillpoint_hp_regen.name=Specified Skillpoint (HP Regeneration)
+item.skillpoint_spell_tier.name=Specified Skillpoint (Spell Tier)
+
+item.spell_heal_t1.name=Heal Spell T1
+item.spell_heal_t2.name=Heal Spell T2
+item.spell_heal_t3.name=Heal Spell T3
+item.spell_heal_t4.name=Heal Spell T4
+item.spell_heal_t5.name=Heal Spell T5
+
+item.spell_time_day.name=Day Spell
+item.spell_time_night.name=Night Spell
+
+item.spell_weather_t1.name=Weather Spell T1
+item.spell_weather_t2.name=Weather Spell T2
+item.spell_weather_t3.name=Weather Spell T3
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple

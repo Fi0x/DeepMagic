@@ -16,10 +16,6 @@ public class GuiManaRenderOverlay extends Gui
 	public static GuiManaRenderOverlay instance = new GuiManaRenderOverlay();
 
 	private final ResourceLocation MANA_BAR = new ResourceLocation(Reference.MOD_ID, "textures/gui/manabar.png");
-	private final int TEXT_WIDTH = 20;
-	private final int TEXT_HEIGHT = 104;
-	private int positionX = 0;
-	private int positionY = 0;
 
 	public void setValues(double currentMana, double maxMana)
 	{
@@ -39,10 +35,14 @@ public class GuiManaRenderOverlay extends Gui
 			assert playerMana != null;
 			int currentHeight = (int) playerMana.getManaPercentage();
 			mc.renderEngine.bindTexture(MANA_BAR);
-			drawTexturedModalRect(positionX, positionY+10, 0, 0, TEXT_WIDTH, TEXT_HEIGHT);
-			drawTexturedModalRect(positionX, positionY+10+TEXT_HEIGHT-currentHeight-2, TEXT_WIDTH, 2, TEXT_WIDTH, currentHeight);
-			mc.fontRenderer.drawString("" + (int) playerMana.getMaxMana(), positionX+1, positionY+1, 15658734);
-			mc.fontRenderer.drawString("" + (int) playerMana.getMana(), positionX+1, positionY+TEXT_HEIGHT + 11, 15658734);
+			int TEXT_WIDTH = 20;
+			int TEXT_HEIGHT = 104;
+			int positionX = 0;
+			int positionY = 0;
+			drawTexturedModalRect(positionX, positionY +10, 0, 0, TEXT_WIDTH, TEXT_HEIGHT);
+			drawTexturedModalRect(positionX, positionY +10+ TEXT_HEIGHT -currentHeight-2, TEXT_WIDTH, 2, TEXT_WIDTH, currentHeight);
+			mc.fontRenderer.drawString("" + (int) playerMana.getMaxMana(), positionX +1, positionY +1, 15658734);
+			mc.fontRenderer.drawString("" + (int) playerMana.getMana(), positionX +1, positionY + TEXT_HEIGHT + 11, 15658734);
 		}
 	}
 }

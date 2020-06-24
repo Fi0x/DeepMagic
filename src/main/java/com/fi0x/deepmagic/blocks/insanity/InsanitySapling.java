@@ -51,7 +51,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
         Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
-    public void generateTree(World world, BlockPos pos, IBlockState state, Random rand)
+    public void generateTree(World world, BlockPos pos, Random rand)
     {
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
         WorldGenerator worldGenerator = new ModTreeGenerator(true);
@@ -73,12 +73,12 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     @Override
     public void grow(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, IBlockState state)
     {
-        if(state.getValue(STAGE).intValue() == 0)
+        if(state.getValue(STAGE) == 0)
         {
             worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
         } else
         {
-            generateTree(worldIn, pos, state, rand);
+            generateTree(worldIn, pos, rand);
         }
     }
     @Override
@@ -104,13 +104,13 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
+        return getDefaultState().withProperty(STAGE, (meta & 8) >> 3);
     }
     @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
-        i = i | state.getValue(STAGE).intValue() << 3;
+        i = i | state.getValue(STAGE) << 3;
         return i;
     }
     @Nonnull

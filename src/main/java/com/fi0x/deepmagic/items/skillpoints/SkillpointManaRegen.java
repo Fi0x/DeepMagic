@@ -9,6 +9,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class SkillpointManaRegen extends SkillpointBasic
 {
     public SkillpointManaRegen(String name)
@@ -16,12 +18,14 @@ public class SkillpointManaRegen extends SkillpointBasic
         super(name);
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn)
     {
         if(!worldIn.isRemote)
         {
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
+            assert playerMana != null;
             playerMana.setManaRegenRate(playerMana.getManaRegenRate() + 1);
             return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
         }

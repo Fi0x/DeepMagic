@@ -8,7 +8,6 @@ import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -27,6 +26,7 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(DeepMagicTab.ITEMS);
+		setMaxStackSize(1);
 		
 		ModItems.ITEMS.add(this);
 	}
@@ -44,12 +44,10 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if(!worldIn.isRemote)
 		{
-			stack = new ItemStack(Blocks.AIR, 0);
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
 			playerMana.setMana(playerMana.getMana() + BOOST_AMOUNT);
-			playerMana.showMana(playerIn, worldIn);
-			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
 	}

@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class FoodEffectBase extends FoodBase
 {
 	PotionEffect effect;
@@ -20,7 +22,7 @@ public class FoodEffectBase extends FoodBase
 	}
 	
 	@Override
-	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+	protected void onFoodEaten(@Nonnull ItemStack stack, World worldIn, @Nonnull EntityPlayer player)
 	{
 		if(!worldIn.isRemote)
 		{
@@ -29,7 +31,7 @@ public class FoodEffectBase extends FoodBase
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
+	public boolean hasEffect(@Nonnull ItemStack stack)
 	{
 		return true;
 	}
