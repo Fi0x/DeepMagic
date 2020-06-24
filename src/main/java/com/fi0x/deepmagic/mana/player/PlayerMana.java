@@ -65,7 +65,7 @@ public class PlayerMana
 	}
 	public double getManaPercentage()
 	{
-		if(mana <= maxMana) return (100/maxMana*Math.pow(1.1, maxManaMultiplier))*mana;
+		if(mana <= maxMana*Math.pow(1.1, maxManaMultiplier)) return (100/(maxMana*Math.pow(1.1, maxManaMultiplier)))*mana;
 		return 100;
 	}
 

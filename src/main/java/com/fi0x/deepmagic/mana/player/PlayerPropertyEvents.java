@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.mana.player;
 
-import com.fi0x.deepmagic.network.PacketGetManaAmount;
+import com.fi0x.deepmagic.network.PacketGetPlayerMana;
 import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.entity.Entity;
@@ -54,7 +54,7 @@ public class PlayerPropertyEvents
         if(sync == 0)
         {
             PlayerMana playerMana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
-            PacketHandler.INSTANCE.sendToServer(new PacketGetManaAmount(event.player.getName(), playerMana.getMana(), playerMana.getMaxMana()));
+            PacketHandler.INSTANCE.sendToServer(new PacketGetPlayerMana(event.player.getName(), playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration));
         }
     }
 }

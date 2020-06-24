@@ -12,33 +12,34 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketGetSkill implements IMessage
+public class PacketGetPlayerMana implements IMessage
 {
     private boolean messageValid;
     private String playerName;
 
-    private double skillXP;
-    private int freeSkillpoints;
+    private double currentMana;
+    private double maxMana;
+    private int skillpoints;
     private double manaRegenRate;
     private double manaEfficiency;
-    private int manaMultiplier;
     private int addedHP;
     private int hpRegeneration;
 
-    public PacketGetSkill()
+    public PacketGetPlayerMana()
     {
         messageValid = false;
     }
-    public PacketGetSkill(String playerName, double skillXP, int freeSkillpoints, double manaRegenRate, double manaEfficiency, int manaMultiplier, int addedHP, int hpRegeneration)
+    public PacketGetPlayerMana(String playerName, double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration)
     {
         this.playerName = playerName;
-        this.skillXP = skillXP;
-        this.freeSkillpoints = freeSkillpoints;
+        this.currentMana = currentMana;
+        this.maxMana = maxMana;
+        this.skillpoints = skillpoints;
         this.manaRegenRate = manaRegenRate;
         this.manaEfficiency = manaEfficiency;
-        this.manaMultiplier = manaMultiplier;
         this.addedHP = addedHP;
         this.hpRegeneration = hpRegeneration;
+
         messageValid = true;
     }
 
@@ -48,11 +49,11 @@ public class PacketGetSkill implements IMessage
         try
         {
             playerName = ByteBufUtils.readUTF8String(buf);
-            skillXP = buf.readDouble();
-            freeSkillpoints = buf.readInt();
+            currentMana = buf.readDouble();
+            maxMana = buf.readDouble();
+            skillpoints = buf.readInt();
             manaRegenRate = buf.readDouble();
             manaEfficiency = buf.readDouble();
-            manaMultiplier = buf.readInt();
             addedHP = buf.readInt();
             hpRegeneration = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
@@ -67,35 +68,34 @@ public class PacketGetSkill implements IMessage
     {
         if(!messageValid) return;
         ByteBufUtils.writeUTF8String(buf, playerName);
-        buf.writeDouble(skillXP);
-        buf.writeInt(freeSkillpoints);
+        buf.writeDouble(currentMana);
+        buf.writeDouble(maxMana);
+        buf.writeInt(skillpoints);
         buf.writeDouble(manaRegenRate);
         buf.writeDouble(manaEfficiency);
-        buf.writeInt(manaMultiplier);
         buf.writeInt(addedHP);
         buf.writeInt(hpRegeneration);
     }
 
-    public static class Handler implements IMessageHandler<PacketGetSkill, IMessage>
+    public static class Handler implements IMessageHandler<PacketGetPlayerMana, IMessage>
     {
 
         @Override
-        public IMessage onMessage(PacketGetSkill message, MessageContext ctx)
+        public IMessage onMessage(PacketGetPlayerMana message, MessageContext ctx)
         {
             if(!message.messageValid && ctx.side != Side.SERVER) return null;
             FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> processMessage(message, ctx));
             return null;
         }
 
-        void processMessage(PacketGetSkill message, MessageContext ctx)
+        void processMessage(PacketGetPlayerMana message, MessageContext ctx)
         {
-            System.out.println("Get-Message processing");
             EntityPlayer player = ctx.getServerHandler().player.getServerWorld().getPlayerEntityByName(message.playerName);
             if(player != null && player.hasCapability(PlayerProperties.PLAYER_MANA, null))
             {
                 PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(message.playerName, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.maxManaMultiplier, playerMana.addedHP, playerMana.hpRegeneration), ctx.getServerHandler().player);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnPlayerMana(playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration), ctx.getServerHandler().player);
             }
         }
     }

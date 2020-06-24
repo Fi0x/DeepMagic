@@ -6,9 +6,11 @@ Balance Mob stats
 GUIs
 Update Insanity Biome Spawnlist
 Animations
+Add crafting recipes
 
 change insanity leaves texture to render behind other leaves
 change item model of insanity sapling and flower to normal item
 add custom music to insanity dimension
-fix todos in GuiSkilltree
 fix rotation of armor stands in structures
+increase insanity water flow range
+enable 2 slabs in 1 block placement
