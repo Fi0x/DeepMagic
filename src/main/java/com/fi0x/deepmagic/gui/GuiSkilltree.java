@@ -25,6 +25,12 @@ public class GuiSkilltree extends GuiScreen
     private int guiY;
     private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background.png");
     private GuiButton buttonExit;
+    private GuiButton buttonAddMaxMana;
+    private GuiButton buttonAddManaRegenRate;
+    private GuiButton buttonAddManaEfficiency;
+    private GuiButton buttonAddMaxHP;
+    private GuiButton buttonAddHPRegen;
+    private GuiButton buttonAddSpellTier;
 
     public GuiSkilltree(EntityPlayer player)
     {
@@ -41,8 +47,21 @@ public class GuiSkilltree extends GuiScreen
         buttonList.clear();
         labelList.clear();
         Keyboard.enableRepeatEvents(true);
+
         buttonExit = new GuiButton(0, width/2 -20, guiY + backgroundHeight-30, 40, 20, I18n.format("Exit"));
         buttonList.add(buttonExit);
+        buttonAddMaxMana = new GuiButton(1, guiX + 160, guiY + 5, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddMaxMana);
+        buttonAddManaRegenRate = new GuiButton(2, guiX + 160, guiY + 25, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddManaRegenRate);
+        buttonAddManaEfficiency = new GuiButton(3, guiX + 160, guiY + 45, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddManaEfficiency);
+        buttonAddMaxHP = new GuiButton(4, guiX + 160, guiY + 65, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddMaxHP);
+        buttonAddHPRegen = new GuiButton(5, guiX + 160, guiY + 85, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddHPRegen);
+        buttonAddSpellTier = new GuiButton(6, guiX + 160, guiY + 105, 20, 10, I18n.format("+"));
+        buttonList.add(buttonAddSpellTier);
 
         GuiLabel labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 5, 150, 20, 0);
         labelMaxMana.addLine("Mana Capacity: " + (int) playerMana.getMaxMana());
@@ -64,6 +83,24 @@ public class GuiSkilltree extends GuiScreen
     @Override
     public void updateScreen()
     {
+        if(playerMana.getSkillpoints() > 0)
+        {
+            buttonAddMaxMana.visible = true;
+            buttonAddManaRegenRate.visible = true;
+            buttonAddManaEfficiency.visible = true;
+            buttonAddMaxHP.visible = true;
+            buttonAddHPRegen.visible = true;
+            if(playerMana.getSpellTier() < 10) buttonAddSpellTier.visible = true;
+            else buttonAddSpellTier.visible = false;
+        } else
+        {
+            buttonAddMaxMana.visible = false;
+            buttonAddManaRegenRate.visible = false;
+            buttonAddManaEfficiency.visible = false;
+            buttonAddMaxHP.visible = false;
+            buttonAddHPRegen.visible = false;
+            buttonAddSpellTier.visible = false;
+        }
     }
 
     @Override
@@ -82,6 +119,16 @@ public class GuiSkilltree extends GuiScreen
     protected void actionPerformed(@Nonnull GuiButton button)
     {
         if(button == buttonExit) mc.displayGuiScreen(null);
+        else
+        {
+            if(button == buttonAddMaxMana) playerMana.maxManaMultiplier++;
+            else if(button == buttonAddManaRegenRate) playerMana.setManaRegenRate(playerMana.getManaRegenRate() + 1);
+            else if(button == buttonAddManaEfficiency) playerMana.setManaEfficiency(playerMana.getManaEfficiency() + 1);
+            else if(button == buttonAddMaxHP) playerMana.addedHP++;
+            else if(button == buttonAddHPRegen) playerMana.hpRegeneration++;
+            else if(button == buttonAddSpellTier) playerMana.addSpellTier();
+            playerMana.removeSkillpoint();
+        }
     }
 
     @Override
