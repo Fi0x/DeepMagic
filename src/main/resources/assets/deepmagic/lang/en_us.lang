@@ -37,7 +37,6 @@ tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
 tile.altar_of_knowledge.name=Altar of Knowledge
-tile.skill_manifester.name=Skill Manifester
 tile.weather_controller.name=Weather Controller
 tile.time_controller=Time Controller
 
@@ -53,17 +52,6 @@ item.deep_crystal_helmet.name=Deep Crystal Helmet
 item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
-
-item.skill_monitor.name=Skill Monitor
-item.skillpoint_uncharged.name=Uncharged Skillpoint
-item.skillpoint_charged.name=Charged Skillpoint
-item.skillpoint_max_mana.name=Specified Skillpoint (Max Mana)
-item.skillpoint_mana_regen.name=Specified Skillpoint (Mana Regeneration)
-item.skillpoint_mana_efficiency.name=Specified Skillpoint (Mana Efficiency)
-item.skillpoint_max_hp.name=Specified Skillpoint (Max HP)
-item.skillpoint_hp_regen.name=Specified Skillpoint (HP Regeneration)
-item.skillpoint_spell_tier.name=Specified Skillpoint (Spell Tier)
-item.skillpoint_spell_cast_skill.name=Specified Skillpoint (Spell Cast Skill)
 
 item.spell_heal_t1.name=Heal Spell T1
 item.spell_heal_t2.name=Heal Spell T2

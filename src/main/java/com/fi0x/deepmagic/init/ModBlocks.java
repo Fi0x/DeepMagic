@@ -1,6 +1,9 @@
 package com.fi0x.deepmagic.init;
 
-import com.fi0x.deepmagic.blocks.*;
+import com.fi0x.deepmagic.blocks.AltarOfKnowledge;
+import com.fi0x.deepmagic.blocks.BlockFluid;
+import com.fi0x.deepmagic.blocks.DeepCrystalBlock;
+import com.fi0x.deepmagic.blocks.DeepCrystalOre;
 import com.fi0x.deepmagic.blocks.effectstones.AttackStone;
 import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
@@ -57,7 +60,6 @@ public class ModBlocks
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
 
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
-	public static final Block SKILL_MANIFESTER = new SkillManifester("skill_manifester", Material.ROCK);
 	public static final Block WEATHER_CONTROLLER = new WeatherController("weather_controller", Material.IRON);
 	public static final Block TIME_CONTROLLER = new TimeController("time_controller", Material.IRON);
 }

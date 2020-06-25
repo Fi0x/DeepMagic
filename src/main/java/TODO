@@ -67,7 +67,9 @@ Mobs {
 ManaLevel {
     improve skill-xp-levelsystem
 }
-Implement passive Skilltree {
+Passive Skilltree {
+    add skillpoint count
+    update stats on buttonclick
 	increased saturation
 	increased resistances
 	    fire, explosion, drowning, arrow, meele, ...
