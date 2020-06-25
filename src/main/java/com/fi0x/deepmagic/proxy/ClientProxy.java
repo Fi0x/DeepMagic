@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.proxy;
 
 import com.fi0x.deepmagic.gui.GuiManaRenderOverlay;
 import com.fi0x.deepmagic.gui.GuiSkilltree;
+import com.fi0x.deepmagic.mana.player.PlayerMana;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -19,9 +20,9 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void openSkilltreeGui()
+	public void openSkilltreeGui(PlayerMana playerMana)
 	{
-		Minecraft.getMinecraft().addScheduledTask( () -> Minecraft.getMinecraft().displayGuiScreen(new GuiSkilltree(Minecraft.getMinecraft().player)));
+		Minecraft.getMinecraft().addScheduledTask( () -> Minecraft.getMinecraft().displayGuiScreen(new GuiSkilltree(playerMana)));
 	}
 
 	@Override

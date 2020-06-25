@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.items.ArmorBase;
 import com.fi0x.deepmagic.items.ItemBase;
+import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
@@ -48,6 +49,7 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Skills
+	public static final Item SKILL_MONITOR = new SkillMonitor("skill_monitor");
 	public static final Item SKILLPOINT_UNCHARGED = new SkillpointBasic("skillpoint_uncharged");
 	public static final Item SKILLPOINT_CHARGED = new SkillpointBasic("skillpoint_charged");
 	public static final Item SKILLPOINT_MAX_MANA = new SkillpointMaxMana("skillpoint_max_mana");
@@ -56,6 +58,7 @@ public class ModItems
 	public static final Item SKILLPOINT_MAX_HP = new SkillpointMaxHP("skillpoint_max_hp");
 	public static final Item SKILLPOINT_HP_REGEN = new SkillpointHPRegen("skillpoint_hp_regen");
 	public static final Item SKILLPOINT_SPELL_TIER = new SkillpointSpellTier("skillpoint_spell_tier");
+	public static final Item SKILLPOINT_SPELL_CAST_SKILL = new SkillpointSpellCastSkill("skillpoint_spell_cast_skill");
 
 	//Spells
 	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);
@@ -80,4 +83,5 @@ public class ModItems
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true));
 	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false));
+	public static final Item STONE_SNACK = new FoodBase("stone_snack", 5, 10, false);
 }

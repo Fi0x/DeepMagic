@@ -19,6 +19,7 @@ public class PlayerMana
 	public int addedHP = 0;
 	public int hpRegeneration = 0;
 	private int spellTier = 1;
+	public int spellCastSkill = 1;
 	
 	public PlayerMana() {}
 	
@@ -151,6 +152,7 @@ public class PlayerMana
 		compound.setInteger("addedHP", addedHP);
 		compound.setInteger("hpRegeneration", hpRegeneration);
 		compound.setInteger("spellTier", spellTier);
+		compound.setInteger("spellCastSkill", spellCastSkill);
 	}
 	public void loadNBTData(NBTTagCompound compound)
 	{
@@ -164,5 +166,6 @@ public class PlayerMana
 		addedHP = compound.getInteger("addedHP");
 		hpRegeneration = compound.getInteger("hpRegeneration");
 		spellTier = compound.getInteger("spellTier");
+		spellCastSkill = compound.getInteger("spellCastSkill");
 	}
 }

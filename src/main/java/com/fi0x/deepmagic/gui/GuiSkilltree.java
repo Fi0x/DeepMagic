@@ -1,13 +1,11 @@
 package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.mana.player.PlayerMana;
-import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -16,7 +14,6 @@ import javax.annotation.Nonnull;
 
 public class GuiSkilltree extends GuiScreen
 {
-    EntityPlayer player;
     PlayerMana playerMana;
 
     private final int backgroundHeight = 256;
@@ -26,10 +23,9 @@ public class GuiSkilltree extends GuiScreen
     private static final ResourceLocation  backgroundTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/skilltree_background.png");
     private GuiButton buttonExit;
 
-    public GuiSkilltree(EntityPlayer player)
+    public GuiSkilltree(PlayerMana playerMana)
     {
-        this.player = player;
-        this.playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
+        this.playerMana = playerMana;
     }
 
     @Override
@@ -59,6 +55,12 @@ public class GuiSkilltree extends GuiScreen
         GuiLabel labelHealthRegen = new GuiLabel(this.fontRenderer, 105, guiX + 5, guiY + 85, 150, 20, 0);
         labelHealthRegen.addLine("Health Regeneration: " + playerMana.hpRegeneration);
         labelList.add(labelHealthRegen);
+        GuiLabel labelSpellTier = new GuiLabel(this.fontRenderer, 106, guiX + 5, guiY + 105, 150, 20, 0);
+        labelSpellTier.addLine("Spell-Tier: " + playerMana.getSpellTier());
+        labelList.add(labelSpellTier);
+        GuiLabel labelCastSkill = new GuiLabel(this.fontRenderer, 107, guiX + 5, guiY + 125, 150, 20, 0);
+        labelCastSkill.addLine("Spell-Cast Skill: " + playerMana.spellCastSkill);
+        labelList.add(labelCastSkill);
     }
 
     @Override

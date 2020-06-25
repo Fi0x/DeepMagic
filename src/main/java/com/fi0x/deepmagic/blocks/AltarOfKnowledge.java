@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.Main;
+import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -30,7 +31,7 @@ public class AltarOfKnowledge extends BlockBase
         {
 //            PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 //            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerIn.getName(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.maxManaMultiplier, playerMana.addedHP, playerMana.hpRegeneration));
-            Main.proxy.openSkilltreeGui();
+            Main.proxy.openSkilltreeGui(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null));
         }
         return true;
     }

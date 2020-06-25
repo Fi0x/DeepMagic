@@ -33,8 +33,11 @@ public class SpellHeal extends SpellBase
         {
             if(playerMana.removeMana(manaCost * Math.pow(2, tier - 1), playerIn))
             {
-                playerIn.heal((int) Math.pow(2, tier));
-            }
+                if((Math.random() * playerMana.spellCastSkill) > tier * 2)
+                {
+                    playerIn.heal((int) Math.pow(2, tier));
+                } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
+            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
