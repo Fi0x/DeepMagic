@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.items.ArmorBase;
 import com.fi0x.deepmagic.items.ItemBase;
+import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
@@ -82,4 +83,5 @@ public class ModItems
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true));
 	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false));
+	public static final Item STONE_SNACK = new FoodBase("stone_snack", 5, 10, false);
 }
