@@ -54,6 +54,7 @@ item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
 
+item.skill_monitor.name=Skill Monitor
 item.skillpoint_uncharged.name=Uncharged Skillpoint
 item.skillpoint_charged.name=Charged Skillpoint
 item.skillpoint_max_mana.name=Specified Skillpoint (Max Mana)

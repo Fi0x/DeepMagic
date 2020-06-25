@@ -48,6 +48,7 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Skills
+	public static final Item SKILL_MONITOR = new SkillMonitor("skill_monitor");
 	public static final Item SKILLPOINT_UNCHARGED = new SkillpointBasic("skillpoint_uncharged");
 	public static final Item SKILLPOINT_CHARGED = new SkillpointBasic("skillpoint_charged");
 	public static final Item SKILLPOINT_MAX_MANA = new SkillpointMaxMana("skillpoint_max_mana");

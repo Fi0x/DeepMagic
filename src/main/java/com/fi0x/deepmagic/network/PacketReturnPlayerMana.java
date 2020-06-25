@@ -21,12 +21,13 @@ public class PacketReturnPlayerMana implements IMessage
     private int addedHP;
     private int hpRegeneration;
     private int spellTier;
+    private int spellCastSkill;
 
     public PacketReturnPlayerMana()
     {
         this.messageValid = false;
     }
-    public PacketReturnPlayerMana(double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier)
+    public PacketReturnPlayerMana(double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier, int spellCastSkill)
     {
         this.currentMana = currentMana;
         this.maxMana = maxMana;
@@ -36,6 +37,7 @@ public class PacketReturnPlayerMana implements IMessage
         this.addedHP = addedHP;
         this.hpRegeneration = hpRegeneration;
         this.spellTier = spellTier;
+        this.spellCastSkill = spellCastSkill;
 
         messageValid = true;
     }
@@ -53,6 +55,7 @@ public class PacketReturnPlayerMana implements IMessage
             addedHP = buf.readInt();
             hpRegeneration = buf.readInt();
             spellTier = buf.readInt();
+            spellCastSkill = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -72,6 +75,7 @@ public class PacketReturnPlayerMana implements IMessage
         buf.writeInt(addedHP);
         buf.writeInt(hpRegeneration);
         buf.writeInt(spellTier);
+        buf.writeInt(spellCastSkill);
     }
 
     public static class Handler implements IMessageHandler<PacketReturnPlayerMana, IMessage>

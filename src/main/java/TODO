@@ -125,8 +125,6 @@ Blocks {
         add costs
     Quarry
         uses mana2
-    Altar of Knowledge
-        sync skill-gui with server
 }
 Fluids {
     Insanity Lava
