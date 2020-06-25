@@ -26,6 +26,7 @@ Mobs {
 		Insanity Dimension (Dragon (in Dragon Lair))
 	Hostiles
 	    Demon
+	        summon with ritual
 	        optimize ai
 	        set stats / attributes
 	        add custom loot table
@@ -64,10 +65,10 @@ Mobs {
 	Friendlys
 	    Mobs that can be tamed / pets
 }
-ManaLevel {
-    improve skill-xp-levelsystem
+Passive Skilltree {
+    update stats on buttonclick
 }
-Implement passive Skilltree {
+Add skills {
 	increased saturation
 	increased resistances
 	    fire, explosion, drowning, arrow, meele, ...
@@ -82,6 +83,8 @@ Implement passive Skilltree {
 	jump height
 	tool speed
 	weapon speed (sword hit speed and bow draw speed)
+	hp regen+increase
+	    add function
 }
 Mana2System {
     Stored in Altar
@@ -116,6 +119,7 @@ Items {
 	    fortune
 	    auto smelting
 	    spells tier 1-10
+	Random crafting items
 }
 Blocks {
     Add more World controllers

@@ -18,31 +18,15 @@ public class PacketGetPlayerMana implements IMessage
     private String playerName;
 
     private double currentMana;
-    private double maxMana;
-    private int skillpoints;
-    private double manaRegenRate;
-    private double manaEfficiency;
-    private int addedHP;
-    private int hpRegeneration;
-    private int spellTier;
-    private int spellCastSkill;
 
     public PacketGetPlayerMana()
     {
         messageValid = false;
     }
-    public PacketGetPlayerMana(String playerName, double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier, int spellCastSkill)
+    public PacketGetPlayerMana(String playerName, double currentMana)
     {
         this.playerName = playerName;
         this.currentMana = currentMana;
-        this.maxMana = maxMana;
-        this.skillpoints = skillpoints;
-        this.manaRegenRate = manaRegenRate;
-        this.manaEfficiency = manaEfficiency;
-        this.addedHP = addedHP;
-        this.hpRegeneration = hpRegeneration;
-        this.spellTier = spellTier;
-        this.spellCastSkill = spellCastSkill;
 
         messageValid = true;
     }
@@ -54,14 +38,6 @@ public class PacketGetPlayerMana implements IMessage
         {
             playerName = ByteBufUtils.readUTF8String(buf);
             currentMana = buf.readDouble();
-            maxMana = buf.readDouble();
-            skillpoints = buf.readInt();
-            manaRegenRate = buf.readDouble();
-            manaEfficiency = buf.readDouble();
-            addedHP = buf.readInt();
-            hpRegeneration = buf.readInt();
-            spellTier = buf.readInt();
-            spellCastSkill = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -75,14 +51,6 @@ public class PacketGetPlayerMana implements IMessage
         if(!messageValid) return;
         ByteBufUtils.writeUTF8String(buf, playerName);
         buf.writeDouble(currentMana);
-        buf.writeDouble(maxMana);
-        buf.writeInt(skillpoints);
-        buf.writeDouble(manaRegenRate);
-        buf.writeDouble(manaEfficiency);
-        buf.writeInt(addedHP);
-        buf.writeInt(hpRegeneration);
-        buf.writeInt(spellTier);
-        buf.writeInt(spellCastSkill);
     }
 
     public static class Handler implements IMessageHandler<PacketGetPlayerMana, IMessage>
@@ -103,7 +71,7 @@ public class PacketGetPlayerMana implements IMessage
             {
                 PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                PacketHandler.INSTANCE.sendTo(new PacketReturnPlayerMana(playerMana.getMana(), playerMana.getMaxMana(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill), ctx.getServerHandler().player);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnPlayerMana(playerMana.getMana()), ctx.getServerHandler().player);
             }
         }
     }

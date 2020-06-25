@@ -1,7 +1,10 @@
 package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.Main;
+import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
+import com.fi0x.deepmagic.network.PacketGetSkill;
+import com.fi0x.deepmagic.network.PacketHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,8 +32,10 @@ public class AltarOfKnowledge extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-//            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerIn.getName(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.maxManaMultiplier, playerMana.addedHP, playerMana.hpRegeneration));
-            Main.proxy.openSkilltreeGui(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null));
+            PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
+            assert playerMana != null;
+            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerIn.getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
+            Main.proxy.openSkilltreeGui(playerIn);
         }
         return true;
     }

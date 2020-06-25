@@ -7,7 +7,6 @@ import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
-import com.fi0x.deepmagic.items.skillpoints.*;
 import com.fi0x.deepmagic.items.spells.SpellHeal;
 import com.fi0x.deepmagic.items.spells.SpellTime;
 import com.fi0x.deepmagic.items.spells.SpellWeather;
@@ -47,18 +46,6 @@ public class ModItems
 	public static final ItemPickaxe DEEP_CRYSTAL_PICKAXE = new ToolPickaxe("deep_crystal_pickaxe", MATERIAL_DEEP_CRYSTAL);
 	public static final ItemAxe DEEP_CRYSTAL_AXE = new ToolAxe("deep_crystal_axe", MATERIAL_DEEP_CRYSTAL);
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
-
-	//Skills
-	public static final Item SKILL_MONITOR = new SkillMonitor("skill_monitor");
-	public static final Item SKILLPOINT_UNCHARGED = new SkillpointBasic("skillpoint_uncharged");
-	public static final Item SKILLPOINT_CHARGED = new SkillpointBasic("skillpoint_charged");
-	public static final Item SKILLPOINT_MAX_MANA = new SkillpointMaxMana("skillpoint_max_mana");
-	public static final Item SKILLPOINT_MANA_REGEN = new SkillpointManaRegen("skillpoint_mana_regen");
-	public static final Item SKILLPOINT_MANA_EFFICIENCY = new SkillpointManaEfficiency("skillpoint_mana_efficiency");
-	public static final Item SKILLPOINT_MAX_HP = new SkillpointMaxHP("skillpoint_max_hp");
-	public static final Item SKILLPOINT_HP_REGEN = new SkillpointHPRegen("skillpoint_hp_regen");
-	public static final Item SKILLPOINT_SPELL_TIER = new SkillpointSpellTier("skillpoint_spell_tier");
-	public static final Item SKILLPOINT_SPELL_CAST_SKILL = new SkillpointSpellCastSkill("skillpoint_spell_cast_skill");
 
 	//Spells
 	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);

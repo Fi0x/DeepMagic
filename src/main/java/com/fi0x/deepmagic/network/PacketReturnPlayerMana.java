@@ -14,30 +14,14 @@ public class PacketReturnPlayerMana implements IMessage
     private boolean messageValid;
 
     private double currentMana;
-    private double maxMana;
-    private int skillpoints;
-    private double manaRegenRate;
-    private double manaEfficiency;
-    private int addedHP;
-    private int hpRegeneration;
-    private int spellTier;
-    private int spellCastSkill;
 
     public PacketReturnPlayerMana()
     {
         this.messageValid = false;
     }
-    public PacketReturnPlayerMana(double currentMana, double maxMana, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier, int spellCastSkill)
+    public PacketReturnPlayerMana(double currentMana)
     {
         this.currentMana = currentMana;
-        this.maxMana = maxMana;
-        this.skillpoints = skillpoints;
-        this.manaRegenRate = manaRegenRate;
-        this.manaEfficiency = manaEfficiency;
-        this.addedHP = addedHP;
-        this.hpRegeneration = hpRegeneration;
-        this.spellTier = spellTier;
-        this.spellCastSkill = spellCastSkill;
 
         messageValid = true;
     }
@@ -48,14 +32,6 @@ public class PacketReturnPlayerMana implements IMessage
         try
         {
             currentMana = buf.readDouble();
-            maxMana = buf.readDouble();
-            skillpoints = buf.readInt();
-            manaRegenRate = buf.readDouble();
-            manaEfficiency = buf.readDouble();
-            addedHP = buf.readInt();
-            hpRegeneration = buf.readInt();
-            spellTier = buf.readInt();
-            spellCastSkill = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -68,14 +44,6 @@ public class PacketReturnPlayerMana implements IMessage
     {
         if(!messageValid) return;
         buf.writeDouble(currentMana);
-        buf.writeDouble(maxMana);
-        buf.writeInt(skillpoints);
-        buf.writeDouble(manaRegenRate);
-        buf.writeDouble(manaEfficiency);
-        buf.writeInt(addedHP);
-        buf.writeInt(hpRegeneration);
-        buf.writeInt(spellTier);
-        buf.writeInt(spellCastSkill);
     }
 
     public static class Handler implements IMessageHandler<PacketReturnPlayerMana, IMessage>
@@ -92,7 +60,7 @@ public class PacketReturnPlayerMana implements IMessage
         {
             try
             {
-                GuiManaRenderOverlay.instance.setValues(message.currentMana, message.maxMana);
+                GuiManaRenderOverlay.instance.setCurrentMana(message.currentMana);
             } catch(Exception e)
             {
                 Main.getLogger().catching(e);
