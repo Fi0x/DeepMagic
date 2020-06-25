@@ -17,12 +17,17 @@ public class GuiManaRenderOverlay extends Gui
 
 	private final ResourceLocation MANA_BAR = new ResourceLocation(Reference.MOD_ID, "textures/gui/manabar.png");
 
-	public void setValues(double currentMana, double maxMana)
+	public void setCurrentMana(double currentMana)
 	{
 		PlayerMana playerMana = Minecraft.getMinecraft().player.getCapability(PlayerProperties.PLAYER_MANA, null);
 		assert playerMana != null;
 		playerMana.setMana(currentMana);
-		playerMana.setMaxMana(maxMana);
+	}
+	public void setMaxManaMultiplier(int maxManaMultiplier)
+	{
+		PlayerMana playerMana = Minecraft.getMinecraft().player.getCapability(PlayerProperties.PLAYER_MANA, null);
+		assert playerMana != null;
+		playerMana.maxManaMultiplier = maxManaMultiplier;
 	}
 
 	@SubscribeEvent

@@ -1,11 +1,15 @@
 package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.mana.player.PlayerMana;
+import com.fi0x.deepmagic.mana.player.PlayerProperties;
+import com.fi0x.deepmagic.network.PacketGetSkill;
+import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -15,6 +19,7 @@ import javax.annotation.Nonnull;
 public class GuiSkilltree extends GuiScreen
 {
     PlayerMana playerMana;
+    String playerName;
 
     private final int backgroundHeight = 256;
     private final int backgroundWidth = 512;
@@ -30,9 +35,10 @@ public class GuiSkilltree extends GuiScreen
     private GuiButton buttonAddSpellTier;
     private GuiButton buttonAddSpellCastSkill;
 
-    public GuiSkilltree(PlayerMana playerMana)
+    public GuiSkilltree(EntityPlayer player)
     {
-        this.playerMana = playerMana;
+        this.playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
+        this.playerName = player.getName();
     }
 
     @Override
@@ -137,6 +143,7 @@ public class GuiSkilltree extends GuiScreen
             else if(button == buttonAddSpellCastSkill) playerMana.spellCastSkill++;
             playerMana.removeSkillpoint();
         }
+        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName, playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
     }
 
     @Override

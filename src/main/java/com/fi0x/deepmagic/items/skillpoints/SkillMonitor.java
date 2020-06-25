@@ -2,8 +2,6 @@ package com.fi0x.deepmagic.items.skillpoints;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.items.ItemBase;
-import com.fi0x.deepmagic.mana.player.PlayerMana;
-import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,8 +25,7 @@ public class SkillMonitor extends ItemBase implements IMagicItem
     {
         if(!worldIn.isRemote)
         {
-            PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
-            Main.proxy.openSkilltreeGui(playerMana);
+            Main.proxy.openSkilltreeGui(playerIn);
             return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
