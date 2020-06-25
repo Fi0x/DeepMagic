@@ -33,13 +33,12 @@ public class SpellWeather extends SpellBase
         {
             if(playerMana.removeMana(manaCost * tier, playerIn))
             {
-                if((int) (Math.random() * (5 + tier)) > 4)
+                if((int) (Math.random() * playerMana.spellCastSkill) > tier)
                 {
                     worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
                     playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
-                }
-                else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-            }
+                } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
+            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }

@@ -19,7 +19,7 @@ public class PlayerMana
 	public int addedHP = 0;
 	public int hpRegeneration = 0;
 	private int spellTier = 1;
-	public int spellCastSkill = 0;
+	public int spellCastSkill = 1;
 	
 	public PlayerMana() {}
 	

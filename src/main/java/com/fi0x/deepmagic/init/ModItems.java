@@ -57,6 +57,7 @@ public class ModItems
 	public static final Item SKILLPOINT_MAX_HP = new SkillpointMaxHP("skillpoint_max_hp");
 	public static final Item SKILLPOINT_HP_REGEN = new SkillpointHPRegen("skillpoint_hp_regen");
 	public static final Item SKILLPOINT_SPELL_TIER = new SkillpointSpellTier("skillpoint_spell_tier");
+	public static final Item SKILLPOINT_SPELL_CAST_SKILL = new SkillpointSpellCastSkill("skillpoint_spell_cast_skill");
 
 	//Spells
 	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);
