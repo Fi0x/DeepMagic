@@ -28,6 +28,7 @@ public class GuiSkilltree extends GuiScreen
     private GuiButton buttonAddMaxHP;
     private GuiButton buttonAddHPRegen;
     private GuiButton buttonAddSpellTier;
+    private GuiButton buttonAddSpellCastSkill;
 
     public GuiSkilltree(PlayerMana playerMana)
     {
@@ -56,8 +57,10 @@ public class GuiSkilltree extends GuiScreen
         buttonList.add(buttonAddMaxHP);
         buttonAddHPRegen = new GuiButton(5, guiX + 160, guiY + 85, 20, 20, I18n.format("+"));
         buttonList.add(buttonAddHPRegen);
-        buttonAddSpellTier = new GuiButton(6, guiX + 160, guiY + 105, 20, 10, I18n.format("+"));
+        buttonAddSpellTier = new GuiButton(6, guiX + 160, guiY + 105, 20, 20, I18n.format("+"));
         buttonList.add(buttonAddSpellTier);
+        buttonAddSpellCastSkill = new GuiButton(6, guiX + 160, guiY + 125, 20, 20, I18n.format("+"));
+        buttonList.add(buttonAddSpellCastSkill);
 
         GuiLabel labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 5, 150, 20, 0);
         labelMaxMana.addLine("Mana Capacity: " + (int) playerMana.getMaxMana());
@@ -94,6 +97,7 @@ public class GuiSkilltree extends GuiScreen
             buttonAddHPRegen.visible = true;
             if(playerMana.getSpellTier() < 10) buttonAddSpellTier.visible = true;
             else buttonAddSpellTier.visible = false;
+            buttonAddSpellCastSkill.visible = true;
         } else
         {
             buttonAddMaxMana.visible = false;
@@ -102,6 +106,7 @@ public class GuiSkilltree extends GuiScreen
             buttonAddMaxHP.visible = false;
             buttonAddHPRegen.visible = false;
             buttonAddSpellTier.visible = false;
+            buttonAddSpellCastSkill.visible = false;
         }
     }
 
@@ -129,6 +134,7 @@ public class GuiSkilltree extends GuiScreen
             else if(button == buttonAddMaxHP) playerMana.addedHP++;
             else if(button == buttonAddHPRegen) playerMana.hpRegeneration++;
             else if(button == buttonAddSpellTier) playerMana.addSpellTier();
+            else if(button == buttonAddSpellCastSkill) playerMana.spellCastSkill++;
             playerMana.removeSkillpoint();
         }
     }
