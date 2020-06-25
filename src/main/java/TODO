@@ -64,12 +64,10 @@ Mobs {
 	Friendlys
 	    Mobs that can be tamed / pets
 }
-ManaLevel {
-    improve skill-xp-levelsystem
-}
 Passive Skilltree {
-    add skillpoint count
     update stats on buttonclick
+}
+Add skills {
 	increased saturation
 	increased resistances
 	    fire, explosion, drowning, arrow, meele, ...

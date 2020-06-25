@@ -35,6 +35,24 @@ public class GuiSkilltree extends GuiScreen
     private GuiButton buttonAddSpellTier;
     private GuiButton buttonAddSpellCastSkill;
 
+    private GuiLabel labelSkillPoint;
+    private GuiLabel labelMaxMana;
+    private GuiLabel labelManaRegen;
+    private GuiLabel labelManaEfficiency;
+    private GuiLabel labelMaxHP;
+    private GuiLabel labelHealthRegen;
+    private GuiLabel labelSpellTier;
+    private GuiLabel labelCastSkill;
+
+    private int valueSkillPoint;
+    private double valueMaxMana;
+    private double valueManaRegen;
+    private double valueManaEfficiency;
+    private int valueMaxHP;
+    private int valueHPRegen;
+    private int valueSpellTier;
+    private int valueCastingSkill;
+
     public GuiSkilltree(EntityPlayer player)
     {
         this.playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
@@ -68,26 +86,31 @@ public class GuiSkilltree extends GuiScreen
         buttonAddSpellCastSkill = new GuiButton(6, guiX + 160, guiY + 125, 20, 20, I18n.format("+"));
         buttonList.add(buttonAddSpellCastSkill);
 
-        GuiLabel labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 5, 150, 20, 0);
-        labelMaxMana.addLine("Mana Capacity: " + (int) playerMana.getMaxMana());
+        updateScreen();
+
+        labelSkillPoint = new GuiLabel(this.fontRenderer, 100, guiX + backgroundWidth / 2 - 30, guiY + backgroundHeight - 60, 150, 20, 0);
+        labelSkillPoint.addLine("Skillpoints: " + valueSkillPoint);
+        labelList.add(labelSkillPoint);
+        labelMaxMana = new GuiLabel(this.fontRenderer, 101, guiX + 5, guiY + 5, 100, 20, 0);
+        labelMaxMana.addLine("Mana Capacity: " + (int) valueMaxMana);
         labelList.add(labelMaxMana);
-        GuiLabel labelManaRegen = new GuiLabel(this.fontRenderer, 102, guiX + 5, guiY + 25, 150, 20, 0);
-        labelManaRegen.addLine("Mana Regeneration: " + (int) playerMana.getManaRegenRate());
+        labelManaRegen = new GuiLabel(this.fontRenderer, 102, guiX + 5, guiY + 25, 100, 20, 0);
+        labelManaRegen.addLine("Mana Regeneration: " + (int) valueManaRegen);
         labelList.add(labelManaRegen);
-        GuiLabel labelManaEfficiency = new GuiLabel(this.fontRenderer, 103, guiX + 5, guiY + 45, 150, 20, 0);
-        labelManaEfficiency.addLine("Mana Efficiency: " + (int) playerMana.getManaEfficiency());
+        labelManaEfficiency = new GuiLabel(this.fontRenderer, 103, guiX + 5, guiY + 45, 100, 20, 0);
+        labelManaEfficiency.addLine("Mana Efficiency: " + (int) valueManaEfficiency);
         labelList.add(labelManaEfficiency);
-        GuiLabel labelMaxHP = new GuiLabel(this.fontRenderer, 104, guiX + 5, guiY + 65, 150, 20, 0);
-        labelMaxHP.addLine("Health Points: " + (playerMana.addedHP+20));
+        labelMaxHP = new GuiLabel(this.fontRenderer, 104, guiX + 5, guiY + 65, 100, 20, 0);
+        labelMaxHP.addLine("Health Points: " + valueMaxHP);
         labelList.add(labelMaxHP);
-        GuiLabel labelHealthRegen = new GuiLabel(this.fontRenderer, 105, guiX + 5, guiY + 85, 150, 20, 0);
-        labelHealthRegen.addLine("Health Regeneration: " + playerMana.hpRegeneration);
+        labelHealthRegen = new GuiLabel(this.fontRenderer, 105, guiX + 5, guiY + 85, 100, 20, 0);
+        labelHealthRegen.addLine("Health Regeneration: " + valueHPRegen);
         labelList.add(labelHealthRegen);
-        GuiLabel labelSpellTier = new GuiLabel(this.fontRenderer, 106, guiX + 5, guiY + 105, 150, 20, 0);
-        labelSpellTier.addLine("Spell-Tier: " + playerMana.getSpellTier());
+        labelSpellTier = new GuiLabel(this.fontRenderer, 106, guiX + 5, guiY + 105, 100, 20, 0);
+        labelSpellTier.addLine("Spell-Tier: " + valueSpellTier);
         labelList.add(labelSpellTier);
-        GuiLabel labelCastSkill = new GuiLabel(this.fontRenderer, 107, guiX + 5, guiY + 125, 150, 20, 0);
-        labelCastSkill.addLine("Spell-Cast Skill: " + playerMana.spellCastSkill);
+        labelCastSkill = new GuiLabel(this.fontRenderer, 107, guiX + 5, guiY + 125, 100, 20, 0);
+        labelCastSkill.addLine("Spell-Cast Skill: " + valueCastingSkill);
         labelList.add(labelCastSkill);
     }
 
@@ -114,6 +137,15 @@ public class GuiSkilltree extends GuiScreen
             buttonAddSpellTier.visible = false;
             buttonAddSpellCastSkill.visible = false;
         }
+
+        valueSkillPoint = playerMana.getSkillpoints();
+        valueMaxMana = playerMana.getMaxMana();
+        valueManaRegen = playerMana.getManaRegenRate();
+        valueManaEfficiency = playerMana.getManaEfficiency();
+        valueMaxHP = (playerMana.addedHP+20);
+        valueHPRegen = playerMana.hpRegeneration;
+        valueSpellTier = playerMana.getSpellTier();
+        valueCastingSkill = playerMana.spellCastSkill;
     }
 
     @Override
