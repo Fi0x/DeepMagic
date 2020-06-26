@@ -134,11 +134,15 @@ public class PlayerMana
 	{
 		mana = source.mana;
 		maxMana = source.maxMana;
+		skillXP = source.skillXP;
+		skillpoints = source.skillpoints;
 		manaRegenRate = source.manaRegenRate;
 		manaEfficiency = source.manaEfficiency;
 		maxManaMultiplier = source.maxManaMultiplier;
 		addedHP = source.addedHP;
 		hpRegeneration = source.hpRegeneration;
+		spellTier = source.spellTier;
+		spellCastSkill = source.spellCastSkill;
 	}
 	public void saveNBTData(NBTTagCompound compound)
 	{
