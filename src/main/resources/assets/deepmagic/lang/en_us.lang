@@ -66,6 +66,8 @@ item.spell_weather_t1.name=Weather Spell T1
 item.spell_weather_t2.name=Weather Spell T2
 item.spell_weather_t3.name=Weather Spell T3
 
+item.spell_ranged_mob_annihilation.name=Ranged Mob Annihilation Spell
+
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
 item.stone_snack.name=Stone Snack

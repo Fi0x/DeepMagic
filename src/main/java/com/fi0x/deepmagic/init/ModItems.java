@@ -8,6 +8,7 @@ import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
 import com.fi0x.deepmagic.items.spells.SpellHeal;
+import com.fi0x.deepmagic.items.spells.SpellRangedMobAnnihilation;
 import com.fi0x.deepmagic.items.spells.SpellTime;
 import com.fi0x.deepmagic.items.spells.SpellWeather;
 import com.fi0x.deepmagic.items.tools.*;
@@ -60,6 +61,8 @@ public class ModItems
 	public static final Item SPELL_WEATHER_T1 = new SpellWeather("spell_weather_t1", 1);
 	public static final Item SPELL_WEATHER_T2 = new SpellWeather("spell_weather_t2", 2);
 	public static final Item SPELL_WEATHER_T3 = new SpellWeather("spell_weather_t3", 3);
+
+	public static final Item SPELL_RANGED_MOB_ANNIHILATION = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation", 8);
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
