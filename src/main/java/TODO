@@ -1,90 +1,11 @@
 Fix IDE Texture Bug
-Insanity Dimension {
-	add structures
-		dungeons (with riddles)
-		    add more rooms
-		        riddles
-		        treasures
-		        spawners
-		        traps
-		    un-comment room adds in Dungeon and fix it
-		    fix shaft entrance
-		dragon lair
-}
 Mobs {
     Add more variants
         Stone
         Grass
         Nether
-	Bosses
-		Nether worm (remake required)
-		    optimize AI
-		    create loottable
-		    fix hitbox (split in multiple parts)
-		    customize stats
-		Overworld (Spawnable)
-		Insanity Dimension (Dragon (in Dragon Lair))
-	Hostiles
-	    Demon
-	        summon with ritual
-	        optimize ai
-	        set stats / attributes
-	        add custom loot table
-	        add custom sounds
-		Zentaur
-		Cyclopse
-		Hovering Orb
-		    EntityAIRandomFly
-		        make it work
-		Giant Wolf
-		Spirits / Ghosts
-		Kraken?
-		Leprechaun?
-		Pixie?
-	Passives
-	    Elves
-	    Worms / serpents in the depths
-	    Goblin
-	    Dwarf
-	        customize ai
-	        add default stat values
-	    Rock Troll
-	        add animation to defence mechanism
-	        fix standing still animation
-	    Depth Mage
-	        add different spells as attack
-	        add attack animation
-	        add different types
-	            healer
-	            attacker
-	            miner
-	            farmer
-		Friendly Floating Orb
-		    like normal floating orb without spikes
-		Giant chicken
 	Friendlys
 	    Mobs that can be tamed / pets
-}
-Passive Skilltree {
-    update stats on buttonclick
-}
-Add skills {
-	increased saturation
-	increased resistances
-	    fire, explosion, drowning, arrow, meele, ...
-	potion effects
-	permanent xp boost
-	increased damage
-	    meele
-	    ranged
-	    magic
-	increased armor
-	feather fall
-	jump height
-	tool speed
-	weapon speed (sword hit speed and bow draw speed)
-	hp regen+increase
-	    add function
 }
 Mana2System {
     Stored in Altar
@@ -101,35 +22,4 @@ Mana2-Altar {
         needs to be linked
             can be linked to multiple items/machines
     Doesn't generate mana2
-}
-Items {
-    End-game-armor
-        as strong as draconic evolution
-        uses mana(1 or 2)
-    Food from the depths
-        Can be found in rocks
-        Needs some way to regenerate
-        Very effective food
-    Spells (consume mana) (can be activated / deactivated)
-        World control
-            kill ALL mobs in large area
-	    flight for mana consumption
-	    2nd chance (don't die)
-	    silk touch
-	    fortune
-	    auto smelting
-	    spells tier 1-10
-	Random crafting items
-}
-Blocks {
-    Add more World controllers
-    Weather controller
-        add costs
-    Time controller
-        add costs
-    Quarry
-        uses mana2
-}
-Fluids {
-    Insanity Lava
 }
