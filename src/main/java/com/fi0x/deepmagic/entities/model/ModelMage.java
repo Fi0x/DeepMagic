@@ -100,5 +100,20 @@ public class ModelMage extends ModelBase {
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.legLeft.rotateAngleX = MathHelper.cos(limbSwing * 2F) * 1F * limbSwingAmount;
         this.legRight.rotateAngleX = MathHelper.cos(limbSwing * 2F + (float) Math.PI) * 1F * limbSwingAmount;
+
+        float f = MathHelper.sin(this.swingProgress * (float)Math.PI);
+        float f1 = MathHelper.sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float)Math.PI);
+        this.armRight.rotateAngleZ = 0.0F;
+        this.armLeft.rotateAngleZ = 0.0F;
+        this.armRight.rotateAngleY = -(0.1F - f * 0.6F);
+        this.armLeft.rotateAngleY = 0.1F - f * 0.6F;
+        this.armRight.rotateAngleX = 0;
+        this.armLeft.rotateAngleX = 0;
+        this.armRight.rotateAngleX += f * 1.2F - f1 * 0.4F;
+        this.armLeft.rotateAngleX += f * 1.2F - f1 * 0.4F;
+        this.armRight.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+        this.armLeft.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+        this.armRight.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+        this.armLeft.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
     }
 }
