@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+   "parent": "block/cube",
+   "textures": {
+       "particle": "deepmagic:blocks/demon_stone_side",
+       "up": "deepmagic:blocks/demon_stone_top",
+       "down": "deepmagic:blocks/demon_stone_bottom",
+       "north": "deepmagic:blocks/demon_stone_side",
+       "east": "deepmagic:blocks/demon_stone_side",
+       "south": "deepmagic:blocks/demon_stone_side",
+       "west": "deepmagic:blocks/demon_stone_side"
+   }
+}

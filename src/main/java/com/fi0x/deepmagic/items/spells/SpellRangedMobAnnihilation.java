@@ -47,7 +47,7 @@ public class SpellRangedMobAnnihilation extends SpellBase
                 playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell couldn't find a target"));
                 return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
             }
-            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4), playerIn))
+            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4)))
             {
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
