@@ -37,6 +37,7 @@ public class SpellWeather extends SpellBase
                 {
                     worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
                     playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
+                    addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
