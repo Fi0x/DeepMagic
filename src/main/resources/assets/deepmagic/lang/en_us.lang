@@ -7,7 +7,7 @@ item.deep_crystal_powder.name=Deep Crystal Powder
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
 item.mana_waster.name=Mana Waster
-item.mana_monitor.name=Mana Monitor
+item.demon_crystal=Demon Crystal
 
 tile.deep_crystal_ore.name=Deep Crystal Ore
 tile.deep_crystal_nether_ore.name=Deep Crystal Ore

@@ -1,6 +1,8 @@
 package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.entities.EntityDemon;
+import com.fi0x.deepmagic.items.DemonCrystal;
+import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +16,7 @@ import javax.annotation.Nonnull;
 
 public class DemonStone extends BlockBase
 {
+
     public DemonStone(String name, Material material)
     {
         super(name, material);
@@ -28,11 +31,15 @@ public class DemonStone extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            EntityDemon demon = new EntityDemon(worldIn);
-            demon.posX = pos.getX();
-            demon.posY = pos.getY() + 1;
-            demon.posZ = pos.getZ();
-            worldIn.spawnEntity(demon);
+            if(playerIn.getHeldItem(hand).getItem() instanceof DemonCrystal && playerIn.getCapability(PlayerProperties.PLAYER_MANA, null).removeMana(100))
+            {
+                playerIn.getHeldItem(hand).setCount(playerIn.getHeldItem(hand).getCount() - 1);
+                EntityDemon demon = new EntityDemon(worldIn);
+                demon.posX = pos.getX() + 0.5;
+                demon.posY = pos.getY() + 1;
+                demon.posZ = pos.getZ() + 0.5;
+                worldIn.spawnEntity(demon);
+            }
         }
         return true;
     }

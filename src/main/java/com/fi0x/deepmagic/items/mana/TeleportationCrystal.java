@@ -52,7 +52,7 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 		{
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
-			if(playerMana.removeMana(50, playerIn))
+			if(playerMana.removeMana(50))
 			{
 				playerMana.addSkillXP(51);
 				int x = playerIn.getPosition().getX();
