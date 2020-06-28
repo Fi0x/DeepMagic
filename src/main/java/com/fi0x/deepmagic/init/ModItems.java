@@ -8,6 +8,7 @@ import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
 import com.fi0x.deepmagic.items.spells.SpellHeal;
+import com.fi0x.deepmagic.items.spells.SpellRangedMobAnnihilation;
 import com.fi0x.deepmagic.items.spells.SpellTime;
 import com.fi0x.deepmagic.items.spells.SpellWeather;
 import com.fi0x.deepmagic.items.tools.*;
@@ -60,6 +61,8 @@ public class ModItems
 	public static final Item SPELL_WEATHER_T1 = new SpellWeather("spell_weather_t1", 1);
 	public static final Item SPELL_WEATHER_T2 = new SpellWeather("spell_weather_t2", 2);
 	public static final Item SPELL_WEATHER_T3 = new SpellWeather("spell_weather_t3", 3);
+
+	public static final Item SPELL_RANGED_MOB_ANNIHILATION = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation", 8);
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
@@ -71,4 +74,7 @@ public class ModItems
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true));
 	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false));
 	public static final Item STONE_SNACK = new FoodBase("stone_snack", 5, 10, false);
+	public static final Item RAW_COCKROACH = new FoodBase("raw_cockroach", 2, 4, false);
+	public static final Item COOKED_COCKROACH = new FoodBase("cooked_cockroach", 4, 4, false);
+	public static final Item COCKROACH_SNACK = new FoodBase("cockroach_snack", 6, 8, false);
 }
