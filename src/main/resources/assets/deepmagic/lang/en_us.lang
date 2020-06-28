@@ -66,7 +66,13 @@ item.spell_weather_t1.name=Weather Spell T1
 item.spell_weather_t2.name=Weather Spell T2
 item.spell_weather_t3.name=Weather Spell T3
 
-item.spell_ranged_mob_annihilation.name=Ranged Mob Annihilation Spell
+item.spell_mob_annihilation_t8.name=Mob Annihilation Spell T8
+item.spell_mob_annihilation_t9.name=Mob Annihilation Spell T9
+item.spell_mob_annihilation_t10.name=Mob Annihilation Spell T10
+
+item.spell_ranged_mob_annihilation_t8.name=Ranged Mob Annihilation Spell T8
+item.spell_ranged_mob_annihilation_t9.name=Ranged Mob Annihilation Spell T9
+item.spell_ranged_mob_annihilation_t10.name=Ranged Mob Annihilation Spell T10
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple

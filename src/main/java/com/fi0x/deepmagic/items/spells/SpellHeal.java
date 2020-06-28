@@ -36,6 +36,7 @@ public class SpellHeal extends SpellBase
                 if((Math.random() * playerMana.spellCastSkill) > tier * 2)
                 {
                     playerIn.heal((int) Math.pow(2, tier));
+                    addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));

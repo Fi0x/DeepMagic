@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,7 +27,7 @@ public class SpellRangedMobAnnihilation extends SpellBase
     public SpellRangedMobAnnihilation(String name, int tier)
     {
         super(name, tier);
-        this.manaCost = 50;
+        this.manaCost = 100;
         this.radius = 10;
         this.range = 100;
     }
@@ -52,7 +53,8 @@ public class SpellRangedMobAnnihilation extends SpellBase
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
                     BlockPos pos = result.getBlockPos();
-                    createExplosions(worldIn, playerIn, pos, this.radius);
+                    createExplosions(worldIn, playerIn, pos, this.radius * (tier - 7));
+                    addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
@@ -63,7 +65,7 @@ public class SpellRangedMobAnnihilation extends SpellBase
     {
         Vec3d vec3d = player.getPositionEyes(1F);
         Vec3d vec3d1 = player.getLook(1F);
-        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * range, vec3d1.y * range, vec3d1.z * range);
+        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * range * (tier - 7), vec3d1.y * range * (tier - 7), vec3d1.z * range * (tier - 7));
         return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
     }
     private void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
@@ -75,6 +77,7 @@ public class SpellRangedMobAnnihilation extends SpellBase
         {
             BlockPos explosionPos = entities.get(0).getPosition();
             world.createExplosion(player, explosionPos.getX(), explosionPos.getY(), explosionPos.getZ(), 5, false);
+            entities.get(0).attackEntityFrom(DamageSource.MAGIC, 50);
             entities.remove(0);
         }
     }

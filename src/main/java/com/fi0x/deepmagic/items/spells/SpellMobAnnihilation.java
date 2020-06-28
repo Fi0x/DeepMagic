@@ -2,25 +2,32 @@ package com.fi0x.deepmagic.items.spells;
 
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
-public class SpellTime extends SpellBase
+public class SpellMobAnnihilation extends SpellBase
 {
-    private final int time;
-    public SpellTime(String name, int time)
+    int radius;
+    double range;
+    public SpellMobAnnihilation(String name, int tier)
     {
-        super(name, 0);
-        this.time = time;
-        this.manaCost = 500;
+        super(name, tier);
+        this.manaCost = 50;
+        this.radius = 10;
+        this.range = 100;
     }
 
     @Nonnull
@@ -33,16 +40,30 @@ public class SpellTime extends SpellBase
         assert playerMana != null;
         if(playerMana.getSpellTier() >= tier)
         {
-            if(playerMana.removeMana(manaCost, playerIn))
+            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4), playerIn))
             {
-                if(Math.random() * playerMana.spellCastSkill > 1)
+                if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
-                    worldIn.setWorldTime(time);
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
+                    BlockPos pos = playerIn.getPosition();
+                    createExplosions(worldIn, playerIn, pos, this.radius * (tier - 7));
                     addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    }
+
+    private void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
+    {
+        AxisAlignedBB area = new AxisAlignedBB(pos.getX()-radius, pos.getY()-radius, pos.getZ()-radius, pos.getX()+radius, pos.getY()+radius, pos.getZ()+radius);
+        List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);
+
+        while(!entities.isEmpty())
+        {
+            BlockPos explosionPos = entities.get(0).getPosition();
+            world.createExplosion(player, explosionPos.getX(), explosionPos.getY(), explosionPos.getZ(), 5, false);
+            entities.get(0).attackEntityFrom(DamageSource.MAGIC, 50);
+            entities.remove(0);
+        }
     }
 }
