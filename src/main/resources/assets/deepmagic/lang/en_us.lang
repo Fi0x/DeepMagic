@@ -38,7 +38,8 @@ tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
 tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
-tile.time_controller=Time Controller
+tile.time_controller.name=Time Controller
+tile.demon_stone.name=Demon Stone
 
 fluid.insanity_water=Insanity Water
 
