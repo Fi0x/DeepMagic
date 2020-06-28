@@ -3,12 +3,10 @@ package com.fi0x.deepmagic.entities;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -30,15 +28,29 @@ public class EntityDwarf extends EntityCreature
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
-        this.tasks.addTask(5, new EntityAILookIdle(this));
+        this.tasks.addTask(4, new EntityAIWatchClosest(this, Entity.class, 8.0F));
+
+        this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityGiant.class, true));
     }
 
     @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
+        getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+        getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16);
+        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25);
+        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30.0D);
+        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(30.0D);
+        getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(20);
+        getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(8);
     }
 
     @Nullable

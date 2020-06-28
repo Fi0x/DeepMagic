@@ -12,6 +12,7 @@ public class LootTableHandler
     public static final ResourceLocation DEPTH_MAGE = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "depth_mage"));
     public static final ResourceLocation INSANITY_COW = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "insanity_cow"));
     public static final ResourceLocation DWARF = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dwarf"));
+    public static final ResourceLocation DEMON = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "demon"));
 
     public static final ResourceLocation STRUCTURE_DEFAULT = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "structure_default"));
 }
