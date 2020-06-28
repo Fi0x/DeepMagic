@@ -66,6 +66,10 @@ public class ModItems
 	public static final Item SPELL_RANGED_MOB_ANNIHILATION_T8 = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation_t8", 8);
 	public static final Item SPELL_RANGED_MOB_ANNIHILATION_T9 = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation_t9", 9);
 	public static final Item SPELL_RANGED_MOB_ANNIHILATION_T10 = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation_t10", 10);
+
+	public static final Item SPELL_MOB_PUSHER_T3 = new SpellMobPusher("spell_mob_pusher_t3", 3);
+	public static final Item SPELL_MOB_PUSHER_T4 = new SpellMobPusher("spell_mob_pusher_t4", 4);
+	public static final Item SPELL_MOB_PUSHER_T5 = new SpellMobPusher("spell_mob_pusher_t5", 5);
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
