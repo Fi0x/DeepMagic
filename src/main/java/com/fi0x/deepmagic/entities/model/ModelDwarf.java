@@ -21,31 +21,31 @@ public class ModelDwarf extends ModelBase {
 
     public ModelDwarf() {
         this.textureWidth = 64;
-        this.textureHeight = 32;
-        this.legLeft = new ModelRenderer(this, 18, 0);
-        this.legLeft.setRotationPoint(1.5F, 6.0F, 0.0F);
-        this.legLeft.addBox(-1.5F, 0.0F, -1.5F, 3, 5, 3, 0.0F);
-        this.legRight = new ModelRenderer(this, 30, 0);
-        this.legRight.setRotationPoint(-1.5F, 6.0F, 0.0F);
-        this.legRight.addBox(-1.5F, 0.0F, -1.5F, 3, 5, 3, 0.0F);
-        this.head = new ModelRenderer(this, 37, 3);
-        this.head.setRotationPoint(0.0F, 0F, 0.0F);
-        this.head.addBox(-3.0F, -5.0F, -2.5F, 6, 5, 5, 0.0F);
-        this.armLeft = new ModelRenderer(this, 15, 8);
-        this.armLeft.setRotationPoint(3.0F, 0F, 0.0F);
-        this.armLeft.addBox(0.0F, 0.0F, -1.5F, 2, 6, 3, 0.0F);
-        this.armRight = new ModelRenderer(this, 25, 8);
-        this.armRight.setRotationPoint(-3.0F, 0F, 0.0F);
-        this.armRight.addBox(-2.0F, 0.0F, -1.5F, 2, 6, 3, 0.0F);
+        this.textureHeight = 64;
+        this.legLeft = new ModelRenderer(this, 32, 0);
+        this.legLeft.setRotationPoint(2.5F, 10.0F, 0.0F);
+        this.legLeft.addBox(-2.5F, 0.0F, -2.5F, 5, 8, 5, 0.0F);
+        this.armLeft = new ModelRenderer(this, 47, 13);
+        this.armLeft.setRotationPoint(5.0F, 1.0F, 0.0F);
+        this.armLeft.addBox(0.0F, -1.0F, -2.0F, 4, 10, 4, 0.0F);
+        this.head = new ModelRenderer(this, 0, 16);
+        this.head.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.head.addBox(-3.0F, -6.0F, -3.0F, 6, 6, 6, 0.0F);
+        this.armRight = new ModelRenderer(this, 20, 26);
+        this.armRight.setRotationPoint(-5.0F, 1.0F, 0.0F);
+        this.armRight.addBox(-4.0F, -1.0F, -2.0F, 4, 10, 4, 0.0F);
+        this.legRight = new ModelRenderer(this, 27, 13);
+        this.legRight.setRotationPoint(-2.5F, 10.0F, 0.0F);
+        this.legRight.addBox(-2.5F, 0.0F, -2.5F, 5, 8, 5, 0.0F);
         this.body = new ModelRenderer(this, 0, 0);
-        this.body.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.body.addBox(-3.0F, 0.0F, -1.5F, 6, 6, 3, 0.0F);
+        this.body.setRotationPoint(0.0F, 6.0F, 0.0F);
+        this.body.addBox(-5.0F, 0.0F, -3.0F, 10, 10, 6, 0.0F);
 
-        body.addChild(head);
-        body.addChild(armLeft);
-        body.addChild(armRight);
         body.addChild(legLeft);
         body.addChild(legRight);
+        body.addChild(armRight);
+        body.addChild(armLeft);
+        body.addChild(head);
     }
 
     @Override

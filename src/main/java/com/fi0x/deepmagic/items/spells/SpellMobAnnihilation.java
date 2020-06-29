@@ -41,7 +41,7 @@ public class SpellMobAnnihilation extends SpellBase
         assert playerMana != null;
         if(playerMana.getSpellTier() >= tier)
         {
-            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4), playerIn))
+            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4)))
             {
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
