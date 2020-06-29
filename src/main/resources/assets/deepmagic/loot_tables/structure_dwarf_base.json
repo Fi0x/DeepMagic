@@ -2,7 +2,10 @@
   "pools": [
     {
       "name": "structure_dwarf_base_normal",
-      "rolls": 5,
+      "rolls": {
+        "min": 1,
+        "max": 5
+      },
       "entries": [
         {
           "type": "item",
@@ -12,11 +15,13 @@
             {
               "function": "set_count",
               "count": {
-                "min": 32,
-                "max": 64
+                "min": 4,
+                "max": 16
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
           "weight": 1,
           "name": "minecraft:dirt",
@@ -24,19 +29,24 @@
             {
               "function": "set_count",
               "count": {
-                "min": 16,
-                "max": 32
+                "min": 2,
+                "max": 8
               }
             }
           ]
         }
-      ],
-      "name": "structure_dwarf_base_ores",
-      "rolls": 10,
+      ]
+    },
+    {
+      "name": "structure_dwarf_base_special",
+      "rolls": {
+        "min": 5,
+        "max": 10
+      },
       "entries": [
         {
           "type": "item",
-          "weight": 40,
+          "weight": 1,
           "name": "minecraft:coal_ore",
           "functions": [
             {
@@ -46,9 +56,11 @@
                 "max": 8
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
-          "weight": 5,
+          "weight": 1,
           "name": "minecraft:diamond_ore",
           "functions": [
             {
@@ -58,9 +70,11 @@
                 "max": 2
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
-          "weight": 2,
+          "weight": 1,
           "name": "minecraft:emerald_ore",
           "functions": [
             {
@@ -70,9 +84,11 @@
                 "max": 1
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
-          "weight": 5,
+          "weight": 1,
           "name": "minecraft:gold_ore",
           "functions": [
             {
@@ -82,9 +98,11 @@
                 "max": 2
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
-          "weight": 28,
+          "weight": 1,
           "name": "minecraft:iron_ore",
           "functions": [
             {
@@ -94,9 +112,11 @@
                 "max": 4
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
-          "weight": 10,
+          "weight": 1,
           "name": "minecraft:lapis_ore",
           "functions": [
             {
@@ -106,9 +126,11 @@
                 "max": 1
               }
             }
-          ],
+          ]
+        },
+        {
           "type": "item",
-          "weight": 10,
+          "weight": 1,
           "name": "minecraft:redstone_ore",
           "functions": [
             {
