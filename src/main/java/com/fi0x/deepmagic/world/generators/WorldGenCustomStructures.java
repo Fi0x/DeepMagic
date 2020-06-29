@@ -28,6 +28,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	public static final ModWorldGenStructure INSANITY_ROCK_TROLL_CAVE = new ModWorldGenStructure("insanity_rock_troll_cave");
 	public static final ModWorldGenStructure SHRINE = new ModWorldGenStructure("shrine");
 	public static final ModWorldGenStructure INSANITY_OASIS = new ModWorldGenStructure("insanity_oasis");
+	public static final ModWorldGenStructure DWARF_BASE = new ModWorldGenStructure("dwarf_base");
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
@@ -39,6 +40,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
 			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 			generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
+			generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 100, BiomeInsanity.class);
 
 			if(chunkX % 20 == 0 && chunkZ % 20 == 0) DUNGEON.generate(world, random, new BlockPos(chunkX * 16, 20, chunkZ * 16));
 		}
@@ -51,6 +53,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		int x = (chunkX * 16) + random.nextInt(15);
 		int z = (chunkZ * 16) + random.nextInt(15);
 		int y = calculateGenerationHeight(world, x, z)+yOffset;
+		if(heightDifference == -1) y = random.nextInt(40) + 10;
 		BlockPos pos = new BlockPos(x, y, z);
 		
 		Class<?> biome = world.provider.getBiomeForCoords(pos).getClass();
@@ -78,6 +81,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 
 	public static boolean canSpawnHere(Template template, BlockPos pos, int heightDifference)
 	{
+		if(heightDifference == -1) return true;
 		return isCornerValid(pos, heightDifference)
 				&& isCornerValid(pos.add(template.getSize().getX(), 0, 0), heightDifference)
 				&& isCornerValid(pos.add(0, 0, template.getSize().getZ()), heightDifference)
