@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -14,12 +15,14 @@ public class EntityAIFleeLight extends EntityAIFleeSun
     private double shelterY;
     private double shelterZ;
     private final double movementSpeed;
+    private final World world;
 
     public EntityAIFleeLight(EntityCreature theCreatureIn, double movementSpeedIn)
     {
         super(theCreatureIn, movementSpeedIn);
         this.movementSpeed = movementSpeedIn;
         this.creature = theCreatureIn;
+        world = theCreatureIn.world;
     }
 
     @Override
@@ -57,7 +60,7 @@ public class EntityAIFleeLight extends EntityAIFleeSun
         {
             BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-            if (!this.world.canSeeSky(blockpos1) && this.creature.getBlockPathWeight(blockpos1) < 0.0F)
+            if (world.getLight(blockpos1) < 7 && this.creature.getBlockPathWeight(blockpos1) < 0.0F)
             {
                 return new Vec3d(blockpos1.getX(), blockpos1.getY(), blockpos1.getZ());
             }
