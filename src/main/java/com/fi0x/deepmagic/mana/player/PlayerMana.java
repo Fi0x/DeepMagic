@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.mana.player;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerMana
@@ -44,7 +43,7 @@ public class PlayerMana
 		}
 		return false;
 	}
-	public boolean removeMana(double value, EntityPlayer player)
+	public boolean removeMana(double value)
 	{
 		if(mana-(value/Math.pow(1.1, manaEfficiency)) < 0)
 		{

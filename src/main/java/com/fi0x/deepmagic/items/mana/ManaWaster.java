@@ -43,7 +43,7 @@ public class ManaWaster extends Item implements IHasModel, IMagicItem
         {
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
-            if(playerMana.removeMana(10, playerIn)) return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+            if(playerMana.removeMana(10)) return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
         return new ActionResult<>(EnumActionResult.FAIL, stack);
     }

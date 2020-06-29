@@ -33,7 +33,7 @@ public class SpellTime extends SpellBase
         assert playerMana != null;
         if(playerMana.getSpellTier() >= tier)
         {
-            if(playerMana.removeMana(manaCost, playerIn))
+            if(playerMana.removeMana(manaCost))
             {
                 if(Math.random() * playerMana.spellCastSkill > 1)
                 {

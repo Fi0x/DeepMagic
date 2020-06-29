@@ -38,7 +38,7 @@ public class SpellMobPusher extends SpellBase
         assert playerMana != null;
         if(playerMana.getSpellTier() >= tier)
         {
-            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 3), playerIn))
+            if(playerMana.removeMana(manaCost * Math.pow(2, tier - 3)))
             {
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {

@@ -21,6 +21,7 @@ public class Reference
 	public static final int ENTITY_ROCK_TROLL = 1769;
 	public static final int ENTITY_DEPTH_MAGE = 1770;
 	public static final int ENTITY_DEMON = 1771;
+	public static final int ENTITY_COCKROACH = 1772;
 
 	//Gui IDs
 	public static final int GUI_SKILLTREE = 74088;

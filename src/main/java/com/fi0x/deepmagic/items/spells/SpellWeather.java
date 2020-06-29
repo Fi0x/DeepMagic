@@ -31,7 +31,7 @@ public class SpellWeather extends SpellBase
         assert playerMana != null;
         if(playerMana.getSpellTier() >= tier)
         {
-            if(playerMana.removeMana(manaCost * tier, playerIn))
+            if(playerMana.removeMana(manaCost * tier))
             {
                 if((int) (Math.random() * playerMana.spellCastSkill) > tier)
                 {
