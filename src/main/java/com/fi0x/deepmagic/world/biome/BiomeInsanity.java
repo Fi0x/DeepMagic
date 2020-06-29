@@ -1,9 +1,6 @@
 package com.fi0x.deepmagic.world.biome;
 
-import com.fi0x.deepmagic.entities.EntityDepthMage;
-import com.fi0x.deepmagic.entities.EntityGiant;
-import com.fi0x.deepmagic.entities.EntityHoveringOrb;
-import com.fi0x.deepmagic.entities.EntityInsanityCow;
+import com.fi0x.deepmagic.entities.*;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
@@ -37,7 +34,7 @@ public class BiomeInsanity extends Biome
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 
-		this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 10, 5, 10));
+		this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 5, 1, 3));
 		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 20, 1, 2));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
