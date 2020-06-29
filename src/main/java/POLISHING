@@ -11,4 +11,4 @@ Tweak item + block stats (costs, effect)
 Add ai targets to mobs for different race battles (dwarfs and giants battle...)
 Mobs work together (Dwarfs mine, mages battle, elves heal)
 
-fix todos in EntityAIMining
+fix todos in EntityAIMining and DigHelper

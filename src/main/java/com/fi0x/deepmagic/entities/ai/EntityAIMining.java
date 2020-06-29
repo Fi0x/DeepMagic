@@ -7,20 +7,21 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class EntityAIMining extends EntityAIBase
 {
     protected final EntityDwarf creature;
     private BlockPos destination;
     private World world;
-    private List<IBlockState> ores;
+    private ArrayList<IBlockState> ores;
 
     public EntityAIMining(EntityDwarf creature, World world)
     {
         this.creature = creature;
         this.setMutexBits(1);
         this.world = world;
+        ores = new ArrayList<>();
         fillOreList();
     }
 
@@ -33,7 +34,11 @@ public class EntityAIMining extends EntityAIBase
     {
         this.creature.isMining = true;
         destination = findOre(creature.getPosition());
-        //TODO: create route-finding
+        if(destination != null)
+        {
+            ArrayList<BlockPos> miningBlocks = DigHelper.getMiningBlocks(world, creature.getPosition(), destination);
+            //TODO: dig blocks
+        }
     }
 
     public boolean shouldContinueExecuting()
@@ -48,7 +53,7 @@ public class EntityAIMining extends EntityAIBase
 
     private BlockPos findOre(BlockPos pos)
     {
-        for(int range = 1; range < 5; range++)
+        for(int range = 1; range < 10; range++)
         {
             for(int x = pos.getX() - range; x < pos.getX() + range; x++)
             {
