@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "name": "special_cockroach",
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:raw_cockroach",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
