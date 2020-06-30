@@ -3,7 +3,7 @@ package com.fi0x.deepmagic.world.generators;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.world.biome.BiomeInsanity;
-import com.fi0x.deepmagic.world.generators.dungeon.Dungeon;
+import com.fi0x.deepmagic.world.generators.dungeon.SmallDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -21,14 +21,13 @@ import java.util.Random;
 
 public class WorldGenCustomStructures implements IWorldGenerator
 {
-	public static final Dungeon DUNGEON = new Dungeon();
-
 	public static final ModWorldGenStructure MAGE_HOUSE = new ModWorldGenStructure("mage_house");
 	public static final ModWorldGenStructure MAGE_HOUSE_SMALL = new ModWorldGenStructure("mage_house_small");
 	public static final ModWorldGenStructure INSANITY_ROCK_TROLL_CAVE = new ModWorldGenStructure("insanity_rock_troll_cave");
 	public static final ModWorldGenStructure SHRINE = new ModWorldGenStructure("shrine");
 	public static final ModWorldGenStructure INSANITY_OASIS = new ModWorldGenStructure("insanity_oasis");
 	public static final ModWorldGenStructure DWARF_BASE = new ModWorldGenStructure("dwarf_base");
+	public static final SmallDungeon SMALL_DUNGEON = new SmallDungeon();
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
@@ -40,9 +39,8 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
 			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 			generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
-			generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 100, BiomeInsanity.class);
-
-			if(chunkX % 20 == 0 && chunkZ % 20 == 0) DUNGEON.generate(world, random, new BlockPos(chunkX * 16, 20, chunkZ * 16));
+			generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
+			generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -2, 100, BiomeInsanity.class);
 		}
 	}
 	
@@ -53,16 +51,18 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		int x = (chunkX * 16) + random.nextInt(15);
 		int z = (chunkZ * 16) + random.nextInt(15);
 		int y = calculateGenerationHeight(world, x, z)+yOffset;
-		if(heightDifference == -1) y = random.nextInt(40) + 10;
+		if(heightDifference < 0) y = random.nextInt(40 / Math.abs(heightDifference)) + 10;
 		BlockPos pos = new BlockPos(x, y, z);
 		
 		Class<?> biome = world.provider.getBiomeForCoords(pos).getClass();
 
-		Template template = ((WorldServer) world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(Reference.MOD_ID, ((ModWorldGenStructure) generator).structureName));
-		
-		if(classesList.contains(biome) && random.nextInt(chance) == 0 && y > 10 && template != null && canSpawnHere(template, pos, heightDifference))
+		Template template = null;
+		if(generator instanceof ModWorldGenStructure) template = ((WorldServer) world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(Reference.MOD_ID, ((ModWorldGenStructure) generator).structureName));
+
+		if(classesList.contains(biome) && random.nextInt(chance) == 0 && y > 10 && canSpawnHere(template, pos, heightDifference))
 		{
-			generator.generate(world, random, pos);
+			if(generator instanceof SmallDungeon) generator.generate(world, random, pos);
+			else if(template != null) generator.generate(world, random, pos);
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 
 	public static boolean canSpawnHere(Template template, BlockPos pos, int heightDifference)
 	{
-		if(heightDifference == -1) return true;
+		if(heightDifference < 0) return true;
 		return isCornerValid(pos, heightDifference)
 				&& isCornerValid(pos.add(template.getSize().getX(), 0, 0), heightDifference)
 				&& isCornerValid(pos.add(0, 0, template.getSize().getZ()), heightDifference)
