@@ -37,7 +37,7 @@ public class EntityAIMining extends EntityAIBase
         if(destination != null)
         {
             ArrayList<BlockPos> miningBlocks = DigHelper.getMiningBlocks(world, creature.getPosition(), destination);
-            //TODO: dig blocks
+            DigHelper.mineBlocks(world, miningBlocks, creature);
         }
     }
 

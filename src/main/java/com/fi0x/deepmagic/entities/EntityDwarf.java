@@ -88,6 +88,6 @@ public class EntityDwarf extends EntityCreature
     @Override
     public float getEyeHeight()
     {
-        return 0.8F;
+        return 1.2F;
     }
 }
