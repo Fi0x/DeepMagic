@@ -34,7 +34,7 @@ public class BiomeInsanity extends Biome
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 
-		this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 10, 5, 10));
+		this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 5, 1, 3));
 		this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 20, 1, 2));
 		this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
