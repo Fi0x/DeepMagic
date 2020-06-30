@@ -80,10 +80,13 @@ public class ModItems
 	public static final Item DEEP_CRYSTAL_BOOTS = new ArmorBase("deep_crystal_boots", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.FEET);
 	
 	//Food
-	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true));
-	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false));
+	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true), true);
+	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false), false);
 	public static final Item STONE_SNACK = new FoodBase("stone_snack", 5, 10, false);
-	public static final Item RAW_COCKROACH = new FoodBase("raw_cockroach", 2, 4, false);
+	public static final Item RAW_COCKROACH = new FoodEffectBase("raw_cockroach", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
 	public static final Item COOKED_COCKROACH = new FoodBase("cooked_cockroach", 4, 4, false);
 	public static final Item COCKROACH_SNACK = new FoodBase("cockroach_snack", 6, 8, false);
+	public static final Item RAW_WORM = new FoodEffectBase("raw_worm", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
+	public static final Item COOKED_WORM = new FoodBase("cooked_worm", 4, 4, false);
+	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
 }
