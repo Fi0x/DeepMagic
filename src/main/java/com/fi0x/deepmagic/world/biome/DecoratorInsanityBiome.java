@@ -8,7 +8,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -18,14 +19,8 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     public boolean decorating;
     public BlockPos chunkPos;
     public ChunkGeneratorSettings chunkProviderSettings;
-    public WorldGenerator clayGen = new WorldGenClay(4);
-    public WorldGenerator sandGen = new WorldGenSand(Blocks.SAND, 7);
-    public WorldGenerator gravelGen = new WorldGenSand(Blocks.GRAVEL, 6);
     public WorldGenerator dirtGen;
     public WorldGenerator gravelOreGen;
-    public WorldGenerator graniteGen;
-    public WorldGenerator dioriteGen;
-    public WorldGenerator andesiteGen;
     public WorldGenerator coalGen;
     public WorldGenerator ironGen;
     public WorldGenerator goldGen;
@@ -47,9 +42,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
             this.chunkPos = pos;
             this.dirtGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
             this.gravelOreGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);
-            this.graniteGen = new WorldGenMinable(ModBlocks.INSANITY_WATER.getDefaultState(), this.chunkProviderSettings.graniteSize);
-            this.dioriteGen = new WorldGenMinable(ModBlocks.INSANITY_WATER.getDefaultState(), this.chunkProviderSettings.dioriteSize);
-            this.andesiteGen = new WorldGenMinable(ModBlocks.INSANITY_WATER.getDefaultState(), this.chunkProviderSettings.andesiteSize);
             this.coalGen = new WorldGenMinable(Blocks.COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
             this.ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
             this.goldGen = new WorldGenMinable(Blocks.GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);
@@ -68,53 +60,43 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         this.generateOres(worldIn, random);
 
         if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
-        for (int l2 = 0; l2 < this.flowersPerChunk; ++l2)
         {
-            int i7 = random.nextInt(16) + 8;
-            int l10 = random.nextInt(16) + 8;
-            int j14 = worldIn.getHeight(this.chunkPos.add(i7, 0, l10)).getY() + 32;
-
-            if (j14 > 0)
+            for (int l2 = 0; l2 < this.flowersPerChunk; ++l2)
             {
-                int k17 = random.nextInt(j14);
-                BlockPos blockpos1 = this.chunkPos.add(i7, k17, l10);
-                
-                for (int i = 0; i < 64; ++i)
+                int i7 = random.nextInt(16) + 8;
+                int l10 = random.nextInt(16) + 8;
+                int j14 = worldIn.getHeight(this.chunkPos.add(i7, 0, l10)).getY() + 32;
+
+                if (j14 > 0)
                 {
-                    BlockPos blockpos = blockpos1.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-                    if (worldIn.isAirBlock(blockpos) && blockpos.getY() < 255 && ((BlockBush) ModBlocks.INSANITY_FLOWER).canBlockStay(worldIn, blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState()))
+                    int k17 = random.nextInt(j14);
+                    BlockPos blockpos1 = this.chunkPos.add(i7, k17, l10);
+
+                    for (int i = 0; i < 64; ++i)
                     {
-                        worldIn.setBlockState(blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState(), 2);
+                        BlockPos blockpos = blockpos1.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
+                        if (worldIn.isAirBlock(blockpos) && blockpos.getY() < 255 && ((BlockBush) ModBlocks.INSANITY_FLOWER).canBlockStay(worldIn, blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState()))
+                        {
+                            worldIn.setBlockState(blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState(), 2);
+                        }
                     }
                 }
             }
         }
 
         if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS))
-        for (int i3 = 0; i3 < this.grassPerChunk; ++i3)
         {
-            int j7 = random.nextInt(16) + 8;
-            int i11 = random.nextInt(16) + 8;
-            int k14 = worldIn.getHeight(this.chunkPos.add(j7, 0, i11)).getY() * 2;
-
-            if (k14 > 0)
+            for (int i3 = 0; i3 < this.grassPerChunk; ++i3)
             {
-                int l17 = random.nextInt(k14);
-                biomeIn.getRandomWorldGenForGrass(random).generate(worldIn, random, this.chunkPos.add(j7, l17, i11));
-            }
-        }
+                int j7 = random.nextInt(16) + 8;
+                int i11 = random.nextInt(16) + 8;
+                int k14 = worldIn.getHeight(this.chunkPos.add(j7, 0, i11)).getY() * 2;
 
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.PUMPKIN))
-        if (random.nextInt(32) == 0)
-        {
-            int i5 = random.nextInt(16) + 8;
-            int k9 = random.nextInt(16) + 8;
-            int j13 = worldIn.getHeight(this.chunkPos.add(i5, 0, k9)).getY() * 2;
-
-            if (j13 > 0)
-            {
-                int k16 = random.nextInt(j13);
-                (new WorldGenPumpkin()).generate(worldIn, random, this.chunkPos.add(i5, k16, k9));
+                if (k14 > 0)
+                {
+                    int l17 = random.nextInt(k14);
+                    biomeIn.getRandomWorldGenForGrass(random).generate(worldIn, random, this.chunkPos.add(j7, l17, i11));
+                }
             }
         }
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
@@ -127,12 +109,6 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         this.genStandardOre1(worldIn, random, this.chunkProviderSettings.dirtCount, this.dirtGen, this.chunkProviderSettings.dirtMinHeight, this.chunkProviderSettings.dirtMaxHeight);
         if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, gravelOreGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRAVEL))
         this.genStandardOre1(worldIn, random, this.chunkProviderSettings.gravelCount, this.gravelOreGen, this.chunkProviderSettings.gravelMinHeight, this.chunkProviderSettings.gravelMaxHeight);
-        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dioriteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIORITE))
-        this.genStandardOre1(worldIn, random, this.chunkProviderSettings.dioriteCount, this.dioriteGen, this.chunkProviderSettings.dioriteMinHeight, this.chunkProviderSettings.dioriteMaxHeight);
-        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, graniteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRANITE))
-        this.genStandardOre1(worldIn, random, this.chunkProviderSettings.graniteCount, this.graniteGen, this.chunkProviderSettings.graniteMinHeight, this.chunkProviderSettings.graniteMaxHeight);
-        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, andesiteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.ANDESITE))
-        this.genStandardOre1(worldIn, random, this.chunkProviderSettings.andesiteCount, this.andesiteGen, this.chunkProviderSettings.andesiteMinHeight, this.chunkProviderSettings.andesiteMaxHeight);
         if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, coalGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL))
         this.genStandardOre1(worldIn, random, this.chunkProviderSettings.coalCount, this.coalGen, this.chunkProviderSettings.coalMinHeight, this.chunkProviderSettings.coalMaxHeight);
         if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, ironGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON))
@@ -158,14 +134,8 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         }
         else if (maxHeight == minHeight)
         {
-            if (minHeight < 255)
-            {
-                ++maxHeight;
-            }
-            else
-            {
-                --minHeight;
-            }
+            if (minHeight < 255) ++maxHeight;
+            else --minHeight;
         }
 
         for (int j = 0; j < blockCount; ++j)
