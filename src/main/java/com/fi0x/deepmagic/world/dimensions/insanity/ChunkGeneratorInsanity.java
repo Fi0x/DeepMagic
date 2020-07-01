@@ -13,9 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.gen.*;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -37,6 +35,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 	private Biome generatedBiome;
 	private final float[] biomeWeights;
 	double[] mainNoiseRegion, minLimitRegion, maxLimitRegion, depthRegion;
+	private MapGenBase caveGenerator = new MapGenCaves();
+	private MapGenBase ravineGenerator = new MapGenRavine();
 	
 	public ChunkGeneratorInsanity(World world, long seed)
 	{
@@ -51,6 +51,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 		this.depthNoise = new NoiseGeneratorOctaves(this.rand, 16);
 		this.heightMap = new double[825];
 		this.biomeWeights = new float[25];
+		caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
+		ravineGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(ravineGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE);
 		
 		for(int i = -2; i <= 2; ++i)
 		{
@@ -84,6 +86,9 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 		this.generatedBiome = BiomeInit.INSANITY;
 		this.setBlocksInChunk(x, z, chunkprimer);
 		this.replaceBiomeBlocks(x, z, chunkprimer, generatedBiome);
+
+		caveGenerator.generate(world, x, z, chunkprimer);
+		ravineGenerator.generate(world, x, z, chunkprimer);
 		
 		Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
 		byte[] abyte = chunk.getBiomeArray();
