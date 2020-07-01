@@ -27,6 +27,8 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	public static final ModWorldGenStructure SHRINE = new ModWorldGenStructure("shrine");
 	public static final ModWorldGenStructure INSANITY_OASIS = new ModWorldGenStructure("insanity_oasis");
 	public static final ModWorldGenStructure DWARF_BASE = new ModWorldGenStructure("dwarf_base");
+	public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");
+
 	public static final SmallDungeon SMALL_DUNGEON = new SmallDungeon();
 	
 	@Override
@@ -40,6 +42,8 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 			generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
 			generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
+			generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
+
 			generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -2, 100, BiomeInsanity.class);
 		}
 	}
