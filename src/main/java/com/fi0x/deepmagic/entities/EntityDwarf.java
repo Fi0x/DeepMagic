@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.entities.ai.EntityAIMining;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -18,10 +19,13 @@ import javax.annotation.Nullable;
 
 public class EntityDwarf extends EntityCreature
 {
+    public boolean isMining;
+
     public EntityDwarf(World worldIn)
     {
         super(worldIn);
-        this.setSize(0.1F, 1.5F);
+        isMining = false;
+        this.setSize(1F, 1.5F);
     }
 
     @Override
@@ -29,11 +33,11 @@ public class EntityDwarf extends EntityCreature
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
-        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(2, new EntityAIMining(this, this.world));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, Entity.class, 8.0F));
+        this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1));
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityGiant.class, true));
     }
 
     @Override
@@ -84,6 +88,6 @@ public class EntityDwarf extends EntityCreature
     @Override
     public float getEyeHeight()
     {
-        return 0.8F;
+        return 1.2F;
     }
 }

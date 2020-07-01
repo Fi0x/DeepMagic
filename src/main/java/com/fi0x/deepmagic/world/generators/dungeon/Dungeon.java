@@ -26,7 +26,9 @@ public class Dungeon extends WorldGenerator implements IWorldGenerator
             new DungeonPiece("dungeon_room3", 9, 6, 9, 1, -1, -1, -1),
             new DungeonPiece("dungeon_room4", 5, 5, 5, 1, -1, -1, -1),
             new DungeonPiece("dungeon_room5", 7, 6, 7, 1, -1, -1, -1),
-            new DungeonPiece("dungeon_room6", 15, 8, 15, 1, -1, 1, -1)};
+            new DungeonPiece("dungeon_room6", 15, 8, 15, 1, -1, 1, -1),
+            new DungeonPiece("dungeon_room7", 13, 6, 13, 1, 1, 1, 1),
+            new DungeonPiece("dungeon_room8", 9, 6, 9, -1, -1, -1, 1)};
 
     private final ArrayList<DungeonPiece> dungeonRooms = new ArrayList<>();
 

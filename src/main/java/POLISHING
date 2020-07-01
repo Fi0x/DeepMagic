@@ -9,5 +9,4 @@ Animations / Models
 Add crafting recipes
 Tweak item + block stats (costs, effect)
 Add ai targets to mobs for different race battles (dwarfs and giants battle...)
-
-fix loot table for dwarf base
+Mobs work together (Dwarfs mine, mages battle, elves heal)
