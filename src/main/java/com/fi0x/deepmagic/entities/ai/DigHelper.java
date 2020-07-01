@@ -11,6 +11,18 @@ import java.util.ArrayList;
 
 public class DigHelper
 {
+    private static final IBlockState[] mineableBlocks = new IBlockState[] {
+            Blocks.STONE.getDefaultState(),
+            Blocks.DIRT.getDefaultState(),
+            Blocks.QUARTZ_ORE.getDefaultState(),
+            Blocks.COAL_ORE.getDefaultState(),
+            Blocks.IRON_ORE.getDefaultState(),
+            Blocks.GOLD_ORE.getDefaultState(),
+            Blocks.REDSTONE_ORE.getDefaultState(),
+            Blocks.LAPIS_ORE.getDefaultState(),
+            Blocks.DIAMOND_ORE.getDefaultState(),
+            Blocks.EMERALD_ORE.getDefaultState()};
+
     public static ArrayList<BlockPos> getMiningBlocks(World world, BlockPos currentPosition, BlockPos destination)
     {
         ArrayList<BlockPos> blocks = new ArrayList<>();
@@ -24,7 +36,7 @@ public class DigHelper
         BlockPos checkPos = currentPosition;
         for(int i = 0; i < Math.abs(xDifference); i++)
         {
-            if(world.getBlockState(checkPos) != Blocks.AIR.getDefaultState() || world.getBlockState(checkPos.add(0, 1, 0)) != Blocks.AIR.getDefaultState())
+            if(isMiningBlock(world.getBlockState(checkPos)) && isMiningBlock(world.getBlockState(checkPos.add(0, 1, 0))))
             {
                 blocks.add(checkPos.add(0, 1, 0));
                 blocks.add(checkPos);
@@ -33,8 +45,7 @@ public class DigHelper
         }
         for(int j = 0; j < Math.abs(zDifference); j++)
         {
-            IBlockState currentBlock;
-            if(world.getBlockState(checkPos) != Blocks.AIR.getDefaultState() || world.getBlockState(checkPos.add(0, 1, 0)) != Blocks.AIR.getDefaultState())
+            if(isMiningBlock(world.getBlockState(checkPos)) && isMiningBlock(world.getBlockState(checkPos.add(0, 1, 0))))
             {
                 blocks.add(checkPos.add(0, 1, 0));
                 blocks.add(checkPos);
@@ -43,6 +54,15 @@ public class DigHelper
             checkPos = checkPos.add(0, 0, zIncrease);
         }
         return blocks;
+    }
+
+    private static boolean isMiningBlock(IBlockState checkBlock)
+    {
+        for(int i = 0; i < mineableBlocks.length; i++)
+        {
+            if(checkBlock == mineableBlocks[i]) return true;
+        }
+        return false;
     }
 
     public static void mineBlocks(World world, ArrayList<BlockPos> miningBlocks, EntityCreature creature)
