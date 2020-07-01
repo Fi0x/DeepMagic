@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -51,6 +52,13 @@ public class EntityHoveringOrb extends EntityMob implements IMagicCreature
         getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.1);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1);
     }
+
+    @Override
+    protected PathNavigate createNavigator(World worldIn)
+    {
+        return super.createNavigator(worldIn);
+    }
+
     @Override
     public float getEyeHeight()
     {
