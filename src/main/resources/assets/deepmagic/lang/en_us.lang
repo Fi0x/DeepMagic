@@ -85,6 +85,9 @@ item.stone_snack.name=Stone Snack
 item.raw_cockroach.name=Raw Cockroach
 item.cooked_cockroach.name=Cooked Cockroach
 item.cockroach_snack.name=Cockroach Snack
+item.raw_worm.name=Raw Worm
+item.cooked_worm.name=Cooked Worm
+item.worm_snack.name=Worm Snack
 
 entity.insanity_cow.name=Insanity Cow
 entity.dwarf.name=Dwarf

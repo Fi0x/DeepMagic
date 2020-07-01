@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.entities.ai.EntityAIFleeLight;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -81,5 +82,12 @@ public class EntityCockroach extends EntityCreature
     public float getEyeHeight()
     {
         return 0.15F;
+    }
+
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        IBlockState iblockstate = this.world.getBlockState((new BlockPos(this)).down());
+        return iblockstate.canEntitySpawn(this) && world.getLight(new BlockPos(this)) < 7;
     }
 }
