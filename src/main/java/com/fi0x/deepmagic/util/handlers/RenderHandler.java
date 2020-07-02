@@ -27,6 +27,8 @@ public class RenderHandler
         RenderingRegistry.registerEntityRenderingHandler(EntityDwarf.class, RenderDwarf::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDemon.class, RenderDemon::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCockroach.class, RenderCockroach::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWorm.class, RenderWorm::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCyclopes.class, RenderCyclopes::new);
     }
 
     public static void registerCustomMeshesAndStates()

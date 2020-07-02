@@ -15,7 +15,7 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 
     public RenderDemon(RenderManager manager)
     {
-        super(manager, new ModelDemon(), 0.5F);
+        super(manager, new ModelDemon(), 0.4F);
     }
 
     @Nullable

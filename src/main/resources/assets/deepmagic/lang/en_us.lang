@@ -98,3 +98,5 @@ entity.rock_troll.name=Rock Troll
 entity.depth_mage.name=Mage of the Depths
 entity.demon.name=Demon
 entity.cockroach.name=Cockroach
+entity.worm.name=Worm
+entity.cyclopes.name=Cyclopes
