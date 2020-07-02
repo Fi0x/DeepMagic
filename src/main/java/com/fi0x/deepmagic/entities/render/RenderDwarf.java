@@ -15,7 +15,7 @@ public class RenderDwarf extends RenderLiving<EntityDwarf>
 
     public RenderDwarf(RenderManager manager)
     {
-        super(manager, new ModelDwarf(), 0.5F);
+        super(manager, new ModelDwarf(), 0.4F);
     }
 
     @Nullable
