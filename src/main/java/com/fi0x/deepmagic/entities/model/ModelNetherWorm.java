@@ -10,7 +10,8 @@ import javax.annotation.Nonnull;
  * ModelNetherWorm - Fi0x
  * Created using Tabula 7.1.0
  */
-public class ModelNetherWorm extends ModelBase {
+public class ModelNetherWorm extends ModelBase
+{
     public ModelRenderer head;
     public ModelRenderer eyeLeft;
     public ModelRenderer eyeRight;
@@ -18,7 +19,8 @@ public class ModelNetherWorm extends ModelBase {
     public ModelRenderer neck1;
     public ModelRenderer body1;
 
-    public ModelNetherWorm() {
+    public ModelNetherWorm()
+    {
         this.textureWidth = 128;
         this.textureHeight = 64;
         this.mouth = new ModelRenderer(this, 58, 0);
@@ -51,15 +53,6 @@ public class ModelNetherWorm extends ModelBase {
     {
         this.head.render(f5);
         this.body1.render(f5);
-    }
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 
     @Override

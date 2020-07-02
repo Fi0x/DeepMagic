@@ -15,7 +15,7 @@ public class RenderWorm extends RenderLiving<EntityWorm>
 
     public RenderWorm(RenderManager manager)
     {
-        super(manager, new ModelWorm(), 0.5F);
+        super(manager, new ModelWorm(), 0.1F);
     }
 
     @Nullable

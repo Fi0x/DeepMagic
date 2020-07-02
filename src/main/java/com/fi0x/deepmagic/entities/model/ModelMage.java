@@ -11,7 +11,8 @@ import javax.annotation.Nonnull;
  * ModelMage - Fi0x
  * Created using Tabula 7.1.0
  */
-public class ModelMage extends ModelBase {
+public class ModelMage extends ModelBase
+{
     public ModelRenderer body;
     public ModelRenderer legLeft;
     public ModelRenderer legRight;
@@ -25,7 +26,8 @@ public class ModelMage extends ModelBase {
     public ModelRenderer cap5;
     public ModelRenderer cap6;
 
-    public ModelMage() {
+    public ModelMage()
+    {
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.legRight = new ModelRenderer(this, 40, 0);
@@ -82,15 +84,6 @@ public class ModelMage extends ModelBase {
     public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         this.body.render(f5);
-    }
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 
     @Override

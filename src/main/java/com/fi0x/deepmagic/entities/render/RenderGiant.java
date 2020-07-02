@@ -15,7 +15,7 @@ public class RenderGiant extends RenderLiving<EntityGiant>
 
     public RenderGiant(RenderManager manager)
     {
-        super(manager, new ModelGiant(), 0.5F);
+        super(manager, new ModelGiant(), 0.6F);
     }
 
     @Nullable

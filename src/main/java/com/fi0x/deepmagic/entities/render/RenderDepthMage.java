@@ -15,7 +15,7 @@ public class RenderDepthMage extends RenderLiving<EntityDepthMage>
 
     public RenderDepthMage(RenderManager manager)
     {
-        super(manager, new ModelMage(), 0.5F);
+        super(manager, new ModelMage(), 0.4F);
     }
 
     @Nullable

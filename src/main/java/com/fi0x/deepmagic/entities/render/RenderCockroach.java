@@ -15,7 +15,7 @@ public class RenderCockroach extends RenderLiving<EntityCockroach>
 
     public RenderCockroach(RenderManager manager)
     {
-        super(manager, new ModelCockroach(), 0.5F);
+        super(manager, new ModelCockroach(), 0.3F);
     }
 
     @Nullable

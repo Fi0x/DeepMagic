@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
 import javax.annotation.Nonnull;
@@ -13,7 +12,8 @@ import javax.annotation.Nonnull;
  * EntityHoveringOrb - Undefined
  * Created using Tabula 7.1.0
  */
-public class ModelHoveringOrb extends ModelBase {
+public class ModelHoveringOrb extends ModelBase
+{
     public ModelRenderer topBody;
     public ModelRenderer spike1;
     public ModelRenderer spike2;
@@ -89,7 +89,8 @@ public class ModelHoveringOrb extends ModelBase {
     public ModelRenderer topCover;
     public ModelRenderer bottomCover;
 
-    public ModelHoveringOrb() {
+    public ModelHoveringOrb()
+    {
         this.textureWidth = 128;
         this.textureHeight = 64;
 
@@ -211,7 +212,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike51.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike51.addBox(-5.7F, -2.8F, 8.0F, 1, 1, 2, 0.0F);
         this.topBody = new ModelRenderer(this, 0, 0);
-        this.topBody.setRotationPoint(0.0F, 16.0F, 0.0F);
+        this.topBody.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.topBody.addBox(-8.0F, -7.5F, -8.0F, 16, 7, 16, 0.0F);
         this.spike45 = new ModelRenderer(this, 96, 7);
         this.spike45.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -247,7 +248,7 @@ public class ModelHoveringOrb extends ModelBase {
         this.spike3.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.spike3.addBox(8.0F, -6.0F, -2.2F, 2, 1, 1, 0.0F);
         this.bottomBody = new ModelRenderer(this, 48, 7);
-        this.bottomBody.setRotationPoint(0.0F, 16.0F, 0.0F);
+        this.bottomBody.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.bottomBody.addBox(-8.0F, 0.5F, -8.0F, 16, 7, 16, 0.0F);
         this.spike19 = new ModelRenderer(this, 84, 0);
         this.spike19.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -385,10 +386,13 @@ public class ModelHoveringOrb extends ModelBase {
         this.centerBody.addChild(eyeRight);
         this.centerBody.addChild(topCover);
         this.centerBody.addChild(bottomCover);
+        this.centerBody.addChild(topBody);
+        this.centerBody.addChild(bottomBody);
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.centerBody.render(f5);
         GlStateManager.pushMatrix();
         GlStateManager.translate(this.eyeExtenderRight.offsetX, this.eyeExtenderRight.offsetY, this.eyeExtenderRight.offsetZ);
@@ -398,8 +402,6 @@ public class ModelHoveringOrb extends ModelBase {
         GlStateManager.translate(-this.eyeExtenderRight.rotationPointX * f5, -this.eyeExtenderRight.rotationPointY * f5, -this.eyeExtenderRight.rotationPointZ * f5);
         this.eyeExtenderRight.render(f5);
         GlStateManager.popMatrix();
-        this.topBody.render(f5);
-        this.bottomBody.render(f5);
         GlStateManager.pushMatrix();
         GlStateManager.translate(this.eyeExtenderLeft.offsetX, this.eyeExtenderLeft.offsetY, this.eyeExtenderLeft.offsetZ);
         GlStateManager.translate(this.eyeExtenderLeft.rotationPointX * f5, this.eyeExtenderLeft.rotationPointY * f5, this.eyeExtenderLeft.rotationPointZ * f5);
@@ -408,15 +410,6 @@ public class ModelHoveringOrb extends ModelBase {
         GlStateManager.translate(-this.eyeExtenderLeft.rotationPointX * f5, -this.eyeExtenderLeft.rotationPointY * f5, -this.eyeExtenderLeft.rotationPointZ * f5);
         this.eyeExtenderLeft.render(f5);
         GlStateManager.popMatrix();
-    }
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 
     @Override
@@ -435,9 +428,5 @@ public class ModelHoveringOrb extends ModelBase {
         this.bottomBody.rotateAngleY -= (ageInTicks * 0.067F) * 10;
         this.topBody.offsetY += MathHelper.cos(ageInTicks * 0.067F) * 0.03;
         this.bottomBody.offsetY -= MathHelper.cos(ageInTicks * 0.067F) * 0.03;
-    }
-    @Override
-    public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
     }
 }

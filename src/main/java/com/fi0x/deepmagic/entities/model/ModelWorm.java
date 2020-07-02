@@ -4,6 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
+import javax.annotation.Nonnull;
+
 /**
  * ModelWorm - Fi0x
  * Created using Tabula 7.1.0
@@ -19,7 +21,8 @@ public class ModelWorm extends ModelBase {
     public ModelRenderer connector3;
     public ModelRenderer body4;
 
-    public ModelWorm() {
+    public ModelWorm()
+    {
         this.textureWidth = 32;
         this.textureHeight = 16;
         this.body2 = new ModelRenderer(this, 16, 0);
@@ -61,17 +64,17 @@ public class ModelWorm extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         this.body1.render(f5);
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+    @Override
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entityIn)
+    {
+        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.head.rotateAngleX = headPitch * 0.017453292F;
+
+
     }
 }
