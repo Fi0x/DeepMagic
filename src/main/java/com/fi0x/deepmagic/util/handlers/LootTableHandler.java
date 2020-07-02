@@ -14,6 +14,7 @@ public class LootTableHandler
     public static final ResourceLocation DWARF = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dwarf"));
     public static final ResourceLocation DEMON = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "demon"));
     public static final ResourceLocation COCKROACH = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "cockroach"));
+    public static final ResourceLocation WORM = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "worm"));
 
     public static final ResourceLocation STRUCTURE_DEFAULT = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "structure_default"));
     public static final ResourceLocation STRUCTURE_DWARF_BASE = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "structure_dwarf_base"));

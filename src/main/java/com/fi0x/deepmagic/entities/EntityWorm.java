@@ -39,22 +39,22 @@ public class EntityWorm extends EntityCreature
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return SoundsHandler.ENTITY_HOVERING_ORB_AMBIENT;
+        return SoundsHandler.ENTITY_WORM_AMBIENT;
     }
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource source)
     {
-        return SoundsHandler.ENTITY_HOVERING_ORB_HURT;
+        return SoundsHandler.ENTITY_WORM_HURT;
     }
     @Override
     protected SoundEvent getDeathSound()
     {
-        return SoundsHandler.ENTITY_HOVERING_ORB_DEATH;
+        return SoundsHandler.ENTITY_WORM_DEATH;
     }
     @Override
     protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
     {
-        this.playSound(SoundsHandler.ENTITY_HOVERING_ORB_STEP, 1F, 1F);
+        this.playSound(SoundsHandler.ENTITY_WORM_STEP, 1F, 1F);
     }
     @Override
     protected float getSoundVolume()
@@ -65,6 +65,6 @@ public class EntityWorm extends EntityCreature
     @Override
     protected ResourceLocation getLootTable()
     {
-        return LootTableHandler.HOVERING_ORB;
+        return LootTableHandler.WORM;
     }
 }
