@@ -40,21 +40,24 @@ public class EntityAIMining extends EntityAIBase
         mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
     }
 
+    @Override
     public boolean shouldExecute()
     {
         return !creature.isMining && creature.posY < 50;
     }
 
+    @Override
     public void startExecuting()
     {
-        this.creature.isMining = true;
-        destination = getRandomDestination();
-
-        ArrayList<BlockPos> miningBlocks = getMiningPath(creature.getPosition(), destination);
-        if(isMineablePath(world, miningBlocks)) mineBlocks(world, miningBlocks, creature);
-        else creature.isMining = false;
+//        this.creature.isMining = true;
+//        destination = getRandomDestination();
+//
+//        ArrayList<BlockPos> miningBlocks = getMiningPath(creature.getPosition(), destination);
+//        if(isMineablePath(world, miningBlocks)) mineBlocks(world, miningBlocks, creature);
+//        else creature.isMining = false;
     }
 
+    @Override
     public boolean shouldContinueExecuting()
     {
         if(creature.getPosition() == destination) creature.isMining = false;
