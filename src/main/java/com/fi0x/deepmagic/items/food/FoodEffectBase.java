@@ -12,13 +12,15 @@ import javax.annotation.Nonnull;
 public class FoodEffectBase extends FoodBase
 {
 	PotionEffect effect;
+	boolean effectVisible;
 	
-	public FoodEffectBase(String name, int amount, float saturation, boolean isAnimalFood, PotionEffect effect)
+	public FoodEffectBase(String name, int amount, float saturation, boolean isAnimalFood, PotionEffect effect, boolean effectVisible)
 	{
 		super(name, amount, saturation, isAnimalFood);
 		setAlwaysEdible();
 		
 		this.effect = effect;
+		this.effectVisible = effectVisible;
 	}
 	
 	@Override
@@ -33,6 +35,6 @@ public class FoodEffectBase extends FoodBase
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(@Nonnull ItemStack stack)
 	{
-		return true;
+		return effectVisible;
 	}
 }
