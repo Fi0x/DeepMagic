@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
@@ -11,61 +12,63 @@ import java.util.ArrayList;
 
 public class DigHelper
 {
-    private static final IBlockState[] mineableBlocks = new IBlockState[] {
-            Blocks.STONE.getDefaultState(),
-            Blocks.DIRT.getDefaultState(),
-            Blocks.QUARTZ_ORE.getDefaultState(),
-            Blocks.COAL_ORE.getDefaultState(),
-            Blocks.IRON_ORE.getDefaultState(),
-            Blocks.GOLD_ORE.getDefaultState(),
-            Blocks.REDSTONE_ORE.getDefaultState(),
-            Blocks.LAPIS_ORE.getDefaultState(),
-            Blocks.DIAMOND_ORE.getDefaultState(),
-            Blocks.EMERALD_ORE.getDefaultState()};
+    private final ArrayList<IBlockState> mineableBlocks;
 
-    public static ArrayList<BlockPos> getMiningBlocks(World world, BlockPos currentPosition, BlockPos destination)
+    public DigHelper()
+    {
+        mineableBlocks = new ArrayList<>();
+        mineableBlocks.add(Blocks.STONE.getDefaultState());
+        mineableBlocks.add(Blocks.DIRT.getDefaultState());
+        mineableBlocks.add(Blocks.AIR.getDefaultState());
+        mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
+        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
+    }
+
+    public ArrayList<BlockPos> getMiningPath(World world, BlockPos currentPosition, BlockPos destination)
     {
         ArrayList<BlockPos> blocks = new ArrayList<>();
-        int xDifference = destination.getX() - currentPosition.getX();
-        int zDifference = destination.getZ() - currentPosition.getZ();
         int xIncrease = 1;
         int zIncrease = 1;
         if(destination.getX() > currentPosition.getX()) xIncrease = -1;
         if(destination.getZ() > currentPosition.getZ()) zIncrease = -1;
 
         BlockPos checkPos = currentPosition;
-        for(int i = 0; i < Math.abs(xDifference); i++)
+        while(checkPos.getX() != destination.getX())
         {
-            if(isMiningBlock(world.getBlockState(checkPos)) && isMiningBlock(world.getBlockState(checkPos.add(0, 1, 0))))
-            {
-                blocks.add(checkPos.add(0, 1, 0));
-                blocks.add(checkPos);
-            }
             checkPos = checkPos.add(xIncrease, 0, 0);
+            blocks.add(checkPos.add(0, 1, 0));
+            blocks.add(checkPos);
         }
-        for(int j = 0; j < Math.abs(zDifference); j++)
+        while(checkPos.getZ() != destination.getZ())
         {
-            if(isMiningBlock(world.getBlockState(checkPos)) && isMiningBlock(world.getBlockState(checkPos.add(0, 1, 0))))
-            {
-                blocks.add(checkPos.add(0, 1, 0));
-                blocks.add(checkPos);
-            }
-
             checkPos = checkPos.add(0, 0, zIncrease);
+            blocks.add(checkPos.add(0, 1, 0));
+            blocks.add(checkPos);
         }
+
         return blocks;
     }
 
-    private static boolean isMiningBlock(IBlockState checkBlock)
+    public boolean isMineablePath(World world, ArrayList<BlockPos> blocks)
     {
-        for(int i = 0; i < mineableBlocks.length; i++)
+        for(int i = 0; i < blocks.size(); i++)
         {
-            if(checkBlock == mineableBlocks[i]) return true;
+            if(!mineableBlocks.contains(world.getBlockState(blocks.get(i))))
+            {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
-    public static void mineBlocks(World world, ArrayList<BlockPos> miningBlocks, EntityCreature creature)
+    public void mineBlocks(World world, ArrayList<BlockPos> miningBlocks, EntityCreature creature)
     {
         while(!miningBlocks.isEmpty())
         {
