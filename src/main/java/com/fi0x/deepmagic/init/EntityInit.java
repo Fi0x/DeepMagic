@@ -21,6 +21,7 @@ public class EntityInit
         registerEntity("demon", EntityDemon.class, Reference.ENTITY_DEMON, 50, 2162688, 9109504);
         registerEntity("cockroach", EntityCockroach.class, Reference.ENTITY_COCKROACH, 50, 5439488, 2299392);
         registerEntity("worm", EntityWorm.class, Reference.ENTITY_WORM, 50, 3093045, 8750988);
+        registerEntity("cyclopes", EntityCyclopes.class, Reference.ENTITY_CYCLOPES, 50, 16230511, 8735521);
     }
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)
     {

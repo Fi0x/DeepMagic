@@ -34,7 +34,7 @@ public class ModelInsanityCow extends ModelBase
 
     public ModelInsanityCow()
     {
-        this.textureWidth = 128;
+        this.textureWidth = 64;
         this.textureHeight = 64;
         this.rightHead = new ModelRenderer(this, 0, 48);
         this.rightHead.setRotationPoint(-3.8F, 4.0F, -8.0F);
