@@ -1,18 +1,17 @@
 package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityAIDigRandom extends EntityAIBase
+public class EntityAIDigRandom extends EntityAIWanderAvoidWater
 {
-    EntityDwarf creature;
     World world;
 
     public EntityAIDigRandom(EntityDwarf entity, World world)
     {
-        this.creature = entity;
+        super(entity, 1, 30);
         this.setMutexBits(1);
         this.world = world;
     }
@@ -20,25 +19,40 @@ public class EntityAIDigRandom extends EntityAIBase
     @Override
     public boolean shouldExecute()
     {
-        return !creature.isMining && creature.posY < 50;
+        return super.shouldExecute();
     }
 
     @Override
     public void startExecuting()
     {
-        creature.isMining = true;
-        BlockPos pos = getRandomBlock();
-        world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        super.startExecuting();
     }
 
     @Override
     public boolean shouldContinueExecuting()
     {
-        return false;
+        if(entity.getNavigator().noPath())
+        {
+            BlockPos pos = getRandomBlock();
+            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+            world.setBlockToAir(pos);
+            pos = pos.add(0, (Math.random() * 3) - 1, 0);
+            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+            world.setBlockToAir(pos);
+            return false;
+        }
+        return true;
     }
 
     private BlockPos getRandomBlock()
     {
-        return creature.getPosition().add(Math.random() * 3 - 1, Math.random() * 2, Math.random() * 3 - 1);
+        int x = 0;
+        int z = 0;
+        while(x == 0 && z == 0)
+        {
+            x = (int) (Math.random() * 3) - 1;
+            if(x == 0) z = (int) (Math.random() * 3) - 1;
+        }
+        return entity.getPosition().add(x, 0, z);
     }
 }
