@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities;
 
+import com.fi0x.deepmagic.entities.ai.EntityAIDigRandom;
 import com.fi0x.deepmagic.entities.ai.EntityAIMining;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
@@ -34,8 +35,10 @@ public class EntityDwarf extends EntityCreature
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
         this.tasks.addTask(2, new EntityAIMining(this, this.world));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, Entity.class, 8.0F));
-        this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1));
+        this.tasks.addTask(3, new EntityAIDigRandom(this, this.world));
+        this.tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1));
+        this.tasks.addTask(5, new EntityAIWatchClosest(this, Entity.class, 8.0F));
+        this.tasks.addTask(6, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
     }
