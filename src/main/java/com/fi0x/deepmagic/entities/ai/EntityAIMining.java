@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
+import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
@@ -18,6 +19,8 @@ public class EntityAIMining extends EntityAIBase
     protected double z;
     protected final double speed;
     protected final float probability;
+    protected BlockPos chestPos;
+    private final int searchRange = 30;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -58,6 +61,7 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public void startExecuting()
     {
+        chestPos = findChest(entity.getPosition());
         this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
     }
 
@@ -96,5 +100,36 @@ public class EntityAIMining extends EntityAIBase
             return vec3d == null ? RandomPositionGenerator.findRandomTarget(this.entity, 10, 7) : vec3d;
         }
         return this.entity.getRNG().nextFloat() >= this.probability ? RandomPositionGenerator.getLandPos(this.entity, 10, 7) : RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+    }
+    protected BlockPos findChest(BlockPos pos)
+    {
+        int height = 5;
+
+        for(int range = 0; range <= searchRange; range++)
+        {
+            int x = -range;
+            int z = -range;
+            for(int y = -height; y <= height; y++)
+            {
+                for(; x <= range; x++)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+                for(; z <= range; z++)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+                for(; x >= -range; x--)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+                for(; z >= -range; z--)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+            }
+        }
+        System.out.println("No chest found");
+        return null;
     }
 }
