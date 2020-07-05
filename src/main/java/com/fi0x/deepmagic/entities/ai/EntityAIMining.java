@@ -1,23 +1,35 @@
 package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class EntityAIMining extends EntityAIBase
 {
     protected final int executionChance;
-    protected final EntityCreature entity;
     protected final World world;
+    protected final EntityCreature entity;
+    protected final double speed;
+    protected final int searchRange = 30;
+    protected final float probability;
+    protected final int maxExecutionHeight = 50;
+    protected final Random random;
     protected double x;
     protected double y;
     protected double z;
-    protected final double speed;
-    protected final float probability;
+    protected BlockPos chestPos;
+    protected TileEntityChest chestEntity;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -35,13 +47,14 @@ public class EntityAIMining extends EntityAIBase
         this.probability = 0.001F;
         this.speed = speed;
         this.executionChance = executionChance;
+        random = new Random();
     }
 
     @Override
     public boolean shouldExecute()
     {
-        if (this.entity.getIdleTime() >= 100) return false;
-        if (this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
+        if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
+        if (entity.posY > maxExecutionHeight) return false;
 
         Vec3d vec3d = this.getPosition();
 
@@ -51,6 +64,7 @@ public class EntityAIMining extends EntityAIBase
             this.x = vec3d.x;
             this.y = vec3d.y;
             this.z = vec3d.z;
+            System.out.println("Starting mining ai");
             return true;
         }
     }
@@ -58,26 +72,59 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public void startExecuting()
     {
+        chestPos = findChest(entity.getPosition());
+        TileEntity te = world.getTileEntity(chestPos);
+        if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
+
         this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
+        //TODO: get a random position that might be a wall
     }
 
     @Override
     public boolean shouldContinueExecuting()
     {
+        //TODO: start digging a tunnel to the new destination
         if(entity.getNavigator().noPath())
         {
-            BlockPos pos = getRandomBlock();
-            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
-            world.setBlockToAir(pos);
-            pos = pos.add(0, (Math.random() * 3) - 1, 0);
-            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
-            world.setBlockToAir(pos);
+            BlockPos pos = getRandomSurroundingBlock();
+            digAtBlockPos(pos);
+            digAtBlockPos(pos.add(0, (Math.random() * 3) - 1, 0));
             return false;
         }
         return true;
     }
 
-    protected BlockPos getRandomBlock()
+    protected void digAtBlockPos(BlockPos pos)
+    {
+        System.out.println("Starting digging process");
+        Block block = world.getBlockState(pos).getBlock();
+        ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+
+        int currentSlot = 0;
+        ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
+        while(currentSlot < chestEntity.getSizeInventory())
+        {
+            if(currentSlotContent == ItemStack.EMPTY) break;
+            if(currentSlotContent.getItem() == droppedItemStack.getItem())
+            {
+                if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
+            }
+            currentSlot++;
+        }
+
+        System.out.println("Slot " + currentSlot + " can hold the new block");
+        if(currentSlot >= chestEntity.getSizeInventory())
+        {
+            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        } else
+        {
+            if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
+            else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
+        }
+        world.setBlockToAir(pos);
+        System.out.println("Block destroyed");
+    }
+    protected BlockPos getRandomSurroundingBlock()
     {
         int x = 0;
         int z = 0;
@@ -92,9 +139,41 @@ public class EntityAIMining extends EntityAIBase
     {
         if (entity.isInWater())
         {
-            Vec3d vec3d = RandomPositionGenerator.getLandPos(this.entity, 15, 7);
-            return vec3d == null ? RandomPositionGenerator.findRandomTarget(this.entity, 10, 7) : vec3d;
+            Vec3d vec3d = RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
+            if(vec3d == null) return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
+            else return vec3d;
         }
-        return this.entity.getRNG().nextFloat() >= this.probability ? RandomPositionGenerator.getLandPos(this.entity, 10, 7) : RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+        if(entity.getRNG().nextFloat() >= this.probability) return RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
+        else return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
+    }
+    protected BlockPos findChest(BlockPos pos)
+    {
+        int height = searchRange / 4;
+
+        for(int range = 0; range <= searchRange; range++)
+        {
+            int x = -range;
+            int z = -range;
+            for(int y = -height; y <= height; y++)
+            {
+                for(; x <= range; x++)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+                for(; z <= range; z++)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+                for(; x >= -range; x--)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+                for(; z >= -range; z--)
+                {
+                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                }
+            }
+        }
+        return null;
     }
 }
