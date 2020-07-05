@@ -5,12 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -27,9 +25,6 @@ public class EntityAIMining extends EntityAIBase
     protected final int maxExecutionHeight = 50;
     protected final Random random;
     protected BlockPos startPosition;
-    protected double x;
-    protected double y;
-    protected double z;
     protected BlockPos destination;
     protected ArrayList<BlockPos> miningBlocks;
     protected BlockPos chestPos;
@@ -59,18 +54,7 @@ public class EntityAIMining extends EntityAIBase
     public boolean shouldExecute()
     {
         if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
-        if (entity.posY > maxExecutionHeight) return false;
-
-        Vec3d vec3d = this.getPosition();
-
-        if (vec3d == null) return false;
-        else
-        {
-            this.x = vec3d.x;
-            this.y = vec3d.y;
-            this.z = vec3d.z;
-            return true;
-        }
+        return !(entity.posY > maxExecutionHeight);
     }
 
     @Override
@@ -85,24 +69,23 @@ public class EntityAIMining extends EntityAIBase
         digDelay = 0;
 
         getMiningBlocks(startPosition, destination);
-
-        //TODO: remove the following command when ai works correctly
-        this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
     }
 
     @Override
     public boolean shouldContinueExecuting()
     {
-        //TODO: dig each block in the miningBlocks list
-        //TODO: move entity to mined block position
-        if(entity.getNavigator().noPath())
+        if(digDelay == 0)
         {
-            BlockPos pos = getRandomSurroundingBlock();
-            digAtBlockPos(pos);
-            digAtBlockPos(pos.add(0, (Math.random() * 3) - 1, 0));
-            return false;
-        }
-        return true;
+            digAtBlockPos(miningBlocks.get(0));
+            if(miningBlocks.get(0).getY() == entity.posY)
+            {
+                //TODO: move entity to mined block position
+            }
+            miningBlocks.remove(0);
+            digDelay = 10;
+        } else digDelay--;
+
+        return !miningBlocks.isEmpty();
     }
 
     protected void digAtBlockPos(BlockPos pos)
@@ -132,32 +115,27 @@ public class EntityAIMining extends EntityAIBase
         }
         world.setBlockToAir(pos);
     }
-    protected BlockPos getRandomSurroundingBlock()
-    {
-        int x = 0;
-        int z = 0;
-        while(x == 0 && z == 0)
-        {
-            x = (int) (Math.random() * 3) - 1;
-            if(x == 0) z = (int) (Math.random() * 3) - 1;
-        }
-        return entity.getPosition().add(x, 0, z);
-    }
-    protected Vec3d getPosition()
-    {
-        if (entity.isInWater())
-        {
-            Vec3d vec3d = RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
-            if(vec3d == null) return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
-            else return vec3d;
-        }
-        if(entity.getRNG().nextFloat() >= this.probability) return RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
-        else return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
-    }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {
         ArrayList<BlockPos> blocks = new ArrayList<>();
-        //TODO: get all blocks between start and end position
+        int xDifference = 0;
+        int zDifference = 0;
+        if(start.getX() == start.getZ())
+        {
+            if(start.getZ() < end.getZ()) zDifference = 1;
+            else zDifference = -1;
+        } else
+        {
+            if(start.getX() < end.getX()) xDifference = 1;
+            else xDifference = -1;
+        }
+
+        while(start != end)
+        {
+            blocks.add(start);
+            blocks.add(start.add(0, 1, 0));
+            start = start.add(xDifference, 0, zDifference);
+        }
 
         miningBlocks = blocks;
     }
@@ -166,8 +144,8 @@ public class EntityAIMining extends EntityAIBase
         BlockPos pos = entity.getPosition();
         int xIncrease = 0;
         int zIncrease = 0;
-        if((int) (Math.random() * 2) == 0) xIncrease = random.nextInt(searchRange / 2);
-        if(xIncrease == 0) zIncrease = random.nextInt(searchRange / 2);
+        if((int) (Math.random() * 2) == 0) xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+        if(xIncrease == 0) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
         pos = pos.add(xIncrease, 0, zIncrease);
 
         return pos;
