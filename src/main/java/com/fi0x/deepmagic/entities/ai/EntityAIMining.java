@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -12,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class EntityAIMining extends EntityAIBase
 {
     protected final int executionChance;
@@ -21,6 +24,7 @@ public class EntityAIMining extends EntityAIBase
     protected final int searchRange = 30;
     protected final float probability;
     protected final int maxExecutionHeight = 50;
+    protected final Random random;
     protected double x;
     protected double y;
     protected double z;
@@ -33,7 +37,7 @@ public class EntityAIMining extends EntityAIBase
     }
     public EntityAIMining(EntityDwarf entity, int speed)
     {
-        this(entity, speed, 50);
+        this(entity, speed, 120);
     }
     public EntityAIMining(EntityDwarf entity, int speed, int executionChance)
     {
@@ -43,6 +47,7 @@ public class EntityAIMining extends EntityAIBase
         this.probability = 0.001F;
         this.speed = speed;
         this.executionChance = executionChance;
+        random = new Random();
     }
 
     @Override
@@ -59,6 +64,7 @@ public class EntityAIMining extends EntityAIBase
             this.x = vec3d.x;
             this.y = vec3d.y;
             this.z = vec3d.z;
+            System.out.println("Starting mining ai");
             return true;
         }
     }
@@ -90,17 +96,33 @@ public class EntityAIMining extends EntityAIBase
 
     protected void digAtBlockPos(BlockPos pos)
     {
-        //TODO: find out which item will be dropped by the block at specified position
+        System.out.println("Starting digging process");
+        Block block = world.getBlockState(pos).getBlock();
+        ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
         int currentSlot = 0;
         ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
-        while(currentSlotContent != ItemStack.EMPTY || currentSlot < chestEntity.getSizeInventory())
+        while(currentSlot < chestEntity.getSizeInventory())
         {
-            //TODO: check if dropped item can be placed in current inventory-slot
+            if(currentSlotContent == ItemStack.EMPTY) break;
+            if(currentSlotContent.getItem() == droppedItemStack.getItem())
+            {
+                if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
+            }
+            currentSlot++;
         }
-        //TODO: store Item in inventory slot if slot is not null
-        world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+
+        System.out.println("Slot " + currentSlot + " can hold the new block");
+        if(currentSlot >= chestEntity.getSizeInventory())
+        {
+            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        } else
+        {
+            if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
+            else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
+        }
         world.setBlockToAir(pos);
+        System.out.println("Block destroyed");
     }
     protected BlockPos getRandomSurroundingBlock()
     {
