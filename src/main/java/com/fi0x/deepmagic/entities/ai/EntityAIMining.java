@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class EntityAIMining extends EntityAIBase
@@ -25,11 +26,15 @@ public class EntityAIMining extends EntityAIBase
     protected final float probability;
     protected final int maxExecutionHeight = 50;
     protected final Random random;
+    protected BlockPos startPosition;
     protected double x;
     protected double y;
     protected double z;
+    protected BlockPos destination;
+    protected ArrayList<BlockPos> miningBlocks;
     protected BlockPos chestPos;
     protected TileEntityChest chestEntity;
+    private int digDelay;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -64,7 +69,6 @@ public class EntityAIMining extends EntityAIBase
             this.x = vec3d.x;
             this.y = vec3d.y;
             this.z = vec3d.z;
-            System.out.println("Starting mining ai");
             return true;
         }
     }
@@ -76,14 +80,21 @@ public class EntityAIMining extends EntityAIBase
         TileEntity te = world.getTileEntity(chestPos);
         if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
 
+        startPosition = entity.getPosition();
+        destination = getRandomPosition();
+        digDelay = 0;
+
+        getMiningBlocks(startPosition, destination);
+
+        //TODO: remove the following command when ai works correctly
         this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
-        //TODO: get a random position that might be a wall
     }
 
     @Override
     public boolean shouldContinueExecuting()
     {
-        //TODO: start digging a tunnel to the new destination
+        //TODO: dig each block in the miningBlocks list
+        //TODO: move entity to mined block position
         if(entity.getNavigator().noPath())
         {
             BlockPos pos = getRandomSurroundingBlock();
@@ -96,7 +107,6 @@ public class EntityAIMining extends EntityAIBase
 
     protected void digAtBlockPos(BlockPos pos)
     {
-        System.out.println("Starting digging process");
         Block block = world.getBlockState(pos).getBlock();
         ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
@@ -112,7 +122,6 @@ public class EntityAIMining extends EntityAIBase
             currentSlot++;
         }
 
-        System.out.println("Slot " + currentSlot + " can hold the new block");
         if(currentSlot >= chestEntity.getSizeInventory())
         {
             world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
@@ -122,7 +131,6 @@ public class EntityAIMining extends EntityAIBase
             else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
         }
         world.setBlockToAir(pos);
-        System.out.println("Block destroyed");
     }
     protected BlockPos getRandomSurroundingBlock()
     {
@@ -145,6 +153,24 @@ public class EntityAIMining extends EntityAIBase
         }
         if(entity.getRNG().nextFloat() >= this.probability) return RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
         else return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
+    }
+    protected void getMiningBlocks(BlockPos start, BlockPos end)
+    {
+        ArrayList<BlockPos> blocks = new ArrayList<>();
+        //TODO: get all blocks between start and end position
+
+        miningBlocks = blocks;
+    }
+    protected BlockPos getRandomPosition()
+    {
+        BlockPos pos = entity.getPosition();
+        int xIncrease = 0;
+        int zIncrease = 0;
+        if((int) (Math.random() * 2) == 0) xIncrease = random.nextInt(searchRange / 2);
+        if(xIncrease == 0) zIncrease = random.nextInt(searchRange / 2);
+        pos = pos.add(xIncrease, 0, zIncrease);
+
+        return pos;
     }
     protected BlockPos findChest(BlockPos pos)
     {
