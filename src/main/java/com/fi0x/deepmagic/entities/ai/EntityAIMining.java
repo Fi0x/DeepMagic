@@ -1,10 +1,13 @@
 package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
+import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
@@ -30,6 +33,7 @@ public class EntityAIMining extends EntityAIBase
     protected BlockPos chestPos;
     protected TileEntityChest chestEntity;
     private int digDelay;
+    private ArrayList<IBlockState> mineableBlocks;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -49,6 +53,20 @@ public class EntityAIMining extends EntityAIBase
         this.executionChance = executionChance;
         random = new Random();
         miningBlocks = new ArrayList<>();
+
+        mineableBlocks = new ArrayList<>();
+        mineableBlocks.add(Blocks.STONE.getDefaultState());
+        mineableBlocks.add(Blocks.DIRT.getDefaultState());
+        mineableBlocks.add(Blocks.AIR.getDefaultState());
+        mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
+        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
     }
 
     @Override
@@ -133,7 +151,7 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end && miningBlocks.size() < 12)
+        while(start != end && miningBlocks.size() < 12 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
         {
             miningBlocks.add(start);
             miningBlocks.add(start.add(0, 1, 0));
@@ -142,14 +160,12 @@ public class EntityAIMining extends EntityAIBase
     }
     protected BlockPos getRandomPosition()
     {
-        BlockPos pos = entity.getPosition();
         int xIncrease = 0;
         int zIncrease = 0;
-        if((int) (Math.random() * 2) == 0) xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
-        if(xIncrease == 0) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
-        pos = pos.add(xIncrease, 0, zIncrease);
+        if(Math.random() < 0.5) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+        else xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
 
-        return pos;
+        return entity.getPosition().add(xIncrease, 0, zIncrease);
     }
     protected BlockPos findChest(BlockPos pos)
     {
