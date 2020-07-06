@@ -1,18 +1,20 @@
 package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
+import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class EntityAIMining extends EntityAIBase
@@ -25,11 +27,13 @@ public class EntityAIMining extends EntityAIBase
     protected final float probability;
     protected final int maxExecutionHeight = 50;
     protected final Random random;
-    protected double x;
-    protected double y;
-    protected double z;
+    protected BlockPos startPosition;
+    protected BlockPos destination;
+    protected ArrayList<BlockPos> miningBlocks;
     protected BlockPos chestPos;
     protected TileEntityChest chestEntity;
+    private int digDelay;
+    private ArrayList<IBlockState> mineableBlocks;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -48,103 +52,120 @@ public class EntityAIMining extends EntityAIBase
         this.speed = speed;
         this.executionChance = executionChance;
         random = new Random();
+        miningBlocks = new ArrayList<>();
+
+        mineableBlocks = new ArrayList<>();
+        mineableBlocks.add(Blocks.STONE.getDefaultState());
+        mineableBlocks.add(Blocks.DIRT.getDefaultState());
+        mineableBlocks.add(Blocks.AIR.getDefaultState());
+        mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
+        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
     }
 
     @Override
     public boolean shouldExecute()
     {
         if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
-        if (entity.posY > maxExecutionHeight) return false;
-
-        Vec3d vec3d = this.getPosition();
-
-        if (vec3d == null) return false;
-        else
-        {
-            this.x = vec3d.x;
-            this.y = vec3d.y;
-            this.z = vec3d.z;
-            System.out.println("Starting mining ai");
-            return true;
-        }
+        return !(entity.posY > maxExecutionHeight);
     }
 
     @Override
     public void startExecuting()
     {
         chestPos = findChest(entity.getPosition());
-        TileEntity te = world.getTileEntity(chestPos);
-        if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
+        try
+        {
+            TileEntity te = world.getTileEntity(chestPos);
+            if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
+        } catch(Exception ignore) {}
 
-        this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
-        //TODO: get a random position that might be a wall
+        startPosition = entity.getPosition();
+        destination = getRandomPosition();
+        digDelay = 0;
+
+        getMiningBlocks(startPosition, destination);
     }
 
     @Override
     public boolean shouldContinueExecuting()
     {
-        //TODO: start digging a tunnel to the new destination
-        if(entity.getNavigator().noPath())
+        if(digDelay == 0 && !miningBlocks.isEmpty())
         {
-            BlockPos pos = getRandomSurroundingBlock();
-            digAtBlockPos(pos);
-            digAtBlockPos(pos.add(0, (Math.random() * 3) - 1, 0));
-            return false;
-        }
-        return true;
+            digAtBlockPos(miningBlocks.get(0));
+            miningBlocks.remove(0);
+            digDelay = 20;
+        } else digDelay--;
+
+        return !miningBlocks.isEmpty();
     }
 
     protected void digAtBlockPos(BlockPos pos)
     {
-        System.out.println("Starting digging process");
         Block block = world.getBlockState(pos).getBlock();
-        ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
-        int currentSlot = 0;
-        ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
-        while(currentSlot < chestEntity.getSizeInventory())
+        if(chestEntity == null) world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        else
         {
-            if(currentSlotContent == ItemStack.EMPTY) break;
-            if(currentSlotContent.getItem() == droppedItemStack.getItem())
+            ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+            int currentSlot = 0;
+            ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
+            while(currentSlot < chestEntity.getSizeInventory())
             {
-                if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
+                if(currentSlotContent == ItemStack.EMPTY) break;
+                if(currentSlotContent.getItem() == droppedItemStack.getItem())
+                {
+                    if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
+                }
+                currentSlot++;
             }
-            currentSlot++;
-        }
 
-        System.out.println("Slot " + currentSlot + " can hold the new block");
-        if(currentSlot >= chestEntity.getSizeInventory())
-        {
-            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
-        } else
-        {
-            if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
-            else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
+            if(currentSlot >= chestEntity.getSizeInventory())
+            {
+                world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+            } else
+            {
+                if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
+                else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
+            }
         }
         world.setBlockToAir(pos);
-        System.out.println("Block destroyed");
     }
-    protected BlockPos getRandomSurroundingBlock()
+    protected void getMiningBlocks(BlockPos start, BlockPos end)
     {
-        int x = 0;
-        int z = 0;
-        while(x == 0 && z == 0)
+        int xDifference = 0;
+        int zDifference = 0;
+        if(start.getX() == start.getZ())
         {
-            x = (int) (Math.random() * 3) - 1;
-            if(x == 0) z = (int) (Math.random() * 3) - 1;
+            if(start.getZ() < end.getZ()) zDifference = 1;
+            else zDifference = -1;
+        } else
+        {
+            if(start.getX() < end.getX()) xDifference = 1;
+            else xDifference = -1;
         }
-        return entity.getPosition().add(x, 0, z);
+
+        while(start != end && miningBlocks.size() < 12 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
+        {
+            miningBlocks.add(start);
+            miningBlocks.add(start.add(0, 1, 0));
+            start = start.add(xDifference, 0, zDifference);
+        }
     }
-    protected Vec3d getPosition()
+    protected BlockPos getRandomPosition()
     {
-        if (entity.isInWater())
-        {
-            Vec3d vec3d = RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
-            if(vec3d == null) return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
-            else return vec3d;
-        }
-        if(entity.getRNG().nextFloat() >= this.probability) return RandomPositionGenerator.getLandPos(this.entity, searchRange, searchRange / 3);
-        else return RandomPositionGenerator.findRandomTarget(this.entity, searchRange, searchRange / 3);
+        int xIncrease = 0;
+        int zIncrease = 0;
+        if(Math.random() < 0.5) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+        else xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+
+        return entity.getPosition().add(xIncrease, 0, zIncrease);
     }
     protected BlockPos findChest(BlockPos pos)
     {
