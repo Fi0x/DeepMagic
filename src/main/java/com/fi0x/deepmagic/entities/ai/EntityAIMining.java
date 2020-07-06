@@ -48,6 +48,7 @@ public class EntityAIMining extends EntityAIBase
         this.speed = speed;
         this.executionChance = executionChance;
         random = new Random();
+        miningBlocks = new ArrayList<>();
     }
 
     @Override
@@ -61,8 +62,11 @@ public class EntityAIMining extends EntityAIBase
     public void startExecuting()
     {
         chestPos = findChest(entity.getPosition());
-        TileEntity te = world.getTileEntity(chestPos);
-        if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
+        try
+        {
+            TileEntity te = world.getTileEntity(chestPos);
+            if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
+        } catch(Exception ignore) {}
 
         startPosition = entity.getPosition();
         destination = getRandomPosition();
@@ -74,7 +78,7 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public boolean shouldContinueExecuting()
     {
-        if(digDelay == 0)
+        if(digDelay == 0 && !miningBlocks.isEmpty())
         {
             digAtBlockPos(miningBlocks.get(0));
             if(miningBlocks.get(0).getY() == entity.posY)
@@ -91,33 +95,36 @@ public class EntityAIMining extends EntityAIBase
     protected void digAtBlockPos(BlockPos pos)
     {
         Block block = world.getBlockState(pos).getBlock();
-        ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
-        int currentSlot = 0;
-        ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
-        while(currentSlot < chestEntity.getSizeInventory())
+        if(chestEntity == null) world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        else
         {
-            if(currentSlotContent == ItemStack.EMPTY) break;
-            if(currentSlotContent.getItem() == droppedItemStack.getItem())
+            ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+            int currentSlot = 0;
+            ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
+            while(currentSlot < chestEntity.getSizeInventory())
             {
-                if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
+                if(currentSlotContent == ItemStack.EMPTY) break;
+                if(currentSlotContent.getItem() == droppedItemStack.getItem())
+                {
+                    if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
+                }
+                currentSlot++;
             }
-            currentSlot++;
-        }
 
-        if(currentSlot >= chestEntity.getSizeInventory())
-        {
-            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
-        } else
-        {
-            if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
-            else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
+            if(currentSlot >= chestEntity.getSizeInventory())
+            {
+                world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+            } else
+            {
+                if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
+                else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
+            }
         }
         world.setBlockToAir(pos);
     }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {
-        ArrayList<BlockPos> blocks = new ArrayList<>();
         int xDifference = 0;
         int zDifference = 0;
         if(start.getX() == start.getZ())
@@ -130,14 +137,12 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end)
+        while(start != end && miningBlocks.size() < searchRange * 2)
         {
-            blocks.add(start);
-            blocks.add(start.add(0, 1, 0));
+            miningBlocks.add(start);
+            miningBlocks.add(start.add(0, 1, 0));
             start = start.add(xDifference, 0, zDifference);
         }
-
-        miningBlocks = blocks;
     }
     protected BlockPos getRandomPosition()
     {
