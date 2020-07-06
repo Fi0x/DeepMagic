@@ -96,14 +96,17 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public boolean shouldContinueExecuting()
     {
-        if(digDelay == 0 && !miningBlocks.isEmpty())
+        if(entity.getNavigator().noPath())
         {
-            digAtBlockPos(miningBlocks.get(0));
-            miningBlocks.remove(0);
-            digDelay = 20;
-        } else digDelay--;
-
-        return !miningBlocks.isEmpty();
+            if(digDelay == 0 && !miningBlocks.isEmpty())
+            {
+                digAtBlockPos(miningBlocks.get(0));
+                entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
+                miningBlocks.remove(0);
+                digDelay = 20;
+            } else digDelay--;
+            return !miningBlocks.isEmpty();
+        } else return true;
     }
 
     protected void digAtBlockPos(BlockPos pos)
@@ -151,7 +154,7 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end && miningBlocks.size() < 12 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
+        while(start != end && miningBlocks.size() < 30 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
         {
             miningBlocks.add(start);
             miningBlocks.add(start.add(0, 1, 0));

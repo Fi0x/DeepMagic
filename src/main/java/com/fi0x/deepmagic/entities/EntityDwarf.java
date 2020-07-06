@@ -25,7 +25,7 @@ public class EntityDwarf extends EntityCreature
     {
         super(worldIn);
         isMining = false;
-        this.setSize(1F, 1.5F);
+        this.setSize(0.9F, 1.5F);
     }
 
     @Override
