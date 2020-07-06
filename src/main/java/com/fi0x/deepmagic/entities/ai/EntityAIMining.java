@@ -81,12 +81,8 @@ public class EntityAIMining extends EntityAIBase
         if(digDelay == 0 && !miningBlocks.isEmpty())
         {
             digAtBlockPos(miningBlocks.get(0));
-            if(miningBlocks.get(0).getY() == entity.posY)
-            {
-                //TODO: move entity to mined block position
-            }
             miningBlocks.remove(0);
-            digDelay = 10;
+            digDelay = 20;
         } else digDelay--;
 
         return !miningBlocks.isEmpty();
@@ -137,7 +133,7 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end && miningBlocks.size() < searchRange * 2)
+        while(start != end && miningBlocks.size() < 12)
         {
             miningBlocks.add(start);
             miningBlocks.add(start.add(0, 1, 0));
