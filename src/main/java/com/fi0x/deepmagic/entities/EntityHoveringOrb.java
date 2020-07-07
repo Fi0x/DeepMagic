@@ -53,8 +53,9 @@ public class EntityHoveringOrb extends EntityMob implements IMagicCreature
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1);
     }
 
+    @Nonnull
     @Override
-    protected PathNavigate createNavigator(World worldIn)
+    protected PathNavigate createNavigator(@Nonnull World worldIn)
     {
         return super.createNavigator(worldIn);
     }
