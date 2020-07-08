@@ -2,8 +2,7 @@ package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.EntityDwarf;
 import com.fi0x.deepmagic.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -13,6 +12,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -55,18 +57,35 @@ public class EntityAIMining extends EntityAIBase
         miningBlocks = new ArrayList<>();
 
         mineableBlocks = new ArrayList<>();
-        mineableBlocks.add(Blocks.STONE.getDefaultState());
-        mineableBlocks.add(Blocks.DIRT.getDefaultState());
         mineableBlocks.add(Blocks.AIR.getDefaultState());
-        mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+        mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
+        mineableBlocks.add(Blocks.GRASS.getDefaultState());
+        mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL));
+        mineableBlocks.add(Blocks.MYCELIUM.getDefaultState());
+        mineableBlocks.add(Blocks.GRAVEL.getDefaultState());
+        mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND));
+        mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND));
+        mineableBlocks.add(Blocks.CLAY.getDefaultState());
+        mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
+        mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE));
+        mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE));
+        mineableBlocks.add(Blocks.OBSIDIAN.getDefaultState());
+        mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE));
         mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
         mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
         mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
         mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
         mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
+        mineableBlocks.add(Blocks.NETHERRACK.getDefaultState());
+        mineableBlocks.add(Blocks.SOUL_SAND.getDefaultState());
+        mineableBlocks.add(Blocks.END_STONE.getDefaultState());
         mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
+        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState());
+        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState());
     }
 
     @Override
@@ -80,11 +99,8 @@ public class EntityAIMining extends EntityAIBase
     public void startExecuting()
     {
         chestPos = findChest(entity.getPosition());
-        try
-        {
-            TileEntity te = world.getTileEntity(chestPos);
-            if(te instanceof TileEntityChest) chestEntity = (TileEntityChest) te;
-        } catch(Exception ignore) {}
+        TileEntity te = world.getTileEntity(chestPos);
+        if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) chestEntity = (TileEntityChest) te;
 
         startPosition = entity.getPosition();
         destination = getRandomPosition();
@@ -96,14 +112,17 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public boolean shouldContinueExecuting()
     {
-        if(digDelay == 0 && !miningBlocks.isEmpty())
+        if(entity.getNavigator().noPath())
         {
-            digAtBlockPos(miningBlocks.get(0));
-            miningBlocks.remove(0);
-            digDelay = 20;
-        } else digDelay--;
-
-        return !miningBlocks.isEmpty();
+            if(digDelay == 0 && !miningBlocks.isEmpty())
+            {
+                digAtBlockPos(miningBlocks.get(0));
+                entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
+                miningBlocks.remove(0);
+                digDelay = 20;
+            } else digDelay--;
+            return !miningBlocks.isEmpty();
+        } else return true;
     }
 
     protected void digAtBlockPos(BlockPos pos)
@@ -114,26 +133,9 @@ public class EntityAIMining extends EntityAIBase
         else
         {
             ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
-            int currentSlot = 0;
-            ItemStack currentSlotContent = chestEntity.getStackInSlot(currentSlot);
-            while(currentSlot < chestEntity.getSizeInventory())
-            {
-                if(currentSlotContent == ItemStack.EMPTY) break;
-                if(currentSlotContent.getItem() == droppedItemStack.getItem())
-                {
-                    if(64 - currentSlotContent.getCount() >= droppedItemStack.getCount()) break;
-                }
-                currentSlot++;
-            }
 
-            if(currentSlot >= chestEntity.getSizeInventory())
-            {
-                world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
-            } else
-            {
-                if(currentSlotContent == ItemStack.EMPTY) chestEntity.getStackInSlot(currentSlot).setCount(droppedItemStack.getCount());
-                else chestEntity.getStackInSlot(currentSlot).setCount(currentSlotContent.getCount() + droppedItemStack.getCount());
-            }
+            IItemHandler handler = chestEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            ItemHandlerHelper.insertItemStacked(handler, droppedItemStack, false);
         }
         world.setBlockToAir(pos);
     }
@@ -151,7 +153,7 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end && miningBlocks.size() < 12 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
+        while(start != end && miningBlocks.size() < 30 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
         {
             miningBlocks.add(start);
             miningBlocks.add(start.add(0, 1, 0));
