@@ -162,8 +162,8 @@ public class EntityAIMining extends EntityAIBase
     {
         int xIncrease = 0;
         int zIncrease = 0;
-        if(Math.random() < 0.5) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
-        else xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+        if(entity.posX % 3 == 0) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+        else if(entity.posZ % 2 == 0) xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
 
         return entity.getPosition().add(xIncrease, 0, zIncrease);
     }
