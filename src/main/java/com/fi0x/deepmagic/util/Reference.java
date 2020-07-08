@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.util;
 
-public class Reference
-{
+public class Reference {
 	public static final String MOD_ID = "deepmagic";
 	public static final String NAME = "Deep Magic";
 	public static final String VERSION = "1.0";
@@ -22,6 +21,8 @@ public class Reference
 	public static final int ENTITY_DEPTH_MAGE = 1770;
 	public static final int ENTITY_DEMON = 1771;
 	public static final int ENTITY_COCKROACH = 1772;
+	public static final int ENTITY_WORM = 1773;
+	public static final int ENTITY_CYCLOPES = 1774;
 
 	//Gui IDs
 	public static final int GUI_SKILLTREE = 74088;

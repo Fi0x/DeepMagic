@@ -7,10 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -28,7 +25,7 @@ public class EntityDwarf extends EntityCreature
     {
         super(worldIn);
         isMining = false;
-        this.setSize(1F, 1.5F);
+        this.setSize(0.9F, 1.5F);
     }
 
     @Override
@@ -36,8 +33,10 @@ public class EntityDwarf extends EntityCreature
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
-        this.tasks.addTask(2, new EntityAIMining(this, this.world));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, Entity.class, 8.0F));
+        this.tasks.addTask(2, new EntityAIMining(this));
+        this.tasks.addTask(2, new EntityAIWanderAvoidWater(this, 1));
+        this.tasks.addTask(5, new EntityAIWatchClosest(this, Entity.class, 8.0F));
+        this.tasks.addTask(6, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
     }
@@ -90,6 +89,6 @@ public class EntityDwarf extends EntityCreature
     @Override
     public float getEyeHeight()
     {
-        return 0.8F;
+        return 1.2F;
     }
 }

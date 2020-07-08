@@ -3,7 +3,6 @@ package com.fi0x.deepmagic.util.handlers;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class SoundsHandler
@@ -17,14 +16,11 @@ public class SoundsHandler
     public static SoundEvent ENTITY_DWARF_AMBIENT, ENTITY_DWARF_HURT, ENTITY_DWARF_DEATH, ENTITY_DWARF_STEP;
     public static SoundEvent ENTITY_DEMON_AMBIENT, ENTITY_DEMON_HURT, ENTITY_DEMON_DEATH, ENTITY_DEMON_STEP;
     public static SoundEvent ENTITY_COCKROACH_AMBIENT, ENTITY_COCKROACH_HURT, ENTITY_COCKROACH_DEATH, ENTITY_COCKROACH_STEP;
-
-    public static SoundEvent MUSIC_INSANITY_DIMENSION;
+    public static SoundEvent ENTITY_WORM_AMBIENT, ENTITY_WORM_HURT, ENTITY_WORM_DEATH, ENTITY_WORM_STEP;
+    public static SoundEvent ENTITY_CYCLOPES_AMBIENT, ENTITY_CYCLOPES_HURT, ENTITY_CYCLOPES_DEATH, ENTITY_CYCLOPES_STEP;
 
     public static void registerSounds()
     {
-        MUSIC_INSANITY_DIMENSION = registerSound("music.insanity_dimension");
-        EnumHelperClient.addMusicType("INSANITY_DIMENSION", MUSIC_INSANITY_DIMENSION, 0, 1);
-
         ENTITY_HOVERING_ORB_AMBIENT = registerSound("entity.hovering_orb.ambient");
         ENTITY_HOVERING_ORB_HURT = registerSound("entity.hovering_orb.hurt");
         ENTITY_HOVERING_ORB_DEATH = registerSound("entity.hovering_orb.death");
@@ -69,6 +65,16 @@ public class SoundsHandler
         ENTITY_COCKROACH_HURT = registerSound("entity.cockroach.hurt");
         ENTITY_COCKROACH_DEATH = registerSound("entity.cockroach.death");
         ENTITY_COCKROACH_STEP = registerSound("entity.cockroach.step");
+
+        ENTITY_WORM_AMBIENT = registerSound("entity.worm.ambient");
+        ENTITY_WORM_HURT = registerSound("entity.worm.hurt");
+        ENTITY_WORM_DEATH = registerSound("entity.worm.death");
+        ENTITY_WORM_STEP = registerSound("entity.worm.step");
+
+        ENTITY_CYCLOPES_AMBIENT = registerSound("entity.cyclopes.ambient");
+        ENTITY_CYCLOPES_HURT = registerSound("entity.cyclopes.hurt");
+        ENTITY_CYCLOPES_DEATH = registerSound("entity.cyclopes.death");
+        ENTITY_CYCLOPES_STEP = registerSound("entity.cyclopes.step");
     }
     private static SoundEvent registerSound(String name)
     {

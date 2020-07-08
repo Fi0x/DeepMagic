@@ -15,7 +15,7 @@ public class RenderRockTroll extends RenderLiving<EntityRockTroll>
 
     public RenderRockTroll(RenderManager manager)
     {
-        super(manager, new ModelRockTroll(), 0.5F);
+        super(manager, new ModelRockTroll(), 0.7F);
     }
 
     @Nullable

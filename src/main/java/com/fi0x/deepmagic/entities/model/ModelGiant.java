@@ -11,7 +11,8 @@ import javax.annotation.Nonnull;
  * ModelGiant - Either Mojang or a mod author
  * Created using Tabula 7.1.0
  */
-public class ModelGiant extends ModelBase {
+public class ModelGiant extends ModelBase
+{
     public ModelRenderer armRight;
     public ModelRenderer legRight;
     public ModelRenderer head;
@@ -20,7 +21,8 @@ public class ModelGiant extends ModelBase {
     public ModelRenderer legLeft;
     public ModelRenderer bodyDown;
 
-    public ModelGiant() {
+    public ModelGiant()
+    {
         this.textureWidth = 128;
         this.textureHeight = 128;
         this.armLeft = new ModelRenderer(this, 0, 48);
@@ -59,15 +61,6 @@ public class ModelGiant extends ModelBase {
     public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         this.bodyUp.render(f5);
-    }
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 
     @Override
