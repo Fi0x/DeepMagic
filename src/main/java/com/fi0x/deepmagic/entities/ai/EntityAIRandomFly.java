@@ -22,23 +22,12 @@ public class EntityAIRandomFly extends EntityAIWanderAvoidWater
     {
         if (!this.mustUpdate)
         {
-            if (this.entity.getIdleTime() >= 100)
-            {
-                return false;
-            }
-
-            if (this.entity.getRNG().nextInt(this.executionChance) != 0)
-            {
-                return   false;
-            }
+            if (this.entity.getIdleTime() >= 100) return false;
+            if (this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
         }
 
         Vec3d vec3d = this.getPosition();
-
-        if (vec3d == null)
-        {
-            return   false;
-        }
+        if (vec3d == null) return false;
         else
         {
             this.x = vec3d.x;
@@ -50,13 +39,15 @@ public class EntityAIRandomFly extends EntityAIWanderAvoidWater
     }
 
     @Override
-    public boolean shouldContinueExecuting()
-    {
-        return super.shouldContinueExecuting();
-    }
-
     public void startExecuting()
     {
         this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
+    }
+
+    @Override
+    public boolean shouldContinueExecuting()
+    {
+        entity.motionY *= -1;
+        return !entity.getNavigator().noPath();
     }
 }

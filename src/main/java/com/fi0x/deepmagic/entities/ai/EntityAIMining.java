@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
@@ -35,7 +36,7 @@ public class EntityAIMining extends EntityAIBase
     protected BlockPos chestPos;
     protected TileEntityChest chestEntity;
     private int digDelay;
-    private ArrayList<IBlockState> mineableBlocks;
+    private final ArrayList<IBlockState> mineableBlocks;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -99,8 +100,6 @@ public class EntityAIMining extends EntityAIBase
     public void startExecuting()
     {
         chestPos = findChest(entity.getPosition());
-        TileEntity te = world.getTileEntity(chestPos);
-        if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) chestEntity = (TileEntityChest) te;
 
         startPosition = entity.getPosition();
         destination = getRandomPosition();
@@ -128,14 +127,18 @@ public class EntityAIMining extends EntityAIBase
     protected void digAtBlockPos(BlockPos pos)
     {
         Block block = world.getBlockState(pos).getBlock();
+        TileEntity te = world.getTileEntity(chestPos);
+        if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) chestEntity = (TileEntityChest) te;
 
         if(chestEntity == null) world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
         else
         {
-            ItemStack droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+            ItemStack dropppedItemStack;
+            if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
+            else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
             IItemHandler handler = chestEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            ItemHandlerHelper.insertItemStacked(handler, droppedItemStack, false);
+            ItemHandlerHelper.insertItemStacked(handler, dropppedItemStack, false);
         }
         world.setBlockToAir(pos);
     }
