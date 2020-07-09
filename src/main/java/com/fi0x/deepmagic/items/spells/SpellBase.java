@@ -26,4 +26,14 @@ public class SpellBase extends ItemBase implements IMagicItem
     {
         player.getCapability(PlayerProperties.PLAYER_MANA, null).addSkillXP(skillXP);
     }
+
+    public enum SpellType {
+        HEAL,
+        TIME_DAY,
+        TIME_NIGHT,
+        WEATHER,
+        MOB_ANNIHILATION,
+        RANGED_MOB_ANNIHILATION,
+        MOB_PUSHER
+    }
 }
