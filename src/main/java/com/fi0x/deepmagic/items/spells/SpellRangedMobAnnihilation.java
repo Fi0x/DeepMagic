@@ -52,13 +52,18 @@ public class SpellRangedMobAnnihilation extends SpellBase
             {
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
-                    BlockPos pos = result.getBlockPos();
-                    createExplosions(worldIn, playerIn, pos, this.radius * (tier - 7));
+                    execute(result, worldIn, playerIn, radius, tier);
                     addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    }
+
+    public static void execute(RayTraceResult result, World worldIn, EntityPlayer playerIn, int radius, int tier)
+    {
+        BlockPos pos = result.getBlockPos();
+        createExplosions(worldIn, playerIn, pos, radius * (tier - 7));
     }
 
     private RayTraceResult getRayTrace(EntityPlayer player)
@@ -68,7 +73,7 @@ public class SpellRangedMobAnnihilation extends SpellBase
         Vec3d vec3d2 = vec3d.addVector(vec3d1.x * range * (tier - 7), vec3d1.y * range * (tier - 7), vec3d1.z * range * (tier - 7));
         return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
     }
-    private void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
+    private static void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
     {
         AxisAlignedBB area = new AxisAlignedBB(pos.getX()-radius, pos.getY()-radius, pos.getZ()-radius, pos.getX()+radius, pos.getY()+radius, pos.getZ()+radius);
         List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);

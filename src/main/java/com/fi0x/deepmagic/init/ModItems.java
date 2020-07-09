@@ -48,7 +48,7 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Spells
-	public static final Item CHARGED_SPELL = new ManaChargedSpell("charged_spell");
+	public static final Item CHARGED_SPELL = new ManaChargedSpell("charged_spell", ManaChargedSpell.SpellType.HEAL, 1);
 
 	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);
 	public static final Item SPELL_HEAL_T2 = new SpellHeal("spell_heal_t2", 2);

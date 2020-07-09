@@ -1,5 +1,6 @@
 itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
+itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
 item.deep_crystal.name=Deep Crystal
 item.compressed_deep_crystal.name=Compressed Deep Crystal

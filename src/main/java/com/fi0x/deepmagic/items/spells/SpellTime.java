@@ -37,12 +37,17 @@ public class SpellTime extends SpellBase
             {
                 if(Math.random() * playerMana.spellCastSkill > 1)
                 {
-                    worldIn.setWorldTime(time);
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
+                    execute(worldIn, playerIn, time);
                     addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    }
+
+    public static void execute(World worldIn, EntityPlayer playerIn, int time)
+    {
+        worldIn.setWorldTime(time);
+        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
     }
 }

@@ -45,8 +45,7 @@ public class SpellMobAnnihilation extends SpellBase
             {
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
-                    BlockPos pos = playerIn.getPosition();
-                    createExplosions(worldIn, playerIn, pos, this.radius * (tier - 7));
+                    execute(playerIn, worldIn, tier, radius);
                     addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
@@ -54,7 +53,13 @@ public class SpellMobAnnihilation extends SpellBase
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
-    private void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
+    public static void execute(EntityPlayer playerIn, World worldIn, int tier, int radius)
+    {
+        BlockPos pos = playerIn.getPosition();
+        createExplosions(worldIn, playerIn, pos, radius * (tier - 7));
+    }
+
+    private static void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
     {
         AxisAlignedBB area = new AxisAlignedBB(pos.getX()-radius, pos.getY()-radius, pos.getZ()-radius, pos.getX()+radius, pos.getY()+radius, pos.getZ()+radius);
         List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);

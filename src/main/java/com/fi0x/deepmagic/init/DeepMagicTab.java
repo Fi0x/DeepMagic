@@ -8,7 +8,8 @@ public class DeepMagicTab
 	public static final CreativeTabs BLOCKS = new CreativeTabs("deepmagic_blocks_tab")
 	{
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack getTabIconItem()
+		{
 			return new ItemStack(ModBlocks.DEEP_CRYSTAL_BLOCK);
 		}
 	};
@@ -16,8 +17,18 @@ public class DeepMagicTab
 	public static final CreativeTabs ITEMS = new CreativeTabs("deepmagic_items_tab")
 	{
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack getTabIconItem()
+		{
 			return new ItemStack(ModItems.DEEP_CRYSTAL);
+		}
+	};
+
+	public static final CreativeTabs SPELLS = new CreativeTabs("deepmagic_spells_tab")
+	{
+		@Override
+		public ItemStack getTabIconItem()
+		{
+			return new ItemStack(ModItems.SPELL_HEAL_T1);
 		}
 	};
 }

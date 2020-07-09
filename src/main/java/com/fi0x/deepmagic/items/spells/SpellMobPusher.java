@@ -42,7 +42,7 @@ public class SpellMobPusher extends SpellBase
             {
                 if((Math.random() * playerMana.spellCastSkill) > tier)
                 {
-                    pushMobs(worldIn, playerIn, this.radius * (tier - 2));
+                    execute(worldIn, playerIn, tier, radius);
                     addSkillXP(playerIn);
                 } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
             } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
@@ -50,7 +50,12 @@ public class SpellMobPusher extends SpellBase
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
-    private void pushMobs(World world, EntityPlayer player, int radius)
+    public static void execute(World worldIn, EntityPlayer playerIn, int tier, int radius)
+    {
+        pushMobs(worldIn, playerIn, radius * (tier - 2), tier);
+    }
+
+    private static void pushMobs(World world, EntityPlayer player, int radius, int tier)
     {
         AxisAlignedBB area = new AxisAlignedBB(player.getPosition().getX()-radius, player.getPosition().getY()-radius, player.getPosition().getZ()-radius, player.getPosition().getX()+radius, player.getPosition().getY()+radius, player.getPosition().getZ()+radius);
         List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);

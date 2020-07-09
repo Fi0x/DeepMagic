@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells;
 
+import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
@@ -14,6 +15,8 @@ public class SpellBase extends ItemBase implements IMagicItem
     public SpellBase(String name, int tier)
     {
         super(name);
+        setCreativeTab(DeepMagicTab.SPELLS);
+
         this.tier = tier;
         this.skillXP = 10 * tier;
         setMaxStackSize(1);
