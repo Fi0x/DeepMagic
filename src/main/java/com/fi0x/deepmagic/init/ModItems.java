@@ -9,7 +9,6 @@ import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
 import com.fi0x.deepmagic.items.mana.Spell;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
-import com.fi0x.deepmagic.items.spells.ManaChargedSpell;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -49,8 +48,6 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Spells
-	public static final Item CHARGED_SPELL = new ManaChargedSpell("charged_spell", ManaChargedSpell.SpellType.HEAL, 1);
-
 	public static final Item SPELL_HEAL_T1 = new Spell("spell_heal_t1", Spell.SpellType.HEAL, 1, 50);
 	public static final Item SPELL_HEAL_T2 = new Spell("spell_heal_t2", Spell.SpellType.HEAL, 2, 50);
 	public static final Item SPELL_HEAL_T3 = new Spell("spell_heal_t3", Spell.SpellType.HEAL, 3, 50);

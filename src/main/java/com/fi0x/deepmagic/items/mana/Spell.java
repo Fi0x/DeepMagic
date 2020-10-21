@@ -20,7 +20,9 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Objects;
 
 public class Spell extends ItemBase implements IMagicItem
 {
@@ -51,8 +53,9 @@ public class Spell extends ItemBase implements IMagicItem
         this.range = 100;
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn)
     {
         if(worldIn.isRemote) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 
@@ -164,7 +167,7 @@ public class Spell extends ItemBase implements IMagicItem
 
     protected void addSkillXP(EntityPlayer player)
     {
-        player.getCapability(PlayerProperties.PLAYER_MANA, null).addSkillXP(skillXP);
+        Objects.requireNonNull(player.getCapability(PlayerProperties.PLAYER_MANA, null)).addSkillXP(skillXP);
     }
 
     private RayTraceResult getRayTrace(EntityPlayer player)
