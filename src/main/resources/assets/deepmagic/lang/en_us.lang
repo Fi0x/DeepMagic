@@ -55,7 +55,7 @@ item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
 
-item.charged_spell.name=Charged Spell
+item.custom_spell.name=Custom Spell
 
 item.spell_heal_t1.name=Heal Spell T1
 item.spell_heal_t2.name=Heal Spell T2
