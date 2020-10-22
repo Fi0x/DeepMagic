@@ -48,6 +48,23 @@ public class CustomSpell extends ItemBase implements IMagicItem
         compound = itemStack.getTagCompound();
         assert compound != null;
 
+        //TODO: Needs to be removed, only for testing
+        if(playerIn.isSneaking())
+        {
+            compound.setInteger("manaCosts", 10);
+            compound.setInteger("tier", 0);
+            compound.setInteger("range", 10);
+            compound.setInteger("target", 0);
+            compound.setInteger("radius", 0);
+            compound.setInteger("damage", 0);
+            compound.setBoolean("environmentalDamage", false);
+            compound.setBoolean("explosion", false);
+            compound.setInteger("heal", 5);
+            compound.setInteger("time", 10);
+            compound.setBoolean("weather", true);
+            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        }
+
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
         if(compound.hasKey("manaCosts") && !(playerMana.removeMana(compound.getDouble("manaCosts"))))
@@ -95,13 +112,11 @@ public class CustomSpell extends ItemBase implements IMagicItem
         {
             targetEntity.heal(heal);
             targetEntity.attackEntityFrom(DamageSource.MAGIC, damage);
-            editMobsInArea(worldIn, targetEntity.getPosition(), radius, damage, heal);
-            if(explosion) createExplosions(worldIn, playerIn, targetEntity.getPosition(), radius, environmentalDmg);
+            editMobsInArea(worldIn, playerIn, targetEntity.getPosition(), radius, damage, heal, explosion, environmentalDmg);
         }
         if(targetPos != null)
         {
-            editMobsInArea(worldIn, targetPos, radius, damage, heal);
-            if(explosion) createExplosions(worldIn, playerIn, targetPos, radius, environmentalDmg);
+            editMobsInArea(worldIn, playerIn, targetPos, radius, damage, heal, explosion, environmentalDmg);
         }
         if(time != 0) worldIn.setWorldTime(time);
         if(toggledownfall) worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
@@ -152,19 +167,7 @@ public class CustomSpell extends ItemBase implements IMagicItem
         if(result.typeOfHit == RayTraceResult.Type.MISS) return null;
         return player;
     }
-    private static void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius, boolean envDmg)
-    {
-        AxisAlignedBB area = new AxisAlignedBB(pos.getX()-radius, pos.getY()-radius, pos.getZ()-radius, pos.getX()+radius, pos.getY()+radius, pos.getZ()+radius);
-        List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);
-
-        while(!entities.isEmpty())
-        {
-            BlockPos explosionPos = entities.get(0).getPosition();
-            world.createExplosion(player, explosionPos.getX(), explosionPos.getY(), explosionPos.getZ(), 5, envDmg);
-            entities.remove(0);
-        }
-    }
-    private static void editMobsInArea(World world, BlockPos pos, int radius, int dmg, int heal)
+    private static void editMobsInArea(World world, EntityPlayer player, BlockPos pos, int radius, int dmg, int heal, boolean explode, boolean envDmg)
     {
         AxisAlignedBB area = new AxisAlignedBB(pos.getX()-radius, pos.getY()-radius, pos.getZ()-radius, pos.getX()+radius, pos.getY()+radius, pos.getZ()+radius);
         List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);
@@ -173,6 +176,8 @@ public class CustomSpell extends ItemBase implements IMagicItem
         {
             entities.get(0).attackEntityFrom(DamageSource.MAGIC, dmg);
             entities.get(0).heal(heal);
+            BlockPos explosionPos = entities.get(0).getPosition();
+            if(explode) world.createExplosion(player, explosionPos.getX(), explosionPos.getY(),  explosionPos.getZ(), 5, envDmg);
             entities.remove(0);
         }
     }
