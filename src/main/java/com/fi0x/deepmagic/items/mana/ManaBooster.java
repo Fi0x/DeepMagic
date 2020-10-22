@@ -7,15 +7,19 @@ import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class ManaBooster extends Item implements IHasModel, IMagicItem
 {
@@ -50,5 +54,16 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 			return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
+	}
+
+	@Override
+	public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
+	{
+		tooltip.add(TextFormatting.WHITE + "Get a mana boos!");
+		if(GuiScreen.isShiftKeyDown())
+		{
+			tooltip.add(TextFormatting.GREEN + "Adds " + BOOST_AMOUNT + " Mana");
+			tooltip.add(TextFormatting.WHITE + "Can overcharge your mana capacity");
+		} else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
 	}
 }

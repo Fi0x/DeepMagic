@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -92,6 +93,11 @@ public class Spell extends ItemBase implements IMagicItem
             }
         } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    }
+    @Override
+    public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
+    {
+        tooltip.add(TextFormatting.RED + "This item will be removed in the future");
     }
 
     private void executeHeal(EntityPlayer playerIn, PlayerMana playerMana)
