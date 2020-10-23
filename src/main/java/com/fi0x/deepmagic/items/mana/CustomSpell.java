@@ -1,11 +1,11 @@
 package com.fi0x.deepmagic.items.mana;
 
+import com.fi0x.deepmagic.blocks.SpellStone;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -49,36 +49,8 @@ public class CustomSpell extends ItemBase implements IMagicItem
         compound = itemStack.getTagCompound();
         assert compound != null;
 
-        if(playerIn.isSneaking())
-        {
-            BlockPos blockPos = getFocusedBlock(playerIn, 5);
-            if(blockPos != null)
-            {
-                IBlockState block = worldIn.getBlockState(blockPos);
-                if(true) //TODO: Check if block is a Spell Stone
-                {
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Spell Stone clicked"));
-                }
-            } else
-            {
-                //TODO: Needs to be removed, only for testing
-                compound.setInteger("manaCosts", 10);
-                compound.setInteger("tier", 0);
-                compound.setInteger("range", 10);
-                compound.setInteger("target", 0);
-                compound.setInteger("radius", 0);
-                compound.setInteger("damage", 0);
-                compound.setBoolean("environmentalDamage", false);
-                compound.setBoolean("explosion", false);
-                compound.setInteger("heal", 5);
-                compound.setInteger("time", 10);
-                compound.setBoolean("weather", true);
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Stats set"));
-                return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-            }
-
-            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-        }
+        BlockPos blockPos = getFocusedBlock(playerIn, 5);
+        if(blockPos != null && worldIn.getBlockState(blockPos).getBlock() instanceof SpellStone) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
@@ -147,6 +119,7 @@ public class CustomSpell extends ItemBase implements IMagicItem
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         compound = stack.getTagCompound();
         assert compound != null;
+        if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.RED + "Consumes " + compound.getInteger("manaCosts") + " Mana");
         if(GuiScreen.isShiftKeyDown())
         {
             tooltip.add(TextFormatting.WHITE + "Spell Effects:");
