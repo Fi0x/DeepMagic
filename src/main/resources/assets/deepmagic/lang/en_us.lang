@@ -57,31 +57,6 @@ item.deep_crystal_boots.name=Deep Crystal Boots
 
 item.custom_spell.name=Custom Spell
 
-item.spell_heal_t1.name=Heal Spell T1
-item.spell_heal_t2.name=Heal Spell T2
-item.spell_heal_t3.name=Heal Spell T3
-item.spell_heal_t4.name=Heal Spell T4
-item.spell_heal_t5.name=Heal Spell T5
-
-item.spell_time_day.name=Day Spell
-item.spell_time_night.name=Night Spell
-
-item.spell_weather_t1.name=Weather Spell T1
-item.spell_weather_t2.name=Weather Spell T2
-item.spell_weather_t3.name=Weather Spell T3
-
-item.spell_mob_annihilation_t8.name=Mob Annihilation Spell T8
-item.spell_mob_annihilation_t9.name=Mob Annihilation Spell T9
-item.spell_mob_annihilation_t10.name=Mob Annihilation Spell T10
-
-item.spell_ranged_mob_annihilation_t8.name=Ranged Mob Annihilation Spell T8
-item.spell_ranged_mob_annihilation_t9.name=Ranged Mob Annihilation Spell T9
-item.spell_ranged_mob_annihilation_t10.name=Ranged Mob Annihilation Spell T10
-
-item.spell_mob_pusher_t3.name=Mob Pusher Spell T3
-item.spell_mob_pusher_t4.name=Mob Pusher Spell T4
-item.spell_mob_pusher_t5.name=Mob Pusher Spell T5
-
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
 item.stone_snack.name=Stone Snack
