@@ -28,7 +28,7 @@ public class DeepMagicTab
 		@Override
 		public ItemStack getTabIconItem()
 		{
-			return new ItemStack(ModItems.SPELL_HEAL_T1);
+			return new ItemStack(ModItems.SPELL_CUSTOM);
 		}
 	};
 }

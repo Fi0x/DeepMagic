@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.ai;
 
-import com.fi0x.deepmagic.entities.EntityRockTroll;
+import com.fi0x.deepmagic.entities.mobs.EntityRockTroll;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class EntityAIDefence extends EntityAIBase
