@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.mobs;
 
+import com.fi0x.deepmagic.entities.projectiles.EntitySpellExplosion;
 import com.fi0x.deepmagic.entities.projectiles.EntitySpellFireball;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.IMagicCreature;
@@ -164,13 +165,16 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
         double d3 = x - d0;
         double d4 = y - d1;
         double d5 = z - d2;
-        EntitySpellFireball fireball = new EntitySpellFireball(world, this, d3, d4, d5);
+        Entity projectile;
+        int rand = (int) (Math.random()*2);
+        if(rand == 0) projectile = new EntitySpellFireball(world, this, d3, d4, d5);
+        else projectile = new EntitySpellExplosion(world, this, d3, d4, d5);
 
-        fireball.setEntityInvulnerable(true);
+        projectile.setEntityInvulnerable(true);
 
-        fireball.posY = d1;
-        fireball.posX = d0;
-        fireball.posZ = d2;
-        this.world.spawnEntity(fireball);
+        projectile.posY = d1;
+        projectile.posX = d0;
+        projectile.posZ = d2;
+        this.world.spawnEntity(projectile);
     }
 }
