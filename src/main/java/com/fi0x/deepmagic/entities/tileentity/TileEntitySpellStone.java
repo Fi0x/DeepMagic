@@ -51,9 +51,9 @@ public class TileEntitySpellStone extends TileEntity
     {
         return range;
     }
-    public void setRange(int x)
+    public void increaseRange(int x)
     {
-        range = x;
+        range += x;
         markDirty();
     }
     public int resetRange(int currrentManaCosts)
