@@ -23,6 +23,8 @@ import java.util.List;
 
 public class ManaWaster extends Item implements IHasModel, IMagicItem
 {
+    private static final int WASTE_AMOUNT = 20;
+
     public ManaWaster(String name)
     {
         setUnlocalizedName(name);
@@ -47,7 +49,7 @@ public class ManaWaster extends Item implements IHasModel, IMagicItem
         {
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
-            if(playerMana.removeMana(10)) return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+            if(playerMana.removeMana(WASTE_AMOUNT)) return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
         return new ActionResult<>(EnumActionResult.FAIL, stack);
     }
@@ -58,8 +60,11 @@ public class ManaWaster extends Item implements IHasModel, IMagicItem
         tooltip.add(TextFormatting.YELLOW + "This is a developer item");
         if(GuiScreen.isShiftKeyDown())
         {
-            tooltip.add(TextFormatting.RED + "Consumes 10 Mana");
-            tooltip.add(TextFormatting.WHITE + "This item has no other effect");
-        } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
+            tooltip.add(TextFormatting.WHITE + "This item has no effect");
+        } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more information");
+        if(GuiScreen.isCtrlKeyDown())
+        {
+            tooltip.add(TextFormatting.BLUE + "Consumes " + WASTE_AMOUNT + " Mana");
+        } else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
     }
 }
