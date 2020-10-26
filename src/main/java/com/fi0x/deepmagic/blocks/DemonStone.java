@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks;
 
-import com.fi0x.deepmagic.entities.EntityDemon;
+import com.fi0x.deepmagic.entities.mobs.EntityDemon;
 import com.fi0x.deepmagic.items.DemonCrystal;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import net.minecraft.block.SoundType;

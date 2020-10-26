@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.ai;
 
-import com.fi0x.deepmagic.entities.EntityDwarf;
+import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;

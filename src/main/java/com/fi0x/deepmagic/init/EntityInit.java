@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.Main;
-import com.fi0x.deepmagic.entities.*;
+import com.fi0x.deepmagic.entities.mobs.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

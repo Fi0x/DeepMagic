@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntityDemon;
+import com.fi0x.deepmagic.entities.mobs.EntityDemon;
 import com.fi0x.deepmagic.entities.model.ModelDemon;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

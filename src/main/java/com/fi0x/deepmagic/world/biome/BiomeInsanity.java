@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.world.biome;
 
-import com.fi0x.deepmagic.entities.*;
+import com.fi0x.deepmagic.entities.mobs.*;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;

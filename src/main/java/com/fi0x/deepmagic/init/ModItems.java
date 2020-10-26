@@ -5,10 +5,7 @@ import com.fi0x.deepmagic.items.DemonCrystal;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
-import com.fi0x.deepmagic.items.mana.ManaBooster;
-import com.fi0x.deepmagic.items.mana.ManaWaster;
-import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
-import com.fi0x.deepmagic.items.spells.*;
+import com.fi0x.deepmagic.items.mana.*;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -48,30 +45,9 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Spells
-	public static final Item SPELL_HEAL_T1 = new SpellHeal("spell_heal_t1", 1);
-	public static final Item SPELL_HEAL_T2 = new SpellHeal("spell_heal_t2", 2);
-	public static final Item SPELL_HEAL_T3 = new SpellHeal("spell_heal_t3", 3);
-	public static final Item SPELL_HEAL_T4 = new SpellHeal("spell_heal_t4", 4);
-	public static final Item SPELL_HEAL_T5 = new SpellHeal("spell_heal_t5", 5);
-
-	public static final Item SPELL_TIME_DAY = new SpellTime("spell_time_day", 5000);
-	public static final Item SPELL_TIME_NIGHT = new SpellTime("spell_time_night", 17000);
-
-	public static final Item SPELL_WEATHER_T1 = new SpellWeather("spell_weather_t1", 1);
-	public static final Item SPELL_WEATHER_T2 = new SpellWeather("spell_weather_t2", 2);
-	public static final Item SPELL_WEATHER_T3 = new SpellWeather("spell_weather_t3", 3);
-
-	public static final Item SPELL_MOB_ANNIHILATION_T8 = new SpellMobAnnihilation("spell_mob_annihilation_t8", 8);
-	public static final Item SPELL_MOB_ANNIHILATION_T9 = new SpellMobAnnihilation("spell_mob_annihilation_t9", 9);
-	public static final Item SPELL_MOB_ANNIHILATION_T10 = new SpellMobAnnihilation("spell_mob_annihilation_t10", 10);
-
-	public static final Item SPELL_RANGED_MOB_ANNIHILATION_T8 = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation_t8", 8);
-	public static final Item SPELL_RANGED_MOB_ANNIHILATION_T9 = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation_t9", 9);
-	public static final Item SPELL_RANGED_MOB_ANNIHILATION_T10 = new SpellRangedMobAnnihilation("spell_ranged_mob_annihilation_t10", 10);
-
-	public static final Item SPELL_MOB_PUSHER_T3 = new SpellMobPusher("spell_mob_pusher_t3", 3);
-	public static final Item SPELL_MOB_PUSHER_T4 = new SpellMobPusher("spell_mob_pusher_t4", 4);
-	public static final Item SPELL_MOB_PUSHER_T5 = new SpellMobPusher("spell_mob_pusher_t5", 5);
+	public static final Item SPELL = new Spell("spell");
+	public static final Item CHARGED_SPELL = new ManaChargedSpell("charged_spell");
+	public static final Item BREAKABLE_SPELL = new BreakableSpell("breakable_spell");
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);

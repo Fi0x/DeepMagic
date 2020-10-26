@@ -10,6 +10,8 @@ import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -24,10 +26,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Objects;
 
 public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 {
+	private static final int MANA_COSTS = 50;
+	private static final int SKILL_XP = 5;
+
 	public TeleportationCrystal(String name)
 	{
 		setUnlocalizedName(name);
@@ -43,6 +49,15 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
+	@Override
+	public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
+	{
+		tooltip.add(TextFormatting.WHITE + "Can teleport the player to the insanity dimension and back");
+		if(GuiScreen.isCtrlKeyDown())
+		{
+			tooltip.add(TextFormatting.BLUE + "Consumes " + MANA_COSTS + " Mana");
+		} else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
+	}
 	@Nonnull
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
@@ -52,9 +67,9 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 		{
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
-			if(playerMana.removeMana(50))
+			if(playerMana.removeMana(MANA_COSTS))
 			{
-				playerMana.addSkillXP(51);
+				playerMana.addSkillXP(SKILL_XP);
 				int x = playerIn.getPosition().getX();
 				int z = playerIn.getPosition().getZ();
 				if(playerIn.dimension == 0)
