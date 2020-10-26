@@ -39,9 +39,6 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         Item item = stack.getItem();
         TileEntitySpellStone tile = getTileEntity(worldIn, pos);
 
-        System.out.println("Itemname: " + item.getUnlocalizedName());
-        System.out.println("Class: " + item.getClass());
-
         if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
 
         if(item instanceof ItemSnowball)
