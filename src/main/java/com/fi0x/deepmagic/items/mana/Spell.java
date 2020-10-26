@@ -1,14 +1,20 @@
 package com.fi0x.deepmagic.items.mana;
 
+import com.fi0x.deepmagic.blocks.SpellStone;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
@@ -23,35 +29,14 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Objects;
 
 public class Spell extends ItemBase implements IMagicItem
 {
-    protected int manaCost;
-    protected int tier;
-    protected double skillXP;
-    protected SpellType spellType;
-    private final int time;
-    private final int radius;
-    private final int range;
-
-    public Spell(String name, SpellType type, int tier, int manaCost)
-    {
-        this(name, type, tier, manaCost, 0);
-    }
-    public Spell(String name, SpellType type, int tier, int manaCost, int time)
+    public Spell(String name)
     {
         super(name);
         setCreativeTab(DeepMagicTab.SPELLS);
         setMaxStackSize(1);
-
-        this.tier = tier;
-        this.manaCost = manaCost;
-        this.skillXP = 10 * tier;
-        this.spellType = type;
-        this.time = time;
-        this.radius = 10;
-        this.range = 100;
     }
 
     @Nonnull
@@ -59,174 +44,131 @@ public class Spell extends ItemBase implements IMagicItem
     public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn)
     {
         if(worldIn.isRemote) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        ItemStack itemStack = playerIn.getHeldItem(handIn);
+        NBTTagCompound compound;
+        if(!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
+        compound = itemStack.getTagCompound();
+        assert compound != null;
+
+        BlockPos blockPos = getFocusedBlock(playerIn, 5);
+        if(blockPos != null && worldIn.getBlockState(blockPos).getBlock() instanceof SpellStone) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
-        if(playerMana.getSpellTier() >= tier)
+        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(compound.getDouble("manaCosts"))))
         {
-            switch(spellType)
-            {
-                case HEAL:
-                    executeHeal(playerIn, playerMana);
-                    break;
-                case TIME:
-                    executeTime(worldIn, playerIn, playerMana);
-                    break;
-                case WEATHER:
-                    executeWeather(worldIn, playerIn, playerMana);
-                    break;
-                case MOB_ANNIHILATION:
-                    executeMobAnnihilation(worldIn, playerIn, playerMana);
-                    break;
-                case RANGED_MOB_ANNIHILATION:
-                    RayTraceResult result = getRayTrace(playerIn);
-                    if(result.typeOfHit == RayTraceResult.Type.MISS)
-                    {
-                        playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell couldn't find a target"));
-                        return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
-                    }
-                    executeRangedMobAnnihilation(worldIn, playerIn, playerMana, result);
-                    break;
-                case MOB_PUSHER:
-                    executeMobPusher(worldIn, playerIn, playerMana);
-                    break;
-            }
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Your spell tier is not high enough"));
+            playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
+            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        }
+        if(compound.hasKey("tier") && playerMana.getSpellTier() < compound.getInteger("tier"))
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You are not skilled enough for this spell"));
+            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        }
+
+        int range = 0;
+        EntityLivingBase targetEntity = null;
+        BlockPos targetPos = null;
+        int radius = 0;
+
+        int damage = 0;
+        boolean environmentalDmg = false;
+        boolean explosion = false;
+        int heal = 0;
+        int time = 0;
+        boolean toggledownfall = false;
+
+        if(compound.hasKey("range")) range = compound.getInteger("range");
+        if(compound.hasKey("target"))
+        {
+            int targetCode = compound.getInteger("target");
+            if(targetCode == 0) targetEntity = playerIn;
+            else if(targetCode == 1) targetPos = playerIn.getPosition();
+            else if(targetCode == 2) targetPos = getFocusedBlock(playerIn, range);
+            else if(targetCode == 3) targetEntity = (EntityLivingBase) getFocusedEntity();
+        }
+        if(compound.hasKey("radius")) radius = compound.getInteger("radius");
+
+        if(compound.hasKey("damage")) damage = compound.getInteger("damage");
+        if(compound.hasKey("environmentalDamage")) environmentalDmg = compound.getBoolean("environmentalDamage");
+        if(compound.hasKey("explosion")) explosion = compound.getBoolean("explosion");
+        if(compound.hasKey("heal")) heal = compound.getInteger("heal");
+        if(compound.hasKey("time")) time = compound.getInteger("time");
+        if(compound.hasKey("weather")) toggledownfall = compound.getBoolean("weather");
+
+        if(targetEntity != null)
+        {
+            targetEntity.heal(heal);
+            targetEntity.attackEntityFrom(DamageSource.MAGIC, damage);
+            editMobsInArea(worldIn, playerIn, targetEntity.getPosition(), radius, damage, heal, explosion, environmentalDmg);
+        }
+        if(targetPos != null)
+        {
+            editMobsInArea(worldIn, playerIn, targetPos, radius, damage, heal, explosion, environmentalDmg);
+        }
+        if(time != 0) worldIn.setWorldTime(time);
+        if(toggledownfall) worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
+
+        if(compound.hasKey("skillXP")) playerMana.addSkillXP(compound.getDouble("skillXP"));
+        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Spell executed"));
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
     @Override
-    public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
+    public void addInformation(ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
     {
-        tooltip.add(TextFormatting.RED + "This item will be removed in the future");
+        NBTTagCompound compound;
+        if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+        compound = stack.getTagCompound();
+        assert compound != null;
+        if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.RED + "Consumes " + compound.getInteger("manaCosts") + " Mana");
+        if(compound.hasKey("tier")) tooltip.add(TextFormatting.RED + "Requires Skill Tier " + compound.getInteger("tier"));
+        if(GuiScreen.isShiftKeyDown())
+        {
+            tooltip.add(TextFormatting.WHITE + "Spell Effects:");
+            if(compound.hasKey("target")) tooltip.add(TextFormatting.WHITE + "Target: " + compound.getInteger("target"));
+            if(compound.hasKey("range")) tooltip.add(TextFormatting.WHITE + "Range: " + compound.getInteger("range"));
+            if(compound.hasKey("radius")) tooltip.add(TextFormatting.WHITE + "Radius: " + compound.getInteger("radius"));
+            if(compound.hasKey("damage")) tooltip.add(TextFormatting.RED + "Damage: " + compound.getInteger("damage"));
+            if(compound.hasKey("environmentalDamage") && compound.getBoolean("environmentalDamage")) tooltip.add(TextFormatting.RED + "Does environmental damage" );
+            if(compound.hasKey("explosion") && compound.getBoolean("explosion")) tooltip.add(TextFormatting.RED + "Creates an explosion");
+            if(compound.hasKey("heal")) tooltip.add(TextFormatting.GREEN + "Healing amount: " + compound.getInteger("heal"));
+            if(compound.hasKey("time")) tooltip.add(TextFormatting.WHITE + "Set Time to: " + compound.getInteger("time"));
+            if(compound.hasKey("weather") && compound.getBoolean("weather")) tooltip.add(TextFormatting.WHITE + "Can toggle downfall");
+        } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
     }
 
-    private void executeHeal(EntityPlayer playerIn, PlayerMana playerMana)
-    {
-        if(playerMana.removeMana(manaCost * Math.pow(2, tier - 1)))
-        {
-            if((Math.random() * playerMana.spellCastSkill) > tier * 2)
-            {
-                playerIn.heal((int) Math.pow(2, tier));
-                addSkillXP(playerIn);
-            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-    }
-    private void executeTime(World worldIn, EntityPlayer playerIn, PlayerMana playerMana)
-    {
-        if(playerMana.removeMana(manaCost))
-        {
-            if(Math.random() * playerMana.spellCastSkill > 1)
-            {
-                worldIn.setWorldTime(time);
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
-                addSkillXP(playerIn);
-            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-    }
-    private void executeWeather(World worldIn, EntityPlayer playerIn, PlayerMana playerMana)
-    {
-        if(playerMana.removeMana(manaCost * tier))
-        {
-            if((int) (Math.random() * playerMana.spellCastSkill) > tier)
-            {
-                worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell worked"));
-                addSkillXP(playerIn);
-            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-    }
-    private void executeMobAnnihilation(World worldIn, EntityPlayer playerIn, PlayerMana playerMana)
-    {
-        if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4)))
-        {
-            if((Math.random() * playerMana.spellCastSkill) > tier)
-            {
-                BlockPos pos = playerIn.getPosition();
-                createExplosions(worldIn, playerIn, pos, radius * (tier - 7));
-                addSkillXP(playerIn);
-            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-    }
-    private void executeRangedMobAnnihilation(World worldIn, EntityPlayer playerIn, PlayerMana playerMana, RayTraceResult result)
-    {
-        if(playerMana.removeMana(manaCost * Math.pow(2, tier - 4)))
-        {
-            if((Math.random() * playerMana.spellCastSkill) > tier)
-            {
-                BlockPos pos = result.getBlockPos();
-                createExplosions(worldIn, playerIn, pos, radius * (tier - 7));
-                addSkillXP(playerIn);
-            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-    }
-    private void executeMobPusher(World worldIn, EntityPlayer playerIn, PlayerMana playerMana)
-    {
-        if(playerMana.removeMana(manaCost * Math.pow(2, tier - 3)))
-        {
-            if((Math.random() * playerMana.spellCastSkill) > tier)
-            {
-                pushMobs(worldIn, playerIn, radius * (tier - 2), tier);
-                addSkillXP(playerIn);
-            } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "The spell didn't work"));
-        } else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-    }
-
-    protected void addSkillXP(EntityPlayer player)
-    {
-        Objects.requireNonNull(player.getCapability(PlayerProperties.PLAYER_MANA, null)).addSkillXP(skillXP);
-    }
-
-    private RayTraceResult getRayTrace(EntityPlayer player)
+    private BlockPos getFocusedBlock(EntityPlayer player, int range)
     {
         Vec3d vec3d = player.getPositionEyes(1F);
         Vec3d vec3d1 = player.getLook(1F);
-        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * range * (tier - 7), vec3d1.y * range * (tier - 7), vec3d1.z * range * (tier - 7));
-        return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
+        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * range, vec3d1.y * range, vec3d1.z * range);
+        RayTraceResult result = player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
+        assert result != null;
+        if(result.typeOfHit == RayTraceResult.Type.MISS) return null;
+        return result.getBlockPos();
     }
-    private static void createExplosions(World world, EntityPlayer player, BlockPos pos, int radius)
+    private Entity getFocusedEntity()
+    {
+        //TODO: Change to get targets that are further away
+        Minecraft mc = Minecraft.getMinecraft();
+        RayTraceResult rtResult = mc.objectMouseOver;
+        mc.entityRenderer.getMouseOver(0);
+        Entity target = rtResult.entityHit;
+        System.out.println("Target: " + target);
+        return target;
+    }
+    private static void editMobsInArea(World world, EntityPlayer player, BlockPos pos, int radius, int dmg, int heal, boolean explode, boolean envDmg)
     {
         AxisAlignedBB area = new AxisAlignedBB(pos.getX()-radius, pos.getY()-radius, pos.getZ()-radius, pos.getX()+radius, pos.getY()+radius, pos.getZ()+radius);
         List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);
 
         while(!entities.isEmpty())
         {
+            entities.get(0).attackEntityFrom(DamageSource.MAGIC, dmg);
+            entities.get(0).heal(heal);
             BlockPos explosionPos = entities.get(0).getPosition();
-            world.createExplosion(player, explosionPos.getX(), explosionPos.getY(), explosionPos.getZ(), 5, false);
-            entities.get(0).attackEntityFrom(DamageSource.MAGIC, 50);
+            if(explode) world.createExplosion(player, explosionPos.getX(), explosionPos.getY(),  explosionPos.getZ(), 5, envDmg);
             entities.remove(0);
         }
-    }
-    private static void pushMobs(World world, EntityPlayer player, int radius, int tier)
-    {
-        AxisAlignedBB area = new AxisAlignedBB(player.getPosition().getX()-radius, player.getPosition().getY()-radius, player.getPosition().getZ()-radius, player.getPosition().getX()+radius, player.getPosition().getY()+radius, player.getPosition().getZ()+radius);
-        List<EntityCreature> entities = world.getEntitiesWithinAABB(EntityCreature.class, area);
-        BlockPos playerPos = player.getPosition();
-
-        while(!entities.isEmpty())
-        {
-            EntityCreature currentEntity = entities.get(0);
-            BlockPos creaturePos = currentEntity.getPosition();
-
-            if(playerPos.getX() < creaturePos.getX()) currentEntity.motionX = tier - 2;
-            else if(playerPos.getX() > creaturePos.getX()) currentEntity.motionX = -tier - 2;
-            else currentEntity.motionX = 0;
-
-            if(playerPos.getZ() < creaturePos.getZ()) currentEntity.motionZ = tier - 2;
-            else if(playerPos.getZ() > creaturePos.getZ()) currentEntity.motionZ = -tier - 2;
-            else currentEntity.motionZ = 0;
-
-            currentEntity.motionY = 0.5 * (tier - 2);
-
-            entities.remove(0);
-        }
-    }
-
-    public enum SpellType {
-        HEAL,
-        TIME,
-        WEATHER,
-        MOB_ANNIHILATION,
-        RANGED_MOB_ANNIHILATION,
-        MOB_PUSHER
     }
 }

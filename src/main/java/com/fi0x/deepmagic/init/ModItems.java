@@ -5,9 +5,9 @@ import com.fi0x.deepmagic.items.DemonCrystal;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
-import com.fi0x.deepmagic.items.mana.CustomSpell;
 import com.fi0x.deepmagic.items.mana.ManaBooster;
 import com.fi0x.deepmagic.items.mana.ManaWaster;
+import com.fi0x.deepmagic.items.mana.Spell;
 import com.fi0x.deepmagic.items.mana.TeleportationCrystal;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
@@ -48,7 +48,7 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Spells
-	public static final Item SPELL_CUSTOM = new CustomSpell("custom_spell");
+	public static final Item SPELL_CUSTOM = new Spell("custom_spell");
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);

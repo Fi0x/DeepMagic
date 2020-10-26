@@ -2,14 +2,12 @@ package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.entities.tileentity.BlockTileEntity;
 import com.fi0x.deepmagic.entities.tileentity.TileEntitySpellStone;
-import com.fi0x.deepmagic.items.mana.CustomSpell;
+import com.fi0x.deepmagic.items.mana.Spell;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -41,35 +39,23 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         Item item = stack.getItem();
         TileEntitySpellStone tile = getTileEntity(worldIn, pos);
 
-        if(item instanceof CustomSpell) return chargeSpell(playerIn, stack, tile);
+        if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
 
-        if(item instanceof ItemSword)
+        if(item instanceof ItemSword && tile.getAttackDmg() < 1)
         {
-            if(((ItemSword) item).getToolMaterialName().equals("WOOD") && tile.getAttackDmg() < 1)
-            {
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 1"));
-                tile.setAttackDmg(1);
-            } else if(((ItemSword) item).getToolMaterialName().equals("STONE") && tile.getAttackDmg() < 2)
-            {
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 2"));
-                tile.setAttackDmg(2);
-            } else if(((ItemSword) item).getToolMaterialName().equals("IRON") && tile.getAttackDmg() < 3)
-            {
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 3"));
-                tile.setAttackDmg(3);
-            } else if(((ItemSword) item).getToolMaterialName().equals("GOLD") && tile.getAttackDmg() < 4)
-            {
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 4"));
-                tile.setAttackDmg(4);
-            } else if(((ItemSword) item).getToolMaterialName().equals("DIAMOND") && tile.getAttackDmg() < 5)
-            {
-                playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 5"));
-                tile.setAttackDmg(5);
-            } else return false;
-            stack.setCount(stack.getCount() - 1);
-            return true;
-        }
-        return false;
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 1"));
+            tile.setAttackDmg(1);
+        } else if(item instanceof ItemBow)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted entity"));
+            tile.setTarget(4);
+        } else if(item instanceof ItemSnowball)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the range by 2"));
+            tile.increaseRange(2);
+        } else return false;
+        stack.setCount(stack.getCount() - 1);
+        return true;
     }
     @Override
     public Class<TileEntitySpellStone> getTileEntityClass()
@@ -101,7 +87,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         }
         if(tile.getTarget() != 0)
         {
-            compound.setInteger("target", tile.getTarget());
+            compound.setInteger("target", tile.getTarget() - 1);
             manaCosts = tile.resetTarget(manaCosts);
         }
         if(compound.getInteger("radius") < tile.getRadius())
