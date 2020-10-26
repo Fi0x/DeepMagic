@@ -59,11 +59,11 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 	@Override
 	public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
 	{
-		tooltip.add(TextFormatting.WHITE + "Get a mana boos!");
-		if(GuiScreen.isShiftKeyDown())
+		tooltip.add(TextFormatting.BOLD + "Get a mana boost!");
+		if(GuiScreen.isCtrlKeyDown())
 		{
-			tooltip.add(TextFormatting.GREEN + "Adds " + BOOST_AMOUNT + " Mana");
-			tooltip.add(TextFormatting.WHITE + "Can overcharge your mana capacity");
-		} else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
+			tooltip.add(TextFormatting.BLUE + "Adds " + BOOST_AMOUNT + " Mana");
+			tooltip.add(TextFormatting.BLUE + "Can overcharge your mana capacity");
+		} else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
 	}
 }
