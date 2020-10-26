@@ -67,8 +67,10 @@ public class Spell extends ItemBase implements IMagicItem
         }
 
         int range = 0;
-        EntityLivingBase targetEntity = null;
-        BlockPos targetPos = null;
+        EntityLivingBase targetEntity1 = null;
+        EntityLivingBase targetEntity2 = null;
+        BlockPos targetPos1 = null;
+        BlockPos targetPos2 = null;
         int radius = 0;
 
         int damage = 0;
@@ -79,14 +81,10 @@ public class Spell extends ItemBase implements IMagicItem
         boolean toggledownfall = false;
 
         if(compound.hasKey("range")) range = compound.getInteger("range");
-        if(compound.hasKey("target"))
-        {
-            int targetCode = compound.getInteger("target");
-            if(targetCode == 0) targetEntity = playerIn;
-            else if(targetCode == 1) targetPos = playerIn.getPosition();
-            else if(targetCode == 2) targetPos = getFocusedBlock(playerIn, range);
-            else if(targetCode == 3) targetEntity = (EntityLivingBase) getFocusedEntity();
-        }
+        if(compound.hasKey("targetSelf")) targetEntity1 = playerIn;
+        if(compound.hasKey("targetSelfPos")) targetPos1 = playerIn.getPosition();
+        if(compound.hasKey("targetFocus")) targetEntity2 = (EntityLivingBase) getFocusedEntity();
+        if(compound.hasKey("targetFocusPos")) targetPos2 = getFocusedBlock(playerIn, range);
         if(compound.hasKey("radius")) radius = compound.getInteger("radius");
 
         if(compound.hasKey("damage")) damage = compound.getInteger("damage");
@@ -96,17 +94,20 @@ public class Spell extends ItemBase implements IMagicItem
         if(compound.hasKey("time")) time = compound.getInteger("time");
         if(compound.hasKey("weather")) toggledownfall = compound.getBoolean("weather");
 
-        if(targetEntity != null)
+        if(targetEntity1 != null)
         {
-            targetEntity.heal(heal);
-            targetEntity.attackEntityFrom(DamageSource.MAGIC, damage);
-            editMobsInArea(worldIn, playerIn, targetEntity.getPosition(), radius, damage, heal, explosion, environmentalDmg);
+            targetEntity1.heal(heal);
+            editMobsInArea(worldIn, playerIn, targetEntity1.getPosition(), radius, damage, heal, explosion, environmentalDmg);
         }
-        if(targetPos != null)
+        if(targetPos1 != null) editMobsInArea(worldIn, playerIn, targetPos1, radius, damage, heal, explosion, environmentalDmg);
+        if(targetEntity2 != null)
         {
-            editMobsInArea(worldIn, playerIn, targetPos, radius, damage, heal, explosion, environmentalDmg);
+            targetEntity2.heal(heal);
+            targetEntity2.attackEntityFrom(DamageSource.MAGIC, damage);
+            editMobsInArea(worldIn, playerIn, targetEntity2.getPosition(), radius, damage, heal, explosion, environmentalDmg);
         }
-        if(time != 0) worldIn.setWorldTime(time);
+        if(targetPos2 != null) editMobsInArea(worldIn, playerIn, targetPos2, radius, damage, heal, explosion, environmentalDmg);
+        if(time != 0) worldIn.setWorldTime(worldIn.getWorldTime() + time);
         if(toggledownfall) worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
 
         if(compound.hasKey("skillXP")) playerMana.addSkillXP(compound.getDouble("skillXP"));
@@ -124,16 +125,21 @@ public class Spell extends ItemBase implements IMagicItem
         if(compound.hasKey("tier")) tooltip.add(TextFormatting.RED + "Requires Skill Tier " + compound.getInteger("tier"));
         if(GuiScreen.isShiftKeyDown())
         {
-            tooltip.add(TextFormatting.WHITE + "Spell Effects:");
-            if(compound.hasKey("target")) tooltip.add(TextFormatting.WHITE + "Target: " + compound.getInteger("target"));
+            tooltip.add(TextFormatting.GREEN + "Spell Effects:");
+            if(compound.hasKey("damage")) tooltip.add(TextFormatting.GREEN + "Damage: " + compound.getInteger("damage"));
+            if(compound.hasKey("environmentalDamage") && compound.getBoolean("environmentalDamage")) tooltip.add(TextFormatting.GREEN + "Does environmental damage" );
+            if(compound.hasKey("explosion") && compound.getBoolean("explosion")) tooltip.add(TextFormatting.GREEN + "Creates an explosion");
+            if(compound.hasKey("heal")) tooltip.add(TextFormatting.GREEN + "Healing amount: " + compound.getInteger("heal"));
+            if(compound.hasKey("time")) tooltip.add(TextFormatting.GREEN + "Add " + compound.getInteger("time") + " timeunits");
+            if(compound.hasKey("weather") && compound.getBoolean("weather")) tooltip.add(TextFormatting.GREEN + "Can toggle downfall");
+            tooltip.add(TextFormatting.WHITE + "Modifications:");
             if(compound.hasKey("range")) tooltip.add(TextFormatting.WHITE + "Range: " + compound.getInteger("range"));
             if(compound.hasKey("radius")) tooltip.add(TextFormatting.WHITE + "Radius: " + compound.getInteger("radius"));
-            if(compound.hasKey("damage")) tooltip.add(TextFormatting.RED + "Damage: " + compound.getInteger("damage"));
-            if(compound.hasKey("environmentalDamage") && compound.getBoolean("environmentalDamage")) tooltip.add(TextFormatting.RED + "Does environmental damage" );
-            if(compound.hasKey("explosion") && compound.getBoolean("explosion")) tooltip.add(TextFormatting.RED + "Creates an explosion");
-            if(compound.hasKey("heal")) tooltip.add(TextFormatting.GREEN + "Healing amount: " + compound.getInteger("heal"));
-            if(compound.hasKey("time")) tooltip.add(TextFormatting.WHITE + "Set Time to: " + compound.getInteger("time"));
-            if(compound.hasKey("weather") && compound.getBoolean("weather")) tooltip.add(TextFormatting.WHITE + "Can toggle downfall");
+            tooltip.add(TextFormatting.YELLOW + "Targets:");
+            if(compound.hasKey("targetSelf") && compound.getBoolean("targetSelf")) tooltip.add(TextFormatting.YELLOW + "Yourself");
+            if(compound.hasKey("targetSelfPos") && compound.getBoolean("targetSelfPos")) tooltip.add(TextFormatting.YELLOW + "Your Position");
+            if(compound.hasKey("targetFocus") && compound.getBoolean("targetFocus")) tooltip.add(TextFormatting.YELLOW + "Focused Entity");
+            if(compound.hasKey("targetFocusPos") && compound.getBoolean("targetFocusPos")) tooltip.add(TextFormatting.YELLOW + "Focused Position");
         } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
     }
 
@@ -164,7 +170,7 @@ public class Spell extends ItemBase implements IMagicItem
 
         while(!entities.isEmpty())
         {
-            entities.get(0).attackEntityFrom(DamageSource.MAGIC, dmg);
+            if(!entities.get(0).equals(player)) entities.get(0).attackEntityFrom(DamageSource.MAGIC, dmg);
             entities.get(0).heal(heal);
             BlockPos explosionPos = entities.get(0).getPosition();
             if(explode) world.createExplosion(player, explosionPos.getX(), explosionPos.getY(),  explosionPos.getZ(), 5, envDmg);
