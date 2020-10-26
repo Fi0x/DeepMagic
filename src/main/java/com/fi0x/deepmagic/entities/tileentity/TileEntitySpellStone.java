@@ -9,7 +9,10 @@ public class TileEntitySpellStone extends TileEntity
 {
     private int range;
     private int radius;
-    private int target;
+    private boolean targetSelf;
+    private boolean targetSelfPos;
+    private boolean targetFocus;
+    private boolean targetFocusPos;
     private int attackDmg;
     private boolean envDmg;
     private boolean explosive;
@@ -23,7 +26,10 @@ public class TileEntitySpellStone extends TileEntity
     {
         compound.setInteger("range", range);
         compound.setInteger("radius", radius);
-        compound.setInteger("target", target);
+        compound.setBoolean("targetSelf", targetSelf);
+        compound.setBoolean("targetSelfPos", targetSelfPos);
+        compound.setBoolean("targetFocus", targetFocus);
+        compound.setBoolean("targetFocusPos", targetFocusPos);
         compound.setInteger("attackDmg", attackDmg);
         compound.setBoolean("envDmg", envDmg);
         compound.setBoolean("explosive", explosive);
@@ -37,7 +43,10 @@ public class TileEntitySpellStone extends TileEntity
     {
         range = compound.getInteger("range");
         radius = compound.getInteger("radius");
-        target = compound.getInteger("target");
+        targetSelf = compound.getBoolean("targetSelf");
+        targetSelfPos = compound.getBoolean("targetSelfPos");
+        targetFocus = compound.getBoolean("targetFocus");
+        targetFocusPos = compound.getBoolean("targetFocusPos");
         attackDmg = compound.getInteger("attackDmg");
         envDmg = compound.getBoolean("envDmg");
         explosive = compound.getBoolean("explosive");
@@ -65,11 +74,11 @@ public class TileEntitySpellStone extends TileEntity
     }
     public int getRadius()
     {
-        return range;
+        return radius;
     }
-    public void setRadius(int x)
+    public void increaseRadius(int x)
     {
-        radius = x;
+        radius += x;
         markDirty();
     }
     public int resetRadius(int currrentManaCosts)
@@ -79,21 +88,65 @@ public class TileEntitySpellStone extends TileEntity
         markDirty();
         return currrentManaCosts * tmp;
     }
-    public int getTarget()
+    public boolean isTargetSelf()
     {
-        return target;
+        return targetSelf;
     }
-    public void setTarget(int x)
+    public void setTargetSelf()
     {
-        target = x;
+        targetSelf = true;
         markDirty();
     }
-    public int resetTarget(int currrentManaCosts)
+    public int resetTargetSelf(int currrentManaCosts)
     {
-        int tmp = target;
-        target = 0;
+        targetSelf = false;
         markDirty();
-        return currrentManaCosts * tmp;
+        return currrentManaCosts * 2;
+    }
+    public boolean isTargetSelfPos()
+    {
+        return targetSelfPos;
+    }
+    public void setTargetSelfPos()
+    {
+        targetSelfPos = true;
+        markDirty();
+    }
+    public int resetTargetSelfPos(int currrentManaCosts)
+    {
+        targetSelfPos = false;
+        markDirty();
+        return currrentManaCosts * 2;
+    }
+    public boolean isTargetFocus()
+    {
+        return targetFocus;
+    }
+    public void setTargetFocus()
+    {
+        targetFocus = true;
+        markDirty();
+    }
+    public int resetTargetFocus(int currrentManaCosts)
+    {
+        targetFocus = false;
+        markDirty();
+        return currrentManaCosts * 2;
+    }
+    public boolean isTargetFocusPos()
+    {
+        return targetFocusPos;
+    }
+    public void setTargetFocusPos()
+    {
+        targetFocusPos = true;
+        markDirty();
+    }
+    public int resetTargetFocusPos(int currrentManaCosts)
+    {
+        targetFocusPos = false;
+        markDirty();
+        return currrentManaCosts * 2;
     }
     public int getAttackDmg()
     {
@@ -143,11 +196,11 @@ public class TileEntitySpellStone extends TileEntity
     }
     public int getHeal()
     {
-        return target;
+        return heal;
     }
-    public void setHeal(int x)
+    public void increaseHeal(int x)
     {
-        heal = x;
+        heal += x;
         markDirty();
     }
     public int resetHeal(int currrentManaCosts)
@@ -161,9 +214,9 @@ public class TileEntitySpellStone extends TileEntity
     {
         return time;
     }
-    public void setTime(int x)
+    public void addTime(int x)
     {
-        time = x;
+        time += x;
         markDirty();
     }
     public int resetTime(int currrentManaCosts)
@@ -171,7 +224,7 @@ public class TileEntitySpellStone extends TileEntity
         int tmp = time;
         time = 0;
         markDirty();
-        return currrentManaCosts * tmp;
+        return currrentManaCosts * (tmp / 500);
     }
     public boolean doesWeather()
     {

@@ -41,18 +41,54 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
 
         if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
 
-        if(item instanceof ItemSword && tile.getAttackDmg() < 1)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 1"));
-            tile.setAttackDmg(1);
-        } else if(item instanceof ItemBow)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted entity"));
-            tile.setTarget(4);
-        } else if(item instanceof ItemSnowball)
+        if(item instanceof ItemSnowball)
         {
             playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the range by 2"));
             tile.increaseRange(2);
+        } else if(item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD") && !tile.isTargetSelf())
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to yourself"));
+            tile.setTargetSelf();
+        } else if(item.getUnlocalizedName().equals("tile.stone") && !tile.isTargetSelfPos())
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to your position"));
+            tile.setTargetSelfPos();
+        } else if(item instanceof ItemArrow && !tile.isTargetFocus())
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to your targeted block"));
+            tile.setTargetFocus();
+        } else if(item instanceof ItemBow && !tile.isTargetFocusPos())
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted entity"));
+            tile.setTargetFocusPos();
+        } else if(item instanceof ItemSplashPotion)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the radius by 2"));
+            tile.increaseRadius(2);
+        } else if(item instanceof ItemSword && tile.getAttackDmg() < 1 && ((ItemSword) item).getToolMaterialName().equals("IRON"))
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 2"));
+            tile.setAttackDmg(2);
+        } else if(item instanceof ItemFlintAndSteel)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added Environmental Damage"));
+            tile.setEnvDmg();
+        } else if(item.getUnlocalizedName().equals("tile.tnt"))
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added an explosion"));
+            tile.setExplosive();
+        } else if(item instanceof ItemAppleGold)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the healing by 1"));
+            tile.increaseHeal(1);
+        } else if(item instanceof ItemClock)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added 1hr to the time"));
+            tile.addTime(1000);
+        } else if(item instanceof ItemBucket)
+        {
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell will change the weather"));
+            tile.setWeather();
         } else return false;
         stack.setCount(stack.getCount() - 1);
         return true;
@@ -77,25 +113,40 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         compound = stack.getTagCompound();
         assert compound != null;
 
-        int manaCosts = 0;
+        int manaCosts = 10;
         if(compound.hasKey("manaCosts")) manaCosts = compound.getInteger("manaCosts");
 
-        if(compound.getInteger("range") < tile.getRange())
+        if(tile.getRange() > 0)
         {
-            compound.setInteger("range", tile.getRange());
+            compound.setInteger("range", compound.getInteger("range") + tile.getRange());
             manaCosts = tile.resetRange(manaCosts);
         }
-        if(tile.getTarget() != 0)
+        if(tile.isTargetSelf())
         {
-            compound.setInteger("target", tile.getTarget() - 1);
-            manaCosts = tile.resetTarget(manaCosts);
+            compound.setBoolean("targetSelf", true);
+            manaCosts = tile.resetTargetSelf(manaCosts);
         }
-        if(compound.getInteger("radius") < tile.getRadius())
+        if(tile.isTargetSelfPos())
         {
-            compound.setInteger("radius", tile.getRadius());
+            compound.setBoolean("targetSelfPos", true);
+            manaCosts = tile.resetTargetSelfPos(manaCosts);
+        }
+        if(tile.isTargetFocus())
+        {
+            compound.setBoolean("targetFocus", true);
+            manaCosts = tile.resetTargetFocus(manaCosts);
+        }
+        if(tile.isTargetFocusPos())
+        {
+            compound.setBoolean("targetFocusPos", true);
+            manaCosts = tile.resetTargetFocusPos(manaCosts);
+        }
+        if(tile.getRadius() > 0)
+        {
+            compound.setInteger("radius", compound.getInteger("radius") + tile.getRadius());
             manaCosts = tile.resetRadius(manaCosts);
         }
-        if(compound.getInteger("damage") < tile.getAttackDmg())
+        if(tile.getAttackDmg() > 0 && ((compound.hasKey("damage") && compound.getInteger("damage") < tile.getAttackDmg()) || !compound.hasKey("damage")))
         {
             compound.setInteger("damage", tile.getAttackDmg());
             manaCosts = tile.resetAttackDmg(manaCosts);
@@ -110,7 +161,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
             compound.setBoolean("explosion", true);
             manaCosts = tile.resetExplosive(manaCosts);
         }
-        if(compound.getInteger("heal") < tile.getHeal())
+        if(tile.getHeal() > 0 && ((compound.hasKey("heal") || compound.getInteger("heal") < tile.getHeal()) || !compound.hasKey("heal")))
         {
             compound.setInteger("heal", tile.getHeal());
             manaCosts = tile.resetHeal(manaCosts);
@@ -127,7 +178,8 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         }
 
         compound.setInteger("manaCosts", manaCosts);
-        compound.setInteger("tier", manaCosts / 100);
+        compound.setInteger("tier", manaCosts / 1000);
+        compound.setDouble("skillXP", (double) manaCosts / 100);
         return true;
     }
 }
