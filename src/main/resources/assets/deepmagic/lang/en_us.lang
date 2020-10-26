@@ -1,5 +1,6 @@
 itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
+itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
 item.deep_crystal.name=Deep Crystal
 item.compressed_deep_crystal.name=Compressed Deep Crystal
@@ -36,6 +37,7 @@ tile.insanity_stone_stairs.name=Insanity Stone Stairs
 tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
+tile.spell_stone.name=Spell Stone
 tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
 tile.time_controller.name=Time Controller
@@ -54,30 +56,7 @@ item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
 
-item.spell_heal_t1.name=Heal Spell T1
-item.spell_heal_t2.name=Heal Spell T2
-item.spell_heal_t3.name=Heal Spell T3
-item.spell_heal_t4.name=Heal Spell T4
-item.spell_heal_t5.name=Heal Spell T5
-
-item.spell_time_day.name=Day Spell
-item.spell_time_night.name=Night Spell
-
-item.spell_weather_t1.name=Weather Spell T1
-item.spell_weather_t2.name=Weather Spell T2
-item.spell_weather_t3.name=Weather Spell T3
-
-item.spell_mob_annihilation_t8.name=Mob Annihilation Spell T8
-item.spell_mob_annihilation_t9.name=Mob Annihilation Spell T9
-item.spell_mob_annihilation_t10.name=Mob Annihilation Spell T10
-
-item.spell_ranged_mob_annihilation_t8.name=Ranged Mob Annihilation Spell T8
-item.spell_ranged_mob_annihilation_t9.name=Ranged Mob Annihilation Spell T9
-item.spell_ranged_mob_annihilation_t10.name=Ranged Mob Annihilation Spell T10
-
-item.spell_mob_pusher_t3.name=Mob Pusher Spell T3
-item.spell_mob_pusher_t4.name=Mob Pusher Spell T4
-item.spell_mob_pusher_t5.name=Mob Pusher Spell T5
+item.custom_spell.name=Custom Spell
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple

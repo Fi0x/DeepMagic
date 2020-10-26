@@ -30,18 +30,15 @@ public class PlayerMana
 	{
 		this.mana = mana;
 	}
-	public boolean addMana(double value)
+	public void addMana(double value)
 	{
 		if(mana+(value*Math.pow(1.1, manaRegenRate)) > maxMana*Math.pow(1.1, maxManaMultiplier) && mana < maxMana*Math.pow(1.1, maxManaMultiplier))
 		{
 			mana = maxMana*Math.pow(1.1, maxManaMultiplier);
-			return false;
 		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= maxMana*Math.pow(1.1, maxManaMultiplier))
 		{
 			mana += (value*Math.pow(1.1, manaRegenRate));
-			return true;
 		}
-		return false;
 	}
 	public boolean removeMana(double value)
 	{
@@ -55,10 +52,6 @@ public class PlayerMana
 	public double getMaxMana()
 	{
 		return maxMana*Math.pow(1.1, maxManaMultiplier);
-	}
-	public void setMaxMana(double maxMana)
-	{
-		this.maxMana = maxMana;
 	}
 	public double getManaPercentage()
 	{
@@ -77,10 +70,6 @@ public class PlayerMana
 		difference += addAmount;
 		if(difference >= 100) addSkillpoint();
 	}
-	public void setSkillXP(double newAmount)
-	{
-		skillXP = newAmount;
-	}
 	public int getSkillpoints()
 	{
 		return skillpoints;
@@ -93,14 +82,12 @@ public class PlayerMana
 	{
 		skillpoints++;
 	}
-	public boolean removeSkillpoint()
+	public void removeSkillpoint()
 	{
 		if(skillpoints > 0)
 		{
 			skillpoints--;
-			return true;
 		}
-		return false;
 	}
 	public void setManaRegenRate(double manaRegenRate)
 	{
@@ -118,11 +105,9 @@ public class PlayerMana
 	{
 		return manaEfficiency;
 	}
-	public boolean addSpellTier()
+	public void addSpellTier()
 	{
-		if(spellTier >= 10) return false;
 		spellTier++;
-		return true;
 	}
 	public int getSpellTier()
 	{

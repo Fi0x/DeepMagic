@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.entities;
+package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIDefence;
 import com.fi0x.deepmagic.util.CustomNameGenerator;

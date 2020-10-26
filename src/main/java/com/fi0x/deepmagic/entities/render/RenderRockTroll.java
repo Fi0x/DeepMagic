@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntityRockTroll;
+import com.fi0x.deepmagic.entities.mobs.EntityRockTroll;
 import com.fi0x.deepmagic.entities.model.ModelRockTroll;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

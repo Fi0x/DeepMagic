@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntityHoveringOrb;
+import com.fi0x.deepmagic.entities.mobs.EntityHoveringOrb;
 import com.fi0x.deepmagic.entities.model.ModelHoveringOrb;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

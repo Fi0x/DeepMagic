@@ -1,17 +1,19 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
+import com.fi0x.deepmagic.entities.tileentity.TileEntitySpellStone;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.IHasModel;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @EventBusSubscriber
 public class RegistryHandler
@@ -48,5 +50,10 @@ public class RegistryHandler
 				((IHasModel)block).registerModels();
 			}
 		}
+	}
+
+	public static void registerTileEntities()
+	{
+		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
 	}
 }

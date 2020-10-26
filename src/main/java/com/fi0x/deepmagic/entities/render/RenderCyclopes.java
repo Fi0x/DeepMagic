@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntityCyclopes;
+import com.fi0x.deepmagic.entities.mobs.EntityCyclopes;
 import com.fi0x.deepmagic.entities.model.ModelCyclopes;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntityNetherWorm;
+import com.fi0x.deepmagic.entities.mobs.EntityNetherWorm;
 import com.fi0x.deepmagic.entities.model.ModelNetherWorm;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
