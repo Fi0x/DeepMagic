@@ -25,7 +25,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
     public SpellStone(String name, Material material)
     {
         super(name, material);
-        setSoundType(SoundType.METAL);
+        setSoundType(SoundType.STONE);
         setHardness(5.0F);
         setResistance(5.0F);
         setHarvestLevel("pickaxe", 2);
@@ -109,7 +109,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
     {
         playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Spell Stone used"));
         NBTTagCompound compound;
-        if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+        if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         compound = stack.getTagCompound();
         assert compound != null;
 

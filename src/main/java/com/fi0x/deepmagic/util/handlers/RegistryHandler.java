@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
+import com.fi0x.deepmagic.entities.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.entities.tileentity.TileEntitySpellStone;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
@@ -55,5 +56,6 @@ public class RegistryHandler
 	public static void registerTileEntities()
 	{
 		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
+		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation("mana_altar"));
 	}
 }

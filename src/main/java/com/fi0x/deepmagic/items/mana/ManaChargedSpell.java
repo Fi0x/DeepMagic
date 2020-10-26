@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.mana;
 
+import com.fi0x.deepmagic.blocks.ManaAltar;
 import com.fi0x.deepmagic.blocks.SpellStone;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
@@ -22,9 +23,6 @@ import java.util.List;
 
 public class ManaChargedSpell extends Spell implements IMagicItem
 {
-    /* Can't be powered with playermana
-     * Must be linked to machine mana*/
-
     public ManaChargedSpell(String name)
     {
         super(name);
@@ -42,7 +40,7 @@ public class ManaChargedSpell extends Spell implements IMagicItem
         assert compound != null;
 
         BlockPos blockPos = getFocusedBlock(playerIn, 5);
-        if(blockPos != null && worldIn.getBlockState(blockPos).getBlock() instanceof SpellStone) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        if(blockPos != null && (worldIn.getBlockState(blockPos).getBlock() instanceof SpellStone || worldIn.getBlockState(blockPos).getBlock() instanceof ManaAltar)) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;

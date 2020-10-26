@@ -37,6 +37,7 @@ tile.insanity_stone_stairs.name=Insanity Stone Stairs
 tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
+tile.mana_altar.name=Mana Altar
 tile.spell_stone.name=Spell Stone
 tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
