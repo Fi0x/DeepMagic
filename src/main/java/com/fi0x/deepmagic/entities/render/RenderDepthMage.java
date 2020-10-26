@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.render;
 
-import com.fi0x.deepmagic.entities.EntityDepthMage;
+import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
 import com.fi0x.deepmagic.entities.model.ModelMage;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

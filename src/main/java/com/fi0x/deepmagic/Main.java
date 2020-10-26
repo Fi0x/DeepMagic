@@ -60,6 +60,7 @@ public class Main
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
 		WorldGenCustomTrees.register();
+		RegistryHandler.registerTileEntities();
 
 		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
 		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
