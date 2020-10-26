@@ -55,64 +55,19 @@ public class Spell extends ItemBase implements IMagicItem
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
-        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(compound.getDouble("manaCosts"))))
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
-            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
-        }
         if(compound.hasKey("tier") && playerMana.getSpellTier() < compound.getInteger("tier"))
         {
             playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You are not skilled enough for this spell"));
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
-
-        int range = 0;
-        EntityLivingBase targetEntity1 = null;
-        EntityLivingBase targetEntity2 = null;
-        BlockPos targetPos1 = null;
-        BlockPos targetPos2 = null;
-        int radius = 0;
-
-        int damage = 0;
-        boolean environmentalDmg = false;
-        boolean explosion = false;
-        int heal = 0;
-        int time = 0;
-        boolean toggledownfall = false;
-
-        if(compound.hasKey("range")) range = compound.getInteger("range");
-        if(compound.hasKey("targetSelf")) targetEntity1 = playerIn;
-        if(compound.hasKey("targetSelfPos")) targetPos1 = playerIn.getPosition();
-        if(compound.hasKey("targetFocus")) targetEntity2 = (EntityLivingBase) getFocusedEntity();
-        if(compound.hasKey("targetFocusPos")) targetPos2 = getFocusedBlock(playerIn, range);
-        if(compound.hasKey("radius")) radius = compound.getInteger("radius");
-
-        if(compound.hasKey("damage")) damage = compound.getInteger("damage");
-        if(compound.hasKey("environmentalDamage")) environmentalDmg = compound.getBoolean("environmentalDamage");
-        if(compound.hasKey("explosion")) explosion = compound.getBoolean("explosion");
-        if(compound.hasKey("heal")) heal = compound.getInteger("heal");
-        if(compound.hasKey("time")) time = compound.getInteger("time");
-        if(compound.hasKey("weather")) toggledownfall = compound.getBoolean("weather");
-
-        if(targetEntity1 != null)
+        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(compound.getDouble("manaCosts"))))
         {
-            targetEntity1.heal(heal);
-            editMobsInArea(worldIn, playerIn, targetEntity1.getPosition(), radius, damage, heal, explosion, environmentalDmg);
+            playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
+            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
-        if(targetPos1 != null) editMobsInArea(worldIn, playerIn, targetPos1, radius, damage, heal, explosion, environmentalDmg);
-        if(targetEntity2 != null)
-        {
-            targetEntity2.heal(heal);
-            targetEntity2.attackEntityFrom(DamageSource.MAGIC, damage);
-            editMobsInArea(worldIn, playerIn, targetEntity2.getPosition(), radius, damage, heal, explosion, environmentalDmg);
-        }
-        if(targetPos2 != null) editMobsInArea(worldIn, playerIn, targetPos2, radius, damage, heal, explosion, environmentalDmg);
-        if(time != 0) worldIn.setWorldTime(worldIn.getWorldTime() + time);
-        if(toggledownfall) worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
 
         if(compound.hasKey("skillXP")) playerMana.addSkillXP(compound.getDouble("skillXP"));
-        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Spell executed"));
-        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return executeSpell(worldIn, playerIn, handIn, compound);
     }
     @Override
     public void addInformation(ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
@@ -121,8 +76,6 @@ public class Spell extends ItemBase implements IMagicItem
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         compound = stack.getTagCompound();
         assert compound != null;
-        if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.RED + "Consumes " + compound.getInteger("manaCosts") + " Mana");
-        if(compound.hasKey("tier")) tooltip.add(TextFormatting.RED + "Requires Skill Tier " + compound.getInteger("tier"));
         if(GuiScreen.isShiftKeyDown())
         {
             tooltip.add(TextFormatting.GREEN + "Spell Effects:");
@@ -141,9 +94,64 @@ public class Spell extends ItemBase implements IMagicItem
             if(compound.hasKey("targetFocus") && compound.getBoolean("targetFocus")) tooltip.add(TextFormatting.YELLOW + "Focused Entity");
             if(compound.hasKey("targetFocusPos") && compound.getBoolean("targetFocusPos")) tooltip.add(TextFormatting.YELLOW + "Focused Position");
         } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
+        if(GuiScreen.isCtrlKeyDown())
+        {
+            if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.BLUE + "Consumes " + compound.getInteger("manaCosts") + " Mana");
+            if(compound.hasKey("tier")) tooltip.add(TextFormatting.BLUE + "Requires Skill Tier " + compound.getInteger("tier"));
+        } else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
     }
 
-    private BlockPos getFocusedBlock(EntityPlayer player, int range)
+    protected ActionResult<ItemStack> executeSpell(World world, EntityPlayer player, EnumHand hand, NBTTagCompound compound)
+    {
+        int range = 0;
+        EntityLivingBase targetEntity1 = null;
+        EntityLivingBase targetEntity2 = null;
+        BlockPos targetPos1 = null;
+        BlockPos targetPos2 = null;
+        int radius = 0;
+
+        int damage = 0;
+        boolean environmentalDmg = false;
+        boolean explosion = false;
+        int heal = 0;
+        int time = 0;
+        boolean toggledownfall = false;
+
+        if(compound.hasKey("range")) range = compound.getInteger("range");
+        if(compound.hasKey("targetSelf")) targetEntity1 = player;
+        if(compound.hasKey("targetSelfPos")) targetPos1 = player.getPosition();
+        if(compound.hasKey("targetFocus")) targetEntity2 = (EntityLivingBase) getFocusedEntity();
+        if(compound.hasKey("targetFocusPos")) targetPos2 = getFocusedBlock(player, range);
+        if(compound.hasKey("radius")) radius = compound.getInteger("radius");
+
+        if(compound.hasKey("damage")) damage = compound.getInteger("damage");
+        if(compound.hasKey("environmentalDamage")) environmentalDmg = compound.getBoolean("environmentalDamage");
+        if(compound.hasKey("explosion")) explosion = compound.getBoolean("explosion");
+        if(compound.hasKey("heal")) heal = compound.getInteger("heal");
+        if(compound.hasKey("time")) time = compound.getInteger("time");
+        if(compound.hasKey("weather")) toggledownfall = compound.getBoolean("weather");
+
+        if(targetEntity1 != null)
+        {
+            targetEntity1.heal(heal);
+            editMobsInArea(world, player, targetEntity1.getPosition(), radius, damage, heal, explosion, environmentalDmg);
+        }
+        if(targetPos1 != null) editMobsInArea(world, player, targetPos1, radius, damage, heal, explosion, environmentalDmg);
+        if(targetEntity2 != null)
+        {
+            targetEntity2.heal(heal);
+            targetEntity2.attackEntityFrom(DamageSource.MAGIC, damage);
+            editMobsInArea(world, player, targetEntity2.getPosition(), radius, damage, heal, explosion, environmentalDmg);
+        }
+        if(targetPos2 != null) editMobsInArea(world, player, targetPos2, radius, damage, heal, explosion, environmentalDmg);
+        if(time != 0) world.setWorldTime(world.getWorldTime() + time);
+        if(toggledownfall) world.getWorldInfo().setRaining(!world.getWorldInfo().isRaining());
+
+        assert player != null;
+        player.sendMessage(new TextComponentString(TextFormatting.GREEN + "Spell executed"));
+        return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+    }
+    protected BlockPos getFocusedBlock(EntityPlayer player, int range)
     {
         Vec3d vec3d = player.getPositionEyes(1F);
         Vec3d vec3d1 = player.getLook(1F);

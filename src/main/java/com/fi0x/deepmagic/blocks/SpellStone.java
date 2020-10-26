@@ -39,9 +39,6 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         Item item = stack.getItem();
         TileEntitySpellStone tile = getTileEntity(worldIn, pos);
 
-        System.out.println("Itemname: " + item.getUnlocalizedName());
-        System.out.println("Class: " + item.getClass());
-
         if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
 
         if(item instanceof ItemSnowball)
@@ -181,8 +178,8 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         }
 
         compound.setInteger("manaCosts", manaCosts);
-        compound.setInteger("tier", manaCosts / 1000);
-        compound.setDouble("skillXP", (double) manaCosts / 100);
+        compound.setInteger("tier", (int) Math.log(Math.pow(manaCosts, 2.4)));
+        compound.setDouble("skillXP", Math.sqrt(manaCosts));
         return true;
     }
 }
