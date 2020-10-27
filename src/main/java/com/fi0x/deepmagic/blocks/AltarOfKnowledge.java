@@ -4,7 +4,7 @@ import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.network.PacketGetSkill;
-import com.fi0x.deepmagic.network.PacketHandler;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

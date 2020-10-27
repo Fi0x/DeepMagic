@@ -25,6 +25,8 @@ import javax.annotation.Nullable;
 
 public class EntityDepthMage extends EntityCreature implements IRangedAttackMob, IMagicCreature
 {
+    public int attackCounter;
+
     public EntityDepthMage(World worldIn)
     {
         super(worldIn);
@@ -144,16 +146,21 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
 
         return flag;
     }
-
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         launchProjectileToCoords(target.posX, target.posY + target.getEyeHeight()*0.5, target.posZ);
+        attackCounter = 20;
     }
-
     @Override
     public void setSwingingArms(boolean swingingArms)
     {
+    }
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+        if(attackCounter > 0) attackCounter--;
     }
 
     private void launchProjectileToCoords(double x, double y, double z)

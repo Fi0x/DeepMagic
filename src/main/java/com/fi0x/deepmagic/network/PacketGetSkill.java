@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.network;
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
