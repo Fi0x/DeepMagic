@@ -2,9 +2,11 @@ package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.projectiles.EntitySpellExplosion;
 import com.fi0x.deepmagic.entities.projectiles.EntitySpellFireball;
+import com.fi0x.deepmagic.network.PacketReturnMobAnimation;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.IMagicCreature;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -19,6 +21,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -160,7 +163,9 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
     public void onUpdate()
     {
         super.onUpdate();
-        if(attackCounter > 0) attackCounter--;
+        if(attackCounter <= 0) return;
+        attackCounter--;
+        PacketHandler.INSTANCE.sendToAllAround(new PacketReturnMobAnimation(this.getEntityId(), attackCounter), new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
     }
 
     private void launchProjectileToCoords(double x, double y, double z)

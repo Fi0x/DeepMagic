@@ -1,9 +1,6 @@
 package com.fi0x.deepmagic.util.handlers;
 
-import com.fi0x.deepmagic.network.PacketGetPlayerMana;
-import com.fi0x.deepmagic.network.PacketGetSkill;
-import com.fi0x.deepmagic.network.PacketReturnPlayerMana;
-import com.fi0x.deepmagic.network.PacketReturnSkill;
+import com.fi0x.deepmagic.network.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,5 +24,8 @@ public class PacketHandler
 
         INSTANCE.registerMessage(PacketGetSkill.Handler.class, PacketGetSkill.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketReturnSkill.Handler.class, PacketReturnSkill.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketGetMobAnimation.Handler.class, PacketGetMobAnimation.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketReturnMobAnimation.Handler.class, PacketReturnMobAnimation.class, nextID(), Side.CLIENT);
     }
 }

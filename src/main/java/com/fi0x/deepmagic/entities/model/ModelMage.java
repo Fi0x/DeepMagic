@@ -110,11 +110,11 @@ public class ModelMage extends ModelBase
         this.armRight.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
         this.armLeft.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 
-        if(((EntityDepthMage) entityIn).attackCounter > 0)
+        int attackValue = ((EntityDepthMage) entityIn).attackCounter;
+        if(attackValue > 0)
         {
-            System.out.println("Attacking");
-            this.armLeft.rotateAngleX = 0.1F;
-            this.armRight.rotateAngleX = 1;
+            this.armLeft.rotateAngleX = attackValue;
+            this.armRight.rotateAngleX = attackValue;
         }
     }
 }
