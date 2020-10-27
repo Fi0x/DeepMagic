@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.model;
 
+import com.fi0x.deepmagic.entities.mobs.EntityRockTroll;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -89,5 +90,14 @@ public class ModelRockTroll extends ModelBase
         this.armLeft.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
         this.armRight.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
         this.armLeft.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+
+        int defence = ((EntityRockTroll) entityIn).defenceTime;
+        if(defence > 0)
+        {
+            this.armLeft.rotateAngleX = 5.4F;
+            this.armRight.rotateAngleX = 5.4F;
+            this.armLeft.rotateAngleZ = 0.75F;
+            this.armRight.rotateAngleZ = 5.4F;
+        }
     }
 }

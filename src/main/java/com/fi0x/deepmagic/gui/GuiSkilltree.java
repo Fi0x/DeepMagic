@@ -3,8 +3,8 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.network.PacketGetSkill;
-import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
@@ -124,8 +124,7 @@ public class GuiSkilltree extends GuiScreen
             buttonAddManaEfficiency.visible = true;
             buttonAddMaxHP.visible = true;
             buttonAddHPRegen.visible = true;
-            if(playerMana.getSpellTier() < 10) buttonAddSpellTier.visible = true;
-            else buttonAddSpellTier.visible = false;
+            buttonAddSpellTier.visible = playerMana.getSpellTier() < 10;
             buttonAddSpellCastSkill.visible = true;
         } else
         {

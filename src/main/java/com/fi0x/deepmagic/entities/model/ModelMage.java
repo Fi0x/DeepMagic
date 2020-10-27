@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.model;
 
+import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -108,5 +109,12 @@ public class ModelMage extends ModelBase
         this.armLeft.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
         this.armRight.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
         this.armLeft.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+
+        int attackValue = ((EntityDepthMage) entityIn).attackTimer;
+        if(attackValue > 0)
+        {
+            this.armLeft.rotateAngleX = 5.5F;
+            this.armRight.rotateAngleX = 5.5F;
+        }
     }
 }

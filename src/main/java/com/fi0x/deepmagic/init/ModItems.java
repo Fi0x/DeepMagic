@@ -34,7 +34,6 @@ public class ModItems
 	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
 	public static final Item MANA_BOOSTER = new ManaBooster("mana_booster");
-	public static final Item MANA_WASTER = new ManaWaster("mana_waster");
 	public static final Item DEMON_CRYSTAL = new DemonCrystal("demon_crystal");
 	
 	//Tools
