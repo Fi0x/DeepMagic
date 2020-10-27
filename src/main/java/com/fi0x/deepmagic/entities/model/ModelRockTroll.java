@@ -94,8 +94,10 @@ public class ModelRockTroll extends ModelBase
         int defence = ((EntityRockTroll) entityIn).defenceTime;
         if(defence > 0)
         {
-            this.armLeft.rotateAngleX = defence;
-            this.armRight.rotateAngleX = defence;
+            this.armLeft.rotateAngleX = 5.4F;
+            this.armRight.rotateAngleX = 5.4F;
+            this.armLeft.rotateAngleZ = 0.75F;
+            this.armRight.rotateAngleZ = 5.4F;
         }
     }
 }

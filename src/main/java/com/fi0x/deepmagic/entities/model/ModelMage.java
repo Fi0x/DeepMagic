@@ -113,8 +113,8 @@ public class ModelMage extends ModelBase
         int attackValue = ((EntityDepthMage) entityIn).attackTimer;
         if(attackValue > 0)
         {
-            this.armLeft.rotateAngleX = attackValue;
-            this.armRight.rotateAngleX = attackValue;
+            this.armLeft.rotateAngleX = 5.5F;
+            this.armRight.rotateAngleX = 5.5F;
         }
     }
 }
