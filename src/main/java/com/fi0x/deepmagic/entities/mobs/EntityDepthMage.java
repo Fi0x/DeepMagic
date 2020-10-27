@@ -28,12 +28,15 @@ import javax.annotation.Nullable;
 
 public class EntityDepthMage extends EntityCreature implements IRangedAttackMob, IMagicCreature
 {
-    public int attackCounter;
+    public int attackTimer;
+    public int defenceTime;
 
     public EntityDepthMage(World worldIn)
     {
         super(worldIn);
         this.setSize(1F, 2F);
+        attackTimer = 0;
+        defenceTime = 0;
         this.setCustomNameTag(CustomNameGenerator.getRandomMageName());
     }
 
@@ -153,7 +156,7 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         launchProjectileToCoords(target.posX, target.posY + target.getEyeHeight()*0.5, target.posZ);
-        attackCounter = 20;
+        attackTimer = 20;
     }
     @Override
     public void setSwingingArms(boolean swingingArms)
@@ -163,9 +166,9 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
     public void onUpdate()
     {
         super.onUpdate();
-        if(attackCounter <= 0) return;
-        attackCounter--;
-        PacketHandler.INSTANCE.sendToAllAround(new PacketReturnMobAnimation(this.getEntityId(), attackCounter), new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
+        if(attackTimer <= 0) return;
+        attackTimer--;
+        PacketHandler.INSTANCE.sendToAllAround(new PacketReturnMobAnimation(this.getEntityId(), attackTimer, defenceTime), new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
     }
 
     private void launchProjectileToCoords(double x, double y, double z)

@@ -1,8 +1,10 @@
 package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIDefence;
+import com.fi0x.deepmagic.network.PacketReturnMobAnimation;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -19,22 +21,23 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityRockTroll extends EntityCreature
 {
-    public boolean defenceState;
     public int defenceTime;
+    public int attackTimer;
 
     public EntityRockTroll(World worldIn)
     {
         super(worldIn);
         setSize(2F, 2.5F);
         this.isImmuneToFire = true;
-        defenceState = false;
         defenceTime = 0;
+        attackTimer = 0;
         this.setCustomNameTag(CustomNameGenerator.getRandomTrollName());
     }
 
@@ -106,7 +109,13 @@ public class EntityRockTroll extends EntityCreature
     @Override
     public boolean isEntityInvulnerable(@Nonnull DamageSource source)
     {
-        return defenceState && !source.isCreativePlayer();
+        return defenceTime > 0 && !source.isCreativePlayer();
+    }
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+        PacketHandler.INSTANCE.sendToAllAround(new PacketReturnMobAnimation(this.getEntityId(), attackTimer, defenceTime), new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
     }
 
     @Override
@@ -159,7 +168,6 @@ public class EntityRockTroll extends EntityCreature
 
             this.applyEnchantments(this, entityIn);
         }
-
         return flag;
     }
 }

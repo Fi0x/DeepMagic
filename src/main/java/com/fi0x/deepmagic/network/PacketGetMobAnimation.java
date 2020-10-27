@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
+import com.fi0x.deepmagic.entities.mobs.EntityRockTroll;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -18,16 +19,18 @@ public class PacketGetMobAnimation implements IMessage
     private int entityID;
     private int dimension;
     private int attackState;
+    private int defenceState;
 
     public PacketGetMobAnimation()
     {
         messageValid = false;
     }
-    public PacketGetMobAnimation(int entityID, int dimension, int attackState)
+    public PacketGetMobAnimation(int entityID, int dimension, int attackState, int defenceState)
     {
         this.entityID = entityID;
         this.dimension = dimension;
         this.attackState = attackState;
+        this.defenceState = defenceState;
 
         messageValid = true;
     }
@@ -40,6 +43,7 @@ public class PacketGetMobAnimation implements IMessage
             entityID = buf.readInt();
             dimension = buf.readInt();
             attackState = buf.readInt();
+            defenceState = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -53,7 +57,8 @@ public class PacketGetMobAnimation implements IMessage
         if(!messageValid) return;
         buf.writeInt(entityID);
         buf.writeInt(dimension);
-        buf.writeDouble(attackState);
+        buf.writeInt(attackState);
+        buf.writeInt(defenceState);
     }
 
     public static class Handler implements IMessageHandler<PacketGetMobAnimation, IMessage>
@@ -72,7 +77,11 @@ public class PacketGetMobAnimation implements IMessage
             Entity entity = world.getEntityByID(message.entityID);
             if(entity instanceof EntityDepthMage)
             {
-                PacketHandler.INSTANCE.sendTo(new PacketReturnMobAnimation(message.entityID, ((EntityDepthMage) entity).attackCounter), ctx.getServerHandler().player);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnMobAnimation(message.entityID, ((EntityDepthMage) entity).attackTimer), ctx.getServerHandler().player);
+            } else
+            if(entity instanceof EntityRockTroll)
+            {
+                PacketHandler.INSTANCE.sendTo(new PacketReturnMobAnimation(message.entityID, ((EntityRockTroll) entity).defenceTime), ctx.getServerHandler().player);
             }
         }
     }

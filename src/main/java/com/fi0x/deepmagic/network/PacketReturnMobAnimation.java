@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
+import com.fi0x.deepmagic.entities.mobs.EntityRockTroll;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -16,15 +17,25 @@ public class PacketReturnMobAnimation implements IMessage
 
     private int entityID;
     private int attackState;
+    private int defenceState;
 
     public PacketReturnMobAnimation()
     {
         this.messageValid = false;
     }
-    public PacketReturnMobAnimation(int entityID, int attackState)
+    public PacketReturnMobAnimation(int entityID, int attackDefenceState)
+    {
+        this.entityID = entityID;
+        this.attackState = attackDefenceState;
+        this.defenceState = attackDefenceState;
+
+        messageValid = true;
+    }
+    public PacketReturnMobAnimation(int entityID, int attackState, int defenceState)
     {
         this.entityID = entityID;
         this.attackState = attackState;
+        this.defenceState = defenceState;
 
         messageValid = true;
     }
@@ -36,6 +47,7 @@ public class PacketReturnMobAnimation implements IMessage
         {
             entityID = buf.readInt();
             attackState = buf.readInt();
+            defenceState = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -49,6 +61,7 @@ public class PacketReturnMobAnimation implements IMessage
         if(!messageValid) return;
         buf.writeInt(entityID);
         buf.writeInt(attackState);
+        buf.writeInt(defenceState);
     }
 
     public static class Handler implements IMessageHandler<PacketReturnMobAnimation, IMessage>
@@ -68,7 +81,10 @@ public class PacketReturnMobAnimation implements IMessage
                 Entity entity = Minecraft.getMinecraft().world.getEntityByID(message.entityID);
                 if(entity instanceof EntityDepthMage)
                 {
-                    ((EntityDepthMage) entity).attackCounter = message.attackState;
+                    ((EntityDepthMage) entity).attackTimer = message.attackState;
+                } else if(entity instanceof EntityRockTroll)
+                {
+                    ((EntityRockTroll) entity).defenceTime = message.defenceState;
                 }
             } catch(Exception e)
             {
