@@ -52,5 +52,25 @@ public class RenderHandler
                 return new ModelResourceLocation("deepmagic:insanity_water", "fluid");
             }
         });
+
+        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ModBlocks.INSANITY_LAVA), new ItemMeshDefinition()
+        {
+            @Nonnull
+            @Override
+            public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack)
+            {
+                return new ModelResourceLocation("deepmagic:insanity_lava", "fluid");
+            }
+        });
+
+        ModelLoader.setCustomStateMapper(ModBlocks.INSANITY_LAVA, new StateMapperBase()
+        {
+            @Nonnull
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state)
+            {
+                return new ModelResourceLocation("deepmagic:insanity_lava", "fluid");
+            }
+        });
     }
 }
