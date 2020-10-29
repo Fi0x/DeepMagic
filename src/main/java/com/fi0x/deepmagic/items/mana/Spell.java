@@ -91,8 +91,8 @@ public class Spell extends ItemBase implements IMagicItem
             tooltip.add(TextFormatting.YELLOW + "Targets:");
             if(compound.hasKey("targetSelf") && compound.getBoolean("targetSelf")) tooltip.add(TextFormatting.YELLOW + "Yourself");
             if(compound.hasKey("targetSelfPos") && compound.getBoolean("targetSelfPos")) tooltip.add(TextFormatting.YELLOW + "Your Position");
-            if(compound.hasKey("targetFocus") && compound.getBoolean("targetFocus")) tooltip.add(TextFormatting.YELLOW + "Focused Entity");
-            if(compound.hasKey("targetFocusPos") && compound.getBoolean("targetFocusPos")) tooltip.add(TextFormatting.YELLOW + "Focused Position");
+            if(compound.hasKey("targetFocus") && compound.getBoolean("targetFocus")) tooltip.add(TextFormatting.YELLOW + "Targeted Entity");
+            if(compound.hasKey("targetFocusPos") && compound.getBoolean("targetFocusPos")) tooltip.add(TextFormatting.YELLOW + "Targeted Position");
         } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
         if(GuiScreen.isCtrlKeyDown())
         {

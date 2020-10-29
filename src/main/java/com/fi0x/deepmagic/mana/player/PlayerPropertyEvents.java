@@ -1,8 +1,8 @@
 package com.fi0x.deepmagic.mana.player;
 
 import com.fi0x.deepmagic.network.PacketGetPlayerMana;
-import com.fi0x.deepmagic.network.PacketHandler;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

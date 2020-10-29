@@ -1,9 +1,12 @@
 package com.fi0x.deepmagic.entities.mobs;
 
+import com.fi0x.deepmagic.entities.projectiles.EntitySpellExplosion;
 import com.fi0x.deepmagic.entities.projectiles.EntitySpellFireball;
+import com.fi0x.deepmagic.network.PacketReturnMobAnimation;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.IMagicCreature;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -18,16 +21,22 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityDepthMage extends EntityCreature implements IRangedAttackMob, IMagicCreature
 {
+    public int attackTimer;
+    public int defenceTime;
+
     public EntityDepthMage(World worldIn)
     {
         super(worldIn);
         this.setSize(1F, 2F);
+        attackTimer = 0;
+        defenceTime = 0;
         this.setCustomNameTag(CustomNameGenerator.getRandomMageName());
     }
 
@@ -143,16 +152,23 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
 
         return flag;
     }
-
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         launchProjectileToCoords(target.posX, target.posY + target.getEyeHeight()*0.5, target.posZ);
+        attackTimer = 20;
     }
-
     @Override
     public void setSwingingArms(boolean swingingArms)
     {
+    }
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+        if(attackTimer <= 0) return;
+        attackTimer--;
+        PacketHandler.INSTANCE.sendToAllAround(new PacketReturnMobAnimation(this.getEntityId(), attackTimer, defenceTime), new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
     }
 
     private void launchProjectileToCoords(double x, double y, double z)
@@ -164,13 +180,16 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
         double d3 = x - d0;
         double d4 = y - d1;
         double d5 = z - d2;
-        EntitySpellFireball fireball = new EntitySpellFireball(world, this, d3, d4, d5);
+        Entity projectile;
+        int rand = (int) (Math.random()*2);
+        if(rand == 0) projectile = new EntitySpellFireball(world, this, d3, d4, d5);
+        else projectile = new EntitySpellExplosion(world, this, d3, d4, d5);
 
-        fireball.setEntityInvulnerable(true);
+        projectile.setEntityInvulnerable(true);
 
-        fireball.posY = d1;
-        fireball.posX = d0;
-        fireball.posZ = d2;
-        this.world.spawnEntity(fireball);
+        projectile.posY = d1;
+        projectile.posX = d0;
+        projectile.posZ = d2;
+        this.world.spawnEntity(projectile);
     }
 }

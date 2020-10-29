@@ -20,7 +20,6 @@ public class EntityAIDefence extends EntityAIBase
 
     public void startExecuting()
     {
-        this.creature.defenceState = true;
         this.creature.defenceTime = 5*20;
     }
 
@@ -28,7 +27,6 @@ public class EntityAIDefence extends EntityAIBase
     {
         if(creature.defenceTime <= 0)
         {
-            creature.defenceState = false;
             return false;
         }
         creature.defenceTime--;

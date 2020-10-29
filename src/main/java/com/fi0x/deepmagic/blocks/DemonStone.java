@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.entities.mobs.EntityDemon;
 import com.fi0x.deepmagic.items.DemonCrystal;
+import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ import javax.annotation.Nonnull;
 
 public class DemonStone extends BlockBase
 {
+    private static final int SKILL_XP = 100;
 
     public DemonStone(String name, Material material)
     {
@@ -31,14 +33,17 @@ public class DemonStone extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            if(playerIn.getHeldItem(hand).getItem() instanceof DemonCrystal && playerIn.getCapability(PlayerProperties.PLAYER_MANA, null).removeMana(100))
-            {
-                playerIn.getHeldItem(hand).setCount(playerIn.getHeldItem(hand).getCount() - 1);
-                EntityDemon demon = new EntityDemon(worldIn);
-                demon.posX = pos.getX() + 0.5;
-                demon.posY = pos.getY() + 1;
-                demon.posZ = pos.getZ() + 0.5;
-                worldIn.spawnEntity(demon);
+            PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
+            if(playerIn.getHeldItem(hand).getItem() instanceof DemonCrystal) {
+                assert playerMana != null;
+                if (playerMana.removeMana(100)) {
+                    playerIn.getHeldItem(hand).setCount(playerIn.getHeldItem(hand).getCount() - 1);
+                    playerMana.addSkillXP(SKILL_XP);
+
+                    EntityDemon demon = new EntityDemon(worldIn);
+                    demon.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+                    worldIn.spawnEntity(demon);
+                }
             }
         }
         return true;
