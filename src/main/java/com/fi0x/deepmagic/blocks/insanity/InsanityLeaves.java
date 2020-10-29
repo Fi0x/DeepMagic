@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -42,7 +43,7 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
         setSoundType(SoundType.PLANT);
         setHardness(0.3F);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.valueOf(true)));
+        setDefaultState(getBlockState().getBaseState().withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
@@ -144,5 +145,11 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
     public int damageDropped(@Nonnull IBlockState state)
     {
         return 0;
+    }
+
+    @Override
+    public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
+    {
+        return true;
     }
 }
