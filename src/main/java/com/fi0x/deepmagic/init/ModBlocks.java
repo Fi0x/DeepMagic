@@ -48,7 +48,6 @@ public class ModBlocks
 	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new HalfSlabBase("insanity_wood_slab_half", Material.WOOD);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
-	public static final Block INSANITY_LAVA = new BlockFluid("insanity_lava", ModFluids.INSANITY_LAVA, Material.LAVA);
 
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);

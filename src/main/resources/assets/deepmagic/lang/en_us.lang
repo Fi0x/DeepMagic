@@ -44,7 +44,6 @@ tile.time_controller.name=Time Controller
 tile.demon_stone.name=Demon Stone
 
 fluid.insanity_water=Insanity Water
-fluid.insanity_lava=Insanity Lava
 
 item.deep_crystal_sword.name=Deep Crystal Sword
 item.deep_crystal_shovel.name=Deep Crystal Shovel
