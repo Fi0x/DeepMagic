@@ -55,11 +55,11 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
             tile.setTargetSelfPos();
         } else if(item instanceof ItemArrow && !tile.isTargetFocus())
         {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to your targeted block"));
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted entity"));
             tile.setTargetFocus();
         } else if(item instanceof ItemBow && !tile.isTargetFocusPos())
         {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted entity"));
+            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted block"));
             tile.setTargetFocusPos();
         } else if(item instanceof ItemSplashPotion)
         {
