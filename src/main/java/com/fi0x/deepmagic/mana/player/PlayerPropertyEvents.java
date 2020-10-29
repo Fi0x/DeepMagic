@@ -1,12 +1,14 @@
 package com.fi0x.deepmagic.mana.player;
 
 import com.fi0x.deepmagic.network.PacketGetPlayerMana;
+import com.fi0x.deepmagic.network.PacketGetSkill;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -38,6 +40,7 @@ public class PlayerPropertyEvents
                 PlayerMana newStore = PlayerProperties.getPlayerMana(event.getEntityPlayer());
                 assert oldStore != null;
                 newStore.copyFrom(oldStore);
+                PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntityPlayer().getName(), newStore.getMaxMana(), newStore.getSkillXP(), newStore.getSkillpoints(), newStore.getManaRegenRate(), newStore.getManaEfficiency(), newStore.addedHP, newStore.hpRegeneration, newStore.getSpellTier(), newStore.spellCastSkill));
             }
         }
     }
@@ -56,6 +59,24 @@ public class PlayerPropertyEvents
             PlayerMana playerMana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
             PacketHandler.INSTANCE.sendToServer(new PacketGetPlayerMana(event.player.getName(), playerMana.getMana()));
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerSwapDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+        PlayerMana playerMana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
+        assert playerMana != null;
+        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.player.getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
+    }
+    @SubscribeEvent
+    public void onPlayerJoin(EntityJoinWorldEvent event)
+    {
+        if(event.getEntity() instanceof EntityPlayer)
+        {
+            PlayerMana playerMana = event.getEntity().getCapability(PlayerProperties.PLAYER_MANA, null);
+            assert playerMana != null;
+            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntity().getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
         }
     }
 }

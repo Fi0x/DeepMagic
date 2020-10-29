@@ -50,7 +50,7 @@ public class Skillpoint extends Item implements IHasModel
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
 			playerMana.addSkillpoint();
-			stack.setCount(stack.getCount() - 1);
+			playerIn.getHeldItem(handIn).setCount(playerIn.getHeldItem(handIn).getCount() - 1);
 			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
