@@ -6,8 +6,6 @@ import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
-import com.fi0x.deepmagic.util.IMagicItem;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -21,11 +19,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ManaBooster extends Item implements IHasModel, IMagicItem
+public class Skillpoint extends Item implements IHasModel
 {
-	private static final int BOOST_AMOUNT = 1000;
-	
-	public ManaBooster(String name)
+	public Skillpoint(String name)
 	{
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -39,7 +35,11 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-	
+	@Override
+	public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
+	{
+		tooltip.add(TextFormatting.WHITE + "Gives you a Skillpoint");
+	}
 	@Nonnull
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
@@ -49,20 +49,10 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		{
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
-			playerMana.setMana(playerMana.getMana() + BOOST_AMOUNT);
-			return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
+			playerMana.addSkillpoint();
+			stack.setCount(stack.getCount() - 1);
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
-	}
-
-	@Override
-	public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
-	{
-		tooltip.add(TextFormatting.BOLD + "Get a mana boost!");
-		if(GuiScreen.isCtrlKeyDown())
-		{
-			tooltip.add(TextFormatting.BLUE + "Adds " + BOOST_AMOUNT + " Mana");
-			tooltip.add(TextFormatting.BLUE + "Can overcharge your mana capacity");
-		} else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
 	}
 }
