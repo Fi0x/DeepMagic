@@ -35,6 +35,7 @@ public class ModItems
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
 	public static final Item MANA_BOOSTER = new ManaBooster("mana_booster");
 	public static final Item DEMON_CRYSTAL = new DemonCrystal("demon_crystal");
+	public static final Item SKILLPOINT = new Skillpoint("skillpoint");
 	
 	//Tools
 	public static final ItemSword DEEP_CRYSTAL_SWORD = new ToolSword("deep_crystal_sword", MATERIAL_DEEP_CRYSTAL);
