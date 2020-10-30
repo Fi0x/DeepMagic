@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "deepmagic:items/crafting_item_10"
+       "layer0": "deepmagic:items/dimensional_crystal"
    }
 }

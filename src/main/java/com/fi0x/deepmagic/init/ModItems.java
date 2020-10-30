@@ -29,9 +29,6 @@ public class ModItems
 	public static final ArmorMaterial ARMOR_MATERIAL_DEEP_CRYSTAL = EnumHelper.addArmorMaterial("armor_material_deep_crystal", Reference.MOD_ID + ":deep_crystal", 16, new int[] {4, 9, 7, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0F);
 	
 	//Items
-	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
-	public static final Item COMPRESSED_DEEP_CRYSTAL = new ItemBase("compressed_deep_crystal");
-	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
 	public static final Item MANA_BOOSTER = new ManaBooster("mana_booster");
 	public static final Item DEMON_CRYSTAL = new DemonCrystal("demon_crystal");
@@ -67,14 +64,17 @@ public class ModItems
 	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
 
 	//Crafting Items
-	public static final Item CRAFTING_ITEM_1 = new ItemBase("crafting_item_1");
-	public static final Item CRAFTING_ITEM_2 = new ItemBase("crafting_item_2");
-	public static final Item CRAFTING_ITEM_3 = new ItemBase("crafting_item_3");
-	public static final Item CRAFTING_ITEM_4 = new ItemBase("crafting_item_4");
-	public static final Item CRAFTING_ITEM_5 = new ItemBase("crafting_item_5");
-	public static final Item CRAFTING_ITEM_6 = new ItemBase("crafting_item_6");
-	public static final Item CRAFTING_ITEM_7 = new ItemBase("crafting_item_7");
-	public static final Item CRAFTING_ITEM_8 = new ItemBase("crafting_item_8");
-	public static final Item CRAFTING_ITEM_9 = new ItemBase("crafting_item_9");
-	public static final Item CRAFTING_ITEM_10 = new ItemBase("crafting_item_10");
+	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
+	public static final Item COMPRESSED_DEEP_CRYSTAL = new ItemBase("compressed_deep_crystal");
+	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");
+	public static final Item MANA_BATTERY = new ItemBase("mana_battery");
+	public static final Item MAGIC_CONVERTER = new ItemBase("magic_converter");
+	public static final Item EMPTY_SCROLL = new ItemBase("empty_scroll");
+	public static final Item DIMENSIONAL_CRYSTAL = new ItemBase("dimensional_crystal");
+	public static final Item MAGIC_POWDER = new ItemBase("magic_powder");
+	public static final Item MAGIC_SIGIL = new ItemBase("magic_sigil");
+	public static final Item MAGIC_FLOW_CONTROLLER = new ItemBase("magic_flow_controller");
+	public static final Item MANA_INTERFACE = new ItemBase("mana_interface");
+	public static final Item KNOWLEDGE_SEGMENT = new ItemBase("knowledge_segment");
+	public static final Item WORLD_INTERACTION_SEGMENT = new ItemBase("world_interaction_segment");
 }
