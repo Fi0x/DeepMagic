@@ -3,28 +3,40 @@
     
     "pattern":
     [
-        "IDI",
-        "CEC",
-        "IDI"
+        "AIA",
+        "CDF",
+        "BMB"
     ],
     
     "key":
     {
-        "C":
-        {
-            "item": "deepmagic:deep_crystal"
-        },
         "D":
         {
-            "item": "minecraft:diamond"
+            "item": "deepmagic:dimensional_crystal"
+        },
+        "M":
+        {
+            "item": "deepmagic:mana_battery"
         },
         "I":
         {
-        	"item": "minecraft:iron_ingot"
+        	"item": "deepmagic:mana_interface"
         },
-        "E":
+        "C":
         {
-        	"item": "minecraft:ender_pearl"
+        	"item": "deepmagic:magic_converter"
+        },
+        "F":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        },
+        "A":
+        {
+            "item": "minecraft:diamond"
+        },
+        "B":
+        {
+            "item": "minecraft:iron_ingot"
         }
     },
     
