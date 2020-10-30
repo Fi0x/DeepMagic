@@ -65,4 +65,16 @@ public class ModItems
 	public static final Item RAW_WORM = new FoodEffectBase("raw_worm", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
 	public static final Item COOKED_WORM = new FoodBase("cooked_worm", 4, 4, false);
 	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
+
+	//Crafting Items
+	public static final Item CRAFTING_ITEM_1 = new ItemBase("crafting_item_1");
+	public static final Item CRAFTING_ITEM_2 = new ItemBase("crafting_item_2");
+	public static final Item CRAFTING_ITEM_3 = new ItemBase("crafting_item_3");
+	public static final Item CRAFTING_ITEM_4 = new ItemBase("crafting_item_4");
+	public static final Item CRAFTING_ITEM_5 = new ItemBase("crafting_item_5");
+	public static final Item CRAFTING_ITEM_6 = new ItemBase("crafting_item_6");
+	public static final Item CRAFTING_ITEM_7 = new ItemBase("crafting_item_7");
+	public static final Item CRAFTING_ITEM_8 = new ItemBase("crafting_item_8");
+	public static final Item CRAFTING_ITEM_9 = new ItemBase("crafting_item_9");
+	public static final Item CRAFTING_ITEM_10 = new ItemBase("crafting_item_10");
 }

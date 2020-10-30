@@ -71,6 +71,17 @@ item.raw_worm.name=Raw Worm
 item.cooked_worm.name=Cooked Worm
 item.worm_snack.name=Worm Snack
 
+item.crafting_item_1.name=Crafting Item 1
+item.crafting_item_2.name=Crafting Item 2
+item.crafting_item_3.name=Crafting Item 3
+item.crafting_item_4.name=Crafting Item 4
+item.crafting_item_5.name=Crafting Item 5
+item.crafting_item_6.name=Crafting Item 6
+item.crafting_item_7.name=Crafting Item 7
+item.crafting_item_8.name=Crafting Item 8
+item.crafting_item_9.name=Crafting Item 9
+item.crafting_item_10.name=Crafting Item 10
+
 entity.insanity_cow.name=Insanity Cow
 entity.dwarf.name=Dwarf
 entity.hovering_orb.name=Hovering Orb
