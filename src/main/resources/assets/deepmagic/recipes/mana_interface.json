@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "ISI",
+        "ICI",
+        "IDI"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:compressed_deep_crystal"
+        },
+        "S":
+        {
+        	"item": "deepmagic:empty_scroll"
+        },
+        "D":
+        {
+            "item": "deepmagic:deep_crystal"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:mana_interface",
+        "count": 1
+    }
+}

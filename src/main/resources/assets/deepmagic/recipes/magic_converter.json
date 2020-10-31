@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "ICI",
+        "I I",
+        "IDI"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:compressed_deep_crystal"
+        },
+        "D":
+        {
+        	"item": "deepmagic:deep_crystal"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:magic_converter",
+        "count": 1
+    }
+}

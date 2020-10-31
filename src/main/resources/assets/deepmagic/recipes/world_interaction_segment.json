@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "CPC",
+        "SIS",
+        "CPC"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:deep_crystal_block"
+        },
+        "S":
+        {
+        	"item": "deepmagic:magic_sigil"
+        },
+        "P":
+        {
+            "item": "deepmagic:magic_powder"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_pickaxe"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:world_interaction_segment",
+        "count": 1
+    }
+}

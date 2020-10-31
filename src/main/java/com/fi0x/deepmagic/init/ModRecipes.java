@@ -9,5 +9,7 @@ public class ModRecipes
 	{
 		GameRegistry.addSmelting(ModBlocks.DEEP_CRYSTAL_ORE, new ItemStack(ModItems.DEEP_CRYSTAL, 1), 1F);
 		GameRegistry.addSmelting(ModItems.DEEP_CRYSTAL_POWDER, new ItemStack(ModItems.DEEP_CRYSTAL, 1), 1F);
+		GameRegistry.addSmelting(ModItems.RAW_COCKROACH, new ItemStack(ModItems.COOKED_COCKROACH, 1), 1F);
+		GameRegistry.addSmelting(ModItems.RAW_WORM, new ItemStack(ModItems.COOKED_WORM, 1), 1F);
 	}
 }

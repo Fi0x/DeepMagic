@@ -32,7 +32,8 @@ public class ModBlocks
 	public static final BlockSlab CLEAN_STONE_SLAB_DOUBLE = new DoubleSlabBase("clean_stone_slab_double", Material.ROCK);
 	public static final BlockSlab CLEAN_STONE_SLAB_HALF = new HalfSlabBase("clean_stone_slab_half", Material.ROCK);
 	public static final BlockStairs CLEAN_STONE_STAIRS = new StairBase("clean_stone_stairs", Blocks.STONE.getDefaultState());
-	
+
+	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
@@ -49,6 +50,7 @@ public class ModBlocks
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
 
+	//Special Blocks
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
 	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3);
@@ -58,6 +60,7 @@ public class ModBlocks
 	public static final Block LEVITATION_STONE = new LevitationStone("levitation_stone", Material.ROCK);
 	public static final Block DEMON_STONE = new DemonStone("demon_stone", Material.ROCK);
 
+	//Interacting Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
 	public static final SpellStone SPELL_STONE = new SpellStone("spell_stone", Material.ROCK);
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);

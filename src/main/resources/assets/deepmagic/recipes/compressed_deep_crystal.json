@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "AA",
+        "AA"
+    ],
+    
+    "key":
+    {
+        "A":
+        {
+            "item": "deepmagic:deep_crystal"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:compressed_deep_crystal",
+        "count": 1
+    }
+}

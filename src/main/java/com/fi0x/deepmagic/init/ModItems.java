@@ -55,7 +55,6 @@ public class ModItems
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true), true);
 	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false), false);
-	public static final Item STONE_SNACK = new FoodBase("stone_snack", 5, 10, false);
 	public static final Item RAW_COCKROACH = new FoodEffectBase("raw_cockroach", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
 	public static final Item COOKED_COCKROACH = new FoodBase("cooked_cockroach", 4, 4, false);
 	public static final Item COCKROACH_SNACK = new FoodBase("cockroach_snack", 6, 8, false);
@@ -66,12 +65,12 @@ public class ModItems
 	//Crafting Items
 	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
 	public static final Item COMPRESSED_DEEP_CRYSTAL = new ItemBase("compressed_deep_crystal");
-	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");
+	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");//TODO: Crafting Recipe
 	public static final Item MANA_BATTERY = new ItemBase("mana_battery");
 	public static final Item MAGIC_CONVERTER = new ItemBase("magic_converter");
 	public static final Item EMPTY_SCROLL = new ItemBase("empty_scroll");
 	public static final Item DIMENSIONAL_CRYSTAL = new ItemBase("dimensional_crystal");
-	public static final Item MAGIC_POWDER = new ItemBase("magic_powder");
+	public static final Item MAGIC_POWDER = new ItemBase("magic_powder");//TODO: Crafting Recipe
 	public static final Item MAGIC_SIGIL = new ItemBase("magic_sigil");
 	public static final Item MAGIC_FLOW_CONTROLLER = new ItemBase("magic_flow_controller");
 	public static final Item MANA_INTERFACE = new ItemBase("mana_interface");
