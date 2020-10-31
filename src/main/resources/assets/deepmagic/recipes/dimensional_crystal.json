@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "DPD",
+        "SES",
+        "DPD"
+    ],
+    
+    "key":
+    {
+        "E":
+        {
+            "item": "minecraft:ender_pearl"
+        },
+        "S":
+        {
+        	"item": "deepmagic:magic_sigil"
+        },
+        "P":
+        {
+            "item": "deepmagic:magic_powder"
+        },
+        "D":
+        {
+            "item": "minecraft:diamond"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:dimensional_crystal",
+        "count": 1
+    }
+}

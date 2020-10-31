@@ -10,5 +10,3 @@ Add / tweak crafting recipes
 Tweak item, spell + block stats (costs, effect)
 Add ai targets to mobs for different race battles (dwarfs and giants battle...)
 Mobs work together (Dwarfs mine, mages battle, elves heal)
-
-Fix Todo in Spell.java

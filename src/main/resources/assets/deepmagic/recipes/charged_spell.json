@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        " P ",
+        "FSB",
+        " D "
+    ],
+    
+    "key":
+    {
+        "P":
+        {
+            "item": "deepmagic:magic_powder"
+        },
+        "F":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        },
+        "S":
+        {
+        	"item": "deepmagic:spell"
+        },
+        "B":
+        {
+            "item": "deepmagic:mana_battery"
+        },
+        "D":
+        {
+            "item": "deepmagic:dimensional_crystal"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:charged_spell",
+        "count": 1
+    }
+}

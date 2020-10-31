@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "ICI",
+        "IMI",
+        "IDI"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:compressed_deep_crystal"
+        },
+        "D":
+        {
+        	"item": "deepmagic:deep_crystal"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        "M":
+        {
+            "item": "deepmagic:magic_converter"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:magic_flow_controller",
+        "count": 1
+    }
+}

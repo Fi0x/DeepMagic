@@ -3,26 +3,18 @@
     
     "pattern":
     [
-        "AIA",
-        "CDF",
-        "BMB"
+        " M ",
+        "IFI",
+        "ICI"
     ],
     
     "key":
     {
-        "D":
+        "C":
         {
-            "item": "deepmagic:dimensional_crystal"
+            "item": "deepmagic:compressed_deep_crystal"
         },
         "M":
-        {
-            "item": "deepmagic:mana_battery"
-        },
-        "I":
-        {
-        	"item": "deepmagic:mana_interface"
-        },
-        "C":
         {
         	"item": "deepmagic:magic_converter"
         },
@@ -30,11 +22,7 @@
         {
             "item": "deepmagic:magic_flow_controller"
         },
-        "A":
-        {
-            "item": "minecraft:diamond"
-        },
-        "B":
+        "I":
         {
             "item": "minecraft:iron_ingot"
         }
@@ -42,7 +30,7 @@
     
     "result":
     {
-        "item": "deepmagic:teleportation_crystal",
+        "item": "deepmagic:mana_battery",
         "count": 1
     }
 }

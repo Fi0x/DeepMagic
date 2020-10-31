@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "DCD",
+        "CSC",
+        "DCD"
+    ],
+    
+    "key":
+    {
+        "D":
+        {
+            "item": "minecraft:diamond"
+        },
+        "C":
+        {
+            "item": "deepmagic:deep_crystal"
+        },
+        "S":
+        {
+        	"item": "deepmagic:magic_sigil"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:demon_crystal",
+        "count": 1
+    }
+}

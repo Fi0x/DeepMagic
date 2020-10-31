@@ -2,9 +2,6 @@ itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
 itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
-item.deep_crystal.name=Deep Crystal
-item.compressed_deep_crystal.name=Compressed Deep Crystal
-item.deep_crystal_powder.name=Deep Crystal Powder
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
 item.demon_crystal.name=Demon Crystal
@@ -63,13 +60,27 @@ item.breakable_spell.name=Breakable Spell
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
-item.stone_snack.name=Stone Snack
 item.raw_cockroach.name=Raw Cockroach
 item.cooked_cockroach.name=Cooked Cockroach
 item.cockroach_snack.name=Cockroach Snack
 item.raw_worm.name=Raw Worm
 item.cooked_worm.name=Cooked Worm
 item.worm_snack.name=Worm Snack
+
+item.deep_crystal.name=Deep Crystal
+item.compressed_deep_crystal.name=Compressed Deep Crystal
+item.deep_crystal_powder.name=Deep Crystal Powder
+item.mana_battery.name=Mana Battery
+item.magic_converter.name=Magic Converter
+item.empty_scroll.name=Empty Scroll
+item.dimensional_crystal.name=Dimensional Crystal
+item.magic_powder.name=Magic Powder
+item.magic_sigil.name=Magic Sigil
+item.magic_flow_controller.name=Magic Flow-Controller
+item.mana_interface.name=Mana Interface
+item.knowledge_segment.name=Knowledge Segment
+item.world_interaction_segment.name=World Interaction Segment
+item.mana_segment.name=Mana Segment
 
 entity.insanity_cow.name=Insanity Cow
 entity.dwarf.name=Dwarf

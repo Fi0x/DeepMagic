@@ -3,21 +3,20 @@
     
     "pattern":
     [
-        "AA",
-        "AA"
+        "SSS"
     ],
     
     "key":
     {
-        "A":
+        "S":
         {
-            "item": "deepmagic:deep_crystal"
+            "item": "minecraft:stone"
         }
     },
     
     "result":
     {
-        "item": "deepmagic:compressed_deep_crystal",
-        "count": 1
+        "item": "deepmagic:clean_stone_slab_half",
+        "count": 6
     }
 }

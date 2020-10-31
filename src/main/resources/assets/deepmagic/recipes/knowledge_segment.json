@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "CPC",
+        "SBS",
+        "CPC"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:deep_crystal_block"
+        },
+        "S":
+        {
+        	"item": "deepmagic:magic_sigil"
+        },
+        "P":
+        {
+            "item": "deepmagic:magic_powder"
+        },
+        "B":
+        {
+            "item": "minecraft:book"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:knowledge_segment",
+        "count": 1
+    }
+}

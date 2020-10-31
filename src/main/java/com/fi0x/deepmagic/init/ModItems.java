@@ -29,9 +29,6 @@ public class ModItems
 	public static final ArmorMaterial ARMOR_MATERIAL_DEEP_CRYSTAL = EnumHelper.addArmorMaterial("armor_material_deep_crystal", Reference.MOD_ID + ":deep_crystal", 16, new int[] {4, 9, 7, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0F);
 	
 	//Items
-	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
-	public static final Item COMPRESSED_DEEP_CRYSTAL = new ItemBase("compressed_deep_crystal");
-	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
 	public static final Item MANA_BOOSTER = new ManaBooster("mana_booster");
 	public static final Item DEMON_CRYSTAL = new DemonCrystal("demon_crystal");
@@ -58,11 +55,26 @@ public class ModItems
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20*20), 1, false, true), true);
 	public static final Item INSANITY_APPLE = new FoodEffectBase("insanity_apple", 4, 1F, false, new PotionEffect(MobEffects.NAUSEA, 10*20, 1, false, false), false);
-	public static final Item STONE_SNACK = new FoodBase("stone_snack", 5, 10, false);
 	public static final Item RAW_COCKROACH = new FoodEffectBase("raw_cockroach", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
 	public static final Item COOKED_COCKROACH = new FoodBase("cooked_cockroach", 4, 4, false);
 	public static final Item COCKROACH_SNACK = new FoodBase("cockroach_snack", 6, 8, false);
 	public static final Item RAW_WORM = new FoodEffectBase("raw_worm", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
 	public static final Item COOKED_WORM = new FoodBase("cooked_worm", 4, 4, false);
 	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
+
+	//Crafting Items
+	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
+	public static final Item COMPRESSED_DEEP_CRYSTAL = new ItemBase("compressed_deep_crystal");
+	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");//TODO: Crafting Recipe
+	public static final Item MANA_BATTERY = new ItemBase("mana_battery");
+	public static final Item MAGIC_CONVERTER = new ItemBase("magic_converter");
+	public static final Item EMPTY_SCROLL = new ItemBase("empty_scroll");
+	public static final Item DIMENSIONAL_CRYSTAL = new ItemBase("dimensional_crystal");
+	public static final Item MAGIC_POWDER = new ItemBase("magic_powder");//TODO: Crafting Recipe
+	public static final Item MAGIC_SIGIL = new ItemBase("magic_sigil");
+	public static final Item MAGIC_FLOW_CONTROLLER = new ItemBase("magic_flow_controller");
+	public static final Item MANA_INTERFACE = new ItemBase("mana_interface");
+	public static final Item KNOWLEDGE_SEGMENT = new ItemBase("knowledge_segment");
+	public static final Item WORLD_INTERACTION_SEGMENT = new ItemBase("world_interaction_segment");
+	public static final Item MANA_SEGMENT = new ItemBase("mana_segment");
 }

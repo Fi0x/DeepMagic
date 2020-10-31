@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "S  ",
+        "SS ",
+        "SSS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "minecraft:stone"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:clean_stone_stairs",
+        "count": 4
+    }
+}

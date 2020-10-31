@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        " P ",
+        "CSC",
+        " M "
+    ],
+    
+    "key":
+    {
+        "P":
+        {
+            "item": "deepmagic:magic_powder"
+        },
+        "C":
+        {
+            "item": "deepmagic:deep_crystal"
+        },
+        "S":
+        {
+        	"item": "deepmagic:empty_scroll"
+        },
+        "M":
+        {
+            "item": "deepmagic:magic_converter"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:spell",
+        "count": 1
+    }
+}
