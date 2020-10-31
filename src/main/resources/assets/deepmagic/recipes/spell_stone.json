@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SES",
+        "CKC",
+        "SMS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_stone"
+        },
+        "E":
+        {
+        	"item": "deepmagic:empty_scroll"
+        },
+        "C":
+        {
+            "item": "deepmagic:deep_crystal_block"
+        },
+        "K":
+        {
+            "item": "deepmagic:knowledge_segment"
+        },
+        "M":
+        {
+            "item": "deepmagic:magic_sigil"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:spell_stone",
+        "count": 1
+    }
+}
