@@ -1,5 +1,7 @@
 package com.fi0x.deepmagic.mana.player;
 
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerMana
@@ -112,6 +114,11 @@ public class PlayerMana
 	public int getSpellTier()
 	{
 		return spellTier;
+	}
+	public void updatePlayerHP(EntityPlayer player)
+	{
+		int hpIncrease = (int) (0.03 * Math.pow(addedHP, 1.5));
+		player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20 + hpIncrease);
 	}
 	
 	public void copyFrom(PlayerMana source)

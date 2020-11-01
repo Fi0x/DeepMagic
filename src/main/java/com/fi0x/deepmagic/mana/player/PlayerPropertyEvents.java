@@ -40,6 +40,7 @@ public class PlayerPropertyEvents
                 PlayerMana newStore = PlayerProperties.getPlayerMana(event.getEntityPlayer());
                 assert oldStore != null;
                 newStore.copyFrom(oldStore);
+                newStore.updatePlayerHP(event.getEntityPlayer());
                 PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntityPlayer().getName(), newStore.getMaxMana(), newStore.getSkillXP(), newStore.getSkillpoints(), newStore.getManaRegenRate(), newStore.getManaEfficiency(), newStore.addedHP, newStore.hpRegeneration, newStore.getSpellTier(), newStore.spellCastSkill));
             }
         }
@@ -67,6 +68,7 @@ public class PlayerPropertyEvents
     {
         PlayerMana playerMana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
+        playerMana.updatePlayerHP(event.player);
         PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.player.getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
     }
     @SubscribeEvent
@@ -76,6 +78,7 @@ public class PlayerPropertyEvents
         {
             PlayerMana playerMana = event.getEntity().getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
+            playerMana.updatePlayerHP((EntityPlayer) event.getEntity());
             PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntity().getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
         }
     }
