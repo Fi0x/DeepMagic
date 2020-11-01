@@ -1,5 +1,5 @@
 {
-   "parent": "deepmagic:block/insanity_stone_slab_bottom",
+   "parent": "deepmagic:block/insanity_wood_slab_bottom",
    "display": {
       "thirdperson": {
          "rotation": [ 10, -45, 170 ],
