@@ -26,6 +26,7 @@ public abstract class SlabBase extends BlockSlab
         IBlockState state = this.blockState.getBaseState();
         if(!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
         setDefaultState(state);
+
         this.useNeighborBrightness = true;
 
         ModBlocks.BLOCKS.add(this);
@@ -70,7 +71,7 @@ public abstract class SlabBase extends BlockSlab
     @Override
     public int getMetaFromState(@Nonnull IBlockState state)
     {
-        if(this.isDouble()) return 0;
+        if(!this.isDouble()) return 0;
         return state.getValue(HALF).ordinal() + 1;
     }
 
@@ -78,6 +79,7 @@ public abstract class SlabBase extends BlockSlab
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
+        //TODO: Change for other half slabs
         return Item.getItemFromBlock(ModBlocks.CLEAN_STONE_SLAB_HALF);
     }
 
