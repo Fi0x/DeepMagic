@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
@@ -61,33 +62,39 @@ public class EntityAIMining extends EntityAIBase
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
         mineableBlocks.add(Blocks.GRASS.getDefaultState());
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL));
-        mineableBlocks.add(Blocks.MYCELIUM.getDefaultState());
-        mineableBlocks.add(Blocks.GRAVEL.getDefaultState());
-        mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND));
-        mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND));
-        mineableBlocks.add(Blocks.CLAY.getDefaultState());
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE));
-        mineableBlocks.add(Blocks.OBSIDIAN.getDefaultState());
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE));
-        mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
-        mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
         mineableBlocks.add(Blocks.NETHERRACK.getDefaultState());
-        mineableBlocks.add(Blocks.SOUL_SAND.getDefaultState());
-        mineableBlocks.add(Blocks.END_STONE.getDefaultState());
-        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
-        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState());
-        mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState());
         mineableBlocks.add(ModBlocks.INSANITY_STONE.getDefaultState());
         mineableBlocks.add(ModBlocks.INSANITY_DIRT.getDefaultState());
         mineableBlocks.add(ModBlocks.INSANITY_GRASS.getDefaultState());
+        if(ConfigHandler.dwarfMineResources)
+        {
+            mineableBlocks.add(Blocks.CLAY.getDefaultState());
+            mineableBlocks.add(Blocks.OBSIDIAN.getDefaultState());
+            mineableBlocks.add(Blocks.SOUL_SAND.getDefaultState());
+            mineableBlocks.add(Blocks.END_STONE.getDefaultState());
+            mineableBlocks.add(Blocks.MYCELIUM.getDefaultState());
+            mineableBlocks.add(Blocks.GRAVEL.getDefaultState());
+            mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND));
+            mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND));
+        }
+        if(ConfigHandler.dwarfMineOres)
+        {
+            mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
+            mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState());
+        }
     }
 
     @Override

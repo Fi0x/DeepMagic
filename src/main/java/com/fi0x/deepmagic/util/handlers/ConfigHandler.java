@@ -48,6 +48,9 @@ public class ConfigHandler
     public static boolean allowGiant;
     //NPC Behavior
     public static boolean dwarfMining;
+    //Whitelist
+    public static boolean dwarfMineOres;
+    public static boolean dwarfMineResources;
 
     //PlayerMana
     public static int baseMana;
@@ -125,6 +128,11 @@ public class ConfigHandler
         category = "NPC Behavior";
         npcs.addCustomCategoryComment(category, "NPC Behavior");
         dwarfMining = npcs.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
+
+        category = "NPC Whitelist";
+        npcs.addCustomCategoryComment(category, "NPC Whitelist");
+        dwarfMineOres = npcs.getBoolean("Dwarf Mine Ores", category, true, "Allow Dwarfs to mine Ores");
+        dwarfMineResources = npcs.getBoolean("Dwarf Mine Resources", category, true, "Allow Dwarfs to mine Resource Blocks");
 
         npcs.save();
     }
