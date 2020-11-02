@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -80,6 +81,16 @@ public class PlayerPropertyEvents
             assert playerMana != null;
             playerMana.updatePlayerHP((EntityPlayer) event.getEntity());
             PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntity().getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
+        }
+    }
+    @SubscribeEvent
+    public void onPlayerHeal(LivingHealEvent event)
+    {
+        if(event.getEntity() instanceof EntityPlayer)
+        {
+            PlayerMana playerMana = event.getEntity().getCapability(PlayerProperties.PLAYER_MANA, null);
+            assert playerMana != null;
+            event.setAmount(event.getAmount() + (float) Math.pow(playerMana.hpRegeneration, 0.6));
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.fi0x.deepmagic.mana.player;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -118,7 +120,11 @@ public class PlayerMana
 	public void updatePlayerHP(EntityPlayer player)
 	{
 		int hpIncrease = (int) (0.03 * Math.pow(addedHP, 1.5));
-		player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20 + hpIncrease);
+		AttributeModifier modifier = new AttributeModifier(player.getUniqueID(), "deepMagicHpIncrease", hpIncrease, 0);
+		IAttributeInstance playerHP = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
+
+		if(playerHP.hasModifier(modifier)) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(modifier);
+		playerHP.applyModifier(modifier);
 	}
 	
 	public void copyFrom(PlayerMana source)
