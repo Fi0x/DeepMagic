@@ -5,10 +5,7 @@ import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerPropertyEvents;
 import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
-import com.fi0x.deepmagic.util.handlers.PacketHandler;
-import com.fi0x.deepmagic.util.handlers.RegistryHandler;
-import com.fi0x.deepmagic.util.handlers.RenderHandler;
-import com.fi0x.deepmagic.util.handlers.SoundsHandler;
+import com.fi0x.deepmagic.util.handlers.*;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomTrees;
@@ -29,11 +26,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class Main
 {
 	private static org.apache.logging.log4j.Logger logger;
+	public static File config;
 
 	@Mod.Instance
 	public static Main instance;
@@ -61,6 +60,7 @@ public class Main
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
 		WorldGenCustomTrees.register();
 		RegistryHandler.registerTileEntities();
+		ConfigHandler.registerConfig(event);
 
 		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
 		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
