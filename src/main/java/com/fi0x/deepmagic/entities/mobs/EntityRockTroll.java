@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.entities.mobs;
 import com.fi0x.deepmagic.entities.ai.EntityAIDefence;
 import com.fi0x.deepmagic.network.PacketReturnMobAnimation;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
@@ -44,7 +45,7 @@ public class EntityRockTroll extends EntityCreature
     @Override
     protected void initEntityAI()
     {
-        this.tasks.addTask(0, new EntityAIDefence(this));
+        if(ConfigHandler.trollDefenceState) this.tasks.addTask(0, new EntityAIDefence(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
@@ -59,9 +60,9 @@ public class EntityRockTroll extends EntityCreature
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthRockTroll);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27);
-        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.damageRockTroll);
     }
     @Override
     public void onLivingUpdate()

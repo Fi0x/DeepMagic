@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.init;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biome.BiomeInsanity;
-
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -24,7 +24,7 @@ public class BiomeInit
 		biome.setRegistryName(name);
 		ForgeRegistries.BIOMES.register(biome);
 		BiomeDictionary.addTypes(biome, types);
-		BiomeManager.addBiome(biomeType, new BiomeEntry(biome, 0));
+		if(ConfigHandler.overworldInsanityBiome) BiomeManager.addBiome(biomeType, new BiomeEntry(biome, ConfigHandler.insanityBiomeWeight));
 		BiomeManager.addSpawnBiome(biome);
 		return biome;
 	}
