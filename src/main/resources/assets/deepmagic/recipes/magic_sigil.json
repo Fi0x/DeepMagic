@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "IPI",
+        "PAP",
+        "IPI"
+    ],
+    
+    "key":
+    {
+        "P":
+        {
+            "item": "deepmagic:magic_powder"
+        },
+        "A":
+        {
+        	"item": "minecraft:paper"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:magic_sigil",
+        "count": 1
+    }
+}

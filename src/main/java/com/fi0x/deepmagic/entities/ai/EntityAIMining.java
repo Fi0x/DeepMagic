@@ -10,7 +10,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -34,7 +33,6 @@ public class EntityAIMining extends EntityAIBase
     protected BlockPos destination;
     protected ArrayList<BlockPos> miningBlocks;
     protected BlockPos chestPos;
-    protected TileEntityChest chestEntity;
     private int digDelay;
     private final ArrayList<IBlockState> mineableBlocks;
 
@@ -96,7 +94,7 @@ public class EntityAIMining extends EntityAIBase
     public boolean shouldExecute()
     {
         if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
-        return !(entity.posY > maxExecutionHeight);
+        return entity.posY <= maxExecutionHeight;
     }
 
     @Override
@@ -130,17 +128,28 @@ public class EntityAIMining extends EntityAIBase
     protected void digAtBlockPos(BlockPos pos)
     {
         Block block = world.getBlockState(pos).getBlock();
-        TileEntity te = world.getTileEntity(chestPos);
-        if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) chestEntity = (TileEntityChest) te;
+        TileEntity te = null;
+        if(chestPos != null && world.getBlockState(chestPos).getBlock() != Blocks.CHEST) chestPos = findChest(entity.getPosition());
+        try
+        {
+            assert chestPos != null;
+            te = world.getTileEntity(chestPos);
+        } catch (Exception ignored)
+        {
+        }
 
-        if(chestEntity == null) world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        if(te == null)
+        {
+            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+            chestPos = findChest(entity.getPosition());
+        }
         else
         {
             ItemStack dropppedItemStack;
             if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
             else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
-            IItemHandler handler = chestEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             ItemHandlerHelper.insertItemStacked(handler, dropppedItemStack, false);
         }
         world.setBlockToAir(pos);
@@ -149,7 +158,8 @@ public class EntityAIMining extends EntityAIBase
     {
         int xDifference = 0;
         int zDifference = 0;
-        if(start.getX() == start.getZ())
+
+        if(start.getX() == end.getX())
         {
             if(start.getZ() < end.getZ()) zDifference = 1;
             else zDifference = -1;

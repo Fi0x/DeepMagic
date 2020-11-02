@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SIS",
+        "CKC",
+        "SMS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_stone"
+        },
+        "I":
+        {
+        	"item": "deepmagic:mana_interface"
+        },
+        "C":
+        {
+            "item": "deepmagic:deep_crystal_block"
+        },
+        "K":
+        {
+            "item": "deepmagic:knowledge_segment"
+        },
+        "M":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:altar_of_knowledge",
+        "count": 1
+    }
+}

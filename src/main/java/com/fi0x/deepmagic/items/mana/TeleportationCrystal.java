@@ -8,7 +8,7 @@ import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
-import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -77,13 +77,13 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 					x*=10;
 					z*=10;
 					playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You entered a strange dimension..."));
-					return teleportEntityTo(playerIn, Reference.DIMENSION_ID_INSANITY, x, z, stack);
+					return teleportEntityTo(playerIn, ConfigHandler.dimensionIdInsanityID, x, z, stack);
 				} else if(playerIn.dimension == -1)
 				{
 					x*=8;
 					z*=8;
 					return teleportEntityTo(playerIn, 0, x, z, stack);
-				} else if(playerIn.dimension == Reference.DIMENSION_ID_INSANITY)
+				} else if(playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
 				{
 					x*=0.1;
 					z*=0.1;

@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        " M ",
+        "IFI",
+        "ICI"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "deepmagic:compressed_deep_crystal"
+        },
+        "M":
+        {
+        	"item": "deepmagic:magic_converter"
+        },
+        "F":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:mana_battery",
+        "count": 1
+    }
+}

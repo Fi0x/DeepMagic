@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SSS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_planks"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:insanity_wood_slab_half",
+        "count": 6
+    }
+}

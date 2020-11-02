@@ -3,15 +3,15 @@
     
     "pattern":
     [
-        "CC",
-        "CC"
+        "AA",
+        "AA"
     ],
     
     "key":
     {
-        "C":
+        "A":
         {
-            "item": "deepmagic:deep_crystal_block"
+            "item": "deepmagic:deep_crystal"
         }
     },
     

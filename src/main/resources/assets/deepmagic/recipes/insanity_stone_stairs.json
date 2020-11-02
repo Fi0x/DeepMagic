@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "S  ",
+        "SS ",
+        "SSS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_stone"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:insanity_stone_stairs",
+        "count": 4
+    }
+}

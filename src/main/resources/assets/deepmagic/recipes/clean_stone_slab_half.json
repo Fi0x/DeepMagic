@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SSS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "minecraft:stone"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:clean_stone_slab_half",
+        "count": 6
+    }
+}

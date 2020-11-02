@@ -1,0 +1,26 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+        "item": "deepmagic:cooked_worm"
+    },
+    {
+        "item": "deepmagic:cooked_worm"
+    },
+    {
+        "item": "deepmagic:cooked_worm"
+    },
+    {
+        "item": "deepmagic:cooked_worm"
+    }
+    ],
+
+    "result": 
+    {
+        "item": "deepmagic:worm_snack",
+        "count": 3
+    }
+}

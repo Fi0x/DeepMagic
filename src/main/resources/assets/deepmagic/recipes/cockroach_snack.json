@@ -1,0 +1,26 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+        "item": "deepmagic:cooked_cockroach"
+    },
+    {
+        "item": "deepmagic:cooked_cockroach"
+    },
+    {
+        "item": "deepmagic:cooked_cockroach"
+    },
+    {
+        "item": "deepmagic:cooked_cockroach"
+    }
+    ],
+
+    "result": 
+    {
+        "item": "deepmagic:cockroach_snack",
+        "count": 3
+    }
+}

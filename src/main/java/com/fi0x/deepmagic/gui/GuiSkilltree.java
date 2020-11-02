@@ -19,6 +19,7 @@ import javax.annotation.Nonnull;
 
 public class GuiSkilltree extends GuiScreen
 {
+    EntityPlayer player;
     PlayerMana playerMana;
     String playerName;
 
@@ -69,6 +70,7 @@ public class GuiSkilltree extends GuiScreen
     {
         this.playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
         this.playerName = player.getName();
+        this.player = player;
     }
 
     @Override
@@ -114,7 +116,7 @@ public class GuiSkilltree extends GuiScreen
         labelManaEfficiency.addLine("Mana Efficiency");
         labelList.add(labelManaEfficiency);
         labelMaxHP = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 65, 100, 20, 0);
-        labelMaxHP.addLine("Health Points");
+        labelMaxHP.addLine("Health");
         labelList.add(labelMaxHP);
         labelHealthRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 85, 100, 20, 0);
         labelHealthRegen.addLine("Health Regeneration");
@@ -179,7 +181,11 @@ public class GuiSkilltree extends GuiScreen
     @Override
     protected void actionPerformed(@Nonnull GuiButton button)
     {
-        if(button == buttonExit) mc.displayGuiScreen(null);
+        if(button == buttonExit)
+        {
+            playerMana.updatePlayerHP(player);
+            mc.displayGuiScreen(null);
+        }
         else
         {
             if(button == buttonAddMaxMana) playerMana.maxManaMultiplier++;

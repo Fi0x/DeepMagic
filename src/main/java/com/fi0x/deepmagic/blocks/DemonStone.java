@@ -17,6 +17,7 @@ import javax.annotation.Nonnull;
 
 public class DemonStone extends BlockBase
 {
+    private static final int SUMMON_MANA_COST = 100;
     private static final int SKILL_XP = 100;
 
     public DemonStone(String name, Material material)
@@ -33,15 +34,17 @@ public class DemonStone extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
-            if(playerIn.getHeldItem(hand).getItem() instanceof DemonCrystal) {
+            if(playerIn.getHeldItem(hand).getItem() instanceof DemonCrystal)
+            {
+                PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                if (playerMana.removeMana(100)) {
-                    playerIn.getHeldItem(hand).setCount(playerIn.getHeldItem(hand).getCount() - 1);
+                if (playerMana.removeMana(SUMMON_MANA_COST))
+                {
+                    playerIn.getHeldItem(hand).shrink(1);
                     playerMana.addSkillXP(SKILL_XP);
 
                     EntityDemon demon = new EntityDemon(worldIn);
-                    demon.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+                    demon.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
                     worldIn.spawnEntity(demon);
                 }
             }
