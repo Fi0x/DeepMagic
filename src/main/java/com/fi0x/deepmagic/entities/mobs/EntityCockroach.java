@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIFleeLight;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -42,7 +43,7 @@ public class EntityCockroach extends EntityCreature
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthCockroach);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(15);

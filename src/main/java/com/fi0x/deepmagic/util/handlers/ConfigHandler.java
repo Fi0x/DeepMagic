@@ -10,8 +10,9 @@ import java.io.File;
 public class ConfigHandler
 {
     public static Configuration ids;
-    public static Configuration worldgeneration;
-    public static Configuration npcs;
+    public static Configuration worldGeneration;
+    public static Configuration npcsGeneral;
+    public static Configuration npcStats;
     public static Configuration player;
 
     //Dimension IDs
@@ -52,6 +53,28 @@ public class ConfigHandler
     public static boolean dwarfMineOres;
     public static boolean dwarfMineResources;
 
+    //NPC Health
+    public static int healthCockroach;
+    public static int healthCyclopse;
+    public static int healthDemon;
+    public static int healthDepthMage;
+    public static int healthDwarf;
+    public static int healthGiant;
+    public static int healthHoveringOrb;
+    public static int healthInsanityCow;
+    public static int healthNetherWorm;
+    public static int healthRockTroll;
+    public static int healthWorm;
+    //NPC Damage
+    public static int damageCyclopse;
+    public static int damageDemon;
+    public static int damageDepthMage;
+    public static int damageDwarf;
+    public static int damageGiant;
+    public static int damageHoveringOrb;
+    public static int damageNetherWorm;
+    public static int damageRockTroll;
+
     //PlayerMana
     public static int baseMana;
     public static int manaXPForLevelup;
@@ -63,6 +86,7 @@ public class ConfigHandler
         initIDs(new File(Main.config.getPath(), "ModIDs.cfg"));
         initWorldGen(new File(Main.config.getPath(), "ModWorldGen.cfg"));
         initNPCs(new File(Main.config.getPath(), "ModNPCs.cfg"));
+        initNPCStats(new File(Main.config.getPath(), "ModNPCStats.cfg"));
         initPlayer(new File(Main.config.getPath(), "Player.cfg"));
     }
 
@@ -93,48 +117,80 @@ public class ConfigHandler
     }
     public static void initWorldGen(File file)
     {
-        worldgeneration = new Configuration(file);
+        worldGeneration = new Configuration(file);
         String category;
 
         category = "Ore Generation";
-        worldgeneration.addCustomCategoryComment(category, "Enable Ore Generation");
-        spawnDeepCrystalOre = worldgeneration.getBoolean("Deep Crystal Ore", category, true, "Enables Deep Crystal Ore Generation in Default Dimensions");
+        worldGeneration.addCustomCategoryComment(category, "Enable Ore Generation");
+        spawnDeepCrystalOre = worldGeneration.getBoolean("Deep Crystal Ore", category, true, "Enables Deep Crystal Ore Generation in Default Dimensions");
 
         category = "Structure Generation";
-        worldgeneration.addCustomCategoryComment(category, "Structure Generation");
-        generateMageHouses = worldgeneration.getBoolean("Mage Houses", category, true, "Enables Mage Houses in the Insanity Dimension");
-        generateInsanityRockTrollCaves = worldgeneration.getBoolean("Insanity Rock Troll Caves", category, true, "Enables Rock Troll Caves in the Insanity Dimension");
-        generateShrines = worldgeneration.getBoolean("Shrines", category, true, "Enables Shrines in the Insanity Dimension");
-        generateInsanityOases = worldgeneration.getBoolean("Insanity Oases", category, true, "Enables Oases in the Insanity Dimension");
-        generateDwarfBases = worldgeneration.getBoolean("Dwarf Bases", category, true, "Enables Dwarf Bases in the Insanity Dimension");
-        generateDragonLairs = worldgeneration.getBoolean("Dragon Lairs", category, true, "Enables Dragon Lairs in the Insanity Dimension");
-        generateDungeons = worldgeneration.getBoolean("Dungeons", category, true, "Enables Dungeons in the Insanity Dimension");
+        worldGeneration.addCustomCategoryComment(category, "Structure Generation");
+        generateMageHouses = worldGeneration.getBoolean("Mage Houses", category, true, "Enables Mage Houses in the Insanity Dimension");
+        generateInsanityRockTrollCaves = worldGeneration.getBoolean("Insanity Rock Troll Caves", category, true, "Enables Rock Troll Caves in the Insanity Dimension");
+        generateShrines = worldGeneration.getBoolean("Shrines", category, true, "Enables Shrines in the Insanity Dimension");
+        generateInsanityOases = worldGeneration.getBoolean("Insanity Oases", category, true, "Enables Oases in the Insanity Dimension");
+        generateDwarfBases = worldGeneration.getBoolean("Dwarf Bases", category, true, "Enables Dwarf Bases in the Insanity Dimension");
+        generateDragonLairs = worldGeneration.getBoolean("Dragon Lairs", category, true, "Enables Dragon Lairs in the Insanity Dimension");
+        generateDungeons = worldGeneration.getBoolean("Dungeons", category, true, "Enables Dungeons in the Insanity Dimension");
 
-        worldgeneration.save();
+        worldGeneration.save();
     }
     public static void initNPCs(File file)
     {
-        npcs = new Configuration(file);
+        npcsGeneral = new Configuration(file);
         String category;
 
         category = "Insanity Biome Spawns";
-        npcs.addCustomCategoryComment(category, "Insanity Biome Spawns");
-        allowCockroach = npcs.getBoolean("Allow Cockroach", category, true, "");
-        allowInsanityCow = npcs.getBoolean("Allow Insanity Cow", category, true, "");
-        allowDepthMage = npcs.getBoolean("Allow Depth Mage", category, true, "");
-        allowHoveringOrb = npcs.getBoolean("Allow Hovering Orb", category, true, "");
-        allowGiant = npcs.getBoolean("Allow Giant", category, true, "");
+        npcsGeneral.addCustomCategoryComment(category, "Insanity Biome Spawns");
+        allowCockroach = npcsGeneral.getBoolean("Allow Cockroach", category, true, "");
+        allowInsanityCow = npcsGeneral.getBoolean("Allow Insanity Cow", category, true, "");
+        allowDepthMage = npcsGeneral.getBoolean("Allow Depth Mage", category, true, "");
+        allowHoveringOrb = npcsGeneral.getBoolean("Allow Hovering Orb", category, true, "");
+        allowGiant = npcsGeneral.getBoolean("Allow Giant", category, true, "");
 
         category = "NPC Behavior";
-        npcs.addCustomCategoryComment(category, "NPC Behavior");
-        dwarfMining = npcs.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
+        npcsGeneral.addCustomCategoryComment(category, "NPC Behavior");
+        dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
 
         category = "NPC Whitelist";
-        npcs.addCustomCategoryComment(category, "NPC Whitelist");
-        dwarfMineOres = npcs.getBoolean("Dwarf Mine Ores", category, true, "Allow Dwarfs to mine Ores");
-        dwarfMineResources = npcs.getBoolean("Dwarf Mine Resources", category, true, "Allow Dwarfs to mine Resource Blocks");
+        npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
+        dwarfMineOres = npcsGeneral.getBoolean("Dwarf Mine Ores", category, true, "Allow Dwarfs to mine Ores");
+        dwarfMineResources = npcsGeneral.getBoolean("Dwarf Mine Resources", category, true, "Allow Dwarfs to mine Resource Blocks");
 
-        npcs.save();
+        npcsGeneral.save();
+    }
+    public static void initNPCStats(File file)
+    {
+        npcStats = new Configuration(file);
+        String category;
+
+        category = "Health";
+        npcStats.addCustomCategoryComment(category, "NPC Health");
+        healthCockroach = npcStats.getInt("Cockroach Max HP", category, 8, 1, 1000, "");
+        healthCyclopse = npcStats.getInt("Cyclopse Max HP", category, 100, 1, 1000, "");
+        healthDemon = npcStats.getInt("Demon Max HP", category, 100, 1, 1000, "");
+        healthDepthMage = npcStats.getInt("Depth Mage Max HP", category, 40, 1, 1000, "");
+        healthDwarf = npcStats.getInt("Dwarf Max HP", category, 16, 1, 1000, "");
+        healthGiant = npcStats.getInt("Giant Max HP", category, 100, 1, 1000, "");
+        healthHoveringOrb = npcStats.getInt("Hovering Orb Max HP", category, 16, 1, 1000, "");
+        healthInsanityCow = npcStats.getInt("Insanity Cow Max HP", category, 30, 1, 1000, "");
+        healthNetherWorm = npcStats.getInt("Nether Worm Max HP", category, 100, 1, 1000, "");
+        healthRockTroll = npcStats.getInt("Rock Troll Max HP", category, 100, 1, 1000, "");
+        healthWorm = npcStats.getInt("Worm Max HP", category, 5, 1, 1000, "");
+
+        category = "Damage";
+        npcStats.addCustomCategoryComment(category, "NPC Attack Damage");
+        damageCyclopse = npcStats.getInt("Cyclopse Attack Damage", category, 7, 1, 1000, "");
+        damageDemon = npcStats.getInt("Demon Attack Damage", category, 6, 1, 1000, "");
+        damageDepthMage = npcStats.getInt("Depth Mage Attack Damage", category, 6, 1, 1000, "");
+        damageDwarf = npcStats.getInt("Dwarf Attack Damage", category, 8, 1, 1000, "");
+        damageGiant = npcStats.getInt("Giant Attack Damage", category, 5, 1, 1000, "");
+        damageHoveringOrb = npcStats.getInt("Hovering Orb Attack Damage", category, 1, 1, 1000, "");
+        damageNetherWorm = npcStats.getInt("Nether Worm Attack Damage", category, 10, 1, 1000, "");
+        damageRockTroll = npcStats.getInt("Rock Troll Attack Damage", category, 8, 1, 1000, "");
+
+        npcStats.save();
     }
     public static void initPlayer(File file)
     {

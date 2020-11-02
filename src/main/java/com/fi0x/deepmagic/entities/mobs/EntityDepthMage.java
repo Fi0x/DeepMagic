@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.entities.projectiles.EntitySpellFireball;
 import com.fi0x.deepmagic.network.PacketReturnMobAnimation;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.IMagicCreature;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
@@ -60,9 +61,9 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthDepthMage);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.damageDepthMage);
     }
 
     @Nullable
