@@ -48,6 +48,7 @@ public class Main
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
+		ConfigHandler.registerConfig(event);
 		proxy.preInit(event);
 		PacketHandler.registerMessages(Reference.MOD_ID);
 		ModFluids.registerFluids();
@@ -60,7 +61,6 @@ public class Main
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
 		WorldGenCustomTrees.register();
 		RegistryHandler.registerTileEntities();
-		ConfigHandler.registerConfig(event);
 
 		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
 		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {

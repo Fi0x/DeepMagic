@@ -12,6 +12,7 @@ public class ConfigHandler
     public static Configuration ids;
     public static Configuration worldgeneration;
     public static Configuration npcs;
+    public static Configuration player;
 
     //Dimension IDs
     public static int dimensionIdInsanityID;
@@ -39,6 +40,19 @@ public class ConfigHandler
     public static boolean generateDragonLairs;
     public static boolean generateDungeons;
 
+    //Insanity Biome SpawnList
+    public static boolean allowCockroach;
+    public static boolean allowInsanityCow;
+    public static boolean allowDepthMage;
+    public static boolean allowHoveringOrb;
+    public static boolean allowGiant;
+    //NPC Behavior
+    public static boolean dwarfMining;
+
+    //PlayerMana
+    public static int baseMana;
+    public static int manaXPForLevelup;
+
     public static void registerConfig(FMLPreInitializationEvent event)
     {
         Main.config = new File(event.getModConfigurationDirectory() + "/" + Reference.MOD_ID);
@@ -46,6 +60,7 @@ public class ConfigHandler
         initIDs(new File(Main.config.getPath(), "ModIDs.cfg"));
         initWorldGen(new File(Main.config.getPath(), "ModWorldGen.cfg"));
         initNPCs(new File(Main.config.getPath(), "ModNPCs.cfg"));
+        initPlayer(new File(Main.config.getPath(), "Player.cfg"));
     }
 
     public static void initIDs(File file)
@@ -99,6 +114,30 @@ public class ConfigHandler
         npcs = new Configuration(file);
         String category;
 
+        category = "Insanity Biome Spawns";
+        npcs.addCustomCategoryComment(category, "Insanity Biome Spawns");
+        allowCockroach = npcs.getBoolean("Allow Cockroach", category, true, "");
+        allowInsanityCow = npcs.getBoolean("Allow Insanity Cow", category, true, "");
+        allowDepthMage = npcs.getBoolean("Allow Depth Mage", category, true, "");
+        allowHoveringOrb = npcs.getBoolean("Allow Hovering Orb", category, true, "");
+        allowGiant = npcs.getBoolean("Allow Giant", category, true, "");
+
+        category = "NPC Behavior";
+        npcs.addCustomCategoryComment(category, "NPC Behavior");
+        dwarfMining = npcs.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
+
         npcs.save();
+    }
+    public static void initPlayer(File file)
+    {
+        player = new Configuration(file);
+        String category;
+
+        category = "Mana";
+        player.addCustomCategoryComment(category, "Mana");
+        baseMana = player.getInt("Base Mana", category, 100, 1, 10000, "The Mana Capacity a new Player has");
+        manaXPForLevelup = player.getInt("XP/Skillpoint", category, 100, 1, 10000, "The XP amount needed to get a Skillpoint");
+
+        player.save();
     }
 }

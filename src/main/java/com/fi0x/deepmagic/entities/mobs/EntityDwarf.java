@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIMining;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -33,7 +34,7 @@ public class EntityDwarf extends EntityCreature
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
-        this.tasks.addTask(2, new EntityAIMining(this));
+        if(ConfigHandler.dwarfMining) this.tasks.addTask(2, new EntityAIMining(this));
         this.tasks.addTask(2, new EntityAIWanderAvoidWater(this, 1));
         this.tasks.addTask(5, new EntityAIWatchClosest(this, Entity.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
