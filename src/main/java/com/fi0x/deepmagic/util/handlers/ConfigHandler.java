@@ -14,6 +14,8 @@ public class ConfigHandler
     public static Configuration npcsGeneral;
     public static Configuration npcStats;
     public static Configuration player;
+    public static Configuration blocks;
+    public static Configuration items;
 
     //Dimension IDs
     public static int dimensionIdInsanityID;
@@ -30,6 +32,9 @@ public class ConfigHandler
     public static int entityWormID;
     public static int entityCyclopesID;
 
+    //Biome Generation
+    public static boolean overworldInsanityBiome;
+    public static int insanityBiomeWeight;
     //Ore Generation
     public static boolean spawnDeepCrystalOre;
     //Structure Generation
@@ -48,7 +53,9 @@ public class ConfigHandler
     public static boolean allowHoveringOrb;
     public static boolean allowGiant;
     //NPC Behavior
+    public static int aiSearchRange;
     public static boolean dwarfMining;
+    public static boolean trollDefenceState;
     //Whitelist
     public static boolean dwarfMineOres;
     public static boolean dwarfMineResources;
@@ -75,9 +82,22 @@ public class ConfigHandler
     public static int damageNetherWorm;
     public static int damageRockTroll;
 
-    //PlayerMana
+    //Player Mana
     public static int baseMana;
     public static int manaXPForLevelup;
+    //Player Visuals
+    public static boolean manaOverlayAlwaysVisible;
+
+    //Mana Altar
+    public static int manaAltarCapacity;
+    //Insanity Water
+    public static boolean insanityWaterEffect;
+
+    //Mana Costs
+    public static int manaBoosterAmount;
+    public static int teleportationCrystalManaCost;
+    //Skill XP
+    public static int teleportationCrystalSkillXP;
 
     public static void registerConfig(FMLPreInitializationEvent event)
     {
@@ -88,6 +108,8 @@ public class ConfigHandler
         initNPCs(new File(Main.config.getPath(), "ModNPCs.cfg"));
         initNPCStats(new File(Main.config.getPath(), "ModNPCStats.cfg"));
         initPlayer(new File(Main.config.getPath(), "Player.cfg"));
+        initBlocks(new File(Main.config.getPath(), "Blocks.cfg"));
+        initItems(new File(Main.config.getPath(), "Items.cfg"));
     }
 
     public static void initIDs(File file)
@@ -120,6 +142,11 @@ public class ConfigHandler
         worldGeneration = new Configuration(file);
         String category;
 
+        category = "Biome Generation";
+        worldGeneration.addCustomCategoryComment(category, "Biome Generation");
+        overworldInsanityBiome = worldGeneration.getBoolean("Overworld Insanity Biome Spawn", category, false, "Enables Spawn of the Insanity Biome in the Overworld");
+        insanityBiomeWeight = worldGeneration.getInt("Insanity Biome Weight", category, 10, 1, 1000, "Insanity Biome Spawn Weight");
+
         category = "Ore Generation";
         worldGeneration.addCustomCategoryComment(category, "Enable Ore Generation");
         spawnDeepCrystalOre = worldGeneration.getBoolean("Deep Crystal Ore", category, true, "Enables Deep Crystal Ore Generation in Default Dimensions");
@@ -151,7 +178,9 @@ public class ConfigHandler
 
         category = "NPC Behavior";
         npcsGeneral.addCustomCategoryComment(category, "NPC Behavior");
+        aiSearchRange = npcsGeneral.getInt("AI Search Range", category, 32, 8, 256, "The Radius in which AIs search for Things");
         dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
+        trollDefenceState = npcsGeneral.getBoolean("Troll Defence State", category, true, "Allow Trolls to use an invulnerable Defence State");
 
         category = "NPC Whitelist";
         npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
@@ -202,6 +231,41 @@ public class ConfigHandler
         baseMana = player.getInt("Base Mana", category, 100, 1, 10000, "The Mana Capacity a new Player has");
         manaXPForLevelup = player.getInt("XP/Skillpoint", category, 100, 1, 10000, "The XP amount needed to get a Skillpoint");
 
+        category = "Visuals";
+        player.addCustomCategoryComment(category, "Visuals");
+        manaOverlayAlwaysVisible = player.getBoolean("Mana Overlay Always Visible", category, false, "Mana Bar is always visible, not only when a magic item is held");
+
         player.save();
+    }
+    public static void initBlocks(File file)
+    {
+        blocks = new Configuration(file);
+        String category;
+
+        category = "Mana Altar";
+        blocks.addCustomCategoryComment(category, "Mana Altar");
+        manaAltarCapacity = blocks.getInt("Mana Capacity", category, 1000, 1, 100000, "The Base Capacity of the Mana Altar");
+
+        category = "Insanity Water";
+        blocks.addCustomCategoryComment(category, "Insanity Water");
+        insanityWaterEffect = blocks.getBoolean("Potion Effect", category, true, "Insanity Water gives Weakness and Speed Effect");
+
+        blocks.save();
+    }
+    public static void initItems(File file)
+    {
+        items = new Configuration(file);
+        String category;
+
+        category = "Mana Costs";
+        items.addCustomCategoryComment(category, "Mana Costs");
+        manaBoosterAmount = items.getInt("Mana Booster Amount", category, 1000, 1, 100000, "Mana Amount a Mana Booster gives");
+        teleportationCrystalManaCost = items.getInt("Teleportation Crystal Cost", category, 100, 0, 10000, "Mana Costs for the Teleportation Crystal");
+
+        category = "Skill XP";
+        items.addCustomCategoryComment(category, "Skill XP");
+        teleportationCrystalSkillXP = items.getInt("Teleportation Crystal Skill XP", category, 10, 0, 10000, "Skill XP gained by using the Teleportation Crystal");
+
+        items.save();
     }
 }

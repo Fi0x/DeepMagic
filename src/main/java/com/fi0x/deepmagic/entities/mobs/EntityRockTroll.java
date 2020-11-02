@@ -45,7 +45,7 @@ public class EntityRockTroll extends EntityCreature
     @Override
     protected void initEntityAI()
     {
-        this.tasks.addTask(0, new EntityAIDefence(this));
+        if(ConfigHandler.trollDefenceState) this.tasks.addTask(0, new EntityAIDefence(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));

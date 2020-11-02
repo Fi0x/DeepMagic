@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -40,7 +41,7 @@ public class BlockFluid extends BlockFluidClassic
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
-        if(entityIn instanceof EntityLivingBase)
+        if(ConfigHandler.insanityWaterEffect && entityIn instanceof EntityLivingBase)
         {
             ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 30*20, 0, false, true));
             ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SPEED, 30*20, 0, false, true));

@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.tileentity;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -7,7 +8,6 @@ import javax.annotation.Nonnull;
 
 public class TileEntityManaAltar extends TileEntity
 {
-    private final double MAX_BASE_MANA_CAPACITY = 10000;
     private double storedMana;
 
     @Nonnull
@@ -30,8 +30,8 @@ public class TileEntityManaAltar extends TileEntity
     }
     public boolean addManaToStorage(double amount)
     {
-        if(storedMana + amount > getMaxCapacity() && storedMana < getMaxCapacity()) storedMana = getMaxCapacity();
-        else if(storedMana + amount <= getMaxCapacity()) storedMana += amount;
+        if(storedMana + amount > ConfigHandler.manaAltarCapacity && storedMana < ConfigHandler.manaAltarCapacity) storedMana = ConfigHandler.manaAltarCapacity;
+        else if(storedMana + amount <= ConfigHandler.manaAltarCapacity) storedMana += amount;
         else return false;
         markDirty();
         return true;
@@ -42,9 +42,5 @@ public class TileEntityManaAltar extends TileEntity
         storedMana -= amount;
         markDirty();
         return true;
-    }
-    private double getMaxCapacity()
-    {
-        return MAX_BASE_MANA_CAPACITY;
     }
 }

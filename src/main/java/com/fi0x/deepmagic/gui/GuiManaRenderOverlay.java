@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.EnumHand;
@@ -33,7 +34,7 @@ public class GuiManaRenderOverlay extends Gui
 	@SubscribeEvent
 	public void renderManaOverlay(RenderGameOverlayEvent.Text event)
 	{
-		if(Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IMagicItem)
+		if(Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IMagicItem || ConfigHandler.manaOverlayAlwaysVisible)
 		{
 			Minecraft mc = Minecraft.getMinecraft();
 			PlayerMana playerMana = mc.player.getCapability(PlayerProperties.PLAYER_MANA, null);

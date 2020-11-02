@@ -26,7 +26,6 @@ public class EntityAIMining extends EntityAIBase
     protected final World world;
     protected final EntityCreature entity;
     protected final double speed;
-    protected final int searchRange = 30;
     protected final float probability;
     protected final int maxExecutionHeight = 50;
     protected final Random random;
@@ -187,16 +186,16 @@ public class EntityAIMining extends EntityAIBase
     {
         int xIncrease = 0;
         int zIncrease = 0;
-        if(Math.random() < 0.5) zIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
-        else xIncrease = random.nextInt(searchRange / 2 - searchRange / 4);
+        if(Math.random() < 0.5) zIncrease = random.nextInt(ConfigHandler.aiSearchRange - ConfigHandler.aiSearchRange / 2);
+        else xIncrease = random.nextInt(ConfigHandler.aiSearchRange - ConfigHandler.aiSearchRange / 2);
 
         return entity.getPosition().add(xIncrease, 0, zIncrease);
     }
     protected BlockPos findChest(BlockPos pos)
     {
-        int height = searchRange / 4;
+        int height = ConfigHandler.aiSearchRange / 4;
 
-        for(int range = 0; range <= searchRange; range++)
+        for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
         {
             int x = -range;
             int z = -range;
