@@ -23,4 +23,4 @@ Mana2-Altar {
             can be linked to multiple items/machines
     Doesn't generate mana2 by itself
 }
-Add insanity cobble
+dwarf whitelist as config file
