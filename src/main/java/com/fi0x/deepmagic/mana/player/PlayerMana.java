@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.mana.player;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -10,7 +11,6 @@ public class PlayerMana
 {
 	//Mana System
 	public double mana = 0;
-	public double maxMana = 100;
 
 	private double skillXP = 0;
 	private int skillpoints = 1;
@@ -36,10 +36,10 @@ public class PlayerMana
 	}
 	public void addMana(double value)
 	{
-		if(mana+(value*Math.pow(1.1, manaRegenRate)) > maxMana*Math.pow(1.1, maxManaMultiplier) && mana < maxMana*Math.pow(1.1, maxManaMultiplier))
+		if(mana+(value*Math.pow(1.1, manaRegenRate)) > ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier) && mana < ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier))
 		{
-			mana = maxMana*Math.pow(1.1, maxManaMultiplier);
-		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= maxMana*Math.pow(1.1, maxManaMultiplier))
+			mana = ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier);
+		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier))
 		{
 			mana += (value*Math.pow(1.1, manaRegenRate));
 		}
@@ -55,11 +55,11 @@ public class PlayerMana
 	}
 	public double getMaxMana()
 	{
-		return maxMana*Math.pow(1.1, maxManaMultiplier);
+		return ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier);
 	}
 	public double getManaPercentage()
 	{
-		if(mana <= maxMana*Math.pow(1.1, maxManaMultiplier)) return (100/(maxMana*Math.pow(1.1, maxManaMultiplier)))*mana;
+		if(mana <= ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier)) return (100/(ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier)))*mana;
 		return 100;
 	}
 
@@ -69,10 +69,15 @@ public class PlayerMana
 	}
 	public void addSkillXP(double addAmount)
 	{
-		double difference = skillXP % 100;
+		double difference = skillXP % ConfigHandler.manaXPForLevelup;
 		skillXP += addAmount;
 		difference += addAmount;
-		if(difference >= 100) addSkillpoint();
+		while (difference >= ConfigHandler.manaXPForLevelup)
+		{
+			addSkillpoint();
+			difference -= ConfigHandler.manaXPForLevelup;
+		}
+		skillXP %= ConfigHandler.manaXPForLevelup;
 	}
 	public int getSkillpoints()
 	{
@@ -130,7 +135,6 @@ public class PlayerMana
 	public void copyFrom(PlayerMana source)
 	{
 		mana = source.mana;
-		maxMana = source.maxMana;
 		skillXP = source.skillXP;
 		skillpoints = source.skillpoints;
 		manaRegenRate = source.manaRegenRate;
@@ -144,7 +148,6 @@ public class PlayerMana
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		compound.setDouble("mana", mana);
-		compound.setDouble("maxMana", maxMana);
 		compound.setDouble("skillXP", skillXP);
 		compound.setInteger("skillpoints", skillpoints);
 		compound.setDouble("manaRegenerationRate", manaRegenRate);
@@ -158,7 +161,6 @@ public class PlayerMana
 	public void loadNBTData(NBTTagCompound compound)
 	{
 		mana = compound.getDouble("mana");
-		maxMana = compound.getDouble("maxMana");
 		skillXP = compound.getDouble("skillXP");
 		skillpoints = compound.getInteger("skillpoints");
 		manaRegenRate = compound.getDouble("manaRegenerationRate");

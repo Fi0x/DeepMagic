@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.world.generators;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biome.BiomeInsanity;
 import com.fi0x.deepmagic.world.generators.dungeon.SmallDungeon;
 import net.minecraft.block.Block;
@@ -34,17 +35,17 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
+		if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
 		{
-			generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 0, 500, BiomeInsanity.class);
-			generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
-			generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
-			generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
-			generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
-			generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
-			generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
+			if(ConfigHandler.generateMageHouses) generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 0, 500, BiomeInsanity.class);
+			if(ConfigHandler.generateMageHouses) generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
+			if(ConfigHandler.generateInsanityRockTrollCaves) generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
+			if(ConfigHandler.generateShrines) generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
+			if(ConfigHandler.generateInsanityOases) generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
+			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
+			if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
 
-			generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -2, 100, BiomeInsanity.class);
+			if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -2, 100, BiomeInsanity.class);
 		}
 	}
 	

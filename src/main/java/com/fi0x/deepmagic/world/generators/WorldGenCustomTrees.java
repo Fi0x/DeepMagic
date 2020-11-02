@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.world.generators;
 
-import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biome.BiomeInsanity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,7 +19,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        if (world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
+        if (world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
         {
             runGenerator(INSANITY, world, random, chunkX, chunkZ, 1, BiomeInsanity.class);
         }

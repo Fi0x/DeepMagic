@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.world.generators;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -38,7 +39,7 @@ public class ModWorldGen implements IWorldGenerator
 		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_AROMAMININGWORLD)
 		{
 			generateAromaMiningWorld(random, chunkX, chunkZ, world);
-		} else if(world.provider.getDimension() == Reference.DIMENSION_ID_INSANITY)
+		} else if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
 		{
 			generateInsanityDimension(random, chunkX, chunkZ, world);
 		} else
@@ -49,17 +50,17 @@ public class ModWorldGen implements IWorldGenerator
 	
 	private void generateOverworld(Random random, int chunkX, int chunkZ, World world)
 	{
-		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 12, random.nextInt(4) + 2, 10);
+		if(ConfigHandler.spawnDeepCrystalOre) generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 12, random.nextInt(4) + 2, 10);
 	}
 	
 	private void generateNether(Random random, int chunkX, int chunkZ, World world)
 	{
-		generateOre(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 200, random.nextInt(8) + 4, 10, Blocks.NETHERRACK);
+		if(ConfigHandler.spawnDeepCrystalOre) generateOre(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 200, random.nextInt(8) + 4, 10, Blocks.NETHERRACK);
 	}
 	
 	private void generateEnd(Random random, int chunkX, int chunkZ, World world)
 	{
-		generateOre(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 100, random.nextInt(4) + 2, 20, Blocks.END_STONE);
+		if(ConfigHandler.spawnDeepCrystalOre) generateOre(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 100, random.nextInt(4) + 2, 20, Blocks.END_STONE);
 	}
 	
 	private void generateDeepDark(Random random, int chunkX, int chunkZ, World world)
