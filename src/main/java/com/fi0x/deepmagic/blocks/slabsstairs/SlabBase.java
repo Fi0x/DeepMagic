@@ -79,7 +79,6 @@ public abstract class SlabBase extends BlockSlab
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
-        //TODO: Change for other half slabs
         return Item.getItemFromBlock(ModBlocks.CLEAN_STONE_SLAB_HALF);
     }
 
