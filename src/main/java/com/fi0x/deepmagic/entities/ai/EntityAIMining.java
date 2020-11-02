@@ -94,7 +94,7 @@ public class EntityAIMining extends EntityAIBase
     public boolean shouldExecute()
     {
         if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
-        return !(entity.posY > maxExecutionHeight);
+        return entity.posY <= maxExecutionHeight;
     }
 
     @Override
@@ -158,7 +158,8 @@ public class EntityAIMining extends EntityAIBase
     {
         int xDifference = 0;
         int zDifference = 0;
-        if(start.getX() == start.getZ())
+
+        if(start.getX() == end.getX())
         {
             if(start.getZ() < end.getZ()) zDifference = 1;
             else zDifference = -1;
