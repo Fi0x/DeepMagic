@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.mobs;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -37,7 +38,7 @@ public class EntityWorm extends EntityCreature
     {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthWorm);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2);
     }
 

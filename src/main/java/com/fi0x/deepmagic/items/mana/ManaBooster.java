@@ -7,6 +7,7 @@ import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +24,6 @@ import java.util.List;
 
 public class ManaBooster extends Item implements IHasModel, IMagicItem
 {
-	private static final int BOOST_AMOUNT = 1000;
 	
 	public ManaBooster(String name)
 	{
@@ -49,7 +49,7 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		{
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
-			playerMana.setMana(playerMana.getMana() + BOOST_AMOUNT);
+			playerMana.setMana(playerMana.getMana() + ConfigHandler.manaBoosterAmount);
 			return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
@@ -61,7 +61,7 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 		tooltip.add(TextFormatting.BOLD + "Get a mana boost!");
 		if(GuiScreen.isCtrlKeyDown())
 		{
-			tooltip.add(TextFormatting.BLUE + "Adds " + BOOST_AMOUNT + " Mana");
+			tooltip.add(TextFormatting.BLUE + "Adds " + ConfigHandler.manaBoosterAmount + " Mana");
 			tooltip.add(TextFormatting.BLUE + "Can overcharge your mana capacity");
 		} else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
 	}

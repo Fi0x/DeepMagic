@@ -116,7 +116,7 @@ public class GuiSkilltree extends GuiScreen
         labelManaEfficiency.addLine("Mana Efficiency");
         labelList.add(labelManaEfficiency);
         labelMaxHP = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 65, 100, 20, 0);
-        labelMaxHP.addLine("Health");
+        labelMaxHP.addLine("Health Boost");
         labelList.add(labelMaxHP);
         labelHealthRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 85, 100, 20, 0);
         labelHealthRegen.addLine("Health Regeneration");
@@ -215,7 +215,7 @@ public class GuiSkilltree extends GuiScreen
         valueMaxMana = playerMana.getMaxMana();
         valueManaRegen = playerMana.getManaRegenRate();
         valueManaEfficiency = playerMana.getManaEfficiency();
-        valueMaxHP = (playerMana.addedHP+20);
+        valueMaxHP = (playerMana.addedHP);
         valueHPRegen = playerMana.hpRegeneration;
         valueSpellTier = playerMana.getSpellTier();
         valueCastingSkill = playerMana.spellCastSkill;

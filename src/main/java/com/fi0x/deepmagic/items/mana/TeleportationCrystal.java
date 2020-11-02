@@ -31,8 +31,6 @@ import java.util.Objects;
 
 public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 {
-	private static final int MANA_COSTS = 50;
-	private static final int SKILL_XP = 5;
 
 	public TeleportationCrystal(String name)
 	{
@@ -55,7 +53,7 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 		tooltip.add(TextFormatting.WHITE + "Can teleport the player to the insanity dimension and back");
 		if(GuiScreen.isCtrlKeyDown())
 		{
-			tooltip.add(TextFormatting.BLUE + "Consumes " + MANA_COSTS + " Mana");
+			tooltip.add(TextFormatting.BLUE + "Consumes " + ConfigHandler.teleportationCrystalManaCost + " Mana");
 		} else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
 	}
 	@Nonnull
@@ -67,9 +65,9 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
 		{
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
-			if(playerMana.removeMana(MANA_COSTS))
+			if(playerMana.removeMana(ConfigHandler.teleportationCrystalManaCost))
 			{
-				playerMana.addSkillXP(SKILL_XP);
+				playerMana.addSkillXP(ConfigHandler.teleportationCrystalSkillXP);
 				int x = playerIn.getPosition().getX();
 				int z = playerIn.getPosition().getZ();
 				if(playerIn.dimension == 0)

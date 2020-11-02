@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.mobs;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -42,7 +43,7 @@ public class EntityInsanityCow extends EntityCow
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthInsanityCow);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
     }

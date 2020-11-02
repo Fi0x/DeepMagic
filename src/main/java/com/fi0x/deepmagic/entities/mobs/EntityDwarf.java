@@ -49,13 +49,13 @@ public class EntityDwarf extends EntityCreature
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
 
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthDwarf);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30.0D);
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(30.0D);
         getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(20);
         getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
-        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.damageDwarf);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(8);
     }
 

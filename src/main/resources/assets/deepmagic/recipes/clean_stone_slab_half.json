@@ -1,22 +1,17 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients":
     [
-        "SSS"
-    ],
-    
-    "key":
-    {
-        "S":
+
         {
-            "item": "minecraft:stone"
+            "item": "minecraft:stone_slab"
         }
-    },
-    
+    ],
+
     "result":
     {
         "item": "deepmagic:clean_stone_slab_half",
-        "count": 6
+        "count": 1
     }
 }
