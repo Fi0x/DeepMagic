@@ -65,12 +65,12 @@ public class ModItems
 	//Crafting Items
 	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
 	public static final Item COMPRESSED_DEEP_CRYSTAL = new ItemBase("compressed_deep_crystal");
-	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");//TODO: Crafting Recipe
+	public static final Item DEEP_CRYSTAL_POWDER = new ItemBase("deep_crystal_powder");
 	public static final Item MANA_BATTERY = new ItemBase("mana_battery");
 	public static final Item MAGIC_CONVERTER = new ItemBase("magic_converter");
 	public static final Item EMPTY_SCROLL = new ItemBase("empty_scroll");
 	public static final Item DIMENSIONAL_CRYSTAL = new ItemBase("dimensional_crystal");
-	public static final Item MAGIC_POWDER = new ItemBase("magic_powder");//TODO: Crafting Recipe
+	public static final Item MAGIC_POWDER = new ItemBase("magic_powder");
 	public static final Item MAGIC_SIGIL = new ItemBase("magic_sigil");
 	public static final Item MAGIC_FLOW_CONTROLLER = new ItemBase("magic_flow_controller");
 	public static final Item MANA_INTERFACE = new ItemBase("mana_interface");
