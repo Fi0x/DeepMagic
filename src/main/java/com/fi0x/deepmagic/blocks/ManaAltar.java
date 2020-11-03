@@ -40,6 +40,9 @@ public class ManaAltar extends BlockTileEntity<TileEntityManaAltar>
         Item item = stack.getItem();
         TileEntityManaAltar tile = getTileEntity(worldIn, pos);
 
+        if(playerIn.getHeldItem(hand).isEmpty()) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana in Altar: " + tile.getStoredMana()));
+
+        //TODO: Charge Spell with another block
         if(item instanceof ManaChargedSpell)
         {
             NBTTagCompound compound;
@@ -53,6 +56,7 @@ public class ManaAltar extends BlockTileEntity<TileEntityManaAltar>
             playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Spell charged"));
         } else
         {
+            //TODO: Remove
             if(tile.addManaToStorage(100)) playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "ManaStorage of Altar has been increased to " + tile.getStoredMana()));
             else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "ManaStorage of Altar seems to be full"));
         }
