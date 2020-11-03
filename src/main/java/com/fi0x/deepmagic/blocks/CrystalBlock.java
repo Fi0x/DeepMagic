@@ -3,9 +3,9 @@ package com.fi0x.deepmagic.blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class DeepCrystalBlock extends BlockBase
+public class CrystalBlock extends BlockBase
 {
-	public DeepCrystalBlock(String name, Material material)
+	public CrystalBlock(String name, Material material)
 	{
 		super(name, material);
 		setSoundType(SoundType.METAL);
