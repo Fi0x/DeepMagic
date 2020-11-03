@@ -9,8 +9,11 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
@@ -130,16 +133,15 @@ public class EntityAIMining extends EntityAIBase
     protected void digAtBlockPos(BlockPos pos)
     {
         Block block = world.getBlockState(pos).getBlock();
-        if(chestPos != null && world.getBlockState(chestPos).getBlock() != Blocks.CHEST) chestPos = findChest(entity.getPosition());
 
         if(entity.itemHandler.getStackInSlot(entity.itemHandler.getSlots()-1).getCount() == 0)
         {
             ItemStack dropppedItemStack;
             if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
             else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
-
             ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false);
-        } else world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
+        } else if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST) inventoryToChest();
+        else world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
 
         world.setBlockToAir(pos);
     }
@@ -203,5 +205,24 @@ public class EntityAIMining extends EntityAIBase
             }
         }
         return null;
+    }
+    protected void inventoryToChest()
+    {
+        TileEntity te = null;
+        try
+        {
+            te = world.getTileEntity(chestPos);
+        } catch (Exception ignored) { }
+        if(te == null)
+        {
+            chestPos = null;
+            return;
+        }
+        IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
+        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
+        {
+            if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+        }
     }
 }
