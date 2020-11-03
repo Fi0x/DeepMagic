@@ -7,13 +7,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
-import java.util.Random;
 
 public abstract class SlabBase extends BlockSlab
 {
@@ -73,14 +71,6 @@ public abstract class SlabBase extends BlockSlab
     {
         if(!this.isDouble()) return 0;
         return state.getValue(HALF).ordinal() + 1;
-    }
-
-    @Nonnull
-    @Override
-    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
-    {
-        //TODO: Change for other half slabs
-        return Item.getItemFromBlock(ModBlocks.CLEAN_STONE_SLAB_HALF);
     }
 
     @Nonnull
