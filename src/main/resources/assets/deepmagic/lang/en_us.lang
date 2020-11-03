@@ -11,6 +11,7 @@ tile.deep_crystal_ore.name=Deep Crystal Ore
 tile.deep_crystal_nether_ore.name=Deep Crystal Ore
 tile.deep_crystal_end_ore.name=Deep Crystal Ore
 tile.deep_crystal_block.name=Deep Crystal Block
+tile.demon_crystal_block.name=Demon Crystal Block
 tile.defence_stone.name=Defence Stone
 tile.attack_stone.name=Attack Stone
 tile.speed_stone.name=Speed Stone

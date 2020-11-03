@@ -26,7 +26,8 @@ public class ModBlocks
 	public static final Block DEEP_CRYSTAL_ORE = new DeepCrystalOre("deep_crystal_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_NETHER_ORE = new DeepCrystalOre("deep_crystal_nether_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_END_ORE = new DeepCrystalOre("deep_crystal_end_ore", Material.ROCK);
-	public static final Block DEEP_CRYSTAL_BLOCK = new DeepCrystalBlock("deep_crystal_block", Material.IRON);
+	public static final Block DEEP_CRYSTAL_BLOCK = new CrystalBlock("deep_crystal_block", Material.GLASS);
+	public static final Block DEMON_CRYSTAL_BLOCK = new CrystalBlock("demon_crystal_block", Material.GLASS);
 	public static final BlockSlab CLEAN_STONE_SLAB_DOUBLE = new CleanStoneDoubleSlab("clean_stone_slab_double", Material.ROCK);
 	public static final BlockSlab CLEAN_STONE_SLAB_HALF = new CleanStoneHalfSlab("clean_stone_slab_half", Material.ROCK);
 	public static final BlockStairs CLEAN_STONE_STAIRS = new StairBase("clean_stone_stairs", Blocks.STONE.getDefaultState());
