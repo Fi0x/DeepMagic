@@ -38,7 +38,8 @@ public class DemonStone extends BlockBase
             {
                 PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                if (playerMana.removeMana(SUMMON_MANA_COST))
+                if(!validateStructure(worldIn, pos)) return false;
+                if(playerMana.removeMana(SUMMON_MANA_COST))
                 {
                     playerIn.getHeldItem(hand).shrink(1);
                     playerMana.addSkillXP(SKILL_XP);
@@ -50,5 +51,17 @@ public class DemonStone extends BlockBase
             }
         }
         return true;
+    }
+
+    private boolean validateStructure(World world, BlockPos pos)
+    {
+        pos = pos.down();
+        return world.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
+                world.getBlockState(pos.north()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
+                world.getBlockState(pos.north().east()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
+                world.getBlockState(pos.north().west()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
+                world.getBlockState(pos.south()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
+                world.getBlockState(pos.south().east()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
+                world.getBlockState(pos.south().west()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block");
     }
 }
