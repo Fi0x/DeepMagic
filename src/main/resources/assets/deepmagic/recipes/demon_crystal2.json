@@ -1,0 +1,17 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "deepmagic:demon_crystal_block"
+    }
+    ],
+
+    "result": 
+    {
+        "item": "deepmagic:demon_crystal",
+        "count": 9
+    }
+}
