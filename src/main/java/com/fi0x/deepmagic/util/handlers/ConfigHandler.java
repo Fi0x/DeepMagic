@@ -81,6 +81,8 @@ public class ConfigHandler
     public static int damageHoveringOrb;
     public static int damageNetherWorm;
     public static int damageRockTroll;
+    //NPC Utility
+    public static int dwarfInventorySlots;
 
     //Player Mana
     public static int baseMana;
@@ -218,6 +220,10 @@ public class ConfigHandler
         damageHoveringOrb = npcStats.getInt("Hovering Orb Attack Damage", category, 1, 1, 1000, "");
         damageNetherWorm = npcStats.getInt("Nether Worm Attack Damage", category, 10, 1, 1000, "");
         damageRockTroll = npcStats.getInt("Rock Troll Attack Damage", category, 8, 1, 1000, "");
+
+        category = "Utility";
+        npcStats.addCustomCategoryComment(category, "NPC Utility Stats");
+        dwarfInventorySlots = npcStats.getInt("Dwarf Inventory Size", category, 10, 1, 30, "Amount of Stacks a Dwarf can carry");
 
         npcStats.save();
     }

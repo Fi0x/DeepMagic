@@ -163,7 +163,6 @@ public class Spell extends ItemBase implements IMagicItem
     }
     private Entity getFocusedEntity()
     {
-        //TODO: Change to get targets that are further away
         Minecraft mc = Minecraft.getMinecraft();
         RayTraceResult rtResult = mc.objectMouseOver;
         mc.entityRenderer.getMouseOver(0);

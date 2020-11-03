@@ -9,22 +9,30 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityDwarf extends EntityCreature
+public class EntityDwarf extends EntityCreature implements ICapabilityProvider
 {
+    public ItemStackHandler itemHandler;
     public boolean isMining;
 
     public EntityDwarf(World worldIn)
     {
         super(worldIn);
+        itemHandler = new ItemStackHandler(ConfigHandler.dwarfInventorySlots);
         isMining = false;
         this.setSize(0.9F, 1.5F);
     }
@@ -91,5 +99,31 @@ public class EntityDwarf extends EntityCreature
     public float getEyeHeight()
     {
         return 1.2F;
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        compound.setTag("ItemStackHandler", itemHandler.serializeNBT());
+        return super.writeToNBT(compound);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound compound)
+    {
+        itemHandler.deserializeNBT(compound.getCompoundTag("ItemStackHandler"));
+        super.readFromNBT(compound);
+    }
+    @Nullable
+    @Override
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return (T) itemHandler;
+        return super.getCapability(capability, facing);
+    }
+    @Override
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
+    {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
+        return super.hasCapability(capability, facing);
     }
 }

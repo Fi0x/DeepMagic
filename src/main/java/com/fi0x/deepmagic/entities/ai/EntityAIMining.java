@@ -5,7 +5,6 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,7 +23,7 @@ public class EntityAIMining extends EntityAIBase
 {
     protected final int executionChance;
     protected final World world;
-    protected final EntityCreature entity;
+    protected final EntityDwarf entity;
     protected final double speed;
     protected final float probability;
     protected final int maxExecutionHeight = 50;
@@ -122,43 +121,33 @@ public class EntityAIMining extends EntityAIBase
         {
             if(digDelay == 0 && !miningBlocks.isEmpty())
             {
-                digAtBlockPos(miningBlocks.get(0));
+                while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock() instanceof BlockAir) miningBlocks.remove(0);
+                if(miningBlocks.isEmpty()) return false;
+                if(!digAtBlockPos(miningBlocks.get(0))) return false;
                 entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-                miningBlocks.remove(0);
                 digDelay = 20;
             } else digDelay--;
             return !miningBlocks.isEmpty();
         } else return true;
     }
 
-    protected void digAtBlockPos(BlockPos pos)
+    protected boolean digAtBlockPos(BlockPos pos)
     {
+        BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
+        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, Blocks.COBBLESTONE.getDefaultState());
         Block block = world.getBlockState(pos).getBlock();
-        TileEntity te = null;
-        if(chestPos != null && world.getBlockState(chestPos).getBlock() != Blocks.CHEST) chestPos = findChest(entity.getPosition());
-        try
+
+        ItemStack dropppedItemStack;
+        if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
+        else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+        if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty())
         {
-            assert chestPos != null;
-            te = world.getTileEntity(chestPos);
-        } catch (Exception ignored)
-        {
+            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST) inventoryToChest();
+            if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty()) return false;
         }
 
-        if(te == null)
-        {
-            world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos).getBlock().getDefaultState(), 1);
-            chestPos = findChest(entity.getPosition());
-        }
-        else
-        {
-            ItemStack dropppedItemStack;
-            if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
-            else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
-
-            IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            ItemHandlerHelper.insertItemStacked(handler, dropppedItemStack, false);
-        }
         world.setBlockToAir(pos);
+        return true;
     }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {
@@ -177,8 +166,8 @@ public class EntityAIMining extends EntityAIBase
 
         while(start != end && miningBlocks.size() < 30 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
         {
-            miningBlocks.add(start);
             miningBlocks.add(start.add(0, 1, 0));
+            miningBlocks.add(start);
             start = start.add(xDifference, 0, zDifference);
         }
     }
@@ -220,5 +209,29 @@ public class EntityAIMining extends EntityAIBase
             }
         }
         return null;
+    }
+    protected void inventoryToChest()
+    {
+        BlockPos currentPos = entity.getPosition();
+        entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
+
+        TileEntity te = null;
+        try
+        {
+            te = world.getTileEntity(chestPos);
+        } catch (Exception ignored) { }
+        if(te == null)
+        {
+            chestPos = null;
+            return;
+        }
+        IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
+        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
+        {
+            if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+        }
+
+        entity.getNavigator().tryMoveToXYZ(currentPos.getX(), currentPos.getY(), currentPos.getZ(), 1);
     }
 }
