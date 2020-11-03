@@ -121,9 +121,10 @@ public class EntityAIMining extends EntityAIBase
         {
             if(digDelay == 0 && !miningBlocks.isEmpty())
             {
+                while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock() instanceof BlockAir) miningBlocks.remove(0);
+                if(miningBlocks.isEmpty()) return false;
                 digAtBlockPos(miningBlocks.get(0));
                 entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-                miningBlocks.remove(0);
                 digDelay = 20;
             } else digDelay--;
             return !miningBlocks.isEmpty();
@@ -132,6 +133,8 @@ public class EntityAIMining extends EntityAIBase
 
     protected void digAtBlockPos(BlockPos pos)
     {
+        BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
+        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, Blocks.COBBLESTONE.getDefaultState());
         Block block = world.getBlockState(pos).getBlock();
 
         if(entity.itemHandler.getStackInSlot(entity.itemHandler.getSlots()-1).getCount() == 0)
@@ -162,8 +165,8 @@ public class EntityAIMining extends EntityAIBase
 
         while(start != end && miningBlocks.size() < 30 && mineableBlocks.contains(world.getBlockState(start)) && mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
         {
-            miningBlocks.add(start);
             miningBlocks.add(start.add(0, 1, 0));
+            miningBlocks.add(start);
             start = start.add(xDifference, 0, zDifference);
         }
     }
