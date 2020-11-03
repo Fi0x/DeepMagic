@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.entities.mobs.EntityDemon;
 import com.fi0x.deepmagic.items.DemonCrystal;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,8 +18,6 @@ import javax.annotation.Nonnull;
 
 public class DemonStone extends BlockBase
 {
-    private static final int SUMMON_MANA_COST = 100;
-    private static final int SKILL_XP = 100;
 
     public DemonStone(String name, Material material)
     {
@@ -39,10 +38,10 @@ public class DemonStone extends BlockBase
                 PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
                 if(!validateStructure(worldIn, pos)) return false;
-                if(playerMana.removeMana(SUMMON_MANA_COST))
+                if(playerMana.removeMana(ConfigHandler.demonSummonCost))
                 {
                     playerIn.getHeldItem(hand).shrink(1);
-                    playerMana.addSkillXP(SKILL_XP);
+                    playerMana.addSkillXP(ConfigHandler.demonSummonXP);
 
                     EntityDemon demon = new EntityDemon(worldIn);
                     demon.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
@@ -56,6 +55,7 @@ public class DemonStone extends BlockBase
     private boolean validateStructure(World world, BlockPos pos)
     {
         pos = pos.down();
+        if(ConfigHandler.requireDemonStructure) return true;
         return world.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
                 world.getBlockState(pos.north()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
                 world.getBlockState(pos.north().east()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&

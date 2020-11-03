@@ -92,6 +92,10 @@ public class ConfigHandler
     public static int manaAltarCapacity;
     //Insanity Water
     public static boolean insanityWaterEffect;
+    //Demon Stone
+    public static int demonSummonCost;
+    public static int demonSummonXP;
+    public static boolean requireDemonStructure;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -249,6 +253,12 @@ public class ConfigHandler
         category = "Insanity Water";
         blocks.addCustomCategoryComment(category, "Insanity Water");
         insanityWaterEffect = blocks.getBoolean("Potion Effect", category, true, "Insanity Water gives Weakness and Speed Effect");
+
+        category = "Demon Stone";
+        blocks.addCustomCategoryComment(category, "Demon Stone");
+        demonSummonCost = blocks.getInt("Demon Summon Costs", category, 100, 0, 10000, "Mana Costs to summon the Demon");
+        demonSummonXP = blocks.getInt("Demon Summon XP", category, 100, 0, 10000, "Skill XP gained by summoning the Demon");
+        requireDemonStructure = blocks.getBoolean("Require Demon Summoning Structure", category, true, "Require a Structure around the Demon Stone to Summon the Demon");
 
         blocks.save();
     }
