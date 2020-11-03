@@ -50,7 +50,8 @@ public class ManaBooster extends Item implements IHasModel, IMagicItem
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
 			playerMana.setMana(playerMana.getMana() + ConfigHandler.manaBoosterAmount);
-			return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
+			stack.shrink(1);
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
 	}

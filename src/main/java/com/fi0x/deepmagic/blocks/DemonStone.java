@@ -55,13 +55,15 @@ public class DemonStone extends BlockBase
     private boolean validateStructure(World world, BlockPos pos)
     {
         pos = pos.down();
-        if(ConfigHandler.requireDemonStructure) return true;
+        if(!ConfigHandler.requireDemonStructure) return true;
         return world.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
-                world.getBlockState(pos.north()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
-                world.getBlockState(pos.north().east()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
-                world.getBlockState(pos.north().west()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
-                world.getBlockState(pos.south()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
-                world.getBlockState(pos.south().east()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block") &&
-                world.getBlockState(pos.south().west()).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block");
+                world.getBlockState(pos.north()).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block") &&
+                world.getBlockState(pos.north().east()).getBlock().getUnlocalizedName().equals("tile.blockIron") &&
+                world.getBlockState(pos.north().west()).getBlock().getUnlocalizedName().equals("tile.blockIron") &&
+                world.getBlockState(pos.south()).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block") &&
+                world.getBlockState(pos.south().east()).getBlock().getUnlocalizedName().equals("tile.blockIron") &&
+                world.getBlockState(pos.south().west()).getBlock().getUnlocalizedName().equals("tile.blockIron") &&
+                world.getBlockState(pos.west()).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block") &&
+                world.getBlockState(pos.east()).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block");
     }
 }
