@@ -2,6 +2,8 @@ itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
 itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
+container.mana_generator=Mana Generator
+
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
 item.demon_crystal.name=Demon Crystal
