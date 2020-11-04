@@ -1,12 +1,13 @@
 {
+	"forge_marker": 1,
 	"variants": {
-		"running=false,facing=north": { "model": "deepmagic:mana_generator"},
-		"running=false,facing=east": { "model": "deepmagic:mana_generator", "y": 90},
-		"running=false,facing=south": { "model": "deepmagic:mana_generator", "y": 180},
-		"running=false,facing=west": { "model": "deepmagic:mana_generator", "y": 270},
-		"running=true,facing=north": { "model": "deepmagic:mana_generator_active"},
-		"running=true,facing=east": { "model": "deepmagic:mana_generator_active", "y": 90},
-		"running=true,facing=south": { "model": "deepmagic:mana_generator_active", "y": 180},
-		"running=true,facing=west": { "model": "deepmagic:mana_generator_active", "y": 270}
+		"facing=north,running=false": { "model": "deepmagic:mana_generator"},
+		"facing=east,running=false": { "model": "deepmagic:mana_generator", "y": 90},
+		"facing=south,running=false": { "model": "deepmagic:mana_generator", "y": 180},
+		"facing=west,running=false": { "model": "deepmagic:mana_generator", "y": 270},
+		"facing=north,running=true": { "model": "deepmagic:mana_generator_active"},
+		"facing=east,running=true": { "model": "deepmagic:mana_generator_active", "y": 90},
+		"facing=south,running=true": { "model": "deepmagic:mana_generator_active", "y": 180},
+		"facing=west,running=true": { "model": "deepmagic:mana_generator_active", "y": 270}
 	}
 }
