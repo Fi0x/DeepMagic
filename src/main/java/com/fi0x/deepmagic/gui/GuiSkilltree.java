@@ -16,6 +16,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
+import java.util.Formatter;
 
 public class GuiSkilltree extends GuiScreen
 {
@@ -38,15 +39,6 @@ public class GuiSkilltree extends GuiScreen
     private GuiButton buttonAddHPRegen;
     private GuiButton buttonAddSpellTier;
     private GuiButton buttonAddSpellCastSkill;
-
-    private GuiLabel labelSkillPoint;
-    private GuiLabel labelMaxMana;
-    private GuiLabel labelManaRegen;
-    private GuiLabel labelManaEfficiency;
-    private GuiLabel labelMaxHP;
-    private GuiLabel labelHealthRegen;
-    private GuiLabel labelSpellTier;
-    private GuiLabel labelCastSkill;
 
     private GuiTextField txtSkillPoints;
     private GuiTextField txtMaxMana;
@@ -102,29 +94,29 @@ public class GuiSkilltree extends GuiScreen
 
         updateScreen();
 
-        labelSkillPoint = new GuiLabel(this.fontRenderer, nextID(), guiX + backgroundWidth - 60, guiY + 5, 55, 20, 0);
+        GuiLabel labelSkillPoint = new GuiLabel(this.fontRenderer, nextID(), guiX + backgroundWidth - 60, guiY + 5, 55, 20, 0);
         labelSkillPoint.addLine("Skillpoints");
         labelList.add(labelSkillPoint);
 
-        labelMaxMana = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 5, 100, 20, 0);
+        GuiLabel labelMaxMana = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 5, 100, 20, 0);
         labelMaxMana.addLine("Mana Capacity");
         labelList.add(labelMaxMana);
-        labelManaRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 25, 100, 20, 0);
+        GuiLabel labelManaRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 25, 100, 20, 0);
         labelManaRegen.addLine("Mana Regeneration");
         labelList.add(labelManaRegen);
-        labelManaEfficiency = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 45, 100, 20, 0);
-        labelManaEfficiency.addLine("Mana Efficiency");
+        GuiLabel labelManaEfficiency = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 45, 100, 20, 0);
+        labelManaEfficiency.addLine("Mana Cost Multiplier");
         labelList.add(labelManaEfficiency);
-        labelMaxHP = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 65, 100, 20, 0);
+        GuiLabel labelMaxHP = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 65, 100, 20, 0);
         labelMaxHP.addLine("Health Boost");
         labelList.add(labelMaxHP);
-        labelHealthRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 85, 100, 20, 0);
+        GuiLabel labelHealthRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 85, 100, 20, 0);
         labelHealthRegen.addLine("Health Regeneration");
         labelList.add(labelHealthRegen);
-        labelSpellTier = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 105, 100, 20, 0);
+        GuiLabel labelSpellTier = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 105, 100, 20, 0);
         labelSpellTier.addLine("Spell-Tier");
         labelList.add(labelSpellTier);
-        labelCastSkill = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 125, 100, 20, 0);
+        GuiLabel labelCastSkill = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 125, 100, 20, 0);
         labelCastSkill.addLine("Spell-Cast Skill");
         labelList.add(labelCastSkill);
 
@@ -214,7 +206,7 @@ public class GuiSkilltree extends GuiScreen
         valueSkillPoint = playerMana.getSkillpoints();
         valueMaxMana = playerMana.getMaxMana();
         valueManaRegen = playerMana.getManaRegenRate();
-        valueManaEfficiency = playerMana.getManaEfficiency();
+        valueManaEfficiency = 1/Math.pow(1.1, playerMana.getManaEfficiency());
         valueMaxHP = (playerMana.addedHP);
         valueHPRegen = playerMana.hpRegeneration;
         valueSpellTier = playerMana.getSpellTier();
@@ -225,7 +217,7 @@ public class GuiSkilltree extends GuiScreen
         txtSkillPoints.setText("" + valueSkillPoint);
         txtMaxMana.setText("" + (int) valueMaxMana);
         txtManaRegen.setText("" + (int) valueManaRegen);
-        txtManaEfficiency.setText("" + (int) valueManaEfficiency);
+        txtManaEfficiency.setText(new Formatter(new StringBuilder()).format("%.4f", valueManaEfficiency).toString());
         txtMaxHP.setText("" + valueMaxHP);
         txtHealthRegen.setText("" + valueHPRegen);
         txtSpellTier.setText("" + valueSpellTier);

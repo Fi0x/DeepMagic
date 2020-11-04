@@ -36,10 +36,10 @@ public class BiomeInsanity extends Biome
 		this.spawnableWaterCreatureList.clear();
 
 		if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 5, 1, 3));
-        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 20, 2, 6));
-        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 20, 1, 2));
-        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 20, 4, 10));
-        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 5, 1, 2));
+        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
+        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
+        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
+        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 2, 1, 2));
 		
 		this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
