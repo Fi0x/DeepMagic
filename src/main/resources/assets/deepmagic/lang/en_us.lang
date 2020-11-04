@@ -33,6 +33,8 @@ tile.insanity_leaves.name=Insanity Leaves
 tile.insanity_sapling.name=Insanity Sapling
 tile.insanity_stone_slab_half.name=Insanity Stone Slab
 tile.insanity_stone_stairs.name=Insanity Stone Stairs
+tile.insanity_cobble_slab_half.name=Insanity Cobble Slab
+tile.insanity_cobble_stairs.name=Insanity Cobble Stairs
 tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 

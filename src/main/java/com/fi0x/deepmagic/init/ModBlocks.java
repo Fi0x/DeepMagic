@@ -45,6 +45,9 @@ public class ModBlocks
 	public static final BlockSlab INSANITY_STONE_SLAB_DOUBLE = new InsanityStoneDoubleSlab("insanity_stone_slab_double", Material.ROCK);
 	public static final BlockSlab INSANITY_STONE_SLAB_HALF = new InsanityStoneHalfSlab("insanity_stone_slab_half", Material.ROCK);
 	public static final BlockStairs INSANITY_STONE_STAIRS = new StairBase("insanity_stone_stairs", INSANITY_STONE.getDefaultState());
+	public static final BlockSlab INSANITY_COBBLE_SLAB_DOUBLE = new InsanityCobbleDoubleSlab("insanity_cobble_slab_double", Material.ROCK);
+	public static final BlockSlab INSANITY_COBBLE_SLAB_HALF = new InsanityCobbleHalfSlab("insanity_cobble_slab_half", Material.ROCK);
+	public static final BlockStairs INSANITY_COBBLE_STAIRS = new StairBase("insanity_cobble_stairs", INSANITY_STONE.getDefaultState());
 	public static final BlockSlab INSANITY_WOOD_SLAB_DOUBLE = new InsanityWoodDoubleSlab("insanity_wood_slab_double", Material.WOOD);
 	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());

@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"half=bottom": { "model": "deepmagic:insanity_cobble_slab_bottom" },
+		"half=top": { "model": "deepmagic:insanity_cobble_slab_top" }
+	}
+}
