@@ -4,11 +4,11 @@ import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -48,7 +48,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     {
         if(!worldIn.isRemote)
         {
-            Main.proxy.openManaGeneratorGui();
+            playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -63,6 +63,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
         TileEntityManaGenerator te = (TileEntityManaGenerator) worldIn.getTileEntity(pos);
+        assert te != null;
         InventoryHelper.dropInventoryItems(worldIn, pos, te);
         super.breakBlock(worldIn, pos, state);
     }
@@ -97,29 +98,33 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityLivingBase placer, @Nonnull ItemStack stack)
     {
         worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
+    @Nonnull
     @Override
-    public EnumBlockRenderType getRenderType(IBlockState state)
+    public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
     {
         return EnumBlockRenderType.MODEL;
     }
+    @Nonnull
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
         return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
+    @Nonnull
     @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
         return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
     }
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {RUNNING, FACING});
+        return new BlockStateContainer(this, RUNNING, FACING);
     }
     @Nullable
     @Override
@@ -128,6 +133,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
         return new TileEntityManaGenerator();
     }
 
+    @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

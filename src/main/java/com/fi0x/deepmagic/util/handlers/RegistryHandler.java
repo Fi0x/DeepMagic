@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntitySpellStone;
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -33,6 +34,7 @@ public class RegistryHandler
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{
 		event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
+		registerTileEntities();
 	}
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
@@ -57,5 +59,6 @@ public class RegistryHandler
 	{
 		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
 		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation("mana_altar"));
+		GameRegistry.registerTileEntity(TileEntityManaGenerator.class, new ResourceLocation("mana_generator"));
 	}
 }

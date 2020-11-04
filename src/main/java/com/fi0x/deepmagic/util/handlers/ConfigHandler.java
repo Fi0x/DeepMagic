@@ -31,6 +31,8 @@ public class ConfigHandler
     public static int entityCockroachID;
     public static int entityWormID;
     public static int entityCyclopesID;
+    //Gui IDs
+    public static int guiManaGeneratorID;
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
@@ -140,6 +142,10 @@ public class ConfigHandler
         entityCockroachID = ids.getInt("Cockroach ID", category, 1772, -10000, 10000, "");
         entityWormID = ids.getInt("Worm ID", category, 1773, -10000, 10000, "");
         entityCyclopesID = ids.getInt("Cyclopse ID", category, 1774, -10000, 10000, "");
+
+        category = "GUIs";
+        ids.addCustomCategoryComment(category, "GUIs");
+
 
         ids.save();
     }
