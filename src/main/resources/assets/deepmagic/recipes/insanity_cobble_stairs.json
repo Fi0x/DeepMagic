@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "S  ",
+        "SS ",
+        "SSS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_cobble"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:insanity_cobble_stairs",
+        "count": 4
+    }
+}

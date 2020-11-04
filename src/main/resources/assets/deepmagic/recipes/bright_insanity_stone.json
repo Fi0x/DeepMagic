@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "III",
+        "ITI",
+        "III"
+    ],
+    
+    "key":
+    {
+        "I":
+        {
+        	"item": "deepmagic:insanity_stone"
+        },
+        "T":
+        {
+            "item": "minecraft:torch"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:bright_insanity_stone",
+        "count": 8
+    }
+}

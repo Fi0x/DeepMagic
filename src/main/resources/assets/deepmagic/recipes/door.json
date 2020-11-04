@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SS",
+        "SS",
+        "SS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_planks"
+        }
+    },
+    
+    "result":
+    {
+        "item": "minecraft:door",
+        "count": 2
+    }
+}

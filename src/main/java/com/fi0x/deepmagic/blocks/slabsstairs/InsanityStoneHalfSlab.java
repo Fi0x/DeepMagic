@@ -20,7 +20,6 @@ public class InsanityStoneHalfSlab extends SlabBase implements IHasModel
     {
         super(name, materialIn);
         setCreativeTab(DeepMagicTab.BLOCKS);
-
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
