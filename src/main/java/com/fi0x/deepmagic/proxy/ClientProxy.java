@@ -24,6 +24,11 @@ public class ClientProxy extends CommonProxy
 	{
 		Minecraft.getMinecraft().addScheduledTask( () -> Minecraft.getMinecraft().displayGuiScreen(new GuiSkilltree(player)));
 	}
+	@Override
+	public void openManaGeneratorGui()
+	{
+		super.openManaGeneratorGui();
+	}
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event)

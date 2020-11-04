@@ -6,6 +6,8 @@ import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
 import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
+import com.fi0x.deepmagic.blocks.mana.ManaAltar;
+import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
 import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
@@ -61,9 +63,12 @@ public class ModBlocks
 	public static final Block DEMON_STONE = new DemonStone("demon_stone", Material.ROCK);
 
 	//Interacting Blocks
-	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
 	public static final SpellStone SPELL_STONE = new SpellStone("spell_stone", Material.ROCK);
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
 	public static final Block WEATHER_CONTROLLER = new WeatherController("weather_controller", Material.IRON);
 	public static final Block TIME_CONTROLLER = new TimeController("time_controller", Material.IRON);
+
+	//Mana System Blocks
+	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
+	public static final ManaGenerator MANA_GENERATOR = new ManaGenerator("mana_generator", Material.ROCK);
 }

@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"running=false,facing=north": { "model": "deepmagic:mana_generator"},
+		"running=false,facing=east": { "model": "deepmagic:mana_generator", "y": 90},
+		"running=false,facing=south": { "model": "deepmagic:mana_generator", "y": 180},
+		"running=false,facing=west": { "model": "deepmagic:mana_generator", "y": 270},
+		"running=true,facing=north": { "model": "deepmagic:mana_generator_active"},
+		"running=true,facing=east": { "model": "deepmagic:mana_generator_active", "y": 90},
+		"running=true,facing=south": { "model": "deepmagic:mana_generator_active", "y": 180},
+		"running=true,facing=west": { "model": "deepmagic:mana_generator_active", "y": 270}
+	}
+}
