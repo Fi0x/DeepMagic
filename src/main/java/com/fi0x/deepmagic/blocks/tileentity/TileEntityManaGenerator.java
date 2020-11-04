@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.entities.tileentity;
+package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
 import net.minecraft.block.Block;

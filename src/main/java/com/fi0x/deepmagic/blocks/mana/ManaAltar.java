@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.blocks.mana;
 
-import com.fi0x.deepmagic.entities.tileentity.BlockTileEntity;
-import com.fi0x.deepmagic.entities.tileentity.TileEntityManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.items.mana.ManaChargedSpell;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

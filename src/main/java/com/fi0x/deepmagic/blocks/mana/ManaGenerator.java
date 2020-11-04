@@ -2,7 +2,7 @@ package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.BlockBase;
-import com.fi0x.deepmagic.entities.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;

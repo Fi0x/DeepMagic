@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.entities.tileentity;
+package com.fi0x.deepmagic.blocks.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
