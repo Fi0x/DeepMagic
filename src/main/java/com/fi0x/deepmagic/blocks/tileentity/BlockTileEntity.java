@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.entities.tileentity;
+package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
 import net.minecraft.block.material.Material;

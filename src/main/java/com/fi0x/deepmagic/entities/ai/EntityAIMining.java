@@ -125,6 +125,7 @@ public class EntityAIMining extends EntityAIBase
                 if(miningBlocks.isEmpty()) return false;
                 if(!digAtBlockPos(miningBlocks.get(0))) return false;
                 entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
+                if(world.getLightBrightness(miningBlocks.get(0)) < 0.09) placeLightAt(miningBlocks.get(0));
                 digDelay = 20;
             } else digDelay--;
             return !miningBlocks.isEmpty();
@@ -134,7 +135,7 @@ public class EntityAIMining extends EntityAIBase
     protected boolean digAtBlockPos(BlockPos pos)
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
-        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, Blocks.COBBLESTONE.getDefaultState());
+        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());
         Block block = world.getBlockState(pos).getBlock();
 
         ItemStack dropppedItemStack;
@@ -148,6 +149,11 @@ public class EntityAIMining extends EntityAIBase
 
         world.setBlockToAir(pos);
         return true;
+    }
+    protected void placeLightAt(BlockPos pos)
+    {
+        BlockPos ceiling = new BlockPos(pos.getX(), entity.posY + 2, pos.getZ());
+        world.setBlockState(ceiling, ModBlocks.BRIGHT_INSANITY_STONE.getDefaultState());
     }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {

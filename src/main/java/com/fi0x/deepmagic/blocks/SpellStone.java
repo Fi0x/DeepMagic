@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.blocks;
 
-import com.fi0x.deepmagic.entities.tileentity.BlockTileEntity;
-import com.fi0x.deepmagic.entities.tileentity.TileEntitySpellStone;
+import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntitySpellStone;
 import com.fi0x.deepmagic.items.mana.Spell;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

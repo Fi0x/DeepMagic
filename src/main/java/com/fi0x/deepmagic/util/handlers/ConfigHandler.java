@@ -31,6 +31,8 @@ public class ConfigHandler
     public static int entityCockroachID;
     public static int entityWormID;
     public static int entityCyclopesID;
+    //Gui IDs
+    public static int guiManaGeneratorID;
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
@@ -98,6 +100,8 @@ public class ConfigHandler
     public static int demonSummonCost;
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
+    //Mana Generator
+    public static int manaGeneratorManaCapacity;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -140,6 +144,10 @@ public class ConfigHandler
         entityCockroachID = ids.getInt("Cockroach ID", category, 1772, -10000, 10000, "");
         entityWormID = ids.getInt("Worm ID", category, 1773, -10000, 10000, "");
         entityCyclopesID = ids.getInt("Cyclopse ID", category, 1774, -10000, 10000, "");
+
+        category = "GUIs";
+        ids.addCustomCategoryComment(category, "GUIs");
+
 
         ids.save();
     }
@@ -265,6 +273,10 @@ public class ConfigHandler
         demonSummonCost = blocks.getInt("Demon Summon Costs", category, 100, 0, 10000, "Mana Costs to summon the Demon");
         demonSummonXP = blocks.getInt("Demon Summon XP", category, 100, 0, 10000, "Skill XP gained by summoning the Demon");
         requireDemonStructure = blocks.getBoolean("Require Demon Summoning Structure", category, true, "Require a Structure around the Demon Stone to Summon the Demon");
+
+        category = "Mana Generator";
+        blocks.addCustomCategoryComment(category, "Mana Generator");
+        manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The maximum Capacity for Mana a Mana Generator has");
 
         blocks.save();
     }

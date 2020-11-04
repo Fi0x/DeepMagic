@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.items.mana;
 
-import com.fi0x.deepmagic.blocks.ManaAltar;
 import com.fi0x.deepmagic.blocks.SpellStone;
+import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;

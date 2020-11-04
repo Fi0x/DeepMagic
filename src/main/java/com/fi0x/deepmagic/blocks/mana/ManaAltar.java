@@ -1,7 +1,7 @@
-package com.fi0x.deepmagic.blocks;
+package com.fi0x.deepmagic.blocks.mana;
 
-import com.fi0x.deepmagic.entities.tileentity.BlockTileEntity;
-import com.fi0x.deepmagic.entities.tileentity.TileEntityManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.items.mana.ManaChargedSpell;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -32,6 +32,12 @@ public class ManaAltar extends BlockTileEntity<TileEntityManaAltar>
         setHarvestLevel("pickaxe", 2);
     }
 
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    {
+        //TODO: Check for specific structure around
+        super.onBlockAdded(worldIn, pos, state);
+    }
     @Override
     public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {

@@ -2,6 +2,8 @@ itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
 itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
+container.mana_generator=Mana Generator
+
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
 item.demon_crystal.name=Demon Crystal
@@ -12,17 +14,11 @@ tile.deep_crystal_nether_ore.name=Deep Crystal Ore
 tile.deep_crystal_end_ore.name=Deep Crystal Ore
 tile.deep_crystal_block.name=Deep Crystal Block
 tile.demon_crystal_block.name=Demon Crystal Block
-tile.defence_stone.name=Defence Stone
-tile.attack_stone.name=Attack Stone
-tile.speed_stone.name=Speed Stone
-tile.heal_stone.name=Heal Stone
-tile.vision_stone.name=Vision Stone
-tile.saturation_stone.name=Saturation Stone
-tile.levitation_stone.name=Levitation Stone
 tile.clean_stone_slab_half.name=Clean Stone Slab
 tile.clean_stone_stairs.name=Clean Stone Stairs
 
 tile.insanity_stone.name=Insanity Stone
+tile.bright_insanity_stone.name=Bright Insanity Stone
 tile.insanity_cobble.name=Insanity Cobble
 tile.insanity_dirt.name=Insanity Dirt
 tile.insanity_grass.name=Insanity Grass
@@ -38,12 +34,22 @@ tile.insanity_cobble_stairs.name=Insanity Cobble Stairs
 tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
-tile.mana_altar.name=Mana Altar
+tile.defence_stone.name=Defence Stone
+tile.attack_stone.name=Attack Stone
+tile.speed_stone.name=Speed Stone
+tile.heal_stone.name=Heal Stone
+tile.vision_stone.name=Vision Stone
+tile.saturation_stone.name=Saturation Stone
+tile.levitation_stone.name=Levitation Stone
+tile.demon_stone.name=Demon Stone
+
 tile.spell_stone.name=Spell Stone
 tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
 tile.time_controller.name=Time Controller
-tile.demon_stone.name=Demon Stone
+
+tile.mana_altar.name=Mana Altar
+tile.mana_generator.name=Mana Generator
 
 fluid.insanity_water=Insanity Water
 

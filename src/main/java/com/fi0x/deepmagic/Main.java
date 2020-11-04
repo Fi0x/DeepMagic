@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,7 +61,6 @@ public class Main
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
 		WorldGenCustomTrees.register();
-		RegistryHandler.registerTileEntities();
 
 		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
 		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
@@ -82,6 +82,7 @@ public class Main
 	{
 		ModRecipes.init();
 		SoundsHandler.registerSounds();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 	}
 
 	@Mod.EventHandler
