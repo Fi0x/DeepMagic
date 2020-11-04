@@ -18,6 +18,7 @@ tile.clean_stone_slab_half.name=Clean Stone Slab
 tile.clean_stone_stairs.name=Clean Stone Stairs
 
 tile.insanity_stone.name=Insanity Stone
+tile.bright_insanity_stone.name=Bright Insanity Stone
 tile.insanity_cobble.name=Insanity Cobble
 tile.insanity_dirt.name=Insanity Dirt
 tile.insanity_grass.name=Insanity Grass

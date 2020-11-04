@@ -36,6 +36,7 @@ public class ModBlocks
 
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
+	public static final Block BRIGHT_INSANITY_STONE = new BrightInsanityStone("bright_insanity_stone", Material.ROCK);
 	public static final Block INSANITY_COBBLE = new InsanityCobble("insanity_cobble", Material.ROCK);
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
