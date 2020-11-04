@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +30,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
 
     private int burnTime;
     private int currentBurnTime;
+    public int storedMana;
 
     @Override
     public int getSizeInventory()
@@ -134,13 +136,14 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
         {
             wasRunning = true;
             burnTime--;
+            storedMana++;
             dirty = true;
         }
         if(world.isRemote) return;
 
         ItemStack stack = inventory.get(0);
 
-        if(!isRunning())
+        if(!isRunning() && storedMana < ConfigHandler.manaGeneratorManaCapacity)
         {
             if(!stack.isEmpty())
             {
@@ -176,6 +179,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         compound.setInteger("burnTime", burnTime);
+        compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
         return super.writeToNBT(compound);
@@ -185,6 +189,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     {
         burnTime = compound.getInteger("burnTime");
         currentBurnTime = getItemBurnTime(inventory.get(0));
+        storedMana = compound.getInteger("storedMana");
         inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventory);
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));

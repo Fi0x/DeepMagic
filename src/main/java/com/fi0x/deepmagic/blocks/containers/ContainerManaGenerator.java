@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 public class ContainerManaGenerator extends Container
 {
     private final TileEntityManaGenerator te;
-    private int burnTime, currentBurnTime;
+    private int burnTime, currentBurnTime, storedMana;
 
     public ContainerManaGenerator(InventoryPlayer player, TileEntityManaGenerator tileEntity)
     {
@@ -35,7 +35,7 @@ public class ContainerManaGenerator extends Container
     }
 
     @Override
-    public void addListener(IContainerListener listener)
+    public void addListener(@Nonnull IContainerListener listener)
     {
         super.addListener(listener);
         listener.sendAllWindowProperties(this, te);
@@ -45,26 +45,27 @@ public class ContainerManaGenerator extends Container
     {
         super.detectAndSendChanges();
 
-        for(int i = 0; i < listeners.size(); i++)
+        for (IContainerListener listener : listeners)
         {
-            IContainerListener listener = listeners.get(i);
-
-            if(burnTime != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
-            if(currentBurnTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
+            if (burnTime != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
+            if (currentBurnTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
+            if (storedMana != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
         }
 
         burnTime = te.getField(0);
         currentBurnTime = te.getField(1);
+        storedMana = te.getField(2);
     }
     @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
     {
         return te.isUsableByPlayer(playerIn);
     }
+    @Nonnull
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)
     {
-        //TODO: implement this method (Harry Talks - Furnace pt4)
+        //TODO: implement this method if problems occur (Harry Talks - Furnace pt4)
         return super.transferStackInSlot(playerIn, index);
     }
 }
