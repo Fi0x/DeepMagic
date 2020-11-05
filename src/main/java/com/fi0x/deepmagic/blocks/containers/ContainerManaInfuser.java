@@ -72,7 +72,7 @@ public class ContainerManaInfuser extends Container
     }
     @Nonnull
     @Override
-    public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index) //TODO: Change values to fit
+    public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
