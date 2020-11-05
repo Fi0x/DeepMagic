@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.newTileEntityManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -16,10 +16,10 @@ import javax.annotation.Nonnull;
 
 public class ContainerManaAltar extends Container
 {
-    private final newTileEntityManaAltar te;
+    private final TileEntityManaAltar te;
     private int storedMana;
 
-    public ContainerManaAltar(InventoryPlayer player, newTileEntityManaAltar tileEntity)
+    public ContainerManaAltar(InventoryPlayer player, TileEntityManaAltar tileEntity)
     {
         te = tileEntity;
 

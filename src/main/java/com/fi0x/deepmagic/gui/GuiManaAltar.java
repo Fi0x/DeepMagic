@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.blocks.containers.ContainerManaAltar;
-import com.fi0x.deepmagic.blocks.tileentity.newTileEntityManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -13,15 +13,22 @@ public class GuiManaAltar extends GuiContainer
 {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_altar.png");
     private final InventoryPlayer player;
-    private final newTileEntityManaAltar te;
+    private final TileEntityManaAltar te;
 
-    public GuiManaAltar(InventoryPlayer player, newTileEntityManaAltar tileentity)
+    public GuiManaAltar(InventoryPlayer player, TileEntityManaAltar tileentity)
     {
         super(new ContainerManaAltar(player, tileentity));
         this.player = player;
         te = tileentity;
     }
 
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
@@ -41,7 +48,7 @@ public class GuiManaAltar extends GuiContainer
     }
     private int getStoredManaScaled(int pixels)
     {
-        int i = te.getField(2);
+        int i = te.getField(0);
         int j = ConfigHandler.manaAltarCapacity;
         if(j != 0 && i != 0) return i * pixels / j;
         return 0;

@@ -72,7 +72,11 @@ public class ManaInfuser extends BlockBase implements ITileEntityProvider
                     int z = compound.getInteger("z");
                     te.setLinkedAltarPos(new BlockPos(x, y, z));
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                } else te.setLinkedAltarPos(null);
+                } else if(compound.hasKey("linked"))
+                {
+                    te.setLinkedAltarPos(null);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Infuser"));
+                }
             }
             else playerIn.openGui(Main.instance, ConfigHandler.guiManaInfuserID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

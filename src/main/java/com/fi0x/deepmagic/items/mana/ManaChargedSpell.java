@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.items.mana;
 
 import com.fi0x.deepmagic.blocks.SpellStone;
-import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
@@ -40,7 +39,7 @@ public class ManaChargedSpell extends Spell implements IMagicItem
         assert compound != null;
 
         BlockPos blockPos = getFocusedBlock(playerIn, 5);
-        if(blockPos != null && (worldIn.getBlockState(blockPos).getBlock() instanceof SpellStone || worldIn.getBlockState(blockPos).getBlock() instanceof ManaAltar)) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        if(blockPos != null && worldIn.getBlockState(blockPos).getBlock() instanceof SpellStone) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;

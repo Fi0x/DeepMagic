@@ -72,7 +72,11 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
                     int z = compound.getInteger("z");
                     te.setLinkedAltarPos(new BlockPos(x, y, z));
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                } else te.setLinkedAltarPos(null);
+                } else if(compound.hasKey("linked"))
+                {
+                    te.setLinkedAltarPos(null);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Generator"));
+                }
             }
             else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

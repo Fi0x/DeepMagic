@@ -3,9 +3,9 @@ package com.fi0x.deepmagic.util.handlers;
 import com.fi0x.deepmagic.blocks.containers.ContainerManaAltar;
 import com.fi0x.deepmagic.blocks.containers.ContainerManaGenerator;
 import com.fi0x.deepmagic.blocks.containers.ContainerManaInfuser;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
-import com.fi0x.deepmagic.blocks.tileentity.newTileEntityManaAltar;
 import com.fi0x.deepmagic.gui.GuiManaAltar;
 import com.fi0x.deepmagic.gui.GuiManaGenerator;
 import com.fi0x.deepmagic.gui.GuiManaInfuser;
@@ -24,7 +24,7 @@ public class GuiHandler implements IGuiHandler
     {
         if(ID == ConfigHandler.guiManaGeneratorID) return new ContainerManaGenerator(player.inventory, (TileEntityManaGenerator) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaInfuserID) return new ContainerManaInfuser(player.inventory, (TileEntityManaInfuser) world.getTileEntity(new BlockPos(x, y, z)));
-        if(ID == ConfigHandler.guiManaAltarID) return new ContainerManaAltar(player.inventory, (newTileEntityManaAltar) world.getTileEntity(new BlockPos(x, y, z)));
+        if(ID == ConfigHandler.guiManaAltarID) return new ContainerManaAltar(player.inventory, (TileEntityManaAltar) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 
@@ -34,7 +34,7 @@ public class GuiHandler implements IGuiHandler
     {
         if(ID == ConfigHandler.guiManaGeneratorID) return new GuiManaGenerator(player.inventory, (TileEntityManaGenerator) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaInfuserID) return new GuiManaInfuser(player.inventory, (TileEntityManaInfuser) world.getTileEntity(new BlockPos(x, y, z)));
-        if(ID == ConfigHandler.guiManaAltarID) return new GuiManaAltar(player.inventory, (newTileEntityManaAltar) world.getTileEntity(new BlockPos(x, y, z)));
+        if(ID == ConfigHandler.guiManaAltarID) return new GuiManaAltar(player.inventory, (TileEntityManaAltar) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 }
