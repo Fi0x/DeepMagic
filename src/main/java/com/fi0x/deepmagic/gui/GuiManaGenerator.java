@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.blocks.containers.ContainerManaGenerator;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -34,5 +35,24 @@ public class GuiManaGenerator extends GuiContainer
         GlStateManager.color(1, 1, 1, 1);
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+        int p = getBurnLeftScaled(14);
+        drawTexturedModalRect(guiLeft + 46,guiTop + 46 - p, 176, 14 - p, 14, p);
+
+        int m = getStoredManaScaled(50);
+        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 14, 16, m);
+    }
+    private int getBurnLeftScaled(int pixels)
+    {
+        int i = te.getField(1);
+        if(i == 0) i = 200;
+        return te.getField(0) * pixels / i;
+    }
+    private int getStoredManaScaled(int pixels)
+    {
+        int i = te.getField(2);
+        int j = ConfigHandler.manaGeneratorManaCapacity;
+        if(j != 0 && i != 0) return i * pixels / j;
+        return 0;
     }
 }

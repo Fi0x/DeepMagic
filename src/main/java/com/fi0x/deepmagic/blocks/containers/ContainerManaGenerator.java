@@ -7,6 +7,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -19,7 +21,7 @@ public class ContainerManaGenerator extends Container
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotManaGenerator(te, 0, 82, 30));
+        addSlotToContainer(new SlotManaGenerator(te, 0, 26, 31));
 
         for(int y = 0; y < 3; y++)
         {
@@ -55,6 +57,12 @@ public class ContainerManaGenerator extends Container
         burnTime = te.getField(0);
         currentBurnTime = te.getField(1);
         storedMana = te.getField(2);
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data)
+    {
+        te.setField(id, data);
     }
     @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn)

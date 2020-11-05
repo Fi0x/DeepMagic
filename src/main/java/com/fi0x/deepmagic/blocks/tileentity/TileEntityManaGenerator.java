@@ -30,7 +30,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
 
     private int burnTime;
     private int currentBurnTime;
-    public int storedMana;
+    private int storedMana;
 
     @Override
     public int getSizeInventory()
@@ -136,7 +136,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
         {
             wasRunning = true;
             burnTime--;
-            storedMana++;
+            if(storedMana < ConfigHandler.manaGeneratorManaCapacity) storedMana++;
             dirty = true;
         }
         if(world.isRemote) return;
