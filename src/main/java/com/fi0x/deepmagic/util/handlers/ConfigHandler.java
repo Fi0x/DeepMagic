@@ -33,6 +33,7 @@ public class ConfigHandler
     public static int entityCyclopesID;
     //Gui IDs
     public static int guiManaGeneratorID;
+    public static int guiManaInfuserID;
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
@@ -92,16 +93,16 @@ public class ConfigHandler
     //Player Visuals
     public static boolean manaOverlayAlwaysVisible;
 
-    //Mana Altar
+    //Mana Capacities
     public static int manaAltarCapacity;
+    public static int manaGeneratorManaCapacity;
+    public static int manaInfuserManaCapacity;
     //Insanity Water
     public static boolean insanityWaterEffect;
     //Demon Stone
     public static int demonSummonCost;
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
-    //Mana Generator
-    public static int manaGeneratorManaCapacity;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -147,7 +148,8 @@ public class ConfigHandler
 
         category = "GUIs";
         ids.addCustomCategoryComment(category, "GUIs");
-
+        guiManaGeneratorID = ids.getInt("Mana Generator GUI ID", category, 84, -1000, 1000, "");
+        guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 85, -1000, 1000, "");
 
         ids.save();
     }
@@ -260,9 +262,11 @@ public class ConfigHandler
         blocks = new Configuration(file);
         String category;
 
-        category = "Mana Altar";
-        blocks.addCustomCategoryComment(category, "Mana Altar");
-        manaAltarCapacity = blocks.getInt("Mana Capacity", category, 1000, 1, 100000, "The Base Capacity of the Mana Altar");
+        category = "Mana Capacity";
+        blocks.addCustomCategoryComment(category, "Mana Capacity");
+        manaAltarCapacity = blocks.getInt("Mana Altar Capacity", category, 10000, 1, 100000, "The Base Capacity of the Mana Altar");
+        manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Generator has");
+        manaInfuserManaCapacity = blocks.getInt("Mana Infuser Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Infuser has");
 
         category = "Insanity Water";
         blocks.addCustomCategoryComment(category, "Insanity Water");
@@ -273,10 +277,6 @@ public class ConfigHandler
         demonSummonCost = blocks.getInt("Demon Summon Costs", category, 100, 0, 10000, "Mana Costs to summon the Demon");
         demonSummonXP = blocks.getInt("Demon Summon XP", category, 100, 0, 10000, "Skill XP gained by summoning the Demon");
         requireDemonStructure = blocks.getBoolean("Require Demon Summoning Structure", category, true, "Require a Structure around the Demon Stone to Summon the Demon");
-
-        category = "Mana Generator";
-        blocks.addCustomCategoryComment(category, "Mana Generator");
-        manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The maximum Capacity for Mana a Mana Generator has");
 
         blocks.save();
     }
