@@ -74,7 +74,7 @@ public class ContainerManaInfuser extends Container
     @Override
     public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)
     {
-        //TODO: implement this method if problems occur (Harry Talks - Furnace pt4)
+        //TODO: implement this method if problems occur (Harry Talks - Furnace pt4) (item transfer with shift?)
         return super.transferStackInSlot(playerIn, index);
     }
 }
