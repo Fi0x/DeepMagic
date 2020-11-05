@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.blocks.containers.ContainerManaGenerator;
+import com.fi0x.deepmagic.blocks.containers.ContainerManaInfuser;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
 import com.fi0x.deepmagic.gui.GuiManaGenerator;
