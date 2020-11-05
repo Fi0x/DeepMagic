@@ -1,0 +1,44 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "DCD",
+        "FTF",
+        "IKI"
+    ],
+    
+    "key":
+    {
+        "D":
+        {
+            "item": "deepmagic:deep_crystal"
+        },
+        "C":
+        {
+            "item": "minecraft:compass"
+        },
+        "F":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        },
+        "T":
+        {
+            "item": "deepmagic:dimensional_crystal"
+        },
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        "K":
+        {
+            "item": "deepmagic:knowledge_segment"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:mana_linker",
+        "count": 1
+    }
+}
