@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -70,6 +71,7 @@ public class ManaLinker extends Item implements IHasModel
 		{
 			assert compound != null;
 			compound.setBoolean("linked", false);
+			playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Cleared memory"));
 			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));

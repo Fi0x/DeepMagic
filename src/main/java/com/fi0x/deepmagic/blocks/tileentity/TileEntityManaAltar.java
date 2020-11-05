@@ -28,6 +28,10 @@ public class TileEntityManaAltar extends TileEntity
     {
         return storedMana;
     }
+    public double getSpaceInAltar()
+    {
+        return ConfigHandler.manaAltarCapacity - storedMana;
+    }
     public boolean addManaToStorage(double amount)
     {
         if(storedMana + amount > ConfigHandler.manaAltarCapacity && storedMana < ConfigHandler.manaAltarCapacity) storedMana = ConfigHandler.manaAltarCapacity;

@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -28,6 +29,8 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
 
+    private BlockPos linkedAltarPos;
+    private TileEntityManaAltar linkedAltar;
     private int burnTime;
     private int currentBurnTime;
     private int storedMana;
@@ -65,10 +68,8 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
         return ItemStackHelper.getAndRemove(inventory, index);
     }
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack)
+    public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
     {
-        ItemStack itemStack = inventory.get(index);
-        boolean flag = !stack.isEmpty() && stack.isItemEqual(itemStack) && ItemStack.areItemStackTagsEqual(stack, itemStack);
         inventory.set(index, stack);
 
         if(stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
@@ -158,6 +159,10 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
             }
         }
         if(isRunning() != wasRunning) ManaGenerator.setState(isRunning(), world, pos);
+        if(storedMana >= 20)
+        {
+            if(sendManaToAltar()) dirty = true;
+        }
         if(dirty) markDirty();
     }
     @Nonnull
@@ -179,8 +184,19 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     }
     @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
+        if(linkedAltarPos != null)
+        {
+            compound.setInteger("altarX", linkedAltarPos.getX());
+            compound.setInteger("altarY", linkedAltarPos.getY());
+            compound.setInteger("altarZ", linkedAltarPos.getZ());
+        } else
+        {
+            if(compound.hasKey("altarX")) compound.removeTag("altarX");
+            if(compound.hasKey("altarY")) compound.removeTag("altarY");
+            if(compound.hasKey("altarZ")) compound.removeTag("altarZ");
+        }
         compound.setInteger("burnTime", burnTime);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
@@ -190,6 +206,14 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
+        if(compound.hasKey("altarX") && compound.hasKey("altarY") && compound.hasKey("altarZ"))
+        {
+            int x = compound.getInteger("altarX");
+            int y = compound.getInteger("altarY");
+            int z = compound.getInteger("altarZ");
+            linkedAltarPos = new BlockPos(x, y, z);
+        }
+
         burnTime = compound.getInteger("burnTime");
         currentBurnTime = getItemBurnTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
@@ -228,5 +252,34 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     public static boolean isItemFuel(ItemStack fuel)
     {
         return getItemBurnTime(fuel) > 0;
+    }
+    public void setLinkedAltarPos(BlockPos blockPos)
+    {
+        linkedAltarPos = blockPos;
+        if(linkedAltarPos == null) linkedAltar = null;
+        else linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
+    }
+    private boolean sendManaToAltar()
+    {
+        if(linkedAltarPos == null) return false;
+
+        if(linkedAltar == null)
+        {
+            linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
+            if(linkedAltar == null)
+            {
+                linkedAltarPos = null;
+                return true;
+            }
+        }
+        int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
+        if(spaceInAltar > storedMana)
+        {
+            if(linkedAltar.addManaToStorage(storedMana)) storedMana = 0;
+        } else
+        {
+            if(linkedAltar.addManaToStorage(spaceInAltar)) storedMana -= spaceInAltar;
+        }
+        return true;
     }
 }

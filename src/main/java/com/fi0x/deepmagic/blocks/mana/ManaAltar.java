@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.blocks.mana;
 import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.items.mana.ManaChargedSpell;
+import com.fi0x.deepmagic.items.mana.ManaLinker;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -33,7 +34,7 @@ public class ManaAltar extends BlockTileEntity<TileEntityManaAltar>
     }
 
     @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
         //TODO: Check for specific structure around
         super.onBlockAdded(worldIn, pos, state);
@@ -42,14 +43,28 @@ public class ManaAltar extends BlockTileEntity<TileEntityManaAltar>
     public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         if(worldIn.isRemote) return false;
+
         ItemStack stack = playerIn.getHeldItem(hand);
         Item item = stack.getItem();
         TileEntityManaAltar tile = getTileEntity(worldIn, pos);
 
-        if(playerIn.getHeldItem(hand).isEmpty()) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana in Altar: " + tile.getStoredMana()));
+        if(stack.isEmpty()) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Mana in Altar: " + tile.getStoredMana())); // TODO: replace with gui
+        else if(item instanceof ManaLinker)
+        {
+            NBTTagCompound compound;
+            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+            compound = stack.getTagCompound();
+            assert compound != null;
+
+            compound.setInteger("x", pos.getX());
+            compound.setInteger("y", pos.getY());
+            compound.setInteger("z", pos.getZ());
+            compound.setBoolean("linked", true);
+            playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Altar Position saved"));
+        }
 
         //TODO: Charge Spell with another block
-        if(item instanceof ManaChargedSpell)
+        else if(item instanceof ManaChargedSpell)
         {
             NBTTagCompound compound;
             if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
@@ -60,11 +75,6 @@ public class ManaAltar extends BlockTileEntity<TileEntityManaAltar>
             compound.setInteger("manaCharge", compound.getInteger("manaCharge") + manaAmount);
             tile.removeManaFromStorage(manaAmount);
             playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Spell charged"));
-        } else
-        {
-            //TODO: Remove
-            if(tile.addManaToStorage(100)) playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "ManaStorage of Altar has been increased to " + tile.getStoredMana()));
-            else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "ManaStorage of Altar seems to be full"));
         }
         return true;
     }

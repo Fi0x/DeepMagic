@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
 import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
+import com.fi0x.deepmagic.blocks.mana.AltarOfKnowledge;
 import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
