@@ -2,6 +2,7 @@ itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
 itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
+container.mana_altar=Mana Altar
 container.mana_generator=Mana Generator
 container.mana_infuser=Mana Infuser
 

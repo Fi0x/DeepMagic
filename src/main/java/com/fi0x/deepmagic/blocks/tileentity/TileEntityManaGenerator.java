@@ -124,7 +124,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public int getFieldCount()
     {
-        return 2;
+        return 3;
     }
     @Override
     public void clear()

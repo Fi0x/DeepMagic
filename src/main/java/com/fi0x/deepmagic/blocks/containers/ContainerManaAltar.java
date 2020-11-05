@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
+import com.fi0x.deepmagic.blocks.tileentity.newTileEntityManaAltar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,17 +14,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaInfuser extends Container
+public class ContainerManaAltar extends Container
 {
-    private final TileEntityManaInfuser te;
-    private int infusionProgress, totalInfusionTime, storedMana;
+    private final newTileEntityManaAltar te;
+    private int storedMana;
 
-    public ContainerManaInfuser(InventoryPlayer player, TileEntityManaInfuser tileEntity)
+    public ContainerManaAltar(InventoryPlayer player, newTileEntityManaAltar tileEntity)
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotManaInfuser(te, 0, 21, 25));
-        addSlotToContainer(new SlotManaInfuserOutput(te, 1, 86, 25));
+        addSlotToContainer(new SlotManaAltar(te, 0, 80, 30));
 
         for(int y = 0; y < 3; y++)
         {
@@ -52,14 +51,10 @@ public class ContainerManaInfuser extends Container
 
         for (IContainerListener listener : listeners)
         {
-            if (infusionProgress != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
-            if (totalInfusionTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
-            if (storedMana != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
+            if (storedMana != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
         }
 
-        infusionProgress = te.getField(0);
-        totalInfusionTime = te.getField(1);
-        storedMana = te.getField(2);
+        storedMana = te.getField(0);
     }
     @Override
     @SideOnly(Side.CLIENT)

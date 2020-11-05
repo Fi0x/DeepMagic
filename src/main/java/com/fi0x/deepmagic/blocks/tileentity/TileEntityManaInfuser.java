@@ -134,14 +134,12 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     @Override
     public void update()
     {
-        boolean wasRunning = false;
+        boolean wasRunning = isRunning();
         boolean dirty = false;
         if(isRunning())
         {
-            wasRunning = true;
             if(storedMana > 0)
             {
-                storedMana--;
                 infusionProgress--;
                 dirty = true;
             }
@@ -149,20 +147,28 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         if(world.isRemote) return;
 
         ItemStack stack = inventory.get(0);
-
-        if(!isRunning() && storedMana > 0) //TODO: change to work (Harry Talks - Furnace pt2)
+        if (storedMana > 0 && !stack.isEmpty())
         {
-            if(!stack.isEmpty())
+            if (isItemInfusable(stack))
             {
-                infusionProgress = getItemInfusionTime(stack);
-                totalInsusionTime = infusionProgress;
-                stack.shrink(1);
-                inventory.set(0, stack);
-                dirty = true;
+                infusionProgress--;
+
+                if (infusionProgress == 0)
+                {
+                    infuseItem();
+                    totalInsusionTime = getItemInfusionTime(stack);
+                    infusionProgress = totalInsusionTime;
+                    dirty = true;
+                }
             }
+            else infusionProgress = 0;
         }
 
-        if(isRunning() != wasRunning) ManaGenerator.setState(isRunning(), world, pos);
+        if(isRunning() != wasRunning)
+        {
+            ManaGenerator.setState(isRunning(), world, pos);
+            dirty = true;
+        }
         if(ConfigHandler.manaInfuserManaCapacity - storedMana >= 10)
         {
             if(getManaFromAltar()) dirty = true;
@@ -243,13 +249,37 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         {
             Block block = Block.getBlockFromItem(item);
             if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 100;
-        }
-        if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
+        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
         return 0;
     }
     public static boolean isItemInfusable(ItemStack item)
     {
         return getItemInfusionTime(item) > 0;
+    }
+    public static ItemStack getInfusionResult(ItemStack input)
+    {
+        Item item = input.getItem();
+        ItemStack result = ItemStack.EMPTY;
+        if(item instanceof ItemBlock)
+        {
+            Block block = Block.getBlockFromItem(item);
+            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) result = new ItemStack(ModBlocks.DEMON_CRYSTAL_BLOCK, 1);
+        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) result = new ItemStack(ModItems.MAGIC_POWDER, 1);
+        return result;
+    }
+    private void infuseItem()
+    {
+        ItemStack input = inventory.get(0);
+        if(isItemInfusable(input))
+        {
+            ItemStack result = getInfusionResult(input);
+            ItemStack output = inventory.get(1);
+
+            if(output.isEmpty()) inventory.set(1, result);
+            else if(output.getItem() == result.getItem()) output.grow(result.getCount());
+
+            input.shrink(1);
+        }
     }
     public void setLinkedAltarPos(BlockPos blockPos)
     {
