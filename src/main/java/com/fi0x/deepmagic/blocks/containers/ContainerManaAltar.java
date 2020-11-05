@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,16 +12,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaGenerator extends Container
+public class ContainerManaAltar extends Container
 {
-    private final TileEntityManaGenerator te;
-    private int burnTime, currentBurnTime, storedMana;
+    private final TileEntityManaAltar te;
+    private int storedMana;
 
-    public ContainerManaGenerator(InventoryPlayer player, TileEntityManaGenerator tileEntity)
+    public ContainerManaAltar(InventoryPlayer player, TileEntityManaAltar tileEntity)
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotManaGenerator(te, 0, 26, 31));
+        addSlotToContainer(new SlotManaAltar(te, 0, 80, 30));
 
         for(int y = 0; y < 3; y++)
         {
@@ -49,14 +49,10 @@ public class ContainerManaGenerator extends Container
 
         for (IContainerListener listener : listeners)
         {
-            if (burnTime != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
-            if (currentBurnTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
-            if (storedMana != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
+            if (storedMana != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
         }
 
-        burnTime = te.getField(0);
-        currentBurnTime = te.getField(1);
-        storedMana = te.getField(2);
+        storedMana = te.getField(0);
     }
     @Override
     @SideOnly(Side.CLIENT)
@@ -87,7 +83,7 @@ public class ContainerManaGenerator extends Container
                 slot.onSlotChange(itemstack1, itemstack);
             } else
             {
-                if (TileEntityManaGenerator.isItemFuel(itemstack1))
+                if (TileEntityManaAltar.isItemChargeable(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
                 } else if (index < 28)
@@ -95,11 +91,11 @@ public class ContainerManaGenerator extends Container
                     if (!this.mergeItemStack(itemstack1, 28, 37, false)) return ItemStack.EMPTY;
                 } else if (index < 37 && !this.mergeItemStack(itemstack1, 1, 28, false)) return ItemStack.EMPTY;
             }
-
             if (itemstack1.isEmpty()) slot.putStack(ItemStack.EMPTY);
             else slot.onSlotChanged();
 
             if (itemstack1.getCount() == itemstack.getCount()) return ItemStack.EMPTY;
+
             slot.onTake(playerIn, itemstack1);
         }
 

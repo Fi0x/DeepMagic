@@ -1,11 +1,11 @@
 {
   "forge_marker": 1,
-   "parent": "block/cube",
+   "parent": "block/orientable",
    "textures": {
        "particle": "deepmagic:blocks/mana_altar_side",
        "up": "deepmagic:blocks/mana_altar_top",
        "down": "deepmagic:blocks/mana_altar_bottom",
-       "north": "deepmagic:blocks/mana_altar_side",
+       "north": "deepmagic:blocks/mana_altar_front",
        "east": "deepmagic:blocks/mana_altar_side",
        "south": "deepmagic:blocks/mana_altar_side",
        "west": "deepmagic:blocks/mana_altar_side"

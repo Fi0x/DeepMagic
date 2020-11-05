@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
-import com.fi0x.deepmagic.blocks.containers.ContainerManaGenerator;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.containers.ContainerManaInfuser;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaGenerator extends GuiContainer
+public class GuiManaInfuser extends GuiContainer
 {
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_infuser.png");
     private final InventoryPlayer player;
-    private final TileEntityManaGenerator te;
+    private final TileEntityManaInfuser te;
 
-    public GuiManaGenerator(InventoryPlayer player, TileEntityManaGenerator tileentity)
+    public GuiManaInfuser(InventoryPlayer player, TileEntityManaInfuser tileentity)
     {
-        super(new ContainerManaGenerator(player, tileentity));
+        super(new ContainerManaInfuser(player, tileentity));
         this.player = player;
         te = tileentity;
     }
@@ -43,13 +43,13 @@ public class GuiManaGenerator extends GuiContainer
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getBurnLeftScaled(14);
-        drawTexturedModalRect(guiLeft + 46,guiTop + 46 - p, 176, 14 - p, 14, p);
+        int p = getProgressLeftScaled(22);
+        drawTexturedModalRect(guiLeft + 47,guiTop + 25, 176, 50, p, 16);
 
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 14, 16, m);
+        drawTexturedModalRect(guiLeft + 141, guiTop + 66 - m, 176, 0, 16, m);
     }
-    private int getBurnLeftScaled(int pixels)
+    private int getProgressLeftScaled(int pixels)
     {
         int i = te.getField(1);
         if(i == 0) i = 200;

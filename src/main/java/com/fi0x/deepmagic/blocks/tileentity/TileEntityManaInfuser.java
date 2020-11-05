@@ -1,12 +1,12 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
+import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
@@ -20,19 +20,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGenerator extends TileEntity implements IInventory, ITickable
+public class TileEntityManaInfuser extends TileEntity implements IInventory, ITickable
 {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
     private String customName;
 
     private BlockPos linkedAltarPos;
     private TileEntityManaAltar linkedAltar;
-    private int burnTime;
-    private int currentBurnTime;
+    private int infusionProgress;
+    private int totalInsusionTime;
     private int storedMana;
 
     @Override
@@ -95,15 +94,16 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return isItemFuel(stack);
+        if(index == 1) return false;
+        return isItemInfusable(stack);
     }
     @Override
     public int getField(int id)
     {
         switch (id)
         {
-            case 0: return burnTime;
-            case 1: return currentBurnTime;
+            case 0: return infusionProgress;
+            case 1: return totalInsusionTime;
             case 2: return storedMana;
         }
         return 0;
@@ -113,9 +113,9 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     {
         switch (id)
         {
-            case 0: burnTime = value;
+            case 0: infusionProgress = value;
             break;
-            case 1: currentBurnTime = value;
+            case 1: totalInsusionTime = value;
             break;
             case 2: storedMana = value;
             break;
@@ -134,34 +134,44 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public void update()
     {
-        boolean wasRunning = false;
+        boolean wasRunning = isRunning();
         boolean dirty = false;
         if(isRunning())
         {
-            wasRunning = true;
-            burnTime--;
-            if(storedMana < ConfigHandler.manaGeneratorManaCapacity) storedMana++;
-            dirty = true;
+            if(storedMana > 0)
+            {
+                infusionProgress--;
+                dirty = true;
+            }
         }
         if(world.isRemote) return;
 
         ItemStack stack = inventory.get(0);
-
-        if(!isRunning() && storedMana < ConfigHandler.manaGeneratorManaCapacity)
+        if (storedMana > 0 && !stack.isEmpty())
         {
-            if(!stack.isEmpty())
+            if (isItemInfusable(stack))
             {
-                burnTime = getItemBurnTime(stack);
-                currentBurnTime = burnTime;
-                stack.shrink(1);
-                inventory.set(0, stack);
-                dirty = true;
+                infusionProgress--;
+
+                if (infusionProgress == 0)
+                {
+                    infuseItem();
+                    totalInsusionTime = getItemInfusionTime(stack);
+                    infusionProgress = totalInsusionTime;
+                    dirty = true;
+                }
             }
+            else infusionProgress = 0;
         }
-        if(isRunning() != wasRunning) ManaGenerator.setState(isRunning(), world, pos);
-        if(storedMana >= 20)
+
+        if(isRunning() != wasRunning)
         {
-            if(sendManaToAltar()) dirty = true;
+            ManaGenerator.setState(isRunning(), world, pos);
+            dirty = true;
+        }
+        if(ConfigHandler.manaInfuserManaCapacity - storedMana >= 10)
+        {
+            if(getManaFromAltar()) dirty = true;
         }
         if(dirty) markDirty();
     }
@@ -169,7 +179,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public String getName()
     {
-        return hasCustomName() ? customName : "container.mana_generator";
+        return hasCustomName() ? customName : "container.mana_infuser";
     }
     @Override
     public boolean hasCustomName()
@@ -197,7 +207,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
             if(compound.hasKey("altarY")) compound.removeTag("altarY");
             if(compound.hasKey("altarZ")) compound.removeTag("altarZ");
         }
-        compound.setInteger("burnTime", burnTime);
+        compound.setInteger("infusionProgress", infusionProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
@@ -214,8 +224,8 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
             linkedAltarPos = new BlockPos(x, y, z);
         }
 
-        burnTime = compound.getInteger("burnTime");
-        currentBurnTime = getItemBurnTime(inventory.get(0));
+        infusionProgress = compound.getInteger("infusionProgress");
+        totalInsusionTime = getItemInfusionTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
         inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventory);
@@ -228,30 +238,48 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     }
     public boolean isRunning()
     {
-        return burnTime > 0;
+        return infusionProgress > 0;
     }
-    public static int getItemBurnTime(ItemStack fuel)
+    public static int getItemInfusionTime(ItemStack infusionStack)
     {
-        if(fuel.isEmpty()) return 0;
+        if(infusionStack.isEmpty()) return 0;
 
-        Item item = fuel.getItem();
+        Item item = infusionStack.getItem();
         if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
         {
             Block block = Block.getBlockFromItem(item);
-            if(block == Blocks.WOODEN_SLAB) return 150;
-            if(block.getDefaultState().getMaterial() == Material.WOOD) return 300;
-            if(block == Blocks.COAL_BLOCK) return 16000;
-        }
-        if(item == Items.STICK) return 100;
-        if(item == Items.COAL) return 1600;
-        if(item == Items.LAVA_BUCKET) return 20000;
-        if(item == Item.getItemFromBlock(Blocks.SAPLING)) return 100;
-        if(item == Items.BLAZE_ROD) return 2400;
-        return ForgeEventFactory.getItemBurnTime(fuel);
+            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 100;
+        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
+        return 0;
     }
-    public static boolean isItemFuel(ItemStack fuel)
+    public static boolean isItemInfusable(ItemStack item)
     {
-        return getItemBurnTime(fuel) > 0;
+        return getItemInfusionTime(item) > 0;
+    }
+    public static ItemStack getInfusionResult(ItemStack input)
+    {
+        Item item = input.getItem();
+        ItemStack result = ItemStack.EMPTY;
+        if(item instanceof ItemBlock)
+        {
+            Block block = Block.getBlockFromItem(item);
+            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) result = new ItemStack(ModBlocks.DEMON_CRYSTAL_BLOCK, 1);
+        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) result = new ItemStack(ModItems.MAGIC_POWDER, 1);
+        return result;
+    }
+    private void infuseItem()
+    {
+        ItemStack input = inventory.get(0);
+        if(isItemInfusable(input))
+        {
+            ItemStack result = getInfusionResult(input);
+            ItemStack output = inventory.get(1);
+
+            if(output.isEmpty()) inventory.set(1, result);
+            else if(output.getItem() == result.getItem()) output.grow(result.getCount());
+
+            input.shrink(1);
+        }
     }
     public void setLinkedAltarPos(BlockPos blockPos)
     {
@@ -259,7 +287,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
         if(linkedAltarPos == null) linkedAltar = null;
         else linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
     }
-    private boolean sendManaToAltar()
+    private boolean getManaFromAltar()
     {
         if(linkedAltarPos == null) return false;
 
@@ -272,13 +300,9 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
                 return true;
             }
         }
-        int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
-        if(spaceInAltar > storedMana)
+        if(linkedAltar.getStoredMana() > 10)
         {
-            if(linkedAltar.addManaToStorage(storedMana)) storedMana = 0;
-        } else
-        {
-            if(linkedAltar.addManaToStorage(spaceInAltar)) storedMana -= spaceInAltar;
+            if(linkedAltar.removeManaFromStorage(10)) storedMana += 10;
         }
         return true;
     }

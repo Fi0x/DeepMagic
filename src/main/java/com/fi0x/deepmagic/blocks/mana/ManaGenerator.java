@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -18,9 +19,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -48,7 +52,33 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     {
         if(!worldIn.isRemote)
         {
-            playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            ItemStack stack = playerIn.getHeldItem(hand);
+            Item item = stack.getItem();
+
+            if(item instanceof ManaLinker)
+            {
+                NBTTagCompound compound;
+                if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+                compound = stack.getTagCompound();
+                assert compound != null;
+
+                TileEntityManaGenerator te = (TileEntityManaGenerator) worldIn.getTileEntity(pos);
+                assert te != null;
+
+                if(compound.hasKey("linked") && compound.getBoolean("linked"))
+                {
+                    int x = compound.getInteger("x");
+                    int y = compound.getInteger("y");
+                    int z = compound.getInteger("z");
+                    te.setLinkedAltarPos(new BlockPos(x, y, z));
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                } else if(compound.hasKey("linked"))
+                {
+                    te.setLinkedAltarPos(null);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Generator"));
+                }
+            }
+            else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

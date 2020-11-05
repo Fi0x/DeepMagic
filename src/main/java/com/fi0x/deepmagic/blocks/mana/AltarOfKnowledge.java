@@ -1,6 +1,7 @@
-package com.fi0x.deepmagic.blocks;
+package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.Main;
+import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.network.PacketGetSkill;

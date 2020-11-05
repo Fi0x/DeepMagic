@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
-import com.fi0x.deepmagic.blocks.containers.ContainerManaGenerator;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.containers.ContainerManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaGenerator extends GuiContainer
+public class GuiManaAltar extends GuiContainer
 {
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_altar.png");
     private final InventoryPlayer player;
-    private final TileEntityManaGenerator te;
+    private final TileEntityManaAltar te;
 
-    public GuiManaGenerator(InventoryPlayer player, TileEntityManaGenerator tileentity)
+    public GuiManaAltar(InventoryPlayer player, TileEntityManaAltar tileentity)
     {
-        super(new ContainerManaGenerator(player, tileentity));
+        super(new ContainerManaAltar(player, tileentity));
         this.player = player;
         te = tileentity;
     }
@@ -43,22 +43,13 @@ public class GuiManaGenerator extends GuiContainer
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getBurnLeftScaled(14);
-        drawTexturedModalRect(guiLeft + 46,guiTop + 46 - p, 176, 14 - p, 14, p);
-
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 14, 16, m);
-    }
-    private int getBurnLeftScaled(int pixels)
-    {
-        int i = te.getField(1);
-        if(i == 0) i = 200;
-        return te.getField(0) * pixels / i;
+        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 0, 16, m);
     }
     private int getStoredManaScaled(int pixels)
     {
-        int i = te.getField(2);
-        int j = ConfigHandler.manaGeneratorManaCapacity;
+        int i = te.getField(0);
+        int j = ConfigHandler.manaAltarCapacity;
         if(j != 0 && i != 0) return i * pixels / j;
         return 0;
     }

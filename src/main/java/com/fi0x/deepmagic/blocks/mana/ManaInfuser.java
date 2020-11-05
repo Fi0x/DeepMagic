@@ -2,7 +2,7 @@ package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.BlockBase;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -10,6 +10,7 @@ import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -30,19 +31,20 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ManaAltar extends BlockBase implements ITileEntityProvider
+public class ManaInfuser extends BlockBase implements ITileEntityProvider
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyBool RUNNING = PropertyBool.create("running");
 
-    public ManaAltar(String name, Material material)
+    public ManaInfuser(String name, Material material)
     {
         super(name, material);
         setSoundType(SoundType.STONE);
         setHardness(5.0F);
         setResistance(5.0F);
-        setHarvestLevel("pickaxe", 2);
+        setHarvestLevel("pickaxe", 0);
 
-        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(RUNNING, false));
     }
 
     @Override
@@ -60,12 +62,23 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
                 compound = stack.getTagCompound();
                 assert compound != null;
 
-                compound.setInteger("x", pos.getX());
-                compound.setInteger("y", pos.getY());
-                compound.setInteger("z", pos.getZ());
-                compound.setBoolean("linked", true);
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Altar Position saved"));
-            } else playerIn.openGui(Main.instance, ConfigHandler.guiManaAltarID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                TileEntityManaInfuser te = (TileEntityManaInfuser) worldIn.getTileEntity(pos);
+                assert te != null;
+
+                if(compound.hasKey("linked") && compound.getBoolean("linked"))
+                {
+                    int x = compound.getInteger("x");
+                    int y = compound.getInteger("y");
+                    int z = compound.getInteger("z");
+                    te.setLinkedAltarPos(new BlockPos(x, y, z));
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                } else if(compound.hasKey("linked"))
+                {
+                    te.setLinkedAltarPos(null);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Infuser"));
+                }
+            }
+            else playerIn.openGui(Main.instance, ConfigHandler.guiManaInfuserID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -74,12 +87,12 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
-        return Item.getItemFromBlock(ModBlocks.MANA_ALTAR);
+        return Item.getItemFromBlock(ModBlocks.MANA_INFUSER);
     }
     @Override
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
-        TileEntityManaAltar te = (TileEntityManaAltar) worldIn.getTileEntity(pos);
+        TileEntityManaInfuser te = (TileEntityManaInfuser) worldIn.getTileEntity(pos);
         assert te != null;
         InventoryHelper.dropInventoryItems(worldIn, pos, te);
         super.breakBlock(worldIn, pos, state);
@@ -88,7 +101,7 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
     @Override
     public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
-        return new ItemStack(ModBlocks.MANA_ALTAR);
+        return new ItemStack(ModBlocks.MANA_INFUSER);
     }
     @Override
     public void onBlockAdded(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
@@ -141,13 +154,13 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, FACING);
+        return new BlockStateContainer(this, RUNNING, FACING);
     }
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
     {
-        return new TileEntityManaAltar();
+        return new TileEntityManaInfuser();
     }
 
     @Nonnull
@@ -163,5 +176,19 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(FACING).getIndex();
+    }
+
+    public static void setState(boolean active, World world, BlockPos pos)
+    {
+        IBlockState state = world.getBlockState(pos);
+        TileEntity te = world.getTileEntity(pos);
+        if(active) world.setBlockState(pos, ModBlocks.MANA_INFUSER.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RUNNING, true), 3);
+        else world.setBlockState(pos, ModBlocks.MANA_INFUSER.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RUNNING, false), 3);
+
+        if(te != null)
+        {
+            te.validate();
+            world.setTileEntity(pos, te);
+        }
     }
 }

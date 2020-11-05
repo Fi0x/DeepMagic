@@ -2,12 +2,15 @@ itemGroup.deepmagic_blocks_tab=Deep Magic Blocks
 itemGroup.deepmagic_items_tab=Deep Magic Items
 itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
+container.mana_altar=Mana Altar
 container.mana_generator=Mana Generator
+container.mana_infuser=Mana Infuser
 
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
 item.demon_crystal.name=Demon Crystal
 item.skillpoint.name=Skillpoint
+item.mana_linker.name=Mana Linker
 
 tile.deep_crystal_ore.name=Deep Crystal Ore
 tile.deep_crystal_nether_ore.name=Deep Crystal Ore
@@ -50,6 +53,7 @@ tile.time_controller.name=Time Controller
 
 tile.mana_altar.name=Mana Altar
 tile.mana_generator.name=Mana Generator
+tile.mana_infuser.name=Mana Infuser
 
 fluid.insanity_water=Insanity Water
 
