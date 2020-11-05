@@ -103,6 +103,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
         {
             case 0: return burnTime;
             case 1: return currentBurnTime;
+            case 2: return storedMana;
         }
         return 0;
     }
@@ -114,6 +115,8 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
             case 0: burnTime = value;
             break;
             case 1: currentBurnTime = value;
+            break;
+            case 2: storedMana = value;
             break;
         }
     }

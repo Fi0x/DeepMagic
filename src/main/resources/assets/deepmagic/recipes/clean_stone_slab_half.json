@@ -5,7 +5,8 @@
     [
 
         {
-            "item": "minecraft:stone_slab"
+            "item": "minecraft:stone_slab",
+            "data": 0
         }
     ],
 

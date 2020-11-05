@@ -26,8 +26,8 @@ public class GuiManaGenerator extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         String tileName = te.getDisplayName().getUnformattedText();
-        fontRenderer.drawString(tileName, xSize / 2 - fontRenderer.getStringWidth(tileName) / 2, 10, 4210752);
-        fontRenderer.drawString(player.getDisplayName().getUnformattedText(), 122, ySize - 94, 4210752);
+        fontRenderer.drawString(tileName, xSize / 2 - fontRenderer.getStringWidth(tileName) / 2, 6, 4210752);
+        fontRenderer.drawString(player.getDisplayName().getUnformattedText(), 7, ySize - 94, 4210752);
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)

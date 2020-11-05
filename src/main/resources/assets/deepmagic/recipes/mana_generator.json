@@ -28,7 +28,8 @@
         },
         "D":
         {
-            "item": "minecraft:furnace"
+            "item": "minecraft:furnace",
+            "data": 0
         }
     },
     
