@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SIS",
+        "CMC",
+        "SDS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "deepmagic:insanity_stone"
+        },
+        "I":
+        {
+        	"item": "deepmagic:mana_interface"
+        },
+        "C":
+        {
+            "item": "deepmagic:deep_crystal_block"
+        },
+        "M":
+        {
+            "item": "deepmagic:mana_segment"
+        },
+        "D":
+        {
+            "item": "minecraft:crafting_table"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:mana_infuser",
+        "count": 1
+    }
+}

@@ -51,6 +51,7 @@ tile.time_controller.name=Time Controller
 
 tile.mana_altar.name=Mana Altar
 tile.mana_generator.name=Mana Generator
+tile.mana_infuser.name=Mana Infuser
 
 fluid.insanity_water=Insanity Water
 

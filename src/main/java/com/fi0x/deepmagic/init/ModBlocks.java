@@ -9,6 +9,7 @@ import com.fi0x.deepmagic.blocks.insanity.*;
 import com.fi0x.deepmagic.blocks.mana.AltarOfKnowledge;
 import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
+import com.fi0x.deepmagic.blocks.mana.ManaInfuser;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
 import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
@@ -76,4 +77,5 @@ public class ModBlocks
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
 	public static final ManaGenerator MANA_GENERATOR = new ManaGenerator("mana_generator", Material.ROCK);
+	public static final ManaInfuser MANA_INFUSER = new ManaInfuser("mana_infuser", Material.ROCK);
 }

@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+   "parent": "block/orientable",
+   "textures": {
+       "particle": "deepmagic:blocks/mana_infuser_side",
+       "up": "deepmagic:blocks/mana_infuser_top",
+       "down": "deepmagic:blocks/mana_infuser_bottom",
+       "north": "deepmagic:blocks/mana_infuser_front_off",
+       "east": "deepmagic:blocks/mana_infuser_side",
+       "south": "deepmagic:blocks/mana_infuser_side",
+       "west": "deepmagic:blocks/mana_infuser_side"
+   }
+}
