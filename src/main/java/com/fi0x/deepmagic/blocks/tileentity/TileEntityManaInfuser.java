@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
+import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaInfuser;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
@@ -294,16 +295,21 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     private boolean getManaFromAltar()
     {
         if(linkedAltarPos == null) return false;
-
+        if(!(world.getBlockState(linkedAltarPos).getBlock() instanceof ManaAltar))
+        {
+            linkedAltarPos = null;
+            return false;
+        }
         if(linkedAltar == null)
         {
             linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
             if(linkedAltar == null)
             {
                 linkedAltarPos = null;
-                return false;
+                return true;
             }
         }
+
         if(linkedAltar.getStoredMana() > 10)
         {
             if(linkedAltar.removeManaFromStorage(10)) storedMana += 10;

@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
+import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
@@ -258,7 +259,11 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     private boolean sendManaToAltar()
     {
         if(linkedAltarPos == null) return false;
-
+        if(!(world.getBlockState(linkedAltarPos).getBlock() instanceof ManaAltar))
+        {
+            linkedAltarPos = null;
+            return false;
+        }
         if(linkedAltar == null)
         {
             linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
@@ -268,6 +273,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
                 return true;
             }
         }
+
         int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
         if(spaceInAltar > storedMana)
         {
