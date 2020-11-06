@@ -10,7 +10,7 @@ import java.util.Map;
 public class ManaInfuserRecipes
 {
     private static final ManaInfuserRecipes INSTANCE = new ManaInfuserRecipes();
-    private final Map<ItemStack, ItemStack> infusionList = Maps.<ItemStack, ItemStack>newHashMap();
+    private final Map<ItemStack, ItemStack> infusionList = Maps.newHashMap();
 
     public static ManaInfuserRecipes instance()
     {
@@ -42,9 +42,5 @@ public class ManaInfuserRecipes
     private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
     {
         return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
-    }
-    public Map<ItemStack, ItemStack> getInfusionList()
-    {
-        return infusionList;
     }
 }

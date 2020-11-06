@@ -132,7 +132,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         inventory.clear();
     }
     @Override
-    public void update() //TODO: Remove mana; reset progress if item is removed
+    public void update()
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
@@ -140,10 +140,19 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         if(!world.isRemote)
         {
             ItemStack stack = inventory.get(0);
-            if (storedMana > 0 && !stack.isEmpty())
+            if(stack.isEmpty())
+            {
+                if(totalInfusionTime > 0)
+                {
+                    infusionProgress = 0;
+                    totalInfusionTime = 0;
+                    dirty = true;
+                }
+            } else if (storedMana > 0)
             {
                 if(canInfuse())
                 {
+                    storedMana--;
                     infusionProgress++;
                     dirty = true;
                     if(totalInfusionTime == 0) totalInfusionTime = getItemInfusionTime(stack);
@@ -253,7 +262,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
         {
             Block block = Block.getBlockFromItem(item);
-            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 100;
+            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 500;
         } else if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
 
         return 0;
