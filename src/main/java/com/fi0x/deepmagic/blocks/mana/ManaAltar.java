@@ -34,7 +34,7 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public ManaAltar(String name, Material material)
+    public ManaAltar(String name, Material material) //TODO: Remove TE when block gets destroyed
     {
         super(name, material);
         setSoundType(SoundType.STONE);

@@ -11,7 +11,6 @@ public class ManaInfuserRecipes
 {
     private static final ManaInfuserRecipes INSTANCE = new ManaInfuserRecipes();
     private final Map<ItemStack, ItemStack> infusionList = Maps.<ItemStack, ItemStack>newHashMap();
-    private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
 
     public static ManaInfuserRecipes instance()
     {
@@ -19,24 +18,25 @@ public class ManaInfuserRecipes
     }
     private ManaInfuserRecipes()
     {
-        addManaInfuserRecipe(new ItemStack(ModItems.DEEP_CRYSTAL_POWDER), new ItemStack(ModItems.MAGIC_POWDER), 1);
-        addManaInfuserRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_BLOCK), new ItemStack(ModBlocks.DEMON_CRYSTAL_BLOCK), 1);
+        addManaInfuserRecipe(new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 1), new ItemStack(ModItems.MAGIC_POWDER, 1));
+        addManaInfuserRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_BLOCK, 1), new ItemStack(ModBlocks.DEMON_CRYSTAL_BLOCK, 1));
     }
 
-    public void addManaInfuserRecipe(ItemStack input, ItemStack result, float xp)
+    private void addManaInfuserRecipe(ItemStack input, ItemStack result)
     {
         if(getInfuserResult(input) != ItemStack.EMPTY) return;
         infusionList.put(input, result);
-        experienceList.put(result, xp);
     }
 
     public ItemStack getInfuserResult(ItemStack input)
     {
         for (Map.Entry<ItemStack, ItemStack> entry : infusionList.entrySet())
         {
-            if (this.compareItemStacks(input, entry.getKey())) return entry.getValue();
+            if (this.compareItemStacks(input, entry.getKey()))
+            {
+                return new ItemStack(entry.getValue().getItem(), entry.getValue().getCount());
+            }
         }
-
         return ItemStack.EMPTY;
     }
     private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
@@ -46,20 +46,5 @@ public class ManaInfuserRecipes
     public Map<ItemStack, ItemStack> getInfusionList()
     {
         return infusionList;
-    }
-    public float getInfusionExperience(ItemStack stack)
-    {
-        float ret = stack.getItem().getSmeltingExperience(stack);
-        if (ret != -1) return ret;
-
-        for (Map.Entry<ItemStack, Float> entry : this.experienceList.entrySet())
-        {
-            if (this.compareItemStacks(stack, entry.getKey()))
-            {
-                return entry.getValue();
-            }
-        }
-
-        return 0.0F;
     }
 }
