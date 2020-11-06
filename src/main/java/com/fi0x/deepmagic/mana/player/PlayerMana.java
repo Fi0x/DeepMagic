@@ -16,13 +16,12 @@ public class PlayerMana
 	private int skillpoints = 1;
 
 	//Skills
-	private double manaRegenRate = 0;
+	private double manaRegenRate = 0;//TODO adjust function
 	private double manaEfficiency = 0;
 	public int maxManaMultiplier = 0;
 	public int addedHP = 0;
-	public int hpRegeneration = 0;
+	public int hpRegeneration = 0;//TODO adjust function
 	private int spellTier = 1;
-	public int spellCastSkill = 1;
 	
 	public PlayerMana() {}
 	
@@ -154,7 +153,6 @@ public class PlayerMana
 		addedHP = source.addedHP;
 		hpRegeneration = source.hpRegeneration;
 		spellTier = source.spellTier;
-		spellCastSkill = source.spellCastSkill;
 	}
 	public void saveNBTData(NBTTagCompound compound)
 	{
@@ -167,7 +165,6 @@ public class PlayerMana
 		compound.setInteger("addedHP", addedHP);
 		compound.setInteger("hpRegeneration", hpRegeneration);
 		compound.setInteger("spellTier", spellTier);
-		compound.setInteger("spellCastSkill", spellCastSkill);
 	}
 	public void loadNBTData(NBTTagCompound compound)
 	{
@@ -180,6 +177,5 @@ public class PlayerMana
 		addedHP = compound.getInteger("addedHP");
 		hpRegeneration = compound.getInteger("hpRegeneration");
 		spellTier = compound.getInteger("spellTier");
-		spellCastSkill = compound.getInteger("spellCastSkill");
 	}
 }

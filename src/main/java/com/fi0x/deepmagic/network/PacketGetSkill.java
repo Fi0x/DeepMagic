@@ -32,7 +32,7 @@ public class PacketGetSkill implements IMessage
     {
         messageValid = false;
     }
-    public PacketGetSkill(String playerName, double maxMana, double skillXP, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier, int spellCastSkill)
+    public PacketGetSkill(String playerName, double maxMana, double skillXP, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier)
     {
         this.playerName = playerName;
         this.maxMana = maxMana;
@@ -104,7 +104,7 @@ public class PacketGetSkill implements IMessage
             {
                 PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(playerMana.maxManaMultiplier, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill), ctx.getServerHandler().player);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(playerMana.maxManaMultiplier, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()), ctx.getServerHandler().player);
             }
         }
     }

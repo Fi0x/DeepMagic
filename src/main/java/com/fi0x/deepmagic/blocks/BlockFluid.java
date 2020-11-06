@@ -39,7 +39,7 @@ public class BlockFluid extends BlockFluidClassic
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollidedWithBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Entity entityIn)
     {
         if(ConfigHandler.insanityWaterEffect && entityIn instanceof EntityLivingBase)
         {

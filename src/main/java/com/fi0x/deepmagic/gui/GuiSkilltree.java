@@ -38,7 +38,6 @@ public class GuiSkilltree extends GuiScreen
     private GuiButton buttonAddMaxHP;
     private GuiButton buttonAddHPRegen;
     private GuiButton buttonAddSpellTier;
-    private GuiButton buttonAddSpellCastSkill;
 
     private GuiTextField txtSkillPoints;
     private GuiTextField txtMaxMana;
@@ -47,7 +46,6 @@ public class GuiSkilltree extends GuiScreen
     private GuiTextField txtMaxHP;
     private GuiTextField txtHealthRegen;
     private GuiTextField txtSpellTier;
-    private GuiTextField txtCastSkill;
 
     private int valueSkillPoint;
     private double valueMaxMana;
@@ -56,7 +54,6 @@ public class GuiSkilltree extends GuiScreen
     private int valueMaxHP;
     private int valueHPRegen;
     private int valueSpellTier;
-    private int valueCastingSkill;
 
     public GuiSkilltree(EntityPlayer player)
     {
@@ -89,8 +86,6 @@ public class GuiSkilltree extends GuiScreen
         buttonList.add(buttonAddHPRegen);
         buttonAddSpellTier = new GuiButton(nextID(), guiX + 200, guiY + 105, 20, 20, I18n.format("+"));
         buttonList.add(buttonAddSpellTier);
-        buttonAddSpellCastSkill = new GuiButton(nextID(), guiX + 200, guiY + 125, 20, 20, I18n.format("+"));
-        buttonList.add(buttonAddSpellCastSkill);
 
         updateScreen();
 
@@ -128,7 +123,6 @@ public class GuiSkilltree extends GuiScreen
         txtMaxHP = new GuiTextField(nextID(), this.fontRenderer, guiX + 130, guiY + 67, 60, 16);
         txtHealthRegen = new GuiTextField(nextID(), this.fontRenderer, guiX + 130, guiY + 87, 60, 16);
         txtSpellTier = new GuiTextField(nextID(), this.fontRenderer, guiX + 130, guiY + 107, 60, 16);
-        txtCastSkill = new GuiTextField(nextID(), this.fontRenderer, guiX + 130, guiY + 127, 60, 16);
 
         updateTextBoxes();
     }
@@ -144,7 +138,6 @@ public class GuiSkilltree extends GuiScreen
             buttonAddMaxHP.visible = true;
             buttonAddHPRegen.visible = true;
             buttonAddSpellTier.visible = true;
-            buttonAddSpellCastSkill.visible = true;
         } else
         {
             buttonAddMaxMana.visible = false;
@@ -153,7 +146,6 @@ public class GuiSkilltree extends GuiScreen
             buttonAddMaxHP.visible = false;
             buttonAddHPRegen.visible = false;
             buttonAddSpellTier.visible = false;
-            buttonAddSpellCastSkill.visible = false;
         }
     }
     @Override
@@ -186,10 +178,9 @@ public class GuiSkilltree extends GuiScreen
             else if(button == buttonAddMaxHP) playerMana.addedHP++;
             else if(button == buttonAddHPRegen) playerMana.hpRegeneration++;
             else if(button == buttonAddSpellTier) playerMana.addSpellTier();
-            else if(button == buttonAddSpellCastSkill) playerMana.spellCastSkill++;
             playerMana.removeSkillpoint();
         }
-        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName, playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
+        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName, playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
         updateStats();
         updateTextBoxes();
     }
@@ -210,7 +201,6 @@ public class GuiSkilltree extends GuiScreen
         valueMaxHP = playerMana.getAddedHP();
         valueHPRegen = playerMana.hpRegeneration;
         valueSpellTier = playerMana.getSpellTier();
-        valueCastingSkill = playerMana.spellCastSkill;
     }
     private void updateTextBoxes()
     {
@@ -221,7 +211,6 @@ public class GuiSkilltree extends GuiScreen
         txtMaxHP.setText("" + valueMaxHP);
         txtHealthRegen.setText("" + valueHPRegen);
         txtSpellTier.setText("" + valueSpellTier);
-        txtCastSkill.setText("" + valueCastingSkill);
     }
     private void drawTextBoxes()
     {
@@ -232,7 +221,6 @@ public class GuiSkilltree extends GuiScreen
         txtMaxHP.drawTextBox();
         txtHealthRegen.drawTextBox();
         txtSpellTier.drawTextBox();
-        txtCastSkill.drawTextBox();
     }
     private int nextID()
     {

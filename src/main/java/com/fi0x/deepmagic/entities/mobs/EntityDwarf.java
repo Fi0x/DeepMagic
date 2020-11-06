@@ -103,6 +103,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         return 1.2F;
     }
 
+    @Nonnull
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {

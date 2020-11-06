@@ -27,7 +27,7 @@ public class PacketReturnSkill implements IMessage
     {
         this.messageValid = false;
     }
-    public PacketReturnSkill(int maxManaMultiplier, double skillXP, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier, int spellCastSkill)
+    public PacketReturnSkill(int maxManaMultiplier, double skillXP, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier)
     {
         this.maxManaMultiplier = maxManaMultiplier;
         this.skillXP = skillXP;
