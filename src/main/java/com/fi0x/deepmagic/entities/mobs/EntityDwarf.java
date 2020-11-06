@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIMining;
+import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
@@ -35,6 +36,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         itemHandler = new ItemStackHandler(ConfigHandler.dwarfInventorySlots);
         isMining = false;
         this.setSize(0.9F, 1.5F);
+        setCustomNameTag(CustomNameGenerator.getRandomDwarfName());
     }
 
     @Override

@@ -6,6 +6,7 @@ public class CustomNameGenerator
 {
     private static final String[] TROLL_NAMES = new String[] {"Ali", "Bob", "Brian", "Bronn", "Erik", "Jeff", "Jeremy", "Karl", "Kevin", "Mike", "Sebastian", "Steve"};
     private static final String[] MAGE_NAMES = new String[] {"Anagast", "Astrea", "Dubin", "Durin", "Druviar", "Ebras", "Fharin", "Gandalf", "Kraldor", "Malfurion", "Masior", "Merlin", "Ogrus", "Orhan", "Seharis", "Tholyn", "Thrall", "Torin", "Udor", "Ugafeus", "Vogorim"};
+    private static final String[] DWARF_NAMES = new String[] {"Bennur", "Bronn", "Brumdus", "Galnur", "Gardus", "Gremnik", "Haegar", "Hjalram", "Karmur", "Mannie", "Muirdur", "Thorrim", "Thuldahr", "Thygrim", "Ülf"};
 
     private static final String[][] SPAWNER_TYPES = new String[][] {
             {"minecraft", "Creeper"},
@@ -25,10 +26,13 @@ public class CustomNameGenerator
     {
         return TROLL_NAMES[(int) (Math.random() * TROLL_NAMES.length)];
     }
-
     public static String getRandomMageName()
     {
         return MAGE_NAMES[(int) (Math.random() * MAGE_NAMES.length)];
+    }
+    public static String getRandomDwarfName()
+    {
+        return DWARF_NAMES[(int) (Math.random() * DWARF_NAMES.length)];
     }
 
     public static ResourceLocation getRandomSpawnableMob()
