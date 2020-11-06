@@ -108,7 +108,7 @@ public class GuiSkilltree extends GuiScreen
         labelManaEfficiency.addLine("Mana Cost Multiplier");
         labelList.add(labelManaEfficiency);
         GuiLabel labelMaxHP = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 65, 100, 20, 0);
-        labelMaxHP.addLine("Health Boost");
+        labelMaxHP.addLine("Added HP");
         labelList.add(labelMaxHP);
         GuiLabel labelHealthRegen = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 85, 100, 20, 0);
         labelHealthRegen.addLine("Health Regeneration");
@@ -182,14 +182,14 @@ public class GuiSkilltree extends GuiScreen
         {
             if(button == buttonAddMaxMana) playerMana.maxManaMultiplier++;
             else if(button == buttonAddManaRegenRate) playerMana.setManaRegenRate(playerMana.getManaRegenRate() + 1);
-            else if(button == buttonAddManaEfficiency) playerMana.setManaEfficiency(playerMana.getManaEfficiency() + 1);
+            else if(button == buttonAddManaEfficiency) playerMana.setManaEfficiencyValue(playerMana.getManaEfficiencyValue() + 1);
             else if(button == buttonAddMaxHP) playerMana.addedHP++;
             else if(button == buttonAddHPRegen) playerMana.hpRegeneration++;
             else if(button == buttonAddSpellTier) playerMana.addSpellTier();
             else if(button == buttonAddSpellCastSkill) playerMana.spellCastSkill++;
             playerMana.removeSkillpoint();
         }
-        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName, playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
+        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName, playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill));
         updateStats();
         updateTextBoxes();
     }
@@ -206,8 +206,8 @@ public class GuiSkilltree extends GuiScreen
         valueSkillPoint = playerMana.getSkillpoints();
         valueMaxMana = playerMana.getMaxMana();
         valueManaRegen = playerMana.getManaRegenRate();
-        valueManaEfficiency = 1/Math.pow(1.1, playerMana.getManaEfficiency());
-        valueMaxHP = (playerMana.addedHP);
+        valueManaEfficiency = playerMana.getManaEfficiencyMultiplier();
+        valueMaxHP = playerMana.getAddedHP();
         valueHPRegen = playerMana.hpRegeneration;
         valueSpellTier = playerMana.getSpellTier();
         valueCastingSkill = playerMana.spellCastSkill;

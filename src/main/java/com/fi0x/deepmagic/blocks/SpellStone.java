@@ -178,8 +178,9 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         }
 
         compound.setInteger("manaCosts", manaCosts);
-        compound.setInteger("tier", (int) Math.log(Math.pow(manaCosts, 2.4)));
-        compound.setDouble("skillXP", Math.sqrt(manaCosts));
+        double tier = Math.min(Math.log(Math.pow(manaCosts, 2.4)), 0.01 * Math.pow(manaCosts, 0.7));
+        compound.setInteger("tier", (int) tier);
+        compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
         return true;
     }
 }

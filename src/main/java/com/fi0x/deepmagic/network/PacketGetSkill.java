@@ -104,7 +104,7 @@ public class PacketGetSkill implements IMessage
             {
                 PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
-                PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(playerMana.maxManaMultiplier, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiency(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill), ctx.getServerHandler().player);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(playerMana.maxManaMultiplier, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier(), playerMana.spellCastSkill), ctx.getServerHandler().player);
             }
         }
     }

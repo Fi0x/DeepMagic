@@ -36,30 +36,33 @@ public class PlayerMana
 	}
 	public void addMana(double value)
 	{
-		if(mana+(value*Math.pow(1.1, manaRegenRate)) > ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier) && mana < ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier))
+		if(mana+(value*Math.pow(1.1, manaRegenRate)) > getMaxMana() && mana < getMaxMana())
 		{
-			mana = ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier);
-		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier))
+			mana = getMaxMana();
+		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= getMaxMana())
 		{
 			mana += (value*Math.pow(1.1, manaRegenRate));
 		}
 	}
 	public boolean removeMana(double value)
 	{
-		if(mana-(value/Math.pow(1.1, manaEfficiency)) < 0)
+		if(mana-(value * getManaEfficiencyMultiplier()) < 0)
 		{
 			return false;
 		}
-		mana -= (value/Math.pow(1.1, manaEfficiency));
+		mana -= (value * getManaEfficiencyMultiplier());
 		return true;
 	}
 	public double getMaxMana()
 	{
-		return ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier);
+		int base = ConfigHandler.baseMana;
+		double f1 = base * Math.pow(1.1, maxManaMultiplier);
+		double f2 = 10 * base * Math.pow(maxManaMultiplier + 1, 0.9);
+		return Math.min(f1, f2);
 	}
 	public double getManaPercentage()
 	{
-		if(mana <= ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier)) return (100/(ConfigHandler.baseMana*Math.pow(1.1, maxManaMultiplier)))*mana;
+		if(mana <= getMaxMana()) return (100 / getMaxMana()) * mana;
 		return 100;
 	}
 
@@ -69,15 +72,12 @@ public class PlayerMana
 	}
 	public void addSkillXP(double addAmount)
 	{
-		double difference = skillXP % ConfigHandler.manaXPForLevelup;
 		skillXP += addAmount;
-		difference += addAmount;
-		while (difference >= ConfigHandler.manaXPForLevelup)
+		while (skillXP >= ConfigHandler.manaXPForLevelup)
 		{
 			addSkillpoint();
-			difference -= ConfigHandler.manaXPForLevelup;
+			skillXP -= ConfigHandler.manaXPForLevelup;
 		}
-		skillXP %= ConfigHandler.manaXPForLevelup;
 	}
 	public int getSkillpoints()
 	{
@@ -106,13 +106,21 @@ public class PlayerMana
 	{
 		return manaRegenRate;
 	}
-	public void setManaEfficiency(double manaEfficiency)
+	public void setManaEfficiencyValue(double manaEfficiency)
 	{
 		this.manaEfficiency = manaEfficiency;
 	}
-	public double getManaEfficiency()
+	public double getManaEfficiencyValue()
 	{
 		return manaEfficiency;
+	}
+	public double getManaEfficiencyMultiplier()
+	{
+		double f1 = 1 / Math.pow(1.1, manaEfficiency);
+		double f2 = 1 / (0.1 * (manaEfficiency + 13));
+		double f12 = Math.max(f1, f2);
+		double f3 = 0.1 + 1 / (manaEfficiency + 1);
+		return Math.max(f12, f3);
 	}
 	public void addSpellTier()
 	{
@@ -122,10 +130,13 @@ public class PlayerMana
 	{
 		return spellTier;
 	}
+	public int getAddedHP()
+	{
+		return (int) Math.pow(addedHP, 0.9);
+	}
 	public void updatePlayerHP(EntityPlayer player)
 	{
-		int hpIncrease = (int) (0.03 * Math.pow(addedHP, 1.5));
-		AttributeModifier modifier = new AttributeModifier(player.getUniqueID(), "deepMagicHpIncrease", hpIncrease, 0);
+		AttributeModifier modifier = new AttributeModifier(player.getUniqueID(), "deepMagicHpIncrease", getAddedHP(), 0);
 		IAttributeInstance playerHP = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
 		if(playerHP.hasModifier(modifier)) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(modifier);
