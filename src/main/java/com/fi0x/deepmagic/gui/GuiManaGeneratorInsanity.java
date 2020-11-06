@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiManaGeneratorInsanity extends GuiContainer//TODO: Make correct gui
 {
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator_insanity.png");//TODO: Add texture
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator_insanity.png");
     private final InventoryPlayer player;
     private final TileEntityManaGeneratorInsanity te;
 

@@ -12,8 +12,7 @@
     {
         "S":
         {
-            "item": "minecraft:stone",
-            "data": 0
+            "item": "deepmagic:insanity_stone"
         },
         "I":
         {
@@ -36,7 +35,7 @@
     
     "result":
     {
-        "item": "deepmagic:mana_generator_normal",
+        "item": "deepmagic:mana_generator_insanity",
         "count": 1
     }
 }

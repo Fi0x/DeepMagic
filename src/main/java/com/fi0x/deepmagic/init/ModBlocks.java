@@ -82,6 +82,6 @@ public class ModBlocks
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
 	public static final ManaGeneratorNormal MANA_GENERATOR_NORMAL = new ManaGeneratorNormal("mana_generator_normal", Material.ROCK);
-	public static final ManaGeneratorInsanity MANA_GENERATOR_INSANITY = new ManaGeneratorInsanity("mana_generator_insanity", Material.ROCK);//TODO: Add crafting recipe
+	public static final ManaGeneratorInsanity MANA_GENERATOR_INSANITY = new ManaGeneratorInsanity("mana_generator_insanity", Material.ROCK);
 	public static final ManaInfuser MANA_INFUSER = new ManaInfuser("mana_infuser", Material.ROCK);
 }
