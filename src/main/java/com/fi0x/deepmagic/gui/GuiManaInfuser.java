@@ -43,16 +43,16 @@ public class GuiManaInfuser extends GuiContainer
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getProgressLeftScaled(22);
+        int p = getProgressScaled(22);
         drawTexturedModalRect(guiLeft + 47,guiTop + 25, 176, 50, p, 16);
 
         int m = getStoredManaScaled(50);
         drawTexturedModalRect(guiLeft + 141, guiTop + 66 - m, 176, 0, 16, m);
     }
-    private int getProgressLeftScaled(int pixels)
+    private int getProgressScaled(int pixels)
     {
         int i = te.getField(1);
-        if(i == 0) i = 200;
+        if(i == 0) i = 1;
         return te.getField(0) * pixels / i;
     }
     private int getStoredManaScaled(int pixels)

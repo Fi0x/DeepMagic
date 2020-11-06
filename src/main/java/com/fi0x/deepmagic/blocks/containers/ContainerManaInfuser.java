@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks.containers;
 
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
+import com.fi0x.deepmagic.util.recipes.ManaInfuserRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -88,7 +89,7 @@ public class ContainerManaInfuser extends Container
                 slot.onSlotChange(itemstack1, itemstack);
             } else if (index != 0)
             {
-                if (TileEntityManaInfuser.isItemInfusable(itemstack1))
+                if (!ManaInfuserRecipes.instance().getInfuserResult(itemstack1).isEmpty())
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
                 } else if (index < 29)
