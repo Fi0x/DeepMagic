@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.util.recipes.ManaInfuserRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -94,8 +95,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        if(index == 1) return false;
-        return isItemInfusable(stack);
+        return index != 1;
     }
     @Override
     public int getField(int id)
@@ -132,7 +132,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         inventory.clear();
     }
     @Override
-    public void update()
+    public void update() //Todo fix item-drop error
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
@@ -146,7 +146,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
                 {
                     infusionProgress++;
 
-                    if (infusionProgress == totalInsusionTime)
+                    if (infusionProgress >= totalInsusionTime)
                     {
                         infusionProgress = 0;
                         totalInsusionTime = getItemInfusionTime(stack);
@@ -201,7 +201,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
-        return super.writeToNBT(compound);// TODO fix "missing mapping" error
+        return super.writeToNBT(compound);
     }
     @Override
     public void readFromNBT(NBTTagCompound compound)
@@ -235,7 +235,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         if (inventory.get(0).isEmpty()) return false;
         else
         {
-            ItemStack infusionResult = getInfusionResult(inventory.get(0));
+            ItemStack infusionResult = ManaInfuserRecipes.instance().getInfuserResult(inventory.get(0));
 
             if (infusionResult.isEmpty()) return false;
             else
@@ -244,8 +244,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
 
                 if (output.isEmpty()) return true;
                 else if (!output.isItemEqual(infusionResult)) return false;
-                else if (output.getCount() + infusionResult.getCount() <= getInventoryStackLimit() && output.getCount() + infusionResult.getCount() <= output.getMaxStackSize()) return true;
-                else return false;
+                else return output.getCount() + infusionResult.getCount() <= getInventoryStackLimit() && output.getCount() + infusionResult.getCount() <= output.getMaxStackSize();
             }
         }
     }
@@ -266,21 +265,10 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     {
         return getItemInfusionTime(item) > 0;
     }
-    public static ItemStack getInfusionResult(ItemStack input)
-    {
-        Item item = input.getItem();
-        ItemStack result = ItemStack.EMPTY;
-        if(item instanceof ItemBlock)
-        {
-            Block block = Block.getBlockFromItem(item);
-            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) result = new ItemStack(ModBlocks.DEMON_CRYSTAL_BLOCK, 1);
-        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) result = new ItemStack(ModItems.MAGIC_POWDER, 1);
-        return result;
-    }
     private void infuseItem()
     {
         ItemStack input = inventory.get(0);
-        ItemStack result = getInfusionResult(input);
+        ItemStack result = ManaInfuserRecipes.instance().getInfuserResult(input);
         if(!result.isEmpty())
         {
             ItemStack output = inventory.get(1);

@@ -95,7 +95,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return isItemFuel(stack);
+        return isItemFuel(stack) || index != 0;
     }
     @Override
     public int getField(int id)
@@ -134,11 +134,10 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public void update()
     {
-        boolean wasRunning = false;
+        boolean wasRunning = isRunning();
         boolean dirty = false;
         if(isRunning())
         {
-            wasRunning = true;
             burnTime--;
             if(storedMana < ConfigHandler.manaGeneratorManaCapacity) storedMana++;
             dirty = true;
