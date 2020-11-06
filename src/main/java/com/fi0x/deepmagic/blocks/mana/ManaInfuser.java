@@ -118,7 +118,7 @@ public class ManaInfuser extends BlockBase implements ITileEntityProvider
             else if(face == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) face = EnumFacing.NORTH;
             else if(face == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) face = EnumFacing.WEST;
             else if(face == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) face = EnumFacing.EAST;
-            worldIn.setBlockState(pos, state.withProperty(FACING, face), 2);
+            worldIn.setBlockState(pos, state.withProperty(FACING, face), 2); //Todo fix "missing mapping" error
         }
     }
     @Nonnull

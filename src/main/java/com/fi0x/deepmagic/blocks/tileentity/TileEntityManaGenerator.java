@@ -191,12 +191,9 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
             compound.setInteger("altarX", linkedAltarPos.getX());
             compound.setInteger("altarY", linkedAltarPos.getY());
             compound.setInteger("altarZ", linkedAltarPos.getZ());
-        } else
-        {
-            if(compound.hasKey("altarX")) compound.removeTag("altarX");
-            if(compound.hasKey("altarY")) compound.removeTag("altarY");
-            if(compound.hasKey("altarZ")) compound.removeTag("altarZ");
-        }
+            compound.setBoolean("linked", true);
+        } else compound.setBoolean("linked", false);
+
         compound.setInteger("burnTime", burnTime);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
@@ -206,7 +203,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        if(compound.hasKey("altarX") && compound.hasKey("altarY") && compound.hasKey("altarZ"))
+        if(compound.hasKey("linked") && compound.getBoolean("linked"))
         {
             int x = compound.getInteger("altarX");
             int y = compound.getInteger("altarY");

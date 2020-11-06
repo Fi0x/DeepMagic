@@ -136,42 +136,35 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
-        if(isRunning())
+
+        if(!world.isRemote)
         {
-            if(storedMana > 0)
+            ItemStack stack = inventory.get(0);
+            if (storedMana > 0 && !stack.isEmpty())
             {
-                infusionProgress--;
+                if (canInfuse())
+                {
+                    infusionProgress++;
+
+                    if (infusionProgress == totalInsusionTime)
+                    {
+                        infusionProgress = 0;
+                        totalInsusionTime = getItemInfusionTime(stack);
+                        infuseItem();
+                        dirty = true;
+                    }
+                } else infusionProgress = 0;
+            }
+
+            if(isRunning() != wasRunning)
+            {
+                ManaGenerator.setState(isRunning(), world, pos);
                 dirty = true;
             }
-        }
-        if(world.isRemote) return;
-
-        ItemStack stack = inventory.get(0);
-        if (storedMana > 0 && !stack.isEmpty())
-        {
-            if (isItemInfusable(stack))
+            if(ConfigHandler.manaInfuserManaCapacity - storedMana >= 10)
             {
-                infusionProgress--;
-
-                if (infusionProgress == 0)
-                {
-                    infuseItem();
-                    totalInsusionTime = getItemInfusionTime(stack);
-                    infusionProgress = totalInsusionTime;
-                    dirty = true;
-                }
+                if(getManaFromAltar()) dirty = true;
             }
-            else infusionProgress = 0;
-        }
-
-        if(isRunning() != wasRunning)
-        {
-            ManaGenerator.setState(isRunning(), world, pos);
-            dirty = true;
-        }
-        if(ConfigHandler.manaInfuserManaCapacity - storedMana >= 10)
-        {
-            if(getManaFromAltar()) dirty = true;
         }
         if(dirty) markDirty();
     }
@@ -201,22 +194,19 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
             compound.setInteger("altarX", linkedAltarPos.getX());
             compound.setInteger("altarY", linkedAltarPos.getY());
             compound.setInteger("altarZ", linkedAltarPos.getZ());
-        } else
-        {
-            if(compound.hasKey("altarX")) compound.removeTag("altarX");
-            if(compound.hasKey("altarY")) compound.removeTag("altarY");
-            if(compound.hasKey("altarZ")) compound.removeTag("altarZ");
-        }
+            compound.setBoolean("linked", true);
+        } else compound.setBoolean("linked", false);
+
         compound.setInteger("infusionProgress", infusionProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
-        return super.writeToNBT(compound);
+        return super.writeToNBT(compound);// TODO fix "missing mapping" error
     }
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        if(compound.hasKey("altarX") && compound.hasKey("altarY") && compound.hasKey("altarZ"))
+        if(compound.hasKey("linked") && compound.getBoolean("linked"))
         {
             int x = compound.getInteger("altarX");
             int y = compound.getInteger("altarY");
@@ -240,6 +230,25 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     {
         return infusionProgress > 0;
     }
+    private boolean canInfuse()
+    {
+        if (inventory.get(0).isEmpty()) return false;
+        else
+        {
+            ItemStack infusionResult = getInfusionResult(inventory.get(0));
+
+            if (infusionResult.isEmpty()) return false;
+            else
+            {
+                ItemStack output = inventory.get(1);
+
+                if (output.isEmpty()) return true;
+                else if (!output.isItemEqual(infusionResult)) return false;
+                else if (output.getCount() + infusionResult.getCount() <= getInventoryStackLimit() && output.getCount() + infusionResult.getCount() <= output.getMaxStackSize()) return true;
+                else return false;
+            }
+        }
+    }
     public static int getItemInfusionTime(ItemStack infusionStack)
     {
         if(infusionStack.isEmpty()) return 0;
@@ -250,6 +259,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
             Block block = Block.getBlockFromItem(item);
             if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 100;
         } else if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
+
         return 0;
     }
     public static boolean isItemInfusable(ItemStack item)
@@ -270,9 +280,9 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     private void infuseItem()
     {
         ItemStack input = inventory.get(0);
-        if(isItemInfusable(input))
+        ItemStack result = getInfusionResult(input);
+        if(!result.isEmpty())
         {
-            ItemStack result = getInfusionResult(input);
             ItemStack output = inventory.get(1);
 
             if(output.isEmpty()) inventory.set(1, result);
