@@ -37,6 +37,13 @@ tile.insanity_cobble_stairs.name=Insanity Cobble Stairs
 tile.insanity_wood_slab_half.name=Insanity Wood Slab
 tile.insanity_wood_stairs.name=Insanity Wood Stairs
 
+tile.dungeon_stone.name=Dungeon Stone
+tile.dungeon_cobble.name=Dungeon Cobble
+tile.dungeon_cobble_mossy.name=Mossy Dungeon Cobble
+tile.dungeon_brick.name=Dungeon Brick
+tile.dungeon_brick_mossy.name=Mossy Dungeon Brick
+tile.dungeon_brick_cracked.name=Cracked Dungeon Brick
+
 tile.defence_stone.name=Defence Stone
 tile.attack_stone.name=Attack Stone
 tile.speed_stone.name=Speed Stone

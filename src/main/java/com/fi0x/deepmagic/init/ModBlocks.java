@@ -58,6 +58,14 @@ public class ModBlocks
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
 
+	//Dungeon Blocks
+	public static final Block DUNGEON_STONE = new DungeonStone("dungeon_stone", Material.ROCK);
+	public static final Block DUNGEON_COBBLE = new DungeonStone("dungeon_cobble", Material.ROCK);
+	public static final Block DUNGEON_COBBLE_MOSSY = new DungeonStone("dungeon_cobble_mossy", Material.ROCK);
+	public static final Block DUNGEON_BRICK = new DungeonStone("dungeon_brick", Material.ROCK);
+	public static final Block DUNGEON_BRICK_MOSSY = new DungeonStone("dungeon_brick_mossy", Material.ROCK);
+	public static final Block DUNGEON_BRICK_CRACKED = new DungeonStone("dungeon_brick_cracked", Material.ROCK);
+
 	//Special Blocks
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
