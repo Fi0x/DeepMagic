@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaAltar;
-import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
+import com.fi0x.deepmagic.blocks.mana.ManaGeneratorInsanity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -25,7 +25,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGenerator extends TileEntity implements IInventory, ITickable
+public class TileEntityManaGeneratorInsanity extends TileEntity implements IInventory, ITickable//TODO: Adjust class
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
@@ -158,7 +158,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
                 dirty = true;
             }
         }
-        if(isRunning() != wasRunning) ManaGenerator.setState(isRunning(), world, pos);
+        if(isRunning() != wasRunning) ManaGeneratorInsanity.setState(isRunning(), world, pos);
         if(storedMana >= 20)
         {
             if(sendManaToAltar()) dirty = true;
@@ -169,7 +169,7 @@ public class TileEntityManaGenerator extends TileEntity implements IInventory, I
     @Override
     public String getName()
     {
-        return hasCustomName() ? customName : "container.mana_generator";
+        return hasCustomName() ? customName : "container.mana_generator_insanity";
     }
     @Override
     public boolean hasCustomName()

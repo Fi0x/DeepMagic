@@ -3,7 +3,8 @@ itemGroup.deepmagic_items_tab=Deep Magic Items
 itemGroup.deepmagic_spells_tab=Deep Magic Spells
 
 container.mana_altar=Mana Altar
-container.mana_generator=Mana Generator
+container.mana_generator_normal=Normal Mana Generator
+container.mana_generator_insanity=Insanity Mana Generator
 container.mana_infuser=Mana Infuser
 
 item.teleportation_crystal.name=Teleportation Crystal
@@ -59,7 +60,8 @@ tile.weather_controller.name=Weather Controller
 tile.time_controller.name=Time Controller
 
 tile.mana_altar.name=Mana Altar
-tile.mana_generator.name=Mana Generator
+tile.mana_generator_normal.name=Normal Mana Generator
+tile.mana_generator_insanity.name=Insanity Mana Generator
 tile.mana_infuser.name=Mana Infuser
 
 fluid.insanity_water=Insanity Water

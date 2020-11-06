@@ -6,10 +6,7 @@ import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
 import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
-import com.fi0x.deepmagic.blocks.mana.AltarOfKnowledge;
-import com.fi0x.deepmagic.blocks.mana.ManaAltar;
-import com.fi0x.deepmagic.blocks.mana.ManaGenerator;
-import com.fi0x.deepmagic.blocks.mana.ManaInfuser;
+import com.fi0x.deepmagic.blocks.mana.*;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
 import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
@@ -84,6 +81,7 @@ public class ModBlocks
 
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
-	public static final ManaGenerator MANA_GENERATOR = new ManaGenerator("mana_generator", Material.ROCK);
+	public static final ManaGeneratorNormal MANA_GENERATOR_NORMAL = new ManaGeneratorNormal("mana_generator_normal", Material.ROCK);
+	public static final ManaGeneratorInsanity MANA_GENERATOR_INSANITY = new ManaGeneratorInsanity("mana_generator_insanity", Material.ROCK);//TODO: Add crafting recipe
 	public static final ManaInfuser MANA_INFUSER = new ManaInfuser("mana_infuser", Material.ROCK);
 }
