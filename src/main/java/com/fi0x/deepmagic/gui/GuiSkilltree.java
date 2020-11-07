@@ -198,7 +198,7 @@ public class GuiSkilltree extends GuiScreen
         valueManaRegen = playerMana.getManaRegenRate();
         valueManaEfficiency = playerMana.getManaEfficiencyMultiplier();
         valueMaxHP = playerMana.getAddedHP();
-        valueHPRegen = playerMana.hpRegeneration;
+        valueHPRegen = playerMana.getHpRegenerationAmount();
         valueSpellTier = playerMana.getSpellTier();
     }
     private void updateTextBoxes()

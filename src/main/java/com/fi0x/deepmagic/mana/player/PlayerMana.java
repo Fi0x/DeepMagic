@@ -20,7 +20,7 @@ public class PlayerMana
 	private double manaEfficiency = 0;
 	public int maxManaMultiplier = 0;
 	public int addedHP = 0;
-	public int hpRegeneration = 0;//TODO adjust function
+	public int hpRegeneration = 0;
 	private int spellTier = 1;
 	
 	public PlayerMana() {}
@@ -120,6 +120,10 @@ public class PlayerMana
 		double f12 = Math.max(f1, f2);
 		double f3 = 0.1 + 1 / (manaEfficiency + 1);
 		return Math.max(f12, f3);
+	}
+	public int getHpRegenerationAmount()
+	{
+		return (int) (Math.pow(hpRegeneration, 0.5));
 	}
 	public void addSpellTier()
 	{
