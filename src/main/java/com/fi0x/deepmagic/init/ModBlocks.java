@@ -66,10 +66,10 @@ public class ModBlocks
 	//Special Blocks
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
-	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3);
+	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3,true);
 	public static final Block HEAL_STONE = new PotionEffectStone("heal_stone", Material.ROCK, MobEffects.REGENERATION, 2, 3);
-	public static final Block VISION_STONE = new PotionEffectStone("vision_stone", Material.ROCK, MobEffects.NIGHT_VISION, 11, 1);
-	public static final Block SATURATION_STONE = new PotionEffectStone("saturation_stone", Material.ROCK, MobEffects.SATURATION, 60, 3);
+	public static final Block VISION_STONE = new PotionEffectStone("vision_stone", Material.ROCK, MobEffects.NIGHT_VISION, 11, 1, true);
+	public static final Block SATURATION_STONE = new PotionEffectStone("saturation_stone", Material.ROCK, MobEffects.SATURATION, 60, 3, true);
 	public static final Block LEVITATION_STONE = new LevitationStone("levitation_stone", Material.ROCK);
 	public static final Block POISON_STONE = new PotionEffectStone("poison_stone", Material.ROCK, MobEffects.POISON, 5, 1);
 	public static final Block DEMON_STONE = new DemonStone("demon_stone", Material.ROCK);

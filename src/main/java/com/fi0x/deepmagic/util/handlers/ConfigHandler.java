@@ -294,7 +294,7 @@ public class ConfigHandler
         category = "Mana Costs";
         items.addCustomCategoryComment(category, "Mana Costs");
         manaBoosterAmount = items.getInt("Mana Booster Amount", category, 1000, 1, 100000, "Mana Amount a Mana Booster gives");
-        teleportationCrystalManaCost = items.getInt("Teleportation Crystal Cost", category, 100, 0, 10000, "Mana Costs for the Teleportation Crystal");
+        teleportationCrystalManaCost = items.getInt("Teleportation Crystal Cost", category, 90, 0, 10000, "Mana Costs for the Teleportation Crystal");
 
         category = "Skill XP";
         items.addCustomCategoryComment(category, "Skill XP");
