@@ -2,12 +2,12 @@ package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaGeneratorInsanity;
+import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
@@ -21,11 +21,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGeneratorInsanity extends TileEntity implements IInventory, ITickable//TODO: Adjust class
+public class TileEntityManaGeneratorInsanity extends TileEntity implements IInventory, ITickable
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
@@ -140,7 +139,7 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
         if(isRunning())
         {
             burnTime--;
-            if(storedMana < ConfigHandler.manaGeneratorManaCapacity) storedMana++;
+            if(storedMana - 10 < ConfigHandler.manaGeneratorManaCapacity) storedMana += 10;
             dirty = true;
         }
         if(world.isRemote) return;
@@ -159,7 +158,7 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
             }
         }
         if(isRunning() != wasRunning) ManaGeneratorInsanity.setState(isRunning(), world, pos);
-        if(storedMana >= 20)
+        if(storedMana >= 100)
         {
             if(sendManaToAltar()) dirty = true;
         }
@@ -232,19 +231,20 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
         if(fuel.isEmpty()) return 0;
 
         Item item = fuel.getItem();
-        if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
+        if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)//TODO: Handle more insanity blocks
         {
             Block block = Block.getBlockFromItem(item);
-            if(block == Blocks.WOODEN_SLAB) return 150;
-            if(block.getDefaultState().getMaterial() == Material.WOOD) return 300;
-            if(block == Blocks.COAL_BLOCK) return 16000;
+            if(block == ModBlocks.INSANITY_STONE) return 50;
+            if(block == ModBlocks.INSANITY_COBBLE) return 10;
+            if(block == ModBlocks.INSANITY_DIRT) return 10;
+            if(block == ModBlocks.INSANITY_GRASS) return 25;
+            if(block == ModBlocks.INSANITY_PLANKS) return 10;
+        } else
+        {
+            if(item == ModItems.INSANITY_APPLE) return 100;
         }
-        if(item == Items.STICK) return 100;
-        if(item == Items.COAL) return 1600;
-        if(item == Items.LAVA_BUCKET) return 20000;
-        if(item == Item.getItemFromBlock(Blocks.SAPLING)) return 100;
-        if(item == Items.BLAZE_ROD) return 2400;
-        return ForgeEventFactory.getItemBurnTime(fuel);
+        if(item.getUnlocalizedName().contains("insanity")) return 20;
+        return 0;
     }
     public static boolean isItemFuel(ItemStack fuel)
     {

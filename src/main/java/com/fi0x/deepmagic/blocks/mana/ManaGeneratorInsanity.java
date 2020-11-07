@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ManaGeneratorInsanity extends BlockBase implements ITileEntityProvider//TODO: Adjust for Insanity
+public class ManaGeneratorInsanity extends BlockBase implements ITileEntityProvider
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool RUNNING = PropertyBool.create("running");

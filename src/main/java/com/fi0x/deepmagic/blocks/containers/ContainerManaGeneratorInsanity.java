@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaGeneratorInsanity extends Container//TODO: Adjust for insanity
+public class ContainerManaGeneratorInsanity extends Container
 {
     private final TileEntityManaGeneratorInsanity te;
     private int burnTime, currentBurnTime, storedMana;
@@ -21,7 +21,7 @@ public class ContainerManaGeneratorInsanity extends Container//TODO: Adjust for 
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotManaGeneratorNormal(te, 0, 26, 31));
+        addSlotToContainer(new SlotManaGeneratorInsanity(te, 0, 26, 31));
 
         for(int y = 0; y < 3; y++)
         {

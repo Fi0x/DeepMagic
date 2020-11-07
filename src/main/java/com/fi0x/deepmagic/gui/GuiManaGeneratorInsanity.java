@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaGeneratorInsanity extends GuiContainer//TODO: Make correct gui
+public class GuiManaGeneratorInsanity extends GuiContainer
 {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator_insanity.png");
     private final InventoryPlayer player;
