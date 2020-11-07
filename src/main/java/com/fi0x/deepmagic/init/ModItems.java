@@ -62,6 +62,7 @@ public class ModItems
 	public static final Item RAW_WORM = new FoodEffectBase("raw_worm", 2, 4, false, new PotionEffect(MobEffects.POISON, 5*20, 1, false, false), false);
 	public static final Item COOKED_WORM = new FoodBase("cooked_worm", 4, 4, false);
 	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
+	public static final Item DRY_FLESH = new FoodBase("dry_flesh", 4, 1, false);
 
 	//Crafting Items
 	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
