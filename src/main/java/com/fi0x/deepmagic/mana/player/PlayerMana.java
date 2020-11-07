@@ -16,7 +16,7 @@ public class PlayerMana
 	private int skillpoints = 1;
 
 	//Skills
-	private double manaRegenRate = 0;//TODO adjust function
+	private double manaRegenRate = 0;
 	private double manaEfficiency = 0;
 	public int maxManaMultiplier = 0;
 	public int addedHP = 0;
@@ -35,12 +35,12 @@ public class PlayerMana
 	}
 	public void addMana(double value)
 	{
-		if(mana+(value*Math.pow(1.1, manaRegenRate)) > getMaxMana() && mana < getMaxMana())
+		if(mana+(value * (manaRegenRate + 1)) > getMaxMana() && mana < getMaxMana())
 		{
 			mana = getMaxMana();
-		} else if(mana+(value*Math.pow(1.1, manaRegenRate)) <= getMaxMana())
+		} else if(mana + (value * (manaRegenRate + 1)) <= getMaxMana())
 		{
-			mana += (value*Math.pow(1.1, manaRegenRate));
+			mana += value * (manaRegenRate + 1);
 		}
 	}
 	public boolean removeMana(double value)
