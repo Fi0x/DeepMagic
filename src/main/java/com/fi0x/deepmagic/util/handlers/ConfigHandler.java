@@ -35,6 +35,7 @@ public class ConfigHandler
     public static int guiManaAltarID;
     public static int guiManaGeneratorNormalID;
     public static int guiManaGeneratorInsanityID;
+    public static int guiManaGeneratorMobID;
     public static int guiManaInfuserID;
 
     //Biome Generation
@@ -153,7 +154,8 @@ public class ConfigHandler
         guiManaAltarID = ids.getInt("Mana Altar GUI ID", category, 420, -1000, 1000, "");
         guiManaGeneratorNormalID = ids.getInt("Normal Mana Generator GUI ID", category, 421, -1000, 1000, "");
         guiManaGeneratorInsanityID = ids.getInt("Insanity Mana Generator GUI ID", category, 422, -1000, 1000, "");
-        guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 423, -1000, 1000, "");
+        guiManaGeneratorMobID = ids.getInt("Mob Mana Generator GUI ID", category, 423, -1000, 1000, "");
+        guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 424, -1000, 1000, "");
 
         ids.save();
     }
