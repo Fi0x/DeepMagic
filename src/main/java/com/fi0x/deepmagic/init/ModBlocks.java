@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ModBlocks
 {
-	public static final List<Block> BLOCKS = new ArrayList<>();//TODO: Add Poison Stone
+	public static final List<Block> BLOCKS = new ArrayList<>();
 	
 	public static final Block DEEP_CRYSTAL_ORE = new DeepCrystalOre("deep_crystal_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_NETHER_ORE = new DeepCrystalOre("deep_crystal_nether_ore", Material.ROCK);

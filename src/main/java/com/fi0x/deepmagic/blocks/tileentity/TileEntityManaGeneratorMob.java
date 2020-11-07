@@ -3,18 +3,22 @@ package com.fi0x.deepmagic.blocks.tileentity;
 import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaGeneratorMob;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class TileEntityManaGeneratorMob extends TileEntity implements IInventory, ITickable
 {
@@ -124,11 +128,19 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
 
         if(storedMana < ConfigHandler.manaGeneratorManaCapacity && cooldown <= 10)
         {
-            //TODO: Get mobs in range as list
-            if(true)//TODO: Check if moblist is not empty
+            int mobRange = ConfigHandler.manaGeneratorMobRange;
+            AxisAlignedBB area = new AxisAlignedBB(pos.getX()-mobRange, pos.getY()-mobRange, pos.getZ()-mobRange, pos.getX()+mobRange, pos.getY()+mobRange, pos.getZ()+mobRange);
+            List<EntityMob> entities = world.getEntitiesWithinAABB(EntityMob.class, area);
+            if(!entities.isEmpty())
             {
                 cooldown = 30;
-                //TODO: Damage mobs and add mana
+
+                int gain = ConfigHandler.manaGainFromMob;
+                for(EntityMob entity : entities)
+                {
+                    entity.attackEntityFrom(DamageSource.MAGIC, 1);
+                    storedMana += gain;
+                }
                 dirty = true;
             }
         }
@@ -225,7 +237,7 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
                 return true;
             }
         }
-        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > 100)
+        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange)
         {
             linkedAltarPos = null;
             return false;

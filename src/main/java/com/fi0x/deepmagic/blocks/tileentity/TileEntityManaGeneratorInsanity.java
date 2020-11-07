@@ -276,7 +276,7 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
                 return true;
             }
         }
-        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > 100)
+        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange)
         {
             linkedAltarPos = null;
             return false;

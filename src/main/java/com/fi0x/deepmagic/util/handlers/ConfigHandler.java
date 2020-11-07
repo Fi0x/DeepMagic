@@ -96,10 +96,14 @@ public class ConfigHandler
     //Player Visuals
     public static boolean manaOverlayAlwaysVisible;
 
-    //Mana Capacities
+    //Mana Amounts
     public static int manaAltarCapacity;
     public static int manaGeneratorManaCapacity;
     public static int manaInfuserManaCapacity;
+    public static int manaGainFromMob;
+    //Block Ranges
+    public static int manaBlockTransferRange;
+    public static int manaGeneratorMobRange;
     //Insanity Water
     public static boolean insanityWaterEffect;
     //Demon Stone
@@ -268,11 +272,17 @@ public class ConfigHandler
         blocks = new Configuration(file);
         String category;
 
-        category = "Mana Capacity";
-        blocks.addCustomCategoryComment(category, "Mana Capacity");
+        category = "Mana Amounts";
+        blocks.addCustomCategoryComment(category, "Mana Amounts");
         manaAltarCapacity = blocks.getInt("Mana Altar Capacity", category, 10000, 1, 100000, "The Base Capacity of the Mana Altar");
         manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Generator has");
         manaInfuserManaCapacity = blocks.getInt("Mana Infuser Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Infuser has");
+        manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
+
+        category = "Ranges";
+        blocks.addCustomCategoryComment(category, "Block Ranges");
+        manaBlockTransferRange = blocks.getInt("Mana Transfer Range", category, 10, 1, 100, "The maximum Distance between Blocks to be abled to transfer Mana");
+        manaGeneratorMobRange = blocks.getInt("Mob Mana Generator Range", category, 5, 1, 100, "The Radius in which Mobs will be damaged to generate Mana");
 
         category = "Insanity Water";
         blocks.addCustomCategoryComment(category, "Insanity Water");
