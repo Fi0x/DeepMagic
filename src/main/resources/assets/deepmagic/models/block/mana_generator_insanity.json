@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/orientable",
    "textures": {
-       "particle": "deepmagic:blocks/mana_generator_insanity_side",
-       "up": "deepmagic:blocks/mana_generator_insanity_top",
-       "down": "deepmagic:blocks/mana_generator_insanity_bottom",
-       "north": "deepmagic:blocks/mana_generator_insanity_front_off",
-       "east": "deepmagic:blocks/mana_generator_insanity_side",
-       "south": "deepmagic:blocks/mana_generator_insanity_side",
-       "west": "deepmagic:blocks/mana_generator_insanity_side"
+       "particle": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_side",
+       "up": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_top",
+       "down": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_bottom",
+       "north": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_front_off",
+       "east": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_side",
+       "south": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_side",
+       "west": "deepmagic:blocks/mana/generator_insanity/mana_generator_insanity_side"
    }
 }

@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/cube",
    "textures": {
-     "particle": "deepmagic:blocks/attack_stone",
-     "up": "deepmagic:blocks/functional_stone_top",
-     "down": "deepmagic:blocks/functional_stone_bottom",
-     "north": "deepmagic:blocks/attack_stone",
-     "east": "deepmagic:blocks/attack_stone",
-     "south": "deepmagic:blocks/attack_stone",
-     "west": "deepmagic:blocks/attack_stone"
+     "particle": "deepmagic:blocks/functional_stone/attack_stone",
+     "up": "deepmagic:blocks/functional_stone/functional_stone_top",
+     "down": "deepmagic:blocks/functional_stone/functional_stone_bottom",
+     "north": "deepmagic:blocks/functional_stone/attack_stone",
+     "east": "deepmagic:blocks/functional_stone/attack_stone",
+     "south": "deepmagic:blocks/functional_stone/attack_stone",
+     "west": "deepmagic:blocks/functional_stone/attack_stone"
    }
 }

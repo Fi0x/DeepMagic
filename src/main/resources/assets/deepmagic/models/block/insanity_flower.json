@@ -1,6 +1,6 @@
 {
    "parent": "block/cross",
    "textures": {
-       "cross": "deepmagic:blocks/insanity_flower"
+       "cross": "deepmagic:blocks/insanity/insanity_flower"
    }
 }

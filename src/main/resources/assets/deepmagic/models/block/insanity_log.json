@@ -1,7 +1,7 @@
 {
    "parent": "block/cube_column",
    "textures": {
-       "end": "deepmagic:blocks/insanity_log_top",
-       "side": "deepmagic:blocks/insanity_log_side"
+       "end": "deepmagic:blocks/insanity/insanity_log_top",
+       "side": "deepmagic:blocks/insanity/insanity_log_side"
    }
 }

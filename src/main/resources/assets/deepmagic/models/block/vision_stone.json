@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/cube",
    "textures": {
-     "particle": "deepmagic:blocks/vision_stone",
-     "up": "deepmagic:blocks/functional_stone_top",
-     "down": "deepmagic:blocks/functional_stone_bottom",
-     "north": "deepmagic:blocks/vision_stone",
-     "east": "deepmagic:blocks/vision_stone",
-     "south": "deepmagic:blocks/vision_stone",
-     "west": "deepmagic:blocks/vision_stone"
+     "particle": "deepmagic:blocks/functional_stone/vision_stone",
+     "up": "deepmagic:blocks/functional_stone/functional_stone_top",
+     "down": "deepmagic:blocks/functional_stone/functional_stone_bottom",
+     "north": "deepmagic:blocks/functional_stone/vision_stone",
+     "east": "deepmagic:blocks/functional_stone/vision_stone",
+     "south": "deepmagic:blocks/functional_stone/vision_stone",
+     "west": "deepmagic:blocks/functional_stone/vision_stone"
    }
 }

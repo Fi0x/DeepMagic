@@ -1,8 +1,8 @@
 {
   "parent": "block/stairs",
   "textures": {
-    "bottom": "deepmagic:blocks/insanity_stone",
-    "top": "deepmagic:blocks/insanity_stone",
-    "side": "deepmagic:blocks/insanity_stone"
+    "bottom": "deepmagic:blocks/insanity/insanity_stone",
+    "top": "deepmagic:blocks/insanity/insanity_stone",
+    "side": "deepmagic:blocks/insanity/insanity_stone"
   }
 }
