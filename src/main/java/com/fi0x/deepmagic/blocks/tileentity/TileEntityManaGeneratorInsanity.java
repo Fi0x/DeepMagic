@@ -231,7 +231,7 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
         if(fuel.isEmpty()) return 0;
 
         Item item = fuel.getItem();
-        if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)//TODO: Handle more insanity blocks
+        if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
         {
             Block block = Block.getBlockFromItem(item);
             if(block == ModBlocks.INSANITY_STONE) return 50;
@@ -239,6 +239,9 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
             if(block == ModBlocks.INSANITY_DIRT) return 10;
             if(block == ModBlocks.INSANITY_GRASS) return 25;
             if(block == ModBlocks.INSANITY_PLANKS) return 10;
+            if(block == ModBlocks.INSANITY_FLOWER) return 30;
+            if(block == ModBlocks.INSANITY_LOG) return 30;
+            if(block == ModBlocks.INSANITY_SAPLING) return 10;
         } else
         {
             if(item == ModItems.INSANITY_APPLE) return 100;
