@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
@@ -72,19 +71,19 @@ public class GuiSkilltree extends GuiScreen
         labelList.clear();
         Keyboard.enableRepeatEvents(true);
 
-        buttonExit = new GuiButton(nextID(), width/2 -20, guiY + backgroundHeight-30, 40, 20, I18n.format("Exit"));
+        buttonExit = new GuiButton(nextID(), width/2 -20, guiY + backgroundHeight-30, 40, 20, "Exit");
         buttonList.add(buttonExit);
-        buttonAddMaxMana = new GuiButton(nextID(), guiX + 200, guiY + 5, 20, 20, I18n.format("+"));
+        buttonAddMaxMana = new GuiButton(nextID(), guiX + 200, guiY + 5, 20, 20, "+");
         buttonList.add(buttonAddMaxMana);
-        buttonAddManaRegenRate = new GuiButton(nextID(), guiX + 200, guiY + 25, 20, 20, I18n.format("+"));
+        buttonAddManaRegenRate = new GuiButton(nextID(), guiX + 200, guiY + 25, 20, 20, "+");
         buttonList.add(buttonAddManaRegenRate);
-        buttonAddManaEfficiency = new GuiButton(nextID(), guiX + 200, guiY + 45, 20, 20, I18n.format("+"));
+        buttonAddManaEfficiency = new GuiButton(nextID(), guiX + 200, guiY + 45, 20, 20, "+");
         buttonList.add(buttonAddManaEfficiency);
-        buttonAddMaxHP = new GuiButton(nextID(), guiX + 200, guiY + 65, 20, 20, I18n.format("+"));
+        buttonAddMaxHP = new GuiButton(nextID(), guiX + 200, guiY + 65, 20, 20, "+");
         buttonList.add(buttonAddMaxHP);
-        buttonAddHPRegen = new GuiButton(nextID(), guiX + 200, guiY + 85, 20, 20, I18n.format("+"));
+        buttonAddHPRegen = new GuiButton(nextID(), guiX + 200, guiY + 85, 20, 20, "+");
         buttonList.add(buttonAddHPRegen);
-        buttonAddSpellTier = new GuiButton(nextID(), guiX + 200, guiY + 105, 20, 20, I18n.format("+"));
+        buttonAddSpellTier = new GuiButton(nextID(), guiX + 200, guiY + 105, 20, 20, "+");
         buttonList.add(buttonAddSpellTier);
 
         updateScreen();

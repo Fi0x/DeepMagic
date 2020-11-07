@@ -1,0 +1,42 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SIS",
+        "CMC",
+        "SDS"
+    ],
+    
+    "key":
+    {
+        "S":
+        {
+            "item": "minecraft:stone",
+            "data": 0
+        },
+        "I":
+        {
+        	"item": "deepmagic:mana_interface"
+        },
+        "C":
+        {
+            "item": "deepmagic:deep_crystal_block"
+        },
+        "M":
+        {
+            "item": "deepmagic:mana_segment"
+        },
+        "D":
+        {
+            "item": "minecraft:furnace",
+            "data": 0
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:mana_generator_normal",
+        "count": 1
+    }
+}

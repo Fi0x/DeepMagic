@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGeneratorNormal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,16 +12,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaGenerator extends Container
+public class ContainerManaGeneratorNormal extends Container
 {
-    private final TileEntityManaGenerator te;
+    private final TileEntityManaGeneratorNormal te;
     private int burnTime, currentBurnTime, storedMana;
 
-    public ContainerManaGenerator(InventoryPlayer player, TileEntityManaGenerator tileEntity)
+    public ContainerManaGeneratorNormal(InventoryPlayer player, TileEntityManaGeneratorNormal tileEntity)
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotManaGenerator(te, 0, 26, 31));
+        addSlotToContainer(new SlotManaGeneratorNormal(te, 0, 26, 31));
 
         for(int y = 0; y < 3; y++)
         {
@@ -87,7 +87,7 @@ public class ContainerManaGenerator extends Container
                 slot.onSlotChange(itemstack1, itemstack);
             } else
             {
-                if (TileEntityManaGenerator.isItemFuel(itemstack1))
+                if (TileEntityManaGeneratorNormal.isItemFuel(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
                 } else if (index < 28)

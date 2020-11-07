@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
-import com.fi0x.deepmagic.blocks.containers.ContainerManaGenerator;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.containers.ContainerManaGeneratorInsanity;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGeneratorInsanity;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaGenerator extends GuiContainer
+public class GuiManaGeneratorInsanity extends GuiContainer
 {
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator_insanity.png");
     private final InventoryPlayer player;
-    private final TileEntityManaGenerator te;
+    private final TileEntityManaGeneratorInsanity te;
 
-    public GuiManaGenerator(InventoryPlayer player, TileEntityManaGenerator tileentity)
+    public GuiManaGeneratorInsanity(InventoryPlayer player, TileEntityManaGeneratorInsanity tileentity)
     {
-        super(new ContainerManaGenerator(player, tileentity));
+        super(new ContainerManaGeneratorInsanity(player, tileentity));
         this.player = player;
         te = tileentity;
     }

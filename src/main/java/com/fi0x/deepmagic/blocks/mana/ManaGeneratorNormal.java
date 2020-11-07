@@ -2,7 +2,7 @@ package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.BlockBase;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGenerator;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGeneratorNormal;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -31,12 +31,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ManaGenerator extends BlockBase implements ITileEntityProvider
+public class ManaGeneratorNormal extends BlockBase implements ITileEntityProvider
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool RUNNING = PropertyBool.create("running");
 
-    public ManaGenerator(String name, Material material)
+    public ManaGeneratorNormal(String name, Material material)
     {
         super(name, material);
         setSoundType(SoundType.STONE);
@@ -62,7 +62,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
                 compound = stack.getTagCompound();
                 assert compound != null;
 
-                TileEntityManaGenerator te = (TileEntityManaGenerator) worldIn.getTileEntity(pos);
+                TileEntityManaGeneratorNormal te = (TileEntityManaGeneratorNormal) worldIn.getTileEntity(pos);
                 assert te != null;
 
                 if(compound.hasKey("linked") && compound.getBoolean("linked"))
@@ -78,7 +78,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Generator"));
                 }
             }
-            else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorNormalID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -87,12 +87,12 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
-        return Item.getItemFromBlock(ModBlocks.MANA_GENERATOR);
+        return Item.getItemFromBlock(ModBlocks.MANA_GENERATOR_NORMAL);
     }
     @Override
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
-        TileEntityManaGenerator te = (TileEntityManaGenerator) worldIn.getTileEntity(pos);
+        TileEntityManaGeneratorNormal te = (TileEntityManaGeneratorNormal) worldIn.getTileEntity(pos);
         assert te != null;
         InventoryHelper.dropInventoryItems(worldIn, pos, te);
         super.breakBlock(worldIn, pos, state);
@@ -101,7 +101,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     @Override
     public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
-        return new ItemStack(ModBlocks.MANA_GENERATOR);
+        return new ItemStack(ModBlocks.MANA_GENERATOR_NORMAL);
     }
     @Override
     public void onBlockAdded(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
@@ -160,7 +160,7 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
     {
-        return new TileEntityManaGenerator();
+        return new TileEntityManaGeneratorNormal();
     }
 
     @Nonnull
@@ -182,8 +182,8 @@ public class ManaGenerator extends BlockBase implements ITileEntityProvider
     {
         IBlockState state = world.getBlockState(pos);
         TileEntity te = world.getTileEntity(pos);
-        if(active) world.setBlockState(pos, ModBlocks.MANA_GENERATOR.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RUNNING, true), 3);
-        else world.setBlockState(pos, ModBlocks.MANA_GENERATOR.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RUNNING, false), 3);
+        if(active) world.setBlockState(pos, ModBlocks.MANA_GENERATOR_NORMAL.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RUNNING, true), 3);
+        else world.setBlockState(pos, ModBlocks.MANA_GENERATOR_NORMAL.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RUNNING, false), 3);
 
         if(te != null)
         {
