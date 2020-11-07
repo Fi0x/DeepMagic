@@ -71,6 +71,7 @@ public class ModBlocks
 	public static final Block VISION_STONE = new PotionEffectStone("vision_stone", Material.ROCK, MobEffects.NIGHT_VISION, 11, 1);
 	public static final Block SATURATION_STONE = new PotionEffectStone("saturation_stone", Material.ROCK, MobEffects.SATURATION, 60, 3);
 	public static final Block LEVITATION_STONE = new LevitationStone("levitation_stone", Material.ROCK);
+	public static final Block POISON_STONE = new PotionEffectStone("poison_stone", Material.ROCK, MobEffects.POISON, 5, 1);
 	public static final Block DEMON_STONE = new DemonStone("demon_stone", Material.ROCK);
 
 	//Interacting Blocks
