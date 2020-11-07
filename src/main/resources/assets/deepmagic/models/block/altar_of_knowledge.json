@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/cube",
    "textures": {
-       "particle": "deepmagic:blocks/altar_of_knowledge_side",
-       "up": "deepmagic:blocks/altar_of_knowledge_top",
-       "down": "deepmagic:blocks/altar_of_knowledge_bottom",
-       "north": "deepmagic:blocks/altar_of_knowledge_side",
-       "east": "deepmagic:blocks/altar_of_knowledge_side",
-       "south": "deepmagic:blocks/altar_of_knowledge_side",
-       "west": "deepmagic:blocks/altar_of_knowledge_side"
+       "particle": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_side",
+       "up": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_top",
+       "down": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_bottom",
+       "north": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_side",
+       "east": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_side",
+       "south": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_side",
+       "west": "deepmagic:blocks/altar_of_knowledge/altar_of_knowledge_side"
    }
 }

@@ -1,6 +1,6 @@
 {
    "parent": "block/cube_all",
    "textures": {
-       "all": "deepmagic:blocks/insanity_stone"
+       "all": "deepmagic:blocks/insanity/insanity_stone"
    }
 }

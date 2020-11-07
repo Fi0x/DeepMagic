@@ -1,6 +1,6 @@
 {
    "parent": "block/leaves",
    "textures": {
-       "all": "deepmagic:blocks/insanity_leaves"
+       "all": "deepmagic:blocks/insanity/insanity_leaves"
    }
 }

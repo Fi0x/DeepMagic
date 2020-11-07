@@ -1,8 +1,8 @@
 {
   "parent": "block/inner_stairs",
   "textures": {
-    "bottom": "deepmagic:blocks/insanity_cobble",
-    "top": "deepmagic:blocks/insanity_cobble",
-    "side": "deepmagic:blocks/insanity_cobble"
+    "bottom": "deepmagic:blocks/insanity/insanity_cobble",
+    "top": "deepmagic:blocks/insanity/insanity_cobble",
+    "side": "deepmagic:blocks/insanity/insanity_cobble"
   }
 }

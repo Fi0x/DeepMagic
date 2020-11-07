@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/cube",
    "textures": {
-       "particle": "deepmagic:blocks/weather_controller_side1",
-       "up": "deepmagic:blocks/controller_top",
-       "down": "deepmagic:blocks/controller_top",
-       "north": "deepmagic:blocks/weather_controller_side1",
-       "east": "deepmagic:blocks/weather_controller_side2",
-       "south": "deepmagic:blocks/weather_controller_side1",
-       "west": "deepmagic:blocks/weather_controller_side2"
+       "particle": "deepmagic:blocks/controller/weather_controller_side1",
+       "up": "deepmagic:blocks/controller/controller_top",
+       "down": "deepmagic:blocks/controller/controller_top",
+       "north": "deepmagic:blocks/controller/weather_controller_side1",
+       "east": "deepmagic:blocks/controller/weather_controller_side2",
+       "south": "deepmagic:blocks/controller/weather_controller_side1",
+       "west": "deepmagic:blocks/controller/weather_controller_side2"
    }
 }

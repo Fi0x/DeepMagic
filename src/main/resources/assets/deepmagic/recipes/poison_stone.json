@@ -1,0 +1,44 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "ISI",
+        "MWF",
+        "IBI"
+    ],
+    
+    "key":
+    {
+        "I":
+        {
+            "item": "deepmagic:insanity_stone"
+        },
+        "S":
+        {
+            "item": "deepmagic:insanity_apple"
+        },
+        "M":
+        {
+            "item": "deepmagic:magic_converter"
+        },
+        "W":
+        {
+            "item": "deepmagic:world_interaction_segment"
+        },
+        "F":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        },
+        "B":
+        {
+            "item": "deepmagic:mana_battery"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:poison_stone",
+        "count": 1
+    }
+}

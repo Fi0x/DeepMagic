@@ -90,7 +90,7 @@ public class PlayerPropertyEvents
         {
             PlayerMana playerMana = event.getEntity().getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
-            event.setAmount(event.getAmount() + (float) Math.pow(playerMana.hpRegeneration, 0.6));
+            event.setAmount(event.getAmount() + playerMana.getHpRegenerationAmount());
         }
     }
 }

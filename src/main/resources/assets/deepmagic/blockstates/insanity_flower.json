@@ -12,7 +12,7 @@
           "model": "builtin/generated",
           "transform": "forge:default-item",
           "textures": {
-            "layer0": "deepmagic:blocks/insanity_flower"
+            "layer0": "deepmagic:blocks/insanity/insanity_flower"
           }
         }]
     }

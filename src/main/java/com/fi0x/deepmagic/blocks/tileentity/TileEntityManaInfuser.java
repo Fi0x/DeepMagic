@@ -309,6 +309,11 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
                 return true;
             }
         }
+        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange)
+        {
+            linkedAltarPos = null;
+            return false;
+        }
 
         if(linkedAltar.getStoredMana() > 10)
         {

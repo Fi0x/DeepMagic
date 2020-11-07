@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/cube",
    "textures": {
-       "particle": "deepmagic:blocks/time_controller_side",
-       "up": "deepmagic:blocks/controller_top",
-       "down": "deepmagic:blocks/controller_top",
-       "north": "deepmagic:blocks/time_controller_side",
-       "east": "deepmagic:blocks/time_controller_side",
-       "south": "deepmagic:blocks/time_controller_side",
-       "west": "deepmagic:blocks/time_controller_side"
+       "particle": "deepmagic:blocks/controller/time_controller_side",
+       "up": "deepmagic:blocks/controller/controller_top",
+       "down": "deepmagic:blocks/controller/controller_top",
+       "north": "deepmagic:blocks/controller/time_controller_side",
+       "east": "deepmagic:blocks/controller/time_controller_side",
+       "south": "deepmagic:blocks/controller/time_controller_side",
+       "west": "deepmagic:blocks/controller/time_controller_side"
    }
 }

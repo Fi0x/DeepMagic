@@ -5,6 +5,7 @@ itemGroup.deepmagic_spells_tab=Deep Magic Spells
 container.mana_altar=Mana Altar
 container.mana_generator_normal=Normal Mana Generator
 container.mana_generator_insanity=Insanity Mana Generator
+container.mana_generator_mob=Mob Mana Generator
 container.mana_infuser=Mana Infuser
 
 item.teleportation_crystal.name=Teleportation Crystal
@@ -52,6 +53,7 @@ tile.heal_stone.name=Heal Stone
 tile.vision_stone.name=Vision Stone
 tile.saturation_stone.name=Saturation Stone
 tile.levitation_stone.name=Levitation Stone
+tile.poison_stone.name=Poison Stone
 tile.demon_stone.name=Demon Stone
 
 tile.spell_stone.name=Spell Stone
@@ -62,6 +64,7 @@ tile.time_controller.name=Time Controller
 tile.mana_altar.name=Mana Altar
 tile.mana_generator_normal.name=Normal Mana Generator
 tile.mana_generator_insanity.name=Insanity Mana Generator
+tile.mana_generator_mob.name=Mob Mana Generator
 tile.mana_infuser.name=Mana Infuser
 
 fluid.insanity_water=Insanity Water

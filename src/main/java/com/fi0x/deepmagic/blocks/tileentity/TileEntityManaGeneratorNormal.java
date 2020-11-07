@@ -273,6 +273,11 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
                 return true;
             }
         }
+        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange)
+        {
+            linkedAltarPos = null;
+            return false;
+        }
 
         int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
         if(spaceInAltar > storedMana)

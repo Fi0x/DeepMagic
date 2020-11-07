@@ -2,12 +2,12 @@
   "forge_marker": 1,
    "parent": "block/cube",
    "textures": {
-       "particle": "deepmagic:blocks/insanity_grass_side",
-       "up": "deepmagic:blocks/insanity_grass_top",
-       "down": "deepmagic:blocks/insanity_dirt",
-       "north": "deepmagic:blocks/insanity_grass_side",
-       "east": "deepmagic:blocks/insanity_grass_side",
-       "south": "deepmagic:blocks/insanity_grass_side",
-       "west": "deepmagic:blocks/insanity_grass_side"
+       "particle": "deepmagic:blocks/insanity/insanity_grass_side",
+       "up": "deepmagic:blocks/insanity/insanity_grass_top",
+       "down": "deepmagic:blocks/insanity/insanity_dirt",
+       "north": "deepmagic:blocks/insanity/insanity_grass_side",
+       "east": "deepmagic:blocks/insanity/insanity_grass_side",
+       "south": "deepmagic:blocks/insanity/insanity_grass_side",
+       "west": "deepmagic:blocks/insanity/insanity_grass_side"
    }
 }
