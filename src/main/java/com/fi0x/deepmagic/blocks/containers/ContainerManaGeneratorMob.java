@@ -12,16 +12,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaGeneratorMob extends Container//TODO: Adjust class
+public class ContainerManaGeneratorMob extends Container
 {
     private final TileEntityManaGeneratorMob te;
-    private int burnTime, currentBurnTime, storedMana;
+    private int cooldown, storedMana;
 
     public ContainerManaGeneratorMob(InventoryPlayer player, TileEntityManaGeneratorMob tileEntity)
     {
         te = tileEntity;
-
-        addSlotToContainer(new SlotManaGeneratorMob(te, 0, 26, 31));
 
         for(int y = 0; y < 3; y++)
         {
@@ -49,14 +47,12 @@ public class ContainerManaGeneratorMob extends Container//TODO: Adjust class
 
         for (IContainerListener listener : listeners)
         {
-            if (burnTime != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
-            if (currentBurnTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
-            if (storedMana != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
+            if (cooldown != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
+            if (storedMana != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
         }
 
-        burnTime = te.getField(0);
-        currentBurnTime = te.getField(1);
-        storedMana = te.getField(2);
+        cooldown = te.getField(0);
+        storedMana = te.getField(1);
     }
     @Override
     @SideOnly(Side.CLIENT)
@@ -81,20 +77,10 @@ public class ContainerManaGeneratorMob extends Container//TODO: Adjust class
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index == 0)
+            if (index < 27)
             {
-                if (!this.mergeItemStack(itemstack1, 1, 37, true)) return ItemStack.EMPTY;
-                slot.onSlotChange(itemstack1, itemstack);
-            } else
-            {
-                if (TileEntityManaGeneratorMob.isItemFuel(itemstack1))
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
-                } else if (index < 28)
-                {
-                    if (!this.mergeItemStack(itemstack1, 28, 37, false)) return ItemStack.EMPTY;
-                } else if (index < 37 && !this.mergeItemStack(itemstack1, 1, 28, false)) return ItemStack.EMPTY;
-            }
+                if (!this.mergeItemStack(itemstack1, 27, 36, false)) return ItemStack.EMPTY;
+            } else if (index < 36 && !this.mergeItemStack(itemstack1, 0, 27, false)) return ItemStack.EMPTY;
 
             if (itemstack1.isEmpty()) slot.putStack(ItemStack.EMPTY);
             else slot.onSlotChanged();

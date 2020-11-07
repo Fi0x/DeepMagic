@@ -20,19 +20,17 @@ import javax.annotation.Nonnull;
 
 public class TileEntityManaGeneratorMob extends TileEntity implements IInventory, ITickable//TODO: Adjust class
 {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
 
     private BlockPos linkedAltarPos;
     private TileEntityManaAltar linkedAltar;
-    private int burnTime;
-    private int currentBurnTime;
+    private int cooldown;
     private int storedMana;
 
     @Override
     public int getSizeInventory()
     {
-        return inventory.size();
+        return 0;
     }
     @Override
     public boolean isEmpty()

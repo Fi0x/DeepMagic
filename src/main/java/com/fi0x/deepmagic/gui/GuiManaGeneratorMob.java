@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaGeneratorMob extends GuiContainer//TODO: Adjust class
+public class GuiManaGeneratorMob extends GuiContainer
 {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_generator_mob.png");
     private final InventoryPlayer player;
@@ -43,17 +43,11 @@ public class GuiManaGeneratorMob extends GuiContainer//TODO: Adjust class
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getBurnLeftScaled(14);
-        drawTexturedModalRect(guiLeft + 46,guiTop + 46 - p, 176, 14 - p, 14, p);
+        drawTexturedModalRect(guiLeft + 33,guiTop + 38, 176, 0, 16, 16);
+        drawTexturedModalRect(guiLeft + 124,guiTop + 38, 176, 0, 16, 16);
 
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 14, 16, m);
-    }
-    private int getBurnLeftScaled(int pixels)
-    {
-        int i = te.getField(1);
-        if(i == 0) i = 200;
-        return te.getField(0) * pixels / i;
+        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 16, 16, m);
     }
     private int getStoredManaScaled(int pixels)
     {

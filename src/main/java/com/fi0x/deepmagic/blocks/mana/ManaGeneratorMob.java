@@ -16,7 +16,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,7 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ManaGeneratorMob extends BlockBase implements ITileEntityProvider//TODO: Adjust class
+public class ManaGeneratorMob extends BlockBase implements ITileEntityProvider
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool RUNNING = PropertyBool.create("running");
@@ -88,14 +87,6 @@ public class ManaGeneratorMob extends BlockBase implements ITileEntityProvider//
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
         return Item.getItemFromBlock(ModBlocks.MANA_GENERATOR_MOB);
-    }
-    @Override
-    public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
-    {
-        TileEntityManaGeneratorMob te = (TileEntityManaGeneratorMob) worldIn.getTileEntity(pos);
-        assert te != null;
-        InventoryHelper.dropInventoryItems(worldIn, pos, te);
-        super.breakBlock(worldIn, pos, state);
     }
     @Nonnull
     @Override
