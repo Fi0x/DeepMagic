@@ -5,12 +5,10 @@ import com.fi0x.deepmagic.blocks.mana.ManaGeneratorMob;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -18,7 +16,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGeneratorMob extends TileEntity implements IInventory, ITickable//TODO: Adjust class
+public class TileEntityManaGeneratorMob extends TileEntity implements IInventory, ITickable
 {
     private String customName;
 
@@ -35,36 +33,29 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     @Override
     public boolean isEmpty()
     {
-        for(ItemStack stack : inventory)
-        {
-            if(!stack.isEmpty()) return false;
-        }
         return true;
     }
     @Nonnull
     @Override
     public ItemStack getStackInSlot(int index)
     {
-        return inventory.get(index);
+        return ItemStack.EMPTY;
     }
     @Nonnull
     @Override
     public ItemStack decrStackSize(int index, int count)
     {
-        return ItemStackHelper.getAndSplit(inventory, index, count);
+        return ItemStack.EMPTY;
     }
     @Nonnull
     @Override
     public ItemStack removeStackFromSlot(int index)
     {
-        return ItemStackHelper.getAndRemove(inventory, index);
+        return ItemStack.EMPTY;
     }
     @Override
     public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
     {
-        inventory.set(index, stack);
-
-        if(stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
     }
     @Override
     public int getInventoryStackLimit()
@@ -87,16 +78,15 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return isItemFuel(stack) || index != 0;
+        return true;
     }
     @Override
     public int getField(int id)
     {
         switch (id)
         {
-            case 0: return burnTime;
-            case 1: return currentBurnTime;
-            case 2: return storedMana;
+            case 0: return cooldown;
+            case 1: return storedMana;
         }
         return 0;
     }
@@ -105,23 +95,20 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     {
         switch (id)
         {
-            case 0: burnTime = value;
+            case 0: cooldown = value;
             break;
-            case 1: currentBurnTime = value;
-            break;
-            case 2: storedMana = value;
+            case 1: storedMana = value;
             break;
         }
     }
     @Override
     public int getFieldCount()
     {
-        return 3;
+        return 2;
     }
     @Override
     public void clear()
     {
-        inventory.clear();
     }
     @Override
     public void update()
@@ -130,26 +117,27 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
         boolean dirty = false;
         if(isRunning())
         {
-            burnTime--;
-            if(storedMana - 10 < ConfigHandler.manaGeneratorManaCapacity) storedMana += 10;
+            cooldown--;
             dirty = true;
         }
         if(world.isRemote) return;
 
-        ItemStack stack = inventory.get(0);
-
-        if(!isRunning() && storedMana < ConfigHandler.manaGeneratorManaCapacity)
+        if(storedMana < ConfigHandler.manaGeneratorManaCapacity && cooldown <= 10)
         {
-            if(!stack.isEmpty())
+            //TODO: Get mobs in range as list
+            if(true)//TODO: Check if moblist is not empty
             {
-                burnTime = getItemBurnTime(stack);
-                currentBurnTime = burnTime;
-                stack.shrink(1);
-                inventory.set(0, stack);
+                cooldown = 30;
+                //TODO: Damage mobs and add mana
                 dirty = true;
             }
         }
-        if(isRunning() != wasRunning) ManaGeneratorMob.setState(isRunning(), world, pos);
+
+        if(isRunning() != wasRunning)
+        {
+            ManaGeneratorMob.setState(isRunning(), world, pos);
+            dirty = true;
+        }
         if(storedMana >= 100)
         {
             if(sendManaToAltar()) dirty = true;
@@ -185,9 +173,8 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
             compound.setBoolean("linked", true);
         } else compound.setBoolean("linked", false);
 
-        compound.setInteger("burnTime", burnTime);
+        compound.setInteger("cooldown", cooldown);
         compound.setInteger("storedMana", storedMana);
-        ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
         return super.writeToNBT(compound);
     }
@@ -202,11 +189,8 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
             linkedAltarPos = new BlockPos(x, y, z);
         }
 
-        burnTime = compound.getInteger("burnTime");
-        currentBurnTime = getItemBurnTime(inventory.get(0));
+        cooldown = compound.getInteger("cooldown");
         storedMana = compound.getInteger("storedMana");
-        inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound, inventory);
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
         super.readFromNBT(compound);
     }
@@ -216,15 +200,7 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     }
     public boolean isRunning()
     {
-        return burnTime > 0;
-    }
-    public static int getItemBurnTime(ItemStack fuel)
-    {
-        return 0;
-    }
-    public static boolean isItemFuel(ItemStack fuel)
-    {
-        return getItemBurnTime(fuel) > 0;
+        return cooldown > 0;
     }
     public void setLinkedAltarPos(BlockPos blockPos)
     {
@@ -248,6 +224,11 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
                 linkedAltarPos = null;
                 return true;
             }
+        }
+        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > 100)
+        {
+            linkedAltarPos = null;
+            return false;
         }
 
         int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
