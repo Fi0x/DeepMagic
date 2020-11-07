@@ -47,11 +47,11 @@ public class GuiManaGeneratorMob extends GuiContainer
         drawTexturedModalRect(guiLeft + 124,guiTop + 38, 176, 0, 16, 16);
 
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 134, guiTop + 70 - m, 176, 16, 16, m);
+        drawTexturedModalRect(guiLeft + 80, guiTop + 71 - m, 176, 16, 16, m);
     }
     private int getStoredManaScaled(int pixels)
     {
-        int i = te.getField(2);
+        int i = te.getField(1);
         int j = ConfigHandler.manaGeneratorManaCapacity;
         if(j != 0 && i != 0) return i * pixels / j;
         return 0;

@@ -134,8 +134,8 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
             if(!entities.isEmpty())
             {
                 cooldown = 30;
-
                 int gain = ConfigHandler.manaGainFromMob;
+
                 for(EntityMob entity : entities)
                 {
                     entity.attackEntityFrom(DamageSource.MAGIC, 1);
