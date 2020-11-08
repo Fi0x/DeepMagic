@@ -14,23 +14,26 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
 {
     private final SmallDungeonRoom[] rooms = new SmallDungeonRoom[] {
             new SmallDungeonRoom("small_dungeon_room0", 16, 16, 7),
-            new SmallDungeonRoom("small_dungeon_room1", 16, 16, 6)};
+            new SmallDungeonRoom("small_dungeon_room1", 16, 16, 6),
+            new SmallDungeonRoom("small_dungeon_room2", 16, 16, 6),
+            new SmallDungeonRoom("small_dungeon_room3", 16, 16, 8),
+            new SmallDungeonRoom("small_dungeon_room4", 16, 16, 7),
+            new SmallDungeonRoom("small_dungeon_room5", 16, 16, 6)};
+    private final SmallDungeonRoom ceiling = new SmallDungeonRoom("small_dungeon_ceiling", 16, 16, 1);
 
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
     {
-        int maxHeight = 60 + (int) (Math.random() * 15);
-        int previousRoom = 0;
+        int maxHeight = 55 + (int) (Math.random() * 10);
 
         while (position.getY() < maxHeight)
         {
             int room = (int) (Math.random() * rooms.length);
-            if(room == previousRoom) room++;
-            if(room == rooms.length) room = 0;
 
             rooms[room].generate(world, rand, position);
             position = position.add(0, rooms[room].height, 0);
         }
+        ceiling.generate(world, rand, position);
 
         return true;
     }
