@@ -1,10 +1,10 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.blocks.mana.ManaInfuser;
+import com.fi0x.deepmagic.blocks.mana.ManaGrinder;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.util.recipes.ManaInfuserRecipes;
+import com.fi0x.deepmagic.util.recipes.ManaGrinderRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,7 +24,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaInfuser extends TileEntity implements IInventory, ITickable
+public class TileEntityManaGrinder extends TileEntity implements IInventory, ITickable//TODO: Adjust class
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
     private String customName;
@@ -167,7 +167,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
 
             if(isRunning() != wasRunning)
             {
-                ManaInfuser.setState(isRunning(), world, pos);
+                ManaGrinder.setState(isRunning(), world, pos);
                 dirty = true;
             }
             if(ConfigHandler.manaMachineManaCapacity - storedMana >= 10)
@@ -181,7 +181,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     @Override
     public String getName()
     {
-        return hasCustomName() ? customName : "container.mana_infuser";
+        return hasCustomName() ? customName : "container.mana_grinder";
     }
     @Override
     public boolean hasCustomName()
@@ -245,7 +245,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         if (inputStack.isEmpty()) return false;
         else
         {
-            ItemStack infusionResult = ManaInfuserRecipes.instance().getInfuserResult(inputStack);
+            ItemStack infusionResult = ManaGrinderRecipes.instance().getGrinderResult(inputStack);
             if (infusionResult.isEmpty()) return false;
 
             ItemStack output = inventory.get(1);
@@ -274,7 +274,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     private void infuseItem()
     {
         ItemStack input = inventory.get(0);
-        ItemStack result = ManaInfuserRecipes.instance().getInfuserResult(input);
+        ItemStack result = ManaGrinderRecipes.instance().getGrinderResult(input);
         if(!result.isEmpty())
         {
             ItemStack output = inventory.get(1);

@@ -37,6 +37,7 @@ public class ConfigHandler
     public static int guiManaGeneratorInsanityID;
     public static int guiManaGeneratorMobID;
     public static int guiManaInfuserID;
+    public static int guiManaGrinderID;
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
@@ -99,7 +100,7 @@ public class ConfigHandler
     //Mana Amounts
     public static int manaAltarCapacity;
     public static int manaGeneratorManaCapacity;
-    public static int manaInfuserManaCapacity;
+    public static int manaMachineManaCapacity;
     public static int manaGainFromMob;
     //Block Ranges
     public static int manaBlockTransferRange;
@@ -160,6 +161,7 @@ public class ConfigHandler
         guiManaGeneratorInsanityID = ids.getInt("Insanity Mana Generator GUI ID", category, 422, -1000, 1000, "");
         guiManaGeneratorMobID = ids.getInt("Mob Mana Generator GUI ID", category, 423, -1000, 1000, "");
         guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 424, -1000, 1000, "");
+        guiManaGrinderID = ids.getInt("Mana Grinder GUI ID", category, 425, -1000, 1000, "");
 
         ids.save();
     }
@@ -276,7 +278,7 @@ public class ConfigHandler
         blocks.addCustomCategoryComment(category, "Mana Amounts");
         manaAltarCapacity = blocks.getInt("Mana Altar Capacity", category, 10000, 1, 100000, "The Base Capacity of the Mana Altar");
         manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Generator has");
-        manaInfuserManaCapacity = blocks.getInt("Mana Infuser Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Infuser has");
+        manaMachineManaCapacity = blocks.getInt("Mana Machine Capacity", category, 1000, 100, 100000, "The Mana Capacity for all Mana consuming Machines");
         manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
 
         category = "Ranges";
