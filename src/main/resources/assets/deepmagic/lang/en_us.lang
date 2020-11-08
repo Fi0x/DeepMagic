@@ -7,6 +7,7 @@ container.mana_generator_normal=Normal Mana Generator
 container.mana_generator_insanity=Insanity Mana Generator
 container.mana_generator_mob=Mob Mana Generator
 container.mana_infuser=Mana Infuser
+container.mana_grinder=Mana Grinder
 
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
@@ -66,6 +67,7 @@ tile.mana_generator_normal.name=Normal Mana Generator
 tile.mana_generator_insanity.name=Insanity Mana Generator
 tile.mana_generator_mob.name=Mob Mana Generator
 tile.mana_infuser.name=Mana Infuser
+tile.mana_grinder.name=Mana Grinder
 
 fluid.insanity_water=Insanity Water
 
