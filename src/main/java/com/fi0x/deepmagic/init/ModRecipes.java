@@ -14,5 +14,6 @@ public class ModRecipes
 		GameRegistry.addSmelting(ModItems.RAW_WORM, new ItemStack(ModItems.COOKED_WORM, 1), 1F);
 		GameRegistry.addSmelting(ModBlocks.INSANITY_COBBLE, new ItemStack(ModBlocks.INSANITY_STONE, 1), 1F);
 		GameRegistry.addSmelting(Items.ROTTEN_FLESH, new ItemStack(ModItems.DRY_FLESH, 1), 1F);
+		GameRegistry.addSmelting(ModItems.WHEAT_FLOUR, new ItemStack(Items.BREAD, 1), 0F);
 	}
 }

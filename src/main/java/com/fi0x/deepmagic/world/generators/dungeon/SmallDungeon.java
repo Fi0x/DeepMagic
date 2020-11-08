@@ -24,7 +24,7 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
     {
-        int maxHeight = 55 + (int) (Math.random() * 10);
+        int maxHeight = 60 + (int) (Math.random() * 10);
 
         while (position.getY() < maxHeight)
         {

@@ -95,6 +95,7 @@ item.raw_worm.name=Raw Worm
 item.cooked_worm.name=Cooked Worm
 item.worm_snack.name=Worm Snack
 item.dry_flesh.name=Dry Flesh
+item.wheat_flour.name=Wheat Flour
 
 item.deep_crystal.name=Deep Crystal
 item.compressed_deep_crystal.name=Compressed Deep Crystal

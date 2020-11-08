@@ -31,6 +31,7 @@ public class ManaGrinderRecipes
         addManaGrinderRecipe(new ItemStack(Blocks.DIAMOND_ORE, 1), new ItemStack(Items.DIAMOND, 4));
         addManaGrinderRecipe(new ItemStack(Blocks.EMERALD_ORE, 1), new ItemStack(Items.EMERALD, 4));
         addManaGrinderRecipe(new ItemStack(Blocks.QUARTZ_ORE, 1), new ItemStack(Items.QUARTZ, 4));
+        addManaGrinderRecipe(new ItemStack(Items.WHEAT, 1), new ItemStack(ModItems.WHEAT_FLOUR, 1));
     }
 
     private void addManaGrinderRecipe(ItemStack input, ItemStack result)

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ModItems
 {
-	public static final List<Item> ITEMS = new ArrayList<>();//TODO: Add Wheat flour to be grinded from wheat
+	public static final List<Item> ITEMS = new ArrayList<>();
 	
 	//Materials
 	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", 4, 1561, 10.0F, 4.0F, 10);
@@ -63,6 +63,7 @@ public class ModItems
 	public static final Item COOKED_WORM = new FoodBase("cooked_worm", 4, 4, false);
 	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
 	public static final Item DRY_FLESH = new FoodBase("dry_flesh", 4, 1, false);
+	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour");
 
 	//Crafting Items
 	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");
