@@ -1,8 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaInfuser;
-import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.recipes.ManaInfuserRecipes;
 import net.minecraft.block.Block;
@@ -261,11 +259,9 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
         Item item = infusionStack.getItem();
         if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
         {
-            Block block = Block.getBlockFromItem(item);
-            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 500;
-        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
-
-        return 0;
+            return 1000;
+        }
+        return 120;
     }
     public static boolean isItemInfusable(ItemStack item)
     {

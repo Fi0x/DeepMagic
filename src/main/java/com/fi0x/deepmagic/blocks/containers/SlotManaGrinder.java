@@ -16,6 +16,6 @@ public class SlotManaGrinder extends Slot
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        return TileEntityManaGrinder.isItemInfusable(stack);
+        return TileEntityManaGrinder.isItemGrindable(stack);
     }
 }

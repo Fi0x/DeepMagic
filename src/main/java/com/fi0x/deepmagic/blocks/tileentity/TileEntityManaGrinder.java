@@ -24,15 +24,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGrinder extends TileEntity implements IInventory, ITickable//TODO: Adjust class
+public class TileEntityManaGrinder extends TileEntity implements IInventory, ITickable
 {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
     private String customName;
 
     private BlockPos linkedAltarPos;
     private TileEntityManaAltar linkedAltar;
-    private int infusionProgress;
-    private int totalInfusionTime;
+    private int grindProgress;
+    private int totalGrindTime;
     private int storedMana;
 
     @Override
@@ -95,15 +95,15 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return index != 1;
+        return index == 0 || index > 3;
     }
     @Override
     public int getField(int id)
     {
         switch (id)
         {
-            case 0: return infusionProgress;
-            case 1: return totalInfusionTime;
+            case 0: return grindProgress;
+            case 1: return totalGrindTime;
             case 2: return storedMana;
         }
         return 0;
@@ -113,9 +113,9 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
     {
         switch (id)
         {
-            case 0: infusionProgress = value;
+            case 0: grindProgress = value;
             break;
-            case 1: totalInfusionTime = value;
+            case 1: totalGrindTime = value;
             break;
             case 2: storedMana = value;
             break;
@@ -132,7 +132,7 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
         inventory.clear();
     }
     @Override
-    public void update()
+    public void update()//TODO: Adjust method
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
@@ -142,27 +142,27 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
             ItemStack stack = inventory.get(0);
             if(stack.isEmpty())
             {
-                if(totalInfusionTime > 0)
+                if(totalGrindTime > 0)
                 {
-                    infusionProgress = 0;
-                    totalInfusionTime = 0;
+                    grindProgress = 0;
+                    totalGrindTime = 0;
                     dirty = true;
                 }
             } else if (storedMana > 0)
             {
-                if(canInfuse())
+                if(canGrind())
                 {
                     storedMana--;
-                    infusionProgress++;
+                    grindProgress++;
                     dirty = true;
-                    if(totalInfusionTime == 0) totalInfusionTime = getItemInfusionTime(stack);
-                    if (infusionProgress >= totalInfusionTime)
+                    if(totalGrindTime == 0) totalGrindTime = getItemGrindTime(stack);
+                    if (grindProgress >= totalGrindTime)
                     {
-                        infusionProgress = 0;
-                        infuseItem();
-                        totalInfusionTime = getItemInfusionTime(stack);
+                        grindProgress = 0;
+                        grindItem();
+                        totalGrindTime = getItemGrindTime(stack);
                     }
-                } else infusionProgress = 0;
+                } else grindProgress = 0;
             }
 
             if(isRunning() != wasRunning)
@@ -206,7 +206,7 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
             compound.setBoolean("linked", true);
         } else compound.setBoolean("linked", false);
 
-        compound.setInteger("infusionProgress", infusionProgress);
+        compound.setInteger("grindProgress", grindProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
@@ -223,8 +223,8 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
             linkedAltarPos = new BlockPos(x, y, z);
         }
 
-        infusionProgress = compound.getInteger("infusionProgress");
-        totalInfusionTime = getItemInfusionTime(inventory.get(0));
+        grindProgress = compound.getInteger("grindProgress");
+        totalGrindTime = getItemGrindTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
         inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventory);
@@ -237,47 +237,49 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
     }
     public boolean isRunning()
     {
-        return infusionProgress > 0;
+        return grindProgress > 0;
     }
-    private boolean canInfuse()
+    private boolean canGrind()
     {
         ItemStack inputStack = inventory.get(0);
         if (inputStack.isEmpty()) return false;
         else
         {
-            ItemStack infusionResult = ManaGrinderRecipes.instance().getGrinderResult(inputStack);
-            if (infusionResult.isEmpty()) return false;
+            ItemStack grinderResult = ManaGrinderRecipes.instance().getGrinderResult(inputStack);
+            if (grinderResult.isEmpty()) return false;
 
-            ItemStack output = inventory.get(1);
+            ItemStack output = inventory.get(1);//TODO: use all output slots
             if (output.isEmpty()) return true;
-            if (!output.isItemEqual(infusionResult)) return false;
-            return output.getCount() + infusionResult.getCount() <= getInventoryStackLimit() && output.getCount() + infusionResult.getCount() <= output.getMaxStackSize();
+            if (!output.isItemEqual(grinderResult)) return false;
+            return output.getCount() + grinderResult.getCount() <= getInventoryStackLimit() && output.getCount() + grinderResult.getCount() <= output.getMaxStackSize();
         }
     }
-    public static int getItemInfusionTime(ItemStack infusionStack)
+    public static int getItemGrindTime(ItemStack grindStack)
     {
-        if(infusionStack.isEmpty()) return 0;
+        if(grindStack.isEmpty()) return 0;
 
-        Item item = infusionStack.getItem();
+        Item item = grindStack.getItem();
         if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
         {
             Block block = Block.getBlockFromItem(item);
-            if(block == ModBlocks.DEEP_CRYSTAL_BLOCK) return 500;
-        } else if(item == ModItems.DEEP_CRYSTAL_POWDER) return 100;
+            if(block == ModBlocks.DEEP_CRYSTAL_ORE) return 400;
+            if(block == ModBlocks.DEEP_CRYSTAL_END_ORE) return 400;
+            if(block == ModBlocks.DEEP_CRYSTAL_NETHER_ORE) return 400;
+        } else if(item == ModItems.DEEP_CRYSTAL) return 200;
 
-        return 0;
+        return 100;
     }
-    public static boolean isItemInfusable(ItemStack item)
+    public static boolean isItemGrindable(ItemStack item)
     {
-        return getItemInfusionTime(item) > 0;
+        return getItemGrindTime(item) > 0;
     }
-    private void infuseItem()
+    private void grindItem()
     {
         ItemStack input = inventory.get(0);
         ItemStack result = ManaGrinderRecipes.instance().getGrinderResult(input);
         if(!result.isEmpty())
         {
-            ItemStack output = inventory.get(1);
+            ItemStack output = inventory.get(1);//TODO: change output slots
 
             if(output.isEmpty()) inventory.set(1, result);
             else if(output.getItem() == result.getItem()) output.grow(result.getCount());
