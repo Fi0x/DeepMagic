@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaGrinder extends GuiContainer//TODO: Adjust class
+public class GuiManaGrinder extends GuiContainer
 {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_grinder.png");
     private final InventoryPlayer player;
@@ -43,11 +43,11 @@ public class GuiManaGrinder extends GuiContainer//TODO: Adjust class
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getProgressScaled(22);
-        drawTexturedModalRect(guiLeft + 47,guiTop + 25, 176, 50, p, 15);
+        int p = getProgressScaled(38);
+        drawTexturedModalRect(guiLeft + 42,guiTop + 25, 176, 50, p, 15);
 
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 141, guiTop + 66 - m, 176, 0, 16, m);
+        drawTexturedModalRect(guiLeft + 147, guiTop + 66 - m, 176, 0, 16, m);
     }
     private int getProgressScaled(int pixels)
     {
@@ -58,7 +58,7 @@ public class GuiManaGrinder extends GuiContainer//TODO: Adjust class
     private int getStoredManaScaled(int pixels)
     {
         int i = te.getField(2);
-        int j = ConfigHandler.manaGeneratorManaCapacity;
+        int j = ConfigHandler.manaMachineManaCapacity;
         if(j != 0 && i != 0) return i * pixels / j;
         return 0;
     }

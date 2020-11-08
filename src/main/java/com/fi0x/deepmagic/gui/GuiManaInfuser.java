@@ -58,7 +58,7 @@ public class GuiManaInfuser extends GuiContainer
     private int getStoredManaScaled(int pixels)
     {
         int i = te.getField(2);
-        int j = ConfigHandler.manaGeneratorManaCapacity;
+        int j = ConfigHandler.manaMachineManaCapacity;
         if(j != 0 && i != 0) return i * pixels / j;
         return 0;
     }
