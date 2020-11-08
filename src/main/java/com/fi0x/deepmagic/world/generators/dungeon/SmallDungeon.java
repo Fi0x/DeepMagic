@@ -12,19 +12,22 @@ import java.util.Random;
 
 public class SmallDungeon extends WorldGenerator implements IWorldGenerator
 {
-    private BlockPos dungeonCenter;
-
     private final SmallDungeonRoom[] rooms = new SmallDungeonRoom[] {
             new SmallDungeonRoom("small_dungeon_room0", 16, 16, 7),
             new SmallDungeonRoom("small_dungeon_room1", 16, 16, 6)};
 
     @Override
-    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)//TODO: don't generate same rooms above each other
+    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
     {
-        dungeonCenter = position;
-        while (position.getY() < 100)
+        int maxHeight = 60 + (int) (Math.random() * 15);
+        int previousRoom = 0;
+
+        while (position.getY() < maxHeight)
         {
             int room = (int) (Math.random() * rooms.length);
+            if(room == previousRoom) room++;
+            if(room == rooms.length) room = 0;
+
             rooms[room].generate(world, rand, position);
             position = position.add(0, rooms[room].height, 0);
         }
