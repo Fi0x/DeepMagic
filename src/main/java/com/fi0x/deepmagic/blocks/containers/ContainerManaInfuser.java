@@ -23,7 +23,7 @@ public class ContainerManaInfuser extends Container
         te = tileEntity;
 
         addSlotToContainer(new SlotManaInfuser(te, 0, 21, 25));
-        addSlotToContainer(new SlotManaInfuserOutput(te, 1, 86, 25));
+        addSlotToContainer(new SlotOutput(te, 1, 86, 25));
 
         for(int y = 0; y < 3; y++)
         {
