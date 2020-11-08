@@ -18,29 +18,22 @@ public class SmallDungeonRoom extends WorldGenerator implements IStructure
 
     private final int sizeX;
     private final int sizeZ;
+    public final int height;
     public int offsetX;
     public int offsetZ;
 
-    public boolean hasEntranceNorth;
-    public boolean hasEntranceEast;
-    public boolean hasEntranceSouth;
-    public boolean hasEntranceWest;
-
     public Rotation rotation;
 
-    public SmallDungeonRoom(String name, boolean hasEntranceNorth, boolean hasEntranceEast, boolean hasEntranceSouth, boolean hasEntranceWest)
+    public SmallDungeonRoom(String name, int sizeX, int sizeZ, int height)
     {
         this.templateName = name;
 
-        this.sizeX = 16;
-        this.sizeZ = 16;
+        this.sizeX = sizeX;
+        this.sizeZ = sizeZ;
+        this.height = height;
+
         offsetX = - sizeX / 2;
         offsetZ = - sizeZ / 2;
-
-        this.hasEntranceNorth = hasEntranceNorth;
-        this.hasEntranceEast = hasEntranceEast;
-        this.hasEntranceSouth = hasEntranceSouth;
-        this.hasEntranceWest = hasEntranceWest;
 
         this.rotation = Rotation.NONE;
     }
@@ -50,36 +43,5 @@ public class SmallDungeonRoom extends WorldGenerator implements IStructure
     {
         this.pos = pos;
         return GenerationHelper.templatePlacer(world, rand, this.pos.add(offsetX, 0, offsetZ), templateName, rotation);
-    }
-
-    public void rotate90Deg()
-    {
-        rotation = rotation.add(Rotation.CLOCKWISE_90);
-
-        boolean temp = hasEntranceNorth;
-        hasEntranceNorth = hasEntranceWest;
-        hasEntranceWest = hasEntranceSouth;
-        hasEntranceSouth = hasEntranceEast;
-        hasEntranceEast = temp;
-
-        switch(rotation)
-        {
-            case NONE:
-                offsetX = - sizeX / 2;
-                offsetZ = - sizeZ / 2;
-                break;
-            case CLOCKWISE_90:
-                offsetX = sizeZ / 2;
-                offsetZ = - sizeX / 2;
-                break;
-            case CLOCKWISE_180:
-                offsetX = sizeX / 2;
-                offsetZ = sizeZ / 2;
-                break;
-            case COUNTERCLOCKWISE_90:
-                offsetX = - sizeZ / 2;
-                offsetZ = sizeX / 2;
-                break;
-        }
     }
 }

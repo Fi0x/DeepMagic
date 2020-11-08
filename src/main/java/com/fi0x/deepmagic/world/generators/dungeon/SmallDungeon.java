@@ -14,83 +14,22 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
 {
     private BlockPos dungeonCenter;
 
-    private final SmallDungeonRoom dungeonCore = new SmallDungeonRoom("small_dungeon_center", true, true, true, true);
-    private final SmallDungeonRoom[] dungeonSide = new SmallDungeonRoom[] {
-            new SmallDungeonRoom("small_dungeon_side_1", false, true, true, true),
-            new SmallDungeonRoom("small_dungeon_side_2", false, false, true, true)};
-    private final SmallDungeonRoom[] dungeonCorner = new SmallDungeonRoom[] {
-            new SmallDungeonRoom("small_dungeon_corner_1", false, false, true, false)};
+    private final SmallDungeonRoom[] rooms = new SmallDungeonRoom[] {
+            new SmallDungeonRoom("small_dungeon_room0", 16, 16, 7),
+            new SmallDungeonRoom("small_dungeon_room1", 16, 16, 6)};
 
     @Override
-    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
+    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)//TODO: don't generate same rooms above each other
     {
         dungeonCenter = position;
-        dungeonCore.generate(world, rand, dungeonCenter);
-
-        generateSides(world, rand);
-//        generateCorners(world, rand);
+        while (position.getY() < 100)
+        {
+            int room = (int) (Math.random() * rooms.length);
+            rooms[room].generate(world, rand, position);
+            position = position.add(0, rooms[room].height, 0);
+        }
 
         return true;
-    }
-
-    private boolean generateSides(World world, Random rand)
-    {
-        boolean success = true;
-        int x = dungeonCenter.getX();
-        int y = dungeonCenter.getY();
-        int z = dungeonCenter.getZ();
-
-        SmallDungeonRoom side = dungeonSide[rand.nextInt(dungeonSide.length)];
-        while(!side.hasEntranceSouth || (!side.hasEntranceWest && !side.hasEntranceEast)) side.rotate90Deg();
-
-        success = success && side.generate(world, rand, new BlockPos(x, y, z - 16));
-
-        side = dungeonSide[rand.nextInt(dungeonSide.length)];
-        while(!side.hasEntranceWest || (!side.hasEntranceNorth && !side.hasEntranceSouth)) side.rotate90Deg();
-
-        success = success && side.generate(world, rand, new BlockPos(x + 16, y, z));
-
-        side = dungeonSide[rand.nextInt(dungeonSide.length)];
-        while(!side.hasEntranceNorth || (!side.hasEntranceEast && !side.hasEntranceWest)) side.rotate90Deg();
-
-        success = success && side.generate(world, rand, new BlockPos(x, y, z + 16));
-
-        side = dungeonSide[rand.nextInt(dungeonSide.length)];
-        while(!side.hasEntranceEast || (!side.hasEntranceNorth && !side.hasEntranceSouth)) side.rotate90Deg();
-
-        success = success && side.generate(world, rand, new BlockPos(x - 16, y, z));
-
-        return success;
-    }
-
-    private boolean generateCorners(World world, Random rand)
-    {
-        boolean success = true;
-        int x = dungeonCenter.getX();
-        int y = dungeonCenter.getY();
-        int z = dungeonCenter.getZ();
-
-        SmallDungeonRoom corner = dungeonCorner[rand.nextInt(dungeonCorner.length)];
-        while(!corner.hasEntranceSouth || !corner.hasEntranceWest) corner.rotate90Deg();
-
-        success = success && corner.generate(world, rand, new BlockPos(x + 16, y, z - 16));
-
-        corner = dungeonCorner[rand.nextInt(dungeonCorner.length)];
-        while(!corner.hasEntranceNorth || !corner.hasEntranceWest) corner.rotate90Deg();
-
-        success = success && corner.generate(world, rand, new BlockPos(x + 16, y, z + 16));
-
-        corner = dungeonCorner[rand.nextInt(dungeonCorner.length)];
-        while(!corner.hasEntranceNorth || !corner.hasEntranceEast) corner.rotate90Deg();
-
-        success = success && corner.generate(world, rand, new BlockPos(x - 16, y, z + 16));
-
-        corner = dungeonCorner[rand.nextInt(dungeonCorner.length)];
-        while(!corner.hasEntranceEast || !corner.hasEntranceSouth) corner.rotate90Deg();
-
-        success = success && corner.generate(world, rand, new BlockPos(x - 16, y, z - 16));
-
-        return success;
     }
 
     @Override

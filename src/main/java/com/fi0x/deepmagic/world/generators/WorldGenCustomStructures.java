@@ -45,7 +45,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
 			if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
 
-			if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -2, 100, BiomeInsanity.class);
+			if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -2, 200, BiomeInsanity.class);
 		}
 	}
 	
