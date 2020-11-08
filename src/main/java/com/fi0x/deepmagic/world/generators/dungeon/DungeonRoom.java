@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class SmallDungeonRoom extends WorldGenerator implements IStructure
+public class DungeonRoom extends WorldGenerator implements IStructure
 {
     private final String templateName;
 
@@ -24,7 +24,7 @@ public class SmallDungeonRoom extends WorldGenerator implements IStructure
 
     public Rotation rotation;
 
-    public SmallDungeonRoom(String name, int sizeX, int sizeZ, int height)
+    public DungeonRoom(String name, int sizeX, int sizeZ, int height)
     {
         this.templateName = name;
 

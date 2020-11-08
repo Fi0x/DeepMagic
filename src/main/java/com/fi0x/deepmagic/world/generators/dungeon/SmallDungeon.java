@@ -12,14 +12,14 @@ import java.util.Random;
 
 public class SmallDungeon extends WorldGenerator implements IWorldGenerator
 {
-    private final SmallDungeonRoom[] rooms = new SmallDungeonRoom[] {
-            new SmallDungeonRoom("small_dungeon_room0", 16, 16, 7),
-            new SmallDungeonRoom("small_dungeon_room1", 16, 16, 6),
-            new SmallDungeonRoom("small_dungeon_room2", 16, 16, 6),
-            new SmallDungeonRoom("small_dungeon_room3", 16, 16, 8),
-            new SmallDungeonRoom("small_dungeon_room4", 16, 16, 7),
-            new SmallDungeonRoom("small_dungeon_room5", 16, 16, 6)};
-    private final SmallDungeonRoom ceiling = new SmallDungeonRoom("small_dungeon_ceiling", 16, 16, 1);
+    private final DungeonRoom[] rooms = new DungeonRoom[] {
+            new DungeonRoom("small_dungeon_room0", 16, 16, 7),
+            new DungeonRoom("small_dungeon_room1", 16, 16, 6),
+            new DungeonRoom("small_dungeon_room2", 16, 16, 6),
+            new DungeonRoom("small_dungeon_room3", 16, 16, 8),
+            new DungeonRoom("small_dungeon_room4", 16, 16, 7),
+            new DungeonRoom("small_dungeon_room5", 16, 16, 6)};
+    private final DungeonRoom ceiling = new DungeonRoom("small_dungeon_ceiling", 16, 16, 1);
 
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
