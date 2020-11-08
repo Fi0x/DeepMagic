@@ -3,6 +3,8 @@ package com.fi0x.deepmagic.util.recipes;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.google.common.collect.Maps;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.Map;
@@ -22,6 +24,13 @@ public class ManaGrinderRecipes
         addManaGrinderRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_ORE, 1), new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 2));
         addManaGrinderRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_END_ORE, 1), new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 2));
         addManaGrinderRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_NETHER_ORE, 1), new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 2));
+        addManaGrinderRecipe(new ItemStack(ModItems.COOKED_WORM, 1), new ItemStack(ModItems.WORM_SNACK, 1));
+        addManaGrinderRecipe(new ItemStack(ModItems.COOKED_COCKROACH, 1), new ItemStack(ModItems.COCKROACH_SNACK, 1));
+        addManaGrinderRecipe(new ItemStack(Blocks.COAL_ORE, 1), new ItemStack(Items.COAL, 4));
+        addManaGrinderRecipe(new ItemStack(Blocks.REDSTONE_ORE, 1), new ItemStack(Items.REDSTONE, 8));
+        addManaGrinderRecipe(new ItemStack(Blocks.DIAMOND_ORE, 1), new ItemStack(Items.DIAMOND, 4));
+        addManaGrinderRecipe(new ItemStack(Blocks.EMERALD_ORE, 1), new ItemStack(Items.EMERALD, 4));
+        addManaGrinderRecipe(new ItemStack(Blocks.QUARTZ_ORE, 1), new ItemStack(Items.QUARTZ, 4));
     }
 
     private void addManaGrinderRecipe(ItemStack input, ItemStack result)

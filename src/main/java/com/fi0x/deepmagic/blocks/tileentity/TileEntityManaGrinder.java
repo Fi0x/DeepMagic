@@ -132,7 +132,7 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
         inventory.clear();
     }
     @Override
-    public void update()//TODO: Adjust method
+    public void update()
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
@@ -248,10 +248,18 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
             ItemStack grinderResult = ManaGrinderRecipes.instance().getGrinderResult(inputStack);
             if (grinderResult.isEmpty()) return false;
 
-            ItemStack output = inventory.get(1);//TODO: use all output slots
-            if (output.isEmpty()) return true;
-            if (!output.isItemEqual(grinderResult)) return false;
-            return output.getCount() + grinderResult.getCount() <= getInventoryStackLimit() && output.getCount() + grinderResult.getCount() <= output.getMaxStackSize();
+            ItemStack output1 = inventory.get(1);
+            ItemStack output2 = inventory.get(2);
+            ItemStack output3 = inventory.get(3);
+            if (output1.isEmpty() || output2.isEmpty() || output3.isEmpty()) return true;
+            if (!output1.isItemEqual(grinderResult) && !output2.isItemEqual(grinderResult) && !output3.isItemEqual(grinderResult)) return false;
+
+            int freeItems = 0;
+            if(output1.isItemEqual(grinderResult)) freeItems += getInventoryStackLimit() - output1.getCount();
+            if(output3.isItemEqual(grinderResult)) freeItems += getInventoryStackLimit() - output2.getCount();
+            if(output1.isItemEqual(grinderResult)) freeItems += getInventoryStackLimit() - output3.getCount();
+
+            return freeItems - grinderResult.getCount() >= 0;
         }
     }
     public static int getItemGrindTime(ItemStack grindStack)
@@ -279,10 +287,16 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
         ItemStack result = ManaGrinderRecipes.instance().getGrinderResult(input);
         if(!result.isEmpty())
         {
-            ItemStack output = inventory.get(1);//TODO: change output slots
+            ItemStack output1 = inventory.get(1);
+            ItemStack output2 = inventory.get(2);
+            ItemStack output3 = inventory.get(3);
 
-            if(output.isEmpty()) inventory.set(1, result);
-            else if(output.getItem() == result.getItem()) output.grow(result.getCount());
+            if(output1.getItem() == result.getItem()) output1.grow(result.getCount());
+            else if(output2.getItem() == result.getItem()) output2.grow(result.getCount());
+            else if(output3.getItem() == result.getItem()) output3.grow(result.getCount());
+            else if(output1.isEmpty()) inventory.set(1, result);
+            else if(output2.isEmpty()) inventory.set(2, result);
+            else if(output3.isEmpty()) inventory.set(3, result);
 
             input.shrink(1);
         }
@@ -296,6 +310,7 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
     private boolean getManaFromAltar()
     {
         if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
+        linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
         if(linkedAltar.getStoredMana() > 10)
         {

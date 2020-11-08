@@ -290,6 +290,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     private boolean getManaFromAltar()
     {
         if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
+        linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
         if(linkedAltar.getStoredMana() > 10)
         {

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ModItems
 {
-	public static final List<Item> ITEMS = new ArrayList<>();
+	public static final List<Item> ITEMS = new ArrayList<>();//TODO: Add Wheat flour to be grinded from wheat
 	
 	//Materials
 	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", 4, 1561, 10.0F, 4.0F, 10);
