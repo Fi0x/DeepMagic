@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
-import com.fi0x.deepmagic.blocks.containers.ContainerManaInfuser;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
+import com.fi0x.deepmagic.blocks.containers.ContainerManaGrinder;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGrinder;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaInfuser extends GuiContainer
+public class GuiManaGrinder extends GuiContainer
 {
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_infuser.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_grinder.png");
     private final InventoryPlayer player;
-    private final TileEntityManaInfuser te;
+    private final TileEntityManaGrinder te;
 
-    public GuiManaInfuser(InventoryPlayer player, TileEntityManaInfuser tileentity)
+    public GuiManaGrinder(InventoryPlayer player, TileEntityManaGrinder tileentity)
     {
-        super(new ContainerManaInfuser(player, tileentity));
+        super(new ContainerManaGrinder(player, tileentity));
         this.player = player;
         te = tileentity;
     }
@@ -43,11 +43,11 @@ public class GuiManaInfuser extends GuiContainer
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getProgressScaled(22);
-        drawTexturedModalRect(guiLeft + 47,guiTop + 25, 176, 50, p, 15);
+        int p = getProgressScaled(38);
+        drawTexturedModalRect(guiLeft + 42,guiTop + 25, 176, 50, p, 15);
 
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 141, guiTop + 66 - m, 176, 0, 16, m);
+        drawTexturedModalRect(guiLeft + 147, guiTop + 66 - m, 176, 0, 16, m);
     }
     private int getProgressScaled(int pixels)
     {

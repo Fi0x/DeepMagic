@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class SlotManaInfuserOutput extends Slot
+public class SlotOutput extends Slot
 {
-    public SlotManaInfuserOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
+    public SlotOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
     {
         super(inventoryIn, index, xPosition, yPosition);
     }

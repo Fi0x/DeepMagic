@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
-import com.fi0x.deepmagic.util.recipes.ManaInfuserRecipes;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGrinder;
+import com.fi0x.deepmagic.util.recipes.ManaGrinderRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,17 +13,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaInfuser extends Container
+public class ContainerManaGrinder extends Container
 {
-    private final TileEntityManaInfuser te;
-    private int infusionProgress, totalInfusionTime, storedMana;
+    private final TileEntityManaGrinder te;
+    private int grindProgress, totalGrindTime, storedMana;
 
-    public ContainerManaInfuser(InventoryPlayer player, TileEntityManaInfuser tileEntity)
+    public ContainerManaGrinder(InventoryPlayer player, TileEntityManaGrinder tileEntity)
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotManaInfuser(te, 0, 21, 25));
+        addSlotToContainer(new SlotManaGrinder(te, 0, 21, 25));
         addSlotToContainer(new SlotOutput(te, 1, 86, 25));
+        addSlotToContainer(new SlotOutput(te, 2, 104, 25));
+        addSlotToContainer(new SlotOutput(te, 3, 122, 25));
 
         for(int y = 0; y < 3; y++)
         {
@@ -51,13 +53,13 @@ public class ContainerManaInfuser extends Container
 
         for (IContainerListener listener : listeners)
         {
-            if (infusionProgress != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
-            if (totalInfusionTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
+            if (grindProgress != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
+            if (totalGrindTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
             if (storedMana != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
         }
 
-        infusionProgress = te.getField(0);
-        totalInfusionTime = te.getField(1);
+        grindProgress = te.getField(0);
+        totalGrindTime = te.getField(1);
         storedMana = te.getField(2);
     }
     @Override
@@ -83,20 +85,20 @@ public class ContainerManaInfuser extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index == 1)
+            if (index > 0 && index <= 3)
             {
                 if (!this.mergeItemStack(itemstack1, 2, 38, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(itemstack1, itemstack);
             } else if (index != 0)
             {
-                if (!ManaInfuserRecipes.instance().getInfuserResult(itemstack1).isEmpty())
+                if (!ManaGrinderRecipes.instance().getGrinderResult(itemstack1).isEmpty())
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
-                } else if (index < 29)
+                } else if (index < 31)
                 {
-                    if (!this.mergeItemStack(itemstack1, 29, 38, false)) return ItemStack.EMPTY;
-                } else if (index < 38 && !this.mergeItemStack(itemstack1, 2, 29, false)) return ItemStack.EMPTY;
-            } else if (!this.mergeItemStack(itemstack1, 2, 38, false)) return ItemStack.EMPTY;
+                    if (!this.mergeItemStack(itemstack1, 31, 40, false)) return ItemStack.EMPTY;
+                } else if (index < 40 && !this.mergeItemStack(itemstack1, 4, 31, false)) return ItemStack.EMPTY;
+            } else if (!this.mergeItemStack(itemstack1, 4, 40, false)) return ItemStack.EMPTY;
 
             if (itemstack1.isEmpty()) slot.putStack(ItemStack.EMPTY);
             else slot.onSlotChanged();

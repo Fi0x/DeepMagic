@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.blocks.mana.ManaAltar;
 import com.fi0x.deepmagic.blocks.mana.ManaGeneratorInsanity;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
@@ -261,26 +260,8 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     }
     private boolean sendManaToAltar()
     {
-        if(linkedAltarPos == null) return false;
-        if(!(world.getBlockState(linkedAltarPos).getBlock() instanceof ManaAltar))
-        {
-            linkedAltarPos = null;
-            return false;
-        }
-        if(linkedAltar == null)
-        {
-            linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
-            if(linkedAltar == null)
-            {
-                linkedAltarPos = null;
-                return true;
-            }
-        }
-        if(linkedAltar.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange)
-        {
-            linkedAltarPos = null;
-            return false;
-        }
+        if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
+        linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
         int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
         if(spaceInAltar > storedMana)

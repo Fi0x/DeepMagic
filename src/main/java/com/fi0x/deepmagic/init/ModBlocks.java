@@ -86,4 +86,5 @@ public class ModBlocks
 	public static final ManaGeneratorInsanity MANA_GENERATOR_INSANITY = new ManaGeneratorInsanity("mana_generator_insanity", Material.ROCK);
 	public static final ManaGeneratorMob MANA_GENERATOR_MOB = new ManaGeneratorMob("mana_generator_mob", Material.ROCK);
 	public static final ManaInfuser MANA_INFUSER = new ManaInfuser("mana_infuser", Material.ROCK);
+	public static final ManaGrinder MANA_GRINDER = new ManaGrinder("mana_grinder", Material.ROCK);
 }

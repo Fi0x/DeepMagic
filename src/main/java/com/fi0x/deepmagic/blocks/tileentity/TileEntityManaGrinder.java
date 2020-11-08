@@ -1,12 +1,13 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.blocks.mana.ManaGeneratorNormal;
+import com.fi0x.deepmagic.blocks.mana.ManaGrinder;
+import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.util.recipes.ManaGrinderRecipes;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
@@ -20,19 +21,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGeneratorNormal extends TileEntity implements IInventory, ITickable
+public class TileEntityManaGrinder extends TileEntity implements IInventory, ITickable
 {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
     private String customName;
 
     private BlockPos linkedAltarPos;
     private TileEntityManaAltar linkedAltar;
-    private int burnTime;
-    private int currentBurnTime;
+    private int grindProgress;
+    private int totalGrindTime;
     private int storedMana;
 
     @Override
@@ -95,15 +95,15 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return isItemFuel(stack) || index != 0;
+        return index == 0 || index > 3;
     }
     @Override
     public int getField(int id)
     {
         switch (id)
         {
-            case 0: return burnTime;
-            case 1: return currentBurnTime;
+            case 0: return grindProgress;
+            case 1: return totalGrindTime;
             case 2: return storedMana;
         }
         return 0;
@@ -113,9 +113,9 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     {
         switch (id)
         {
-            case 0: burnTime = value;
+            case 0: grindProgress = value;
             break;
-            case 1: currentBurnTime = value;
+            case 1: totalGrindTime = value;
             break;
             case 2: storedMana = value;
             break;
@@ -136,31 +136,44 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
-        if(isRunning())
-        {
-            burnTime--;
-            if(storedMana < ConfigHandler.manaGeneratorManaCapacity) storedMana++;
-            dirty = true;
-        }
-        if(world.isRemote) return;
 
-        ItemStack stack = inventory.get(0);
-
-        if(!isRunning() && storedMana < ConfigHandler.manaGeneratorManaCapacity)
+        if(!world.isRemote)
         {
-            if(!stack.isEmpty())
+            ItemStack stack = inventory.get(0);
+            if(stack.isEmpty())
             {
-                burnTime = getItemBurnTime(stack);
-                currentBurnTime = burnTime;
-                stack.shrink(1);
-                inventory.set(0, stack);
+                if(totalGrindTime > 0)
+                {
+                    grindProgress = 0;
+                    totalGrindTime = 0;
+                    dirty = true;
+                }
+            } else if (storedMana > 0)
+            {
+                if(canGrind())
+                {
+                    storedMana--;
+                    grindProgress++;
+                    dirty = true;
+                    if(totalGrindTime == 0) totalGrindTime = getItemGrindTime(stack);
+                    if (grindProgress >= totalGrindTime)
+                    {
+                        grindProgress = 0;
+                        grindItem();
+                        totalGrindTime = getItemGrindTime(stack);
+                    }
+                } else grindProgress = 0;
+            }
+
+            if(isRunning() != wasRunning)
+            {
+                ManaGrinder.setState(isRunning(), world, pos);
                 dirty = true;
             }
-        }
-        if(isRunning() != wasRunning) ManaGeneratorNormal.setState(isRunning(), world, pos);
-        if(storedMana >= 20)
-        {
-            if(sendManaToAltar()) dirty = true;
+            if(ConfigHandler.manaMachineManaCapacity - storedMana >= 10)
+            {
+                if(getManaFromAltar()) dirty = true;
+            }
         }
         if(dirty) markDirty();
     }
@@ -168,7 +181,7 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     @Override
     public String getName()
     {
-        return hasCustomName() ? customName : "container.mana_generator_normal";
+        return hasCustomName() ? customName : "container.mana_grinder";
     }
     @Override
     public boolean hasCustomName()
@@ -193,7 +206,7 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
             compound.setBoolean("linked", true);
         } else compound.setBoolean("linked", false);
 
-        compound.setInteger("burnTime", burnTime);
+        compound.setInteger("grindProgress", grindProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
@@ -210,8 +223,8 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
             linkedAltarPos = new BlockPos(x, y, z);
         }
 
-        burnTime = compound.getInteger("burnTime");
-        currentBurnTime = getItemBurnTime(inventory.get(0));
+        grindProgress = compound.getInteger("grindProgress");
+        totalGrindTime = getItemGrindTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
         inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventory);
@@ -224,30 +237,69 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     }
     public boolean isRunning()
     {
-        return burnTime > 0;
+        return grindProgress > 0;
     }
-    public static int getItemBurnTime(ItemStack fuel)
+    private boolean canGrind()
     {
-        if(fuel.isEmpty()) return 0;
+        ItemStack inputStack = inventory.get(0);
+        if (inputStack.isEmpty()) return false;
+        else
+        {
+            ItemStack grinderResult = ManaGrinderRecipes.instance().getGrinderResult(inputStack);
+            if (grinderResult.isEmpty()) return false;
 
-        Item item = fuel.getItem();
+            ItemStack output1 = inventory.get(1);
+            ItemStack output2 = inventory.get(2);
+            ItemStack output3 = inventory.get(3);
+            if (output1.isEmpty() || output2.isEmpty() || output3.isEmpty()) return true;
+            if (!output1.isItemEqual(grinderResult) && !output2.isItemEqual(grinderResult) && !output3.isItemEqual(grinderResult)) return false;
+
+            int freeItems = 0;
+            if(output1.isItemEqual(grinderResult)) freeItems += getInventoryStackLimit() - output1.getCount();
+            if(output3.isItemEqual(grinderResult)) freeItems += getInventoryStackLimit() - output2.getCount();
+            if(output1.isItemEqual(grinderResult)) freeItems += getInventoryStackLimit() - output3.getCount();
+
+            return freeItems - grinderResult.getCount() >= 0;
+        }
+    }
+    public static int getItemGrindTime(ItemStack grindStack)
+    {
+        if(grindStack.isEmpty()) return 0;
+
+        Item item = grindStack.getItem();
         if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
         {
             Block block = Block.getBlockFromItem(item);
-            if(block == Blocks.WOODEN_SLAB) return 150;
-            if(block.getDefaultState().getMaterial() == Material.WOOD) return 300;
-            if(block == Blocks.COAL_BLOCK) return 16000;
-        }
-        if(item == Items.STICK) return 100;
-        if(item == Items.COAL) return 1600;
-        if(item == Items.LAVA_BUCKET) return 20000;
-        if(item == Item.getItemFromBlock(Blocks.SAPLING)) return 100;
-        if(item == Items.BLAZE_ROD) return 2400;
-        return ForgeEventFactory.getItemBurnTime(fuel);
+            if(block == ModBlocks.DEEP_CRYSTAL_ORE) return 400;
+            if(block == ModBlocks.DEEP_CRYSTAL_END_ORE) return 400;
+            if(block == ModBlocks.DEEP_CRYSTAL_NETHER_ORE) return 400;
+        } else if(item == ModItems.DEEP_CRYSTAL) return 200;
+
+        return 100;
     }
-    public static boolean isItemFuel(ItemStack fuel)
+    public static boolean isItemGrindable(ItemStack item)
     {
-        return getItemBurnTime(fuel) > 0;
+        return getItemGrindTime(item) > 0;
+    }
+    private void grindItem()
+    {
+        ItemStack input = inventory.get(0);
+        ItemStack result = ManaGrinderRecipes.instance().getGrinderResult(input);
+        if(!result.isEmpty())
+        {
+            ItemStack output1 = inventory.get(1);
+            ItemStack output2 = inventory.get(2);
+            ItemStack output3 = inventory.get(3);
+
+            if(output1.getItem() == result.getItem()) output1.grow(result.getCount());
+            else if(output2.getItem() == result.getItem()) output2.grow(result.getCount());
+            else if(output3.getItem() == result.getItem()) output3.grow(result.getCount());
+            else if(output1.isEmpty()) inventory.set(1, result);
+            else if(output2.isEmpty()) inventory.set(2, result);
+            else if(output3.isEmpty()) inventory.set(3, result);
+
+            input.shrink(1);
+        }
     }
     public void setLinkedAltarPos(BlockPos blockPos)
     {
@@ -255,18 +307,14 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
         if(linkedAltarPos == null) linkedAltar = null;
         else linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
     }
-    private boolean sendManaToAltar()
+    private boolean getManaFromAltar()
     {
         if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
         linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
-        int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
-        if(spaceInAltar > storedMana)
+        if(linkedAltar.getStoredMana() > 10)
         {
-            if(linkedAltar.addManaToStorage(storedMana)) storedMana = 0;
-        } else
-        {
-            if(linkedAltar.addManaToStorage(spaceInAltar)) storedMana -= spaceInAltar;
+            if(linkedAltar.removeManaFromStorage(10)) storedMana += 10;
         }
         return true;
     }
