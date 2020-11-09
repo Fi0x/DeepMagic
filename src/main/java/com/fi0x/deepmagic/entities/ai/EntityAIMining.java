@@ -92,6 +92,15 @@ public class EntityAIMining extends EntityAIBase
             mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
             mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState());
             mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState());
+
+            mineableBlocks.add(ModBlocks.INSANITY_COAL_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_LAPIS_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_GOLD_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_DIAMOND_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_EMERALD_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState());
         }
     }
 
