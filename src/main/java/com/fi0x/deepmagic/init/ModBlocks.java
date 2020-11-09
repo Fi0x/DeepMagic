@@ -7,6 +7,7 @@ import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
 import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
 import com.fi0x.deepmagic.blocks.mana.*;
+import com.fi0x.deepmagic.blocks.ores.*;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
 import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
@@ -36,7 +37,7 @@ public class ModBlocks
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
 	public static final Block BRIGHT_INSANITY_STONE = new BrightInsanityStone("bright_insanity_stone", Material.ROCK);
-	public static final Block INSANITY_COBBLE = new InsanityCobble("insanity_cobble", Material.ROCK);
+	public static final Block INSANITY_COBBLE = new InsanityCobble("insanity_cobble", Material.ROCK);//TODO: Replace with cooler looking light source for dwarfs
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
 	public static final Block INSANITY_PLANKS = new InsanityPlanks("insanity_planks", Material.WOOD);
@@ -54,6 +55,15 @@ public class ModBlocks
 	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
+	//Insanity Ores
+	public static final Block INSANITY_COAL_ORE = new InsanityOreCoal("insanity_coal_ore", Material.ROCK);
+	public static final Block INSANITY_IRON_ORE = new InsanityOreIron("insanity_iron_ore", Material.ROCK);
+	public static final Block INSANITY_REDSTONE_ORE = new InsanityOreRedstone("insanity_redstone_ore", Material.ROCK);
+	public static final Block INSANITY_LAPIS_ORE = new InsanityOreLapis("insanity_lapis_ore", Material.ROCK);
+	public static final Block INSANITY_GOLD_ORE = new InsanityOreGold("insanity_gold_ore", Material.ROCK);
+	public static final Block INSANITY_DIAMOND_ORE = new InsanityOreDiamond("insanity_diamond_ore", Material.ROCK);
+	public static final Block INSANITY_EMERALD_ORE = new InsanityOreEmerald("insanity_emerald_ore", Material.ROCK);
+	public static final Block INSANITY_DEEP_CRYSTAL_ORE = new DeepCrystalOre("insanity_deep_crystal_ore", Material.ROCK);
 
 	//Dungeon Blocks
 	public static final Block DUNGEON_STONE = new DungeonStone("dungeon_stone", Material.ROCK);
