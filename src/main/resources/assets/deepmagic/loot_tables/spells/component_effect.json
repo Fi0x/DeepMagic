@@ -11,6 +11,61 @@
           "functions": [
             {
               "function": "set_nbt",
+              "tag": "{effect: 0S}"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:spell_component",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{effect: 1S}"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:spell_component",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{effect: 2S}"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:spell_component",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{effect: 3S}"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:spell_component",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{effect: 4S}"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:spell_component",
+          "functions": [
+            {
+              "function": "set_nbt",
               "tag": "{effect: 5S}"
             }
           ]
