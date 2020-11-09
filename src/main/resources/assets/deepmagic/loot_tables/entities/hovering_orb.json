@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "special_hovering_orb",
+      "name": "poll1",
       "rolls": 1,
       "entries": [
         {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "normal_hovering_orb",
+      "name": "poll2",
       "rolls": 1,
       "entries": [
         {

@@ -1,146 +1,44 @@
 {
   "pools": [
     {
-      "name": "structure_dwarf_base_normal",
+      "name": "poll0",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:structures/dungeon_t3"
+        }
+      ]
+    },
+    {
+      "name": "poll1",
       "rolls": {
         "min": 1,
-        "max": 5
+        "max": 1
       },
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:cobblestone",
+          "name": "deepmagic:teleportation_crystal",
           "functions": [
             {
               "function": "set_count",
-              "count": {
-                "min": 4,
-                "max": 16
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:dirt",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 8
-              }
+              "count": 1
             }
           ]
         }
       ]
     },
     {
-      "name": "structure_dwarf_base_special",
-      "rolls": {
-        "min": 5,
-        "max": 10
-      },
+      "name": "poll2",
+      "rolls": 1,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:coal_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 4,
-                "max": 8
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:diamond_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:emerald_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:gold_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:iron_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:lapis_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:redstone_ore",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
+          "name": "minecraft:bedrock"
         }
       ]
     }

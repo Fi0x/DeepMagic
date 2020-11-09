@@ -1,22 +1,49 @@
 {
   "pools": [
     {
-      "name": "rock_troll_default",
+      "name": "poll1",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:stone",
+          "name": "deepmagic:insanity_stone",
           "functions": [
             {
               "function": "set_count",
               "count": {
-                "min": 5,
-                "max": 10
+                "min": 1,
+                "max": 4
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 80,
+          "name": "minecraft:empty"
+        },
+        {
+          "type": "item",
+          "weight": 20,
+          "name": "deepmagic:skillpoint"
+        }
+      ]
+    },
+    {
+      "name": "poll3",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
         }
       ]
     }

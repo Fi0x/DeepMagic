@@ -1,42 +1,29 @@
 {
   "pools": [
     {
-      "name": "special_insanity_cow",
-      "rolls": 1,
+      "name": "poll1",
+      "rolls": 4,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:iron_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
+          "name": "minecraft:beef"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:leather"
         }
       ]
     },
     {
-      "name": "normal_insanity_cow",
+      "name": "poll2",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "deepmagic:insanity_dirt",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
+          "name": "minecraft:bedrock"
         }
       ]
     }
