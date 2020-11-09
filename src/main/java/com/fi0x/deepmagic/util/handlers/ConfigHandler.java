@@ -96,6 +96,7 @@ public class ConfigHandler
     public static int manaXPForLevelup;
     //Player Visuals
     public static boolean manaOverlayAlwaysVisible;
+    public static boolean showSkillpointAddedText;
 
     //Mana Amounts
     public static int manaAltarCapacity;
@@ -267,6 +268,7 @@ public class ConfigHandler
         category = "Visuals";
         player.addCustomCategoryComment(category, "Visuals");
         manaOverlayAlwaysVisible = player.getBoolean("Mana Overlay Always Visible", category, false, "Mana Bar is always visible, not only when a magic item is held");
+        showSkillpointAddedText = player.getBoolean("Show Skillpoint added Text", category, true, "Enables the Message a player gets when gaining a Skillpoint");
 
         player.save();
     }

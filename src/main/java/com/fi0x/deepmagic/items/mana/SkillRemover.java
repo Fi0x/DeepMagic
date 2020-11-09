@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -46,6 +47,7 @@ public class SkillRemover extends ItemBase implements IHasModel
 			PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
 			assert playerMana != null;
 			playerMana.resetAllStats();
+			playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "All Magic Properties removed"));
 			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, stack);

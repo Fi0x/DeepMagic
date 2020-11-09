@@ -67,7 +67,7 @@ public class Spell extends ItemBase implements IMagicItem
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
 
-        if(compound.hasKey("skillXP")) playerMana.addSkillXP(compound.getDouble("skillXP"));
+        if(compound.hasKey("skillXP")) playerMana.addSkillXP(playerIn, compound.getDouble("skillXP"));
         return executeSpell(worldIn, playerIn, handIn, compound);
     }
     @Override
