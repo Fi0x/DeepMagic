@@ -36,7 +36,7 @@ public class ModBlocks
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
 	public static final Block BRIGHT_INSANITY_STONE = new BrightInsanityStone("bright_insanity_stone", Material.ROCK);
-	public static final Block INSANITY_COBBLE = new InsanityCobble("insanity_cobble", Material.ROCK);
+	public static final Block INSANITY_COBBLE = new InsanityCobble("insanity_cobble", Material.ROCK);//TODO: Replace with cooler looking light source for dwarfs
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
 	public static final Block INSANITY_PLANKS = new InsanityPlanks("insanity_planks", Material.WOOD);
@@ -54,6 +54,7 @@ public class ModBlocks
 	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
+	//Insanity Ores
 
 	//Dungeon Blocks
 	public static final Block DUNGEON_STONE = new DungeonStone("dungeon_stone", Material.ROCK);
