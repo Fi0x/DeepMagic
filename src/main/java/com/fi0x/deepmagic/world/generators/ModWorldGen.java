@@ -80,7 +80,7 @@ public class ModWorldGen implements IWorldGenerator
 	
 	private void generateInsanityDimension(Random random, int chunkX, int chunkZ, World world)
 	{
-		generateOre(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 64, 8, 20);
+		generateOre(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX*16, chunkZ*16, 1, 64, 8, 20);
 	}
 	
 	private void generateDefaultDimension(Random random, int chunkX, int chunkZ, World world)
