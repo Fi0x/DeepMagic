@@ -34,6 +34,7 @@ public class ModItems
 	public static final Item DEMON_CRYSTAL = new DemonCrystal("demon_crystal");
 	public static final Item SKILLPOINT = new Skillpoint("skillpoint");
 	public static final Item MANA_LINKER = new ManaLinker("mana_linker");
+	public static final Item SKILL_REMOVER = new SkillRemover("skill_remover");
 	
 	//Tools
 	public static final ItemSword DEEP_CRYSTAL_SWORD = new ToolSword("deep_crystal_sword", MATERIAL_DEEP_CRYSTAL);

@@ -145,6 +145,20 @@ public class PlayerMana
 		if(playerHP.hasModifier(modifier)) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(modifier);
 		playerHP.applyModifier(modifier);
 	}
+	public void resetAllStats()
+	{
+		mana = 0;
+
+		skillXP = 0;
+		skillpoints = 1;
+
+		manaRegenRate = 0;
+		manaEfficiency = 0;
+		maxManaMultiplier = 0;
+		addedHP = 0;
+		hpRegeneration = 0;
+		spellTier = 1;
+	}
 	
 	public void copyFrom(PlayerMana source)
 	{
