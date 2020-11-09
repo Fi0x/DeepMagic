@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "spell",
+      "name": "spellcomponentselection",
       "rolls": 1,
       "entries": [
         {

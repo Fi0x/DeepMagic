@@ -1,52 +1,28 @@
 {
   "pools": [
     {
-      "name": "spell",
+      "name": "componenttarget",
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "deepmagic:spell_component",
-          "functions": [
-            {
-              "function": "set_nbt",
-              "tag": "{target: 0S}"
-            }
-          ]
+          "name": "deepmagic:spells/component_target0"
         },
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "deepmagic:spell_component",
-          "functions": [
-            {
-              "function": "set_nbt",
-              "tag": "{target: 1S}"
-            }
-          ]
+          "name": "deepmagic:spells/component_target1"
         },
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "deepmagic:spell_component",
-          "functions": [
-            {
-              "function": "set_nbt",
-              "tag": "{target: 2S}"
-            }
-          ]
+          "name": "deepmagic:spells/component_target2"
         },
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "deepmagic:spell_component",
-          "functions": [
-            {
-              "function": "set_nbt",
-              "tag": "{target: 3S}"
-            }
-          ]
+          "name": "deepmagic:spells/component_target3"
         }
       ]
     }
