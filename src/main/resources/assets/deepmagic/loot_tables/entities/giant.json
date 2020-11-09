@@ -1,0 +1,31 @@
+{
+  "pools": [
+    {
+      "name": "poll1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 90,
+          "name": "minecraft:empty"
+        },
+        {
+          "type": "item",
+          "weight": 10,
+          "name": "deepmagic:skillpoint"
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
+        }
+      ]
+    }
+  ]
+}

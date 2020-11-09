@@ -1,20 +1,17 @@
 {
   "pools": [
     {
-      "name": "rock_troll_default",
+      "name": "componenteffect1",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:stone",
+          "name": "deepmagic:spell_component",
           "functions": [
             {
-              "function": "set_count",
-              "count": {
-                "min": 5,
-                "max": 10
-              }
+              "function": "set_nbt",
+              "tag": "{effect: 1S}"
             }
           ]
         }

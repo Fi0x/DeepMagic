@@ -1,0 +1,46 @@
+{
+  "pools": [
+    {
+      "name": "poll0",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:structures/dungeon_t3"
+        }
+      ]
+    },
+    {
+      "name": "poll1",
+      "rolls": {
+        "min": 1,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:teleportation_crystal",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
+        }
+      ]
+    }
+  ]
+}

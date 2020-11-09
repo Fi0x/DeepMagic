@@ -1,0 +1,30 @@
+{
+  "pools": [
+    {
+      "name": "componenttarget",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component_target0"
+        },
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component_target1"
+        },
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component_target2"
+        },
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component_target3"
+        }
+      ]
+    }
+  ]
+}

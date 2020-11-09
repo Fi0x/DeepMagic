@@ -1,0 +1,20 @@
+{
+  "pools": [
+    {
+      "name": "componentmodifier",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component_modifier0"
+        },
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component_modifier1"
+        }
+      ]
+    }
+  ]
+}

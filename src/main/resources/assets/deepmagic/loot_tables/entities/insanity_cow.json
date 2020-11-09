@@ -1,0 +1,31 @@
+{
+  "pools": [
+    {
+      "name": "poll1",
+      "rolls": 4,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:beef"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:leather"
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
+        }
+      ]
+    }
+  ]
+}

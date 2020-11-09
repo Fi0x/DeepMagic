@@ -1,0 +1,26 @@
+{
+  "pools": [
+    {
+      "name": "poll0",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:structures/mage_house_t0"
+        }
+      ]
+    },
+    {
+      "name": "poll1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
+        }
+      ]
+    }
+  ]
+}

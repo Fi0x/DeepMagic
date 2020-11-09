@@ -1,0 +1,42 @@
+{
+  "pools": [
+    {
+      "name": "poll1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 1,
+          "name": "deepmagic:spells/component"
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "weight": 50,
+          "name": "minecraft:empty"
+        },
+        {
+          "type": "item",
+          "weight": 50,
+          "name": "deepmagic:skillpoint"
+        }
+      ]
+    },
+    {
+      "name": "poll3",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
+        }
+      ]
+    }
+  ]
+}

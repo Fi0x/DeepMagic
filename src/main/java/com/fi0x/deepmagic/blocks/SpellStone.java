@@ -3,11 +3,14 @@ package com.fi0x.deepmagic.blocks;
 import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntitySpellStone;
 import com.fi0x.deepmagic.items.mana.Spell;
+import com.fi0x.deepmagic.items.mana.SpellComponent;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -41,55 +44,90 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
 
         if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
 
-        if(item instanceof ItemSnowball)
+        if(item instanceof SpellComponent)
         {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the range by 2"));
-            tile.increaseRange(2);
-        } else if(item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD") && !tile.isTargetSelf())
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to yourself"));
-            tile.setTargetSelf();
-        } else if(item.getUnlocalizedName().equals("tile.stone") && !tile.isTargetSelfPos())
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to your position"));
-            tile.setTargetSelfPos();
-        } else if(item instanceof ItemArrow && !tile.isTargetFocus())
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted entity"));
-            tile.setTargetFocus();
-        } else if(item instanceof ItemBow && !tile.isTargetFocusPos())
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a targeted block"));
-            tile.setTargetFocusPos();
-        } else if(item instanceof ItemSplashPotion)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the radius by 2"));
-            tile.increaseRadius(2);
-        } else if(item instanceof ItemSword && tile.getAttackDmg() < 1 && ((ItemSword) item).getToolMaterialName().equals("IRON"))
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 2"));
-            tile.setAttackDmg(2);
-        } else if(item instanceof ItemFlintAndSteel)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added Environmental Damage"));
-            tile.setEnvDmg();
-        } else if(item.getUnlocalizedName().equals("tile.tnt"))
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added an explosion"));
-            tile.setExplosive();
-        } else if(item instanceof ItemAppleGold)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the healing by 1"));
-            tile.increaseHeal(1);
-        } else if(item instanceof ItemClock)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added 1hr to the time"));
-            tile.addTime(1000);
-        } else if(item instanceof ItemBucket)
-        {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell will change the weather"));
-            tile.setWeather();
-        } else return false;
+            NBTTagCompound compound;
+            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+            compound = stack.getTagCompound();
+            assert compound != null;
+
+            if(compound.hasKey("effect"))
+            {
+                switch(compound.getByte("effect"))
+                {
+                    case 0:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 2"));
+                        tile.setAttackDmg(2);
+                        break;
+                    case 1:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added environmental damage"));
+                        tile.setEnvDmg();
+                        break;
+                    case 2:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added an explosion effect"));
+                        tile.setExplosive();
+                        break;
+                    case 3:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the healing by 1"));
+                        tile.increaseHeal(1);
+                        break;
+                    case 4:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added 1hr to the time"));
+                        tile.addTime(1000);
+                        break;
+                    case 5:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "Your spell will change the weather"));
+                        tile.setWeather();
+                        break;
+                    default:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "This component didn't do anything"));
+                        break;
+                }
+            }
+            if(compound.hasKey("modifier"))
+            {
+                switch(compound.getByte("modifier"))
+                {
+                    case 0:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the range by 2"));
+                        tile.increaseRange(2);
+                        break;
+                    case 1:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the radius by 2"));
+                        tile.increaseRadius(2);
+                        break;
+                    default:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "This component didn't do anything"));
+                        break;
+                }
+            }
+            if(compound.hasKey("target"))
+            {
+                switch(compound.getByte("target"))
+                {
+                    case 0:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to yourself"));
+                        tile.setTargetSelf();
+                        break;
+                    case 1:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to your position"));
+                        tile.setTargetSelfPos();
+                        break;
+                    case 2:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a focused entity"));
+                        tile.setTargetFocus();
+                        break;
+                    case 3:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the target to a focused block"));
+                        tile.setTargetFocusPos();
+                        break;
+                    default:
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "This component didn't do anything"));
+                        break;
+                }
+            }
+        }
+
         stack.setCount(stack.getCount() - 1);
         return true;
     }
@@ -113,69 +151,80 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         compound = stack.getTagCompound();
         assert compound != null;
 
-        int manaCosts = 10;
-        if(compound.hasKey("manaCosts")) manaCosts = compound.getInteger("manaCosts");
-
         if(tile.getRange() > 0)
         {
             compound.setInteger("range", compound.getInteger("range") + tile.getRange());
-            manaCosts = tile.resetRange(manaCosts);
+            tile.resetRange();
         }
         if(tile.isTargetSelf())
         {
             compound.setBoolean("targetSelf", true);
-            manaCosts = tile.resetTargetSelf(manaCosts);
+            tile.resetTargetSelf();
         }
         if(tile.isTargetSelfPos())
         {
             compound.setBoolean("targetSelfPos", true);
-            manaCosts = tile.resetTargetSelfPos(manaCosts);
+            tile.resetTargetSelfPos();
         }
         if(tile.isTargetFocus())
         {
             compound.setBoolean("targetFocus", true);
-            manaCosts = tile.resetTargetFocus(manaCosts);
+            tile.resetTargetFocus();
         }
         if(tile.isTargetFocusPos())
         {
             compound.setBoolean("targetFocusPos", true);
-            manaCosts = tile.resetTargetFocusPos(manaCosts);
+            tile.resetTargetFocusPos();
         }
         if(tile.getRadius() > 0)
         {
             compound.setInteger("radius", compound.getInteger("radius") + tile.getRadius());
-            manaCosts = tile.resetRadius(manaCosts);
+            tile.resetRadius();
         }
         if(tile.getAttackDmg() > 0 && ((compound.hasKey("damage") && compound.getInteger("damage") < tile.getAttackDmg()) || !compound.hasKey("damage")))
         {
             compound.setInteger("damage", tile.getAttackDmg());
-            manaCosts = tile.resetAttackDmg(manaCosts);
+            tile.resetAttackDmg();
         }
         if(tile.doesEnvDmg())
         {
             compound.setBoolean("environmentalDamage", true);
-            manaCosts = tile.resetEnvDmg(manaCosts);
+            tile.resetEnvDmg();
         }
         if(tile.isExplosive())
         {
             compound.setBoolean("explosion", true);
-            manaCosts = tile.resetExplosive(manaCosts);
+            tile.resetExplosive();
         }
         if(tile.getHeal() > 0 && ((compound.hasKey("heal") || compound.getInteger("heal") < tile.getHeal()) || !compound.hasKey("heal")))
         {
             compound.setInteger("heal", tile.getHeal());
-            manaCosts = tile.resetHeal(manaCosts);
+            tile.resetHeal();
         }
         if(tile.getTime() != 0)
         {
             compound.setInteger("time", tile.getTime());
-            manaCosts = tile.resetTime(manaCosts);
+            tile.resetTime();
         }
         if(tile.doesWeather())
         {
             compound.setBoolean("weather", true);
-            manaCosts = tile.resetWeather(manaCosts);
+            tile.resetWeather();
         }
+
+        int manaBase = ConfigHandler.spellBaseManaCost;
+        if(compound.hasKey("manaBase")) manaBase = compound.getInteger("manaBase");
+        manaBase += tile.getManaAdder();
+        compound.setInteger("manaBase", manaBase);
+        tile.resetManaAdder();
+
+        double manaMult = 1;
+        if(compound.hasKey("manaMultiplier")) manaMult = compound.getDouble("manaMultiplier");
+        manaMult += tile.getManaMultiplier();
+        compound.setDouble("manaMultiplier", manaMult);
+        tile.resetManaMultiplier();
+
+        int manaCosts = (int) (manaBase * manaMult);
 
         compound.setInteger("manaCosts", manaCosts);
         double tier = Math.min(Math.log(Math.pow(manaCosts, 2.4)), 0.01 * Math.pow(manaCosts, 0.7));

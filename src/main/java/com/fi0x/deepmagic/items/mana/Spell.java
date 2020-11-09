@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.IMagicItem;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -66,7 +67,7 @@ public class Spell extends ItemBase implements IMagicItem
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
 
-        if(compound.hasKey("skillXP")) playerMana.addSkillXP(compound.getDouble("skillXP"));
+        if(compound.hasKey("skillXP")) playerMana.addSkillXP(playerIn, compound.getDouble("skillXP"));
         return executeSpell(worldIn, playerIn, handIn, compound);
     }
     @Override
@@ -97,6 +98,7 @@ public class Spell extends ItemBase implements IMagicItem
         if(GuiScreen.isCtrlKeyDown())
         {
             if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.BLUE + "Consumes " + compound.getInteger("manaCosts") + " Mana");
+            else tooltip.add(TextFormatting.BLUE + "Consumes " + ConfigHandler.spellBaseManaCost + " Mana");
             if(compound.hasKey("tier")) tooltip.add(TextFormatting.BLUE + "Requires Skill Tier " + compound.getInteger("tier"));
         } else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
     }

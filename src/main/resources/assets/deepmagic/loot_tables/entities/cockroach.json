@@ -1,20 +1,20 @@
 {
   "pools": [
     {
-      "name": "structure_default1",
-      "rolls": 1,
+      "name": "poll1",
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:dirt",
+          "name": "deepmagic:raw_cockroach",
           "functions": [
             {
               "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 5
-              }
+              "count": 1
             }
           ]
         }

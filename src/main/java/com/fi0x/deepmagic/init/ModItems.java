@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ModItems
 {
-	public static final List<Item> ITEMS = new ArrayList<>();//TODO: Add Wheat flour to be grinded from wheat
+	public static final List<Item> ITEMS = new ArrayList<>();
 	
 	//Materials
 	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", 4, 1561, 10.0F, 4.0F, 10);
@@ -34,6 +34,7 @@ public class ModItems
 	public static final Item DEMON_CRYSTAL = new DemonCrystal("demon_crystal");
 	public static final Item SKILLPOINT = new Skillpoint("skillpoint");
 	public static final Item MANA_LINKER = new ManaLinker("mana_linker");
+	public static final Item SKILL_REMOVER = new SkillRemover("skill_remover");
 	
 	//Tools
 	public static final ItemSword DEEP_CRYSTAL_SWORD = new ToolSword("deep_crystal_sword", MATERIAL_DEEP_CRYSTAL);
@@ -46,6 +47,7 @@ public class ModItems
 	public static final Item SPELL = new Spell("spell");
 	public static final Item CHARGED_SPELL = new ManaChargedSpell("charged_spell");
 	public static final Item BREAKABLE_SPELL = new BreakableSpell("breakable_spell");
+	public static final Item SPELL_COMPONENT = new SpellComponent("spell_component");
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
@@ -63,6 +65,7 @@ public class ModItems
 	public static final Item COOKED_WORM = new FoodBase("cooked_worm", 4, 4, false);
 	public static final Item WORM_SNACK = new FoodBase("worm_snack", 6, 8, false);
 	public static final Item DRY_FLESH = new FoodBase("dry_flesh", 4, 1, false);
+	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour");
 
 	//Crafting Items
 	public static final Item DEEP_CRYSTAL = new ItemBase("deep_crystal");

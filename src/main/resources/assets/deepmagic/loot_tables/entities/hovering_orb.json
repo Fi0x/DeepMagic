@@ -1,13 +1,13 @@
 {
   "pools": [
     {
-      "name": "special_insanity_cow",
+      "name": "poll1",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "minecraft:iron_ingot",
+          "name": "deepmagic:insanity_grass",
           "functions": [
             {
               "function": "set_count",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "normal_insanity_cow",
+      "name": "poll2",
       "rolls": 1,
       "entries": [
         {

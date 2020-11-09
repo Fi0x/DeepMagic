@@ -14,6 +14,7 @@ item.mana_booster.name=Mana Booster
 item.demon_crystal.name=Demon Crystal
 item.skillpoint.name=Skillpoint
 item.mana_linker.name=Mana Linker
+item.skill_remover.name=Skill Remover
 
 tile.deep_crystal_ore.name=Deep Crystal Ore
 tile.deep_crystal_nether_ore.name=Deep Crystal Ore
@@ -85,6 +86,7 @@ item.deep_crystal_boots.name=Deep Crystal Boots
 item.spell.name=Spell
 item.charged_spell.name=Charged Spell
 item.breakable_spell.name=Breakable Spell
+item.spell_component.name=Spell Component
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
@@ -95,6 +97,7 @@ item.raw_worm.name=Raw Worm
 item.cooked_worm.name=Cooked Worm
 item.worm_snack.name=Worm Snack
 item.dry_flesh.name=Dry Flesh
+item.wheat_flour.name=Wheat Flour
 
 item.deep_crystal.name=Deep Crystal
 item.compressed_deep_crystal.name=Compressed Deep Crystal

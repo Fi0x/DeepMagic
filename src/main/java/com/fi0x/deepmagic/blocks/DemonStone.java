@@ -41,7 +41,7 @@ public class DemonStone extends BlockBase
                 if(playerMana.removeMana(ConfigHandler.demonSummonCost))
                 {
                     playerIn.getHeldItem(hand).shrink(1);
-                    playerMana.addSkillXP(ConfigHandler.demonSummonXP);
+                    playerMana.addSkillXP(playerIn, ConfigHandler.demonSummonXP);
 
                     EntityDemon demon = new EntityDemon(worldIn);
                     demon.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);

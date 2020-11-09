@@ -6,6 +6,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
 public class PlayerMana
 {
@@ -69,12 +71,12 @@ public class PlayerMana
 	{
 		return skillXP;
 	}
-	public void addSkillXP(double addAmount)
+	public void addSkillXP(EntityPlayer player, double addAmount)
 	{
 		skillXP += addAmount;
 		while (skillXP >= ConfigHandler.manaXPForLevelup)
 		{
-			addSkillpoint();
+			addSkillpoint(player);
 			skillXP -= ConfigHandler.manaXPForLevelup;
 		}
 	}
@@ -86,8 +88,9 @@ public class PlayerMana
 	{
 		this.skillpoints = newAmount;
 	}
-	public void addSkillpoint()
+	public void addSkillpoint(EntityPlayer player)
 	{
+		if(ConfigHandler.showSkillpointAddedText) player.sendMessage(new TextComponentString(TextFormatting.GREEN + "Skillpoint gained"));
 		skillpoints++;
 	}
 	public void removeSkillpoint()
@@ -144,6 +147,20 @@ public class PlayerMana
 
 		if(playerHP.hasModifier(modifier)) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(modifier);
 		playerHP.applyModifier(modifier);
+	}
+	public void resetAllStats()
+	{
+		mana = 0;
+
+		skillXP = 0;
+		skillpoints = 1;
+
+		manaRegenRate = 0;
+		manaEfficiency = 0;
+		maxManaMultiplier = 0;
+		addedHP = 0;
+		hpRegeneration = 0;
+		spellTier = 1;
 	}
 	
 	public void copyFrom(PlayerMana source)

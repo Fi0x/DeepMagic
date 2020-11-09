@@ -1,33 +1,27 @@
 {
   "pools": [
     {
-      "name": "special_demon",
+      "name": "poll0",
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "minecraft:iron_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
+          "name": "deepmagic:structures/dungeon_t0"
         }
       ]
     },
     {
-      "name": "normal_demon",
-      "rolls": 1,
+      "name": "poll1",
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "deepmagic:insanity_dirt",
+          "name": "deepmagic:deep_crystal",
           "functions": [
             {
               "function": "set_count",
@@ -37,6 +31,17 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
         }
       ]
     }

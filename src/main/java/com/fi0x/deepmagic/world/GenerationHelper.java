@@ -76,21 +76,22 @@ public class GenerationHelper
                                 switch (data[2])
                                 {
                                     case "0":
+                                    case "west":
                                         state = state.withRotation(structureRotation.add(Rotation.CLOCKWISE_90));
                                         break;
                                     case "1":
+                                    case "north":
                                         state = state.withRotation(structureRotation.add(Rotation.CLOCKWISE_180));
                                         break;
                                     case "2":
+                                    case "east":
                                         state = state.withRotation(structureRotation.add(Rotation.COUNTERCLOCKWISE_90));
                                         break;
                                     case "3":
+                                    case "south":
                                         state = state.withRotation(structureRotation.add(Rotation.NONE));
                                         break;
                                 }
-                            } else
-                            {
-                                state = state.withRotation(structureRotation.add(Rotation.CLOCKWISE_90));
                             }
                             break;
                         }

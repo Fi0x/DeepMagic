@@ -1,39 +1,30 @@
 {
   "pools": [
     {
-      "name": "special_giant",
+      "name": "poll1",
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "minecraft:iron_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
+          "name": "deepmagic:spells/component"
         }
       ]
     },
     {
-      "name": "normal_giant",
+      "name": "poll2",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "deepmagic:insanity_dirt",
+          "name": "deepmagic:dry_flesh",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "min": 1,
-                "max": 2
+                "max": 4
               }
             }
           ]

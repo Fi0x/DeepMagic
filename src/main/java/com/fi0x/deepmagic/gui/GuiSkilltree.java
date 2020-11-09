@@ -110,9 +110,6 @@ public class GuiSkilltree extends GuiScreen
         GuiLabel labelSpellTier = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 105, 100, 20, 0);
         labelSpellTier.addLine("Spell-Tier");
         labelList.add(labelSpellTier);
-        GuiLabel labelCastSkill = new GuiLabel(this.fontRenderer, nextID(), guiX + 5, guiY + 125, 100, 20, 0);
-        labelCastSkill.addLine("Spell-Cast Skill");
-        labelList.add(labelCastSkill);
 
         txtSkillPoints = new GuiTextField(nextID(), this.fontRenderer, guiX + backgroundWidth -90, guiY + 7, 25, 16);
 

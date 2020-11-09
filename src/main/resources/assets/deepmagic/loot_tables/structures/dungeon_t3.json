@@ -1,33 +1,27 @@
 {
   "pools": [
     {
-      "name": "special_dwarf",
+      "name": "poll0",
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
+          "type": "loot_table",
           "weight": 1,
-          "name": "minecraft:iron_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
-              }
-            }
-          ]
+          "name": "deepmagic:structures/dungeon_t2"
         }
       ]
     },
     {
-      "name": "normal_dwarf",
-      "rolls": 1,
+      "name": "poll1",
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
       "entries": [
         {
           "type": "item",
           "weight": 1,
-          "name": "deepmagic:insanity_dirt",
+          "name": "deepmagic:magic_powder",
           "functions": [
             {
               "function": "set_count",
@@ -37,6 +31,17 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "poll2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bedrock"
         }
       ]
     }
