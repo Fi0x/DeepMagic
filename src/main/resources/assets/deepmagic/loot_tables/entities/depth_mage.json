@@ -9,7 +9,7 @@
       "entries": [
         {
           "type": "loot_table",
-          "weight": 2,
+          "weight": 80,
           "name": "deepmagic:spells/component",
           "functions": [
             {
@@ -23,7 +23,7 @@
         },
         {
           "type": "item",
-          "weight": 1,
+          "weight": 20,
           "name": "deepmagic:spell"
         }
       ]

@@ -155,9 +155,9 @@ public class TileEntitySpellStone extends TileEntity
     {
         return attackDmg;
     }
-    public void setAttackDmg(int x)
+    public void increaseAttackDmg(int x)
     {
-        attackDmg = x;
+        attackDmg += x;
         markDirty();
     }
     public void resetAttackDmg()

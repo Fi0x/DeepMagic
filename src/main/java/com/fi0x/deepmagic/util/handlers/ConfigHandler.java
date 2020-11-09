@@ -314,7 +314,7 @@ public class ConfigHandler
 
         category = "Skill XP";
         items.addCustomCategoryComment(category, "Skill XP");
-        teleportationCrystalSkillXP = items.getInt("Teleportation Crystal Skill XP", category, 10, 0, 10000, "Skill XP gained by using the Teleportation Crystal");
+        teleportationCrystalSkillXP = items.getInt("Teleportation Crystal Skill XP", category, 5, 0, 10000, "Skill XP gained by using the Teleportation Crystal");
 
         items.save();
     }

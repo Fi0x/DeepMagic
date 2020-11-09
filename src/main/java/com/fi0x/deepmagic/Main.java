@@ -1,11 +1,15 @@
 package com.fi0x.deepmagic;
 
-import com.fi0x.deepmagic.init.*;
+import com.fi0x.deepmagic.init.BiomeInit;
+import com.fi0x.deepmagic.init.DimensionInit;
+import com.fi0x.deepmagic.init.EntityInit;
+import com.fi0x.deepmagic.init.ModFluids;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerPropertyEvents;
 import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.*;
+import com.fi0x.deepmagic.util.recipes.ModRecipes;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomTrees;
