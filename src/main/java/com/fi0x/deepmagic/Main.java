@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic;
 
+import com.fi0x.deepmagic.entities.ai.AIHelper;
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.DimensionInit;
 import com.fi0x.deepmagic.init.EntityInit;
@@ -92,6 +93,7 @@ public class Main
 	@Mod.EventHandler
 	public static void PostInit(FMLPostInitializationEvent event)
 	{
+		AIHelper.fillMiningWhitelist();
 	}
 
 	@Mod.EventHandler
