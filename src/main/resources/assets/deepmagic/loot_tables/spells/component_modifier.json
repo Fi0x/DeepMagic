@@ -1,0 +1,21 @@
+{
+  "pools": [
+    {
+      "name": "spell",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:spell_component",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{modifier: 5S}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

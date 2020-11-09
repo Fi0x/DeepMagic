@@ -11,6 +11,17 @@
   - Names and Descriptions
 - Things that are missing in the [wiki](https://github.com/Fi0x/DeepMagic/wiki)
 - Things from the [wiki](https://github.com/Fi0x/DeepMagic/wiki) that are not implemented
+- ...
 
 ### Feature requests
 **If you have any ideas for new features that could be added to the mod, please write a feature request on the [issues page](https://github.com/Fi0x/DeepMagic/issues)**
+
+### Balance ideas
+**If something feels too over- or underpowered, give me suggestions for alternatives like:**
+- Crafting Recipes
+- Player Stats
+- NPC Stats
+- Loot Tables
+- Block Functions
+- Spell Effects
+- ...

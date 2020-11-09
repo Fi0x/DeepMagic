@@ -28,10 +28,10 @@ public class SpellComponent extends ItemBase
         compound = stack.getTagCompound();
         assert compound != null;
 
-        if(compound.hasKey("linked"))
+        if(compound.hasKey("target"))
         {
-            if(compound.getBoolean("linked")) tooltip.add(TextFormatting.GREEN + "Linked is true" );
-            else tooltip.add(TextFormatting.YELLOW + "Linked Tag found, but not true" );
-        } else tooltip.add(TextFormatting.RED + "No linked tag found" );
+            if(compound.getByte("target") == 5) tooltip.add(TextFormatting.GREEN + "Target is 5" );
+            else tooltip.add(TextFormatting.YELLOW + "Target Tag found, but not 5");
+        } else tooltip.add(TextFormatting.RED + "No Target tag found" );
     }
 }
