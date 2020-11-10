@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"facing=up": { "model": "deepmagic:dwarf_lamp_floor"},
+		"facing=down": { "model": "deepmagic:dwarf_lamp_ceiling"},
+		"facing=east": { "model": "deepmagic:dwarf_lamp_wall" },
+		"facing=south": { "model": "deepmagic:dwarf_lamp_wall", "y": 90 },
+		"facing=west": { "model": "deepmagic:dwarf_lamp_wall", "y": 180 },
+		"facing=north": { "model": "deepmagic:dwarf_lamp_wall", "y": 270 }
+	}
+}
