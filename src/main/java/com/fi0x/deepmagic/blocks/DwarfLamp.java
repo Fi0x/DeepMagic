@@ -36,7 +36,7 @@ public class DwarfLamp extends BlockBase
         setSoundType(SoundType.METAL);
         setHardness(1.0F);
         setResistance(2.0F);
-        setLightLevel(1.0F);
+        setLightLevel(0.9F);
         this.setTickRandomly(true);
 
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
@@ -78,7 +78,7 @@ public class DwarfLamp extends BlockBase
     {
         return false;
     }
-    public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos)//TODO: Might need to look at this method
+    public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos)
     {
         for (EnumFacing enumfacing : FACING.getAllowedValues())
         {
@@ -166,24 +166,19 @@ public class DwarfLamp extends BlockBase
         }
     }
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, @Nonnull World worldIn, BlockPos pos, @Nonnull Random rand)//TODO: Adjust particles and location
+    public void randomDisplayTick(IBlockState stateIn, @Nonnull World worldIn, BlockPos pos, @Nonnull Random rand)
     {
-        EnumFacing enumfacing = stateIn.getValue(FACING);
         double d0 = (double)pos.getX() + 0.5D;
-        double d1 = (double)pos.getY() + 0.7D;
+        double d1 = (double)pos.getY() + 0.6775D;
         double d2 = (double)pos.getZ() + 0.5D;
 
-        if (enumfacing.getAxis().isHorizontal())
+        EnumFacing facing = stateIn.getValue(FACING);
+        if (facing.getAxis().isHorizontal())
         {
-            EnumFacing enumfacing1 = enumfacing.getOpposite();
-            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
-            worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
-        }
-        else
-        {
-            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-            worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-        }
+            EnumFacing facing1 = facing.getOpposite();
+            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.1D * (double)facing1.getFrontOffsetX(), d1 + 0.03125D, d2 + 0.1D * (double)facing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
+        } else if(facing.equals(EnumFacing.UP)) worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+        else if(facing.equals(EnumFacing.DOWN)) worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1 + 0.0425, d2, 0.0D, 0.0D, 0.0D);
     }
     @Nonnull
     public IBlockState getStateFromMeta(int meta)
