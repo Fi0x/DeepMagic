@@ -96,7 +96,7 @@ public class EntityAIMining extends EntityAIBase
             {
                 if(!miningBlocks.isEmpty() && entity.getDistanceSq(miningBlocks.get(0)) < 64)
                 {
-                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock() instanceof BlockAir) miningBlocks.remove(0);
+                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock().getCollisionBoundingBox(world.getBlockState(miningBlocks.get(0)), world, miningBlocks.get(0)) == null) miningBlocks.remove(0);
                     if(miningBlocks.isEmpty()) return false;
 
                     if(!digAtBlockPos(miningBlocks.get(0))) return false;
@@ -132,10 +132,10 @@ public class EntityAIMining extends EntityAIBase
         world.setBlockToAir(pos);
         return true;
     }
-    protected void placeLightAt(BlockPos pos)//TODO: Use the to-be-made light source for dwarfs
+    protected void placeLightAt(BlockPos pos)
     {
-        BlockPos ceiling = new BlockPos(pos.getX(), entity.posY + 2, pos.getZ());
-        if(AIHelper.mineableBlocks.contains(world.getBlockState(ceiling))) world.setBlockState(ceiling, ModBlocks.BRIGHT_INSANITY_STONE.getDefaultState());
+        BlockPos topBlock = new BlockPos(pos.getX(), entity.posY + 1, pos.getZ());
+        if(world.getBlockState(topBlock) == Blocks.AIR.getDefaultState()) world.setBlockState(topBlock, ModBlocks.DWARF_LAMP.getDefaultState());
     }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {

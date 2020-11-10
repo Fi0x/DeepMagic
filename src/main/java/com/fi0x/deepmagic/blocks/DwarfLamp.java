@@ -39,7 +39,7 @@ public class DwarfLamp extends BlockBase
         setLightLevel(0.9F);
         this.setTickRandomly(true);
 
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.DOWN));
     }
 
     @Nonnull
