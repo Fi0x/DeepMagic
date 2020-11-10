@@ -2,11 +2,14 @@ package com.fi0x.deepmagic.entities.ai;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
@@ -64,5 +67,46 @@ public class AIHelper
             mineableBlocks.add(ModBlocks.INSANITY_EMERALD_ORE.getDefaultState());
             mineableBlocks.add(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState());
         }
+    }
+
+    public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation)
+    {
+        int i = (int) (Math.random() * 2);
+        if(i == 0) i = -1;
+
+        for(int r = i; Math.abs(r) <= ConfigHandler.aiSearchRange; r += i)
+        {
+            for(int x = -r; x <= Math.abs(r); x++)
+            {
+                for (int z = -r; z <= Math.abs(r); z++)
+                {
+                    BlockPos pos = entityLocation.add(x, 0, z);
+                    if(mineableBlocks.contains(world.getBlockState(pos)) && mineableBlocks.contains(world.getBlockState(pos.up())))
+                    {
+                        if(world.getBlockState(pos) != Blocks.AIR.getDefaultState() || world.getBlockState(pos.up()) != Blocks.AIR.getDefaultState()) return pos;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static BlockPos findChest(World world, BlockPos pos)//TODO: Check for space in chests
+    {
+        if(pos == null) return null;
+        for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
+        {
+            for(int y = -range / 4; y <= range / 4; y++)
+            {
+                for(int x = -range; x <= range; x++)
+                {
+                    for(int z = -range; z <= range; z++)
+                    {
+                        if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

@@ -28,6 +28,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
 {
     public ItemStackHandler itemHandler;
     public boolean isMining;
+    public BlockPos homePos;//TODO: Set correct home position (Currently 0,0,0)
 
     public EntityDwarf(World worldIn)
     {
@@ -66,6 +67,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.damageDwarf);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(200);
     }
 
     @Nullable

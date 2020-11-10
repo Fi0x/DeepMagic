@@ -5,7 +5,6 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import net.minecraft.block.BlockChest;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -27,13 +26,13 @@ public class EntityAIMining extends EntityAIBase
     protected final EntityDwarf entity;
     protected final double speed;
     protected final float probability;
-    protected final int maxExecutionHeight = 50;
     protected final Random random;
     protected BlockPos startPosition;
     protected BlockPos destination;
     protected ArrayList<BlockPos> miningBlocks;
     protected BlockPos chestPos;
     private int digDelay;
+    private boolean searchChest;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -60,13 +59,15 @@ public class EntityAIMining extends EntityAIBase
     public boolean shouldExecute()
     {
         if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
-        return entity.posY <= maxExecutionHeight;
+        return entity.posY < ConfigHandler.dwarfMaxMiningHeight;
     }
 
     @Override
     public void startExecuting()
     {
-        chestPos = findChest(entity.getPosition());
+        chestPos = AIHelper.findChest(world, entity.getPosition());
+        if(chestPos != null) entity.homePos = entity.getPosition();
+        else chestPos = AIHelper.findChest(world, entity.homePos);
 
         startPosition = entity.getPosition();
         destination = getRandomPosition();
@@ -80,20 +81,35 @@ public class EntityAIMining extends EntityAIBase
     {
         if(entity.getNavigator().noPath())
         {
-            if(digDelay == 0 && !miningBlocks.isEmpty())
+            if(chestPos != null && entity.getDistanceSq(chestPos) < 64)
             {
-                while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock() instanceof BlockAir) miningBlocks.remove(0);
-                if(miningBlocks.isEmpty()) return false;
-                if(!digAtBlockPos(miningBlocks.get(0))) return false;
-                entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-                if(world.getLightBrightness(miningBlocks.get(0)) < 0.09) placeLightAt(miningBlocks.get(0));
-                digDelay = 20;
+                inventoryToChest();
+                searchChest = false;
+            }
+            if(searchChest && chestPos != null)
+            {
+                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
+                if(entity.getNavigator().noPath()) searchChest = false;
+                return true;
+            }
+            if(digDelay == 0)
+            {
+                if(!miningBlocks.isEmpty() && entity.getDistanceSq(miningBlocks.get(0)) < 64)
+                {
+                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock() instanceof BlockAir) miningBlocks.remove(0);
+                    if(miningBlocks.isEmpty()) return false;
+
+                    if(!digAtBlockPos(miningBlocks.get(0))) return false;
+                    if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
+                    if(world.getLightBrightness(miningBlocks.get(0)) < 0.09) placeLightAt(miningBlocks.get(0));
+                    digDelay = 20;
+                } else if(!miningBlocks.isEmpty()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
             } else digDelay--;
-            return !miningBlocks.isEmpty();
+            return true;
         } else return true;
     }
 
-    protected boolean digAtBlockPos(BlockPos pos)
+    protected boolean digAtBlockPos(BlockPos pos)//TODO: Place blocks as bridges, not only under mining blocks
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
         if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());
@@ -102,21 +118,26 @@ public class EntityAIMining extends EntityAIBase
         ItemStack dropppedItemStack;
         if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
         else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+
         if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty())
         {
-            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST) inventoryToChest();
-            if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty()) return false;
+            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST)
+            {
+                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
+                searchChest = true;
+                return true;
+            } else return false;
         }
 
         world.setBlockToAir(pos);
         return true;
     }
-    protected void placeLightAt(BlockPos pos)
+    protected void placeLightAt(BlockPos pos)//TODO: Use the to-be-made light source for dwarfs
     {
         BlockPos ceiling = new BlockPos(pos.getX(), entity.posY + 2, pos.getZ());
-        world.setBlockState(ceiling, ModBlocks.BRIGHT_INSANITY_STONE.getDefaultState());
+        if(AIHelper.mineableBlocks.contains(world.getBlockState(ceiling))) world.setBlockState(ceiling, ModBlocks.BRIGHT_INSANITY_STONE.getDefaultState());
     }
-    protected void getMiningBlocks(BlockPos start, BlockPos end)
+    protected void getMiningBlocks(BlockPos start, BlockPos end)//TODO: Handle torches
     {
         int xDifference = 0;
         int zDifference = 0;
@@ -138,7 +159,7 @@ public class EntityAIMining extends EntityAIBase
             start = start.add(xDifference, 0, zDifference);
         }
     }
-    protected BlockPos getRandomPosition()
+    protected BlockPos getRandomPosition()//TODO: Fix dwarf mines being mainly in positive directions
     {
         int xIncrease = 0;
         int zIncrease = 0;
@@ -147,41 +168,8 @@ public class EntityAIMining extends EntityAIBase
 
         return entity.getPosition().add(xIncrease, 0, zIncrease);
     }
-    protected BlockPos findChest(BlockPos pos)
-    {
-        int height = ConfigHandler.aiSearchRange / 4;
-
-        for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
-        {
-            int x = -range;
-            int z = -range;
-            for(int y = -height; y <= height; y++)
-            {
-                for(; x <= range; x++)
-                {
-                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
-                }
-                for(; z <= range; z++)
-                {
-                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
-                }
-                for(; x >= -range; x--)
-                {
-                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
-                }
-                for(; z >= -range; z--)
-                {
-                    if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
-                }
-            }
-        }
-        return null;
-    }
     protected void inventoryToChest()
     {
-        BlockPos currentPos = entity.getPosition();
-        entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-
         TileEntity te = null;
         try
         {
@@ -192,13 +180,13 @@ public class EntityAIMining extends EntityAIBase
             chestPos = null;
             return;
         }
+
+        //TODO: Add animation to chest opening and closing
         IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
         for(int i = 0; i < entity.itemHandler.getSlots(); i++)
         {
             if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
-
-        entity.getNavigator().tryMoveToXYZ(currentPos.getX(), currentPos.getY(), currentPos.getZ(), 1);
     }
 }
