@@ -137,7 +137,7 @@ public class EntityAIMining extends EntityAIBase
         BlockPos ceiling = new BlockPos(pos.getX(), entity.posY + 2, pos.getZ());
         if(AIHelper.mineableBlocks.contains(world.getBlockState(ceiling))) world.setBlockState(ceiling, ModBlocks.BRIGHT_INSANITY_STONE.getDefaultState());
     }
-    protected void getMiningBlocks(BlockPos start, BlockPos end)//TODO: Handle torches
+    protected void getMiningBlocks(BlockPos start, BlockPos end)
     {
         int xDifference = 0;
         int zDifference = 0;
@@ -152,10 +152,14 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end && miningBlocks.size() < 30 && AIHelper.mineableBlocks.contains(world.getBlockState(start)) && AIHelper.mineableBlocks.contains(world.getBlockState(start.add(0, 1, 0))))
+        while(start != end && miningBlocks.size() <= 64)
         {
-            miningBlocks.add(start.add(0, 1, 0));
-            miningBlocks.add(start);
+            if(AIHelper.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
+            else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
+
+            if(AIHelper.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
+            else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
+
             start = start.add(xDifference, 0, zDifference);
         }
     }
