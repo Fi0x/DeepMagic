@@ -35,7 +35,7 @@ public class DwarfLamp extends BlockBase
         super(name, material);
         setSoundType(SoundType.METAL);
         setHardness(1.0F);
-        setResistance(10.0F);
+        setResistance(2.0F);
         setLightLevel(1.0F);
         this.setTickRandomly(true);
 
@@ -78,13 +78,7 @@ public class DwarfLamp extends BlockBase
     {
         return false;
     }
-    //TODO:Rework the following torch methods
-    private boolean canPlaceOn(World worldIn, BlockPos pos)
-    {
-        IBlockState state = worldIn.getBlockState(pos);
-        return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
-    }
-    public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos)
+    public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos)//TODO: Might need to look at this method
     {
         for (EnumFacing enumfacing : FACING.getAllowedValues())
         {
@@ -103,18 +97,10 @@ public class DwarfLamp extends BlockBase
         Block block = iblockstate.getBlock();
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, blockpos, facing);
 
-        if (facing.equals(EnumFacing.UP) && this.canPlaceOn(worldIn, blockpos))
-        {
-            return true;
-        }
-        else if (facing != EnumFacing.UP && facing != EnumFacing.DOWN)
+        if(!facing.equals(EnumFacing.UP) && !facing.equals(EnumFacing.DOWN))
         {
             return !isExceptBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID;
-        }
-        else
-        {
-            return false;
-        }
+        } else return canPlaceOn(worldIn, blockpos);
     }
     @Nonnull
     public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer)
@@ -122,8 +108,7 @@ public class DwarfLamp extends BlockBase
         if (this.canPlaceAt(worldIn, pos, facing))
         {
             return this.getDefaultState().withProperty(FACING, facing);
-        }
-        else
+        } else
         {
             for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {
@@ -132,25 +117,21 @@ public class DwarfLamp extends BlockBase
                     return this.getDefaultState().withProperty(FACING, enumfacing);
                 }
             }
-
+            if(canPlaceAt(worldIn, pos, EnumFacing.DOWN)) return this.getDefaultState().withProperty(FACING, EnumFacing.DOWN);
             return this.getDefaultState();
         }
     }
     public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
-        this.checkForDrop(worldIn, pos, state);
+        checkForDrop(worldIn, pos, state);
     }
     public void neighborChanged(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos)
     {
-        this.onNeighborChangeInternal(worldIn, pos, state);
+        onNeighborChangeInternal(worldIn, pos, state);
     }
-    protected boolean onNeighborChangeInternal(World worldIn, BlockPos pos, IBlockState state)
+    protected void onNeighborChangeInternal(World worldIn, BlockPos pos, IBlockState state)
     {
-        if (!this.checkForDrop(worldIn, pos, state))
-        {
-            return true;
-        }
-        else
+        if (this.checkForDrop(worldIn, pos, state))
         {
             EnumFacing enumfacing = state.getValue(FACING);
             EnumFacing.Axis enumfacing$axis = enumfacing.getAxis();
@@ -158,30 +139,19 @@ public class DwarfLamp extends BlockBase
             BlockPos blockpos = pos.offset(enumfacing1);
             boolean flag = false;
 
-            if (enumfacing$axis.isHorizontal() && worldIn.getBlockState(blockpos).getBlockFaceShape(worldIn, blockpos, enumfacing) != BlockFaceShape.SOLID)
-            {
-                flag = true;
-            }
-            else if (enumfacing$axis.isVertical() && !this.canPlaceOn(worldIn, blockpos))
-            {
-                flag = true;
-            }
+            if (enumfacing$axis.isHorizontal() && worldIn.getBlockState(blockpos).getBlockFaceShape(worldIn, blockpos, enumfacing) != BlockFaceShape.SOLID) flag = true;
+            else if (enumfacing$axis.isVertical() && !this.canPlaceOn(worldIn, blockpos)) flag = true;
 
             if (flag)
             {
                 this.dropBlockAsItem(worldIn, pos, state, 0);
                 worldIn.setBlockToAir(pos);
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
     }
     protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
     {
-        if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(FACING)))
+        if (state.getBlock() == this && canPlaceAt(worldIn, pos, state.getValue(FACING)))
         {
             return true;
         }
@@ -192,12 +162,11 @@ public class DwarfLamp extends BlockBase
                 this.dropBlockAsItem(worldIn, pos, state, 0);
                 worldIn.setBlockToAir(pos);
             }
-
             return false;
         }
     }
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, @Nonnull World worldIn, BlockPos pos, @Nonnull Random rand)
+    public void randomDisplayTick(IBlockState stateIn, @Nonnull World worldIn, BlockPos pos, @Nonnull Random rand)//TODO: Adjust particles and location
     {
         EnumFacing enumfacing = stateIn.getValue(FACING);
         double d0 = (double)pos.getX() + 0.5D;
@@ -236,6 +205,9 @@ public class DwarfLamp extends BlockBase
                 iblockstate = iblockstate.withProperty(FACING, EnumFacing.NORTH);
                 break;
             case 5:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.DOWN);
+                break;
+            case 6:
             default:
                 iblockstate = iblockstate.withProperty(FACING, EnumFacing.UP);
         }
@@ -267,9 +239,11 @@ public class DwarfLamp extends BlockBase
                 i = i | 4;
                 break;
             case DOWN:
+                i = i | 5;
+                break;
             case UP:
             default:
-                i = i | 5;
+                i = i | 6;
         }
 
         return i;
@@ -277,12 +251,12 @@ public class DwarfLamp extends BlockBase
     @Nonnull
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
     @Nonnull
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
+        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
     }
     @Nonnull
     protected BlockStateContainer createBlockState()
@@ -293,5 +267,10 @@ public class DwarfLamp extends BlockBase
     public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;
+    }
+    private boolean canPlaceOn(World worldIn, BlockPos pos)
+    {
+        IBlockState state = worldIn.getBlockState(pos);
+        return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
     }
 }
