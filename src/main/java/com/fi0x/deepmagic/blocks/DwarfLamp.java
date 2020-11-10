@@ -23,12 +23,12 @@ import java.util.Random;
 public class DwarfLamp extends BlockBase
 {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
-    protected static final AxisAlignedBB LAMP_STANDING_AABB = new AxisAlignedBB(0.34, 0.0D, 0.34, 0.66, 0.69, 0.66);
-    protected static final AxisAlignedBB LAMP_HANGING_AABB = new AxisAlignedBB(0.34, 0.31, 0.34, 0.66, 1, 0.66);
-    protected static final AxisAlignedBB LAMP_NORTH_AABB = new AxisAlignedBB(0.3499999940395355D, 0.20000000298023224D, 0.699999988079071D, 0.6499999761581421D, 0.800000011920929D, 1.0D);
-    protected static final AxisAlignedBB LAMP_SOUTH_AABB = new AxisAlignedBB(0.3499999940395355D, 0.20000000298023224D, 0.0D, 0.6499999761581421D, 0.800000011920929D, 0.30000001192092896D);
-    protected static final AxisAlignedBB LAMP_EAST_AABB = new AxisAlignedBB(0.0D, 0.2, 0.35, 0.6, 0.8, 0.65);
-    protected static final AxisAlignedBB LAMP_WEST_AABB = new AxisAlignedBB(0.699999988079071D, 0.20000000298023224D, 0.3499999940395355D, 1.0D, 0.800000011920929D, 0.6499999761581421D);
+    protected static final AxisAlignedBB LAMP_STANDING_AABB = new AxisAlignedBB(0.3125, 0.0D, 0.3125, 0.6875, 0.71875, 0.6875);
+    protected static final AxisAlignedBB LAMP_HANGING_AABB = new AxisAlignedBB(0.3125, 0.28125, 0.3125, 0.6875, 1, 0.6875);
+    protected static final AxisAlignedBB LAMP_NORTH_AABB = new AxisAlignedBB(0.3125, 0.25, 0.46875, 0.6875, 0.75, 1.0D);
+    protected static final AxisAlignedBB LAMP_SOUTH_AABB = new AxisAlignedBB(0.3125, 0.25, 0.0D, 0.6875, 0.75, 0.53125);
+    protected static final AxisAlignedBB LAMP_EAST_AABB = new AxisAlignedBB(0.0D, 0.25, 0.3125, 0.53125, 0.75, 0.6875);
+    protected static final AxisAlignedBB LAMP_WEST_AABB = new AxisAlignedBB(0.46875, 0.25, 0.3125, 1.0D, 0.75, 0.6875);
 
     public DwarfLamp(String name, Material material)
     {
