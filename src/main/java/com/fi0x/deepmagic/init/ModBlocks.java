@@ -33,6 +33,7 @@ public class ModBlocks
 	public static final BlockSlab CLEAN_STONE_SLAB_DOUBLE = new CleanStoneDoubleSlab("clean_stone_slab_double", Material.ROCK);
 	public static final BlockSlab CLEAN_STONE_SLAB_HALF = new CleanStoneHalfSlab("clean_stone_slab_half", Material.ROCK);
 	public static final BlockStairs CLEAN_STONE_STAIRS = new StairBase("clean_stone_stairs", Blocks.STONE.getDefaultState());
+	public static final Block DWARF_LAMP = new DwarfLamp("dwarf_lamp", Material.CIRCUITS);
 
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);

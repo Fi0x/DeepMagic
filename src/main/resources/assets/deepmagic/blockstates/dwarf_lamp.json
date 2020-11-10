@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"facing=up": { "model": "dwarf_lamp_floor"},
+		"facing=down": { "model": "dwarf_lamp_ceiling"},
+		"facing=east": { "model": "dwarf_lamp_wall" },
+		"facing=south": { "model": "dwarf_lamp_wall", "y": 90 },
+		"facing=west": { "model": "dwarf_lamp_wall", "y": 180 },
+		"facing=north": { "model": "dwarf_lamp_wall", "y": 270 }
+	}
+}
