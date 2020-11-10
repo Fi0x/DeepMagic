@@ -24,7 +24,7 @@ public class DwarfLamp extends BlockBase
 {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
     protected static final AxisAlignedBB LAMP_STANDING_AABB = new AxisAlignedBB(0.34, 0.0D, 0.34, 0.66, 0.69, 0.66);
-    protected static final AxisAlignedBB LAMP_HANGING_AABB = new AxisAlignedBB(0.4000000059604645D, 0.0D, 0.4000000059604645D, 0.6000000238418579D, 0.6000000238418579D, 0.6000000238418579D);
+    protected static final AxisAlignedBB LAMP_HANGING_AABB = new AxisAlignedBB(0.34, 0.31, 0.34, 0.66, 1, 0.66);
     protected static final AxisAlignedBB LAMP_NORTH_AABB = new AxisAlignedBB(0.3499999940395355D, 0.20000000298023224D, 0.699999988079071D, 0.6499999761581421D, 0.800000011920929D, 1.0D);
     protected static final AxisAlignedBB LAMP_SOUTH_AABB = new AxisAlignedBB(0.3499999940395355D, 0.20000000298023224D, 0.0D, 0.6499999761581421D, 0.800000011920929D, 0.30000001192092896D);
     protected static final AxisAlignedBB LAMP_EAST_AABB = new AxisAlignedBB(0.0D, 0.20000000298023224D, 0.3499999940395355D, 0.30000001192092896D, 0.800000011920929D, 0.6499999761581421D);

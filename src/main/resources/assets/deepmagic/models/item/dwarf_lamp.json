@@ -1,6 +1,3 @@
 {
-   "parent": "item/generated",
-   "textures": {
-      "layer0": "blocks/dwarf_lamp"
-   }
+   "parent": "deepmagic:block/dwarf_lamp_floor"
 }
