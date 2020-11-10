@@ -125,6 +125,7 @@ public class EntityAIMining extends EntityAIBase
             {
                 entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
                 searchChest = true;
+                miningBlocks.clear();
                 return true;
             } else return false;
         }
