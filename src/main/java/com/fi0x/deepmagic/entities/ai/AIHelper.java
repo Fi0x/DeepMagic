@@ -8,6 +8,7 @@ import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -91,7 +92,7 @@ public class AIHelper
         return null;
     }
 
-    public static BlockPos findChest(World world, BlockPos pos)//TODO: Check for space in chests
+    public static BlockPos findChest(World world, BlockPos pos)
     {
         if(pos == null) return null;
         for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
@@ -102,11 +103,25 @@ public class AIHelper
                 {
                     for(int z = -range; z <= range; z++)
                     {
-                        if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest) return pos.add(x, y, z);
+                        if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest)
+                        {
+                            if(hasChestSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
+                        }
                     }
                 }
             }
         }
         return null;
+    }
+    private static boolean hasChestSpace(World world, BlockPos pos)
+    {
+        TileEntityChest te = ((TileEntityChest) world.getTileEntity(pos));
+        if(te == null) return false;
+
+        for(int checkSlot = 0; checkSlot < te.getSizeInventory(); checkSlot++)
+        {
+            if(te.getStackInSlot(checkSlot).isEmpty()) return true;
+        }
+        return false;
     }
 }

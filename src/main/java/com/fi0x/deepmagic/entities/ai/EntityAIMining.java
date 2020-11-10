@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -174,10 +174,10 @@ public class EntityAIMining extends EntityAIBase
     }
     protected void inventoryToChest()
     {
-        TileEntity te = null;
+        TileEntityChest te = null;
         try
         {
-            te = world.getTileEntity(chestPos);
+            te = (TileEntityChest) world.getTileEntity(chestPos);
         } catch (Exception ignored) { }
         if(te == null)
         {

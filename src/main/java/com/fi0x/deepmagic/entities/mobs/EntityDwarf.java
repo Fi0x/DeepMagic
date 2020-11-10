@@ -28,7 +28,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
 {
     public ItemStackHandler itemHandler;
     public boolean isMining;
-    public BlockPos homePos;//TODO: Set correct home position (Currently 0,0,0)
+    public BlockPos homePos;
 
     public EntityDwarf(World worldIn)
     {
