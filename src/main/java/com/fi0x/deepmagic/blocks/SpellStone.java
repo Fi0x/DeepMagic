@@ -56,8 +56,8 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
                 switch(compound.getByte("effect"))
                 {
                     case 0:
-                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You set the damage value to 2"));
-                        tile.setAttackDmg(2);
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You increased the damage value by 1"));
+                        tile.increaseAttackDmg(2);
                         break;
                     case 1:
                         playerIn.sendMessage(new TextComponentString(TextFormatting.GREEN + "You added environmental damage"));
@@ -126,9 +126,8 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
                         break;
                 }
             }
+            stack.setCount(stack.getCount() - 1);
         }
-
-        stack.setCount(stack.getCount() - 1);
         return true;
     }
     @Override
@@ -153,7 +152,8 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
 
         if(tile.getRange() > 0)
         {
-            compound.setInteger("range", compound.getInteger("range") + tile.getRange());
+            if(compound.hasKey("range"))compound.setInteger("range", compound.getInteger("range") + tile.getRange());
+            else compound.setInteger("range", tile.getRange());
             tile.resetRange();
         }
         if(tile.isTargetSelf())
@@ -178,12 +178,14 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         }
         if(tile.getRadius() > 0)
         {
-            compound.setInteger("radius", compound.getInteger("radius") + tile.getRadius());
+            if(compound.hasKey("radius")) compound.setInteger("radius", compound.getInteger("radius") + tile.getRadius());
+            else compound.setInteger("radius", tile.getRadius());
             tile.resetRadius();
         }
-        if(tile.getAttackDmg() > 0 && ((compound.hasKey("damage") && compound.getInteger("damage") < tile.getAttackDmg()) || !compound.hasKey("damage")))
+        if(tile.getAttackDmg() > 0)
         {
-            compound.setInteger("damage", tile.getAttackDmg());
+            if(compound.hasKey("damage")) compound.setInteger("damage", compound.getInteger("damage") + tile.getAttackDmg());
+            else compound.setInteger("damage", tile.getAttackDmg());
             tile.resetAttackDmg();
         }
         if(tile.doesEnvDmg())
@@ -196,14 +198,16 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
             compound.setBoolean("explosion", true);
             tile.resetExplosive();
         }
-        if(tile.getHeal() > 0 && ((compound.hasKey("heal") || compound.getInteger("heal") < tile.getHeal()) || !compound.hasKey("heal")))
+        if(tile.getHeal() > 0)
         {
-            compound.setInteger("heal", tile.getHeal());
+            if(compound.hasKey("heal")) compound.setInteger("heal", compound.getInteger("heal") + tile.getHeal());
+            else compound.setInteger("heal", tile.getHeal());
             tile.resetHeal();
         }
         if(tile.getTime() != 0)
         {
-            compound.setInteger("time", tile.getTime());
+            if(compound.hasKey("time")) compound.setInteger("time", compound.getInteger("time") + tile.getTime());
+            else compound.setInteger("time", tile.getTime());
             tile.resetTime();
         }
         if(tile.doesWeather())

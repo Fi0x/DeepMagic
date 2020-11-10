@@ -1,5 +1,7 @@
-package com.fi0x.deepmagic.init;
+package com.fi0x.deepmagic.util.recipes;
 
+import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -22,5 +24,6 @@ public class ModRecipes
 		GameRegistry.addSmelting(ModItems.RAW_WORM, new ItemStack(ModItems.COOKED_WORM, 1), 1F);
 		GameRegistry.addSmelting(Items.ROTTEN_FLESH, new ItemStack(ModItems.DRY_FLESH, 1), 1F);
 		GameRegistry.addSmelting(ModItems.WHEAT_FLOUR, new ItemStack(Items.BREAD, 1), 0F);
+		GameRegistry.addSmelting(ModBlocks.INSANITY_LOG, new ItemStack(Items.COAL, 1), 1F);
 	}
 }
