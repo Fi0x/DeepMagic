@@ -110,7 +110,7 @@ public class EntityAIMining extends EntityAIBase
             {
                 if(!miningBlocks.isEmpty() && entity.getDistanceSq(miningBlocks.get(0)) < 64)
                 {
-                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock().isPassable(world, miningBlocks.get(0))) miningBlocks.remove(0);
+                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null) miningBlocks.remove(0);
                     if(miningBlocks.isEmpty()) return false;
 
                     if(!digAtBlockPos(miningBlocks.get(0))) return false;
@@ -171,10 +171,10 @@ public class EntityAIMining extends EntityAIBase
         while(start != end && miningBlocks.size() <= ConfigHandler.aiSearchRange * 2)
         {
             if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
-            else if(world.getBlockState(start.up()).getBlock().isPassable(world, start.up())) break;
+            else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
 
             if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
-            else if(world.getBlockState(start).getBlock().isPassable(world, start)) break;
+            else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
 
             start = start.add(xDifference, 0, zDifference);
         }

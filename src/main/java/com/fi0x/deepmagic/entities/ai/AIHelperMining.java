@@ -84,7 +84,7 @@ public class AIHelperMining
             blocksDone.add(checkBlocks.get(0));
             BlockPos pos = checkBlocks.get(0);
 
-            if(world.getBlockState(pos).getBlock().isPassable(world, pos) && world.getBlockState(pos.up()).getBlock().isPassable(world, pos.up()))
+            if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null && world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null)
             {
                 int dX = Math.max(entityLocation.getX(), pos.getX()) - Math.min(entityLocation.getX(), pos.getX());
                 int dY = Math.max(entityLocation.getY(), pos.getY()) - Math.min(entityLocation.getY(), pos.getY());
@@ -113,13 +113,13 @@ public class AIHelperMining
         else if(direction == EnumFacing.SOUTH) freeBlock = pos.north();
         else if(direction == EnumFacing.WEST) freeBlock = pos.east();
 
-        if(!world.getBlockState(freeBlock).getBlock().isPassable(world, freeBlock)) return false;
-        if(!world.getBlockState(freeBlock.up()).getBlock().isPassable(world, freeBlock.up())) return false;
+        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null) return false;
+        if(world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
 
         boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
-        boolean downAir = world.getBlockState(pos).getBlock().isPassable(world, pos);
+        boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
         boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
-        boolean upAir = world.getBlockState(pos.up()).getBlock().isPassable(world, pos.up());
+        boolean upAir = world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null;
 
         if(downBlock && upAir) return true;
         if(downBlock && upBlock) return true;
