@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import com.fi0x.deepmagic.blocks.DwarfLamp;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.BlockChest;
@@ -79,9 +80,9 @@ public class AIHelperMining
 
         while(!checkBlocks.isEmpty())
         {
-            if(validatePosition(world, checkBlocks.get(0), direction)) return checkBlocks.get(0);
-            blocksDone.add(checkBlocks.get(0));
             BlockPos pos = checkBlocks.get(0);
+            if(validatePosition(world, pos, direction)) return pos;
+            blocksDone.add(pos);
 
             if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null && world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null)
             {
@@ -136,7 +137,7 @@ public class AIHelperMining
         return start;
     }
 
-    public static BlockPos findChest(World world, BlockPos pos)//TODO: Make search algorithm more effective
+    public static BlockPos findChest(World world, BlockPos pos)
     {
         if(pos == null) return null;
         for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
@@ -167,5 +168,15 @@ public class AIHelperMining
             if(te.getStackInSlot(checkSlot).isEmpty()) return true;
         }
         return false;
+    }
+
+    public static void placeLightAt(World world, BlockPos pos)
+    {
+        BlockPos topBlock = pos.up();
+        if(world.getBlockState(topBlock) == Blocks.AIR.getDefaultState())
+        {
+            if(world.getBlockState(topBlock.up()).isFullBlock()) world.setBlockState(topBlock, ModBlocks.DWARF_LAMP.getDefaultState());
+            else world.setBlockState(pos, ModBlocks.DWARF_LAMP.getDefaultState().withProperty(DwarfLamp.FACING, EnumFacing.UP));
+        }
     }
 }

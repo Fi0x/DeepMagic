@@ -67,7 +67,7 @@ public class EntityAIMining extends EntityAIBase
     {
         chestPos = AIHelperMining.findChest(world, entity.getPosition());
         if(chestPos != null) entity.homePos = entity.getPosition();
-        else chestPos = AIHelperMining.findChest(world, entity.homePos);
+        else if (entity.homePos != null) chestPos = AIHelperMining.findChest(world, entity.homePos);
 
         EnumFacing direction = EnumFacing.NORTH;
         int rand = (int) (Math.random() * 4);
@@ -123,7 +123,7 @@ public class EntityAIMining extends EntityAIBase
                     if(!digAtBlockPos(miningBlocks.get(0))) return false;
                     if(miningBlocks.isEmpty()) return true;
                     if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-                    if(world.getLightBrightness(miningBlocks.get(0)) < 0.09) placeLightAt(miningBlocks.get(0));
+                    if(world.getLightBrightness(miningBlocks.get(0)) < 0.09) AIHelperMining.placeLightAt(world, new BlockPos(miningBlocks.get(0).getX(), entity.posY, miningBlocks.get(0).getZ()));
                     digDelay = 20;
                 } else if(!miningBlocks.isEmpty()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
             } else digDelay--;
@@ -156,11 +156,6 @@ public class EntityAIMining extends EntityAIBase
 
         world.setBlockToAir(pos);
         return true;
-    }
-    protected void placeLightAt(BlockPos pos)
-    {
-        BlockPos topBlock = new BlockPos(pos.getX(), entity.posY + 1, pos.getZ());
-        if(world.getBlockState(topBlock) == Blocks.AIR.getDefaultState()) world.setBlockState(topBlock, ModBlocks.DWARF_LAMP.getDefaultState());
     }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {

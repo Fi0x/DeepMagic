@@ -33,10 +33,12 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     public EntityDwarf(World worldIn)
     {
         super(worldIn);
-        itemHandler = new ItemStackHandler(ConfigHandler.dwarfInventorySlots);
-        isMining = false;
         this.setSize(0.9F, 1.5F);
         enablePersistence();
+
+        itemHandler = new ItemStackHandler(ConfigHandler.dwarfInventorySlots);
+        isMining = false;
+        homePos = null;
     }
 
     @Override
