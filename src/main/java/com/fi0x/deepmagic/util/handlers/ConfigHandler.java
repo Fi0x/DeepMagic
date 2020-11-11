@@ -60,9 +60,9 @@ public class ConfigHandler
     public static boolean allowHoveringOrb;
     public static boolean allowGiant;
     //NPC Behavior
-    public static int aiSearchRange;
     public static boolean dwarfMining;
     public static boolean trollDefenceState;
+    public static int dwarfMaxMiningHeight;
     //Whitelist
     public static boolean dwarfMineOres;
     public static boolean dwarfMineResources;
@@ -89,6 +89,7 @@ public class ConfigHandler
     public static int damageNetherWorm;
     public static int damageRockTroll;
     //NPC Utility
+    public static int aiSearchRange;
     public static int dwarfInventorySlots;
 
     //Player Mana
@@ -208,9 +209,9 @@ public class ConfigHandler
 
         category = "NPC Behavior";
         npcsGeneral.addCustomCategoryComment(category, "NPC Behavior");
-        aiSearchRange = npcsGeneral.getInt("AI Search Range", category, 32, 8, 256, "The Radius in which AIs search for Things");
         dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
         trollDefenceState = npcsGeneral.getBoolean("Troll Defence State", category, true, "Allow Trolls to use an invulnerable Defence State");
+        dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines");
 
         category = "NPC Whitelist";
         npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
@@ -251,7 +252,8 @@ public class ConfigHandler
 
         category = "Utility";
         npcStats.addCustomCategoryComment(category, "NPC Utility Stats");
-        dwarfInventorySlots = npcStats.getInt("Dwarf Inventory Size", category, 10, 1, 30, "Amount of Stacks a Dwarf can carry");
+        aiSearchRange = npcStats.getInt("AI Search Range", category, 32, 8, 256, "The Radius in which AIs search for Things");
+        dwarfInventorySlots = npcStats.getInt("Dwarf Inventory Size", category, 3, 1, 30, "Amount of Stacks a Dwarf can carry");
 
         npcStats.save();
     }
