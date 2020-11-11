@@ -109,12 +109,39 @@ public class AIHelperMining
     private static boolean validatePosition(World world, BlockPos pos, EnumFacing direction)
     {
         BlockPos freeBlock = pos.south();
-        if(direction == EnumFacing.EAST) freeBlock = pos.west();
-        else if(direction == EnumFacing.SOUTH) freeBlock = pos.north();
-        else if(direction == EnumFacing.WEST) freeBlock = pos.east();
+        BlockPos rightBlock = pos.east();
+        BlockPos rightNext = rightBlock.north();
+        BlockPos leftBlock = pos.west();
+        BlockPos leftNext = leftBlock.north();
+        if(direction == EnumFacing.EAST)
+        {
+            freeBlock = pos.west();
+            rightBlock = pos.south();
+            rightNext = rightBlock.east();
+            leftBlock = pos.north();
+            leftNext = leftBlock.east();
+        }
+        else if(direction == EnumFacing.SOUTH)
+        {
+            freeBlock = pos.north();
+            rightBlock = pos.west();
+            rightNext = rightBlock.south();
+            leftBlock = pos.east();
+            leftNext = leftBlock.south();
+        }
+        else if(direction == EnumFacing.WEST)
+        {
+            freeBlock = pos.east();
+            rightBlock = pos.north();
+            rightNext = rightBlock.west();
+            leftBlock = pos.south();
+            leftNext = leftBlock.west();
+        }
 
         if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null) return false;
         if(world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
+        if(world.getBlockState(rightBlock).getBlock() == Blocks.AIR && world.getBlockState(rightNext).getBlock() == Blocks.AIR) return false;
+        if(world.getBlockState(leftBlock).getBlock() == Blocks.AIR && world.getBlockState(leftNext).getBlock() == Blocks.AIR) return false;
 
         boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
         boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
