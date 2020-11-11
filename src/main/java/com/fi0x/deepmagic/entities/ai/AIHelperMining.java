@@ -23,7 +23,6 @@ public class AIHelperMining
     public static void fillMiningWhitelist()
     {
         mineableBlocks = new ArrayList<>();
-        mineableBlocks.add(Blocks.AIR.getDefaultState());
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
         mineableBlocks.add(Blocks.GRASS.getDefaultState());
@@ -127,7 +126,7 @@ public class AIHelperMining
     }
     public static BlockPos getRandomPosition(BlockPos start, EnumFacing direction, Random rand)
     {
-        int distance = rand.nextInt(ConfigHandler.aiSearchRange);
+        int distance = rand.nextInt(ConfigHandler.aiSearchRange / 2) + ConfigHandler.aiSearchRange / 2;
 
         if(direction == EnumFacing.NORTH) return start.add(0, 0, -distance);
         if(direction == EnumFacing.EAST) return start.add(distance, 0, 0);

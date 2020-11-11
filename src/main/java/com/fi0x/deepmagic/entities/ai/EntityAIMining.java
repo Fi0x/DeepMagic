@@ -84,6 +84,8 @@ public class EntityAIMining extends EntityAIBase
                 break;
         }
         startPosition = AIHelperMining.findMiningStartPosition(world, entity.getPosition(), direction);
+        if(startPosition == null) return;
+
         destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
         digDelay = 0;
 
@@ -110,7 +112,12 @@ public class EntityAIMining extends EntityAIBase
             {
                 if(!miningBlocks.isEmpty() && entity.getDistanceSq(miningBlocks.get(0)) < 64)
                 {
-                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null) miningBlocks.remove(0);
+                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
+                    {
+                        BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), entity.posY - 1, miningBlocks.get(0).getZ());
+                        if(world.getBlockState(floor).getBlock() == Blocks.AIR) break;
+                        miningBlocks.remove(0);
+                    }
                     if(miningBlocks.isEmpty()) return false;
 
                     if(!digAtBlockPos(miningBlocks.get(0))) return false;
@@ -124,11 +131,13 @@ public class EntityAIMining extends EntityAIBase
         return true;
     }
 
-    protected boolean digAtBlockPos(BlockPos pos)//TODO: Place blocks as bridges, not only under mining blocks
+    protected boolean digAtBlockPos(BlockPos pos)
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
         if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());
         Block block = world.getBlockState(pos).getBlock();
+
+        if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
 
         ItemStack dropppedItemStack;
         if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
@@ -172,9 +181,11 @@ public class EntityAIMining extends EntityAIBase
         {
             if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
             else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
+            else miningBlocks.add(start.up());
 
             if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
             else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
+            else miningBlocks.add(start);
 
             start = start.add(xDifference, 0, zDifference);
         }
