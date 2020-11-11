@@ -22,6 +22,7 @@ public class GuiHandler implements IGuiHandler
         if(ID == ConfigHandler.guiManaGeneratorMobID) return new ContainerManaGeneratorMob(player.inventory, (TileEntityManaGeneratorMob) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaInfuserID) return new ContainerManaInfuser(player.inventory, (TileEntityManaInfuser) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaGrinderID) return new ContainerManaGrinder(player.inventory, (TileEntityManaGrinder) world.getTileEntity(new BlockPos(x, y, z)));
+        if(ID == ConfigHandler.guiManaFurnaceID) return new ContainerManaFurnace(player.inventory, (TileEntityManaFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 
@@ -35,6 +36,7 @@ public class GuiHandler implements IGuiHandler
         if(ID == ConfigHandler.guiManaGeneratorMobID) return new GuiManaGeneratorMob(player.inventory, (TileEntityManaGeneratorMob) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaInfuserID) return new GuiManaInfuser(player.inventory, (TileEntityManaInfuser) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaGrinderID) return new GuiManaGrinder(player.inventory, (TileEntityManaGrinder) world.getTileEntity(new BlockPos(x, y, z)));
+        if(ID == ConfigHandler.guiManaFurnaceID) return new GuiManaFurnace(player.inventory, (TileEntityManaFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 }
