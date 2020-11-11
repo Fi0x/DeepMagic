@@ -111,12 +111,19 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         compound.setTag("ItemStackHandler", itemHandler.serializeNBT());
+        compound.setInteger("homex", homePos.getX());
+        compound.setInteger("homey", homePos.getY());
+        compound.setInteger("homez", homePos.getZ());
         return super.writeToNBT(compound);
     }
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         itemHandler.deserializeNBT(compound.getCompoundTag("ItemStackHandler"));
+        int x = compound.getInteger("homex");
+        int y = compound.getInteger("homey");
+        int z = compound.getInteger("homez");
+        homePos = new BlockPos(x, y, z);
         super.readFromNBT(compound);
     }
     @Nullable

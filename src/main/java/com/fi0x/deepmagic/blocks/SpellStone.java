@@ -126,7 +126,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
                         break;
                 }
             }
-            stack.setCount(stack.getCount() - 1);
+            stack.shrink(1);
         }
         return true;
     }
