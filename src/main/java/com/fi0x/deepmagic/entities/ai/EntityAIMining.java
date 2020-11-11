@@ -125,7 +125,11 @@ public class EntityAIMining extends EntityAIBase
                     if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
                     if(world.getLightBrightness(entity.getPosition()) < 0.09) AIHelperMining.placeLightAt(world, entity.getPosition());
                     digDelay = 20;
-                } else if(!miningBlocks.isEmpty()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
+                } else if(!miningBlocks.isEmpty())
+                {
+                    entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
+                    return !entity.getNavigator().noPath();
+                }
             } else digDelay--;
         }
         return true;
