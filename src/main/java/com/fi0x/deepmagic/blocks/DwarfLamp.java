@@ -69,6 +69,11 @@ public class DwarfLamp extends BlockBase
         return null;
     }
     @Override
+    public boolean isPassable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
+    {
+        return true;
+    }
+    @Override
     public boolean isOpaqueCube(@Nonnull IBlockState state)
     {
         return false;

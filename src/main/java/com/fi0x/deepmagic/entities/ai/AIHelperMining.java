@@ -9,12 +9,14 @@ import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class AIHelper
+public class AIHelperMining
 {
     public static ArrayList<IBlockState> mineableBlocks = null;
 
@@ -70,29 +72,72 @@ public class AIHelper
         }
     }
 
-    public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation)
+    public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation, EnumFacing direction)
     {
-        int i = (int) (Math.random() * 2);
-        if(i == 0) i = -1;
+        ArrayList<BlockPos> checkBlocks = new ArrayList<>();
+        ArrayList<BlockPos> blocksDone = new ArrayList<>();
+        checkBlocks.add(entityLocation);
 
-        for(int r = i; Math.abs(r) <= ConfigHandler.aiSearchRange; r += i)
+        while(!checkBlocks.isEmpty())
         {
-            for(int x = -r; x <= Math.abs(r); x++)
+            if(validatePosition(world, checkBlocks.get(0), direction)) return checkBlocks.get(0);
+            blocksDone.add(checkBlocks.get(0));
+            BlockPos pos = checkBlocks.get(0);
+
+            if(world.getBlockState(pos).getBlock().isPassable(world, pos) && world.getBlockState(pos.up()).getBlock().isPassable(world, pos.up()))
             {
-                for (int z = -r; z <= Math.abs(r); z++)
+                int dX = Math.max(entityLocation.getX(), pos.getX()) - Math.min(entityLocation.getX(), pos.getX());
+                int dY = Math.max(entityLocation.getY(), pos.getY()) - Math.min(entityLocation.getY(), pos.getY());
+                int dZ = Math.max(entityLocation.getZ(), pos.getZ()) - Math.min(entityLocation.getZ(), pos.getZ());
+                int distance = dX * dX + dY * dY + dZ * dZ;
+
+                if(distance <= ConfigHandler.aiSearchRange * ConfigHandler.aiSearchRange)
                 {
-                    BlockPos pos = entityLocation.add(x, 0, z);
-                    if(mineableBlocks.contains(world.getBlockState(pos)) && mineableBlocks.contains(world.getBlockState(pos.up())))
-                    {
-                        if(world.getBlockState(pos) != Blocks.AIR.getDefaultState() || world.getBlockState(pos.up()) != Blocks.AIR.getDefaultState()) return pos;
-                    }
+                    if(!blocksDone.contains(pos.north()) && !checkBlocks.contains(pos.north())) checkBlocks.add(pos.north());
+
+                    if(!blocksDone.contains(pos.east()) && !checkBlocks.contains(pos.east())) checkBlocks.add(pos.east());
+
+                    if(!blocksDone.contains(pos.south()) && !checkBlocks.contains(pos.south())) checkBlocks.add(pos.south());
+
+                    if(!blocksDone.contains(pos.west()) && !checkBlocks.contains(pos.west())) checkBlocks.add(pos.west());
                 }
             }
+            checkBlocks.remove(0);
         }
         return null;
     }
+    private static boolean validatePosition(World world, BlockPos pos, EnumFacing direction)
+    {
+        BlockPos freeBlock = pos.south();
+        if(direction == EnumFacing.EAST) freeBlock = pos.west();
+        else if(direction == EnumFacing.SOUTH) freeBlock = pos.north();
+        else if(direction == EnumFacing.WEST) freeBlock = pos.east();
 
-    public static BlockPos findChest(World world, BlockPos pos)
+        if(!world.getBlockState(freeBlock).getBlock().isPassable(world, freeBlock)) return false;
+        if(!world.getBlockState(freeBlock.up()).getBlock().isPassable(world, freeBlock.up())) return false;
+
+        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
+        boolean downAir = world.getBlockState(pos).getBlock().isPassable(world, pos);
+        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
+        boolean upAir = world.getBlockState(pos.up()).getBlock().isPassable(world, pos.up());
+
+        if(downBlock && upAir) return true;
+        if(downBlock && upBlock) return true;
+        return downAir && upBlock;
+    }
+    public static BlockPos getRandomPosition(BlockPos start, EnumFacing direction, Random rand)
+    {
+        int distance = rand.nextInt(ConfigHandler.aiSearchRange);
+
+        if(direction == EnumFacing.NORTH) return start.add(0, 0, -distance);
+        if(direction == EnumFacing.EAST) return start.add(distance, 0, 0);
+        if(direction == EnumFacing.SOUTH) return start.add(0, 0, distance);
+        if(direction == EnumFacing.WEST) return start.add(-distance, 0, 0);
+
+        return start;
+    }
+
+    public static BlockPos findChest(World world, BlockPos pos)//TODO: Make search algorithm more effective
     {
         if(pos == null) return null;
         for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)

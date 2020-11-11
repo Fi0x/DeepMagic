@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -52,7 +53,6 @@ public class EntityAIMining extends EntityAIBase
         this.executionChance = executionChance;
         random = new Random();
         miningBlocks = new ArrayList<>();
-        AIHelper.fillMiningWhitelist();
     }
 
     @Override
@@ -65,12 +65,26 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public void startExecuting()
     {
-        chestPos = AIHelper.findChest(world, entity.getPosition());
+        chestPos = AIHelperMining.findChest(world, entity.getPosition());
         if(chestPos != null) entity.homePos = entity.getPosition();
-        else chestPos = AIHelper.findChest(world, entity.homePos);
+        else chestPos = AIHelperMining.findChest(world, entity.homePos);
 
-        startPosition = entity.getPosition();
-        destination = getRandomPosition();
+        EnumFacing direction = EnumFacing.NORTH;
+        int rand = (int) (Math.random() * 4);
+        switch(rand)
+        {
+            case 0:
+                direction = EnumFacing.EAST;
+                break;
+            case 1:
+                direction = EnumFacing.SOUTH;
+                break;
+            case 2:
+                direction = EnumFacing.WEST;
+                break;
+        }
+        startPosition = AIHelperMining.findMiningStartPosition(world, entity.getPosition(), direction);
+        destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
         digDelay = 0;
 
         getMiningBlocks(startPosition, destination);
@@ -96,17 +110,18 @@ public class EntityAIMining extends EntityAIBase
             {
                 if(!miningBlocks.isEmpty() && entity.getDistanceSq(miningBlocks.get(0)) < 64)
                 {
-                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock().getCollisionBoundingBox(world.getBlockState(miningBlocks.get(0)), world, miningBlocks.get(0)) == null) miningBlocks.remove(0);
+                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getBlock().isPassable(world, miningBlocks.get(0))) miningBlocks.remove(0);
                     if(miningBlocks.isEmpty()) return false;
 
                     if(!digAtBlockPos(miningBlocks.get(0))) return false;
+                    if(miningBlocks.isEmpty()) return true;
                     if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
                     if(world.getLightBrightness(miningBlocks.get(0)) < 0.09) placeLightAt(miningBlocks.get(0));
                     digDelay = 20;
                 } else if(!miningBlocks.isEmpty()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
             } else digDelay--;
-            return true;
-        } else return true;
+        }
+        return true;
     }
 
     protected boolean digAtBlockPos(BlockPos pos)//TODO: Place blocks as bridges, not only under mining blocks
@@ -153,25 +168,16 @@ public class EntityAIMining extends EntityAIBase
             else xDifference = -1;
         }
 
-        while(start != end && miningBlocks.size() <= 64)
+        while(start != end && miningBlocks.size() <= ConfigHandler.aiSearchRange * 2)
         {
-            if(AIHelper.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
-            else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
+            if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
+            else if(world.getBlockState(start.up()).getBlock().isPassable(world, start.up())) break;
 
-            if(AIHelper.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
-            else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
+            if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
+            else if(world.getBlockState(start).getBlock().isPassable(world, start)) break;
 
             start = start.add(xDifference, 0, zDifference);
         }
-    }
-    protected BlockPos getRandomPosition()//TODO: Fix dwarf mines being mainly in positive directions
-    {
-        int xIncrease = 0;
-        int zIncrease = 0;
-        if(Math.random() < 0.5) zIncrease = random.nextInt(ConfigHandler.aiSearchRange - ConfigHandler.aiSearchRange / 2);
-        else xIncrease = random.nextInt(ConfigHandler.aiSearchRange - ConfigHandler.aiSearchRange / 2);
-
-        return entity.getPosition().add(xIncrease, 0, zIncrease);
     }
     protected void inventoryToChest()
     {
