@@ -39,7 +39,7 @@ public class DwarfLamp extends BlockBase
         setLightLevel(0.9F);
         this.setTickRandomly(true);
 
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.DOWN));
     }
 
     @Nonnull
@@ -67,6 +67,11 @@ public class DwarfLamp extends BlockBase
     public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
     {
         return null;
+    }
+    @Override
+    public boolean isPassable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
+    {
+        return true;
     }
     @Override
     public boolean isOpaqueCube(@Nonnull IBlockState state)

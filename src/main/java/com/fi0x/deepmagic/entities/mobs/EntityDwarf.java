@@ -28,14 +28,17 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
 {
     public ItemStackHandler itemHandler;
     public boolean isMining;
+    public BlockPos homePos;
 
     public EntityDwarf(World worldIn)
     {
         super(worldIn);
-        itemHandler = new ItemStackHandler(ConfigHandler.dwarfInventorySlots);
-        isMining = false;
         this.setSize(0.9F, 1.5F);
         enablePersistence();
+
+        itemHandler = new ItemStackHandler(ConfigHandler.dwarfInventorySlots);
+        isMining = false;
+        homePos = null;
     }
 
     @Override
@@ -66,6 +69,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.damageDwarf);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(8);
+        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(200);
     }
 
     @Nullable
