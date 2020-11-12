@@ -195,7 +195,7 @@ public class ManaFurnace extends BlockBase implements ITileEntityProvider
             world.setTileEntity(pos, te);
         }
     }
-    @SideOnly(Side.CLIENT)//TODO: Check if method works
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
     {
         if(((TileEntityManaFurnace) Objects.requireNonNull(worldIn.getTileEntity(pos))).isRunning())
