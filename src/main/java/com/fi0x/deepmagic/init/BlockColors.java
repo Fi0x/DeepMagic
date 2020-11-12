@@ -25,5 +25,6 @@ public class BlockColors implements IBlockColor
     public static void registerColors()
     {
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(INSTANCE, ModBlocks.INSANITY_LEAVES);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(INSTANCE, ModBlocks.INSANITY_GRASS);
     }
 }

@@ -35,7 +35,7 @@ import java.util.Random;
 
 public class InsanityLeaves extends BlockLeaves implements IHasModel
 {
-    public InsanityLeaves(String name)//TODO: Fix particle effect texture
+    public InsanityLeaves(String name)
     {
         super();
         setUnlocalizedName(name);
