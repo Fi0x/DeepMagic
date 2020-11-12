@@ -260,6 +260,7 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
         if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
         linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
+        assert linkedAltar != null;
         int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
         if(spaceInAltar > storedMana)
         {

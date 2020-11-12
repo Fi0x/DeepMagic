@@ -62,5 +62,6 @@ public class RegistryHandler
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorMob.class, new ResourceLocation("mana_generator_mob"));
 		GameRegistry.registerTileEntity(TileEntityManaInfuser.class, new ResourceLocation("mana_infuser"));
 		GameRegistry.registerTileEntity(TileEntityManaGrinder.class, new ResourceLocation("mana_grinder"));
+		GameRegistry.registerTileEntity(TileEntityManaFurnace.class, new ResourceLocation("mana_furnace"));
 	}
 }

@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+   "parent": "block/orientable",
+   "textures": {
+       "particle": "deepmagic:blocks/mana/furnace/mana_furnace_side",
+       "up": "deepmagic:blocks/mana/furnace/mana_furnace_top",
+       "down": "deepmagic:blocks/mana/furnace/mana_furnace_bottom",
+       "north": "deepmagic:blocks/mana/furnace/mana_furnace_front_on",
+       "east": "deepmagic:blocks/mana/furnace/mana_furnace_side",
+       "south": "deepmagic:blocks/mana/furnace/mana_furnace_side",
+       "west": "deepmagic:blocks/mana/furnace/mana_furnace_side"
+   }
+}

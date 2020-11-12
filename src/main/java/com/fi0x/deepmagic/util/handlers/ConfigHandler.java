@@ -38,6 +38,7 @@ public class ConfigHandler
     public static int guiManaGeneratorMobID;
     public static int guiManaInfuserID;
     public static int guiManaGrinderID;
+    public static int guiManaFurnaceID;
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
@@ -165,6 +166,7 @@ public class ConfigHandler
         guiManaGeneratorMobID = ids.getInt("Mob Mana Generator GUI ID", category, 423, -1000, 1000, "");
         guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 424, -1000, 1000, "");
         guiManaGrinderID = ids.getInt("Mana Grinder GUI ID", category, 425, -1000, 1000, "");
+        guiManaFurnaceID = ids.getInt("Mana Furnace GUI ID", category, 426, -1000, 1000, "");
 
         ids.save();
     }

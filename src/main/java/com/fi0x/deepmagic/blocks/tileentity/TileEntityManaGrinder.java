@@ -312,6 +312,7 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
         if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
         linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
+        assert linkedAltar != null;
         if(linkedAltar.getStoredMana() > 10)
         {
             if(linkedAltar.removeManaFromStorage(10)) storedMana += 10;

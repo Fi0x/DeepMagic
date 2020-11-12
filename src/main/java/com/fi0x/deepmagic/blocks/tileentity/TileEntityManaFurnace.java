@@ -1,16 +1,12 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.blocks.mana.ManaInfuser;
+import com.fi0x.deepmagic.blocks.mana.ManaFurnace;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.util.recipes.ManaInfuserRecipes;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -22,15 +18,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaInfuser extends TileEntity implements IInventory, ITickable
+public class TileEntityManaFurnace extends TileEntity implements IInventory, ITickable
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
     private String customName;
 
     private BlockPos linkedAltarPos;
     private TileEntityManaAltar linkedAltar;
-    private int infusionProgress;
-    private int totalInfusionTime;
+    private int smeltProgress;
+    private int totalSmeltTime;
     private int storedMana;
 
     @Override
@@ -100,8 +96,8 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     {
         switch (id)
         {
-            case 0: return infusionProgress;
-            case 1: return totalInfusionTime;
+            case 0: return smeltProgress;
+            case 1: return totalSmeltTime;
             case 2: return storedMana;
         }
         return 0;
@@ -111,9 +107,9 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     {
         switch (id)
         {
-            case 0: infusionProgress = value;
+            case 0: smeltProgress = value;
             break;
-            case 1: totalInfusionTime = value;
+            case 1: totalSmeltTime = value;
             break;
             case 2: storedMana = value;
             break;
@@ -140,32 +136,32 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
             ItemStack stack = inventory.get(0);
             if(stack.isEmpty())
             {
-                if(totalInfusionTime > 0)
+                if(totalSmeltTime > 0)
                 {
-                    infusionProgress = 0;
-                    totalInfusionTime = 0;
+                    smeltProgress = 0;
+                    totalSmeltTime = 0;
                     dirty = true;
                 }
             } else if (storedMana > 0)
             {
-                if(canInfuse())
+                if(canSmelt())
                 {
                     storedMana--;
-                    infusionProgress++;
+                    smeltProgress++;
                     dirty = true;
-                    if(totalInfusionTime == 0) totalInfusionTime = getItemInfusionTime(stack);
-                    if (infusionProgress >= totalInfusionTime)
+                    if(totalSmeltTime == 0) totalSmeltTime = getItemSmeltTime();
+                    if (smeltProgress >= totalSmeltTime)
                     {
-                        infusionProgress = 0;
-                        infuseItem();
-                        totalInfusionTime = getItemInfusionTime(stack);
+                        smeltProgress = 0;
+                        smeltItem();
+                        totalSmeltTime = getItemSmeltTime();
                     }
-                } else infusionProgress = 0;
+                } else smeltProgress = 0;
             }
 
             if(isRunning() != wasRunning)
             {
-                ManaInfuser.setState(isRunning(), world, pos);
+                ManaFurnace.setState(isRunning(), world, pos);
                 dirty = true;
             }
             if(ConfigHandler.manaMachineManaCapacity - storedMana >= 10)
@@ -179,7 +175,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     @Override
     public String getName()
     {
-        return hasCustomName() ? customName : "container.mana_infuser";
+        return hasCustomName() ? customName : "container.mana_furnace";
     }
     @Override
     public boolean hasCustomName()
@@ -204,7 +200,7 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
             compound.setBoolean("linked", true);
         } else compound.setBoolean("linked", false);
 
-        compound.setInteger("infusionProgress", infusionProgress);
+        compound.setInteger("smeltProgress", smeltProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
@@ -221,8 +217,8 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
             linkedAltarPos = new BlockPos(x, y, z);
         }
 
-        infusionProgress = compound.getInteger("infusionProgress");
-        totalInfusionTime = getItemInfusionTime(inventory.get(0));
+        smeltProgress = compound.getInteger("smeltProgress");
+        totalSmeltTime = getItemSmeltTime();
         storedMana = compound.getInteger("storedMana");
         inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventory);
@@ -235,48 +231,42 @@ public class TileEntityManaInfuser extends TileEntity implements IInventory, ITi
     }
     public boolean isRunning()
     {
-        return infusionProgress > 0;
+        return smeltProgress > 0;
     }
-    private boolean canInfuse()
+    private boolean canSmelt()
     {
         ItemStack inputStack = inventory.get(0);
         if (inputStack.isEmpty()) return false;
         else
         {
-            ItemStack infusionResult = ManaInfuserRecipes.instance().getInfuserResult(inputStack);
-            if (infusionResult.isEmpty()) return false;
+            ItemStack furnaceResult = FurnaceRecipes.instance().getSmeltingResult(inputStack);
+            if (furnaceResult.isEmpty()) return false;
 
             ItemStack output = inventory.get(1);
             if (output.isEmpty()) return true;
-            if (!output.isItemEqual(infusionResult)) return false;
-            return output.getCount() + infusionResult.getCount() <= getInventoryStackLimit() && output.getCount() + infusionResult.getCount() <= output.getMaxStackSize();
-        }
-    }
-    public static int getItemInfusionTime(ItemStack infusionStack)
-    {
-        if(infusionStack.isEmpty()) return 0;
+            if (!output.isItemEqual(furnaceResult)) return false;
 
-        Item item = infusionStack.getItem();
-        if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
-        {
-            return 1000;
+            return output.getCount() + furnaceResult.getCount() <= getInventoryStackLimit();
         }
-        return 120;
     }
-    public static boolean isItemInfusable(ItemStack item)
+    public static int getItemSmeltTime()
     {
-        return getItemInfusionTime(item) > 0;
+        return 100;
     }
-    private void infuseItem()
+    public static boolean isItemSmeltable()
+    {
+        return getItemSmeltTime() > 0;
+    }
+    private void smeltItem()
     {
         ItemStack input = inventory.get(0);
-        ItemStack result = ManaInfuserRecipes.instance().getInfuserResult(input);
+        ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
         if(!result.isEmpty())
         {
-            ItemStack output = inventory.get(1);
+            ItemStack output1 = inventory.get(1);
 
-            if(output.isEmpty()) inventory.set(1, result);
-            else if(output.getItem() == result.getItem()) output.grow(result.getCount());
+            if(output1.getItem() == result.getItem()) output1.grow(result.getCount());
+            else if(output1.isEmpty()) inventory.set(1, result);
 
             input.shrink(1);
         }
