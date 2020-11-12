@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class SlotManaFurnace extends Slot//TODO:Adjust class
+public class SlotManaFurnace extends Slot
 {
     public SlotManaFurnace(IInventory inventoryIn, int index, int xPosition, int yPosition)
     {
@@ -16,6 +16,6 @@ public class SlotManaFurnace extends Slot//TODO:Adjust class
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        return TileEntityManaFurnace.isItemGrindable(stack);
+        return TileEntityManaFurnace.isItemSmeltable(stack);
     }
 }

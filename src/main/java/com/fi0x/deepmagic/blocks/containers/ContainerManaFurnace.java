@@ -1,22 +1,22 @@
 package com.fi0x.deepmagic.blocks.containers;
 
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaFurnace;
-import com.fi0x.deepmagic.util.recipes.ManaFurnaceRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class ContainerManaFurnace extends Container//TODO:Adjust class
+public class ContainerManaFurnace extends Container
 {
     private final TileEntityManaFurnace te;
-    private int grindProgress, totalGrindTime, storedMana;
+    private int smeltProgress, totalSmeltTime, storedMana;
 
     public ContainerManaFurnace(InventoryPlayer player, TileEntityManaFurnace tileEntity)
     {
@@ -24,8 +24,6 @@ public class ContainerManaFurnace extends Container//TODO:Adjust class
 
         addSlotToContainer(new SlotManaFurnace(te, 0, 21, 25));
         addSlotToContainer(new SlotOutput(te, 1, 86, 25));
-        addSlotToContainer(new SlotOutput(te, 2, 104, 25));
-        addSlotToContainer(new SlotOutput(te, 3, 122, 25));
 
         for(int y = 0; y < 3; y++)
         {
@@ -53,13 +51,13 @@ public class ContainerManaFurnace extends Container//TODO:Adjust class
 
         for (IContainerListener listener : listeners)
         {
-            if (grindProgress != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
-            if (totalGrindTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
+            if (smeltProgress != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
+            if (totalSmeltTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
             if (storedMana != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
         }
 
-        grindProgress = te.getField(0);
-        totalGrindTime = te.getField(1);
+        smeltProgress = te.getField(0);
+        totalSmeltTime = te.getField(1);
         storedMana = te.getField(2);
     }
     @Override
@@ -85,20 +83,20 @@ public class ContainerManaFurnace extends Container//TODO:Adjust class
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index > 0 && index <= 3)
+            if (index > 0 && index <= 1)
             {
-                if (!this.mergeItemStack(itemstack1, 2, 38, true)) return ItemStack.EMPTY;
+                if (!this.mergeItemStack(itemstack1, 2, 37, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(itemstack1, itemstack);
             } else if (index != 0)
             {
-                if (!ManaFurnaceRecipes.instance().getFurnaceResult(itemstack1).isEmpty())
+                if (!FurnaceRecipes.instance().getSmeltingResult(itemstack1).isEmpty())
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
-                } else if (index < 31)
+                } else if (index < 29)
                 {
-                    if (!this.mergeItemStack(itemstack1, 31, 40, false)) return ItemStack.EMPTY;
-                } else if (index < 40 && !this.mergeItemStack(itemstack1, 4, 31, false)) return ItemStack.EMPTY;
-            } else if (!this.mergeItemStack(itemstack1, 4, 40, false)) return ItemStack.EMPTY;
+                    if (!this.mergeItemStack(itemstack1, 29, 37, false)) return ItemStack.EMPTY;
+                } else if (index < 37 && !this.mergeItemStack(itemstack1, 2, 28, false)) return ItemStack.EMPTY;
+            } else if (!this.mergeItemStack(itemstack1, 2, 37, false)) return ItemStack.EMPTY;
 
             if (itemstack1.isEmpty()) slot.putStack(ItemStack.EMPTY);
             else slot.onSlotChanged();

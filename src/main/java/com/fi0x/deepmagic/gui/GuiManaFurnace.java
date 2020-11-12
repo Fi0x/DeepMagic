@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiManaFurnace extends GuiContainer//TODO:Adjust class
+public class GuiManaFurnace extends GuiContainer
 {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/mana_furnace.png");
     private final InventoryPlayer player;
@@ -43,11 +43,11 @@ public class GuiManaFurnace extends GuiContainer//TODO:Adjust class
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int p = getProgressScaled(38);
-        drawTexturedModalRect(guiLeft + 42,guiTop + 25, 176, 50, p, 15);
+        int p = getProgressScaled(24);
+        drawTexturedModalRect(guiLeft + 49,guiTop + 25, 176, 50, p, 15);
 
         int m = getStoredManaScaled(50);
-        drawTexturedModalRect(guiLeft + 147, guiTop + 66 - m, 176, 0, 16, m);
+        drawTexturedModalRect(guiLeft + 141, guiTop + 66 - m, 176, 0, 16, m);
     }
     private int getProgressScaled(int pixels)
     {

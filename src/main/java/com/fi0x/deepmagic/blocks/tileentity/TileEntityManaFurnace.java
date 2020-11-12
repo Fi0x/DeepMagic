@@ -4,7 +4,6 @@ import com.fi0x.deepmagic.blocks.mana.ManaFurnace;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.util.recipes.ManaFurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +12,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -24,15 +24,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaFurnace extends TileEntity implements IInventory, ITickable//TODO:Adjust class
+public class TileEntityManaFurnace extends TileEntity implements IInventory, ITickable
 {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
     private String customName;
 
     private BlockPos linkedAltarPos;
     private TileEntityManaAltar linkedAltar;
-    private int grindProgress;
-    private int totalGrindTime;
+    private int smeltProgress;
+    private int totalSmeltTime;
     private int storedMana;
 
     @Override
@@ -95,15 +95,15 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return index == 0 || index > 3;
+        return index != 1;
     }
     @Override
     public int getField(int id)
     {
         switch (id)
         {
-            case 0: return grindProgress;
-            case 1: return totalGrindTime;
+            case 0: return smeltProgress;
+            case 1: return totalSmeltTime;
             case 2: return storedMana;
         }
         return 0;
@@ -113,9 +113,9 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
     {
         switch (id)
         {
-            case 0: grindProgress = value;
+            case 0: smeltProgress = value;
             break;
-            case 1: totalGrindTime = value;
+            case 1: totalSmeltTime = value;
             break;
             case 2: storedMana = value;
             break;
@@ -132,7 +132,7 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
         inventory.clear();
     }
     @Override
-    public void update()
+    public void update()//TODO: Adjust method
     {
         boolean wasRunning = isRunning();
         boolean dirty = false;
@@ -142,10 +142,10 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
             ItemStack stack = inventory.get(0);
             if(stack.isEmpty())
             {
-                if(totalGrindTime > 0)
+                if(totalSmeltTime > 0)
                 {
-                    grindProgress = 0;
-                    totalGrindTime = 0;
+                    smeltProgress = 0;
+                    totalSmeltTime = 0;
                     dirty = true;
                 }
             } else if (storedMana > 0)
@@ -153,16 +153,16 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
                 if(canGrind())
                 {
                     storedMana--;
-                    grindProgress++;
+                    smeltProgress++;
                     dirty = true;
-                    if(totalGrindTime == 0) totalGrindTime = getItemGrindTime(stack);
-                    if (grindProgress >= totalGrindTime)
+                    if(totalSmeltTime == 0) totalSmeltTime = getItemGrindTime(stack);
+                    if (smeltProgress >= totalSmeltTime)
                     {
-                        grindProgress = 0;
+                        smeltProgress = 0;
                         grindItem();
-                        totalGrindTime = getItemGrindTime(stack);
+                        totalSmeltTime = getItemGrindTime(stack);
                     }
-                } else grindProgress = 0;
+                } else smeltProgress = 0;
             }
 
             if(isRunning() != wasRunning)
@@ -206,7 +206,7 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
             compound.setBoolean("linked", true);
         } else compound.setBoolean("linked", false);
 
-        compound.setInteger("grindProgress", grindProgress);
+        compound.setInteger("smeltProgress", smeltProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
@@ -223,8 +223,8 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
             linkedAltarPos = new BlockPos(x, y, z);
         }
 
-        grindProgress = compound.getInteger("grindProgress");
-        totalGrindTime = getItemGrindTime(inventory.get(0));
+        smeltProgress = compound.getInteger("smeltProgress");
+        totalSmeltTime = getItemGrindTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
         inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventory);
@@ -237,15 +237,15 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
     }
     public boolean isRunning()
     {
-        return grindProgress > 0;
+        return smeltProgress > 0;
     }
-    private boolean canGrind()
+    private boolean canGrind()//TODO: Adjust method
     {
         ItemStack inputStack = inventory.get(0);
         if (inputStack.isEmpty()) return false;
         else
         {
-            ItemStack furnaceResult = ManaFurnaceRecipes.instance().getFurnaceResult(inputStack);
+            ItemStack furnaceResult = FurnaceRecipes.instance().getSmeltingResult(inputStack);
             if (furnaceResult.isEmpty()) return false;
 
             ItemStack output1 = inventory.get(1);
@@ -262,7 +262,7 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
             return freeItems - furnaceResult.getCount() >= 0;
         }
     }
-    public static int getItemGrindTime(ItemStack grindStack)
+    public static int getItemGrindTime(ItemStack grindStack)//TODO: Adjust method
     {
         if(grindStack.isEmpty()) return 0;
 
@@ -277,14 +277,14 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
 
         return 100;
     }
-    public static boolean isItemGrindable(ItemStack item)
+    public static boolean isItemSmeltable(ItemStack item)
     {
         return getItemGrindTime(item) > 0;
     }
-    private void grindItem()
+    private void grindItem()//TODO: Adjust method
     {
         ItemStack input = inventory.get(0);
-        ItemStack result = ManaFurnaceRecipes.instance().getFurnaceResult(input);
+        ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
         if(!result.isEmpty())
         {
             ItemStack output1 = inventory.get(1);
@@ -312,6 +312,7 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
         if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
         linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
 
+        assert linkedAltar != null;
         if(linkedAltar.getStoredMana() > 10)
         {
             if(linkedAltar.removeManaFromStorage(10)) storedMana += 10;
