@@ -88,6 +88,7 @@ public class Main
 		ModRecipes.init();
 		SoundsHandler.registerSounds();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+		proxy.init(event);
 	}
 
 	@Mod.EventHandler

@@ -24,6 +24,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -33,7 +35,7 @@ import java.util.Random;
 
 public class InsanityLeaves extends BlockLeaves implements IHasModel
 {
-    public InsanityLeaves(String name)//TODO: Fix particle effect texture
+    public InsanityLeaves(String name)
     {
         super();
         setUnlocalizedName(name);
@@ -147,6 +149,7 @@ public class InsanityLeaves extends BlockLeaves implements IHasModel
         return 0;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
     {

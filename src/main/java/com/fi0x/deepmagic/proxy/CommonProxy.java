@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy
@@ -10,6 +11,9 @@ public class CommonProxy
 	public void openSkilltreeGui(EntityPlayer player) {}
 
 	public void preInit(FMLPreInitializationEvent event)
+	{
+	}
+	public void init(FMLInitializationEvent event)
 	{
 	}
 }
