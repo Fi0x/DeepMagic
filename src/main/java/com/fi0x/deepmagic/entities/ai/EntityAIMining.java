@@ -202,7 +202,6 @@ public class EntityAIMining extends EntityAIBase
             return;
         }
 
-        //TODO: Add animation to chest opening and closing
         IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
         for(int i = 0; i < entity.itemHandler.getSlots(); i++)
