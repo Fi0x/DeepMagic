@@ -16,6 +16,6 @@ public class SlotManaFurnace extends Slot
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        return TileEntityManaFurnace.isItemSmeltable(stack);
+        return TileEntityManaFurnace.isItemSmeltable();
     }
 }
