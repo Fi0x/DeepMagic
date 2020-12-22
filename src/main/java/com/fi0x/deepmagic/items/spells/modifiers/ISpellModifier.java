@@ -4,12 +4,6 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public interface ISpellModifier extends ISpellPart
 {
-    @Override
-    default boolean isModifier()
-    {
-        return true;
-    }
-
     default int damage()
     {
         return 0;

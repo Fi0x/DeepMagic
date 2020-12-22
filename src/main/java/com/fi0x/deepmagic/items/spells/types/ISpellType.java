@@ -8,11 +8,6 @@ import java.util.ArrayList;
 
 public interface ISpellType extends ISpellPart
 {
-    @Override
-    default boolean isType()
-    {
-        return true;
-    }
     default boolean requiresPosition()
     {
         return false;
