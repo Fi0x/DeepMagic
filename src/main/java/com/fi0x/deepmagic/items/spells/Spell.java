@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.items.mana;
+package com.fi0x.deepmagic.items.spells;
 
 import com.fi0x.deepmagic.blocks.SpellStone;
 import com.fi0x.deepmagic.init.DeepMagicTab;

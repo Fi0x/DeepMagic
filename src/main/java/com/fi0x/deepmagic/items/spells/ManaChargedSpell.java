@@ -1,9 +1,8 @@
-package com.fi0x.deepmagic.items.mana;
+package com.fi0x.deepmagic.items.spells;
 
 import com.fi0x.deepmagic.blocks.SpellStone;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
-import com.fi0x.deepmagic.util.IMagicItem;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ManaChargedSpell extends Spell implements IMagicItem
+public class ManaChargedSpell extends Spell
 {
     public ManaChargedSpell(String name)
     {

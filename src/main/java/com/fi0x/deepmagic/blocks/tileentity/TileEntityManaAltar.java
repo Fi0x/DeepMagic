@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.items.mana.ManaChargedSpell;
+import com.fi0x.deepmagic.items.spells.ManaChargedSpell;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

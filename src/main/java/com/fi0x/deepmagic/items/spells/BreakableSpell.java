@@ -1,6 +1,5 @@
-package com.fi0x.deepmagic.items.mana;
+package com.fi0x.deepmagic.items.spells;
 
-import com.fi0x.deepmagic.util.IMagicItem;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +14,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class BreakableSpell extends Spell implements IMagicItem
+public class BreakableSpell extends Spell
 {
     public BreakableSpell(String name)
     {
