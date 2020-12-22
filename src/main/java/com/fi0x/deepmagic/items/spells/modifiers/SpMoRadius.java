@@ -15,7 +15,6 @@ public class SpMoRadius implements ISpellModifier
     @Override
     public int radius()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

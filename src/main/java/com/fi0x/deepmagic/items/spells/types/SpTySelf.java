@@ -20,7 +20,6 @@ public class SpTySelf implements ISpellType
     @Override
     public ArrayList<Entity> getEntities()
     {
-        //TODO: Return caster
         return null;
     }
     @Override
@@ -32,5 +31,12 @@ public class SpTySelf implements ISpellType
     public boolean requiresEntity()
     {
         return true;
+    }
+
+    public ArrayList<Entity> getEntities(Entity caster)
+    {
+        ArrayList<Entity> list = new ArrayList<>();
+        list.add(caster);
+        return list;
     }
 }

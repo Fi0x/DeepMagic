@@ -15,7 +15,6 @@ public class SpMoHealPower implements ISpellModifier
     @Override
     public int healPower()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

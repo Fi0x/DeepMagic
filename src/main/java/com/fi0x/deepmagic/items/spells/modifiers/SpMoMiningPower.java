@@ -15,7 +15,6 @@ public class SpMoMiningPower implements ISpellModifier
     @Override
     public int miningPower()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

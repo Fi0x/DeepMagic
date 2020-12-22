@@ -15,7 +15,6 @@ public class SpMoTickSpeed implements ISpellModifier
     @Override
     public int tickSpeed()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

@@ -42,7 +42,6 @@ public class SpTyBeam implements ISpellType
     @Override
     public double getRange()
     {
-        //TODO: Adjust value
-        return 1;
+        return 8;
     }
 }

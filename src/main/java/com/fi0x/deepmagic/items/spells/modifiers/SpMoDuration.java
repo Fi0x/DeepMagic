@@ -15,7 +15,6 @@ public class SpMoDuration implements ISpellModifier
     @Override
     public int duration()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

@@ -20,13 +20,11 @@ public class SpTyAreaOfEffect implements ISpellType
     @Override
     public ArrayList<Entity> getEntities()
     {
-        //TODO: Return entities in area
         return null;
     }
     @Override
     public ArrayList<BlockPos> getPositions()
     {
-        //TODO: Return position
         return null;
     }
     @Override
@@ -37,7 +35,22 @@ public class SpTyAreaOfEffect implements ISpellType
     @Override
     public double getRadius()
     {
-        //TODO: Adjust value
         return 1;
+    }
+
+    public ArrayList<Entity> getEntities(BlockPos pos)
+    {
+        ArrayList<Entity> list = new ArrayList<>();
+        //TODO: Return entities in area
+        return list;
+    }
+    public ArrayList<BlockPos> getPositions(BlockPos pos)
+    {
+        ArrayList<BlockPos> list = new ArrayList<>();
+
+        //TODO: Return positions
+        list.add(pos);
+
+        return list;
     }
 }

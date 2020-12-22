@@ -46,13 +46,11 @@ public class SpTyStream implements ISpellType
     @Override
     public double getRange()
     {
-        //TODO: Adjust value
-        return 1;
+        return 4;
     }
     @Override
     public double getRadius()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

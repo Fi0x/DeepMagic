@@ -15,7 +15,6 @@ public class SpMoRange implements ISpellModifier
     @Override
     public int range()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

@@ -1,5 +1,8 @@
 package com.fi0x.deepmagic.items.spells.trigger;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
+
 public class SpTrHeal implements ISpellTrigger
 {
     @Override
@@ -12,5 +15,12 @@ public class SpTrHeal implements ISpellTrigger
     {
         return this;
     }
-    //TODO: Add heal event handler
+
+    public void healEvent(LivingHealEvent event)
+    {
+        if(event.getEntity() instanceof EntityPlayer)
+        {
+            //TODO: Trigger spell
+        }
+    }
 }

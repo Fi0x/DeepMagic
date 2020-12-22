@@ -18,7 +18,6 @@ public class SpMoSplit implements ISpellModifier
     @Override
     public int split()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

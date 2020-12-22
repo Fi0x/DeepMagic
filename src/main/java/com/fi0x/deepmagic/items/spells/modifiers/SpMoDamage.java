@@ -15,7 +15,6 @@ public class SpMoDamage implements ISpellModifier
     @Override
     public int damage()
     {
-        //TODO: Adjust value
         return 1;
     }
 }

@@ -20,18 +20,28 @@ public class SpTyRune implements ISpellType
     @Override
     public ArrayList<Entity> getEntities()
     {
-        //TODO: Return triggering entity
         return null;
     }
     @Override
     public ArrayList<BlockPos> getPositions()
     {
-        //TODO: Return own position
         return null;
     }
     @Override
     public boolean requiresPosition()
     {
         return true;
+    }
+
+    public ArrayList<Entity> getEntities(BlockPos pos)
+    {
+        //TODO: Return triggering entity
+        return null;
+    }
+    public ArrayList<BlockPos> getPositions(BlockPos pos)
+    {
+        ArrayList<BlockPos> list = new ArrayList<>();
+        list.add(pos);
+        return list;
     }
 }
