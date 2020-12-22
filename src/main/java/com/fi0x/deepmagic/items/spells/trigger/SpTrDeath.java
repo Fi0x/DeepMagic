@@ -1,5 +1,5 @@
 package com.fi0x.deepmagic.items.spells.trigger;
 
-public class SpTrDeath
+public class SpTrDeath implements ISpellTrigger
 {
 }

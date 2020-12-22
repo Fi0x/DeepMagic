@@ -1,5 +1,5 @@
 package com.fi0x.deepmagic.items.spells.types;
 
-public class SpTySelf
+public class SpTySelf implements ISpellType
 {
 }
