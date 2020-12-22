@@ -13,17 +13,31 @@ public interface ISpellType extends ISpellPart
     {
         return true;
     }
-
-    boolean providesEntity();
-    boolean providesPosition();
-    boolean triggersOnce();
-    boolean hasDuration();
-    boolean hasRange();
-    boolean hasRadius();
+    default boolean requiresPosition()
+    {
+        return false;
+    }
+    default boolean requiresEntity()
+    {
+        return false;
+    }
+    default boolean triggersOnce()
+    {
+        return true;
+    }
 
     ArrayList<Entity> getEntities();
     ArrayList<BlockPos> getPositions();
-    double getDuration();
-    double getRange();
-    double getRadius();
+    default double getDuration()
+    {
+        return 0;
+    }
+    default double getRange()
+    {
+        return 0;
+    }
+    default double getRadius()
+    {
+        return 0;
+    }
 }

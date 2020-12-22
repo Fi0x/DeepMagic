@@ -26,8 +26,20 @@ public interface ISpellPart
         return false;
     }
 
-    ISpellType getType();
-    ISpellTrigger getTrigger();
-    ISpellModifier getModifier();
-    ISpellEffect getEffect();
+    default ISpellType getType()
+    {
+        return null;
+    }
+    default ISpellTrigger getTrigger()
+    {
+        return null;
+    }
+    default ISpellModifier getModifier()
+    {
+        return null;
+    }
+    default ISpellEffect getEffect()
+    {
+        return null;
+    }
 }
