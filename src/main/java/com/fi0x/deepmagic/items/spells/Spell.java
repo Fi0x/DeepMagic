@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+@Deprecated
 public class Spell extends ItemBase implements IMagicItem
 {
     public Spell(String name)

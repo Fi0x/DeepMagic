@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+@Deprecated
 public class ManaChargedSpell extends Spell
 {
     public ManaChargedSpell(String name)

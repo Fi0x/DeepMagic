@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+@Deprecated
 public class SpellComponent extends ItemBase
 {
     public SpellComponent(String name)
