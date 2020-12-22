@@ -4,4 +4,11 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public interface ISpellTrigger extends ISpellPart
 {
+    @Override
+    default boolean isTrigger()
+    {
+        return true;
+    }
+
+    boolean isTriggered();
 }
