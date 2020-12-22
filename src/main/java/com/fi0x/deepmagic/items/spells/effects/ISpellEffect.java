@@ -9,10 +9,6 @@ import java.util.ArrayList;
 
 public interface ISpellEffect extends ISpellPart
 {
-    default void applyEffect(BlockPos targetPos, ArrayList<ISpellModifier> modifiers)
-    {
-    }
-    default void applyEffect(Entity targetEntity, ArrayList<ISpellModifier> modifiers)
-    {
-    }
+    void applyEffect(BlockPos targetPos, ArrayList<ISpellModifier> modifiers);
+    void applyEffect(Entity targetEntity, ArrayList<ISpellModifier> modifiers);
 }
