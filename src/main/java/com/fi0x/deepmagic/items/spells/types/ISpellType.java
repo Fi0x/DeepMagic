@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 public interface ISpellType extends ISpellPart
 {
-    void execute(ArrayList<ISpellPart> sectionParts, BlockPos castLocation, EntityLivingBase caster);
+    void execute(ArrayList<ISpellPart> sectionParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster);
 }

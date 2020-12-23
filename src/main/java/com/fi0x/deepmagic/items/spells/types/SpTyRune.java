@@ -20,9 +20,9 @@ public class SpTyRune implements ISpellType
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, EntityLivingBase caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
     {
         applicableParts.remove(0);
-        //TODO: Execute spell
+        //TODO: Create a "rune" block that contains the remaining spell information and applies the effects when triggered
     }
 }

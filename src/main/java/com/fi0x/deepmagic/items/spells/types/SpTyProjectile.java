@@ -22,7 +22,7 @@ public class SpTyProjectile implements ISpellType
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, EntityLivingBase caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
     {
         applicableParts.remove(0);
         //TODO: Execute spell

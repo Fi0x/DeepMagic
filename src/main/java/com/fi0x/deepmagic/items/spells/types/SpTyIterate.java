@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells.types;
 
+import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
@@ -22,16 +23,16 @@ public class SpTyIterate implements ISpellType
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, EntityLivingBase caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
     {
         applicableParts.remove(0);
+
+        boolean executed = false;
         //TODO: Execute spell
-        if(applicableParts.get(0) instanceof ISpellType)
+
+        if(!executed)
         {
-            for(int i = 0; i < iterations; i++)
-            {
-                ((ISpellType) applicableParts.get(0)).execute(applicableParts, castLocation, caster);
-            }
+            new CastHelper().findAndCastNextSpellType(remainingSections, caster);
         }
     }
 
