@@ -1,9 +1,9 @@
 package com.fi0x.deepmagic.items.spells.types;
 
 import com.fi0x.deepmagic.items.spells.ISpellPart;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 
 public class SpTyTouch implements ISpellType
@@ -21,8 +21,9 @@ public class SpTyTouch implements ISpellType
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, Entity caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, EntityLivingBase caster)
     {
+        applicableParts.remove(0);
         //TODO: Execute spell
     }
 }

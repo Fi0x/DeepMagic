@@ -50,7 +50,7 @@ public class NewSpell extends ItemBase implements IMagicItem
             } else section = 0;
         } while(section > 0);
 
-        castSpell(spellParts);
+        castSpell(spellParts, playerIn);
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
@@ -60,7 +60,7 @@ public class NewSpell extends ItemBase implements IMagicItem
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    private void castSpell(ArrayList<ArrayList<ISpellPart>> spellParts)
+    private void castSpell(ArrayList<ArrayList<ISpellPart>> spellParts, EntityPlayer caster)
     {
         for(ArrayList<ISpellPart> section : spellParts)
         {
@@ -71,12 +71,10 @@ public class NewSpell extends ItemBase implements IMagicItem
                     section.set(i - 1, ((ISpellModifier) section.get(i)).modifyPart(section.get(i - 1)));
                 }
             }
-            for(ISpellPart spellPart : section)
-            {
-                if(spellPart instanceof ISpellType)
-                {
 
-                }
+            if(section.get(0) instanceof ISpellType)
+            {
+                ((ISpellType) section.get(0)).execute(section, caster.getPosition(), caster);
             }
         }
     }

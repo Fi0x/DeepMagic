@@ -61,8 +61,6 @@ public class SpellPartHandler
                 return new SpTyAreaOfEffect();
             case "type_beam":
                 return new SpTyBeam();
-            case "type_continuous":
-                return new SpTyContinuous();
             case "type_iterate":
                 return new SpTyIterate();
             case "type_projectile":
