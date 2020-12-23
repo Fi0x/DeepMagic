@@ -1,5 +1,7 @@
 package com.fi0x.deepmagic.items.spells.modifiers;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
+
 public class SpMoGravity implements ISpellModifier
 {
     @Override
@@ -13,8 +15,9 @@ public class SpMoGravity implements ISpellModifier
         return this;
     }
     @Override
-    public boolean gravity()
+    public ISpellPart modifyPart(ISpellPart part)
     {
-        return true;
+        //TODO: change value of spellpart
+        return null;
     }
 }

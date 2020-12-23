@@ -2,6 +2,8 @@ package com.fi0x.deepmagic.items.spells;
 
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
+import com.fi0x.deepmagic.items.spells.modifiers.ISpellModifier;
+import com.fi0x.deepmagic.items.spells.types.ISpellType;
 import com.fi0x.deepmagic.util.IMagicItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,14 +39,14 @@ public class NewSpell extends ItemBase implements IMagicItem
         compound = itemStack.getTagCompound();
         assert compound != null;
 
-        ArrayList<ISpellPart> spellParts = new ArrayList<>();
+        ArrayList<ArrayList<ISpellPart>> spellParts = new ArrayList<>();
         int section = 0;
         do
         {
             section++;
             if(compound.hasKey("section" + section))
             {
-                spellParts.addAll(getSectionParts(compound.getCompoundTag("section" + section)));
+                spellParts.add(new SpellPartHandler().getSectionParts(compound.getCompoundTag("section" + section)));
             } else section = 0;
         } while(section > 0);
 
@@ -58,47 +60,24 @@ public class NewSpell extends ItemBase implements IMagicItem
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    private ArrayList<ISpellPart> getSectionParts(NBTTagCompound section)
+    private void castSpell(ArrayList<ArrayList<ISpellPart>> spellParts)
     {
-        ArrayList<ISpellPart> parts = new ArrayList<>();
+        for(ArrayList<ISpellPart> section : spellParts)
+        {
+            for(int i = 0; i < section.size(); i++)
+            {
+                if(section.get(i) instanceof ISpellModifier && i > 0)
+                {
+                    section.set(i - 1, ((ISpellModifier) section.get(i)).modifyPart(section.get(i - 1)));
+                }
+            }
+            for(ISpellPart spellPart : section)
+            {
+                if(spellPart instanceof ISpellType)
+                {
 
-        if(section.hasKey("type"))
-        {
-            String[] types = section.getString("type").split(":");
-            for(String t : types)
-            {
-                parts.add(SpellPartHandler.getSpellType(t));
+                }
             }
         }
-        if(section.hasKey("trigger"))
-        {
-            String[] triggers = section.getString("trigger").split(":");
-            for(String t : triggers)
-            {
-                parts.add(SpellPartHandler.getSpellTrigger(t));
-            }
-        }
-        if(section.hasKey("modifier"))
-        {
-            String[] modifiers = section.getString("modifier").split(":");
-            for(String m : modifiers)
-            {
-                parts.add(SpellPartHandler.getSpellModifier(m));
-            }
-        }
-        if(section.hasKey("effect"))
-        {
-            String[] effects = section.getString("effect").split(":");
-            for(String e : effects)
-            {
-                parts.add(SpellPartHandler.getSpellEffect(e));
-            }
-        }
-
-        return parts;
-    }
-
-    private void castSpell(ArrayList<ISpellPart> spellParts)
-    {
     }
 }

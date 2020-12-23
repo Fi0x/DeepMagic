@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells.types;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.util.math.BlockPos;
 
 import javax.swing.text.html.parser.Entity;
@@ -17,19 +18,10 @@ public class SpTyIterate implements ISpellType
     {
         return this;
     }
+
     @Override
-    public ArrayList<Entity> getEntities()
+    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, Entity caster)
     {
-        return null;
-    }
-    @Override
-    public ArrayList<BlockPos> getPositions()
-    {
-        return null;
-    }
-    @Override
-    public boolean triggersOnce()
-    {
-        return false;
+        //TODO: Execute spell
     }
 }

@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells.types;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.util.math.BlockPos;
 
 import javax.swing.text.html.parser.Entity;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 
 public class SpTyAreaOfEffect implements ISpellType
 {
+    private double radius = 1;
+
     @Override
     public String getName()
     {
@@ -17,40 +20,21 @@ public class SpTyAreaOfEffect implements ISpellType
     {
         return this;
     }
+
     @Override
-    public ArrayList<Entity> getEntities()
+    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, Entity caster)
     {
-        return null;
+        //TODO: Execute spell
     }
+
     @Override
-    public ArrayList<BlockPos> getPositions()
+    public void setRadius(double value)
     {
-        return null;
-    }
-    @Override
-    public boolean requiresPosition()
-    {
-        return true;
+        radius = value;
     }
     @Override
     public double getRadius()
     {
-        return 1;
-    }
-
-    public ArrayList<Entity> getEntities(BlockPos pos)
-    {
-        ArrayList<Entity> list = new ArrayList<>();
-        //TODO: Return entities in area
-        return list;
-    }
-    public ArrayList<BlockPos> getPositions(BlockPos pos)
-    {
-        ArrayList<BlockPos> list = new ArrayList<>();
-
-        //TODO: Return positions
-        list.add(pos);
-
-        return list;
+        return radius;
     }
 }

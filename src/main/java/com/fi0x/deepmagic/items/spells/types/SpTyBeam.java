@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells.types;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.util.math.BlockPos;
 
 import javax.swing.text.html.parser.Entity;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 
 public class SpTyBeam implements ISpellType
 {
+    private double range = 8;
+
     @Override
     public String getName()
     {
@@ -17,31 +20,21 @@ public class SpTyBeam implements ISpellType
     {
         return this;
     }
+
     @Override
-    public ArrayList<Entity> getEntities()
+    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, Entity caster)
     {
-        //TODO: Return hit entities
-        return null;
+        //TODO: Execute spell
     }
+
     @Override
-    public ArrayList<BlockPos> getPositions()
+    public void setRange(double value)
     {
-        //TODO: Return hit positions
-        return null;
-    }
-    @Override
-    public boolean requiresEntity()
-    {
-        return true;
-    }
-    @Override
-    public boolean triggersOnce()
-    {
-        return false;
+        range = value;
     }
     @Override
     public double getRange()
     {
-        return 8;
+        return range;
     }
 }

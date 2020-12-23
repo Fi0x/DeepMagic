@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells.types;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.util.math.BlockPos;
 
 import javax.swing.text.html.parser.Entity;
@@ -17,31 +18,10 @@ public class SpTyRune implements ISpellType
     {
         return this;
     }
-    @Override
-    public ArrayList<Entity> getEntities()
-    {
-        return null;
-    }
-    @Override
-    public ArrayList<BlockPos> getPositions()
-    {
-        return null;
-    }
-    @Override
-    public boolean requiresPosition()
-    {
-        return true;
-    }
 
-    public ArrayList<Entity> getEntities(BlockPos pos)
+    @Override
+    public void execute(ArrayList<ISpellPart> applicableParts, BlockPos castLocation, Entity caster)
     {
-        //TODO: Return triggering entity
-        return null;
-    }
-    public ArrayList<BlockPos> getPositions(BlockPos pos)
-    {
-        ArrayList<BlockPos> list = new ArrayList<>();
-        list.add(pos);
-        return list;
+        //TODO: Execute spell
     }
 }

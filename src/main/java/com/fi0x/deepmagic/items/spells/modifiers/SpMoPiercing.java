@@ -1,5 +1,7 @@
 package com.fi0x.deepmagic.items.spells.modifiers;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
+
 public class SpMoPiercing implements ISpellModifier
 {
     @Override
@@ -13,8 +15,9 @@ public class SpMoPiercing implements ISpellModifier
         return this;
     }
     @Override
-    public boolean piercing()
+    public ISpellPart modifyPart(ISpellPart part)
     {
-        return true;
+        //TODO: change value of spellpart
+        return null;
     }
 }

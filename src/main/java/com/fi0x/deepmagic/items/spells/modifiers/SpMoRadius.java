@@ -1,5 +1,7 @@
 package com.fi0x.deepmagic.items.spells.modifiers;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
+
 public class SpMoRadius implements ISpellModifier
 {
     @Override
@@ -13,8 +15,9 @@ public class SpMoRadius implements ISpellModifier
         return this;
     }
     @Override
-    public int radius()
+    public ISpellPart modifyPart(ISpellPart part)
     {
-        return 1;
+        //TODO: change value of spellpart
+        return null;
     }
 }

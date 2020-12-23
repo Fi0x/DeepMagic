@@ -7,10 +7,53 @@ import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.trigger.*;
 import com.fi0x.deepmagic.items.spells.types.*;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.ArrayList;
 
 public class SpellPartHandler
 {
-    public static ISpellType getSpellType(String name)
+    public ArrayList<ISpellPart> getSectionParts(NBTTagCompound section)
+    {
+        ArrayList<ISpellPart> parts = new ArrayList<>();
+
+        if(section.hasKey("type"))
+        {
+            String[] types = section.getString("type").split(":");
+            for(String t : types)
+            {
+                parts.add(getSpellType(t));
+            }
+        }
+        if(section.hasKey("trigger"))
+        {
+            String[] triggers = section.getString("trigger").split(":");
+            for(String t : triggers)
+            {
+                parts.add(getSpellTrigger(t));
+            }
+        }
+        if(section.hasKey("modifier"))
+        {
+            String[] modifiers = section.getString("modifier").split(":");
+            for(String m : modifiers)
+            {
+                parts.add(getSpellModifier(m));
+            }
+        }
+        if(section.hasKey("effect"))
+        {
+            String[] effects = section.getString("effect").split(":");
+            for(String e : effects)
+            {
+                parts.add(getSpellEffect(e));
+            }
+        }
+
+        return parts;
+    }
+
+    private ISpellType getSpellType(String name)
     {
         switch(name)
         {
@@ -36,8 +79,7 @@ public class SpellPartHandler
                 return null;
         }
     }
-
-    public static ISpellTrigger getSpellTrigger(String name)
+    private ISpellTrigger getSpellTrigger(String name)
     {
         switch(name)
         {
@@ -53,8 +95,7 @@ public class SpellPartHandler
                 return null;
         }
     }
-
-    public static ISpellModifier getSpellModifier(String name)
+    private ISpellModifier getSpellModifier(String name)
     {
         switch(name)
         {
@@ -84,8 +125,7 @@ public class SpellPartHandler
                 return null;
         }
     }
-
-    public static ISpellEffect getSpellEffect(String name)
+    private ISpellEffect getSpellEffect(String name)
     {
         switch(name)
         {

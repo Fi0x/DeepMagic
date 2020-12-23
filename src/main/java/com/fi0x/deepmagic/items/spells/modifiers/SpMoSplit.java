@@ -1,5 +1,7 @@
 package com.fi0x.deepmagic.items.spells.modifiers;
 
+import com.fi0x.deepmagic.items.spells.ISpellPart;
+
 /*
  * Splits types into multiple weaker ones
  */
@@ -16,8 +18,9 @@ public class SpMoSplit implements ISpellModifier
         return this;
     }
     @Override
-    public int split()
+    public ISpellPart modifyPart(ISpellPart part)
     {
-        return 1;
+        //TODO: change value of spellpart
+        return null;
     }
 }
