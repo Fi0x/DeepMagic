@@ -16,7 +16,7 @@ public class SpEfBind implements ISpellEffect
     @Override
     public String getName()
     {
-        return "effect_blind";
+        return "effect_bind";
     }
     @Override
     public ISpellEffect getEffect()
