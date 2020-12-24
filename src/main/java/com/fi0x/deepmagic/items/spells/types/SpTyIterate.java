@@ -28,7 +28,16 @@ public class SpTyIterate implements ISpellType
         applicableParts.remove(0);
 
         boolean executed = false;
-        //TODO: Execute spell
+
+        while(!applicableParts.isEmpty() && !(applicableParts.get(0) instanceof ISpellType))
+        {
+            applicableParts.remove(0);
+        }
+        if(!applicableParts.isEmpty())
+        {
+            ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster);
+            executed = true;
+        }
 
         if(!executed)
         {
