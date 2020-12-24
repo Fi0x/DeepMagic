@@ -4,6 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoHealPower implements ISpellModifier
 {
+    private final int HEAL_INCREASE = 1;
+
     @Override
     public String getName()
     {
@@ -17,7 +19,7 @@ public class SpMoHealPower implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setHealPower(part.getHealPower() + HEAL_INCREASE);
+        return part;
     }
 }

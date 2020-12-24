@@ -4,6 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoMiningPower implements ISpellModifier
 {
+    private final int MINING_INCREASE = 1;
+
     @Override
     public String getName()
     {
@@ -17,7 +19,7 @@ public class SpMoMiningPower implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setMiningPower(part.getMiningPower() + MINING_INCREASE);
+        return part;
     }
 }

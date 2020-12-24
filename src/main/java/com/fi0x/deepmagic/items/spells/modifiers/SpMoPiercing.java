@@ -17,7 +17,7 @@ public class SpMoPiercing implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setPiercing(true);
+        return part;
     }
 }

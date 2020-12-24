@@ -7,6 +7,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
  */
 public class SpMoSplit implements ISpellModifier
 {
+    private final int SPLIT_ADDER = 1;
+
     @Override
     public String getName()
     {
@@ -20,7 +22,7 @@ public class SpMoSplit implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setSplit(part.getSplit() + SPLIT_ADDER);
+        return part;
     }
 }

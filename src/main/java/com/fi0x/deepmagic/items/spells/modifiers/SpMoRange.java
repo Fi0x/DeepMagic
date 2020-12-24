@@ -4,6 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoRange implements ISpellModifier
 {
+    private final double RANGE_INCREASE = 1;
+
     @Override
     public String getName()
     {
@@ -17,7 +19,7 @@ public class SpMoRange implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setRange(part.getRange() + RANGE_INCREASE);
+        return part;
     }
 }

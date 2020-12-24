@@ -4,6 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoRadius implements ISpellModifier
 {
+    private final double RADIUS_INCREASE = 1;
+
     @Override
     public String getName()
     {
@@ -17,7 +19,7 @@ public class SpMoRadius implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setRadius(part.getRadius() + RADIUS_INCREASE);
+        return part;
     }
 }

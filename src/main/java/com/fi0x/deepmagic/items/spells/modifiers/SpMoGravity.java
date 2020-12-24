@@ -17,7 +17,7 @@ public class SpMoGravity implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        //TODO: change value of spellpart
-        return null;
+        part.setGravity(true);
+        return part;
     }
 }
