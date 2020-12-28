@@ -41,7 +41,7 @@ public class SpTyIterate implements ISpellType
 
         if(!executed)
         {
-            new CastHelper().findAndCastNextSpellType(remainingSections, caster);
+            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster);
         }
     }
 

@@ -74,6 +74,6 @@ public class NewSpell extends ItemBase implements IMagicItem
             }
         }
 
-        new CastHelper().findAndCastNextSpellType(spellParts, caster);
+        new CastHelper().findAndCastNextSpellType(spellParts, caster.getPosition(), caster);
     }
 }

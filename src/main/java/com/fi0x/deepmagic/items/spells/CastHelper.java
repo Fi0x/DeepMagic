@@ -2,12 +2,13 @@ package com.fi0x.deepmagic.items.spells;
 
 import com.fi0x.deepmagic.items.spells.types.ISpellType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 
 public class CastHelper
 {
-    public boolean findAndCastNextSpellType(ArrayList<ArrayList<ISpellPart>> remainingSections, EntityLivingBase caster)
+    public boolean findAndCastNextSpellType(ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
     {
         boolean executed = false;
         for(int i = 0; i < remainingSections.size(); i++)
@@ -22,7 +23,7 @@ public class CastHelper
                         nextSectionSet.add(remainingSections.get(k));
                     }
 
-                    ((ISpellType) remainingSections.get(i).get(j)).execute(remainingSections.get(i), nextSectionSet, caster.getPosition(), caster);
+                    ((ISpellType) remainingSections.get(i).get(j)).execute(remainingSections.get(i), nextSectionSet, castLocation, caster);
                     executed = true;
                     break;
                 }
