@@ -31,7 +31,7 @@ public class SpTySelf implements ISpellType
         {
             if(applicableParts.get(0) instanceof ISpellEffect)
             {
-                ((ISpellEffect) applicableParts.get(0)).applyEffect(caster);
+                ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, caster);
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster);

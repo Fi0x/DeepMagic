@@ -54,10 +54,10 @@ public interface ISpellPart
     {
         return 0;
     }
-    default void setMiningPower(int value)
+    default void setPower(int value)
     {
     }
-    default int getMiningPower()
+    default int getPower()
     {
         return 0;
     }
