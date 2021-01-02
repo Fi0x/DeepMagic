@@ -6,10 +6,7 @@ import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.*;
-import com.fi0x.deepmagic.items.spells.BreakableSpell;
-import com.fi0x.deepmagic.items.spells.ManaChargedSpell;
 import com.fi0x.deepmagic.items.spells.Spell;
-import com.fi0x.deepmagic.items.spells.SpellComponent;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.init.MobEffects;
@@ -48,10 +45,7 @@ public class ModItems
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 
 	//Spells
-	public static final Item SPELL = new Spell("spell");//TODO: Use new version
-	public static final Item CHARGED_SPELL = new ManaChargedSpell("charged_spell");
-	public static final Item BREAKABLE_SPELL = new BreakableSpell("breakable_spell");
-	public static final Item SPELL_COMPONENT = new SpellComponent("spell_component");
+	public static final Item SPELL = new Spell("spell");
 	
 	//Armor
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);

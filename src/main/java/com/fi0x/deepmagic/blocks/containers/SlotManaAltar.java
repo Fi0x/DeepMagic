@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.items.spells.ManaChargedSpell;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,6 +15,6 @@ public class SlotManaAltar extends Slot
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        return stack.getItem() instanceof ManaChargedSpell;
+        return false;
     }
 }
