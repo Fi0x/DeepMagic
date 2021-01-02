@@ -2,8 +2,8 @@
 name: Documentation
 about: Missing or wrong wiki entry
 title: New Documentation Problem
-labels: documentation
-assignees: ''
+labels: "new, \U0001F4CB  documentation \U0001F4CB"
+assignees: Fi0x
 
 ---
 

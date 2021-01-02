@@ -1,9 +1,9 @@
 ---
 name: Feature request
-about: Raw outline of the feature
+about: Provide an idea for a new Feature
 title: New Feature
-labels: feature request
-assignees: ''
+labels: new, ⭐ feature ⭐
+assignees: Fi0x
 
 ---
 

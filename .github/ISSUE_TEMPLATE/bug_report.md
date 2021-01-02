@@ -1,9 +1,9 @@
 ---
 name: Bug report
-about: General information
+about: Report a Bug
 title: Unknown Bug
-labels: bug
-assignees: ''
+labels: new, ⚠️ bug ⚠️
+assignees: Fi0x
 
 ---
 
