@@ -5,7 +5,6 @@ import com.fi0x.deepmagic.items.spells.effects.defensive.*;
 import com.fi0x.deepmagic.items.spells.effects.offensive.*;
 import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
-import com.fi0x.deepmagic.items.spells.trigger.*;
 import com.fi0x.deepmagic.items.spells.types.*;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -23,14 +22,6 @@ public class SpellPartHandler
             for(String t : types)
             {
                 parts.add(getSpellType(t));
-            }
-        }
-        if(section.hasKey("trigger"))
-        {
-            String[] triggers = section.getString("trigger").split(":");
-            for(String t : triggers)
-            {
-                parts.add(getSpellTrigger(t));
             }
         }
         if(section.hasKey("modifier"))
@@ -73,22 +64,6 @@ public class SpellPartHandler
                 return new SpTyStream();
             case "type_touch":
                 return new SpTyTouch();
-            default:
-                return null;
-        }
-    }
-    private ISpellTrigger getSpellTrigger(String name)
-    {
-        switch(name)
-        {
-            case "trigger_damage":
-                return new SpTrDamage();
-            case "trigger_death":
-                return new SpTrDeath();
-            case "trigger_fall":
-                return new SpTrFall();
-            case "trigger_heal":
-                return new SpTrHeal();
             default:
                 return null;
         }
