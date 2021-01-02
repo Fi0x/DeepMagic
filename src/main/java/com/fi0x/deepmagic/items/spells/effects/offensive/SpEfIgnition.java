@@ -17,7 +17,6 @@ public class SpEfIgnition implements ISpellEffect
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
     public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
     {
@@ -25,5 +24,6 @@ public class SpEfIgnition implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
+        targetEntity.setFire(5);
     }
 }

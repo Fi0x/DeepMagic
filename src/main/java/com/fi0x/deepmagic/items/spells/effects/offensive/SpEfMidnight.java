@@ -21,13 +21,21 @@ public class SpEfMidnight implements ISpellEffect
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
     public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
     {
+        applyEffect(caster, world);
     }
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
+        applyEffect(caster, caster.world);
+    }
+
+    private void applyEffect(EntityLivingBase caster, World world)
+    {
+        long current = world.getWorldTime();
+        world.setWorldTime(current + 18000 - (current % 24000));
+        //TODO: Spawn "shadows"
     }
 }

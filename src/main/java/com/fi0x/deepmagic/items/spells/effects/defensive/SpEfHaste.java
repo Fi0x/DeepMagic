@@ -27,7 +27,7 @@ public class SpEfHaste implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.addPotionEffect(new PotionEffect(MobEffects.HASTE, 20 * 5, level - 1, false, true));
+        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20 * 5, level - 1, false, true));
     }
 
     @Override
