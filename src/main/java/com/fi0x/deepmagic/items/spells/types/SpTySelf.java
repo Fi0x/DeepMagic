@@ -37,6 +37,7 @@ public class SpTySelf implements ISpellType
                 ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster);
                 executed = true;
             }
+            if(executed) break;
             applicableParts.remove(0);
         }
 
