@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 public class SpEfExplosion implements ISpellEffect
 {
     private int power = 1;
+    private boolean environmentalDamage = false;
 
     @Override
     public String getName()
@@ -27,9 +28,19 @@ public class SpEfExplosion implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.world.newExplosion(caster, targetEntity.posX, targetEntity.posY, targetEntity.posZ, power, false, true);
+        targetEntity.world.newExplosion(caster, targetEntity.posX, targetEntity.posY, targetEntity.posZ, power, false, environmentalDamage);
     }
 
+    @Override
+    public void setEnvironmentalDmg(boolean state)
+    {
+        environmentalDamage = state;
+    }
+    @Override
+    public boolean doesEnvironmentalDmg()
+    {
+        return environmentalDamage;
+    }
     @Override
     public void setPower(int value)
     {

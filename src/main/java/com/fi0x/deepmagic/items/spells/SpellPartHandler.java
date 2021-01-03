@@ -76,6 +76,8 @@ public class SpellPartHandler
                 return new SpMoDamage();
             case "modifier_duration":
                 return new SpMoDuration();
+            case "modifier_environmental":
+                return new SpMoEnvironmental();
             case "modifier_gravity":
                 return new SpMoGravity();
             case "modifier_healpower":

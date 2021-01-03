@@ -35,6 +35,13 @@ public interface ISpellPart
     {
         return 0;
     }
+    default void setEnvironmentalDmg(boolean state)
+    {
+    }
+    default boolean doesEnvironmentalDmg()
+    {
+        return false;
+    }
     default void setGravity(boolean state)
     {
     }
