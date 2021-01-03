@@ -139,4 +139,9 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
     }
+    @Override
+    public boolean attackEntityAsMob(@Nonnull Entity entityIn)
+    {
+        return super.attackEntityFrom(DamageSource.GENERIC, (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+    }
 }
