@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.items.mana.ManaChargedSpell;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -179,7 +178,7 @@ public class TileEntityManaAltar extends TileEntity implements IInventory, ITick
     {
         if(!input.isEmpty())
         {
-            return input.getItem() instanceof ManaChargedSpell;
+            return false;
         }
         return false;
     }
