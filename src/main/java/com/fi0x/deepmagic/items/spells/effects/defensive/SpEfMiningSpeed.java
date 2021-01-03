@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 public class SpEfMiningSpeed implements ISpellEffect
 {
     private int level = 1;
+    private double seconds = 10;
 
     @Override
     public String getName()
@@ -28,9 +29,19 @@ public class SpEfMiningSpeed implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20 * 10, level - 1, false, true));
+        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SPEED, (int) (20 * seconds), level - 1, false, true));
     }
 
+    @Override
+    public void setDuration(double value)
+    {
+        seconds = value;
+    }
+    @Override
+    public double getDuration()
+    {
+        return seconds;
+    }
     @Override
     public void setPower(int value)
     {

@@ -12,6 +12,8 @@ import net.minecraft.world.World;
  */
 public class SpEfRoot implements ISpellEffect
 {
+    private double seconds = 5;
+
     @Override
     public String getName()
     {
@@ -29,6 +31,17 @@ public class SpEfRoot implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 5, 100, false, false));
+        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * seconds), 100, false, false));
+    }
+
+    @Override
+    public void setDuration(double value)
+    {
+        seconds = value;
+    }
+    @Override
+    public double getDuration()
+    {
+        return seconds;
     }
 }

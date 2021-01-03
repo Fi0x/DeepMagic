@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfIgnition implements ISpellEffect
 {
+    private double seconds = 5;
+
     @Override
     public String getName()
     {
@@ -24,6 +26,17 @@ public class SpEfIgnition implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.setFire(5);
+        targetEntity.setFire((int) seconds);
+    }
+
+    @Override
+    public void setDuration(double value)
+    {
+        seconds = value;
+    }
+    @Override
+    public double getDuration()
+    {
+        return seconds;
     }
 }

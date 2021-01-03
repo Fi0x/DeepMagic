@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 
 public class SpEfBlindness implements ISpellEffect
 {
+    private double seconds = 5;
+
     @Override
     public String getName()
     {
@@ -26,6 +28,17 @@ public class SpEfBlindness implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20 * 5, 0, false, true));
+        targetEntity.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, (int) (20 * seconds), 0, false, true));
+    }
+
+    @Override
+    public void setDuration(double value)
+    {
+        seconds = value;
+    }
+    @Override
+    public double getDuration()
+    {
+        return seconds;
     }
 }

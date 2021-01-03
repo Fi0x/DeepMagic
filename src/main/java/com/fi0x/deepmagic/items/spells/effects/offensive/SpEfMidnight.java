@@ -35,7 +35,7 @@ public class SpEfMidnight implements ISpellEffect
     private void applyEffect(EntityLivingBase caster, World world)
     {
         long current = world.getWorldTime();
-        world.setWorldTime(current + 18000 - (current % 24000));
+        world.setWorldTime(current + 18000 + ((current % 24000 < 18000) ? -(current % 24000) : current % 24000));
         //TODO: Spawn "shadows"
     }
 }

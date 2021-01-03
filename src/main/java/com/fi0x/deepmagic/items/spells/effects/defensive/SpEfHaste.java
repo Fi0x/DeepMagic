@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 public class SpEfHaste implements ISpellEffect
 {
     private int level = 1;
+    private double seconds = 5;
+
     @Override
     public String getName()
     {
@@ -27,9 +29,19 @@ public class SpEfHaste implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20 * 5, level - 1, false, true));
+        targetEntity.addPotionEffect(new PotionEffect(MobEffects.SPEED, (int) (20 * seconds), level - 1, false, true));
     }
 
+    @Override
+    public void setDuration(double value)
+    {
+        seconds = value;
+    }
+    @Override
+    public double getDuration()
+    {
+        return seconds;
+    }
     @Override
     public void setPower(int value)
     {
