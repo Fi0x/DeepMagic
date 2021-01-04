@@ -3,14 +3,14 @@ package com.fi0x.deepmagic.items.spells.modifiers;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 /*
- * Weather the spell has Silk-Touch or not
+ * Weather the spell can smelt blocks while mining or not
  */
-public class SpMoSilkTouch implements ISpellModifier
+public class SpMoAutoSmelt implements ISpellModifier
 {
     @Override
     public String getName()
     {
-        return "modifier_silktouch";
+        return "modifier_autosmelt";
     }
     @Override
     public ISpellModifier getModifier()
@@ -20,7 +20,7 @@ public class SpMoSilkTouch implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        part.setSilkTouch(true);
+        part.setAutoSmelt(true);
         return part;
     }
 }

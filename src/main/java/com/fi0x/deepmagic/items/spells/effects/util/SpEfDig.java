@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 
 public class SpEfDig implements ISpellEffect
 {
+    private boolean autoSmelt = false;
     private boolean silkTouch = false;
 
     @Override
@@ -29,6 +30,16 @@ public class SpEfDig implements ISpellEffect
     {
     }
 
+    @Override
+    public void setAutoSmelt(boolean state)
+    {
+        autoSmelt = state;
+    }
+    @Override
+    public boolean hasAutoSmelt()
+    {
+        return autoSmelt;
+    }
     @Override
     public void setSilkTouch(boolean state)
     {

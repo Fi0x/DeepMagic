@@ -72,6 +72,8 @@ public class SpellPartHandler
     {
         switch(name)
         {
+            case "modifier_autosmelt":
+                return new SpMoAutoSmelt();
             case "modifier_damage":
                 return new SpMoDamage();
             case "modifier_duration":

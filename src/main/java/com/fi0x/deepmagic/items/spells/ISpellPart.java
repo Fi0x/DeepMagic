@@ -21,6 +21,13 @@ public interface ISpellPart
         return null;
     }
 
+    default void setAutoSmelt(boolean state)
+    {
+    }
+    default boolean hasAutoSmelt()
+    {
+        return false;
+    }
     default void setDamage(int value)
     {
     }
