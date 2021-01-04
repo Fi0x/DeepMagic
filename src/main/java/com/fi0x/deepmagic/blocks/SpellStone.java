@@ -68,6 +68,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         int sectionNumber = 0;
         while(compound.hasKey("section" + sectionNumber)) sectionNumber++;
         compound.setString("section" + sectionNumber, tile.getSpellParts());
+        tile.resetParts();
 
         int manaBase = ConfigHandler.spellBaseManaCost;
         if(compound.hasKey("manaBase")) manaBase = compound.getInteger("manaBase");
