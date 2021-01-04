@@ -80,6 +80,8 @@ public class SpellPartHandler
                 return new SpMoDuration();
             case "modifier_environmental":
                 return new SpMoEnvironmental();
+            case "modifier_fortune":
+                return new SpMoFortune();
             case "modifier_gravity":
                 return new SpMoGravity();
             case "modifier_healpower":

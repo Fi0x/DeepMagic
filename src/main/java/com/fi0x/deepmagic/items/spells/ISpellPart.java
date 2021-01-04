@@ -49,6 +49,13 @@ public interface ISpellPart
     {
         return false;
     }
+    default void setFortune(int level)
+    {
+    }
+    default int getFortuneLvl()
+    {
+        return 0;
+    }
     default void setGravity(boolean state)
     {
     }
