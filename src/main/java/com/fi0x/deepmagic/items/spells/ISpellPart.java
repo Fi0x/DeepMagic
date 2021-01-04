@@ -70,6 +70,13 @@ public interface ISpellPart
     {
         return 0;
     }
+    default void setLootingLvl(int level)
+    {
+    }
+    default int getLootingLvl()
+    {
+        return 0;
+    }
     default void setPower(int value)
     {
     }

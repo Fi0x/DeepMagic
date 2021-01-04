@@ -86,6 +86,8 @@ public class SpellPartHandler
                 return new SpMoGravity();
             case "modifier_healpower":
                 return new SpMoHealPower();
+            case "modifier_looting":
+                return new SpMoLooting();
             case "modifier_power":
                 return new SpMoPower();
             case "modifier_piercing":
