@@ -6,10 +6,7 @@ import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemArrow;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemFlintAndSteel;
-import net.minecraft.item.ItemGlassBottle;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -23,8 +20,8 @@ import java.util.List;
 
 public class TileEntitySpellStone extends TileEntity implements ITickable
 {
-    private ArrayList<String> spellParts = new ArrayList<>();
-    private ArrayList<String> consumedItems = new ArrayList<>();
+    private final ArrayList<String> spellParts = new ArrayList<>();
+    private final ArrayList<String> consumedItems = new ArrayList<>();
 
     private int manaAdder;
     private double manaMultiplier;
@@ -38,10 +35,9 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
         for(EntityItem i : itemEntities)
         {
             String name;
-            if(i.getItem().getItem() instanceof ItemBlock)
-            {
-                name = i.getItem().getUnlocalizedName();
-            } else name = i.getItem().getItem().getClass().getName();
+            if(i.getItem().getItem() instanceof ItemBlock) name = i.getItem().getUnlocalizedName();
+            else if(i.getItem().getItem() instanceof ItemBucket) name = i.getItem().getUnlocalizedName();
+            else name = i.getItem().getItem().getClass().getName();
             for(int j = 0; j < i.getItem().getCount(); j++)
             {
                 consumedItems.add(name);
@@ -55,7 +51,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     }
     @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
         StringBuilder parts = new StringBuilder();
         parts.append(spellParts.get(0));
@@ -91,13 +87,13 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        //TODO: Add fitting item combinations
-        if(false)
+        if(consumedItems.contains(ItemSplashPotion.class.getName()))
         {
             spellParts.add(SpTyAreaOfEffect.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove(ItemSplashPotion.class.getName());
             flag = true;
         }
+        //TODO: Add fitting item combinations
         if(false)
         {
             spellParts.add(SpTyBeam.NAME);
@@ -110,10 +106,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             consumedItems.remove(null);
             flag = true;
         }
-        if(false)
+        if(consumedItems.contains(ItemSnowball.class.getName()))
         {
             spellParts.add(SpTyProjectile.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove(ItemSnowball.class.getName());
             flag = true;
         }
         if(false)
@@ -147,29 +143,29 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        //TODO: Add fitting item combinations
-        if(false)
+        if(consumedItems.contains("item.bucketLava"))
         {
             spellParts.add(SpMoAutoSmelt.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove("item.bucketLava");
             flag = true;
         }
+        //TODO: Add fitting item combinations
         if(false)
         {
             spellParts.add(SpMoDamage.NAME);
             consumedItems.remove(null);
             flag = true;
         }
-        if(false)
+        if(consumedItems.contains(ItemClock.class.getName()))
         {
             spellParts.add(SpMoDuration.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove(ItemClock.class.getName());
             flag = true;
         }
         if(consumedItems.contains(ItemFlintAndSteel.class.getName()))
         {
             spellParts.add(SpMoEnvironmental.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove(ItemFlintAndSteel.class.getName());
             flag = true;
         }
         if(false)
@@ -251,13 +247,13 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        //TODO: Add fitting item combinations
-        if(false)
+        if(consumedItems.contains(ItemShield.class.getName()))
         {
             spellParts.add(SpEfDeflect.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove(ItemShield.class.getName());
             flag = true;
         }
+        //TODO: Add fitting item combinations
         if(false)
         {
             spellParts.add(SpEfFeatherFall.NAME);
@@ -346,7 +342,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
         if(consumedItems.contains("tile.tnt"))
         {
             spellParts.add(SpEfExplosion.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove("tile.tnt");
             flag = true;
         }
         if(false)
@@ -422,10 +418,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             consumedItems.remove(null);
             flag = true;
         }
-        if(false)
+        if(consumedItems.contains(ItemEnderPearl.class.getName()))
         {
             spellParts.add(SpEfBlink.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove(ItemEnderPearl.class.getName());
             flag = true;
         }
         if(false)
@@ -458,10 +454,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             consumedItems.remove(null);
             flag = true;
         }
-        if(false)
+        if(consumedItems.contains("item.bucket"))
         {
             spellParts.add(SpEfDry.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove("item.bucket");
             flag = true;
         }
         if(false)
@@ -536,10 +532,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             consumedItems.remove(null);
             flag = true;
         }
-        if(false)
+        if(consumedItems.contains("item.bucketWater"))
         {
             spellParts.add(SpEfRain.NAME);
-            consumedItems.remove(null);
+            consumedItems.remove("item.bucketWater");
             flag = true;
         }
         if(false)
