@@ -91,6 +91,13 @@ public interface ISpellPart
     {
         return false;
     }
+    default void setSilkTouch(boolean state)
+    {
+    }
+    default boolean hasSilkTouch()
+    {
+        return false;
+    }
     default void setSplit(int value)
     {
     }

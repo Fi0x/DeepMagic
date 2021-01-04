@@ -92,6 +92,8 @@ public class SpellPartHandler
                 return new SpMoRange();
             case "modifier_ricochet":
                 return new SpMoRicochet();
+            case "modifier_silktouch":
+                return new SpMoSilkTouch();
             case "modifier_split":
                 return new SpMoSplit();
             case "modifier_tickspeed":

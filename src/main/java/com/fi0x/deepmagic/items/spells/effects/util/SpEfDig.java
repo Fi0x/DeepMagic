@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfDig implements ISpellEffect
 {
+    private boolean silkTouch = false;
+
     @Override
     public String getName()
     {
@@ -25,5 +27,16 @@ public class SpEfDig implements ISpellEffect
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
     {
+    }
+
+    @Override
+    public void setSilkTouch(boolean state)
+    {
+        silkTouch = state;
+    }
+    @Override
+    public boolean hasSilkTouch()
+    {
+        return silkTouch;
     }
 }
