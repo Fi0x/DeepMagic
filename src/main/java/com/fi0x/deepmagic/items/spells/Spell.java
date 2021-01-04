@@ -106,15 +106,14 @@ public class Spell extends ItemBase implements IMagicItem
     private void castSpell(NBTTagCompound compound, EntityPlayer caster)
     {
         ArrayList<ArrayList<ISpellPart>> spellParts = new ArrayList<>();
+
         int section = 0;
-        do
+        SpellPartHandler handler = new SpellPartHandler();
+        while(compound.hasKey("section" + section))
         {
+            spellParts.add(handler.getSectionParts(compound.getString("section" + section)));
             section++;
-            if(compound.hasKey("section" + section))
-            {
-                spellParts.add(new SpellPartHandler().getSectionParts(compound.getString("section" + section)));
-            } else section = 0;
-        } while(section > 0);
+        }
 
         for(ArrayList<ISpellPart> s : spellParts)
         {

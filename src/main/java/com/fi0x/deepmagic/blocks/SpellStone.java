@@ -65,11 +65,9 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         compound = stack.getTagCompound();
         assert compound != null;
 
-        NBTTagCompound section = new NBTTagCompound();
-        section.setString("type", "type_self");
-        section.setString("effect", "effect_heal:effect_explosion");
-        compound.setTag("section1", section);
-        //TODO: Add correct spell-parts
+        int sectionNumber = 0;
+        while(compound.hasKey("section" + sectionNumber)) sectionNumber++;
+        compound.setString("section" + sectionNumber, tile.getSpellParts());
 
         int manaBase = ConfigHandler.spellBaseManaCost;
         if(compound.hasKey("manaBase")) manaBase = compound.getInteger("manaBase");

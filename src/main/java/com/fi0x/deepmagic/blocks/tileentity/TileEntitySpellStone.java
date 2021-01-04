@@ -81,9 +81,15 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
         super.readFromNBT(compound);
     }
 
-    public ArrayList<String> getSpellParts()
+    public String getSpellParts()
     {
-        return spellParts;
+        StringBuilder parts = new StringBuilder();
+        parts.append(spellParts.get(0));
+        for(int i = 1; i < spellParts.size(); i++)
+        {
+            parts.append(":").append(spellParts.get(i));
+        }
+        return parts.toString();
     }
     public void resetParts()
     {
