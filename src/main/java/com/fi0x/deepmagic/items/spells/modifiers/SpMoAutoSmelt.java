@@ -7,11 +7,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
  */
 public class SpMoAutoSmelt implements ISpellModifier
 {
-    @Override
-    public String getName()
-    {
-        return "modifier_autosmelt";
-    }
+    public static final String NAME = "modifier_autosmelt";
+
     @Override
     public ISpellModifier getModifier()
     {

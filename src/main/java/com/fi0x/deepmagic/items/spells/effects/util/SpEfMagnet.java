@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfMagnet implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_magnet";
-    }
+    public static final String NAME = "effect_magnet";
+
     @Override
     public ISpellEffect getEffect()
     {

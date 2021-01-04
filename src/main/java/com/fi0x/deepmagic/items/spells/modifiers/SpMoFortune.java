@@ -4,13 +4,9 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoFortune implements ISpellModifier
 {
+    public static final String NAME = "modifier_fortune";
     private final int FORTUNE_INCREASE = 1;
 
-    @Override
-    public String getName()
-    {
-        return "modifier_fortune";
-    }
     @Override
     public ISpellModifier getModifier()
     {

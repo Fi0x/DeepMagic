@@ -4,13 +4,9 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoRange implements ISpellModifier
 {
+    public static final String NAME = "modifier_range";
     private final double RANGE_INCREASE = 1;
 
-    @Override
-    public String getName()
-    {
-        return "modifier_range";
-    }
     @Override
     public ISpellModifier getModifier()
     {

@@ -7,13 +7,9 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
  */
 public class SpMoSplit implements ISpellModifier
 {
+    public static final String NAME = "modifier_split";
     private final int SPLIT_ADDER = 1;
 
-    @Override
-    public String getName()
-    {
-        return "modifier_split";
-    }
     @Override
     public ISpellModifier getModifier()
     {

@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfLightning implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_lightning";
-    }
+    public static final String NAME = "effect_lightning";
+
     @Override
     public ISpellEffect getEffect()
     {

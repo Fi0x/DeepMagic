@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfSink implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_sink";
-    }
+    public static final String NAME = "effect_sink";
+
     @Override
     public ISpellEffect getEffect()
     {

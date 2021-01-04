@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfKnockback implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_knockback";
-    }
+    public static final String NAME = "effect_knockback";
+
     @Override
     public ISpellEffect getEffect()
     {

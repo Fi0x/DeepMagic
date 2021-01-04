@@ -7,15 +7,11 @@ import net.minecraft.world.World;
 
 public class SpEfDig implements ISpellEffect
 {
+    public static final String NAME = "effect_dig";
     private boolean autoSmelt = false;
     private int fortune = 0;
     private boolean silkTouch = false;
 
-    @Override
-    public String getName()
-    {
-        return "effect_dig";
-    }
     @Override
     public ISpellEffect getEffect()
     {

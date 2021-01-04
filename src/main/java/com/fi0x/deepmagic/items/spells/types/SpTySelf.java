@@ -10,11 +10,8 @@ import java.util.ArrayList;
 
 public class SpTySelf implements ISpellType
 {
-    @Override
-    public String getName()
-    {
-        return "type_self";
-    }
+    public static final String NAME = "type_self";
+
     @Override
     public ISpellType getType()
     {

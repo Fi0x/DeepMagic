@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfMidnight implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_midnight";
-    }
+    public static final String NAME = "effect_midnight";
+
     @Override
     public ISpellEffect getEffect()
     {

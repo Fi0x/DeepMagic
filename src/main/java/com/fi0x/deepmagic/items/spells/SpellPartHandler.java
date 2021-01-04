@@ -1,230 +1,193 @@
 package com.fi0x.deepmagic.items.spells;
 
-import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import com.fi0x.deepmagic.items.spells.effects.defensive.*;
 import com.fi0x.deepmagic.items.spells.effects.offensive.*;
 import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 
 public class SpellPartHandler
 {
-    public ArrayList<ISpellPart> getSectionParts(NBTTagCompound section)
+    public ArrayList<ISpellPart> getSectionParts(String section)
     {
-        ArrayList<ISpellPart> parts = new ArrayList<>();
+        String[] partNames = section.split(":");
 
-        if(section.hasKey("type"))
+        ArrayList<ISpellPart> parts = new ArrayList<>();
+        for(String p : partNames)
         {
-            String[] types = section.getString("type").split(":");
-            for(String t : types)
-            {
-                parts.add(getSpellType(t));
-            }
-        }
-        if(section.hasKey("modifier"))
-        {
-            String[] modifiers = section.getString("modifier").split(":");
-            for(String m : modifiers)
-            {
-                parts.add(getSpellModifier(m));
-            }
-        }
-        if(section.hasKey("effect"))
-        {
-            String[] effects = section.getString("effect").split(":");
-            for(String e : effects)
-            {
-                parts.add(getSpellEffect(e));
-            }
+            parts.add(getSpellPart(p));
         }
 
         return parts;
     }
 
-    private ISpellType getSpellType(String name)
+    private ISpellPart getSpellPart(String name)
     {
         switch(name)
         {
-            case "type_aoe":
+            case SpTyAreaOfEffect.NAME:
                 return new SpTyAreaOfEffect();
-            case "type_beam":
+            case SpTyBeam.NAME:
                 return new SpTyBeam();
-            case "type_iterate":
+            case SpTyIterate.NAME:
                 return new SpTyIterate();
-            case "type_projectile":
+            case SpTyProjectile.NAME:
                 return new SpTyProjectile();
-            case "type_rune":
+            case SpTyRune.NAME:
                 return new SpTyRune();
-            case "type_self":
+            case SpTySelf.NAME:
                 return new SpTySelf();
-            case "type_stream":
+            case SpTyStream.NAME:
                 return new SpTyStream();
-            case "type_touch":
+            case SpTyTouch.NAME:
                 return new SpTyTouch();
-            default:
-                return null;
-        }
-    }
-    private ISpellModifier getSpellModifier(String name)
-    {
-        switch(name)
-        {
-            case "modifier_autosmelt":
+            case SpMoAutoSmelt.NAME:
                 return new SpMoAutoSmelt();
-            case "modifier_damage":
+            case SpMoDamage.NAME:
                 return new SpMoDamage();
-            case "modifier_duration":
+            case SpMoDuration.NAME:
                 return new SpMoDuration();
-            case "modifier_environmental":
+            case SpMoEnvironmental.NAME:
                 return new SpMoEnvironmental();
-            case "modifier_fortune":
+            case SpMoFortune.NAME:
                 return new SpMoFortune();
-            case "modifier_gravity":
+            case SpMoGravity.NAME:
                 return new SpMoGravity();
-            case "modifier_healpower":
+            case SpMoHealPower.NAME:
                 return new SpMoHealPower();
-            case "modifier_looting":
+            case SpMoLooting.NAME:
                 return new SpMoLooting();
-            case "modifier_power":
+            case SpMoPower.NAME:
                 return new SpMoPower();
-            case "modifier_piercing":
+            case SpMoPiercing.NAME:
                 return new SpMoPiercing();
-            case "modifier_radius":
+            case SpMoRadius.NAME:
                 return new SpMoRadius();
-            case "modifier_range":
+            case SpMoRange.NAME:
                 return new SpMoRange();
-            case "modifier_ricochet":
+            case SpMoRicochet.NAME:
                 return new SpMoRicochet();
-            case "modifier_silktouch":
+            case SpMoSilkTouch.NAME:
                 return new SpMoSilkTouch();
-            case "modifier_split":
+            case SpMoSplit.NAME:
                 return new SpMoSplit();
-            case "modifier_tickspeed":
+            case SpMoTickSpeed.NAME:
                 return new SpMoTickSpeed();
-            default:
-                return null;
-        }
-    }
-    private ISpellEffect getSpellEffect(String name)
-    {
-        switch(name)
-        {
-            case "effect_deflect":
+            case SpEfDeflect.NAME:
                 return new SpEfDeflect();
-            case "effect_featherfall":
+            case SpEfFeatherFall.NAME:
                 return new SpEfFeatherFall();
-            case "effect_haste":
+            case SpEfHaste.NAME:
                 return new SpEfHaste();
-            case "effect_heal":
+            case SpEfHeal.NAME:
                 return new SpEfHeal();
-            case "effect_mana_shield":
+            case SpEfManaShield.NAME:
                 return new SpEfManaShield();
-            case "effect_miningspeed":
+            case SpEfMiningSpeed.NAME:
                 return new SpEfMiningSpeed();
-            case "effect_mirrorshield":
+            case SpEfMirrorShield.NAME:
                 return new SpEfMirrorShield();
-            case "effect_regeneration":
+            case SpEfRegeneration.NAME:
                 return new SpEfRegeneration();
-            case "effect_root":
+            case SpEfRoot.NAME:
                 return new SpEfRoot();
-            case "effect_slowness":
+            case SpEfSlowness.NAME:
                 return new SpEfSlowness();
-            case "effect_wall":
+            case SpEfWall.NAME:
                 return new SpEfWall();
-            case "effect_wither":
+            case SpEfWither.NAME:
                 return new SpEfWither();
-            case "effect_blindness":
+            case SpEfBlindness.NAME:
                 return new SpEfBlindness();
-            case "effect_drown":
+            case SpEfDrown.NAME:
                 return new SpEfDrown();
-            case "effect_explosion":
+            case SpEfExplosion.NAME:
                 return new SpEfExplosion();
-            case "effect_firedamage":
+            case SpEfFireDamage.NAME:
                 return new SpEfFireDamage();
-            case "effect_frostdamage":
+            case SpEfFrostDamage.NAME:
                 return new SpEfFrostDamage();
-            case "effect_ignition":
+            case SpEfIgnition.NAME:
                 return new SpEfIgnition();
-            case "effect_knockback":
+            case SpEfKnockback.NAME:
                 return new SpEfKnockback();
-            case "effect_magicdamage":
+            case SpEfMagicDamage.NAME:
                 return new SpEfMagicDamage();
-            case "effect_midnight":
+            case SpEfMidnight.NAME:
                 return new SpEfMidnight();
-            case "effect_physicaldamage":
+            case SpEfPhysicalDamage.NAME:
                 return new SpEfPhysicalDamage();
-            case "effect_poison":
+            case SpEfPoison.NAME:
                 return new SpEfPoison();
-            case "effect_sink":
+            case SpEfSink.NAME:
                 return new SpEfSink();
-            case "effect_stun":
+            case SpEfStun.NAME:
                 return new SpEfStun();
-            case "effect_accelerate":
+            case SpEfAccelerate.NAME:
                 return new SpEfAccelerate();
-            case "effect_age":
+            case SpEfAge.NAME:
                 return new SpEfAge();
-            case "effect_bind":
+            case SpEfBind.NAME:
                 return new SpEfBind();
-            case "effect_blink":
+            case SpEfBlink.NAME:
                 return new SpEfBlink();
-            case "effect_buff":
+            case SpEfBuff.NAME:
                 return new SpEfBuff();
-            case "effect_charm":
+            case SpEfCharm.NAME:
                 return new SpEfCharm();
-            case "effect_daynight":
+            case SpEfDayNight.NAME:
                 return new SpEfDayNight();
-            case "effect_dig":
+            case SpEfDig.NAME:
                 return new SpEfDig();
-            case "effect_dimensionalteleport":
+            case SpEfDimensionalTeleport.NAME:
                 return new SpEfDimensionalTeleport();
-            case "effect_dry":
+            case SpEfDry.NAME:
                 return new SpEfDry();
-            case "effect_exchange":
+            case SpEfExchange.NAME:
                 return new SpEfExchange();
-            case "effect_fly":
+            case SpEfFly.NAME:
                 return new SpEfFly();
-            case "effect_freeze":
+            case SpEfFreeze.NAME:
                 return new SpEfFreeze();
-            case "effect_growth":
+            case SpEfGrowth.NAME:
                 return new SpEfGrowth();
-            case "effect_levitate":
+            case SpEfLevitate.NAME:
                 return new SpEfLevitate();
-            case "effect_lifelink":
+            case SpEfLifeLink.NAME:
                 return new SpEfLifeLink();
-            case "effect_light":
+            case SpEfLight.NAME:
                 return new SpEfLight();
-            case "effect_lightning":
+            case SpEfLightning.NAME:
                 return new SpEfLightning();
-            case "effect_magnet":
+            case SpEfMagnet.NAME:
                 return new SpEfMagnet();
-            case "effect_manalink":
+            case SpEfManaLink.NAME:
                 return new SpEfManaLink();
-            case "effect_marklocation":
+            case SpEfMarkLocation.NAME:
                 return new SpEfMarkLocation();
-            case "effect_place":
+            case SpEfPlace.NAME:
                 return new SpEfPlace();
-            case "effect_rain":
+            case SpEfRain.NAME:
                 return new SpEfRain();
-            case "effect_repel":
+            case SpEfRepel.NAME:
                 return new SpEfRepel();
-            case "effect_smelt":
+            case SpEfSmelt.NAME:
                 return new SpEfSmelt();
-            case "effect_store":
+            case SpEfStore.NAME:
                 return new SpEfStore();
-            case "effect_storm":
+            case SpEfStorm.NAME:
                 return new SpEfStorm();
-            case "effect_summon":
+            case SpEfSummon.NAME:
                 return new SpEfSummon();
-            case "effect_sunshine":
+            case SpEfSunshine.NAME:
                 return new SpEfSunshine();
-            case "effect_swimspeed":
+            case SpEfSwimSpeed.NAME:
                 return new SpEfSwimSpeed();
-            case "effect_teleport":
+            case SpEfTeleport.NAME:
                 return new SpEfTeleport();
-            case "effect_totalrecall":
+            case SpEfTotalRecall.NAME:
                 return new SpEfTotalRecall();
             default:
                 return null;

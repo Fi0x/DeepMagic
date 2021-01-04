@@ -112,7 +112,7 @@ public class Spell extends ItemBase implements IMagicItem
             section++;
             if(compound.hasKey("section" + section))
             {
-                spellParts.add(new SpellPartHandler().getSectionParts(compound.getCompoundTag("section" + section)));
+                spellParts.add(new SpellPartHandler().getSectionParts(compound.getString("section" + section)));
             } else section = 0;
         } while(section > 0);
 

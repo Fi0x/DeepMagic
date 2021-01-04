@@ -4,11 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoPiercing implements ISpellModifier
 {
-    @Override
-    public String getName()
-    {
-        return "modifier_piercing";
-    }
+    public static final String NAME = "modifier_piercing";
+
     @Override
     public ISpellModifier getModifier()
     {

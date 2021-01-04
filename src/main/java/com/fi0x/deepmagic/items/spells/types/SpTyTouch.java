@@ -12,12 +12,8 @@ import java.util.ArrayList;
 
 public class SpTyTouch implements ISpellType
 {
+    public static final String NAME = "type_touch";
 
-    @Override
-    public String getName()
-    {
-        return "type_touch";
-    }
     @Override
     public ISpellType getType()
     {

@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfRepel implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_repel";
-    }
+    public static final String NAME = "effect_repel";
+
     @Override
     public ISpellEffect getEffect()
     {

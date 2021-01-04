@@ -9,14 +9,10 @@ import net.minecraft.world.World;
 
 public class SpEfRegeneration implements ISpellEffect
 {
+    public static final String NAME = "effect_regeneration";
     private int power = 1;
     private double seconds = 5;
 
-    @Override
-    public String getName()
-    {
-        return "effect_regeneration";
-    }
     @Override
     public ISpellEffect getEffect()
     {

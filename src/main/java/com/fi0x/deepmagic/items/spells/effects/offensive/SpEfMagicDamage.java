@@ -8,13 +8,9 @@ import net.minecraft.world.World;
 
 public class SpEfMagicDamage implements ISpellEffect
 {
+    public static final String NAME = "effect_magicdamage";
     private int damage = 1;
 
-    @Override
-    public String getName()
-    {
-        return "effect_magicdamage";
-    }
     @Override
     public ISpellEffect getEffect()
     {

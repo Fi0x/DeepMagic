@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfBind implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_bind";
-    }
+    public static final String NAME = "effect_bind";
+
     @Override
     public ISpellEffect getEffect()
     {

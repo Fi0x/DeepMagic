@@ -9,14 +9,10 @@ import net.minecraft.world.World;
 
 public class SpEfPoison implements ISpellEffect
 {
+    public static final String NAME = "effect_poison";
     private int power = 1;
     private double seconds = 5;
 
-    @Override
-    public String getName()
-    {
-        return "effect_poison";
-    }
     @Override
     public ISpellEffect getEffect()
     {

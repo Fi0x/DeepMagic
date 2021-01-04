@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfSwimSpeed implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_swimspeed";
-    }
+    public static final String NAME = "effect_swimspeed";
+
     @Override
     public ISpellEffect getEffect()
     {

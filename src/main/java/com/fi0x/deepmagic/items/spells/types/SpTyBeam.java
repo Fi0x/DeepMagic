@@ -8,13 +8,9 @@ import java.util.ArrayList;
 
 public class SpTyBeam implements ISpellType
 {
+    public static final String NAME = "type_beam";
     private double range = 8;
 
-    @Override
-    public String getName()
-    {
-        return "type_beam";
-    }
     @Override
     public ISpellType getType()
     {

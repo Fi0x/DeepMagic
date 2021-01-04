@@ -10,13 +10,9 @@ import java.util.ArrayList;
 
 public class SpTyAreaOfEffect implements ISpellType
 {
+    public static final String NAME = "type_aoe";
     private double radius = 1;
 
-    @Override
-    public String getName()
-    {
-        return "type_aoe";
-    }
     @Override
     public ISpellType getType()
     {

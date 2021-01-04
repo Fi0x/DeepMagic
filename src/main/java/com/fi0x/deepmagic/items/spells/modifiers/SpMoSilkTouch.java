@@ -7,11 +7,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
  */
 public class SpMoSilkTouch implements ISpellModifier
 {
-    @Override
-    public String getName()
-    {
-        return "modifier_silktouch";
-    }
+    public static final String NAME = "modifier_silktouch";
+
     @Override
     public ISpellModifier getModifier()
     {

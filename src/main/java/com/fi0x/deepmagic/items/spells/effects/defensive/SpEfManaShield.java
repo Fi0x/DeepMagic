@@ -10,11 +10,8 @@ import net.minecraft.world.World;
  */
 public class SpEfManaShield implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_mana_shield";
-    }
+    public static final String NAME = "effect_mana_shield";
+
     @Override
     public ISpellEffect getEffect()
     {

@@ -4,11 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoRicochet implements ISpellModifier
 {
-    @Override
-    public String getName()
-    {
-        return "modifier_ricochet";
-    }
+    public static final String NAME = "modifier_ricochet";
+
     @Override
     public ISpellModifier getModifier()
     {

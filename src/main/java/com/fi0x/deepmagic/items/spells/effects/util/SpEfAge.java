@@ -10,11 +10,8 @@ import net.minecraft.world.World;
  */
 public class SpEfAge implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_age";
-    }
+    public static final String NAME = "effect_age";
+
     @Override
     public ISpellEffect getEffect()
     {

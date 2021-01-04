@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfWall implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_wall";
-    }
+    public static final String NAME = "effect_wall";
+
     @Override
     public ISpellEffect getEffect()
     {
