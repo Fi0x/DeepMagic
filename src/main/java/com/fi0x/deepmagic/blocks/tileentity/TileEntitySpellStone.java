@@ -53,18 +53,24 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
         StringBuilder parts = new StringBuilder();
-        parts.append(spellParts.get(0));
-        for(int i = 1; i < spellParts.size(); i++)
+        if(!spellParts.isEmpty())
         {
-            parts.append(":").append(spellParts.get(i));
+            parts.append(spellParts.get(0));
+            for(int i = 1; i < spellParts.size(); i++)
+            {
+                parts.append(":").append(spellParts.get(i));
+            }
         }
         compound.setString("parts", parts.toString());
 
         StringBuilder items = new StringBuilder();
-        items.append(consumedItems.get(0));
-        for(int i = 1; i < consumedItems.size(); i++)
+        if(!consumedItems.isEmpty())
         {
-            items.append("_:_").append(consumedItems.get(i));
+            items.append(consumedItems.get(0));
+            for(int i = 1; i < consumedItems.size(); i++)
+            {
+                items.append("_:_").append(consumedItems.get(i));
+            }
         }
         compound.setString("items", items.toString());
 
@@ -235,7 +241,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        //TODO: Add fitting item combinations
+        //TODO: Add missing item combinations
         while(consumedItems.remove("item.magic_converter"))
         {
             if(consumedItems.remove("item.shield"))
@@ -523,10 +529,13 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     public String getSpellParts()
     {
         StringBuilder parts = new StringBuilder();
-        parts.append(spellParts.get(0));
-        for(int i = 1; i < spellParts.size(); i++)
+        if(!spellParts.isEmpty())
         {
-            parts.append(":").append(spellParts.get(i));
+            parts.append(spellParts.get(0));
+            for(int i = 1; i < spellParts.size(); i++)
+            {
+                parts.append(":").append(spellParts.get(i));
+            }
         }
         return parts.toString();
     }
