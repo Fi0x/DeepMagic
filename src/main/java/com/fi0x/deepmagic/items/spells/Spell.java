@@ -117,7 +117,7 @@ public class Spell extends ItemBase implements IMagicItem
 
         for(ArrayList<ISpellPart> s : spellParts)
         {
-            for(int i = 0; i < s.size(); i++)
+            for(int i = 1; i < s.size(); i++)
             {
                 if(s.get(i) instanceof ISpellModifier && i > 0)
                 {

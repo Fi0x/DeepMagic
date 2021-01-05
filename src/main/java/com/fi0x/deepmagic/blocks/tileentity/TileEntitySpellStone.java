@@ -6,7 +6,8 @@ import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemEnderPearl;
+import net.minecraft.item.ItemShield;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -34,10 +35,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
 
         for(EntityItem i : itemEntities)
         {
-            String name;
-            if(i.getItem().getItem() instanceof ItemBlock) name = i.getItem().getUnlocalizedName();
-            else if(i.getItem().getItem() instanceof ItemBucket) name = i.getItem().getUnlocalizedName();
-            else name = i.getItem().getItem().getClass().getName();
+            String name = i.getItem().getUnlocalizedName();
             for(int j = 0; j < i.getItem().getCount(); j++)
             {
                 consumedItems.add(name);
@@ -87,54 +85,51 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        if(consumedItems.contains(ItemSplashPotion.class.getName()))
+        //TODO: Add missing item combinations
+        while(consumedItems.remove("item.magic_flow_controller"))
         {
-            spellParts.add(SpTyAreaOfEffect.NAME);
-            consumedItems.remove(ItemSplashPotion.class.getName());
-            flag = true;
-        }
-        //TODO: Add fitting item combinations
-        if(false)
-        {
-            spellParts.add(SpTyBeam.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpTyIterate.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains(ItemSnowball.class.getName()))
-        {
-            spellParts.add(SpTyProjectile.NAME);
-            consumedItems.remove(ItemSnowball.class.getName());
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpTyRune.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains(ItemGlassBottle.class.getName()))
-        {
-            spellParts.add(SpTySelf.NAME);
-            consumedItems.remove(ItemGlassBottle.class.getName());
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpTyStream.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpTyTouch.NAME);
-            consumedItems.remove(null);
-            flag = true;
+            if(consumedItems.remove("item.splash_potion"))
+            {
+                spellParts.add(SpTyAreaOfEffect.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpTyBeam.NAME);
+                flag = true;
+            } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.comparator"))
+            {
+                spellParts.add(SpTyIterate.NAME);
+                consumedItems.remove("item.clock");
+                consumedItems.remove("item.comparator");
+                flag = true;
+            } else if(consumedItems.contains("item.bow") && consumedItems.contains("item.arrow"))
+            {
+                spellParts.add(SpTyProjectile.NAME);
+                consumedItems.remove("item.bow");
+                consumedItems.remove("item.arrow");
+                flag = true;
+            } else if(consumedItems.remove("item.magic_sigil"))
+            {
+                spellParts.add(SpTyRune.NAME);
+                flag = true;
+            } else if(consumedItems.remove("item.mana_interface"))
+            {
+                spellParts.add(SpTySelf.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpTyStream.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("tile.button"))
+            {
+                spellParts.add(SpTyTouch.NAME);
+                flag = true;
+            } else
+            {
+                consumedItems.add("item.magic_flow_controller");
+                break;
+            }
         }
 
         if(flag) markDirty();
@@ -143,102 +138,95 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        if(consumedItems.contains("item.bucketLava"))
+        //TODO: Add missing item combinations
+        while(consumedItems.remove("item.magic_powder"))
         {
-            spellParts.add(SpMoAutoSmelt.NAME);
-            consumedItems.remove("item.bucketLava");
-            flag = true;
-        }
-        //TODO: Add fitting item combinations
-        if(false)
-        {
-            spellParts.add(SpMoDamage.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains(ItemClock.class.getName()))
-        {
-            spellParts.add(SpMoDuration.NAME);
-            consumedItems.remove(ItemClock.class.getName());
-            flag = true;
-        }
-        if(consumedItems.contains(ItemFlintAndSteel.class.getName()))
-        {
-            spellParts.add(SpMoEnvironmental.NAME);
-            consumedItems.remove(ItemFlintAndSteel.class.getName());
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoFortune.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoGravity.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoHealPower.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoLooting.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoPiercing.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoPower.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoRadius.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains(ItemArrow.class.getName()))
-        {
-            spellParts.add(SpMoRange.NAME);
-            consumedItems.remove(ItemArrow.class.getName());
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoRicochet.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoSilkTouch.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoSplit.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpMoTickSpeed.NAME);
-            consumedItems.remove(null);
-            flag = true;
+            if(consumedItems.remove("item.bucketLava"))
+            {
+                spellParts.add(SpMoAutoSmelt.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoDamage.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.diode"))
+            {
+                spellParts.add(SpMoDuration.NAME);
+                consumedItems.remove("item.clock");
+                consumedItems.remove("item.diode");
+                flag = true;
+            } else if(consumedItems.contains("item.shovelIron") && consumedItems.contains("item.pickaxeIron") && consumedItems.contains("item.hatchetIron"))
+            {
+                spellParts.add(SpMoEnvironmental.NAME);
+                consumedItems.remove("item.shovelIron");
+                consumedItems.remove("item.pickaxeIron");
+                consumedItems.remove("item.hatchetIron");
+                flag = true;
+            } else if(consumedItems.contains("tile.blockLapis") && consumedItems.contains("item.diamond"))
+            {
+                spellParts.add(SpMoFortune.NAME);
+                consumedItems.remove("tile.blockLapis");
+                consumedItems.remove("item.diamond");
+                flag = true;
+            } else if(consumedItems.remove("tile.obsidian"))
+            {
+                spellParts.add(SpMoGravity.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoHealPower.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.contains("tile.blockLapis") && consumedItems.contains("item.diamond"))
+            {
+                spellParts.add(SpMoLooting.NAME);
+                consumedItems.remove("tile.blockLapis");
+                consumedItems.remove("item.diamond");
+                flag = true;
+            } else if(consumedItems.remove("item.swordDiamond"))
+            {
+                spellParts.add(SpMoPiercing.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoPower.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoRadius.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("item.arrow"))
+            {
+                spellParts.add(SpMoRange.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoRicochet.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoSilkTouch.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoSplit.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpMoTickSpeed.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else
+            {
+                consumedItems.add("item.magic_powder");
+                break;
+            }
         }
 
         if(flag) markDirty();
