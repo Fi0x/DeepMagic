@@ -6,8 +6,6 @@ import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemEnderPearl;
-import net.minecraft.item.ItemShield;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -43,9 +41,12 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             world.removeEntity(i);
             markDirty();
         }
-        updateSpellTypes();
-        updateSpellModifiers();
-        updateSpellEffects();
+        if(!itemEntities.isEmpty())
+        {
+            updateSpellTypes();
+            updateSpellModifiers();
+            updateSpellEffects();
+        }
     }
     @Nonnull
     @Override
@@ -145,10 +146,9 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             {
                 spellParts.add(SpMoAutoSmelt.NAME);
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.remove("item.swordIron"))
             {
                 spellParts.add(SpMoDamage.NAME);
-                consumedItems.remove(null);
                 flag = true;
             } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.diode"))
             {
@@ -173,10 +173,9 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             {
                 spellParts.add(SpMoGravity.NAME);
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.remove("item.appleGold"))
             {
                 spellParts.add(SpMoHealPower.NAME);
-                consumedItems.remove(null);
                 flag = true;
             } else if(consumedItems.contains("tile.blockLapis") && consumedItems.contains("item.diamond"))
             {
@@ -188,12 +187,15 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             {
                 spellParts.add(SpMoPiercing.NAME);
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.contains("item.coal") && consumedItems.contains("item.ingotIron") && consumedItems.contains("item.ingotGold") && consumedItems.contains("item.diamond"))
             {
                 spellParts.add(SpMoPower.NAME);
-                consumedItems.remove(null);
+                consumedItems.remove("item.coal");
+                consumedItems.remove("item.ingotIron");
+                consumedItems.remove("item.ingotGold");
+                consumedItems.remove("item.diamond");
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.remove("item.compass"))
             {
                 spellParts.add(SpMoRadius.NAME);
                 consumedItems.remove(null);
@@ -202,10 +204,9 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             {
                 spellParts.add(SpMoRange.NAME);
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.remove("item.slimeball"))
             {
                 spellParts.add(SpMoRicochet.NAME);
-                consumedItems.remove(null);
                 flag = true;
             } else if(false)
             {
@@ -217,10 +218,9 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
                 spellParts.add(SpMoSplit.NAME);
                 consumedItems.remove(null);
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.magic_sigil"))
             {
                 spellParts.add(SpMoTickSpeed.NAME);
-                consumedItems.remove(null);
                 flag = true;
             } else
             {
@@ -235,350 +235,286 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     {
         boolean flag = false;
 
-        if(consumedItems.contains(ItemShield.class.getName()))
-        {
-            spellParts.add(SpEfDeflect.NAME);
-            consumedItems.remove(ItemShield.class.getName());
-            flag = true;
-        }
         //TODO: Add fitting item combinations
-        if(false)
+        while(consumedItems.remove("item.magic_converter"))
         {
-            spellParts.add(SpEfFeatherFall.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfHaste.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfHeal.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfManaShield.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfMiningSpeed.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfMirrorShield.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfRegeneration.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfRoot.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfSlowness.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfWall.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfWither.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-
-        if(false)
-        {
-            spellParts.add(SpEfAccelerate.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfBlindness.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfDrown.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains("tile.tnt"))
-        {
-            spellParts.add(SpEfExplosion.NAME);
-            consumedItems.remove("tile.tnt");
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfFireDamage.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfFrostDamage.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfIgnition.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfKnockback.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfMagicDamage.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfMidnight.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfPhysicalDamage.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfPoison.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfSink.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfStun.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-
-        if(false)
-        {
-            spellParts.add(SpEfAge.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfBind.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains(ItemEnderPearl.class.getName()))
-        {
-            spellParts.add(SpEfBlink.NAME);
-            consumedItems.remove(ItemEnderPearl.class.getName());
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfBuff.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfCharm.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfDayNight.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfDig.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfDimensionalTeleport.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains("item.bucket"))
-        {
-            spellParts.add(SpEfDry.NAME);
-            consumedItems.remove("item.bucket");
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfExchange.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfFly.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfFreeze.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfGrowth.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfLevitate.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfLifeLink.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfLight.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfLightning.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfMagnet.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfManaLink.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfMarkLocation.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfPlace.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(consumedItems.contains("item.bucketWater"))
-        {
-            spellParts.add(SpEfRain.NAME);
-            consumedItems.remove("item.bucketWater");
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfRepel.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfSmelt.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfStore.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfStorm.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfSummon.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfSunshine.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfSwimSpeed.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfTeleport.NAME);
-            consumedItems.remove(null);
-            flag = true;
-        }
-        if(false)
-        {
-            spellParts.add(SpEfTotalRecall.NAME);
-            consumedItems.remove(null);
-            flag = true;
+            if(consumedItems.remove("item.shield"))
+            {
+                spellParts.add(SpEfDeflect.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfFeatherFall.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfHaste.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfHeal.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfManaShield.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfMiningSpeed.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfMirrorShield.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfRegeneration.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfRoot.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfSlowness.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfWall.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfWither.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfAccelerate.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfBlindness.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfDrown.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("tile.tnt"))
+            {
+                spellParts.add(SpEfExplosion.NAME);
+                flag = true;
+            } else if(consumedItems.remove("tile.magma"))
+            {
+                spellParts.add(SpEfFireDamage.NAME);
+                flag = true;
+            } else if(consumedItems.remove("tile.ice"))
+            {
+                spellParts.add(SpEfFrostDamage.NAME);
+                flag = true;
+            } else if(consumedItems.remove("item.flintAndSteel"))
+            {
+                spellParts.add(SpEfIgnition.NAME);
+                flag = true;
+            } else if(consumedItems.remove("tile.pistonBase"))
+            {
+                spellParts.add(SpEfKnockback.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfMagicDamage.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfMidnight.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfPhysicalDamage.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfPoison.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfSink.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfStun.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfAge.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfBind.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("item.enderPearl"))
+            {
+                spellParts.add(SpEfBlink.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfBuff.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfCharm.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfDayNight.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfDig.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("item.eyeOfEnder"))
+            {
+                spellParts.add(SpEfDimensionalTeleport.NAME);
+                flag = true;
+            } else if(consumedItems.remove("item.bucket"))
+            {
+                spellParts.add(SpEfDry.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfExchange.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfFly.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("tile.snow"))
+            {
+                spellParts.add(SpEfFreeze.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfGrowth.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfLevitate.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfLifeLink.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("tile.lightgem"))
+            {
+                spellParts.add(SpEfLight.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfLightning.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfMagnet.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfManaLink.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfMarkLocation.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfPlace.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("item.bucketWater"))
+            {
+                spellParts.add(SpEfRain.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfRepel.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfSmelt.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("tile.chest"))
+            {
+                spellParts.add(SpEfStore.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfStorm.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfSummon.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfSunshine.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfSwimSpeed.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else if(consumedItems.remove("item.teleportation_crystal"))
+            {
+                spellParts.add(SpEfTeleport.NAME);
+                flag = true;
+            } else if(false)
+            {
+                spellParts.add(SpEfTotalRecall.NAME);
+                consumedItems.remove(null);
+                flag = true;
+            } else
+            {
+                consumedItems.add("item.magic_converter");
+                break;
+            }
         }
 
         if(flag) markDirty();
