@@ -12,13 +12,9 @@ import net.minecraft.world.World;
  */
 public class SpEfRoot implements ISpellEffect
 {
+    public static final String NAME = "effect_root";
     private double seconds = 5;
 
-    @Override
-    public String getName()
-    {
-        return "effect_root";
-    }
     @Override
     public ISpellEffect getEffect()
     {

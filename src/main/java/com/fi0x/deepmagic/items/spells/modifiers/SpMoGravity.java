@@ -4,11 +4,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoGravity implements ISpellModifier
 {
-    @Override
-    public String getName()
-    {
-        return "modifier_gravity";
-    }
+    public static final String NAME = "modifier_gravity";
+
     @Override
     public ISpellModifier getModifier()
     {

@@ -7,11 +7,8 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
  */
 public class SpMoEnvironmental implements ISpellModifier
 {
-    @Override
-    public String getName()
-    {
-        return "modifier_environmental";
-    }
+    public static final String NAME = "modifier_environmental";
+
     @Override
     public ISpellModifier getModifier()
     {

@@ -7,14 +7,10 @@ import net.minecraft.world.World;
 
 public class SpEfExplosion implements ISpellEffect
 {
+    public static final String NAME = "effect_explosion";
     private int power = 1;
     private boolean environmentalDamage = false;
 
-    @Override
-    public String getName()
-    {
-        return "effect_explosion";
-    }
     @Override
     public ISpellEffect getEffect()
     {

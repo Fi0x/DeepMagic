@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfDimensionalTeleport implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_dimensionalteleport";
-    }
+    public static final String NAME = "effect_dimensionalteleport";
+
     @Override
     public ISpellEffect getEffect()
     {

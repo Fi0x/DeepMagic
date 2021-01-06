@@ -10,13 +10,9 @@ import net.minecraft.world.World;
  */
 public class SpEfAccelerate implements ISpellEffect
 {
+    public static final String NAME = "effect_accelerate";
     private int speed = 1;
 
-    @Override
-    public String getName()
-    {
-        return "effect_accelerate";
-    }
     @Override
     public ISpellEffect getEffect()
     {

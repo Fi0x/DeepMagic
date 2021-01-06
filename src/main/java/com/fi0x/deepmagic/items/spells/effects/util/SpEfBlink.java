@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfBlink implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_blink";
-    }
+    public static final String NAME = "effect_blink";
+
     @Override
     public ISpellEffect getEffect()
     {

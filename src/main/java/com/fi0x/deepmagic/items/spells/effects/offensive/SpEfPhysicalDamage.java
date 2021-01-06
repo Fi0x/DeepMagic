@@ -8,13 +8,9 @@ import net.minecraft.world.World;
 
 public class SpEfPhysicalDamage implements ISpellEffect
 {
+    public static final String NAME = "effect_physicaldamage";
     private int damage = 1;
 
-    @Override
-    public String getName()
-    {
-        return "effect_physicaldamage";
-    }
     @Override
     public ISpellEffect getEffect()
     {

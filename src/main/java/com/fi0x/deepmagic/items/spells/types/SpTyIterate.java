@@ -9,13 +9,9 @@ import java.util.ArrayList;
 
 public class SpTyIterate implements ISpellType
 {
+    public static final String NAME = "type_iterate";
     private int iterations = 4;
 
-    @Override
-    public String getName()
-    {
-        return "type_iterate";
-    }
     @Override
     public ISpellType getType()
     {

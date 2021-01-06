@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfFrostDamage implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_frostdamage";
-    }
+    public static final String NAME = "effect_frostdamage";
+
     @Override
     public ISpellEffect getEffect()
     {

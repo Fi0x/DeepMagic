@@ -10,11 +10,8 @@ import net.minecraft.world.World;
  */
 public class SpEfDry implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_dry";
-    }
+    public static final String NAME = "effect_dry";
+
     @Override
     public ISpellEffect getEffect()
     {

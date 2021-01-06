@@ -10,11 +10,8 @@ import net.minecraft.world.World;
  */
 public class SpEfFly implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_fly";
-    }
+    public static final String NAME = "effect_fly";
+
     @Override
     public ISpellEffect getEffect()
     {

@@ -7,11 +7,8 @@ import net.minecraft.world.World;
 
 public class SpEfLevitate implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_levitate";
-    }
+    public static final String NAME = "effect_levitate";
+
     @Override
     public ISpellEffect getEffect()
     {

@@ -9,14 +9,10 @@ import net.minecraft.world.World;
 
 public class SpEfMiningSpeed implements ISpellEffect
 {
+    public static final String NAME = "effect_miningspeed";
     private int level = 1;
     private double seconds = 10;
 
-    @Override
-    public String getName()
-    {
-        return "effect_miningspeed";
-    }
     @Override
     public ISpellEffect getEffect()
     {

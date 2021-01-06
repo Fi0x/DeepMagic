@@ -9,13 +9,9 @@ import net.minecraft.world.World;
 
 public class SpEfBlindness implements ISpellEffect
 {
+    public static final String NAME = "effect_blindness";
     private double seconds = 5;
 
-    @Override
-    public String getName()
-    {
-        return "effect_blindness";
-    }
     @Override
     public ISpellEffect getEffect()
     {

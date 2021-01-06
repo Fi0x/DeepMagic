@@ -2,9 +2,10 @@ package com.fi0x.deepmagic.items.spells.modifiers;
 
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 
-public class SpMoPiercing implements ISpellModifier
+public class SpMoFortune implements ISpellModifier
 {
-    public static final String NAME = "modifier_piercing";
+    public static final String NAME = "modifier_fortune";
+    private final int FORTUNE_INCREASE = 1;
 
     @Override
     public ISpellModifier getModifier()
@@ -14,7 +15,7 @@ public class SpMoPiercing implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        part.setPiercing(true);
+        part.setFortune(part.getFortuneLvl() + FORTUNE_INCREASE);
         return part;
     }
 }

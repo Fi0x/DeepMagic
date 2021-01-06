@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfManaLink implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_manalink";
-    }
+    public static final String NAME = "effect_manalink";
+
     @Override
     public ISpellEffect getEffect()
     {

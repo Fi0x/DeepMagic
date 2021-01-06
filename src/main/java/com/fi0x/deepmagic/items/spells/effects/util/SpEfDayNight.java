@@ -10,11 +10,8 @@ import net.minecraft.world.World;
  */
 public class SpEfDayNight implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_daynight";
-    }
+    public static final String NAME = "effect_daynight";
+
     @Override
     public ISpellEffect getEffect()
     {

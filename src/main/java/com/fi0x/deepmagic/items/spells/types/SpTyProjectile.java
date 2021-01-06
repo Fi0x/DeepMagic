@@ -8,13 +8,9 @@ import java.util.ArrayList;
 
 public class SpTyProjectile implements ISpellType
 {
+    public static final String NAME = "type_projectile";
     private double range = 16;
 
-    @Override
-    public String getName()
-    {
-        return "type_projectile";
-    }
     @Override
     public ISpellType getType()
     {

@@ -12,11 +12,8 @@ import net.minecraft.world.World;
  */
 public class SpEfTotalRecall implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_totalrecall";
-    }
+    public static final String NAME = "effect_totalrecall";
+
     @Override
     public ISpellEffect getEffect()
     {

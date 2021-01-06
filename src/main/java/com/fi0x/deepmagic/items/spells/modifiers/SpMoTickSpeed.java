@@ -4,13 +4,9 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoTickSpeed implements ISpellModifier
 {
+    public static final String NAME = "modifier_tickspeed";
     private final int TICK_INCREASE = 1;
 
-    @Override
-    public String getName()
-    {
-        return "modifier_tickspeed";
-    }
     @Override
     public ISpellModifier getModifier()
     {

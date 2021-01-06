@@ -7,13 +7,9 @@ import net.minecraft.world.World;
 
 public class SpEfIgnition implements ISpellEffect
 {
+    public static final String NAME = "effect_ignition";
     private double seconds = 5;
 
-    @Override
-    public String getName()
-    {
-        return "effect_ignition";
-    }
     @Override
     public ISpellEffect getEffect()
     {

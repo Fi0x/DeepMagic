@@ -8,11 +8,8 @@ import java.util.ArrayList;
 
 public class SpTyRune implements ISpellType
 {
-    @Override
-    public String getName()
-    {
-        return "type_rune";
-    }
+    public static final String NAME = "type_rune";
+
     @Override
     public ISpellType getType()
     {

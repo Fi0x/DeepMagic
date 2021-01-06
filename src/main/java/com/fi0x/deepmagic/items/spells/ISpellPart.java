@@ -6,8 +6,6 @@ import com.fi0x.deepmagic.items.spells.types.ISpellType;
 
 public interface ISpellPart
 {
-    String getName();
-
     default ISpellType getType()
     {
         return null;
@@ -21,6 +19,13 @@ public interface ISpellPart
         return null;
     }
 
+    default void setAutoSmelt(boolean state)
+    {
+    }
+    default boolean hasAutoSmelt()
+    {
+        return false;
+    }
     default void setDamage(int value)
     {
     }
@@ -42,6 +47,13 @@ public interface ISpellPart
     {
         return false;
     }
+    default void setFortune(int level)
+    {
+    }
+    default int getFortuneLvl()
+    {
+        return 0;
+    }
     default void setGravity(boolean state)
     {
     }
@@ -53,6 +65,13 @@ public interface ISpellPart
     {
     }
     default int getHealPower()
+    {
+        return 0;
+    }
+    default void setLootingLvl(int level)
+    {
+    }
+    default int getLootingLvl()
     {
         return 0;
     }
@@ -88,6 +107,13 @@ public interface ISpellPart
     {
     }
     default boolean canRicochet()
+    {
+        return false;
+    }
+    default void setSilkTouch(boolean state)
+    {
+    }
+    default boolean hasSilkTouch()
     {
         return false;
     }

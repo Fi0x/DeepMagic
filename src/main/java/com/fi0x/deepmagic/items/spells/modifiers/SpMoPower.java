@@ -4,13 +4,9 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 
 public class SpMoPower implements ISpellModifier
 {
+    public static final String NAME = "modifier_power";
     private final int MINING_INCREASE = 1;
 
-    @Override
-    public String getName()
-    {
-        return "modifier_power";
-    }
     @Override
     public ISpellModifier getModifier()
     {

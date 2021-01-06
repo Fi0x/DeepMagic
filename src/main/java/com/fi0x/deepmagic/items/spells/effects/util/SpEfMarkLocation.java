@@ -10,11 +10,8 @@ import net.minecraft.world.World;
  */
 public class SpEfMarkLocation implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_marklocation";
-    }
+    public static final String NAME = "effect_marklocation";
+
     @Override
     public ISpellEffect getEffect()
     {

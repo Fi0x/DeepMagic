@@ -10,20 +10,17 @@ import net.minecraft.world.World;
  */
 public class SpEfLight implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_light";
-    }
+    public static final String NAME = "effect_light";
+
     @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
     public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
     {
+        //TODO: Create light block and place it at position
     }
     @Override
     public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)

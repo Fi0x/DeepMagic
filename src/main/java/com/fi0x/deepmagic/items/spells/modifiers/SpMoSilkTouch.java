@@ -2,9 +2,12 @@ package com.fi0x.deepmagic.items.spells.modifiers;
 
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 
-public class SpMoPiercing implements ISpellModifier
+/*
+ * Weather the spell has Silk-Touch or not
+ */
+public class SpMoSilkTouch implements ISpellModifier
 {
-    public static final String NAME = "modifier_piercing";
+    public static final String NAME = "modifier_silktouch";
 
     @Override
     public ISpellModifier getModifier()
@@ -14,7 +17,7 @@ public class SpMoPiercing implements ISpellModifier
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
-        part.setPiercing(true);
+        part.setSilkTouch(true);
         return part;
     }
 }

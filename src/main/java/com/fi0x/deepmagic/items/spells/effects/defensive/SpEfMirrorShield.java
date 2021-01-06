@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfMirrorShield implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_mirrorshield";
-    }
+    public static final String NAME = "effect_mirrorshield";
+
     @Override
     public ISpellEffect getEffect()
     {

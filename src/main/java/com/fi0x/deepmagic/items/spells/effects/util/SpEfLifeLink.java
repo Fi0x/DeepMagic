@@ -11,11 +11,8 @@ import net.minecraft.world.World;
  */
 public class SpEfLifeLink implements ISpellEffect
 {
-    @Override
-    public String getName()
-    {
-        return "effect_lifelink";
-    }
+    public static final String NAME = "effect_lifelink";
+
     @Override
     public ISpellEffect getEffect()
     {

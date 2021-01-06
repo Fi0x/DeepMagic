@@ -12,14 +12,10 @@ import java.util.ArrayList;
  */
 public class SpTyStream implements ISpellType
 {
+    public static final String NAME = "type_stream";
     private double range = 4;
     private double radius = 1;
 
-    @Override
-    public String getName()
-    {
-        return "type_stream";
-    }
     @Override
     public ISpellType getType()
     {
