@@ -1,6 +1,8 @@
 package com.fi0x.deepmagic.blocks.partial;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
+import com.fi0x.deepmagic.particlesystem.ParticleEnum;
+import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -74,6 +76,7 @@ public class Rune extends BlockBase
                 worldIn.spawnParticle(EnumParticleTypes.TOWN_AURA, x, y, z, 0, 0, 0);
                 break;
         }
+        ParticleSpawner.spawnParticle(ParticleEnum.FLOWER, x, y + 2, z, 0, 0, 0);
     }
     @Nonnull
     @SideOnly(Side.CLIENT)

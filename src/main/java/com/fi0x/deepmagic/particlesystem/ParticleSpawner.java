@@ -6,40 +6,32 @@ import net.minecraft.client.particle.Particle;
 
 public class ParticleSpawner
 {
-    private static Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final double DIST = 16;
 
-    public static Particle spawnParticle(ParticleEnum type, double par2, double par4, double par6, double par8, double par10, double par12)
+    public static Particle spawnParticle(ParticleEnum type, double posX, double posY, double posZ, double velocityX, double velocityY, double velocityZ)
     {
-        if(mc != null && mc.getRenderViewEntity() != null && mc.effectRenderer != null)
+        if(mc.getRenderViewEntity() != null && mc.effectRenderer != null)
         {
-            int var14 = mc.gameSettings.particleSetting;
+            if(mc.gameSettings.particleSetting != 1 || mc.world.rand.nextInt(3) != 0) return null;
 
-            if(var14 == 1 && mc.world.rand.nextInt(3) == 0)
-            {
-                var14 = 2;
-            }
+            double x = mc.getRenderViewEntity().posX - posX;
+            double y = mc.getRenderViewEntity().posY - posY;
+            double z = mc.getRenderViewEntity().posZ - posZ;
+            Particle particle = null;
 
-            double var15 = mc.getRenderViewEntity().posX - par2;
-            double var17 = mc.getRenderViewEntity().posY - par4;
-            double var19 = mc.getRenderViewEntity().posZ - par6;
-            Particle var21 = null;
-            double var22 = 16.0D;
-
-            if(var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)
+            if(x * x + y * y + z * z <= DIST * DIST)
             {
-                return null;
-            } else if(var14 > 1)
-            {
-                return null;
-            } else
-            {
-                if(type == ParticleEnum.FLOWER)
+                switch(type)
                 {
-                    var21 = new ParticlePetal(mc.world, par2, par4, par6, par8, par10, par12);
+                    case FLOWER:
+                        particle = new ParticlePetal(mc.world, posX, posY, posZ, velocityX, velocityY, velocityZ);
+                        break;
                 }
 
-                mc.effectRenderer.addEffect(var21);
-                return var21;
+                assert particle != null;
+                mc.effectRenderer.addEffect(particle);
+                return particle;
             }
         }
         return null;
