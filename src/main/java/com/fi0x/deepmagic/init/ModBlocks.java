@@ -8,6 +8,8 @@ import com.fi0x.deepmagic.blocks.effectstones.PotionEffectStone;
 import com.fi0x.deepmagic.blocks.insanity.*;
 import com.fi0x.deepmagic.blocks.mana.*;
 import com.fi0x.deepmagic.blocks.ores.*;
+import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
+import com.fi0x.deepmagic.blocks.partial.Rune;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
 import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
@@ -24,7 +26,7 @@ import java.util.List;
 public class ModBlocks
 {
 	public static final List<Block> BLOCKS = new ArrayList<>();
-	
+
 	public static final Block DEEP_CRYSTAL_ORE = new DeepCrystalOre("deep_crystal_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_NETHER_ORE = new DeepCrystalOre("deep_crystal_nether_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_END_ORE = new DeepCrystalOre("deep_crystal_end_ore", Material.ROCK);
@@ -34,10 +36,10 @@ public class ModBlocks
 	public static final BlockSlab CLEAN_STONE_SLAB_HALF = new CleanStoneHalfSlab("clean_stone_slab_half", Material.ROCK);
 	public static final BlockStairs CLEAN_STONE_STAIRS = new StairBase("clean_stone_stairs", Blocks.STONE.getDefaultState());
 	public static final Block DWARF_LAMP = new DwarfLamp("dwarf_lamp", Material.CIRCUITS);
+	public static final Block RUNE = new Rune("rune", Material.CIRCUITS);
 
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);
-//	public static final Block BRIGHT_INSANITY_STONE = new BrightInsanityStone("bright_insanity_stone", Material.ROCK);
 	public static final Block INSANITY_COBBLE = new InsanityCobble("insanity_cobble", Material.ROCK);
 	public static final Block INSANITY_DIRT = new InsanityDirt("insanity_dirt", Material.GROUND);
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);

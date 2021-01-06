@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.entities.ai;
 
-import com.fi0x.deepmagic.blocks.DwarfLamp;
+import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.BlockChest;
