@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.particlesystem;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.google.common.collect.Maps;
 
 import javax.annotation.Nullable;
@@ -8,7 +9,7 @@ import java.util.Set;
 
 public enum ParticleEnum
 {
-    FLOWER("flower", 30, false);
+    MAGIC_LIGHT("magic_light", ConfigHandler.firstParticleID, false);
 
     private final String particleName;
     private final int particleID;

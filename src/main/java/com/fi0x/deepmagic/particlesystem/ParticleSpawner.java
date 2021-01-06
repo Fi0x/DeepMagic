@@ -34,7 +34,7 @@ public class ParticleSpawner
 
             if(var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= range * range)
             {
-                if(type == ParticleEnum.FLOWER)
+                if(type == ParticleEnum.MAGIC_LIGHT)
                 {
                     particle = new ParticleMagicLight(mc.world, x, y, z, speedX, speedY, speedZ);
                 }
