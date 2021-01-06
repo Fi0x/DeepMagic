@@ -25,6 +25,8 @@ tile.demon_crystal_block.name=Demon Crystal Block
 tile.clean_stone_slab_half.name=Clean Stone Slab
 tile.clean_stone_stairs.name=Clean Stone Stairs
 tile.dwarf_lamp.name=Dwarf Lamp
+tile.rune.name=Rune
+tile.magic_light.name=Magic Light
 
 tile.insanity_stone.name=Insanity Stone
 tile.bright_insanity_stone.name=Bright Insanity Stone

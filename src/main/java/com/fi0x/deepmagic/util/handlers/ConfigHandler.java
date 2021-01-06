@@ -39,6 +39,8 @@ public class ConfigHandler
     public static int guiManaInfuserID;
     public static int guiManaGrinderID;
     public static int guiManaFurnaceID;
+    //Particle IDs
+    public static int firstParticleID;
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
@@ -167,6 +169,10 @@ public class ConfigHandler
         guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 424, -1000, 1000, "");
         guiManaGrinderID = ids.getInt("Mana Grinder GUI ID", category, 425, -1000, 1000, "");
         guiManaFurnaceID = ids.getInt("Mana Furnace GUI ID", category, 426, -1000, 1000, "");
+
+        category = "Particles";
+        ids.addCustomCategoryComment(category, "Particles");
+        firstParticleID = ids.getInt("The first ID Particles should use", category, 42, 42, 100000, "");
 
         ids.save();
     }

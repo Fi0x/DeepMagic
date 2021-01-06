@@ -1,5 +1,6 @@
-package com.fi0x.deepmagic.blocks;
+package com.fi0x.deepmagic.blocks.partial;
 
+import com.fi0x.deepmagic.blocks.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
