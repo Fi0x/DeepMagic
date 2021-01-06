@@ -28,8 +28,6 @@ public class ParticlePetal extends Particle
         this.particleBlue = 0;
         this.particleScale *= 0.75F * scale;
         this.particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D) * scale);
-
-//        this.setParticleTextureIndex(48);
     }
 
     public void onUpdate()
@@ -67,5 +65,12 @@ public class ParticlePetal extends Particle
         {
             return new ParticlePetal(worldIn, x, y, z, (float) xSpeedIn, (float) ySpeedIn, (float) zSpeedIn);
         }
+    }
+
+    @Override
+    public int getFXLayer()
+    {
+        if(particleTexture == null) return 1;
+        else return 0;
     }
 }

@@ -9,31 +9,36 @@ public class ParticleSpawner
     private static final Minecraft mc = Minecraft.getMinecraft();
     private static final double DIST = 16;
 
-    public static Particle spawnParticle(ParticleEnum type, double posX, double posY, double posZ, double velocityX, double velocityY, double velocityZ)
+    public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ)
+    {
+        spawnParticle(type, x, y, z, speedX, speedY, speedZ, false);
+    }
+    public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ, boolean always)
     {
         if(mc.getRenderViewEntity() != null && mc.effectRenderer != null)
         {
-            if(mc.gameSettings.particleSetting != 1 || mc.world.rand.nextInt(3) != 0) return null;
+            int var14 = mc.gameSettings.particleSetting;
+            if(var14 == 1 && mc.world.rand.nextInt(3) == 0)
+            {
+                var14 = 2;
+            }
+            if(always) var14 = 2;
 
-            double x = mc.getRenderViewEntity().posX - posX;
-            double y = mc.getRenderViewEntity().posY - posY;
-            double z = mc.getRenderViewEntity().posZ - posZ;
+            double var15 = mc.getRenderViewEntity().posX - x;
+            double var17 = mc.getRenderViewEntity().posY - y;
+            double var19 = mc.getRenderViewEntity().posZ - z;
             Particle particle = null;
 
-            if(x * x + y * y + z * z <= DIST * DIST)
+            if(var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= DIST * DIST)
             {
-                switch(type)
+                if(type == ParticleEnum.FLOWER)
                 {
-                    case FLOWER:
-                        particle = new ParticlePetal(mc.world, posX, posY, posZ, velocityX, velocityY, velocityZ);
-                        break;
+                    particle = new ParticlePetal(mc.world, x, y, z, speedX, speedY, speedZ);
                 }
 
                 assert particle != null;
                 mc.effectRenderer.addEffect(particle);
-                return particle;
             }
         }
-        return null;
     }
 }
