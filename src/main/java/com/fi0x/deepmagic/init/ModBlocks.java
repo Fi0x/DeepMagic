@@ -9,6 +9,7 @@ import com.fi0x.deepmagic.blocks.insanity.*;
 import com.fi0x.deepmagic.blocks.mana.*;
 import com.fi0x.deepmagic.blocks.ores.*;
 import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
+import com.fi0x.deepmagic.blocks.partial.MagicLight;
 import com.fi0x.deepmagic.blocks.partial.Rune;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
@@ -37,6 +38,7 @@ public class ModBlocks
 	public static final BlockStairs CLEAN_STONE_STAIRS = new StairBase("clean_stone_stairs", Blocks.STONE.getDefaultState());
 	public static final Block DWARF_LAMP = new DwarfLamp("dwarf_lamp", Material.CIRCUITS);
 	public static final Block RUNE = new Rune("rune", Material.CIRCUITS);
+	public static final Block MAGIC_LIGHT = new MagicLight("magic_light", Material.SNOW);
 
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);

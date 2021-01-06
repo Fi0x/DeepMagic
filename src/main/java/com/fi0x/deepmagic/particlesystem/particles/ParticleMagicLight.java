@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,16 +16,23 @@ public class ParticleMagicLight extends Particle
     {
         this(worldIn, x, y, z, 1.0F, speedX, speedY, speedZ);
     }
-
-    protected ParticleMagicLight(World worldIn, double x, double y, double z, float scale, double speedX, double speedY, double speedZ)
+    public ParticleMagicLight(World worldIn, double x, double y, double z, double scale, double speedX, double speedY, double speedZ)
     {
         super(worldIn, x, y, z, speedX, speedY, speedZ);
-        this.motionX *= 0.100000001;
-        this.motionY *= 0.150000001;
-        this.motionZ *= 0.100000001;
 
-        this.particleScale *= 0.75F * scale;
-        this.particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D) * scale);
+        this.particleScale *= 0.5F * scale;
+        this.particleMaxAge = (int) (Math.random() * 40 + 20);
+
+        this.particleRed = 1;
+        this.particleGreen = (float) (0.7 + Math.random() * 0.3);
+        this.particleBlue = 1;
+        this.motionX = speedX + (Math.random() * 2 - 1) * 0.1;
+        this.motionY = speedY + (Math.random() * 2 - 1) * 0.1;
+        this.motionZ = speedZ + (Math.random() * 2 - 1) * 0.1;
+        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+        this.motionX = this.motionX / f1 * 0.003;
+        this.motionY = this.motionY / f1 * 0.003;
+        this.motionZ = this.motionZ / f1 * 0.003;
 
         ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "particle/magic_light");
         this.setParticleTexture(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString()));
@@ -43,8 +51,8 @@ public class ParticleMagicLight extends Particle
 
         if(this.posY == this.prevPosY)
         {
-            this.motionX *= 1.1D;
-            this.motionZ *= 1.1D;
+            this.motionX *= 1.1;
+            this.motionZ *= 1.1;
         }
 
         this.motionX *= 0.96;

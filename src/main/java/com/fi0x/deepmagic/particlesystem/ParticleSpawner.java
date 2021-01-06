@@ -25,7 +25,7 @@ public class ParticleSpawner
             {
                 var14 = 2;
             }
-            if(always) var14 = 2;
+            if(always) var14 = 0;
 
             double var15 = mc.getRenderViewEntity().posX - x;
             double var17 = mc.getRenderViewEntity().posY - y;
@@ -34,9 +34,11 @@ public class ParticleSpawner
 
             if(var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= range * range)
             {
-                if(type == ParticleEnum.MAGIC_LIGHT)
+                switch(type)
                 {
-                    particle = new ParticleMagicLight(mc.world, x, y, z, speedX, speedY, speedZ);
+                    case MAGIC_LIGHT:
+                        particle = new ParticleMagicLight(mc.world, x, y, z, Math.random() * 2, speedX, speedY, speedZ);
+                        break;
                 }
 
                 assert particle != null;
