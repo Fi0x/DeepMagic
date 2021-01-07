@@ -116,6 +116,8 @@ public class ConfigHandler
     public static int demonSummonCost;
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
+    //Magic Light
+    public static int magicLightParticles;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -308,6 +310,10 @@ public class ConfigHandler
         demonSummonCost = blocks.getInt("Demon Summon Costs", category, 100, 0, 10000, "Mana Costs to summon the Demon");
         demonSummonXP = blocks.getInt("Demon Summon XP", category, 100, 0, 10000, "Skill XP gained by summoning the Demon");
         requireDemonStructure = blocks.getBoolean("Require Demon Summoning Structure", category, true, "Require a Structure around the Demon Stone to Summon the Demon");
+
+        category = "Magic Light";
+        blocks.addCustomCategoryComment(category, "Magic Light");
+        magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
 
         blocks.save();
     }
