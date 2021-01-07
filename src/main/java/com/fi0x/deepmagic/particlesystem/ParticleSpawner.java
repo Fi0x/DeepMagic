@@ -1,8 +1,11 @@
 package com.fi0x.deepmagic.particlesystem;
 
-import com.fi0x.deepmagic.particlesystem.particles.ParticleMagicLight;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ParticleSpawner
 {
@@ -32,13 +35,14 @@ public class ParticleSpawner
             double var19 = mc.getRenderViewEntity().posZ - z;
             Particle particle = null;
 
-            if(var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= range * range)
+            if(type.getShouldIgnoreRange() || (var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= range * range))
             {
-                switch(type)
+                try
                 {
-                    case MAGIC_LIGHT:
-                        particle = new ParticleMagicLight(mc.world, x, y, z, Math.random() * 2, speedX, speedY, speedZ);
-                        break;
+                    Constructor con = type.getParticleClass().getConstructor(String.class, World.class, double.class, double.class, double.class, double.class, double.class, double.class, double.class);
+                    particle = (Particle) con.newInstance(type.getTextureName(), mc.world, x, y, z, Math.random() * 2, speedX, speedY, speedZ);
+                } catch(NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ignored)
+                {
                 }
 
                 assert particle != null;

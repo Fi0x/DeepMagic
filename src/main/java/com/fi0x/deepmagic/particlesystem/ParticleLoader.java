@@ -13,6 +13,6 @@ public class ParticleLoader
     @SubscribeEvent
     public static void spriteAtlas(TextureStitchEvent.Pre event)
     {
-        event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID, "particle/magic_light"));
+        event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID, "particle/" + ParticleEnum.MAGIC_LIGHT.getTextureName()));
     }
 }

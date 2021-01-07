@@ -3,29 +3,32 @@ package com.fi0x.deepmagic.particlesystem.particles;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class ParticleMagicLight extends Particle
 {
-    public ParticleMagicLight(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ)
-    {
-        this(worldIn, x, y, z, 1.0F, speedX, speedY, speedZ);
-    }
-    public ParticleMagicLight(World worldIn, double x, double y, double z, double scale, double speedX, double speedY, double speedZ)
+    public ParticleMagicLight(String textureName, World worldIn, double x, double y, double z, double scale, double speedX, double speedY, double speedZ)
     {
         super(worldIn, x, y, z, speedX, speedY, speedZ);
 
         this.particleScale *= 0.5F * scale;
         this.particleMaxAge = (int) (Math.random() * 40 + 20);
+        this.particleAlpha = 0;
 
         this.particleRed = 1;
-        this.particleGreen = (float) (0.7 + Math.random() * 0.3);
+        this.particleGreen = (float) (0.6 + Math.random() * 0.4);
         this.particleBlue = 1;
+
+
         this.motionX = speedX + (Math.random() * 2 - 1) * 0.1;
         this.motionY = speedY + (Math.random() * 2 - 1) * 0.1;
         this.motionZ = speedZ + (Math.random() * 2 - 1) * 0.1;
@@ -34,38 +37,23 @@ public class ParticleMagicLight extends Particle
         this.motionY = this.motionY / f1 * 0.003;
         this.motionZ = this.motionZ / f1 * 0.003;
 
-        ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "particle/magic_light");
+        ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "particle/" + textureName);
         this.setParticleTexture(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString()));
     }
 
-    public void onUpdate()
+    @Override
+    public void renderParticle(@Nonnull BufferBuilder buffer, @Nonnull Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
-
-        if(this.particleAge++ >= this.particleMaxAge) this.setExpired();
-
-        this.setParticleTextureIndex(7 - this.particleAge * 8 / this.particleMaxAge);
-        this.move(this.motionX, this.motionY, this.motionZ);
-
-        if(this.posY == this.prevPosY)
+        super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+        if(particleAge <= 0.2 * particleMaxAge)
         {
-            this.motionX *= 1.1;
-            this.motionZ *= 1.1;
-        }
-
-        this.motionX *= 0.96;
-        this.motionY *= 0.96;
-        this.motionZ *= 0.96;
-
-        if(this.onGround)
+            this.particleAlpha = (float) (particleAge / (0.2 * particleMaxAge));
+        } else if(particleAge >= 0.8 * particleMaxAge)
         {
-            this.motionX *= 0.7;
-            this.motionZ *= 0.7;
-        }
+            this.particleAlpha = (float) -((particleAge - particleMaxAge) / (0.2 * particleMaxAge));
+        } else this.particleAlpha = 1;
+        if(particleAlpha > 1) System.out.println("Alpha too big");
     }
-
     @Override
     public int getFXLayer()
     {
