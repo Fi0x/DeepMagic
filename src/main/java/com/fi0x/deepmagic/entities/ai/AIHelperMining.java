@@ -1,12 +1,13 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import com.fi0x.deepmagic.blocks.DwarfBaseMarker;
 import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
+import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.particlesystem.ParticleEnum;
+import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockStone;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
@@ -26,8 +27,8 @@ public class AIHelperMining
         mineableBlocks = new ArrayList<>();
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
-        mineableBlocks.add(Blocks.GRASS.getDefaultState());
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL));
+        mineableBlocks.add(Blocks.GRASS.getDefaultState());
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE));
@@ -72,6 +73,30 @@ public class AIHelperMining
         }
     }
 
+    public static boolean hasHomePosition(World world, EntityDwarf entity)
+    {
+        if(entity.homePos != null && world.getBlockState(entity.homePos).getBlock() instanceof DwarfBaseMarker) return true;
+
+        BlockPos pos = entity.getPosition();
+        for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
+        {
+            for(int y = -range / 4; y <= range / 4; y++)
+            {
+                for(int x = -range; x <= range; x++)
+                {
+                    for(int z = -range; z <= range; z++)
+                    {
+                        if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof DwarfBaseMarker)
+                        {
+                            entity.homePos = pos.add(x, y, z);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation, EnumFacing direction)
     {
         ArrayList<BlockPos> checkBlocks = new ArrayList<>();
@@ -81,6 +106,7 @@ public class AIHelperMining
         while(!checkBlocks.isEmpty())
         {
             BlockPos pos = checkBlocks.get(0);
+            if(ConfigHandler.showAISearchParticles) ParticleSpawner.spawnParticle(ParticleEnum.DWARF_SEARCH_MINE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, 2, false, 16);
             if(validatePosition(world, pos, direction)) return pos;
             blocksDone.add(pos);
 
@@ -113,40 +139,44 @@ public class AIHelperMining
         BlockPos rightNext = rightBlock.north();
         BlockPos leftBlock = pos.west();
         BlockPos leftNext = leftBlock.north();
-        if(direction == EnumFacing.EAST)
+        switch(direction)
         {
-            freeBlock = pos.west();
-            rightBlock = pos.south();
-            rightNext = rightBlock.east();
-            leftBlock = pos.north();
-            leftNext = leftBlock.east();
-        }
-        else if(direction == EnumFacing.SOUTH)
-        {
-            freeBlock = pos.north();
-            rightBlock = pos.west();
-            rightNext = rightBlock.south();
-            leftBlock = pos.east();
-            leftNext = leftBlock.south();
-        }
-        else if(direction == EnumFacing.WEST)
-        {
-            freeBlock = pos.east();
-            rightBlock = pos.north();
-            rightNext = rightBlock.west();
-            leftBlock = pos.south();
-            leftNext = leftBlock.west();
+            case EAST:
+                freeBlock = pos.west();
+                rightBlock = pos.south();
+                rightNext = rightBlock.east();
+                leftBlock = pos.north();
+                leftNext = leftBlock.east();
+                break;
+            case SOUTH:
+                freeBlock = pos.north();
+                rightBlock = pos.west();
+                rightNext = rightBlock.south();
+                leftBlock = pos.east();
+                leftNext = leftBlock.south();
+                break;
+            case WEST:
+                freeBlock = pos.east();
+                rightBlock = pos.north();
+                rightNext = rightBlock.west();
+                leftBlock = pos.south();
+                leftNext = leftBlock.west();
+                break;
         }
 
-        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null) return false;
-        if(world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
-        if(world.getBlockState(rightBlock).getBlock() == Blocks.AIR && world.getBlockState(rightNext).getBlock() == Blocks.AIR) return false;
-        if(world.getBlockState(leftBlock).getBlock() == Blocks.AIR && world.getBlockState(leftNext).getBlock() == Blocks.AIR) return false;
+        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null || world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
+        if(world.getBlockState(rightBlock).getCollisionBoundingBox(world, rightBlock) == null && world.getBlockState(rightNext).getCollisionBoundingBox(world, rightNext) == null) return false;
+        if(world.getBlockState(leftBlock).getCollisionBoundingBox(world, leftBlock) == null && world.getBlockState(leftNext).getCollisionBoundingBox(world, leftNext) == null) return false;
 
-        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
         boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
-        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
         boolean upAir = world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null;
+        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
+        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
+
+        Block b = world.getBlockState(pos).getBlock();
+        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
+        b = world.getBlockState(pos.up()).getBlock();
+        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
 
         if(downBlock && upAir) return true;
         if(downBlock && upBlock) return true;
@@ -156,28 +186,39 @@ public class AIHelperMining
     {
         int distance = rand.nextInt(ConfigHandler.aiSearchRange / 2) + ConfigHandler.aiSearchRange / 2;
 
-        if(direction == EnumFacing.NORTH) return start.add(0, 0, -distance);
-        if(direction == EnumFacing.EAST) return start.add(distance, 0, 0);
-        if(direction == EnumFacing.SOUTH) return start.add(0, 0, distance);
-        if(direction == EnumFacing.WEST) return start.add(-distance, 0, 0);
+        switch(direction)
+        {
+            case NORTH:
+                return start.add(0, 0, -distance);
+            case EAST:
+                return start.add(distance, 0, 0);
+            case SOUTH:
+                return start.add(0, 0, distance);
+            case WEST:
+                return start.add(-distance, 0, 0);
+        }
 
         return start;
     }
 
-    public static BlockPos findChest(World world, BlockPos pos)
+    public static BlockPos findChest(World world, BlockPos... positions)
     {
-        if(pos == null) return null;
-        for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
+        if(positions == null || positions.length == 0) return null;
+        for(BlockPos pos : positions)
         {
-            for(int y = -range / 4; y <= range / 4; y++)
+            if(pos == null) continue;
+            for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
             {
-                for(int x = -range; x <= range; x++)
+                for(int y = -range / 4; y <= range / 4; y++)
                 {
-                    for(int z = -range; z <= range; z++)
+                    for(int x = -range; x <= range; x++)
                     {
-                        if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest)
+                        for(int z = -range; z <= range; z++)
                         {
-                            if(hasChestSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
+                            if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest)
+                            {
+                                if(hasChestSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
+                            }
                         }
                     }
                 }

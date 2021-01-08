@@ -39,6 +39,7 @@ public class ModBlocks
 	public static final Block DWARF_LAMP = new DwarfLamp("dwarf_lamp", Material.CIRCUITS);
 	public static final Block RUNE = new Rune("rune", Material.CIRCUITS);
 	public static final Block MAGIC_LIGHT = new MagicLight("magic_light", Material.SNOW);
+	public static final Block DWARF_BASE_MARKER = new DwarfBaseMarker("dwarf_base_marker", Material.ROCK);
 
 	//Insanity Blocks
 	public static final Block INSANITY_STONE = new InsanityStone("insanity_stone", Material.ROCK);

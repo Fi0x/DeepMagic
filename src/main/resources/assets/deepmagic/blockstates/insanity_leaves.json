@@ -2,7 +2,7 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"particle": "deepmagic:blocks/insanity_leaves"
+			"particle": "deepmagic:blocks/insanity/insanity_leaves"
 		},
 		"model": "deepmagic:insanity_leaves",
 		"uvlock": true

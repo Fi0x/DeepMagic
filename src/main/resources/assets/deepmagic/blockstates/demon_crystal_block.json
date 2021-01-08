@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "deepmagic:demon_crystal_block" }
+  "variants": {
+    "normal": {
+      "model": "deepmagic:demon_crystal_block"
     }
+  }
 }

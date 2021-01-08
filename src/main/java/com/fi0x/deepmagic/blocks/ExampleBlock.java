@@ -13,16 +13,16 @@ public class ExampleBlock extends BlockBase
 {
 	public ExampleBlock(String name, Material material)
 	{
-		super(name, material);
-		setSoundType(SoundType.METAL);
-		setHardness(5.0F);
-		setResistance(5.0F);
-		setHarvestLevel("pickaxe", 0);
-		setLightLevel(15.0F);
-		setLightOpacity(1);
-		setBlockUnbreakable();
-		setDefaultSlipperiness(0.6F);
-	}
+        super(name, material);
+        setSoundType(SoundType.METAL);
+        setHardness(5.0F);
+        setResistance(5.0F);
+        setHarvestLevel("pickaxe", 0);
+        setLightLevel(1F);
+        setLightOpacity(1);
+        setBlockUnbreakable();
+        setDefaultSlipperiness(0.6F);
+    }
 	
 	@Nonnull
 	@Override

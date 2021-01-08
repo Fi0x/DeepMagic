@@ -1,22 +1,26 @@
 package com.fi0x.deepmagic.particlesystem;
 
-import com.fi0x.deepmagic.particlesystem.particles.ParticleMagicLight;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ParticleSpawner
 {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
+    public static void spawnParticle(ParticleEnum type, BlockPos pos)
+    {
+        spawnParticle(type, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0, 1, false, 16);
+    }
     public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ)
     {
-        spawnParticle(type, x, y, z, speedX, speedY, speedZ, false);
+        spawnParticle(type, x, y, z, speedX, speedY, speedZ, 1, false, 16);
     }
-    public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ, boolean always)
-    {
-        spawnParticle(type, x, y, z, speedX, speedY, speedZ, always, 16);
-    }
-    public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ, boolean always, int range)
+    public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ, double size, boolean always, int range)
     {
         if(mc.getRenderViewEntity() != null && mc.effectRenderer != null)
         {
@@ -32,13 +36,14 @@ public class ParticleSpawner
             double var19 = mc.getRenderViewEntity().posZ - z;
             Particle particle = null;
 
-            if(var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= range * range)
+            if(type.getShouldIgnoreRange() || (var14 <= 1 && var15 * var15 + var17 * var17 + var19 * var19 <= range * range))
             {
-                switch(type)
+                try
                 {
-                    case MAGIC_LIGHT:
-                        particle = new ParticleMagicLight(mc.world, x, y, z, Math.random() * 2, speedX, speedY, speedZ);
-                        break;
+                    Constructor con = type.getParticleClass().getConstructor(String.class, World.class, double.class, double.class, double.class, double.class, double.class, double.class, double.class);
+                    particle = (Particle) con.newInstance(type.getTextureName(), mc.world, x, y, z, size, speedX, speedY, speedZ);
+                } catch(NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ignored)
+                {
                 }
 
                 assert particle != null;

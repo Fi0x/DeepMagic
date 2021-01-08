@@ -93,7 +93,9 @@ public class ConfigHandler
     public static int damageRockTroll;
     //NPC Utility
     public static int aiSearchRange;
+    public static int dwarfMineRange;
     public static int dwarfInventorySlots;
+    public static boolean showAISearchParticles;
 
     //Player Mana
     public static int baseMana;
@@ -116,6 +118,11 @@ public class ConfigHandler
     public static int demonSummonCost;
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
+    //Magic Light
+    public static int magicLightParticles;
+    //Dwarf Base Marker
+    public static int dwarfBaseMarkerParticles;
+    public static int dwarfMarkerSpawnChance;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -261,7 +268,9 @@ public class ConfigHandler
         category = "Utility";
         npcStats.addCustomCategoryComment(category, "NPC Utility Stats");
         aiSearchRange = npcStats.getInt("AI Search Range", category, 32, 8, 256, "The Radius in which AIs search for Things");
+        dwarfMineRange = npcStats.getInt("Dwarf Mine Range", category, 64, 16, 128, "How far away of a Dwarf Base Marker a Dwarf can mine");
         dwarfInventorySlots = npcStats.getInt("Dwarf Inventory Size", category, 3, 1, 30, "Amount of Stacks a Dwarf can carry");
+        showAISearchParticles = npcStats.getBoolean("AI Search Particles", category, false, "Visualizes the current action of AIs");
 
         npcStats.save();
     }
@@ -308,6 +317,15 @@ public class ConfigHandler
         demonSummonCost = blocks.getInt("Demon Summon Costs", category, 100, 0, 10000, "Mana Costs to summon the Demon");
         demonSummonXP = blocks.getInt("Demon Summon XP", category, 100, 0, 10000, "Skill XP gained by summoning the Demon");
         requireDemonStructure = blocks.getBoolean("Require Demon Summoning Structure", category, true, "Require a Structure around the Demon Stone to Summon the Demon");
+
+        category = "Magic Light";
+        blocks.addCustomCategoryComment(category, "Magic Light");
+        magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
+
+        category = "Dwarf Base Marker";
+        blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
+        dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
+        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
 
         blocks.save();
     }
