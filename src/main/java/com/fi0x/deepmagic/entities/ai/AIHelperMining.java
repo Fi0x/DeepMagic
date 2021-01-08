@@ -7,10 +7,7 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockStone;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
@@ -30,8 +27,8 @@ public class AIHelperMining
         mineableBlocks = new ArrayList<>();
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
-        mineableBlocks.add(Blocks.GRASS.getDefaultState());
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL));
+        mineableBlocks.add(Blocks.GRASS.getDefaultState());
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE));
@@ -167,15 +164,19 @@ public class AIHelperMining
                 break;
         }
 
-        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null) return false;
-        if(world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
-        if(world.getBlockState(rightBlock).getBlock() == Blocks.AIR && world.getBlockState(rightNext).getBlock() == Blocks.AIR) return false;
-        if(world.getBlockState(leftBlock).getBlock() == Blocks.AIR && world.getBlockState(leftNext).getBlock() == Blocks.AIR) return false;
+        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null || world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
+        if(world.getBlockState(rightBlock).getCollisionBoundingBox(world, rightBlock) == null && world.getBlockState(rightNext).getCollisionBoundingBox(world, rightNext) == null) return false;
+        if(world.getBlockState(leftBlock).getCollisionBoundingBox(world, leftBlock) == null && world.getBlockState(leftNext).getCollisionBoundingBox(world, leftNext) == null) return false;
 
-        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
         boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
-        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
         boolean upAir = world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null;
+        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
+        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
+
+        Block b = world.getBlockState(pos).getBlock();
+        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
+        b = world.getBlockState(pos.up()).getBlock();
+        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
 
         if(downBlock && upAir) return true;
         if(downBlock && upBlock) return true;
