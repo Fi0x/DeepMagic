@@ -219,11 +219,12 @@ public class EntityAIMining extends EntityAIBase
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
 
-        ItemStack dropppedItemStack;
-        if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
-        else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+        ItemStack droppedItemStack;
+        if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
+        else if(block == Blocks.STONE) droppedItemStack = new ItemStack(Blocks.COBBLESTONE);
+        else droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
 
-        if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty())
+        if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, droppedItemStack, false).isEmpty())
         {
             if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST)
             {
