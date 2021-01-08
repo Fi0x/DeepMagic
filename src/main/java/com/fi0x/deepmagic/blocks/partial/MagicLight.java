@@ -82,7 +82,7 @@ public class MagicLight extends BlockBase
             double y = pos.getY() + (i % 6 == 0 ? 0.4 : (i % 6 == 1 ? 0.6 : (0.4 + (Math.random() * 0.2))));
             double z = pos.getZ() + (i % 6 == 4 ? 0.4 : (i % 6 == 5 ? 0.6 : (0.4 + (Math.random() * 0.2))));
 
-            ParticleSpawner.spawnParticle(ParticleEnum.MAGIC_LIGHT, x, y, z, 0, 0, 0, true, 32);
+            ParticleSpawner.spawnParticle(ParticleEnum.MAGIC_LIGHT, x, y, z, 0, 0, 0, rand.nextDouble() * 2, true, 32);
         }
     }
     @Nonnull

@@ -94,6 +94,7 @@ public class ConfigHandler
     //NPC Utility
     public static int aiSearchRange;
     public static int dwarfInventorySlots;
+    public static boolean showAISearchParticles;
 
     //Player Mana
     public static int baseMana;
@@ -267,6 +268,7 @@ public class ConfigHandler
         npcStats.addCustomCategoryComment(category, "NPC Utility Stats");
         aiSearchRange = npcStats.getInt("AI Search Range", category, 32, 8, 256, "The Radius in which AIs search for Things");
         dwarfInventorySlots = npcStats.getInt("Dwarf Inventory Size", category, 3, 1, 30, "Amount of Stacks a Dwarf can carry");
+        showAISearchParticles = npcStats.getBoolean("AI Search Particles", category, false, "Visualizes the current action of AIs");
 
         npcStats.save();
     }

@@ -58,16 +58,15 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public boolean shouldExecute()
     {
-        if (this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
+        if(this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
+
+        if(!AIHelperMining.hasHomePosition(world, entity)) return false;
         return entity.posY < ConfigHandler.dwarfMaxMiningHeight;
     }
-
     @Override
     public void startExecuting()
     {
-        chestPos = AIHelperMining.findChest(world, entity.getPosition());
-        if(chestPos != null) entity.homePos = entity.getPosition();
-        else if (entity.homePos != null) chestPos = AIHelperMining.findChest(world, entity.homePos);
+        chestPos = AIHelperMining.findChest(world, entity.getPosition(), entity.homePos);
 
         EnumFacing direction = EnumFacing.NORTH;
         int rand = (int) (Math.random() * 4);
@@ -91,76 +90,22 @@ public class EntityAIMining extends EntityAIBase
 
         getMiningBlocks(startPosition, destination);
     }
-
     @Override
     public boolean shouldContinueExecuting()
     {
         if(entity.getNavigator().noPath())
         {
-            if(chestPos != null && entity.getDistanceSq(chestPos) < 64)
-            {
-                inventoryToChest();
-                searchChest = false;
-            }
-            if(searchChest && chestPos != null)
-            {
-                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-                if(entity.getNavigator().noPath()) searchChest = false;
-                return true;
-            }
+            inventoryToChest();
+            if(searchChest) searchAndGoToChest();
+
             if(digDelay == 0)
             {
-                if(!miningBlocks.isEmpty() && entity.getDistanceSq(miningBlocks.get(0)) < 64)
-                {
-                    while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
-                    {
-                        BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), entity.posY - 1, miningBlocks.get(0).getZ());
-                        if(world.getBlockState(floor).getBlock() == Blocks.AIR) break;
-                        miningBlocks.remove(0);
-                    }
-                    if(miningBlocks.isEmpty()) return false;
-
-                    if(!digAtBlockPos(miningBlocks.get(0))) return false;
-                    if(miningBlocks.isEmpty()) return true;
-                    if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-                    if(world.getLightBrightness(entity.getPosition()) == 0) AIHelperMining.placeLightAt(world, entity.getPosition());
-                    digDelay = 20;
-                } else if(!miningBlocks.isEmpty())
-                {
-                    entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
-                    return !entity.getNavigator().noPath();
-                }
+                return tryToMine();
             } else digDelay--;
         }
         return true;
     }
 
-    protected boolean digAtBlockPos(BlockPos pos)
-    {
-        BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
-        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());
-        Block block = world.getBlockState(pos).getBlock();
-
-        if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
-
-        ItemStack dropppedItemStack;
-        if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
-        else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
-
-        if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty())
-        {
-            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST)
-            {
-                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-                searchChest = true;
-                miningBlocks.clear();
-                return true;
-            } else return false;
-        }
-
-        world.setBlockToAir(pos);
-        return true;
-    }
     protected void getMiningBlocks(BlockPos start, BlockPos end)
     {
         int xDifference = 0;
@@ -191,11 +136,16 @@ public class EntityAIMining extends EntityAIBase
     }
     protected void inventoryToChest()
     {
+        if(chestPos == null || entity.getDistanceSq(chestPos) > 64) return;
+        searchChest = false;
+
         TileEntityChest te = null;
         try
         {
             te = (TileEntityChest) world.getTileEntity(chestPos);
-        } catch (Exception ignored) { }
+        } catch(Exception ignored)
+        {
+        }
         if(te == null)
         {
             chestPos = null;
@@ -208,5 +158,66 @@ public class EntityAIMining extends EntityAIBase
         {
             if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
+    }
+    protected void searchAndGoToChest()
+    {
+        if(chestPos != null)
+        {
+            entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
+            if(entity.getNavigator().noPath()) searchChest = false;
+        }
+    }
+    protected boolean tryToMine()
+    {
+        if(miningBlocks.isEmpty()) return true;
+
+        if(entity.getDistanceSq(miningBlocks.get(0)) < 64)
+        {
+            while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
+            {
+                BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), entity.posY - 1, miningBlocks.get(0).getZ());
+                if(world.getBlockState(floor).getBlock() == Blocks.AIR) break;
+                miningBlocks.remove(0);
+            }
+            if(miningBlocks.isEmpty()) return false;
+
+            if(!digAtBlockPos(miningBlocks.get(0))) return false;
+            if(miningBlocks.isEmpty()) return true;
+            if(entity.getDistanceSq(entity.homePos) > 4096) searchChest = true;
+            if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
+            if(world.getLightBrightness(entity.getPosition()) == 0) AIHelperMining.placeLightAt(world, entity.getPosition());
+            digDelay = 20;
+        } else
+        {
+            entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
+            return !entity.getNavigator().noPath();
+        }
+        return true;
+    }
+    protected boolean digAtBlockPos(BlockPos pos)
+    {
+        BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
+        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());
+        Block block = world.getBlockState(pos).getBlock();
+
+        if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
+
+        ItemStack dropppedItemStack;
+        if(block.getDefaultState() == Blocks.LAPIS_ORE.getDefaultState()) dropppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
+        else dropppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+
+        if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, dropppedItemStack, false).isEmpty())
+        {
+            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST)
+            {
+                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
+                searchChest = true;
+                miningBlocks.clear();
+                return true;
+            } else return false;
+        }
+
+        world.setBlockToAir(pos);
+        return true;
     }
 }

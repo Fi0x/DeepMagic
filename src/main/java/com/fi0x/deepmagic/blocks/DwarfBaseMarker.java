@@ -20,8 +20,8 @@ public class DwarfBaseMarker extends BlockBase
     {
         super(name, material);
         setSoundType(SoundType.STONE);
-        setHardness(5.0F);
-        setResistance(5.0F);
+        setHardness(10.0F);
+        setResistance(10.0F);
         setHarvestLevel("pickaxe", 2);
         setLightLevel(0.5F);
         setTickRandomly(true);
