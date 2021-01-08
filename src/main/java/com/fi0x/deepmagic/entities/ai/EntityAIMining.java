@@ -8,9 +8,12 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -34,6 +37,7 @@ public class EntityAIMining extends EntityAIBase
     protected BlockPos chestPos;
     private int digDelay;
     private boolean searchChest;
+    private boolean goHome;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -66,7 +70,7 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public void startExecuting()
     {
-        chestPos = AIHelperMining.findChest(world, entity.getPosition(), entity.homePos);
+        chestPos = AIHelperMining.findChest(world, entity.homePos, entity.getPosition());
 
         EnumFacing direction = EnumFacing.NORTH;
         int rand = (int) (Math.random() * 4);
@@ -89,12 +93,18 @@ public class EntityAIMining extends EntityAIBase
         digDelay = 0;
 
         getMiningBlocks(startPosition, destination);
+        goHome = false;
     }
     @Override
     public boolean shouldContinueExecuting()
     {
         if(entity.getNavigator().noPath())
         {
+            if(goHome)
+            {
+                entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
+                return !entity.getNavigator().noPath();
+            }
             inventoryToChest();
             if(searchChest) searchAndGoToChest();
 
@@ -161,6 +171,7 @@ public class EntityAIMining extends EntityAIBase
     }
     protected void searchAndGoToChest()
     {
+        if(chestPos == null) chestPos = AIHelperMining.findChest(world, entity.homePos, entity.getPosition());
         if(chestPos != null)
         {
             entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
@@ -182,8 +193,14 @@ public class EntityAIMining extends EntityAIBase
             if(miningBlocks.isEmpty()) return false;
 
             if(!digAtBlockPos(miningBlocks.get(0))) return false;
-            if(miningBlocks.isEmpty()) return true;
-            if(entity.getDistanceSq(entity.homePos) > 4096) searchChest = true;
+            if(!entity.getNavigator().noPath()) return true;
+            if(entity.getDistanceSq(entity.homePos) > 1024)
+            {
+                entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
+                miningBlocks.clear();
+                goHome = true;
+                return true;
+            }
             if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
             if(world.getLightBrightness(entity.getPosition()) == 0) AIHelperMining.placeLightAt(world, entity.getPosition());
             digDelay = 20;
@@ -212,11 +229,12 @@ public class EntityAIMining extends EntityAIBase
             {
                 entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
                 searchChest = true;
-                miningBlocks.clear();
                 return true;
             } else return false;
         }
 
+        SoundEvent sound = SoundEvents.BLOCK_STONE_BREAK;
+        world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
         world.setBlockToAir(pos);
         return true;
     }

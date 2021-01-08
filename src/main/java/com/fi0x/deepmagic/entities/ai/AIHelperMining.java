@@ -198,6 +198,7 @@ public class AIHelperMining
         if(positions == null || positions.length == 0) return null;
         for(BlockPos pos : positions)
         {
+            if(pos == null) continue;
             for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
             {
                 for(int y = -range / 4; y <= range / 4; y++)
