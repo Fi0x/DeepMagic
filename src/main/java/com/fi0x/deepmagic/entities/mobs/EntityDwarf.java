@@ -116,9 +116,9 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         compound.setTag("ItemStackHandler", itemHandler.serializeNBT());
-        compound.setInteger("homex", homePos.getX());
-        compound.setInteger("homey", homePos.getY());
-        compound.setInteger("homez", homePos.getZ());
+        compound.setInteger("homex", (homePos == null ? 0 : homePos.getX()));
+        compound.setInteger("homey", (homePos == null ? 0 : homePos.getY()));
+        compound.setInteger("homez", (homePos == null ? 0 : homePos.getZ()));
         return super.writeToNBT(compound);
     }
     @Override
@@ -128,7 +128,8 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         int x = compound.getInteger("homex");
         int y = compound.getInteger("homey");
         int z = compound.getInteger("homez");
-        homePos = new BlockPos(x, y, z);
+        if(x == 0 && y == 0 && z == 0) homePos = null;
+        else homePos = new BlockPos(x, y, z);
         super.readFromNBT(compound);
     }
     @Nullable
