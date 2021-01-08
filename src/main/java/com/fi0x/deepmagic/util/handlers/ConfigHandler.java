@@ -93,6 +93,7 @@ public class ConfigHandler
     public static int damageRockTroll;
     //NPC Utility
     public static int aiSearchRange;
+    public static int dwarfMineRange;
     public static int dwarfInventorySlots;
     public static boolean showAISearchParticles;
 
@@ -267,6 +268,7 @@ public class ConfigHandler
         category = "Utility";
         npcStats.addCustomCategoryComment(category, "NPC Utility Stats");
         aiSearchRange = npcStats.getInt("AI Search Range", category, 32, 8, 256, "The Radius in which AIs search for Things");
+        dwarfMineRange = npcStats.getInt("Dwarf Mine Range", category, 64, 16, 128, "How far away of a Dwarf Base Marker a Dwarf can mine");
         dwarfInventorySlots = npcStats.getInt("Dwarf Inventory Size", category, 3, 1, 30, "Amount of Stacks a Dwarf can carry");
         showAISearchParticles = npcStats.getBoolean("AI Search Particles", category, false, "Visualizes the current action of AIs");
 

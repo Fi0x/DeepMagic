@@ -185,10 +185,17 @@ public class AIHelperMining
     {
         int distance = rand.nextInt(ConfigHandler.aiSearchRange / 2) + ConfigHandler.aiSearchRange / 2;
 
-        if(direction == EnumFacing.NORTH) return start.add(0, 0, -distance);
-        if(direction == EnumFacing.EAST) return start.add(distance, 0, 0);
-        if(direction == EnumFacing.SOUTH) return start.add(0, 0, distance);
-        if(direction == EnumFacing.WEST) return start.add(-distance, 0, 0);
+        switch(direction)
+        {
+            case NORTH:
+                return start.add(0, 0, -distance);
+            case EAST:
+                return start.add(distance, 0, 0);
+            case SOUTH:
+                return start.add(0, 0, distance);
+            case WEST:
+                return start.add(-distance, 0, 0);
+        }
 
         return start;
     }

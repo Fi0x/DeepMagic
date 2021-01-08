@@ -194,7 +194,7 @@ public class EntityAIMining extends EntityAIBase
 
             if(!digAtBlockPos(miningBlocks.get(0))) return false;
             if(!entity.getNavigator().noPath()) return true;
-            if(entity.getDistanceSq(entity.homePos) > 1024)
+            if(entity.getDistanceSq(entity.homePos) > ConfigHandler.dwarfMineRange * ConfigHandler.dwarfMineRange)
             {
                 entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
                 miningBlocks.clear();

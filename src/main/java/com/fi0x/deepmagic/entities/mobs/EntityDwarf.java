@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIMining;
+import com.fi0x.deepmagic.entities.ai.navigation.DwarfNavigator;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.LootTableHandler;
 import com.fi0x.deepmagic.util.handlers.SoundsHandler;
@@ -14,6 +15,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -58,7 +60,6 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
     }
-
     @Override
     protected void applyEntityAttributes()
     {
@@ -83,7 +84,6 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     {
         return SoundsHandler.ENTITY_DWARF_AMBIENT;
     }
-
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn)
     {
@@ -145,6 +145,13 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
     }
+
+    @Nonnull
+    @Override
+    protected PathNavigate createNavigator(@Nonnull World worldIn)
+    {
+        return new DwarfNavigator(this, worldIn);
+    }
     @Override
     public boolean attackEntityAsMob(@Nonnull Entity entityIn)
     {
@@ -163,7 +170,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         {
             if(i > 0 && entityIn instanceof EntityLivingBase)
             {
-                ((EntityLivingBase) entityIn).knockBack(this, (float) i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double) (-MathHelper.cos(this.rotationYaw * 0.017453292F)));
+                ((EntityLivingBase) entityIn).knockBack(this, (float) i * 0.5F, MathHelper.sin(this.rotationYaw * 0.017453292F), -MathHelper.cos(this.rotationYaw * 0.017453292F));
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
