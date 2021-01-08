@@ -41,13 +41,10 @@ public class DwarfBaseMarker extends BlockBase
             worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
-
     @Override
-    public void randomTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random random)
+    public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, Random rand)
     {
-        if(random.nextInt(15) + 1 > ConfigHandler.dwarfMarkerSpawnChance) return;
-
-        if(random.nextInt(128) == 0)
+        if(rand.nextInt(63) + 1 <= ConfigHandler.dwarfMarkerSpawnChance)
         {
             int tries = 0;
             int x = pos.getX();
@@ -63,7 +60,7 @@ public class DwarfBaseMarker extends BlockBase
             }
 
             EntityDwarf dwarf = new EntityDwarf(worldIn);
-            dwarf.setLocationAndAngles(x, y, z, 0, 0);
+            dwarf.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
             worldIn.spawnEntity(dwarf);
         }
     }
