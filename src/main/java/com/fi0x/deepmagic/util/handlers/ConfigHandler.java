@@ -118,6 +118,9 @@ public class ConfigHandler
     public static boolean requireDemonStructure;
     //Magic Light
     public static int magicLightParticles;
+    //Dwarf Base Marker
+    public static int dwarfBaseMarkerParticles;
+    public static int dwarfMarkerSpawnChance;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -314,6 +317,11 @@ public class ConfigHandler
         category = "Magic Light";
         blocks.addCustomCategoryComment(category, "Magic Light");
         magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
+
+        category = "Dwarf Base Marker";
+        blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
+        dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
+        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
 
         blocks.save();
     }
