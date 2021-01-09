@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaRelay;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -14,6 +15,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -53,7 +56,7 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
     {
-        return null;//TODO
+        return new TileEntityManaRelay();
     }
     @Override
     public boolean isOpaqueCube(@Nonnull IBlockState state)
@@ -65,7 +68,7 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
     {
         return false;
     }
-    @Override
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
     {
         //TODO: Add particles
