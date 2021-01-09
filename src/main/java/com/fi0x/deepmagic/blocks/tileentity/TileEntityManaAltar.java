@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
+import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -15,7 +16,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaAltar extends TileEntity implements IInventory, ITickable
+public class TileEntityManaAltar extends TileEntity implements IInventory, ITickable, IManaTileEntity
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;

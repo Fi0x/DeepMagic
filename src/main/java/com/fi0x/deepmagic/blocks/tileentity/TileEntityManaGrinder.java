@@ -3,7 +3,7 @@ package com.fi0x.deepmagic.blocks.tileentity;
 import com.fi0x.deepmagic.blocks.mana.ManaGrinder;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
-import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.recipes.ManaGrinderRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,20 +17,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGrinder extends TileEntity implements IInventory, ITickable
+public class TileEntityManaGrinder extends TileEntity implements IInventory, ITickable, IManaTileEntity
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
     private String customName;
 
-    private BlockPos linkedAltarPos;
-    private TileEntityManaAltar linkedAltar;
     private int grindProgress;
     private int totalGrindTime;
     private int storedMana;
@@ -170,10 +167,6 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
                 ManaGrinder.setState(isRunning(), world, pos);
                 dirty = true;
             }
-            if(ConfigHandler.manaMachineManaCapacity - storedMana >= 10)
-            {
-                if(getManaFromAltar()) dirty = true;
-            }
         }
         if(dirty) markDirty();
     }
@@ -198,14 +191,6 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
-        if(linkedAltarPos != null)
-        {
-            compound.setInteger("altarX", linkedAltarPos.getX());
-            compound.setInteger("altarY", linkedAltarPos.getY());
-            compound.setInteger("altarZ", linkedAltarPos.getZ());
-            compound.setBoolean("linked", true);
-        } else compound.setBoolean("linked", false);
-
         compound.setInteger("grindProgress", grindProgress);
         compound.setInteger("storedMana", storedMana);
         ItemStackHelper.saveAllItems(compound, inventory);
@@ -215,14 +200,6 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        if(compound.hasKey("linked") && compound.getBoolean("linked"))
-        {
-            int x = compound.getInteger("altarX");
-            int y = compound.getInteger("altarY");
-            int z = compound.getInteger("altarZ");
-            linkedAltarPos = new BlockPos(x, y, z);
-        }
-
         grindProgress = compound.getInteger("grindProgress");
         totalGrindTime = getItemGrindTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
@@ -300,23 +277,5 @@ public class TileEntityManaGrinder extends TileEntity implements IInventory, ITi
 
             input.shrink(1);
         }
-    }
-    public void setLinkedAltarPos(BlockPos blockPos)
-    {
-        linkedAltarPos = blockPos;
-        if(linkedAltarPos == null) linkedAltar = null;
-        else linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
-    }
-    private boolean getManaFromAltar()
-    {
-        if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
-        linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
-
-        assert linkedAltar != null;
-        if(linkedAltar.getStoredMana() > 10)
-        {
-            if(linkedAltar.removeManaFromStorage(10)) storedMana += 10;
-        }
-        return true;
     }
 }

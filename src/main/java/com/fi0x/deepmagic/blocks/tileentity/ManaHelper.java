@@ -1,21 +1,47 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.blocks.mana.ManaAltar;
-import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.util.IManaTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 class ManaHelper
 {
-    public static boolean isAltarValid(World world, BlockPos tePos, BlockPos linkedAltarPos, TileEntityManaAltar linkedAltar)
+    private static boolean isManaTargetValid(World world, BlockPos tePos, BlockPos targetPos, TileEntity te, int senderRange)
     {
-        if(linkedAltarPos == null) return false;
-        if(!(world.getBlockState(linkedAltarPos).getBlock() instanceof ManaAltar)) return false;
-        if(linkedAltar == null)
+        if(targetPos == null) return false;
+        if(!(world.getBlockState(targetPos).getBlock() instanceof IManaTileEntity)) return false;
+        if(te == null)
         {
-            linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
-            if(linkedAltar == null) return false;
+            te = world.getTileEntity(targetPos);
+            if(te == null) return false;
         }
-        return (linkedAltar.getDistanceSq(tePos.getX(), tePos.getY(), tePos.getZ()) < ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange);
+        return (te.getDistanceSq(tePos.getX(), tePos.getY(), tePos.getZ()) < senderRange * senderRange);
+    }
+
+    /**
+     * @param world
+     * @param sourcePos
+     * @param targetPos
+     * @param targetTE
+     * @param range
+     * @param manaAmount
+     * @return the amount that was sent to the target
+     */
+    public static double sendMana(World world, BlockPos sourcePos, BlockPos targetPos, TileEntity targetTE, int range, double manaAmount)
+    {
+        if(!isManaTargetValid(world, sourcePos, targetPos, targetTE, range)) return 0;
+
+        targetTE = world.getTileEntity(targetPos);
+        assert targetTE != null;
+        double spaceInTarget = ((IManaTileEntity) targetTE).getSpaceForMana();
+        if(spaceInTarget > manaAmount)
+        {
+            if(((IManaTileEntity) targetTE).addManaToStorage(manaAmount)) return manaAmount;
+        } else
+        {
+            if(((IManaTileEntity) targetTE).addManaToStorage(spaceInTarget)) return spaceInTarget;
+        }
+        return 0;
     }
 }

@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.blocks.tileentity;
 import com.fi0x.deepmagic.blocks.mana.ManaGeneratorInsanity;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
+import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,13 +24,13 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaGeneratorInsanity extends TileEntity implements IInventory, ITickable
+public class TileEntityManaGeneratorInsanity extends TileEntity implements IInventory, ITickable, IManaTileEntity
 {
+    private BlockPos manaTargetPos;
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
 
-    private BlockPos linkedAltarPos;
-    private TileEntityManaAltar linkedAltar;
+    private TileEntity linkedTE;
     private int burnTime;
     private int currentBurnTime;
     private int storedMana;
@@ -99,25 +100,31 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     @Override
     public int getField(int id)
     {
-        switch (id)
+        switch(id)
         {
-            case 0: return burnTime;
-            case 1: return currentBurnTime;
-            case 2: return storedMana;
+            case 0:
+                return burnTime;
+            case 1:
+                return currentBurnTime;
+            case 2:
+                return storedMana;
         }
         return 0;
     }
     @Override
     public void setField(int id, int value)
     {
-        switch (id)
+        switch(id)
         {
-            case 0: burnTime = value;
-            break;
-            case 1: currentBurnTime = value;
-            break;
-            case 2: storedMana = value;
-            break;
+            case 0:
+                burnTime = value;
+                break;
+            case 1:
+                currentBurnTime = value;
+                break;
+            case 2:
+                storedMana = value;
+                break;
         }
     }
     @Override
@@ -159,7 +166,12 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
         if(isRunning() != wasRunning) ManaGeneratorInsanity.setState(isRunning(), world, pos);
         if(storedMana >= 100)
         {
-            if(sendManaToAltar()) dirty = true;
+            double sent = ManaHelper.sendMana(world, pos, manaTargetPos, linkedTE, ConfigHandler.manaBlockTransferRange, storedMana);
+            if(sent > 0)
+            {
+                storedMana -= (int) sent;
+                dirty = true;
+            }
         }
         if(dirty) markDirty();
     }
@@ -184,13 +196,14 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
-        if(linkedAltarPos != null)
+        if(manaTargetPos != null)
         {
-            compound.setInteger("altarX", linkedAltarPos.getX());
-            compound.setInteger("altarY", linkedAltarPos.getY());
-            compound.setInteger("altarZ", linkedAltarPos.getZ());
-            compound.setBoolean("linked", true);
-        } else compound.setBoolean("linked", false);
+            NBTTagCompound position = new NBTTagCompound();
+            position.setInteger("x", manaTargetPos.getX());
+            position.setInteger("y", manaTargetPos.getY());
+            position.setInteger("z", manaTargetPos.getZ());
+            compound.setTag("target", position);
+        }
 
         compound.setInteger("burnTime", burnTime);
         compound.setInteger("storedMana", storedMana);
@@ -201,12 +214,13 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        if(compound.hasKey("linked") && compound.getBoolean("linked"))
+        if(compound.hasKey("target"))
         {
-            int x = compound.getInteger("altarX");
-            int y = compound.getInteger("altarY");
-            int z = compound.getInteger("altarZ");
-            linkedAltarPos = new BlockPos(x, y, z);
+            NBTTagCompound position = compound.getCompoundTag("target");
+            int x = position.getInteger("x");
+            int y = position.getInteger("y");
+            int z = position.getInteger("z");
+            manaTargetPos = new BlockPos(x, y, z);
         }
 
         burnTime = compound.getInteger("burnTime");
@@ -252,26 +266,10 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     {
         return getItemBurnTime(fuel) > 0;
     }
-    public void setLinkedAltarPos(BlockPos blockPos)
+    public void setManaTargetPos(BlockPos blockPos)
     {
-        linkedAltarPos = blockPos;
-        if(linkedAltarPos == null) linkedAltar = null;
-        else linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
-    }
-    private boolean sendManaToAltar()
-    {
-        if(!ManaHelper.isAltarValid(world, pos, linkedAltarPos, linkedAltar)) return false;
-        linkedAltar = (TileEntityManaAltar) world.getTileEntity(linkedAltarPos);
-
-        assert linkedAltar != null;
-        int spaceInAltar = (int) linkedAltar.getSpaceInAltar();
-        if(spaceInAltar > storedMana)
-        {
-            if(linkedAltar.addManaToStorage(storedMana)) storedMana = 0;
-        } else
-        {
-            if(linkedAltar.addManaToStorage(spaceInAltar)) storedMana -= spaceInAltar;
-        }
-        return true;
+        manaTargetPos = blockPos;
+        if(manaTargetPos == null) linkedTE = null;
+        else linkedTE = world.getTileEntity(manaTargetPos);
     }
 }

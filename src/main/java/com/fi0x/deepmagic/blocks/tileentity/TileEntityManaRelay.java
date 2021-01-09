@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
+import com.fi0x.deepmagic.util.IManaTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -10,9 +11,8 @@ import net.minecraftforge.common.util.Constants;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
-public class TileEntityManaRelay extends TileEntity implements ITickable
+public class TileEntityManaRelay extends TileEntity implements ITickable, IManaTileEntity
 {
-    private final ArrayList<BlockPos> manaSources = new ArrayList<>();
     private final ArrayList<BlockPos> manaTargets = new ArrayList<>();
 
     @Override
@@ -28,17 +28,6 @@ public class TileEntityManaRelay extends TileEntity implements ITickable
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
-        NBTTagList sources = new NBTTagList();
-        for(BlockPos pos : manaSources)
-        {
-            NBTTagCompound position = new NBTTagCompound();
-            position.setInteger("x", pos.getX());
-            position.setInteger("y", pos.getY());
-            position.setInteger("z", pos.getZ());
-            sources.appendTag(position);
-        }
-        compound.setTag("sources", sources);
-
         NBTTagList targets = new NBTTagList();
         for(BlockPos pos : manaTargets)
         {
@@ -55,22 +44,11 @@ public class TileEntityManaRelay extends TileEntity implements ITickable
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        manaSources.clear();
-        NBTTagList sourceList = compound.getTagList("sources", Constants.NBT.TAG_COMPOUND);
-        for(int i = 0; i < sourceList.tagCount(); i++)
-        {
-            NBTTagCompound position = sourceList.getCompoundTagAt(i);
-            int x = position.getInteger("x");
-            int y = position.getInteger("y");
-            int z = position.getInteger("z");
-            manaSources.add(new BlockPos(x, y, z));
-        }
-
         manaTargets.clear();
         NBTTagList targetList = compound.getTagList("targets", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < targetList.tagCount(); i++)
         {
-            NBTTagCompound position = sourceList.getCompoundTagAt(i);
+            NBTTagCompound position = targetList.getCompoundTagAt(i);
             int x = position.getInteger("x");
             int y = position.getInteger("y");
             int z = position.getInteger("z");
@@ -80,15 +58,9 @@ public class TileEntityManaRelay extends TileEntity implements ITickable
         super.readFromNBT(compound);
     }
 
-    public boolean addSource(BlockPos pos)
+    public boolean addOrRemoveTarget(BlockPos pos)
     {
-        if(manaSources.contains(pos)) return false;
-        manaSources.add(pos);
-        return true;
-    }
-    public boolean addTarget(BlockPos pos)
-    {
-        if(manaTargets.contains(pos)) return false;
+        if(manaTargets.remove(pos)) return false;
         manaTargets.add(pos);
         return true;
     }
