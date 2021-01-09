@@ -23,8 +23,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -64,19 +62,7 @@ public class ManaGrinder extends BlockBase implements ITileEntityProvider
 
                 TileEntityManaGrinder te = (TileEntityManaGrinder) worldIn.getTileEntity(pos);
                 assert te != null;
-
-                if(compound.hasKey("linked") && compound.getBoolean("linked"))
-                {
-                    int x = compound.getInteger("x");
-                    int y = compound.getInteger("y");
-                    int z = compound.getInteger("z");
-                    te.setLinkedAltarPos(new BlockPos(x, y, z));
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                } else if(compound.hasKey("linked"))
-                {
-                    te.setLinkedAltarPos(null);
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Grinder"));
-                }
+                //TODO: Add location to mana linker
             }
             else playerIn.openGui(Main.instance, ConfigHandler.guiManaGrinderID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

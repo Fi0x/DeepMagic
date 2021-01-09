@@ -24,8 +24,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -68,21 +66,8 @@ public class ManaFurnace extends BlockBase implements ITileEntityProvider
 
                 TileEntityManaFurnace te = (TileEntityManaFurnace) worldIn.getTileEntity(pos);
                 assert te != null;
-
-                if(compound.hasKey("linked") && compound.getBoolean("linked"))
-                {
-                    int x = compound.getInteger("x");
-                    int y = compound.getInteger("y");
-                    int z = compound.getInteger("z");
-                    te.setLinkedAltarPos(new BlockPos(x, y, z));
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                } else if(compound.hasKey("linked"))
-                {
-                    te.setLinkedAltarPos(null);
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Furnace"));
-                }
-            }
-            else playerIn.openGui(Main.instance, ConfigHandler.guiManaFurnaceID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                //TODO: Add location to mana linker
+            } else playerIn.openGui(Main.instance, ConfigHandler.guiManaFurnaceID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -201,17 +186,17 @@ public class ManaFurnace extends BlockBase implements ITileEntityProvider
         if(((TileEntityManaFurnace) Objects.requireNonNull(worldIn.getTileEntity(pos))).isRunning())
         {
             EnumFacing enumfacing = stateIn.getValue(FACING);
-            double d0 = (double)pos.getX() + 0.5D;
-            double d1 = (double)pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
-            double d2 = (double)pos.getZ() + 0.5D;
+            double d0 = (double) pos.getX() + 0.5D;
+            double d1 = (double) pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
+            double d2 = (double) pos.getZ() + 0.5D;
             double d4 = rand.nextDouble() * 0.6D - 0.3D;
 
-            if (rand.nextDouble() < 0.1D)
+            if(rand.nextDouble() < 0.1D)
             {
-                worldIn.playSound((double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                worldIn.playSound((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
-            switch (enumfacing)
+            switch(enumfacing)
             {
                 case WEST:
                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
