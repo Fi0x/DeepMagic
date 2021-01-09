@@ -3,5 +3,10 @@ package com.fi0x.deepmagic.util;
 public interface IManaTileEntity
 {
     double getSpaceForMana();
-    boolean addManaToStorage(double amount);
+
+    /**
+     * @param amount
+     * @return the amount of mana that could not be sent
+     */
+    double addManaToStorage(double amount);
 }

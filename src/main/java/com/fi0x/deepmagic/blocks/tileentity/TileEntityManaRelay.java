@@ -1,29 +1,23 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.util.IManaTileEntity;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class TileEntityManaRelay extends TileEntity implements ITickable, IManaTileEntity
+public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
 {
     private final ArrayList<BlockPos> manaTargets = new ArrayList<>();
+    private double manaBuffer;
+    private double storedMana;
 
-    @Override
-    public void update()
-    {
-        if(world.isRemote) return;
-
-        boolean dirty = false;
-
-        if(dirty) markDirty();
-    }
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
@@ -38,6 +32,9 @@ public class TileEntityManaRelay extends TileEntity implements ITickable, IManaT
             targets.appendTag(position);
         }
         compound.setTag("targets", targets);
+
+        compound.setDouble("buffer", manaBuffer);
+        compound.setDouble("stored", storedMana);
 
         return super.writeToNBT(compound);
     }
@@ -55,6 +52,9 @@ public class TileEntityManaRelay extends TileEntity implements ITickable, IManaT
             manaTargets.add(new BlockPos(x, y, z));
         }
 
+        manaBuffer = compound.getDouble("buffer");
+        storedMana = compound.getDouble("stored");
+
         super.readFromNBT(compound);
     }
 
@@ -63,5 +63,30 @@ public class TileEntityManaRelay extends TileEntity implements ITickable, IManaT
         if(manaTargets.remove(pos)) return false;
         manaTargets.add(pos);
         return true;
+    }
+    @Override
+    public double getSpaceForMana()
+    {
+        manaBuffer = 0;
+        for(BlockPos pos : manaTargets)
+        {
+            manaBuffer += ((IManaTileEntity) Objects.requireNonNull(world.getTileEntity(pos))).getSpaceForMana();
+        }
+        return manaBuffer;
+    }
+    @Override
+    public double addManaToStorage(double amount)
+    {
+        storedMana += amount;
+
+        for(int i = 0; i < manaTargets.size(); i++)
+        {
+            TileEntity te = world.getTileEntity(manaTargets.get(i));
+            int remainingTargets = manaTargets.size() - i;
+            storedMana -= ManaHelper.sendMana(world, this.pos, manaTargets.get(i), te, ConfigHandler.manaBlockTransferRange, storedMana / remainingTargets);
+        }
+        double ret = storedMana;
+        storedMana = 0;
+        return ret > 0 ? ret : 0;
     }
 }

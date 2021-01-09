@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.blocks.tileentity;
 
 import com.fi0x.deepmagic.blocks.mana.ManaFurnace;
 import com.fi0x.deepmagic.util.IManaTileEntity;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -202,6 +203,21 @@ public class TileEntityManaFurnace extends TileEntity implements IInventory, ITi
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
         super.readFromNBT(compound);
     }
+    @Override
+    public double getSpaceForMana()
+    {
+        return ConfigHandler.manaMachineManaCapacity - storedMana;
+    }
+    @Override
+    public double addManaToStorage(double amount)
+    {
+        double ret = amount - (ConfigHandler.manaMachineManaCapacity - storedMana);
+        if(ret > 0) storedMana = ConfigHandler.manaMachineManaCapacity;
+        else storedMana += amount;
+        markDirty();
+        return ret > 0 ? ret : 0;
+    }
+
     public void setCustomName(String customName)
     {
         this.customName = customName;

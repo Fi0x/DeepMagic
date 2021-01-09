@@ -171,6 +171,20 @@ public class TileEntityManaAltar extends TileEntity implements IInventory, ITick
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
         super.readFromNBT(compound);
     }
+    @Override
+    public double getSpaceForMana()
+    {
+        return ConfigHandler.manaAltarCapacity - storedMana;
+    }
+    @Override
+    public double addManaToStorage(double amount)
+    {
+        double ret = amount - (ConfigHandler.manaAltarCapacity - storedMana);
+        if(ret > 0) storedMana = ConfigHandler.manaAltarCapacity;
+        else storedMana += amount;
+        markDirty();
+        return ret > 0 ? ret : 0;
+    }
     public void setCustomName(String customName)
     {
         this.customName = customName;
@@ -190,20 +204,5 @@ public class TileEntityManaAltar extends TileEntity implements IInventory, ITick
     public double getSpaceInAltar()
     {
         return ConfigHandler.manaAltarCapacity - storedMana;
-    }
-    public boolean addManaToStorage(double amount)
-    {
-        if(storedMana + amount > ConfigHandler.manaAltarCapacity && storedMana < ConfigHandler.manaAltarCapacity) storedMana = ConfigHandler.manaAltarCapacity;
-        else if(storedMana + amount <= ConfigHandler.manaAltarCapacity) storedMana += amount;
-        else return false;
-        markDirty();
-        return true;
-    }
-    public boolean removeManaFromStorage(double amount)
-    {
-        if(storedMana - amount < 0) return false;
-        storedMana -= amount;
-        markDirty();
-        return true;
     }
 }

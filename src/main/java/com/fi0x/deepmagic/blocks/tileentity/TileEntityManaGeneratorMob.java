@@ -213,6 +213,21 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
         super.readFromNBT(compound);
     }
+    @Override
+    public double getSpaceForMana()
+    {
+        return ConfigHandler.manaGeneratorManaCapacity - storedMana;
+    }
+    @Override
+    public double addManaToStorage(double amount)
+    {
+        double ret = amount - (ConfigHandler.manaGeneratorManaCapacity - storedMana);
+        if(ret > 0) storedMana = ConfigHandler.manaGeneratorManaCapacity;
+        else storedMana += amount;
+        markDirty();
+        return ret > 0 ? ret : 0;
+    }
+
     public void setCustomName(String customName)
     {
         this.customName = customName;

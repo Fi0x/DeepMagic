@@ -26,7 +26,7 @@ class ManaHelper
      * @param targetTE
      * @param range
      * @param manaAmount
-     * @return the amount that was sent to the target
+     * @return the amount of mana that was sent to the target
      */
     public static double sendMana(World world, BlockPos sourcePos, BlockPos targetPos, TileEntity targetTE, int range, double manaAmount)
     {
@@ -37,11 +37,10 @@ class ManaHelper
         double spaceInTarget = ((IManaTileEntity) targetTE).getSpaceForMana();
         if(spaceInTarget > manaAmount)
         {
-            if(((IManaTileEntity) targetTE).addManaToStorage(manaAmount)) return manaAmount;
+            return manaAmount - ((IManaTileEntity) targetTE).addManaToStorage(manaAmount);
         } else
         {
-            if(((IManaTileEntity) targetTE).addManaToStorage(spaceInTarget)) return spaceInTarget;
+            return spaceInTarget - ((IManaTileEntity) targetTE).addManaToStorage(spaceInTarget);
         }
-        return 0;
     }
 }
