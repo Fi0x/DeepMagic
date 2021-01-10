@@ -3,6 +3,8 @@ package com.fi0x.deepmagic.blocks.mana;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaRelay;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.particlesystem.ParticleEnum;
+import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Random;
 
 public class ManaRelay extends BlockBase implements ITileEntityProvider
@@ -71,6 +74,19 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
     {
-        //TODO: Add particles
+        if(((TileEntityManaRelay) Objects.requireNonNull(worldIn.getTileEntity(pos))).hasTargets())
+        {
+            double x = pos.getX() + (Math.random() * 0.6) + 0.2;
+            double y = pos.getY() + 1 + (Math.random() * 0.2);
+            double z = pos.getZ() + (Math.random() * 0.6) + 0.2;
+
+            ParticleSpawner.spawnParticle(ParticleEnum.MANA_BLOCK, x, y, z, 0, 0, 0, Math.random() + 0.5, false, 16);
+            /*
+            TODO: Fix texture size
+             disable block collisions
+             motion +y
+             rarer
+             */
+        }
     }
 }

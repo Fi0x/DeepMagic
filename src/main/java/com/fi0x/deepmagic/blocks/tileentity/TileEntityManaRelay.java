@@ -64,6 +64,10 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
         manaTargets.add(pos);
         return true;
     }
+    public boolean hasTargets()
+    {
+        return !manaTargets.isEmpty();
+    }
     @Override
     public double getSpaceForMana()
     {
