@@ -305,7 +305,7 @@ public class ConfigHandler
 
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");
-        manaBlockTransferRange = blocks.getInt("Mana Transfer Range", category, 10, 1, 100, "The maximum Distance between Blocks to be abled to transfer Mana");
+        manaBlockTransferRange = blocks.getInt("Mana Transfer Range", category, 10, 1, 100, "The maximum Distance between Blocks to be able to transfer Mana");
         manaGeneratorMobRange = blocks.getInt("Mob Mana Generator Range", category, 5, 1, 100, "The Radius in which Mobs will be damaged to generate Mana");
 
         category = "Insanity Water";

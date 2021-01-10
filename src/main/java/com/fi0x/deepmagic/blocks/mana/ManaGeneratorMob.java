@@ -69,11 +69,11 @@ public class ManaGeneratorMob extends BlockBase implements ITileEntityProvider
                     int x = compound.getInteger("x");
                     int y = compound.getInteger("y");
                     int z = compound.getInteger("z");
-                    te.setLinkedAltarPos(new BlockPos(x, y, z));
+                    te.setManaTargetPos(new BlockPos(x, y, z));
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
                 } else if(compound.hasKey("linked"))
                 {
-                    te.setLinkedAltarPos(null);
+                    te.setManaTargetPos(null);
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Generator"));
                 }
             }
