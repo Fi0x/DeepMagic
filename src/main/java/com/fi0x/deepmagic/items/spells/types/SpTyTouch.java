@@ -15,6 +15,11 @@ public class SpTyTouch implements ISpellType
     public static final String NAME = "type_touch";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

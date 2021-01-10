@@ -14,6 +14,11 @@ public class SpEfAccelerate implements ISpellEffect
     private int speed = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

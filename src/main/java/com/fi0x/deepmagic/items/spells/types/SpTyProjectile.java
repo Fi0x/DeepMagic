@@ -12,6 +12,11 @@ public class SpTyProjectile implements ISpellType
     private double range = 16;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

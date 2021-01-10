@@ -13,6 +13,11 @@ public class SpEfDayNight implements ISpellEffect
     public static final String NAME = "effect_daynight";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

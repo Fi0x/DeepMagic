@@ -8,6 +8,11 @@ public class SpMoPower implements ISpellModifier
     private final int MINING_INCREASE = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

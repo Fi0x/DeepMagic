@@ -13,6 +13,11 @@ public class SpTySelf implements ISpellType
     public static final String NAME = "type_self";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

@@ -10,6 +10,11 @@ public class SpEfSunshine implements ISpellEffect
     public static final String NAME = "effect_sunshine";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

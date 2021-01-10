@@ -13,6 +13,11 @@ public class SpEfDig implements ISpellEffect
     private boolean silkTouch = false;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

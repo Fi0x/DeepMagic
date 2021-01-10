@@ -14,6 +14,11 @@ public class SpEfHaste implements ISpellEffect
     private double seconds = 5;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

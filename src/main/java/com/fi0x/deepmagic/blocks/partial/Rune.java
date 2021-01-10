@@ -1,10 +1,13 @@
 package com.fi0x.deepmagic.blocks.partial;
 
-import com.fi0x.deepmagic.blocks.BlockBase;
+import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -19,7 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class Rune extends BlockBase
+public class Rune extends BlockTileEntity<TileEntityRune>
 {
     protected static final AxisAlignedBB RUNE_AABB = new AxisAlignedBB(0., 0.0D, 0., 1, 0.0625, 1);
 
@@ -31,9 +34,26 @@ public class Rune extends BlockBase
         setResistance(1.0F);
         setTickRandomly(true);
     }
+    @Override
+    public Class<TileEntityRune> getTileEntityClass()
+    {
+        return TileEntityRune.class;
+    }
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state)
+    {
+        return new TileEntityRune();
+    }
 
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    public void onEntityCollidedWithBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Entity entityIn)
+    {
+        //TODO: Apply spell effects
+    }
+    @Nonnull
+    @Override
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
     {
         return RUNE_AABB;
     }
@@ -41,7 +61,7 @@ public class Rune extends BlockBase
     @Override
     public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
     {
-        return null;
+        return RUNE_AABB;
     }
     @Override
     public boolean isPassable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)

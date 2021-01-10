@@ -13,6 +13,11 @@ public class SpTyIterate implements ISpellType
     private int iterations = 4;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

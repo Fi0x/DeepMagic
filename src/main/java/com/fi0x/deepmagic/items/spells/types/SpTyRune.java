@@ -11,6 +11,11 @@ public class SpTyRune implements ISpellType
     public static final String NAME = "type_rune";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

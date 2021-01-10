@@ -13,6 +13,11 @@ public class SpEfPlace implements ISpellEffect
     public static final String NAME = "effect_place";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

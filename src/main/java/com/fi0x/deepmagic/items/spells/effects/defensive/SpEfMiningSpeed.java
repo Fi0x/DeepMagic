@@ -14,6 +14,11 @@ public class SpEfMiningSpeed implements ISpellEffect
     private double seconds = 10;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

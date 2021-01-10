@@ -10,6 +10,11 @@ public class SpMoAutoSmelt implements ISpellModifier
     public static final String NAME = "modifier_autosmelt";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

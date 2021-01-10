@@ -17,6 +17,11 @@ public class SpTyStream implements ISpellType
     private double radius = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

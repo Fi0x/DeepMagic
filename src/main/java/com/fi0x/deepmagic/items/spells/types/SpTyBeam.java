@@ -12,6 +12,11 @@ public class SpTyBeam implements ISpellType
     private double range = 8;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

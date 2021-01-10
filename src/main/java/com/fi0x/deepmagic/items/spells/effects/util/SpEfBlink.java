@@ -10,6 +10,11 @@ public class SpEfBlink implements ISpellEffect
     public static final String NAME = "effect_blink";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

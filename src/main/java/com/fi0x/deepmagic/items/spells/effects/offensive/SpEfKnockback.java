@@ -10,6 +10,11 @@ public class SpEfKnockback implements ISpellEffect
     public static final String NAME = "effect_knockback";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

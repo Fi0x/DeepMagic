@@ -10,6 +10,11 @@ public class SpEfGrowth implements ISpellEffect
     public static final String NAME = "effect_growth";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

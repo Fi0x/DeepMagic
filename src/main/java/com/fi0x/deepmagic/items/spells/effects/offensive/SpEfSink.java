@@ -14,6 +14,11 @@ public class SpEfSink implements ISpellEffect
     public static final String NAME = "effect_sink";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

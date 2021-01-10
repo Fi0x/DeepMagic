@@ -10,6 +10,11 @@ public class SpEfSummon implements ISpellEffect
     public static final String NAME = "effect_summon";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

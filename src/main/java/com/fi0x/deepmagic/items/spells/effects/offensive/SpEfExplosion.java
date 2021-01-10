@@ -12,6 +12,11 @@ public class SpEfExplosion implements ISpellEffect
     private boolean environmentalDamage = false;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

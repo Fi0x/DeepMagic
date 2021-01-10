@@ -10,6 +10,11 @@ public class SpEfFreeze implements ISpellEffect
     public static final String NAME = "effect_freeze";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

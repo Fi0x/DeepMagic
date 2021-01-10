@@ -12,6 +12,11 @@ public class SpEfMagicDamage implements ISpellEffect
     private int damage = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

@@ -11,6 +11,11 @@ public class SpEfHeal implements ISpellEffect
     private int healPower = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
