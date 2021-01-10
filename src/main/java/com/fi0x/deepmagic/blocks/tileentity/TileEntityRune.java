@@ -6,11 +6,13 @@ import com.fi0x.deepmagic.items.spells.SpellPartHandler;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import com.fi0x.deepmagic.items.spells.types.ISpellType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class TileEntityRune extends TileEntity
@@ -18,6 +20,7 @@ public class TileEntityRune extends TileEntity
     EntityLivingBase caster;
     ArrayList<ISpellPart> applicableParts = new ArrayList<>();
     ArrayList<ArrayList<ISpellPart>> remainingSections = new ArrayList<>();
+    int remainingCasts = 1;
 
     @Nonnull
     @Override
@@ -50,6 +53,8 @@ public class TileEntityRune extends TileEntity
         }
         compound.setString("remainingSections", parts.toString());
 
+        compound.setInteger("remainingCasts", remainingCasts);
+
         return super.writeToNBT(compound);
     }
     @Override
@@ -75,18 +80,21 @@ public class TileEntityRune extends TileEntity
             }
         }
 
+        remainingCasts = compound.getInteger("remainingCasts");
+
         super.readFromNBT(compound);
     }
 
-    public void setSpell(EntityLivingBase caster, ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections)
+    public void setSpell(@Nullable EntityLivingBase caster, ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections)
     {
+        remainingCasts = (int) applicableParts.get(0).getDuration();
         applicableParts.remove(0);
 
         this.caster = caster;
         this.applicableParts = applicableParts;
         this.remainingSections = remainingSections;
     }
-    public void executeSpell()
+    public void executeSpell(EntityLivingBase target)
     {
         boolean executed = false;
 
@@ -95,6 +103,7 @@ public class TileEntityRune extends TileEntity
             if(applicableParts.get(0) instanceof ISpellEffect)
             {
                 ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, pos, world);
+                ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, target);
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, pos, caster, world);
@@ -108,5 +117,7 @@ public class TileEntityRune extends TileEntity
         {
             new CastHelper().findAndCastNextSpellType(remainingSections, pos, caster, world);
         }
+        remainingCasts--;
+        if(remainingCasts <= 0) world.setBlockState(pos, Blocks.AIR.getDefaultState());
     }
 }

@@ -42,10 +42,7 @@ public class Rune extends BlockBase implements ITileEntityProvider
     {
         TileEntityRune te = (TileEntityRune) worldIn.getTileEntity(pos);
         assert te != null;
-        if(entityIn instanceof EntityLivingBase)
-        {
-            te.executeSpell((EntityLivingBase) entityIn);
-        }
+        if(entityIn instanceof EntityLivingBase) te.executeSpell((EntityLivingBase) entityIn);
     }
     @Nullable
     @Override
