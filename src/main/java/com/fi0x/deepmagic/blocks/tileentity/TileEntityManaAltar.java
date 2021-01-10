@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
+import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -15,7 +16,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityManaAltar extends TileEntity implements IInventory, ITickable
+public class TileEntityManaAltar extends TileEntity implements IInventory, ITickable, IManaTileEntity
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
@@ -170,6 +171,20 @@ public class TileEntityManaAltar extends TileEntity implements IInventory, ITick
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
         super.readFromNBT(compound);
     }
+    @Override
+    public double getSpaceForMana()
+    {
+        return ConfigHandler.manaAltarCapacity - storedMana;
+    }
+    @Override
+    public double addManaToStorage(double amount)
+    {
+        double ret = amount - (ConfigHandler.manaAltarCapacity - storedMana);
+        if(ret > 0) storedMana = ConfigHandler.manaAltarCapacity;
+        else storedMana += amount;
+        markDirty();
+        return ret > 0 ? ret : 0;
+    }
     public void setCustomName(String customName)
     {
         this.customName = customName;
@@ -189,20 +204,5 @@ public class TileEntityManaAltar extends TileEntity implements IInventory, ITick
     public double getSpaceInAltar()
     {
         return ConfigHandler.manaAltarCapacity - storedMana;
-    }
-    public boolean addManaToStorage(double amount)
-    {
-        if(storedMana + amount > ConfigHandler.manaAltarCapacity && storedMana < ConfigHandler.manaAltarCapacity) storedMana = ConfigHandler.manaAltarCapacity;
-        else if(storedMana + amount <= ConfigHandler.manaAltarCapacity) storedMana += amount;
-        else return false;
-        markDirty();
-        return true;
-    }
-    public boolean removeManaFromStorage(double amount)
-    {
-        if(storedMana - amount < 0) return false;
-        storedMana -= amount;
-        markDirty();
-        return true;
     }
 }
