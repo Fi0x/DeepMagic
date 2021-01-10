@@ -21,19 +21,20 @@ public class ParticleManaBlock extends Particle
         super(worldIn, x, y, z, speedX, speedY, speedZ);
 
         this.particleScale *= 0.5F * scale;
-        this.particleMaxAge = (int) (Math.random() * 50 + 30);
+        this.particleMaxAge = (int) (Math.random() * 40 + 20);
+        this.canCollide = false;
 
-        this.particleRed = (float) (0.7 + Math.random() * 0.3);
-        this.particleGreen = (float) (0.7 + Math.random() * 0.3);
+        this.particleRed = (float) (0.8 + Math.random() * 0.2);
+        this.particleGreen = (float) (0.8 + Math.random() * 0.2);
         this.particleBlue = 1;
 
 
-        this.motionX = speedX + (Math.random() * 2 - 1) * 0.1;
-        this.motionY = speedY + (Math.random() * 2 - 1) * 0.1;
-        this.motionZ = speedZ + (Math.random() * 2 - 1) * 0.1;
+        this.motionX = speedX + (Math.random() * 0.5 - 0.25) * 0.1;
+        this.motionY = speedY + (Math.random() * 2) * 0.1;
+        this.motionZ = speedZ + (Math.random() * 0.5 - 0.25) * 0.1;
         float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
         this.motionX = this.motionX / f1 * 0.03;
-        this.motionY = this.motionY / f1 * 0.03;
+        this.motionY = this.motionY / f1 * 0.1;
         this.motionZ = this.motionZ / f1 * 0.03;
 
         ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "particle/" + textureName);

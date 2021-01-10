@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.blocks.mana;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaRelay;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import net.minecraft.block.ITileEntityProvider;
@@ -12,6 +13,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -40,7 +42,22 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        //TODO: Add linking option
+        System.out.println("Block activated");
+        if(worldIn.isRemote) return false;
+        ItemStack stack = playerIn.getHeldItem(hand);
+        Item item = stack.getItem();
+        if(item instanceof ManaLinker)
+        {
+            NBTTagCompound compound;
+            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+            compound = stack.getTagCompound();
+            assert compound != null;
+
+            TileEntityManaRelay te = (TileEntityManaRelay) worldIn.getTileEntity(pos);
+            assert te != null;
+
+            //TODO: add target from nbt tag or add location to nbt if player sneaks
+        }
         return false;
     }
     @Nonnull
@@ -74,19 +91,14 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
     {
+        if(rand.nextInt(4) > 0) return;
         if(((TileEntityManaRelay) Objects.requireNonNull(worldIn.getTileEntity(pos))).hasTargets())
         {
-            double x = pos.getX() + (Math.random() * 0.6) + 0.2;
+            double x = pos.getX() + (Math.random() * 0.2) + 0.4;
             double y = pos.getY() + 1 + (Math.random() * 0.2);
-            double z = pos.getZ() + (Math.random() * 0.6) + 0.2;
+            double z = pos.getZ() + (Math.random() * 0.2) + 0.4;
 
-            ParticleSpawner.spawnParticle(ParticleEnum.MANA_BLOCK, x, y, z, 0, 0, 0, Math.random() + 0.5, false, 16);
-            /*
-            TODO: Fix texture size
-             disable block collisions
-             motion +y
-             rarer
-             */
+            ParticleSpawner.spawnParticle(ParticleEnum.MANA_BLOCK, x, y, z, 0, 0, 0, Math.random() * 0.3 + 0.2, false, 16);
         }
     }
 }
