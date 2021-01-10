@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class SpTyAreaOfEffect implements ISpellType
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster, World world)
     {
         applicableParts.remove(0);
         ArrayList<BlockPos> targetPositions = getPositions(castLocation);
@@ -37,13 +38,13 @@ public class SpTyAreaOfEffect implements ISpellType
             {
                 for(BlockPos targetPos : targetPositions)
                 {
-                    ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, targetPos, caster.world);
+                    ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, targetPos, world);
                 }
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 for(BlockPos targetPos : targetPositions)
                 {
-                    ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, targetPos, caster);
+                    ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, targetPos, caster, world);
                 }
                 executed = true;
             }

@@ -108,10 +108,9 @@ public class Spell extends ItemBase implements IMagicItem
         ArrayList<ArrayList<ISpellPart>> spellParts = new ArrayList<>();
 
         int section = 0;
-        SpellPartHandler handler = new SpellPartHandler();
         while(compound.hasKey("section" + section))
         {
-            spellParts.add(handler.getSectionParts(compound.getString("section" + section)));
+            spellParts.add(SpellPartHandler.getSectionParts(compound.getString("section" + section)));
             section++;
         }
 
