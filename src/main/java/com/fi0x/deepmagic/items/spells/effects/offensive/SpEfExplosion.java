@@ -26,12 +26,11 @@ public class SpEfExplosion implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        world.newExplosion(caster, targetPos.getX(), targetPos.getY(), targetPos.getZ(), power, false, true);
+        world.newExplosion(caster, targetPos.getX(), targetPos.getY(), targetPos.getZ(), power, false, environmentalDamage);
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.world.newExplosion(caster, targetEntity.posX, targetEntity.posY, targetEntity.posZ, power, false, environmentalDamage);
     }
 
     @Override

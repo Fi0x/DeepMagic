@@ -21,10 +21,10 @@ public class SpEfSmelt implements ISpellEffect
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
+        //TODO: Use method to smelt target block
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

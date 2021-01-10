@@ -35,7 +35,5 @@ public class SpEfLight implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        if(targetEntity.world.getBlockState(targetEntity.getPosition()) instanceof BlockAir) targetEntity.world.setBlockState(targetEntity.getPosition(), ModBlocks.MAGIC_LIGHT.getDefaultState());
-        if(targetEntity.world.getBlockState(targetEntity.getPosition().up()) instanceof BlockAir) targetEntity.world.setBlockState(targetEntity.getPosition().up(), ModBlocks.MAGIC_LIGHT.getDefaultState());
     }
 }

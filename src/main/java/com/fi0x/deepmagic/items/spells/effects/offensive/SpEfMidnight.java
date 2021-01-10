@@ -28,19 +28,12 @@ public class SpEfMidnight implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        applyEffect(caster, world);
+        long current = world.getWorldTime();
+        world.setWorldTime(current + 18000 + ((current % 24000 < 18000) ? -(current % 24000) : current % 24000));
+        //TODO: Spawn "shadows"
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        //TODO: Check if caster is null
-        applyEffect(caster, caster.world);
-    }
-
-    private void applyEffect(EntityLivingBase caster, World world)
-    {
-        long current = world.getWorldTime();
-        world.setWorldTime(current + 18000 + ((current % 24000 < 18000) ? -(current % 24000) : current % 24000));
-        //TODO: Spawn "shadows"
     }
 }

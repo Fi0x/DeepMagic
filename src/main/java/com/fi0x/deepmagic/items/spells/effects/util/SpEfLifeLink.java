@@ -25,7 +25,6 @@ public class SpEfLifeLink implements ISpellEffect
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
@@ -33,5 +32,6 @@ public class SpEfLifeLink implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
+        //TODO: Use method to link target and casters' HP
     }
 }

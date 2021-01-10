@@ -21,10 +21,10 @@ public class SpEfMagnet implements ISpellEffect
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
+        //TODO: Use method to pull items towards the target location
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

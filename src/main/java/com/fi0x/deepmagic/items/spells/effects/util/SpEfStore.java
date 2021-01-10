@@ -25,7 +25,7 @@ public class SpEfStore implements ISpellEffect
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
+    //TODO: Use only ONE method to apply an effect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
