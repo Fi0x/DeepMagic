@@ -7,6 +7,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class SpEfPoison implements ISpellEffect
 {
     public static final String NAME = "effect_poison";
@@ -24,11 +26,11 @@ public class SpEfPoison implements ISpellEffect
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
         targetEntity.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * seconds), power - 1, false, true));
     }

@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class SpTyTouch implements ISpellType
@@ -27,7 +28,7 @@ public class SpTyTouch implements ISpellType
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster, World world)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
         applicableParts.remove(0);
         boolean executed = false;
@@ -49,11 +50,11 @@ public class SpTyTouch implements ISpellType
 
         if(!executed)
         {
-            new CastHelper().findAndCastNextSpellType(remainingSections, targetPos, caster);
+            new CastHelper().findAndCastNextSpellType(remainingSections, targetPos, caster, world);
         }
     }
 
-    private BlockPos getTouchedPos(EntityLivingBase caster, BlockPos castLocation)
+    private BlockPos getTouchedPos(@Nullable EntityLivingBase caster, BlockPos castLocation)
     {
         BlockPos ret = castLocation;
 

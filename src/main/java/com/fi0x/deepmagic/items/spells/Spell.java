@@ -127,7 +127,7 @@ public class Spell extends ItemBase implements IMagicItem
             }
         }
 
-        new CastHelper().findAndCastNextSpellType(spellParts, caster.getPosition(), caster);
+        new CastHelper().findAndCastNextSpellType(spellParts, caster.getPosition(), caster, caster.world);
     }
 
     private BlockPos getFocusedBlock(EntityPlayer player, int range)

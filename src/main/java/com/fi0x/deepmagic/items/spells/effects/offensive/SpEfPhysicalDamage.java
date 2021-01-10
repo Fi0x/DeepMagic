@@ -6,6 +6,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class SpEfPhysicalDamage implements ISpellEffect
 {
     public static final String NAME = "effect_physicaldamage";
@@ -22,11 +24,11 @@ public class SpEfPhysicalDamage implements ISpellEffect
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
         targetEntity.attackEntityFrom(DamageSource.GENERIC, damage);
     }

@@ -1,7 +1,10 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
+import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.SpellPartHandler;
+import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
+import com.fi0x.deepmagic.items.spells.types.ISpellType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
@@ -83,9 +86,27 @@ public class TileEntityRune extends TileEntity
         this.applicableParts = applicableParts;
         this.remainingSections = remainingSections;
     }
-    public void executeSpell(EntityLivingBase target)
+    public void executeSpell()
     {
+        boolean executed = false;
 
-        //TODO: Cast spell
+        while(!applicableParts.isEmpty())
+        {
+            if(applicableParts.get(0) instanceof ISpellEffect)
+            {
+                ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, pos, world);
+            } else if(applicableParts.get(0) instanceof ISpellType)
+            {
+                ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, pos, caster, world);
+                executed = true;
+            }
+            if(executed) break;
+            applicableParts.remove(0);
+        }
+
+        if(!executed)
+        {
+            new CastHelper().findAndCastNextSpellType(remainingSections, pos, caster, world);
+        }
     }
 }
