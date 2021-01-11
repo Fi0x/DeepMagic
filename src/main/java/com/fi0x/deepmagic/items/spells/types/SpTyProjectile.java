@@ -11,7 +11,9 @@ import java.util.ArrayList;
 public class SpTyProjectile implements ISpellType
 {
     public static final String NAME = "type_projectile";
+    private double existingDuration = 5;
     private double range = 16;
+    private double velocity = 1;
 
     @Override
     public String getName()
@@ -32,6 +34,16 @@ public class SpTyProjectile implements ISpellType
     }
 
     @Override
+    public void setDuration(double value)
+    {
+        existingDuration = value;
+    }
+    @Override
+    public double getDuration()
+    {
+        return existingDuration;
+    }
+    @Override
     public void setRange(double value)
     {
         range = value;
@@ -40,5 +52,15 @@ public class SpTyProjectile implements ISpellType
     public double getRange()
     {
         return range;
+    }
+    @Override
+    public void setVelocity(double value)
+    {
+        velocity = value;
+    }
+    @Override
+    public double getVelocity()
+    {
+        return velocity;
     }
 }

@@ -132,4 +132,11 @@ public interface ISpellPart
     {
         return 0;
     }
+    default void setVelocity(double value)
+    {
+    }
+    default double getVelocity()
+    {
+        return 0;
+    }
 }
