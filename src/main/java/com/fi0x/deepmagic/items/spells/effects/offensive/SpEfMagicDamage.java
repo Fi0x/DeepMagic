@@ -6,22 +6,29 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class SpEfMagicDamage implements ISpellEffect
 {
     public static final String NAME = "effect_magicdamage";
     private int damage = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
         targetEntity.attackEntityFrom(DamageSource.MAGIC, damage);
     }

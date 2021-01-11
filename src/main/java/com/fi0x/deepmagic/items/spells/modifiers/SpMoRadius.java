@@ -8,6 +8,11 @@ public class SpMoRadius implements ISpellModifier
     private final double RADIUS_INCREASE = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

@@ -31,6 +31,7 @@ public class ConfigHandler
     public static int entityCockroachID;
     public static int entityWormID;
     public static int entityCyclopesID;
+    public static int entitySpellProjectileID;
     //Gui IDs
     public static int guiManaAltarID;
     public static int guiManaGeneratorNormalID;
@@ -166,6 +167,7 @@ public class ConfigHandler
         entityCockroachID = ids.getInt("Cockroach ID", category, 1772, -10000, 10000, "");
         entityWormID = ids.getInt("Worm ID", category, 1773, -10000, 10000, "");
         entityCyclopesID = ids.getInt("Cyclopse ID", category, 1774, -10000, 10000, "");
+        entitySpellProjectileID = ids.getInt("Spell Projectile ID", category, 1775, -10000, 10000, "");
 
         category = "GUIs";
         ids.addCustomCategoryComment(category, "GUIs");

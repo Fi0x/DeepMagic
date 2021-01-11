@@ -4,7 +4,9 @@ import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class SpTyIterate implements ISpellType
@@ -13,13 +15,18 @@ public class SpTyIterate implements ISpellType
     private int iterations = 4;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
         applicableParts.remove(0);
 
@@ -31,13 +38,13 @@ public class SpTyIterate implements ISpellType
         }
         if(!applicableParts.isEmpty())
         {
-            ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster);
+            ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster, world);
             executed = true;
         }
 
         if(!executed)
         {
-            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster);
+            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster, world);
         }
     }
 

@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 /*
  * Accelerates the target upwards
  */
@@ -14,16 +16,21 @@ public class SpEfAccelerate implements ISpellEffect
     private int speed = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
         targetEntity.addVelocity(0, speed, 0);
     }

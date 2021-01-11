@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class SpEfDig implements ISpellEffect
 {
     public static final String NAME = "effect_dig";
@@ -13,17 +15,22 @@ public class SpEfDig implements ISpellEffect
     private boolean silkTouch = false;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
-    //TODO: Use one method to apply an effect
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
+        //TODO: Use method to dig the target block
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
     }
 

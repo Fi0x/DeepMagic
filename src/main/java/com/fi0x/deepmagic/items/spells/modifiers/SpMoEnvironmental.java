@@ -10,6 +10,11 @@ public class SpMoEnvironmental implements ISpellModifier
     public static final String NAME = "modifier_environmental";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

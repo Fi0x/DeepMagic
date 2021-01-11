@@ -1,9 +1,13 @@
 package com.fi0x.deepmagic.items.spells.effects.util;
 
+import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
+import net.minecraft.block.BlockAir;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 /*
  * Create a light source
@@ -13,17 +17,23 @@ public class SpEfLight implements ISpellEffect
     public static final String NAME = "effect_light";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        //TODO: Create light block and place it at position
+        if(world.getBlockState(targetPos) instanceof BlockAir) world.setBlockState(targetPos, ModBlocks.MAGIC_LIGHT.getDefaultState());
+        else if(world.getBlockState(targetPos.up()) instanceof BlockAir) world.setBlockState(targetPos, ModBlocks.MAGIC_LIGHT.getDefaultState());
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
     }
 }

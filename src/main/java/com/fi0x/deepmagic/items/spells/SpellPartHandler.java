@@ -10,20 +10,20 @@ import java.util.ArrayList;
 
 public class SpellPartHandler
 {
-    public ArrayList<ISpellPart> getSectionParts(String section)
+    public static ArrayList<ISpellPart> getSectionParts(String section)
     {
         String[] partNames = section.split(":");
 
         ArrayList<ISpellPart> parts = new ArrayList<>();
         for(String p : partNames)
         {
-            parts.add(getSpellPart(p));
+            if(!p.isEmpty()) parts.add(getSpellPart(p));
         }
 
         return parts;
     }
 
-    private ISpellPart getSpellPart(String name)
+    private static ISpellPart getSpellPart(String name)
     {
         switch(name)
         {
