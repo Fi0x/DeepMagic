@@ -78,7 +78,7 @@ public class AIHelperMining
         if(entity.homePos != null && world.getBlockState(entity.homePos).getBlock() instanceof DwarfBaseMarker) return true;
 
         BlockPos pos = entity.getPosition();
-        for(int range = 0; range <= ConfigHandler.aiSearchRange; range++)
+        for(int range = 0; range <= ConfigHandler.aiSearchRange * 1.5; range++)
         {
             for(int y = -range / 4; y <= range / 4; y++)
             {
