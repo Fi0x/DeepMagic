@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.entities.mobs.*;
+import com.fi0x.deepmagic.entities.projectiles.EntitySpellProjectile;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -22,6 +23,8 @@ public class EntityInit
         registerEntity("cockroach", EntityCockroach.class, ConfigHandler.entityCockroachID, 50, 5439488, 2299392);
         registerEntity("worm", EntityWorm.class, ConfigHandler.entityWormID, 50, 3093045, 8750988);
         registerEntity("cyclopes", EntityCyclopes.class, ConfigHandler.entityCyclopesID, 50, 16230511, 8735521);
+
+        EntityRegistry.registerModEntity(new ResourceLocation("deepmagic:spell_projectile"), EntitySpellProjectile.class, "spell_projectile", ConfigHandler.entitySpellProjectileID, Main.instance, 64, 10, true);
     }
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)
     {
