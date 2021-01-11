@@ -24,6 +24,20 @@ public class SpTyStream implements ISpellType
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += range + "_attr_";
+        ret += radius;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        range = Integer.parseInt(attributes[0]);
+        radius = Integer.parseInt(attributes[1]);
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

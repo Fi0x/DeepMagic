@@ -21,6 +21,20 @@ public class SpEfMiningSpeed implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += level + "_attr_";
+        ret += seconds;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        level = Integer.parseInt(attributes[0]);
+        seconds = Double.parseDouble(attributes[1]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

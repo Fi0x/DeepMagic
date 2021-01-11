@@ -20,6 +20,22 @@ public class SpEfDig implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += autoSmelt + "_attr_";
+        ret += fortune + "_attr_";
+        ret += silkTouch;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        autoSmelt = Boolean.parseBoolean(attributes[0]);
+        fortune = Integer.parseInt(attributes[1]);
+        silkTouch = Boolean.parseBoolean(attributes[2]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

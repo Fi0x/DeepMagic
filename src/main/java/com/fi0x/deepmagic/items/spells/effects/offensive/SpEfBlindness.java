@@ -20,6 +20,18 @@ public class SpEfBlindness implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += seconds;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        seconds = Double.parseDouble(attributes[0]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

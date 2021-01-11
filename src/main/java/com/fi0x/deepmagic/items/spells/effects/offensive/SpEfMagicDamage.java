@@ -19,6 +19,18 @@ public class SpEfMagicDamage implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += damage;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        damage = Integer.parseInt(attributes[0]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

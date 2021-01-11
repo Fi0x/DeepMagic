@@ -7,6 +7,10 @@ import com.fi0x.deepmagic.items.spells.types.ISpellType;
 public interface ISpellPart
 {
     String getName();
+    String getPartAsString();
+    default void setAttributesFromString(String[] attributes)
+    {
+    }
     default ISpellType getType()
     {
         return null;

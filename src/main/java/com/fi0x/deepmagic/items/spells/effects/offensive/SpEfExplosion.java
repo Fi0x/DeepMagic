@@ -19,6 +19,20 @@ public class SpEfExplosion implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += power + "_attr_";
+        ret += environmentalDamage;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        power = Integer.parseInt(attributes[0]);
+        environmentalDamage = Boolean.parseBoolean(attributes[1]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

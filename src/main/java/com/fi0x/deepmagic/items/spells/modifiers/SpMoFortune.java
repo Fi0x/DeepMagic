@@ -13,6 +13,12 @@ public class SpMoFortune implements ISpellModifier
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME;
+        return ret;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

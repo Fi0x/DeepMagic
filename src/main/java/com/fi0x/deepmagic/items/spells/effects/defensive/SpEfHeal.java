@@ -18,6 +18,18 @@ public class SpEfHeal implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += healPower;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        healPower = Integer.parseInt(attributes[0]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

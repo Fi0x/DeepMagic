@@ -19,6 +19,18 @@ public class SpTyBeam implements ISpellType
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += range;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        range = Double.parseDouble(attributes[0]);
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

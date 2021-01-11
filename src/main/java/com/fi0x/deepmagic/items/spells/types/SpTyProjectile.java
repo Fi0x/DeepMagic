@@ -21,6 +21,22 @@ public class SpTyProjectile implements ISpellType
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += existingDuration + "_attr_";
+        ret += range + "_attr_";
+        ret += velocity;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        existingDuration = Double.parseDouble(attributes[0]);
+        range = Double.parseDouble(attributes[1]);
+        velocity = Double.parseDouble(attributes[2]);
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

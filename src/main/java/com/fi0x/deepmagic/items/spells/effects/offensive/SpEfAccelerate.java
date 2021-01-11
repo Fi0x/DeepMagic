@@ -21,6 +21,18 @@ public class SpEfAccelerate implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += speed;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(String[] attributes)
+    {
+        speed = Integer.parseInt(attributes[0]);
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;

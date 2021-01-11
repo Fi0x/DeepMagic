@@ -20,6 +20,12 @@ public class SpTySelf implements ISpellType
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME;
+        return ret;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;
