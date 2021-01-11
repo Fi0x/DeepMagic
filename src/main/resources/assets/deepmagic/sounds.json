@@ -142,13 +142,101 @@
   {
     "category": "entity",
     "subtitle": "entity.rock_troll.death",
-    "sounds": [{ "name": "deepmagic:entity/rock_troll/death", "stream": true}]
+    "sounds": [
+      {
+        "name": "deepmagic:entity/rock_troll/death",
+        "stream": true
+      }
+    ]
   },
-
-  "entity.rock_troll.step":
-  {
+  "entity.rock_troll.step": {
     "category": "entity",
     "subtitle": "entity.rock_troll.step",
-    "sounds": [{ "name": "deepmagic:entity/rock_troll/step", "stream": true}]
+    "sounds": [
+      {
+        "name": "deepmagic:entity/rock_troll/step",
+        "stream": true
+      }
+    ]
+  },
+  "entity.dwarf.ambient": {
+    "category": "entity",
+    "subtitle": "entity.dwarf.ambient",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/dwarf/ambient",
+        "stream": true
+      }
+    ]
+  },
+  "entity.dwarf.hurt": {
+    "category": "entity",
+    "subtitle": "entity.dwarf.hurt",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/dwarf/hurt",
+        "stream": true
+      }
+    ]
+  },
+  "entity.dwarf.death": {
+    "category": "entity",
+    "subtitle": "entity.dwarf.death",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/dwarf/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.dwarf.step": {
+    "category": "entity",
+    "subtitle": "entity.dwarf.step",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/dwarf/step",
+        "stream": true
+      }
+    ]
+  },
+  "entity.cockroach.ambient": {
+    "category": "entity",
+    "subtitle": "entity.cockroach.ambient",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/cockroach/ambient",
+        "stream": true
+      }
+    ]
+  },
+  "entity.cockroach.hurt": {
+    "category": "entity",
+    "subtitle": "entity.cockroach.hurt",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/cockroach/hurt",
+        "stream": true
+      }
+    ]
+  },
+  "entity.cockroach.death": {
+    "category": "entity",
+    "subtitle": "entity.cockroach.death",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/cockroach/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.cockroach.step": {
+    "category": "entity",
+    "subtitle": "entity.cockroach.step",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/cockroach/step",
+        "stream": true
+      }
+    ]
   }
 }

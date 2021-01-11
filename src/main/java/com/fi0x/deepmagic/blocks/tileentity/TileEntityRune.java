@@ -33,7 +33,7 @@ public class TileEntityRune extends TileEntity
         {
             for(ISpellPart part : applicableParts)
             {
-                parts.append(":").append(part.getName());
+                parts.append(":").append(part.getPartAsString());
             }
         }
         compound.setString("applicableParts", parts.toString());
@@ -47,7 +47,7 @@ public class TileEntityRune extends TileEntity
                 if(section.isEmpty()) continue;
                 for(ISpellPart part : section)
                 {
-                    parts.append(":").append(part.getName());
+                    parts.append(":").append(part.getPartAsString());
                 }
             }
         }

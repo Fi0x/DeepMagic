@@ -58,15 +58,17 @@ public abstract class SlabBase extends BlockSlab
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        if(!this.isDouble()) return this.getDefaultState().withProperty(HALF, EnumBlockHalf.values()[meta % EnumBlockHalf.values().length]);
-        return this.getDefaultState();
+        IBlockState iblockstate = this.getDefaultState();
+        iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
+        return iblockstate;
     }
 
     @Override
     public int getMetaFromState(@Nonnull IBlockState state)
     {
-        if(!this.isDouble()) return 0;
-        return state.getValue(HALF).ordinal() + 1;
+        int i = 0;
+        if(state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) i |= 8;
+        return i;
     }
 
     @Nonnull

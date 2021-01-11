@@ -23,6 +23,18 @@ public class SpTyRune implements ISpellType
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += casts;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(ArrayList<String> attributes)
+    {
+        casts = Integer.parseInt(attributes.get(0));
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

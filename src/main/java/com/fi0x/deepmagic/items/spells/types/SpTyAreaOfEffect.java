@@ -23,6 +23,18 @@ public class SpTyAreaOfEffect implements ISpellType
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += radius;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(ArrayList<String> attributes)
+    {
+        radius = Double.parseDouble(attributes.get(0));
+    }
+    @Override
     public ISpellType getType()
     {
         return this;

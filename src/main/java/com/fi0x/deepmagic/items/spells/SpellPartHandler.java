@@ -7,6 +7,7 @@ import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SpellPartHandler
 {
@@ -17,7 +18,13 @@ public class SpellPartHandler
         ArrayList<ISpellPart> parts = new ArrayList<>();
         for(String p : partNames)
         {
-            if(!p.isEmpty()) parts.add(getSpellPart(p));
+            if(p.isEmpty()) continue;
+            ArrayList<String> attributes = (ArrayList<String>) Arrays.asList(p.split("_attr_"));
+            ISpellPart nextPart = getSpellPart(attributes.get(0));
+            if(nextPart == null) continue;
+            attributes.remove(0);
+            if(attributes.size() > 0) nextPart.setAttributesFromString(attributes);
+            parts.add(nextPart);
         }
 
         return parts;

@@ -4,9 +4,15 @@ import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import com.fi0x.deepmagic.items.spells.modifiers.ISpellModifier;
 import com.fi0x.deepmagic.items.spells.types.ISpellType;
 
+import java.util.ArrayList;
+
 public interface ISpellPart
 {
     String getName();
+    String getPartAsString();
+    default void setAttributesFromString(ArrayList<String> attributes)
+    {
+    }
     default ISpellType getType()
     {
         return null;

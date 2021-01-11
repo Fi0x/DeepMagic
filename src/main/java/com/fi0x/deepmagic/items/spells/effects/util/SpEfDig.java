@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class SpEfDig implements ISpellEffect
 {
@@ -18,6 +19,22 @@ public class SpEfDig implements ISpellEffect
     public String getName()
     {
         return NAME;
+    }
+    @Override
+    public String getPartAsString()
+    {
+        String ret = NAME + "_attr_";
+        ret += autoSmelt + "_attr_";
+        ret += fortune + "_attr_";
+        ret += silkTouch;
+        return ret;
+    }
+    @Override
+    public void setAttributesFromString(ArrayList<String> attributes)
+    {
+        autoSmelt = Boolean.parseBoolean(attributes.get(0));
+        fortune = Integer.parseInt(attributes.get(1));
+        silkTouch = Boolean.parseBoolean(attributes.get(2));
     }
     @Override
     public ISpellEffect getEffect()

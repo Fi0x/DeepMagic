@@ -22,6 +22,12 @@ public class SpEfTotalRecall implements ISpellEffect
         return NAME;
     }
     @Override
+    public String getPartAsString()
+    {
+        String ret = NAME;
+        return ret;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
