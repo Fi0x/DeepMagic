@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.particlesystem;
 
 import com.fi0x.deepmagic.particlesystem.particles.ParticleDwarfSearchMine;
 import com.fi0x.deepmagic.particlesystem.particles.ParticleMagicLight;
+import com.fi0x.deepmagic.particlesystem.particles.ParticleManaBlock;
 import com.fi0x.deepmagic.particlesystem.particles.ParticleSpellProjectile;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 
@@ -9,6 +10,7 @@ public enum ParticleEnum
 {
     MAGIC_LIGHT("magic_light", ConfigHandler.firstParticleID, true, ParticleMagicLight.class),
     DWARF_SEARCH_MINE("dwarf_search_mine", ConfigHandler.firstParticleID + 1, false, ParticleDwarfSearchMine.class),
+    MANA_BLOCK("mana_block", ConfigHandler.firstParticleID + 2, false, ParticleManaBlock.class),
     SPELL_PROJECTILE("spell_projectile", ConfigHandler.firstParticleID + 2, false, ParticleSpellProjectile.class);
 
     private final Class particleClass;
