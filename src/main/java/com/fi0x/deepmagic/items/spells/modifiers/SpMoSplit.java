@@ -11,6 +11,11 @@ public class SpMoSplit implements ISpellModifier
     private final int SPLIT_ADDER = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

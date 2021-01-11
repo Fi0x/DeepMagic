@@ -7,6 +7,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 /*
  * Target can not move any more
  */
@@ -16,16 +18,21 @@ public class SpEfRoot implements ISpellEffect
     private double seconds = 5;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
         targetEntity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * seconds), 100, false, false));
     }

@@ -7,6 +7,11 @@ public class SpMoGravity implements ISpellModifier
     public static final String NAME = "modifier_gravity";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

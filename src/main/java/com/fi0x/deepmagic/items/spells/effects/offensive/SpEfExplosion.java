@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class SpEfExplosion implements ISpellEffect
 {
     public static final String NAME = "effect_explosion";
@@ -12,19 +14,23 @@ public class SpEfExplosion implements ISpellEffect
     private boolean environmentalDamage = false;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        world.newExplosion(caster, targetPos.getX(), targetPos.getY(), targetPos.getZ(), power, false, true);
+        world.newExplosion(caster, targetPos.getX(), targetPos.getY(), targetPos.getZ(), power, false, environmentalDamage);
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        targetEntity.world.newExplosion(caster, targetEntity.posX, targetEntity.posY, targetEntity.posZ, power, false, environmentalDamage);
     }
 
     @Override

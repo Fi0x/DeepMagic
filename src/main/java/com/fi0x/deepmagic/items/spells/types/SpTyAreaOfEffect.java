@@ -4,9 +4,13 @@ import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpTyAreaOfEffect implements ISpellType
 {
@@ -14,16 +18,23 @@ public class SpTyAreaOfEffect implements ISpellType
     private double radius = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellType getType()
     {
         return this;
     }
 
     @Override
-    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, EntityLivingBase caster)
+    public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
         applicableParts.remove(0);
         ArrayList<BlockPos> targetPositions = getPositions(castLocation);
+        ArrayList<EntityLivingBase> targets = getEntities(world, castLocation);
+
         boolean executed = false;
 
         while(!applicableParts.isEmpty())
@@ -32,13 +43,17 @@ public class SpTyAreaOfEffect implements ISpellType
             {
                 for(BlockPos targetPos : targetPositions)
                 {
-                    ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, targetPos, caster.world);
+                    ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, targetPos, world);
+                }
+                for(EntityLivingBase target : targets)
+                {
+                    ((ISpellEffect) applicableParts.get(0)).applyEffect(caster, target);
                 }
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 for(BlockPos targetPos : targetPositions)
                 {
-                    ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, targetPos, caster);
+                    ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, targetPos, caster, world);
                 }
                 executed = true;
             }
@@ -48,7 +63,7 @@ public class SpTyAreaOfEffect implements ISpellType
 
         if(!executed)
         {
-            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster);
+            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster, world);
         }
     }
 
@@ -80,10 +95,20 @@ public class SpTyAreaOfEffect implements ISpellType
         ArrayList<BlockPos> ret = new ArrayList<>();
         for(BlockPos e : blocks)
         {
-            if(e.distanceSq(pos.getX(), pos.getY(), pos.getZ()) <= radius * radius)
-            {
-                ret.add(e);
-            }
+            if(e.distanceSq(pos) <= radius * radius) ret.add(e);
+        }
+
+        return ret;
+    }
+    private ArrayList<EntityLivingBase> getEntities(World world, BlockPos pos)
+    {
+        AxisAlignedBB aabb = new AxisAlignedBB(pos.add(-radius, -radius, -radius), pos.add(radius, radius, radius));
+        List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, aabb);
+
+        ArrayList<EntityLivingBase> ret = new ArrayList<>();
+        for(EntityLivingBase entity : entities)
+        {
+            if(entity.getDistanceSq(pos) <= radius * radius) ret.add(entity);
         }
 
         return ret;

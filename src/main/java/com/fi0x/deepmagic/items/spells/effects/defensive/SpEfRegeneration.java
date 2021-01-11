@@ -7,6 +7,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class SpEfRegeneration implements ISpellEffect
 {
     public static final String NAME = "effect_regeneration";
@@ -14,16 +16,21 @@ public class SpEfRegeneration implements ISpellEffect
     private double seconds = 5;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellEffect getEffect()
     {
         return this;
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, BlockPos targetPos, World world)
+    public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }
     @Override
-    public void applyEffect(EntityLivingBase caster, EntityLivingBase targetEntity)
+    public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
         targetEntity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, (int) (20 * seconds), power - 1, false, true));
     }

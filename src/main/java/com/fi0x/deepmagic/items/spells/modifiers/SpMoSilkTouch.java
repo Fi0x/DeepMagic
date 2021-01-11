@@ -10,6 +10,11 @@ public class SpMoSilkTouch implements ISpellModifier
     public static final String NAME = "modifier_silktouch";
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;

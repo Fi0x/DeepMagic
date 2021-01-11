@@ -108,10 +108,9 @@ public class Spell extends ItemBase implements IMagicItem
         ArrayList<ArrayList<ISpellPart>> spellParts = new ArrayList<>();
 
         int section = 0;
-        SpellPartHandler handler = new SpellPartHandler();
         while(compound.hasKey("section" + section))
         {
-            spellParts.add(handler.getSectionParts(compound.getString("section" + section)));
+            spellParts.add(SpellPartHandler.getSectionParts(compound.getString("section" + section)));
             section++;
         }
 
@@ -128,7 +127,7 @@ public class Spell extends ItemBase implements IMagicItem
             }
         }
 
-        new CastHelper().findAndCastNextSpellType(spellParts, caster.getPosition(), caster);
+        new CastHelper().findAndCastNextSpellType(spellParts, caster.getPosition(), caster, caster.world);
     }
 
     private BlockPos getFocusedBlock(EntityPlayer player, int range)

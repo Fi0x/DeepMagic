@@ -8,6 +8,11 @@ public class SpMoFortune implements ISpellModifier
     private final int FORTUNE_INCREASE = 1;
 
     @Override
+    public String getName()
+    {
+        return NAME;
+    }
+    @Override
     public ISpellModifier getModifier()
     {
         return this;
