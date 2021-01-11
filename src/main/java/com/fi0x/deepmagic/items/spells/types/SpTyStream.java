@@ -32,10 +32,10 @@ public class SpTyStream implements ISpellType
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        range = Integer.parseInt(attributes[0]);
-        radius = Integer.parseInt(attributes[1]);
+        range = Integer.parseInt(attributes.get(0));
+        radius = Integer.parseInt(attributes.get(1));
     }
     @Override
     public ISpellType getType()

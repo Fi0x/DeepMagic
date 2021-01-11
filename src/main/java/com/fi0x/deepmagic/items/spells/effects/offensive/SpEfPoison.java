@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class SpEfPoison implements ISpellEffect
 {
@@ -29,10 +30,10 @@ public class SpEfPoison implements ISpellEffect
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        power = Integer.parseInt(attributes[0]);
-        seconds = Double.parseDouble(attributes[1]);
+        power = Integer.parseInt(attributes.get(0));
+        seconds = Double.parseDouble(attributes.get(1));
     }
     @Override
     public ISpellEffect getEffect()

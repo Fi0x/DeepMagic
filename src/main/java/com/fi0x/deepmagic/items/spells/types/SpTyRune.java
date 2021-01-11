@@ -30,9 +30,9 @@ public class SpTyRune implements ISpellType
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        casts = Integer.parseInt(attributes[0]);
+        casts = Integer.parseInt(attributes.get(0));
     }
     @Override
     public ISpellType getType()

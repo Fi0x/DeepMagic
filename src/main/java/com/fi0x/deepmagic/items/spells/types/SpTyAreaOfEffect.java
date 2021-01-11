@@ -30,9 +30,9 @@ public class SpTyAreaOfEffect implements ISpellType
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        radius = Double.parseDouble(attributes[0]);
+        radius = Double.parseDouble(attributes.get(0));
     }
     @Override
     public ISpellType getType()

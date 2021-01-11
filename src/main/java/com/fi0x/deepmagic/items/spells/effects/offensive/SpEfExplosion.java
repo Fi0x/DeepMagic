@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class SpEfExplosion implements ISpellEffect
 {
@@ -27,10 +28,10 @@ public class SpEfExplosion implements ISpellEffect
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        power = Integer.parseInt(attributes[0]);
-        environmentalDamage = Boolean.parseBoolean(attributes[1]);
+        power = Integer.parseInt(attributes.get(0));
+        environmentalDamage = Boolean.parseBoolean(attributes.get(1));
     }
     @Override
     public ISpellEffect getEffect()

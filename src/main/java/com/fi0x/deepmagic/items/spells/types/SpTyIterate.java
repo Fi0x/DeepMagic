@@ -27,9 +27,9 @@ public class SpTyIterate implements ISpellType
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        iterations = Integer.parseInt(attributes[0]);
+        iterations = Integer.parseInt(attributes.get(0));
     }
     @Override
     public ISpellType getType()

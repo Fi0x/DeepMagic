@@ -26,9 +26,9 @@ public class SpTyBeam implements ISpellType
         return ret;
     }
     @Override
-    public void setAttributesFromString(String[] attributes)
+    public void setAttributesFromString(ArrayList<String> attributes)
     {
-        range = Double.parseDouble(attributes[0]);
+        range = Double.parseDouble(attributes.get(0));
     }
     @Override
     public ISpellType getType()
