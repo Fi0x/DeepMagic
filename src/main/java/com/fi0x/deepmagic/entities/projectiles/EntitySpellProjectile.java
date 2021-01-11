@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 public class EntitySpellProjectile extends EntityThrowable
 {
-    public double existingSeconds;
+    public double existingSeconds = 5;
 
     public EntitySpellProjectile(World worldIn)
     {

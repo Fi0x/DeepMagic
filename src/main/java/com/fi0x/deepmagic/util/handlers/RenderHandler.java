@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.entities.mobs.*;
+import com.fi0x.deepmagic.entities.projectiles.EntitySpellProjectile;
 import com.fi0x.deepmagic.entities.render.*;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +30,8 @@ public class RenderHandler
         RenderingRegistry.registerEntityRenderingHandler(EntityCockroach.class, RenderCockroach::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWorm.class, RenderWorm::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCyclopes.class, RenderCyclopes::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(EntitySpellProjectile.class, RenderSpellProjectile::new);
     }
 
     public static void registerCustomMeshesAndStates()
