@@ -23,57 +23,70 @@ import java.util.List;
 
 public class ManaLinker extends Item implements IHasModel
 {
-	public ManaLinker(String name)
-	{
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(DeepMagicTab.ITEMS);
-		
-		ModItems.ITEMS.add(this);
-	}
-	
-	@Override
-	public void registerModels()
-	{
-		Main.proxy.registerItemRenderer(this, 0, "inventory");
-	}
-	@Override
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
-	{
-		NBTTagCompound compound;
-		if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-		compound = stack.getTagCompound();
-		assert compound != null;
+    public ManaLinker(String name)
+    {
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(DeepMagicTab.ITEMS);
 
-		tooltip.add(TextFormatting.WHITE + "Can link a Block to the selected Mana Altar");
-		if(GuiScreen.isShiftKeyDown())
-		{
-			if(compound.hasKey("linked") && compound.getBoolean("linked"))
-			{
-				int linkX =compound.getInteger("x");
-				int linkY =compound.getInteger("y");
-				int linkZ =compound.getInteger("z");
-				tooltip.add(TextFormatting.YELLOW + "Linked to: " + linkX + ", " + linkY + ", " + linkZ);
-			}
-			else tooltip.add(TextFormatting.YELLOW + "Not linked");
-		} else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
-	}
-	@Nonnull
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn)
-	{
-		if(worldIn.isRemote) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
-		ItemStack itemStack = playerIn.getHeldItem(handIn);
-		NBTTagCompound compound;
-		if(!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
-		compound = itemStack.getTagCompound();
-		if(playerIn.isSneaking())
-		{
-			assert compound != null;
-			compound.setBoolean("linked", false);
-			playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Cleared memory"));
-			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-		}
-		return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
-	}
+        ModItems.ITEMS.add(this);
+    }
+
+    @Override
+    public void registerModels()
+    {
+        Main.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+    @Override
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
+    {
+        NBTTagCompound compound;
+        if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+        compound = stack.getTagCompound();
+        assert compound != null;
+
+        tooltip.add(TextFormatting.WHITE + "Can link a Block to the selected Mana Altar");
+        if(GuiScreen.isShiftKeyDown())
+        {
+            if(compound.hasKey("x"))
+            {
+                int linkX = compound.getInteger("x");
+                int linkY = compound.getInteger("y");
+                int linkZ = compound.getInteger("z");
+                tooltip.add(TextFormatting.YELLOW + "Stored location: " + linkX + ", " + linkY + ", " + linkZ);
+                tooltip.add(TextFormatting.YELLOW + "Right click a block to send mana from it to the location");
+                tooltip.add(TextFormatting.YELLOW + "To clear the stored location Shift-Right-Click");
+            } else
+            {
+                tooltip.add(TextFormatting.YELLOW + "No location stored");
+                tooltip.add(TextFormatting.YELLOW + "To link blocks together, first select the receiver, then the sender");
+            }
+        } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
+    }
+    @Nonnull
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn)
+    {
+        if(worldIn.isRemote) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+
+        if(playerIn.isSneaking())
+        {
+            ItemStack itemStack = playerIn.getHeldItem(handIn);
+            NBTTagCompound compound;
+            if(!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
+            compound = itemStack.getTagCompound();
+            assert compound != null;
+
+            if(compound.hasKey("x"))
+            {
+                compound.removeTag("x");
+                compound.removeTag("y");
+                compound.removeTag("z");
+
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Cleared stored location"));
+            }
+            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        }
+        return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+    }
 }
