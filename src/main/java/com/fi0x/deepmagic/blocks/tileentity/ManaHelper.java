@@ -10,7 +10,7 @@ class ManaHelper
     private static boolean isManaTargetValid(World world, BlockPos targetPos, TileEntity te)
     {
         if(targetPos == null) return false;
-        if(!(world.getBlockState(targetPos).getBlock() instanceof IManaTileEntity)) return false;
+        if(!(world.getTileEntity(targetPos) instanceof IManaTileEntity)) return false;
         if(te == null)
         {
             te = world.getTileEntity(targetPos);

@@ -10,7 +10,6 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
 {
@@ -77,6 +76,7 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
             return false;
         }
         if(manaTargets.remove(pos)) return false;
+        if(this.pos == pos) return false;
         manaTargets.add(pos);
         return true;
     }
@@ -88,10 +88,23 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
     public double getSpaceForMana()
     {
         manaBuffer = 0;
+        ArrayList<BlockPos> invalid = new ArrayList<>();
         for(BlockPos pos : manaTargets)
         {
-            manaBuffer += ((IManaTileEntity) Objects.requireNonNull(world.getTileEntity(pos))).getSpaceForMana();
+            TileEntity te = world.getTileEntity(pos);
+            if(te == null)
+            {
+                invalid.add(pos);
+                continue;
+            }
+            manaBuffer += ((IManaTileEntity) te).getSpaceForMana();
         }
+
+        for(BlockPos p : invalid)
+        {
+            manaTargets.remove(p);
+        }
+
         return manaBuffer;
     }
     @Override
@@ -101,6 +114,12 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
 
         for(int i = 0; i < manaTargets.size(); i++)
         {
+            if(manaTargets.get(i) == null)
+            {
+                manaTargets.remove(i);
+                i--;
+                continue;
+            }
             TileEntity te = world.getTileEntity(manaTargets.get(i));
             int remainingTargets = manaTargets.size() - i;
             storedMana -= ManaHelper.sendMana(world, manaTargets.get(i), te, storedMana / remainingTargets);
