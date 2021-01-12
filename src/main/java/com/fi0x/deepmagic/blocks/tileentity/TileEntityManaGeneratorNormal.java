@@ -278,11 +278,13 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     {
         return getItemBurnTime(fuel) > 0;
     }
-    public void setManaTargetPos(BlockPos blockPos)
+    public boolean setManaTargetPos(BlockPos blockPos)
     {
-        if(this.getDistanceSq(blockPos.getX(), blockPos.getY(), blockPos.getZ()) > ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange) manaTargetPos = blockPos;
+        if(this.getDistanceSq(blockPos.getX(), blockPos.getY(), blockPos.getZ()) < ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange) manaTargetPos = blockPos;
         else manaTargetPos = null;
         if(manaTargetPos == null) linkedTE = null;
         else linkedTE = world.getTileEntity(manaTargetPos);
+
+        return linkedTE != null;
     }
 }

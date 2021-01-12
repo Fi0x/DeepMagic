@@ -69,9 +69,8 @@ public class ManaGeneratorMob extends BlockBase implements ITileEntityProvider
                     int x = compound.getInteger("x");
                     int y = compound.getInteger("y");
                     int z = compound.getInteger("z");
-                    te.setManaTargetPos(new BlockPos(x, y, z));
-
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                    if(te.setManaTargetPos(new BlockPos(x, y, z))) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                    else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Linking failed"));
                 } else
                 {
                     compound.setInteger("x", pos.getX());

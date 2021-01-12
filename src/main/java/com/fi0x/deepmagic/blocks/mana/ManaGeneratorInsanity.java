@@ -70,9 +70,8 @@ public class ManaGeneratorInsanity extends BlockBase implements ITileEntityProvi
                     int x = compound.getInteger("x");
                     int y = compound.getInteger("y");
                     int z = compound.getInteger("z");
-                    te.setManaTargetPos(new BlockPos(x, y, z));
-
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                    if(te.setManaTargetPos(new BlockPos(x, y, z))) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                    else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "Linking failed"));
                 } else
                 {
                     compound.setInteger("x", pos.getX());
@@ -80,8 +79,7 @@ public class ManaGeneratorInsanity extends BlockBase implements ITileEntityProvi
                     compound.setInteger("z", pos.getZ());
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
                 }
-            }
-            else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorInsanityID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            } else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorInsanityID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

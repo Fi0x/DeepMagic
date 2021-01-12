@@ -44,7 +44,6 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        System.out.println("Block activated");
         if(worldIn.isRemote) return false;
         ItemStack stack = playerIn.getHeldItem(hand);
         Item item = stack.getItem();
