@@ -73,6 +73,13 @@ public class ModBlocks
 
 	//Depth Blocks
 	//Depth Ores
+	public static final Block DEPTH_COAL_ORE = new DepthOreCoal("depth_coal_ore", Material.ROCK);
+	public static final Block DEPTH_IRON_ORE = new DepthOreIron("depth_iron_ore", Material.ROCK);
+	public static final Block DEPTH_REDSTONE_ORE = new DepthOreRedstone("depth_redstone_ore", Material.ROCK);
+	public static final Block DEPTH_LAPIS_ORE = new DepthOreLapis("depth_lapis_ore", Material.ROCK);
+	public static final Block DEPTH_GOLD_ORE = new DepthOreGold("depth_gold_ore", Material.ROCK);
+	public static final Block DEPTH_DIAMOND_ORE = new DepthOreDiamond("depth_diamond_ore", Material.ROCK);
+	public static final Block DEPTH_EMERALD_ORE = new DepthOreEmerald("depth_emerald_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_ORE_COMPRESSED = new DeepCrystalOreCompressed("deep_crystal_ore_compressed", Material.ROCK);
 
 	//Dungeon Blocks
