@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.biome;
+package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockBush;

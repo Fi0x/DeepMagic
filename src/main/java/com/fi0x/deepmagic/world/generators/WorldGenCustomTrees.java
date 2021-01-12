@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.world.generators;
 
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.biome.BiomeInsanity;
+import com.fi0x.deepmagic.world.biomes.BiomeInsanity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;

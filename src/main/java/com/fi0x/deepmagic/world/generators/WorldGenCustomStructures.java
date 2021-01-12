@@ -3,7 +3,7 @@ package com.fi0x.deepmagic.world.generators;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.biome.BiomeInsanity;
+import com.fi0x.deepmagic.world.biomes.BiomeInsanity;
 import com.fi0x.deepmagic.world.generators.dungeon.SmallDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
