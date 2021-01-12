@@ -74,7 +74,7 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
                 compound.setInteger("z", pos.getZ());
                 playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
             }
-        } else if(item.getUnlocalizedName().equals("dimensional_crystal"))
+        } else if(item.getUnlocalizedName().equals("item.dimensional_crystal"))
         {
             if(te.removeRangeLimit())
             {
