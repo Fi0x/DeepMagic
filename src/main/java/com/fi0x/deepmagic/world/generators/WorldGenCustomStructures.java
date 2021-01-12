@@ -49,9 +49,6 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		} else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
 		{
 			//TODO: Adjust structure generating
-			if(ConfigHandler.generateMageHouses) generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 0, 500, BiomeInsanity.class);
-			if(ConfigHandler.generateInsanityRockTrollCaves) generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
-			if(ConfigHandler.generateShrines) generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
 
 			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -8, 200, BiomeInsanity.class);
