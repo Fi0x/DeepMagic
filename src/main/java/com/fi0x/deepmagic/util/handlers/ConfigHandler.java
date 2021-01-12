@@ -19,6 +19,7 @@ public class ConfigHandler
 
     //Dimension IDs
     public static int dimensionIdInsanityID;
+    public static int dimensionIdDepthID;
     //Entity IDs
     public static int entityInsanityCowID;
     public static int entityDwarfID;
@@ -152,7 +153,8 @@ public class ConfigHandler
 
         category = "Mod Dimensions";
         ids.addCustomCategoryComment(category, "Mod Dimensions");
-        dimensionIdInsanityID = ids.getInt("Insanity Dimension ID", category, 42, -1000, -1000, "");
+        dimensionIdInsanityID = ids.getInt("Insanity Dimension ID", category, 42, -1000, 1000, "");
+        dimensionIdDepthID = ids.getInt("Depth Dimension ID", category, 43, -1000, 1000, "");
 
         category = "Mod NPCs";
         ids.addCustomCategoryComment(category, "Mod NPCs");

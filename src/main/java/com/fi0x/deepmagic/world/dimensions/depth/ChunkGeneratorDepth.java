@@ -24,7 +24,6 @@ import java.util.Random;
 //TODO: Adjust class to be less insane and more deep
 public class ChunkGeneratorDepth implements IChunkGenerator
 {
-
     private final World world;
     private final WorldType terrainType;
     private final Random rand;

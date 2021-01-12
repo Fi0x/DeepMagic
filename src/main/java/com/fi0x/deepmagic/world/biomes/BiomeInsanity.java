@@ -17,42 +17,43 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+//TODO: Adjust class to be less insane and more deep
 public class BiomeInsanity extends Biome
 {
-	private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
-	private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
-	private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
-	private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.89F);
-	
-	public BiomeInsanity()
-	{
-		super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
-		topBlock = TOP_BLOCK.getDefaultState();
-		fillerBlock = FILLER_BLOCK.getDefaultState();
-		
-		this.spawnableCaveCreatureList.clear();
-		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
-		this.spawnableWaterCreatureList.clear();
+    private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
+    private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
+    private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
+    private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.89F);
 
-		if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 5, 1, 3));
+    public BiomeInsanity()
+    {
+        super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
+        topBlock = TOP_BLOCK.getDefaultState();
+        fillerBlock = FILLER_BLOCK.getDefaultState();
+
+        this.spawnableCaveCreatureList.clear();
+        this.spawnableCreatureList.clear();
+        this.spawnableMonsterList.clear();
+        this.spawnableWaterCreatureList.clear();
+
+        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 5, 1, 3));
         if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
         if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
         if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
         if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 2, 1, 2));
-		
-		this.flowers.clear();
+
+        this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
-		
-		decorator = new DecoratorInsanityBiome();
-	}
-	
-	@Override
+
+        decorator = new DecoratorInsanityBiome();
+    }
+
+    @Override
     public void genTerrainBlocks(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
         this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
-	public final void generateBiomeTerrain2(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    public final void generateBiomeTerrain2(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
         int i = worldIn.getSeaLevel();
         IBlockState iblockstate = this.topBlock;
@@ -62,22 +63,20 @@ public class BiomeInsanity extends Biome
         int l = x & 15;
         int i1 = z & 15;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        
+
         for (int j1 = 255; j1 >= 0; --j1)
         {
             if (j1 <= rand.nextInt(5))
             {
                 chunkPrimerIn.setBlockState(i1, j1, l, BEDROCK);
-            }
-            else
+            } else
             {
                 IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
                 if (iblockstate2.getMaterial() == Material.AIR)
                 {
                     j = -1;
-                }
-                else if (iblockstate2.getBlock() == ModBlocks.INSANITY_STONE)
+                } else if (iblockstate2.getBlock() == ModBlocks.INSANITY_STONE)
                 {
                     if (j == -1)
                     {
@@ -85,8 +84,7 @@ public class BiomeInsanity extends Biome
                         {
                             iblockstate = AIR;
                             iblockstate1 = ModBlocks.INSANITY_STONE.getDefaultState();
-                        }
-                        else if (j1 >= i - 4 && j1 <= i + 1)
+                        } else if (j1 >= i - 4 && j1 <= i + 1)
                         {
                             iblockstate = this.topBlock;
                             iblockstate1 = this.fillerBlock;
@@ -97,8 +95,7 @@ public class BiomeInsanity extends Biome
                             if (this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F)
                             {
                                 iblockstate = ICE;
-                            }
-                            else
+                            } else
                             {
                                 iblockstate = WATER;
                             }
@@ -109,19 +106,16 @@ public class BiomeInsanity extends Biome
                         if (j1 >= i - 1)
                         {
                             chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
-                        }
-                        else if (j1 < i - 7 - k)
+                        } else if (j1 < i - 7 - k)
                         {
                             iblockstate = AIR;
                             iblockstate1 = ModBlocks.INSANITY_STONE.getDefaultState();
                             chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
-                        }
-                        else
+                        } else
                         {
                             chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
                         }
-                    }
-                    else if (j > 0)
+                    } else if (j > 0)
                     {
                         --j;
                         chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
@@ -136,20 +130,20 @@ public class BiomeInsanity extends Biome
             }
         }
     }
-	
-	@Override
-	public int getSkyColorByTemp(float currentTemperature)
-	{
-		return SKY_COLOR;
-	}
-	@Override
-	public boolean canRain()
-	{
-		return false;
-	}
-	@Override
-	public int getFoliageColorAtPos(@Nonnull BlockPos pos)
-	{
-		return FOLIAGE_COLOR;
-	}
+
+    @Override
+    public int getSkyColorByTemp(float currentTemperature)
+    {
+        return SKY_COLOR;
+    }
+    @Override
+    public boolean canRain()
+    {
+        return false;
+    }
+    @Override
+    public int getFoliageColorAtPos(@Nonnull BlockPos pos)
+    {
+        return FOLIAGE_COLOR;
+    }
 }

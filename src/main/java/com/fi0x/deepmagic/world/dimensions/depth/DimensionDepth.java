@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.DimensionInit;
-import com.fi0x.deepmagic.world.dimensions.insanity.ChunkGeneratorInsanity;
 import net.minecraft.client.audio.MusicTicker.MusicType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,11 +15,11 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-//TODO: Adjust class to be less insane and more deep
 public class DimensionDepth extends WorldProvider
 {
     public DimensionDepth()
     {
+        //TODO: Adjust BiomeProvider
         this.biomeProvider = new BiomeProviderSingle(BiomeInit.INSANITY);
     }
 
@@ -28,13 +27,13 @@ public class DimensionDepth extends WorldProvider
     @Override
     public DimensionType getDimensionType()
     {
-        return DimensionInit.INSANITY;
+        return DimensionInit.DEPTH;
     }
     @Nonnull
     @Override
     public IChunkGenerator createChunkGenerator()
     {
-        return new ChunkGeneratorInsanity(world, world.getSeed());
+        return new ChunkGeneratorDepth(world, world.getSeed());
     }
     @Override
     public boolean canRespawnHere()
@@ -44,12 +43,12 @@ public class DimensionDepth extends WorldProvider
     @Override
     public boolean isSurfaceWorld()
     {
-        return true;
+        return false;
     }
     @Override
     public double getMovementFactor()
     {
-        return 0.1;
+        return 20;
     }
     @Override
     public boolean shouldMapSpin(@Nonnull String entity, double x, double z, double rotation)
@@ -60,31 +59,35 @@ public class DimensionDepth extends WorldProvider
     @Override
     public WorldSleepResult canSleepAt(@Nonnull EntityPlayer player, @Nonnull BlockPos pos)
     {
-        return WorldSleepResult.ALLOW;
+        return WorldSleepResult.DENY;
     }
     @Override
     public MusicType getMusicType()
     {
+        //TODO: Use custom music
         return MusicType.NETHER;
     }
     @Override
     public boolean hasSkyLight()
     {
-        return true;
+        return false;
     }
     @Override
     public float getCloudHeight()
     {
+        //TODO: Verify if necessary
         return 96F;
     }
     @Override
     public float getSunBrightnessFactor(float par1)
     {
+        //TODO: Verify if necessary
         return 0F;
     }
     @Override
     public int getMoonPhase(long worldTime)
     {
+        //TODO: Verify if necessary
         return 4;
     }
     @Nonnull
@@ -93,9 +96,9 @@ public class DimensionDepth extends WorldProvider
     {
         float f = MathHelper.cos(p_76562_1_ * ((float) Math.PI * 2F)) * 2.0F + 0.5F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
-        float f1 = 1F;
-        float f2 = 0.98823529411764705882352941176471F;
-        float f3 = 0.30980392156862745098039215686275F;
+        float f1 = 0.359375F;
+        float f2 = 0.359375F;
+        float f3 = 0.3671875F;
 
         f1 = f1 * (f * 0.94F + 0.06F);
         f2 = f2 * (f * 0.94F + 0.06F);
@@ -110,17 +113,19 @@ public class DimensionDepth extends WorldProvider
     @Override
     public boolean doesWaterVaporize()
     {
-        return true;
+        return false;
     }
     @Override
     public boolean isDaytime()
     {
+        //TODO: Add slow time
         return false;
     }
     @Nonnull
     @Override
     public Vec3d getCloudColor(float partialTicks)
     {
+        //TODO: Ajust cloud color
         float f = world.getCelestialAngle(partialTicks);
         float f1 = MathHelper.cos(f * ((float) Math.PI * 2F)) * 2.0F + 0.5F;
         f1 = MathHelper.clamp(f1, 0.0F, 1.0F);
@@ -145,7 +150,8 @@ public class DimensionDepth extends WorldProvider
     @Override
     public float calculateCelestialAngle(long worldTime, float partialTicks)
     {
-        int i = 12800;        //Freeze dayNightCycle at this tick-point
+        //TODO: re-add time
+        int i = 12800;
         float f = (float) i / 24000.0F - 0.25F;
 
         if(f < 0.0F)

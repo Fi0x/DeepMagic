@@ -31,7 +31,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");
 
 	public static final SmallDungeon DUNGEON = new SmallDungeon();
-	
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
@@ -46,19 +46,28 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
 
 			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -8, 200, BiomeInsanity.class);
+		} else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
+		{
+			//TODO: Adjust structure generating
+			if(ConfigHandler.generateMageHouses) generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 0, 500, BiomeInsanity.class);
+			if(ConfigHandler.generateInsanityRockTrollCaves) generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
+			if(ConfigHandler.generateShrines) generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
+			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
+
+			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -8, 200, BiomeInsanity.class);
 		}
 	}
-	
+
 	private void generateStructure(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int yOffset, int heightDifference, int chance, Class<?>... classes)
 	{
 		ArrayList<Class<?>> classesList = new ArrayList<>(Arrays.asList(classes));
-		
+
 		int x = (chunkX * 16) + random.nextInt(15);
 		int z = (chunkZ * 16) + random.nextInt(15);
-		int y = calculateGenerationHeight(world, x, z)+yOffset;
+		int y = calculateGenerationHeight(world, x, z) + yOffset;
 		if(heightDifference < 0) y = random.nextInt(40 / Math.abs(heightDifference)) + 10;
 		BlockPos pos = new BlockPos(x, y, z);
-		
+
 		Class<?> biome = world.provider.getBiomeForCoords(pos).getClass();
 
 		Template template = null;
@@ -70,12 +79,12 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			else if(template != null) generator.generate(world, random, pos);
 		}
 	}
-	
+
 	private static int calculateGenerationHeight(World world, int x, int z)
 	{
 		int y = world.getHeight();
 		boolean foundGround = false;
-		
+
 		while(!foundGround && y-- >= 0)
 		{
 			Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
