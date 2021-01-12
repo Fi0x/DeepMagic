@@ -60,6 +60,11 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
 
     public boolean addOrRemoveTarget(BlockPos pos)
     {
+        if(this.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange)
+        {
+            manaTargets.remove(pos);
+            return false;
+        }
         if(manaTargets.remove(pos)) return false;
         manaTargets.add(pos);
         return true;

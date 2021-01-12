@@ -62,20 +62,23 @@ public class ManaGeneratorNormal extends BlockBase implements ITileEntityProvide
                 compound = stack.getTagCompound();
                 assert compound != null;
 
-                TileEntityManaGeneratorNormal te = (TileEntityManaGeneratorNormal) worldIn.getTileEntity(pos);
-                assert te != null;
-
-                if(compound.hasKey("linked") && compound.getBoolean("linked"))
+                if(compound.hasKey("x"))
                 {
+                    TileEntityManaGeneratorNormal te = (TileEntityManaGeneratorNormal) worldIn.getTileEntity(pos);
+                    assert te != null;
+
                     int x = compound.getInteger("x");
                     int y = compound.getInteger("y");
                     int z = compound.getInteger("z");
                     te.setManaTargetPos(new BlockPos(x, y, z));
+
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                } else if(compound.hasKey("linked"))
+                } else
                 {
-                    te.setManaTargetPos(null);
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Generator"));
+                    compound.setInteger("x", pos.getX());
+                    compound.setInteger("y", pos.getY());
+                    compound.setInteger("z", pos.getZ());
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
                 }
             }
             else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorNormalID, worldIn, pos.getX(), pos.getY(), pos.getZ());

@@ -283,7 +283,8 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     }
     public void setManaTargetPos(BlockPos blockPos)
     {
-        manaTargetPos = blockPos;
+        if(this.getDistanceSq(blockPos.getX(), blockPos.getY(), blockPos.getZ()) > ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange) manaTargetPos = blockPos;
+        else manaTargetPos = null;
         if(manaTargetPos == null) linkedTE = null;
         else linkedTE = world.getTileEntity(manaTargetPos);
     }

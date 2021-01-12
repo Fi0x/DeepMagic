@@ -14,9 +14,9 @@ class ManaHelper
         if(te == null)
         {
             te = world.getTileEntity(targetPos);
-            if(te == null) return false;
+            return te != null;
         }
-        return (te.getDistanceSq(tePos.getX(), tePos.getY(), tePos.getZ()) < senderRange * senderRange);
+        return true;
     }
 
     /**

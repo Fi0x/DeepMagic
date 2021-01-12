@@ -60,11 +60,14 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
                 compound = stack.getTagCompound();
                 assert compound != null;
 
-                compound.setInteger("x", pos.getX());
-                compound.setInteger("y", pos.getY());
-                compound.setInteger("z", pos.getZ());
-                compound.setBoolean("linked", true);
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Altar Position saved"));
+                if(compound.hasKey("x")) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "This block can't send mana"));
+                else
+                {
+                    compound.setInteger("x", pos.getX());
+                    compound.setInteger("y", pos.getY());
+                    compound.setInteger("z", pos.getZ());
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
+                }
             } else playerIn.openGui(Main.instance, ConfigHandler.guiManaAltarID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;

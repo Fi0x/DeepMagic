@@ -62,20 +62,23 @@ public class ManaGeneratorInsanity extends BlockBase implements ITileEntityProvi
                 compound = stack.getTagCompound();
                 assert compound != null;
 
-                TileEntityManaGeneratorInsanity te = (TileEntityManaGeneratorInsanity) worldIn.getTileEntity(pos);
-                assert te != null;
-
-                if(compound.hasKey("linked") && compound.getBoolean("linked"))
+                if(compound.hasKey("x"))
                 {
+                    TileEntityManaGeneratorInsanity te = (TileEntityManaGeneratorInsanity) worldIn.getTileEntity(pos);
+                    assert te != null;
+
                     int x = compound.getInteger("x");
                     int y = compound.getInteger("y");
                     int z = compound.getInteger("z");
                     te.setManaTargetPos(new BlockPos(x, y, z));
+
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                } else if(compound.hasKey("linked"))
+                } else
                 {
-                    te.setManaTargetPos(null);
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked Generator"));
+                    compound.setInteger("x", pos.getX());
+                    compound.setInteger("y", pos.getY());
+                    compound.setInteger("z", pos.getZ());
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
                 }
             }
             else playerIn.openGui(Main.instance, ConfigHandler.guiManaGeneratorInsanityID, worldIn, pos.getX(), pos.getY(), pos.getZ());

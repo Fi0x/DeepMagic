@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,10 +55,24 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
             compound = stack.getTagCompound();
             assert compound != null;
 
-            TileEntityManaRelay te = (TileEntityManaRelay) worldIn.getTileEntity(pos);
-            assert te != null;
+            if(compound.hasKey("x"))
+            {
+                TileEntityManaRelay te = (TileEntityManaRelay) worldIn.getTileEntity(pos);
+                assert te != null;
 
-            //TODO: add target from nbt tag or add location to nbt if player sneaks
+                int x = compound.getInteger("x");
+                int y = compound.getInteger("y");
+                int z = compound.getInteger("z");
+
+                if(te.addOrRemoveTarget(new BlockPos(x, y, z))) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                else playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked " + x + ", " + y + ", " + z));
+            } else
+            {
+                compound.setInteger("x", pos.getX());
+                compound.setInteger("y", pos.getY());
+                compound.setInteger("z", pos.getZ());
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
+            }
         }
         return false;
     }

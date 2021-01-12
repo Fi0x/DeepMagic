@@ -101,25 +101,31 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     @Override
     public int getField(int id)
     {
-        switch (id)
+        switch(id)
         {
-            case 0: return burnTime;
-            case 1: return currentBurnTime;
-            case 2: return storedMana;
+            case 0:
+                return burnTime;
+            case 1:
+                return currentBurnTime;
+            case 2:
+                return storedMana;
         }
         return 0;
     }
     @Override
     public void setField(int id, int value)
     {
-        switch (id)
+        switch(id)
         {
-            case 0: burnTime = value;
-            break;
-            case 1: currentBurnTime = value;
-            break;
-            case 2: storedMana = value;
-            break;
+            case 0:
+                burnTime = value;
+                break;
+            case 1:
+                currentBurnTime = value;
+                break;
+            case 2:
+                storedMana = value;
+                break;
         }
     }
     @Override
@@ -274,7 +280,8 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     }
     public void setManaTargetPos(BlockPos blockPos)
     {
-        manaTargetPos = blockPos;
+        if(this.getDistanceSq(blockPos.getX(), blockPos.getY(), blockPos.getZ()) > ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange) manaTargetPos = blockPos;
+        else manaTargetPos = null;
         if(manaTargetPos == null) linkedTE = null;
         else linkedTE = world.getTileEntity(manaTargetPos);
     }
