@@ -166,7 +166,7 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
         if(isRunning() != wasRunning) ManaGeneratorInsanity.setState(isRunning(), world, pos);
         if(storedMana >= 100)
         {
-            double sent = ManaHelper.sendMana(world, pos, manaTargetPos, linkedTE, ConfigHandler.manaBlockTransferRange, storedMana);
+            double sent = ManaHelper.sendMana(world, manaTargetPos, linkedTE, storedMana);
             if(sent > 0)
             {
                 storedMana -= (int) sent;
@@ -281,10 +281,13 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
     {
         return getItemBurnTime(fuel) > 0;
     }
-    public void setManaTargetPos(BlockPos blockPos)
+    public boolean setManaTargetPos(BlockPos blockPos)
     {
-        manaTargetPos = blockPos;
+        if(this.getDistanceSq(blockPos.getX(), blockPos.getY(), blockPos.getZ()) < ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange) manaTargetPos = blockPos;
+        else manaTargetPos = null;
         if(manaTargetPos == null) linkedTE = null;
         else linkedTE = world.getTileEntity(manaTargetPos);
+
+        return linkedTE != null;
     }
 }

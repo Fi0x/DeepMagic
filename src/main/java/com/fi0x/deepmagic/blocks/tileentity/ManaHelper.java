@@ -7,30 +7,28 @@ import net.minecraft.world.World;
 
 class ManaHelper
 {
-    private static boolean isManaTargetValid(World world, BlockPos tePos, BlockPos targetPos, TileEntity te, int senderRange)
+    private static boolean isManaTargetValid(World world, BlockPos targetPos, TileEntity te)
     {
         if(targetPos == null) return false;
-        if(!(world.getBlockState(targetPos).getBlock() instanceof IManaTileEntity)) return false;
+        if(!(world.getTileEntity(targetPos) instanceof IManaTileEntity)) return false;
         if(te == null)
         {
             te = world.getTileEntity(targetPos);
-            if(te == null) return false;
+            return te != null;
         }
-        return (te.getDistanceSq(tePos.getX(), tePos.getY(), tePos.getZ()) < senderRange * senderRange);
+        return true;
     }
 
     /**
      * @param world
-     * @param sourcePos
      * @param targetPos
      * @param targetTE
-     * @param range
      * @param manaAmount
      * @return the amount of mana that was sent to the target
      */
-    public static double sendMana(World world, BlockPos sourcePos, BlockPos targetPos, TileEntity targetTE, int range, double manaAmount)
+    public static double sendMana(World world, BlockPos targetPos, TileEntity targetTE, double manaAmount)
     {
-        if(!isManaTargetValid(world, sourcePos, targetPos, targetTE, range)) return 0;
+        if(!isManaTargetValid(world, targetPos, targetTE)) return 0;
 
         targetTE = world.getTileEntity(targetPos);
         assert targetTE != null;

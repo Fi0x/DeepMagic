@@ -70,13 +70,17 @@ public class RegistryHandler
 
 	public static void registerTileEntities()
 	{
-		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
-		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation("mana_altar"));
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorNormal.class, new ResourceLocation("mana_generator_normal"));
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorInsanity.class, new ResourceLocation("mana_generator_insanity"));
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorMob.class, new ResourceLocation("mana_generator_mob"));
+		GameRegistry.registerTileEntity(TileEntityManaRelay.class, new ResourceLocation("mana_relay"));
+
+		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation("mana_altar"));
 		GameRegistry.registerTileEntity(TileEntityManaInfuser.class, new ResourceLocation("mana_infuser"));
 		GameRegistry.registerTileEntity(TileEntityManaGrinder.class, new ResourceLocation("mana_grinder"));
 		GameRegistry.registerTileEntity(TileEntityManaFurnace.class, new ResourceLocation("mana_furnace"));
+
+		GameRegistry.registerTileEntity(TileEntityRune.class, new ResourceLocation("rune"));
+		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
 	}
 }

@@ -24,6 +24,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -52,23 +54,28 @@ public class ManaFurnace extends BlockBase implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(!worldIn.isRemote)
+        if(worldIn.isRemote) return true;
+
+        ItemStack stack = playerIn.getHeldItem(hand);
+        Item item = stack.getItem();
+
+        if(item instanceof ManaLinker)
         {
-            ItemStack stack = playerIn.getHeldItem(hand);
-            Item item = stack.getItem();
+            NBTTagCompound compound;
+            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+            compound = stack.getTagCompound();
+            assert compound != null;
 
-            if(item instanceof ManaLinker)
+            if(compound.hasKey("x")) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "This block can't send mana"));
+            else
             {
-                NBTTagCompound compound;
-                if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-                compound = stack.getTagCompound();
-                assert compound != null;
+                compound.setInteger("x", pos.getX());
+                compound.setInteger("y", pos.getY());
+                compound.setInteger("z", pos.getZ());
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
+            }
+        } else playerIn.openGui(Main.instance, ConfigHandler.guiManaFurnaceID, worldIn, pos.getX(), pos.getY(), pos.getZ());
 
-                TileEntityManaFurnace te = (TileEntityManaFurnace) worldIn.getTileEntity(pos);
-                assert te != null;
-                //TODO: Add location to mana linker
-            } else playerIn.openGui(Main.instance, ConfigHandler.guiManaFurnaceID, worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
         return true;
     }
 

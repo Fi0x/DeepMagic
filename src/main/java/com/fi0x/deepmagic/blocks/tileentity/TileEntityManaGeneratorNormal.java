@@ -101,25 +101,31 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     @Override
     public int getField(int id)
     {
-        switch (id)
+        switch(id)
         {
-            case 0: return burnTime;
-            case 1: return currentBurnTime;
-            case 2: return storedMana;
+            case 0:
+                return burnTime;
+            case 1:
+                return currentBurnTime;
+            case 2:
+                return storedMana;
         }
         return 0;
     }
     @Override
     public void setField(int id, int value)
     {
-        switch (id)
+        switch(id)
         {
-            case 0: burnTime = value;
-            break;
-            case 1: currentBurnTime = value;
-            break;
-            case 2: storedMana = value;
-            break;
+            case 0:
+                burnTime = value;
+                break;
+            case 1:
+                currentBurnTime = value;
+                break;
+            case 2:
+                storedMana = value;
+                break;
         }
     }
     @Override
@@ -161,7 +167,7 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
         if(isRunning() != wasRunning) ManaGeneratorNormal.setState(isRunning(), world, pos);
         if(storedMana >= 20)
         {
-            double sent = ManaHelper.sendMana(world, pos, manaTargetPos, linkedTE, ConfigHandler.manaBlockTransferRange, storedMana);
+            double sent = ManaHelper.sendMana(world, manaTargetPos, linkedTE, storedMana);
             if(sent > 0)
             {
                 storedMana -= (int) sent;
@@ -272,10 +278,13 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
     {
         return getItemBurnTime(fuel) > 0;
     }
-    public void setManaTargetPos(BlockPos blockPos)
+    public boolean setManaTargetPos(BlockPos blockPos)
     {
-        manaTargetPos = blockPos;
+        if(this.getDistanceSq(blockPos.getX(), blockPos.getY(), blockPos.getZ()) < ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange) manaTargetPos = blockPos;
+        else manaTargetPos = null;
         if(manaTargetPos == null) linkedTE = null;
         else linkedTE = world.getTileEntity(manaTargetPos);
+
+        return linkedTE != null;
     }
 }

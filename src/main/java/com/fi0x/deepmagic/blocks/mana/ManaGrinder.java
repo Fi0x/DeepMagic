@@ -23,6 +23,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -60,11 +62,15 @@ public class ManaGrinder extends BlockBase implements ITileEntityProvider
                 compound = stack.getTagCompound();
                 assert compound != null;
 
-                TileEntityManaGrinder te = (TileEntityManaGrinder) worldIn.getTileEntity(pos);
-                assert te != null;
-                //TODO: Add location to mana linker
-            }
-            else playerIn.openGui(Main.instance, ConfigHandler.guiManaGrinderID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                if(compound.hasKey("x")) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "This block can't send mana"));
+                else
+                {
+                    compound.setInteger("x", pos.getX());
+                    compound.setInteger("y", pos.getY());
+                    compound.setInteger("z", pos.getZ());
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
+                }
+            } else playerIn.openGui(Main.instance, ConfigHandler.guiManaGrinderID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
