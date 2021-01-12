@@ -48,6 +48,10 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
         if(worldIn.isRemote) return false;
         ItemStack stack = playerIn.getHeldItem(hand);
         Item item = stack.getItem();
+
+        TileEntityManaRelay te = (TileEntityManaRelay) worldIn.getTileEntity(pos);
+        assert te != null;
+
         if(item instanceof ManaLinker)
         {
             NBTTagCompound compound;
@@ -57,8 +61,6 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
 
             if(compound.hasKey("x"))
             {
-                TileEntityManaRelay te = (TileEntityManaRelay) worldIn.getTileEntity(pos);
-                assert te != null;
 
                 int x = compound.getInteger("x");
                 int y = compound.getInteger("y");
@@ -72,6 +74,13 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
                 compound.setInteger("y", pos.getY());
                 compound.setInteger("z", pos.getZ());
                 playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
+            }
+        } else if(item.getUnlocalizedName().equals("dimensional_crystal"))
+        {
+            if(te.removeRangeLimit())
+            {
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Range limit removed"));
+                stack.shrink(1);
             }
         }
         return false;

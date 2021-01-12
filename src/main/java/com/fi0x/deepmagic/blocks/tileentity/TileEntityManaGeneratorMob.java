@@ -156,7 +156,7 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
         }
         if(storedMana >= 100)
         {
-            double sent = ManaHelper.sendMana(world, pos, manaTargetPos, linkedTE, ConfigHandler.manaBlockTransferRange, storedMana);
+            double sent = ManaHelper.sendMana(world, manaTargetPos, linkedTE, storedMana);
             if(sent > 0)
             {
                 storedMana -= (int) sent;

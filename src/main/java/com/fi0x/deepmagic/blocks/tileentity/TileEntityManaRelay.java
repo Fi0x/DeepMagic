@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
 {
+    private boolean unlimitedRange = false;
     private final ArrayList<BlockPos> manaTargets = new ArrayList<>();
     private double manaBuffer;
     private double storedMana;
@@ -22,6 +23,8 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
+        compound.setBoolean("range", unlimitedRange);
+
         NBTTagList targets = new NBTTagList();
         for(BlockPos pos : manaTargets)
         {
@@ -41,6 +44,8 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
+        unlimitedRange = compound.getBoolean("range");
+
         manaTargets.clear();
         NBTTagList targetList = compound.getTagList("targets", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < targetList.tagCount(); i++)
@@ -58,9 +63,15 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
         super.readFromNBT(compound);
     }
 
+    public boolean removeRangeLimit()
+    {
+        if(unlimitedRange) return false;
+        unlimitedRange = true;
+        return true;
+    }
     public boolean addOrRemoveTarget(BlockPos pos)
     {
-        if(this.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange)
+        if(!unlimitedRange || this.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > ConfigHandler.manaBlockTransferRange * ConfigHandler.manaBlockTransferRange)
         {
             manaTargets.remove(pos);
             return false;
@@ -92,7 +103,7 @@ public class TileEntityManaRelay extends TileEntity implements IManaTileEntity
         {
             TileEntity te = world.getTileEntity(manaTargets.get(i));
             int remainingTargets = manaTargets.size() - i;
-            storedMana -= ManaHelper.sendMana(world, this.pos, manaTargets.get(i), te, ConfigHandler.manaBlockTransferRange, storedMana / remainingTargets);
+            storedMana -= ManaHelper.sendMana(world, manaTargets.get(i), te, storedMana / remainingTargets);
         }
         double ret = storedMana;
         storedMana = 0;

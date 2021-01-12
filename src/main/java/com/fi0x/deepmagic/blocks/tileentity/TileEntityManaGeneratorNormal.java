@@ -167,7 +167,7 @@ public class TileEntityManaGeneratorNormal extends TileEntity implements IInvent
         if(isRunning() != wasRunning) ManaGeneratorNormal.setState(isRunning(), world, pos);
         if(storedMana >= 20)
         {
-            double sent = ManaHelper.sendMana(world, pos, manaTargetPos, linkedTE, ConfigHandler.manaBlockTransferRange, storedMana);
+            double sent = ManaHelper.sendMana(world, manaTargetPos, linkedTE, storedMana);
             if(sent > 0)
             {
                 storedMana -= (int) sent;

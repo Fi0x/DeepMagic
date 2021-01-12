@@ -166,7 +166,7 @@ public class TileEntityManaGeneratorInsanity extends TileEntity implements IInve
         if(isRunning() != wasRunning) ManaGeneratorInsanity.setState(isRunning(), world, pos);
         if(storedMana >= 100)
         {
-            double sent = ManaHelper.sendMana(world, pos, manaTargetPos, linkedTE, ConfigHandler.manaBlockTransferRange, storedMana);
+            double sent = ManaHelper.sendMana(world, manaTargetPos, linkedTE, storedMana);
             if(sent > 0)
             {
                 storedMana -= (int) sent;
