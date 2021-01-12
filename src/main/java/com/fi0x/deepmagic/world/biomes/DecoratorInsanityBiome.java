@@ -15,7 +15,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-//TODO: Adjust class to be less insane and more deep
 public class DecoratorInsanityBiome extends BiomeDecorator
 {
     public boolean decorating;

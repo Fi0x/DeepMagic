@@ -17,7 +17,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-//TODO: Adjust class to be less insane and more deep
 public class BiomeInsanity extends Biome
 {
     private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;

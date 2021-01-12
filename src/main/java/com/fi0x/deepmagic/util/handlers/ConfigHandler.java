@@ -129,6 +129,7 @@ public class ConfigHandler
     //Mana Costs
     public static int manaBoosterAmount;
     public static int teleportationCrystalManaCost;
+    public static int teleportationCrystalManaCostDepth;
     public static int spellBaseManaCost;
     //Skill XP
     public static int teleportationCrystalSkillXP;
@@ -342,6 +343,7 @@ public class ConfigHandler
         items.addCustomCategoryComment(category, "Mana Costs");
         manaBoosterAmount = items.getInt("Mana Booster Amount", category, 1000, 1, 100000, "Mana Amount a Mana Booster gives");
         teleportationCrystalManaCost = items.getInt("Teleportation Crystal Cost", category, 90, 0, 10000, "Mana Costs for the Teleportation Crystal");
+        teleportationCrystalManaCostDepth = items.getInt("Depth Dimension teleport costs", category, 900, 0, 100000, "Mana Costs for Teleporting in or out of Depth Dimension");
         spellBaseManaCost = items.getInt("Base Spell Cost", category, 10, 1, 1000, "The Costs for a Spell without effect");
 
         category = "Skill XP";
