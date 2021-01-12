@@ -71,6 +71,10 @@ public class ModBlocks
 	public static final Block INSANITY_EMERALD_ORE = new InsanityOreEmerald("insanity_emerald_ore", Material.ROCK);
 	public static final Block INSANITY_DEEP_CRYSTAL_ORE = new DeepCrystalOre("insanity_deep_crystal_ore", Material.ROCK);
 
+	//Depth Blocks
+	//Depth Ores
+	public static final Block DEEP_CRYSTAL_ORE_COMPRESSED = new DeepCrystalOreCompressed("deep_crystal_ore_compressed", Material.ROCK);
+
 	//Dungeon Blocks
 	public static final Block DUNGEON_STONE = new DungeonStone("dungeon_stone", Material.ROCK);
 	public static final Block DUNGEON_COBBLE = new DungeonStone("dungeon_cobble", Material.ROCK);
