@@ -2,10 +2,8 @@ package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -71,14 +69,14 @@ public class BiomeDepth extends Biome
                 if(iblockstate2.getMaterial() == Material.AIR)
                 {
                     j = -1;
-                } else if(iblockstate2.getBlock() == ModBlocks.INSANITY_STONE)
+                } else if(iblockstate2.getBlock() == ModBlocks.DEPTH_STONE)
                 {
                     if(j == -1)
                     {
                         if(k <= 0)
                         {
                             iblockstate = AIR;
-                            iblockstate1 = ModBlocks.INSANITY_STONE.getDefaultState();
+                            iblockstate1 = ModBlocks.DEPTH_STONE.getDefaultState();
                         } else if(j1 >= i - 4 && j1 <= i + 1)
                         {
                             iblockstate = this.topBlock;
@@ -104,8 +102,8 @@ public class BiomeDepth extends Biome
                         } else if(j1 < i - 7 - k)
                         {
                             iblockstate = AIR;
-                            iblockstate1 = ModBlocks.INSANITY_STONE.getDefaultState();
-                            chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
+                            iblockstate1 = ModBlocks.DEPTH_STONE.getDefaultState();
+                            chunkPrimerIn.setBlockState(i1, j1, l, ModBlocks.DEPTH_DIRT.getDefaultState());
                         } else
                         {
                             chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
@@ -114,12 +112,6 @@ public class BiomeDepth extends Biome
                     {
                         --j;
                         chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-
-                        if(j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1)
-                        {
-                            j = rand.nextInt(4) + Math.max(0, j1 - 63);
-                            iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? RED_SANDSTONE : SANDSTONE;
-                        }
                     }
                 }
             }

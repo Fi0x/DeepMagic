@@ -22,13 +22,13 @@ public class BiomeInit
 		initBiome(DEPTH, "Depth", BiomeType.COOL, Type.SPOOKY, Type.COLD);
 	}
 
-	private static Biome initBiome(Biome biome, String name, BiomeType biomeType, Type... types)
+	private static void initBiome(Biome biome, String name, BiomeType biomeType, Type... types)
 	{
 		biome.setRegistryName(name);
 		ForgeRegistries.BIOMES.register(biome);
 		BiomeDictionary.addTypes(biome, types);
-		if(ConfigHandler.overworldInsanityBiome) BiomeManager.addBiome(biomeType, new BiomeEntry(biome, ConfigHandler.insanityBiomeWeight));
+		if(ConfigHandler.overworldInsanityBiome && name.equals("Insanity")) BiomeManager.addBiome(biomeType, new BiomeEntry(biome, ConfigHandler.insanityBiomeWeight));
+		if(ConfigHandler.overworldDepthBiome && name.equals("Depth")) BiomeManager.addBiome(biomeType, new BiomeEntry(biome, ConfigHandler.depthBiomeWeight));
 		BiomeManager.addSpawnBiome(biome);
-		return biome;
 	}
 }
