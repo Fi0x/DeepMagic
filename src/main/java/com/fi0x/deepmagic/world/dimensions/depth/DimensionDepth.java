@@ -18,8 +18,7 @@ public class DimensionDepth extends WorldProvider
 {
     public DimensionDepth()
     {
-        //TODO: Adjust BiomeProvider
-        this.biomeProvider = new BiomeProviderSingle(BiomeInit.INSANITY);
+        this.biomeProvider = new BiomeProviderSingle(BiomeInit.DEPTH);
     }
 
     @Nonnull

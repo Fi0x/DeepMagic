@@ -180,17 +180,17 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 					for(int k1 = -2; k1 <= 2; ++k1)
 					{
 						Biome biome1 = this.generatedBiome;
-						float f5 = 0.0F + biome1.getBaseHeight() * 1.0F,
-							  f6 = 0.0F + biome1.getHeightVariation() * 1.0F;
-						
+						float f5 = 0.0F + biome1.getBaseHeight(),
+								f6 = 0.0F + biome1.getHeightVariation();
+
 						if(this.terrainType == WorldType.AMPLIFIED && f5 > 0.0F)
 						{
 							f5 = 1.0F + f5 * 2.0F;
 							f6 = 1.0F + f6 * 4.0F;
 						}
-						
+
 						float f7 = this.biomeWeights[j1 + 2 + (k1 + 2) * 5] / (f5 + 2.0F);
-						
+
 						if(biome1.getBaseHeight() > this.generatedBiome.getBaseHeight()) f7 /= 2.0F;
 						
 						f2 += f6 * f7;
