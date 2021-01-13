@@ -17,9 +17,8 @@ import java.util.Random;
 
 public class BiomeDepth extends Biome
 {
-    //TODO: Adjust blocks
-    private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
-    private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
+    private static final Block TOP_BLOCK = ModBlocks.DEPTH_STONE;
+    private static final Block FILLER_BLOCK = ModBlocks.DEPTH_DIRT;
     private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0F, 0F);
     private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.33F, 0.48F, 0.22F);
 

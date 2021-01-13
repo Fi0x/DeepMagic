@@ -38,11 +38,10 @@ public class DecoratorDepthBiome extends BiomeDecorator
             throw new RuntimeException("Already decorating");
         } else
         {
-            //TODO: Use deep blocks instead of insane
             this.chunkProviderSettings = ChunkGeneratorSettings.Factory.jsonToFactory(worldIn.getWorldInfo().getGeneratorOptions()).build();
             this.chunkPos = pos;
-            this.dirtGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
-            this.gravelOreGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);
+            this.dirtGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
+            this.gravelOreGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);
             this.coalGen = new WorldGenMinable(ModBlocks.DEPTH_COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
             this.ironGen = new WorldGenMinable(ModBlocks.DEPTH_IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
             this.goldGen = new WorldGenMinable(ModBlocks.DEPTH_GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);

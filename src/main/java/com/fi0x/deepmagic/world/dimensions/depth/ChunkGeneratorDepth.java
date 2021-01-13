@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
@@ -25,7 +24,6 @@ import java.util.Random;
 public class ChunkGeneratorDepth implements IChunkGenerator
 {
     private final World world;
-    private final WorldType terrainType;
     private final Random rand;
     private final NoiseGeneratorOctaves minLimitPerlinNoise;
     private final NoiseGeneratorOctaves maxLimitPerlinNoise;
@@ -41,7 +39,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     public ChunkGeneratorDepth(World world, long seed)
     {
         this.world = world;
-        this.terrainType = world.getWorldInfo().getTerrainType();
         this.rand = new Random(seed);
         this.minLimitPerlinNoise = new NoiseGeneratorOctaves(this.rand, 16);
         this.maxLimitPerlinNoise = new NoiseGeneratorOctaves(this.rand, 16);
@@ -180,14 +177,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
                     for(int k1 = -2; k1 <= 2; ++k1)
                     {
                         Biome biome1 = this.generatedBiome;
-                        float f5 = 0.0F + biome1.getBaseHeight() * 1.0F,
-                                f6 = 0.0F + biome1.getHeightVariation() * 1.0F;
-
-                        if(this.terrainType == WorldType.AMPLIFIED && f5 > 0.0F)
-                        {
-                            f5 = 1.0F + f5 * 2.0F;
-                            f6 = 1.0F + f6 * 4.0F;
-                        }
+                        float f5 = 0.0F + biome1.getBaseHeight(), f6 = 0.0F + biome1.getHeightVariation();
 
                         float f7 = this.biomeWeights[j1 + 2 + (k1 + 2) * 5] / (f5 + 2.0F);
 
