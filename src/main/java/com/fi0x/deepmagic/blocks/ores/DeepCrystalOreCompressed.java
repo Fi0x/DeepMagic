@@ -19,7 +19,6 @@ public class DeepCrystalOreCompressed extends BlockBase
         setHardness(4.0F);
         setResistance(6.0F);
         setHarvestLevel("pickaxe", 2);
-        setLightLevel(0.5F);
     }
 
     @Nonnull

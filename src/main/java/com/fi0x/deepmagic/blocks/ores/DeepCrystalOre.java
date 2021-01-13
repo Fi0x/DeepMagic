@@ -19,7 +19,6 @@ public class DeepCrystalOre extends BlockBase
 		setHardness(3.0F);
 		setResistance(5.0F);
 		setHarvestLevel("pickaxe", 2);
-		setLightLevel(0.4F);
 	}
 	
 	@Nonnull
