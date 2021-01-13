@@ -1,6 +1,9 @@
 package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.blocks.*;
+import com.fi0x.deepmagic.blocks.depth.DepthCobble;
+import com.fi0x.deepmagic.blocks.depth.DepthDirt;
+import com.fi0x.deepmagic.blocks.depth.DepthStone;
 import com.fi0x.deepmagic.blocks.effectstones.AttackStone;
 import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
@@ -70,6 +73,20 @@ public class ModBlocks
 	public static final Block INSANITY_DIAMOND_ORE = new InsanityOreDiamond("insanity_diamond_ore", Material.ROCK);
 	public static final Block INSANITY_EMERALD_ORE = new InsanityOreEmerald("insanity_emerald_ore", Material.ROCK);
 	public static final Block INSANITY_DEEP_CRYSTAL_ORE = new DeepCrystalOre("insanity_deep_crystal_ore", Material.ROCK);
+
+	//Depth Blocks
+	public static final Block DEPTH_STONE = new DepthStone("depth_stone", Material.ROCK);
+	public static final Block DEPTH_COBBLE = new DepthCobble("depth_cobble", Material.ROCK);
+	public static final Block DEPTH_DIRT = new DepthDirt("depth_dirt", Material.GROUND);
+	//Depth Ores
+	public static final Block DEPTH_COAL_ORE = new DepthOreCoal("depth_coal_ore", Material.ROCK);
+	public static final Block DEPTH_IRON_ORE = new DepthOreIron("depth_iron_ore", Material.ROCK);
+	public static final Block DEPTH_REDSTONE_ORE = new DepthOreRedstone("depth_redstone_ore", Material.ROCK);
+	public static final Block DEPTH_LAPIS_ORE = new DepthOreLapis("depth_lapis_ore", Material.ROCK);
+	public static final Block DEPTH_GOLD_ORE = new DepthOreGold("depth_gold_ore", Material.ROCK);
+	public static final Block DEPTH_DIAMOND_ORE = new DepthOreDiamond("depth_diamond_ore", Material.ROCK);
+	public static final Block DEPTH_EMERALD_ORE = new DepthOreEmerald("depth_emerald_ore", Material.ROCK);
+	public static final Block DEEP_CRYSTAL_ORE_COMPRESSED = new DeepCrystalOreCompressed("deep_crystal_ore_compressed", Material.ROCK);
 
 	//Dungeon Blocks
 	public static final Block DUNGEON_STONE = new DungeonStone("dungeon_stone", Material.ROCK);
