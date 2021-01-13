@@ -78,7 +78,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     {
         this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
-        this.generatedBiome = BiomeInit.INSANITY;
+        this.generatedBiome = BiomeInit.DEPTH;
         this.setBlocksInChunk(x, z, chunkprimer);
         this.replaceBiomeBlocks(x, z, chunkprimer, generatedBiome);
 
@@ -135,7 +135,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
                             for(int l2 = 0; l2 < 4; ++l2)
                             {
-                                if((lvt_45_1 += d16) > 0.0D) primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, ModBlocks.INSANITY_STONE.getDefaultState());
+                                if((lvt_45_1 += d16) > 0.0D) primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, ModBlocks.DEPTH_STONE.getDefaultState());
                                 else if(i2 * 8 + j2 < 63) primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, ModBlocks.INSANITY_WATER.getDefaultState());
                             }
 
