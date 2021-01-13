@@ -16,14 +16,14 @@ import java.util.Random;
 public class BiomeDepth extends Biome
 {
     private static final Block TOP_BLOCK = ModBlocks.DEPTH_STONE;
-    private static final Block FILLER_BLOCK = ModBlocks.DEPTH_DIRT;
+    private static final Block FILLER_BLOCK = ModBlocks.DEPTH_STONE;
     private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0F, 0F);
     private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.33F, 0.48F, 0.22F);
 
     public BiomeDepth()
     {
         //TODO: Adjust values
-        super(new BiomeProperties("Depth").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
+        super(new BiomeProperties("Depth").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(0.1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
 
@@ -59,17 +59,12 @@ public class BiomeDepth extends Biome
 
         for(int j1 = 255; j1 >= 0; --j1)
         {
-            if(j1 <= rand.nextInt(5))
-            {
-                chunkPrimerIn.setBlockState(i1, j1, l, BEDROCK);
-            } else
+            if(j1 <= rand.nextInt(5)) chunkPrimerIn.setBlockState(i1, j1, l, BEDROCK);
+            else
             {
                 IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
-
-                if(iblockstate2.getMaterial() == Material.AIR)
-                {
-                    j = -1;
-                } else if(iblockstate2.getBlock() == ModBlocks.DEPTH_STONE)
+                if(iblockstate2.getMaterial() == Material.AIR) j = -1;
+                else if(iblockstate2.getBlock() == ModBlocks.DEPTH_STONE)
                 {
                     if(j == -1)
                     {
@@ -85,29 +80,21 @@ public class BiomeDepth extends Biome
 
                         if(j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
                         {
-                            if(this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F)
-                            {
-                                iblockstate = ICE;
-                            } else
-                            {
-                                iblockstate = WATER;
-                            }
+                            if(this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F) iblockstate = ICE;
+                            else iblockstate = WATER;
+
                         }
 
                         j = k;
 
-                        if(j1 >= i - 1)
-                        {
-                            chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
-                        } else if(j1 < i - 7 - k)
+                        if(j1 >= i - 1) chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
+                        else if(j1 < i - 7 - k)
                         {
                             iblockstate = AIR;
                             iblockstate1 = ModBlocks.DEPTH_STONE.getDefaultState();
                             chunkPrimerIn.setBlockState(i1, j1, l, ModBlocks.DEPTH_DIRT.getDefaultState());
-                        } else
-                        {
-                            chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-                        }
+                        } else chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+
                     } else if(j > 0)
                     {
                         --j;

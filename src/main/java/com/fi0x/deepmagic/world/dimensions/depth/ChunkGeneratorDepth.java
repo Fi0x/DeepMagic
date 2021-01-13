@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.dimensions.depth;
 
+import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -32,7 +33,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
     protected static final IBlockState DEPTH_STONE = ModBlocks.DEPTH_STONE.getDefaultState();
     protected static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
-    protected static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
+    protected static final IBlockState LAVA = Blocks.WATER.getDefaultState();
     protected static final IBlockState GRAVEL = ModBlocks.DEPTH_DIRT.getDefaultState();
     protected static final IBlockState SOUL_SAND = ModBlocks.DEPTH_DIRT.getDefaultState();
     private final World world;
@@ -237,12 +238,11 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         this.genNetherCaves.generate(this.world, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
-        Biome[] abiome = this.world.getBiomeProvider().getBiomes(null, x * 16, z * 16, 16, 16);
         byte[] abyte = chunk.getBiomeArray();
 
         for(int i = 0; i < abyte.length; ++i)
         {
-            abyte[i] = (byte) Biome.getIdForBiome(abiome[i]);
+            abyte[i] = (byte) Biome.getIdForBiome(BiomeInit.DEPTH);
         }
 
         chunk.resetRelightChecks();
@@ -344,19 +344,13 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         Biome biome = this.world.getBiome(blockpos.add(16, 0, 16));
         ChunkPos chunkpos = new ChunkPos(x, z);
 
-        if(net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA))
-            for(int k = 0; k < 8; ++k)
-            {
-                this.hellSpringGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
-            }
-
-        if(net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.FIRE))
+        if(TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.FIRE))
             for(int i1 = 0; i1 < this.rand.nextInt(this.rand.nextInt(10) + 1) + 1; ++i1)
             {
                 this.fireFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
             }
 
-        if(net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE))
+        if(TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE))
         {
             for(int j1 = 0; j1 < this.rand.nextInt(this.rand.nextInt(10) + 1); ++j1)
             {
@@ -371,21 +365,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, chunkpos));
-
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(this.world, this.rand, chunkpos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM))
-        {
-            if(this.rand.nextBoolean())
-            {
-                this.brownMushroomFeature.generate(world, rand, blockpos.add(rand.nextInt(16) + 8, rand.nextInt(128), rand.nextInt(16) + 8));
-            }
-        }
-
-        if(net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA2))
-            for(int j2 = 0; j2 < 16; ++j2)
-            {
-                int offset = net.minecraftforge.common.ForgeModContainer.fixVanillaCascading ? 8 : 0; // MC-117810
-                this.lavaTrapGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + offset, this.rand.nextInt(108) + 10, this.rand.nextInt(16) + offset));
-            }
 
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
 

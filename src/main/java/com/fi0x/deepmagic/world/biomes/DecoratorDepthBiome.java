@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.ModBlocks;
-import net.minecraft.block.BlockBush;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -28,8 +27,6 @@ public class DecoratorDepthBiome extends BiomeDecorator
     public WorldGenerator redstoneGen;
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
-    public int flowersPerChunk = 2;
-    public int grassPerChunk = 1;
 
     public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
@@ -60,35 +57,12 @@ public class DecoratorDepthBiome extends BiomeDecorator
         this.generateOres(worldIn, random);
 
         //TODO: Generate cave flora
-        if(TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
-        {
-            for(int l2 = 0; l2 < this.flowersPerChunk; ++l2)
-            {
-                int i7 = random.nextInt(16) + 8;
-                int l10 = random.nextInt(16) + 8;
-                int j14 = worldIn.getHeight(this.chunkPos.add(i7, 0, l10)).getY() + 32;
-
-                if(j14 > 0)
-                {
-                    int k17 = random.nextInt(j14);
-                    BlockPos blockpos1 = this.chunkPos.add(i7, k17, l10);
-
-                    for(int i = 0; i < 64; ++i)
-                    {
-                        BlockPos blockpos = blockpos1.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-                        if(worldIn.isAirBlock(blockpos) && blockpos.getY() < 255 && ((BlockBush) ModBlocks.INSANITY_FLOWER).canBlockStay(worldIn, blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState()))
-                        {
-                            worldIn.setBlockState(blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState(), 2);
-                        }
-                    }
-                }
-            }
-        }
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
     protected void generateOres(@Nonnull World worldIn, @Nonnull Random random)
     {
+        //TODO: Spawn ores on every height
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(worldIn, random, chunkPos));
         if(TerrainGen.generateOre(worldIn, random, dirtGen, chunkPos, OreGenEvent.GenerateMinable.EventType.DIRT))
             this.genStandardOre1(worldIn, random, this.chunkProviderSettings.dirtCount, this.dirtGen, this.chunkProviderSettings.dirtMinHeight, this.chunkProviderSettings.dirtMaxHeight);
