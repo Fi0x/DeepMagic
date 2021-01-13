@@ -120,11 +120,12 @@ public class ConfigHandler
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
     //Dwarf Base Marker
-    public static int dwarfBaseMarkerParticles;
     public static int dwarfMarkerSpawnChance;
     //BlockParticles
+    public static int dwarfBaseMarkerParticles;
     public static int magicLightParticles;
     public static int deepCrystalOreParticles;
+    public static int manaGeneratorParticles;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -323,13 +324,14 @@ public class ConfigHandler
 
         category = "Dwarf Base Marker";
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
-        dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
         dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");
+        dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
         magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
-        deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 50, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
+        deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
+        manaGeneratorParticles = blocks.getInt("Mana Generator Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Mana Generators");
 
         blocks.save();
     }
