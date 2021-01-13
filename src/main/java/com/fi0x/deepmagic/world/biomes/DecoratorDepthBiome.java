@@ -15,7 +15,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-//TODO: Adjust class to decorate more deeply and less insane
 public class DecoratorDepthBiome extends BiomeDecorator
 {
     public boolean decorating;
@@ -39,16 +38,17 @@ public class DecoratorDepthBiome extends BiomeDecorator
             throw new RuntimeException("Already decorating");
         } else
         {
+            //TODO: Use deep blocks instead of insane
             this.chunkProviderSettings = ChunkGeneratorSettings.Factory.jsonToFactory(worldIn.getWorldInfo().getGeneratorOptions()).build();
             this.chunkPos = pos;
             this.dirtGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
             this.gravelOreGen = new WorldGenMinable(ModBlocks.INSANITY_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);
-            this.coalGen = new WorldGenMinable(ModBlocks.INSANITY_COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
-            this.ironGen = new WorldGenMinable(ModBlocks.INSANITY_IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
-            this.goldGen = new WorldGenMinable(ModBlocks.INSANITY_GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);
-            this.redstoneGen = new WorldGenMinable(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState(), this.chunkProviderSettings.redstoneSize);
-            this.diamondGen = new WorldGenMinable(ModBlocks.INSANITY_DIAMOND_ORE.getDefaultState(), this.chunkProviderSettings.diamondSize);
-            this.lapisGen = new WorldGenMinable(ModBlocks.INSANITY_LAPIS_ORE.getDefaultState(), this.chunkProviderSettings.lapisSize);
+            this.coalGen = new WorldGenMinable(ModBlocks.DEPTH_COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
+            this.ironGen = new WorldGenMinable(ModBlocks.DEPTH_IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
+            this.goldGen = new WorldGenMinable(ModBlocks.DEPTH_GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);
+            this.redstoneGen = new WorldGenMinable(ModBlocks.DEPTH_REDSTONE_ORE.getDefaultState(), this.chunkProviderSettings.redstoneSize);
+            this.diamondGen = new WorldGenMinable(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState(), this.chunkProviderSettings.diamondSize);
+            this.lapisGen = new WorldGenMinable(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState(), this.chunkProviderSettings.lapisSize);
             this.genDecorations(biome, worldIn, random);
             this.decorating = false;
         }
@@ -60,6 +60,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
         this.generateOres(worldIn, random);
 
+        //TODO: Generate cave flora
         if(TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
         {
             for(int l2 = 0; l2 < this.flowersPerChunk; ++l2)
@@ -81,22 +82,6 @@ public class DecoratorDepthBiome extends BiomeDecorator
                             worldIn.setBlockState(blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState(), 2);
                         }
                     }
-                }
-            }
-        }
-
-        if(TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS))
-        {
-            for(int i3 = 0; i3 < this.grassPerChunk; ++i3)
-            {
-                int j7 = random.nextInt(16) + 8;
-                int i11 = random.nextInt(16) + 8;
-                int k14 = worldIn.getHeight(this.chunkPos.add(j7, 0, i11)).getY() * 2;
-
-                if(k14 > 0)
-                {
-                    int l17 = random.nextInt(k14);
-                    biomeIn.getRandomWorldGenForGrass(random).generate(worldIn, random, this.chunkPos.add(j7, l17, i11));
                 }
             }
         }

@@ -1,8 +1,6 @@
 package com.fi0x.deepmagic.world.biomes;
 
-import com.fi0x.deepmagic.entities.mobs.*;
 import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -17,7 +15,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-//TODO: Adjust class to be less insane and more deep
 public class BiomeDepth extends Biome
 {
     //TODO: Adjust blocks
@@ -28,6 +25,7 @@ public class BiomeDepth extends Biome
 
     public BiomeDepth()
     {
+        //TODO: Adjust values
         super(new BiomeProperties("Depth").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
@@ -37,16 +35,12 @@ public class BiomeDepth extends Biome
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
 
-        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCockroach.class, 5, 1, 3));
-        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
-        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
-        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
-        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 2, 1, 2));
+        //TODO: Add spawn-lists
 
         this.flowers.clear();
-        addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
+        //TODO: use custom flowers
 
-        decorator = new DecoratorInsanityBiome();
+        decorator = new DecoratorDepthBiome();
     }
 
     @Override
@@ -56,6 +50,7 @@ public class BiomeDepth extends Biome
     }
     public final void generateBiomeTerrain2(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
+        //TODO: Check if generating works for cave dimension
         int i = worldIn.getSeaLevel();
         IBlockState iblockstate = this.topBlock;
         IBlockState iblockstate1 = this.fillerBlock;

@@ -88,8 +88,7 @@ public class ModWorldGen implements IWorldGenerator
 
 	private void generateDepthDimension(Random random, int chunkX, int chunkZ, World world)
 	{
-		//TODO: Use deep crystal ore for depth dimension and adjust values
-		generateOre(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 1, 64, 8, 20);
+		generateOre(ModBlocks.DEEP_CRYSTAL_ORE_COMPRESSED.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 1, 256, 10, 20);
 	}
 
 	private void generateDefaultDimension(Random random, int chunkX, int chunkZ, World world)
