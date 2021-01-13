@@ -46,16 +46,16 @@ public class DeepCrystalOre extends BlockBase
 	@Override
 	public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
-		if(rand.nextInt(16) > 0) return;
+		if(rand.nextInt(100) + 1 > ConfigHandler.deepCrystalOreParticles) return;
 
 		int particles = 0;
 		switch(Minecraft.getMinecraft().gameSettings.particleSetting)
 		{
 			case 0:
-				particles = ConfigHandler.deepCrystalOreParticles;
+				particles = 1;
 				break;
 			case 1:
-				particles = ConfigHandler.deepCrystalOreParticles / 2;
+				particles = 2;
 		}
 
 		for(int i = 0; i < particles; i++)

@@ -20,7 +20,7 @@ public class ParticleDeepCrystalOre extends Particle
     {
         super(worldIn, x, y, z, speedX, speedY, speedZ);
 
-        this.particleScale *= (rand.nextDouble() + 0.5 * scale);
+        this.particleScale *= (rand.nextDouble() + 0.5 * scale) * 0.5;
         this.particleMaxAge = (int) (Math.random() * 40 + 20);
         this.canCollide = false;
 

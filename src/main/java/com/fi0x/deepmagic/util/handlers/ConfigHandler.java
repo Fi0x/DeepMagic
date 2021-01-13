@@ -329,7 +329,7 @@ public class ConfigHandler
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");
         magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
-        deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 6, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
+        deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 50, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
 
         blocks.save();
     }
