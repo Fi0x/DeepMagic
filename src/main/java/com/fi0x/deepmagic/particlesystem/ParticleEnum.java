@@ -9,7 +9,8 @@ public enum ParticleEnum
     DWARF_SEARCH_MINE("dwarf_search_mine", ConfigHandler.firstParticleID + 1, false, ParticleDwarfSearchMine.class),
     MANA_BLOCK("mana_block", ConfigHandler.firstParticleID + 2, false, ParticleManaBlock.class),
     SPELL_PROJECTILE("spell_projectile", ConfigHandler.firstParticleID + 3, false, ParticleSpellProjectile.class),
-    DEEP_CRYSTAL_ORE("deep_crystal_ore", ConfigHandler.firstParticleID + 4, false, ParticleDeepCrystalOre.class);
+    DEEP_CRYSTAL_ORE("deep_crystal_ore", ConfigHandler.firstParticleID + 4, false, ParticleDeepCrystalOre.class),
+    INSANITY_PLANT("insanity_plant", ConfigHandler.firstParticleID + 5, false, ParticlePlant.class);
 
     private final Class particleClass;
     private final String textureName;

@@ -195,7 +195,6 @@ public class ManaGeneratorNormal extends BlockBase implements ITileEntityProvide
         double z = pos.getZ() + (Math.random() * 0.2) + 0.4;
 
         ParticleSpawner.spawnParticle(ParticleEnum.MANA_BLOCK, x, y, z, 0, 0, 0, Math.random() * 0.3 + 0.2, false, 16);
-
     }
 
     public static void setState(boolean active, World world, BlockPos pos)
