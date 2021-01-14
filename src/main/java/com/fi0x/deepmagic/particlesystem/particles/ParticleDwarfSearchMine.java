@@ -19,7 +19,7 @@ public class ParticleDwarfSearchMine extends Particle
     {
         super(worldIn, x, y, z, speedX, speedY, speedZ);
 
-        this.particleScale = (float) scale;
+        this.particleScale = (float) scale * 2;
         this.particleMaxAge = 100;
 
         this.particleRed = (float) (0.8 + Math.random() * 0.2);

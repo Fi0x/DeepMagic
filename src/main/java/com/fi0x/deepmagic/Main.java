@@ -94,7 +94,7 @@ public class Main
 	@Mod.EventHandler
 	public static void PostInit(FMLPostInitializationEvent event)
 	{
-		AIHelperMining.fillMiningWhitelist();
+		AIHelperMining.fillMiningWhitelists();
 	}
 
 	@Mod.EventHandler

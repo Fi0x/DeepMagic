@@ -86,8 +86,13 @@ public class EntityAIMining extends EntityAIBase
                 direction = EnumFacing.WEST;
                 break;
         }
-        startPosition = AIHelperMining.findMiningStartPosition(world, entity.getPosition(), direction);
+        startPosition = AIHelperMining.findMiningStartPosition(world, entity.getPosition(), entity.homePos);
         if(startPosition == null) return;
+        else if(startPosition == entity.homePos)
+        {
+            goHome = true;
+            return;
+        }
 
         destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
         digDelay = 0;

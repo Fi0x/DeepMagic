@@ -21,8 +21,9 @@ import java.util.Random;
 public class AIHelperMining
 {
     public static ArrayList<IBlockState> mineableBlocks = null;
+    public static ArrayList<IBlockState> oreWhitelist = null;
 
-    public static void fillMiningWhitelist()
+    public static void fillMiningWhitelists()
     {
         mineableBlocks = new ArrayList<>();
         mineableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
@@ -48,6 +49,8 @@ public class AIHelperMining
             mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND));
             mineableBlocks.add(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND));
         }
+
+        oreWhitelist = new ArrayList<>();
         if(ConfigHandler.dwarfMineOres)
         {
             mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
@@ -70,6 +73,15 @@ public class AIHelperMining
             mineableBlocks.add(ModBlocks.INSANITY_DIAMOND_ORE.getDefaultState());
             mineableBlocks.add(ModBlocks.INSANITY_EMERALD_ORE.getDefaultState());
             mineableBlocks.add(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState());
+
+            mineableBlocks.add(ModBlocks.DEPTH_COAL_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEPTH_GOLD_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEPTH_EMERALD_ORE.getDefaultState());
+            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE_COMPRESSED.getDefaultState());
         }
     }
 
@@ -97,7 +109,7 @@ public class AIHelperMining
         }
         return false;
     }
-    public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation, EnumFacing direction)
+    public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation, BlockPos baseMarker)
     {
         ArrayList<BlockPos> checkBlocks = new ArrayList<>();
         ArrayList<BlockPos> blocksDone = new ArrayList<>();
@@ -105,64 +117,42 @@ public class AIHelperMining
 
         while(!checkBlocks.isEmpty())
         {
-            BlockPos pos = checkBlocks.get(0);
-            if(ConfigHandler.showAISearchParticles) ParticleSpawner.spawnParticle(ParticleEnum.DWARF_SEARCH_MINE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, 2, false, 16);
-            if(validatePosition(world, pos, direction)) return pos;
+            int idx = (int) (Math.random() * checkBlocks.size());
+            BlockPos pos = checkBlocks.get(idx);
+            if(ConfigHandler.showAISearchParticles) ParticleSpawner.spawnParticle(ParticleEnum.DWARF_SEARCH_MINE, pos);
+
+            if((pos.getY() - baseMarker.getY()) % 3 == 0)
+            {
+                BlockPos possibleStart = getStartBlock(world, pos, baseMarker);
+                if(possibleStart != pos) return possibleStart;
+            }
             blocksDone.add(pos);
 
-            if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null && world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null && world.getBlockState(pos.down()).isFullBlock())
+            if(pos.distanceSq(entityLocation) < ConfigHandler.aiSearchRange * ConfigHandler.aiSearchRange)
             {
-                int dX = Math.max(entityLocation.getX(), pos.getX()) - Math.min(entityLocation.getX(), pos.getX());
-                int dY = Math.max(entityLocation.getY(), pos.getY()) - Math.min(entityLocation.getY(), pos.getY());
-                int dZ = Math.max(entityLocation.getZ(), pos.getZ()) - Math.min(entityLocation.getZ(), pos.getZ());
-                int distance = dX * dX + dY * dY + dZ * dZ;
-
-                if(distance <= ConfigHandler.aiSearchRange * ConfigHandler.aiSearchRange)
-                {
-                    if(!blocksDone.contains(pos.north()) && !checkBlocks.contains(pos.north())) checkBlocks.add(pos.north());
-
-                    if(!blocksDone.contains(pos.east()) && !checkBlocks.contains(pos.east())) checkBlocks.add(pos.east());
-
-                    if(!blocksDone.contains(pos.south()) && !checkBlocks.contains(pos.south())) checkBlocks.add(pos.south());
-
-                    if(!blocksDone.contains(pos.west()) && !checkBlocks.contains(pos.west())) checkBlocks.add(pos.west());
-                }
+                checkBlocks.addAll(getNewCheckPositions(world, pos, blocksDone));
             }
-            checkBlocks.remove(0);
+            checkBlocks.remove(idx);
         }
         return null;
     }
-    private static boolean validatePosition(World world, BlockPos pos, EnumFacing direction)
+    private static BlockPos getStartBlock(World world, BlockPos checkPos, BlockPos baseMarker)
     {
+        //TODO: check if any adjacent block is a valid start block and return it if true
+
+        return checkPos;
+    }
+    private static boolean validatePosition(World world, BlockPos pos, BlockPos baseMarker)
+    {
+        /*
+        TODO: Use direction that faces away from baseMarker
+         verify if height is valid (% 3 == 0)
+         */
         BlockPos freeBlock = pos.south();
         BlockPos rightBlock = pos.east();
         BlockPos rightNext = rightBlock.north();
         BlockPos leftBlock = pos.west();
         BlockPos leftNext = leftBlock.north();
-        switch(direction)
-        {
-            case EAST:
-                freeBlock = pos.west();
-                rightBlock = pos.south();
-                rightNext = rightBlock.east();
-                leftBlock = pos.north();
-                leftNext = leftBlock.east();
-                break;
-            case SOUTH:
-                freeBlock = pos.north();
-                rightBlock = pos.west();
-                rightNext = rightBlock.south();
-                leftBlock = pos.east();
-                leftNext = leftBlock.south();
-                break;
-            case WEST:
-                freeBlock = pos.east();
-                rightBlock = pos.north();
-                rightNext = rightBlock.west();
-                leftBlock = pos.south();
-                leftNext = leftBlock.west();
-                break;
-        }
 
         if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null || world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
         if(world.getBlockState(rightBlock).getCollisionBoundingBox(world, rightBlock) == null && world.getBlockState(rightNext).getCollisionBoundingBox(world, rightNext) == null) return false;
@@ -181,6 +171,14 @@ public class AIHelperMining
         if(downBlock && upAir) return true;
         if(downBlock && upBlock) return true;
         return downAir && upBlock;
+    }
+    private static ArrayList<BlockPos> getNewCheckPositions(World world, BlockPos centerPos, ArrayList<BlockPos> blocksDone)
+    {
+        ArrayList<BlockPos> positions = new ArrayList<>();
+
+        //TODO: Get reachable floor positions
+
+        return positions;
     }
     public static BlockPos getRandomPosition(BlockPos start, EnumFacing direction, Random rand)
     {

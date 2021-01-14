@@ -14,7 +14,7 @@ public class ParticleSpawner
 
     public static void spawnParticle(ParticleEnum type, BlockPos pos)
     {
-        spawnParticle(type, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0, 1, false, 16);
+        spawnParticle(type, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, 1, false, 16);
     }
     public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ)
     {
