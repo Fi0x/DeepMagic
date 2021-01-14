@@ -38,6 +38,7 @@ public class EntityAIMining extends EntityAIBase
     private int digDelay;
     private boolean searchChest;
     private boolean goHome;
+    public EnumFacing direction;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -86,7 +87,7 @@ public class EntityAIMining extends EntityAIBase
                 direction = EnumFacing.WEST;
                 break;
         }
-        startPosition = AIHelperMining.findMiningStartPosition(world, entity.getPosition(), entity.homePos);
+        startPosition = AIHelperMining.findMiningStartPosition(world, this);
         if(startPosition == null) return;
         else if(startPosition == entity.homePos)
         {

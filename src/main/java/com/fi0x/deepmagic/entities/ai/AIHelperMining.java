@@ -7,7 +7,10 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
@@ -109,11 +112,11 @@ public class AIHelperMining
         }
         return false;
     }
-    public static BlockPos findMiningStartPosition(World world, BlockPos entityLocation, BlockPos baseMarker)
+    public static BlockPos findMiningStartPosition(World world, EntityAIMining ai)
     {
         ArrayList<BlockPos> checkBlocks = new ArrayList<>();
         ArrayList<BlockPos> blocksDone = new ArrayList<>();
-        checkBlocks.add(entityLocation);
+        checkBlocks.add(ai.entity.getPosition());
 
         while(!checkBlocks.isEmpty())
         {
@@ -121,14 +124,14 @@ public class AIHelperMining
             BlockPos pos = checkBlocks.get(idx);
             if(ConfigHandler.showAISearchParticles) ParticleSpawner.spawnParticle(ParticleEnum.DWARF_SEARCH_MINE, pos);
 
-            if((pos.getY() - baseMarker.getY()) % 3 == 0)
+            if((pos.getY() - ai.entity.homePos.getY()) % 3 == 0)
             {
-                BlockPos possibleStart = getStartBlock(world, pos, baseMarker);
+                BlockPos possibleStart = getStartBlock(world, pos, ai);
                 if(possibleStart != pos) return possibleStart;
             }
             blocksDone.add(pos);
 
-            if(pos.distanceSq(entityLocation) < ConfigHandler.aiSearchRange * ConfigHandler.aiSearchRange)
+            if(pos.distanceSq(ai.entity.getPosition()) < ConfigHandler.aiSearchRange * ConfigHandler.aiSearchRange)
             {
                 checkBlocks.addAll(getNewCheckPositions(world, pos, blocksDone));
             }
@@ -136,47 +139,73 @@ public class AIHelperMining
         }
         return null;
     }
-    private static BlockPos getStartBlock(World world, BlockPos checkPos, BlockPos baseMarker)
+    private static BlockPos getStartBlock(World world, BlockPos checkPos, EntityAIMining ai)
     {
-        //TODO: check if any adjacent block is a valid start block and return it if true
+        /*
+        TODO: Set direction to face away from entity home position
+         check if any adjacent block is a valid start block
+         set direction in ai
+         return it if true
+         */
 
         return checkPos;
     }
-    private static boolean validatePosition(World world, BlockPos pos, BlockPos baseMarker)
-    {
-        /*
-        TODO: Use direction that faces away from baseMarker
-         verify if height is valid (% 3 == 0)
-         */
-        BlockPos freeBlock = pos.south();
-        BlockPos rightBlock = pos.east();
-        BlockPos rightNext = rightBlock.north();
-        BlockPos leftBlock = pos.west();
-        BlockPos leftNext = leftBlock.north();
-
-        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null || world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
-        if(world.getBlockState(rightBlock).getCollisionBoundingBox(world, rightBlock) == null && world.getBlockState(rightNext).getCollisionBoundingBox(world, rightNext) == null) return false;
-        if(world.getBlockState(leftBlock).getCollisionBoundingBox(world, leftBlock) == null && world.getBlockState(leftNext).getCollisionBoundingBox(world, leftNext) == null) return false;
-
-        boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
-        boolean upAir = world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null;
-        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
-        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
-
-        Block b = world.getBlockState(pos).getBlock();
-        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
-        b = world.getBlockState(pos.up()).getBlock();
-        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
-
-        if(downBlock && upAir) return true;
-        if(downBlock && upBlock) return true;
-        return downAir && upBlock;
-    }
+    //    private static boolean validatePosition(World world, BlockPos pos, BlockPos baseMarker)
+//    {
+//        BlockPos freeBlock = pos.south();
+//        BlockPos rightBlock = pos.east();
+//        BlockPos rightNext = rightBlock.north();
+//        BlockPos leftBlock = pos.west();
+//        BlockPos leftNext = leftBlock.north();
+//
+//        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null || world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
+//        if(world.getBlockState(rightBlock).getCollisionBoundingBox(world, rightBlock) == null && world.getBlockState(rightNext).getCollisionBoundingBox(world, rightNext) == null) return false;
+//        if(world.getBlockState(leftBlock).getCollisionBoundingBox(world, leftBlock) == null && world.getBlockState(leftNext).getCollisionBoundingBox(world, leftNext) == null) return false;
+//
+//        boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
+//        boolean upAir = world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null;
+//        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
+//        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
+//
+//        Block b = world.getBlockState(pos).getBlock();
+//        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
+//        b = world.getBlockState(pos.up()).getBlock();
+//        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
+//
+//        if(downBlock && upAir) return true;
+//        if(downBlock && upBlock) return true;
+//        return downAir && upBlock;
+//    }
     private static ArrayList<BlockPos> getNewCheckPositions(World world, BlockPos centerPos, ArrayList<BlockPos> blocksDone)
     {
         ArrayList<BlockPos> positions = new ArrayList<>();
+        BlockPos[] attachedBlocks = {centerPos.north(), centerPos.east(), centerPos.south(), centerPos.west()};
 
-        //TODO: Get reachable floor positions
+        for(BlockPos pos : attachedBlocks)
+        {
+            if(world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null)
+            {
+                if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null)
+                {
+                    if(world.getBlockState(pos.down()).isFullCube())
+                    {
+                        if(!blocksDone.contains(pos)) positions.add(pos);
+                    } else if(world.getBlockState(pos.down()).getCollisionBoundingBox(world, pos.down()) == null)
+                    {
+                        if(world.getBlockState(pos.down().down()).isFullCube())
+                        {
+                            if(!blocksDone.contains(pos.down())) positions.add(pos.down());
+                        }
+                    }
+                } else if(world.getBlockState(pos).isFullCube())
+                {
+                    if(world.getBlockState(pos.up().up()).getCollisionBoundingBox(world, pos.up().up()) == null)
+                    {
+                        if(!blocksDone.contains(pos.up())) positions.add(pos.up());
+                    }
+                }
+            }
+        }
 
         return positions;
     }
