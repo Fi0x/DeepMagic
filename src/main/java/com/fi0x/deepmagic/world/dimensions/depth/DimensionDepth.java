@@ -69,7 +69,7 @@ public class DimensionDepth extends WorldProvider
     @Override
     public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
     {
-        return new Vec3d(0.3, 0.3, 0.3);
+        return new Vec3d(0.5, 0.5, 0.5);
     }
     @Override
     public boolean doesXZShowFog(int x, int z)
