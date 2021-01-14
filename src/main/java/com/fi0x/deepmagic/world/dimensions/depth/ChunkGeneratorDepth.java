@@ -18,7 +18,9 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenFire;
+import net.minecraft.world.gen.feature.WorldGenGlowStone1;
+import net.minecraft.world.gen.feature.WorldGenGlowStone2;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextHell;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -52,9 +54,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     private final WorldGenFire fireFeature = new WorldGenFire();//TODO: Use ice instead of fire
     private final WorldGenGlowStone1 lightGemGen = new WorldGenGlowStone1();//TODO: Use custom glowstones
     private final WorldGenGlowStone2 hellPortalGen = new WorldGenGlowStone2();//TODO: Use custom glowstones
-    private final WorldGenHellLava lavaTrapGen = new WorldGenHellLava(Blocks.FLOWING_LAVA, true);//TODO: Use frozen lava
-    private final WorldGenHellLava hellSpringGen = new WorldGenHellLava(Blocks.FLOWING_LAVA, false);//TODO: Use frozen lava
-    private final WorldGenBush brownMushroomFeature = new WorldGenBush(Blocks.BROWN_MUSHROOM);//TODO: Use custom flower
     private MapGenBase genNetherCaves = new MapGenCavesHell();//TODO: Change to use custom cave generator that uses space above 128
     double[] pnr;
     double[] ar;
@@ -86,6 +85,29 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         this.scaleNoise = ctx.getScale();
         this.depthNoise = ctx.getDepth();
         this.genNetherCaves = TerrainGen.getModdedMapGen(genNetherCaves, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE);
+    }
+
+    @Nonnull
+    @Override
+    public Chunk generateChunk(int x, int z)
+    {
+        //TODO: Generate chunk correctly
+        this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+        ChunkPrimer chunkprimer = new ChunkPrimer();
+        this.prepareHeights(x, z, chunkprimer);
+        this.buildSurfaces(x, z, chunkprimer);
+        this.genNetherCaves.generate(this.world, x, z, chunkprimer);
+
+        Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
+        byte[] abyte = chunk.getBiomeArray();
+
+        for(int i = 0; i < abyte.length; ++i)
+        {
+            abyte[i] = (byte) Biome.getIdForBiome(BiomeInit.DEPTH);
+        }
+
+        chunk.resetRelightChecks();
+        return chunk;
     }
 
     public void prepareHeights(int p_185936_1_, int p_185936_2_, ChunkPrimer primer)
@@ -149,104 +171,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
                 }
             }
         }
-    }
-
-    public void buildSurfaces(int p_185937_1_, int p_185937_2_, ChunkPrimer primer)
-    {
-        //TODO: Find out what method does
-        if(!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer, this.world)) return;
-        int i = this.world.getSeaLevel() + 1;
-        this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
-        this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, p_185937_1_ * 16, 109, p_185937_2_ * 16, 16, 1, 16, 0.03125D, 1.0D, 0.03125D);
-        this.depthBuffer = this.netherrackExculsivityNoiseGen.generateNoiseOctaves(this.depthBuffer, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
-
-        for(int j = 0; j < 16; ++j)
-        {
-            for(int k = 0; k < 16; ++k)
-            {
-                boolean flag = this.slowsandNoise[j + k * 16] + this.rand.nextDouble() * 0.2D > 0.0D;
-                boolean flag1 = this.gravelNoise[j + k * 16] + this.rand.nextDouble() * 0.2D > 0.0D;
-                int l = (int) (this.depthBuffer[j + k * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
-                int i1 = -1;
-                IBlockState iblockstate = DEPTH_STONE;
-                IBlockState iblockstate1 = DEPTH_STONE;
-
-                for(int j1 = 255; j1 >= 0; --j1)
-                {
-                    if(j1 < 255 - this.rand.nextInt(5) && j1 > this.rand.nextInt(5))
-                    {
-                        IBlockState iblockstate2 = primer.getBlockState(k, j1, j);
-
-                        iblockstate2.getBlock();
-                        if(iblockstate2.getMaterial() != Material.AIR)
-                        {
-                            if(iblockstate2.getBlock() == ModBlocks.DEPTH_STONE)
-                            {
-                                if(i1 == -1)
-                                {
-                                    if(l <= 0)
-                                    {
-                                        iblockstate = AIR;
-                                        iblockstate1 = DEPTH_STONE;
-                                    } else if(j1 >= i - 4 && j1 <= i + 1)
-                                    {
-                                        iblockstate = DEPTH_STONE;
-                                        iblockstate1 = DEPTH_STONE;
-
-                                        if(flag1)
-                                        {
-                                            iblockstate = GRAVEL;
-                                            iblockstate1 = DEPTH_STONE;
-                                        }
-
-                                        if(flag)
-                                        {
-                                            iblockstate = SOUL_SAND;
-                                            iblockstate1 = SOUL_SAND;
-                                        }
-                                    }
-
-                                    if(j1 < i && iblockstate.getMaterial() == Material.AIR) iblockstate = LAVA;
-
-                                    i1 = l;
-
-                                    if(j1 >= i - 1) primer.setBlockState(k, j1, j, iblockstate);
-                                    else primer.setBlockState(k, j1, j, iblockstate1);
-
-                                } else if(i1 > 0)
-                                {
-                                    --i1;
-                                    primer.setBlockState(k, j1, j, iblockstate1);
-                                }
-                            }
-                        } else i1 = -1;
-                    } else primer.setBlockState(k, j1, j, BEDROCK);
-                }
-            }
-        }
-    }
-
-    @Nonnull
-    @Override
-    public Chunk generateChunk(int x, int z)
-    {
-        //TODO: Generate chunk correctly
-        this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
-        ChunkPrimer chunkprimer = new ChunkPrimer();
-        this.prepareHeights(x, z, chunkprimer);
-        this.buildSurfaces(x, z, chunkprimer);
-        this.genNetherCaves.generate(this.world, x, z, chunkprimer);
-
-        Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
-        byte[] abyte = chunk.getBiomeArray();
-
-        for(int i = 0; i < abyte.length; ++i)
-        {
-            abyte[i] = (byte) Biome.getIdForBiome(BiomeInit.DEPTH);
-        }
-
-        chunk.resetRelightChecks();
-        return chunk;
     }
 
     private double[] getHeights(double[] p_185938_1_, int p_185938_2_, int p_185938_3_, int p_185938_4_, int p_185938_5_, int p_185938_6_, int p_185938_7_)
@@ -333,9 +257,88 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         return p_185938_1_;
     }
 
+    public void buildSurfaces(int chunkX, int chunkZ, ChunkPrimer primer)
+    {
+        //TODO: Find out what method does
+        if(!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, chunkX, chunkZ, primer, this.world)) return;
+        int oceanHeight = this.world.getSeaLevel() + 1;
+        this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
+        this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, chunkX * 16, 109, chunkZ * 16, 16, 1, 16, 0.03125D, 1.0D, 0.03125D);
+        this.depthBuffer = this.netherrackExculsivityNoiseGen.generateNoiseOctaves(this.depthBuffer, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
+
+        for(int blockZ = 0; blockZ < 16; ++blockZ)
+        {
+            for(int blockX = 0; blockX < 16; ++blockX)
+            {
+                boolean flagSoulSand = this.slowsandNoise[blockZ + blockX * 16] + this.rand.nextDouble() * 0.2D > 0.0D;
+                boolean flagGravel = this.gravelNoise[blockZ + blockX * 16] + this.rand.nextDouble() * 0.2D > 0.0D;
+                int depthLayout = (int) (this.depthBuffer[blockZ + blockX * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
+                int i1 = -1;
+                IBlockState iblockstate = DEPTH_STONE;
+                IBlockState iblockstate1 = DEPTH_STONE;
+
+                for(int currentY = 255; currentY >= 0; --currentY)
+                {
+                    if(currentY < 255 - this.rand.nextInt(5) && currentY > this.rand.nextInt(5))
+                    {
+                        IBlockState currentBlockState = primer.getBlockState(blockX, currentY, blockZ);
+
+                        currentBlockState.getBlock();
+                        if(currentBlockState.getMaterial() != Material.AIR)
+                        {
+                            if(currentBlockState.getBlock() == ModBlocks.DEPTH_STONE)
+                            {
+                                if(i1 == -1)
+                                {
+                                    if(depthLayout <= 0)
+                                    {
+                                        iblockstate = AIR;
+                                        iblockstate1 = DEPTH_STONE;
+                                    } else if(currentY >= oceanHeight - 4 && currentY <= oceanHeight + 1)
+                                    {
+                                        iblockstate = DEPTH_STONE;
+                                        iblockstate1 = DEPTH_STONE;
+
+                                        if(flagGravel)
+                                        {
+                                            iblockstate = GRAVEL;
+                                            iblockstate1 = DEPTH_STONE;
+                                        }
+
+                                        if(flagSoulSand)
+                                        {
+                                            iblockstate = SOUL_SAND;
+                                            iblockstate1 = SOUL_SAND;
+                                        }
+                                    }
+
+                                    if(currentY < oceanHeight && iblockstate.getMaterial() == Material.AIR) iblockstate = LAVA;
+
+                                    i1 = depthLayout;
+
+                                    if(currentY >= oceanHeight - 1) primer.setBlockState(blockX, currentY, blockZ, iblockstate);
+                                    else primer.setBlockState(blockX, currentY, blockZ, iblockstate1);
+
+                                } else if(i1 > 0)
+                                {
+                                    --i1;
+                                    primer.setBlockState(blockX, currentY, blockZ, iblockstate1);
+                                }
+                            }
+                        } else i1 = -1;
+                    } else primer.setBlockState(blockX, currentY, blockZ, BEDROCK);
+                }
+            }
+        }
+    }
+
     public void populate(int x, int z)
     {
-        //TODO: Compare with insanity generator
+        //TODO: Compare with insanity and hell generators
+        /*
+        TODO: Generate frozen lava
+          Generate custom plants
+         */
         BlockFalling.fallInstantly = true;
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
         int i = x * 16;
