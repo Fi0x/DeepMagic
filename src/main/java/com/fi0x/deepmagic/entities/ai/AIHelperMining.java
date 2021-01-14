@@ -56,35 +56,35 @@ public class AIHelperMining
         oreWhitelist = new ArrayList<>();
         if(ConfigHandler.dwarfMineOres)
         {
-            mineableBlocks.add(Blocks.COAL_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.IRON_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.GOLD_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.DIAMOND_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.EMERALD_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.REDSTONE_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.LAPIS_ORE.getDefaultState());
-            mineableBlocks.add(Blocks.QUARTZ_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.COAL_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.IRON_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.GOLD_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.DIAMOND_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.EMERALD_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.REDSTONE_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.LAPIS_ORE.getDefaultState());
+            oreWhitelist.add(Blocks.QUARTZ_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEEP_CRYSTAL_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEEP_CRYSTAL_NETHER_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEEP_CRYSTAL_END_ORE.getDefaultState());
 
-            mineableBlocks.add(ModBlocks.INSANITY_COAL_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_LAPIS_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_GOLD_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_DIAMOND_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_EMERALD_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_COAL_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_LAPIS_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_GOLD_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_DIAMOND_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_EMERALD_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState());
 
-            mineableBlocks.add(ModBlocks.DEPTH_COAL_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEPTH_GOLD_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEPTH_EMERALD_ORE.getDefaultState());
-            mineableBlocks.add(ModBlocks.DEEP_CRYSTAL_ORE_COMPRESSED.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_COAL_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_GOLD_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_EMERALD_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEEP_CRYSTAL_ORE_COMPRESSED.getDefaultState());
         }
     }
 
@@ -141,14 +141,67 @@ public class AIHelperMining
     }
     private static BlockPos getStartBlock(World world, BlockPos checkPos, EntityAIMining ai)
     {
-        /*
-        TODO: Set direction to face away from entity home position
-         check if any adjacent block is a valid start block
-         set direction in ai
-         return it if true
-         */
+        ArrayList<EnumFacing> directions = new ArrayList<>();
+        directions.add(EnumFacing.NORTH);
+        directions.add(EnumFacing.EAST);
+        directions.add(EnumFacing.SOUTH);
+        directions.add(EnumFacing.WEST);
+
+        int rand = (int) (Math.random() * 4);
+        switch(rand)
+        {
+            case 0:
+                directions.add(directions.get(0));
+                directions.remove(0);
+            case 1:
+                directions.add(directions.get(0));
+                directions.remove(0);
+            case 2:
+                directions.add(directions.get(0));
+                directions.remove(0);
+                break;
+        }
+
+        for(EnumFacing direct : directions)
+        {
+            BlockPos current = checkPos.north();
+            switch(direct)
+            {
+                case EAST:
+                    current = checkPos.east();
+                    break;
+                case SOUTH:
+                    current = checkPos.south();
+                    break;
+                case WEST:
+                    current = checkPos.west();
+                    break;
+            }
+
+            if(isMineable(world, current))
+            {
+                if(isValidStart(world, current, direct))
+                {
+                    ai.direction = direct;
+                    return current;
+                }
+            }
+        }
 
         return checkPos;
+    }
+    private static boolean isMineable(World world, BlockPos pos)
+    {
+        if(mineableBlocks.contains(world.getBlockState(pos)) || oreWhitelist.contains(world.getBlockState(pos)))
+        {
+            return mineableBlocks.contains(world.getBlockState(pos.up())) || oreWhitelist.contains(world.getBlockState(pos.up()));
+        }
+        return false;
+    }
+    private static boolean isValidStart(World world, BlockPos startPos, EnumFacing direction)
+    {
+        //TODO: Similar to old validatePosition
+        return false;
     }
     //    private static boolean validatePosition(World world, BlockPos pos, BlockPos baseMarker)
 //    {

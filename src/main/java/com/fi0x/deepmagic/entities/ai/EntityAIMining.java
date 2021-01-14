@@ -95,6 +95,7 @@ public class EntityAIMining extends EntityAIBase
             return;
         }
 
+        //TODO: Use direction and new method to dig a tunnel
         destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
         digDelay = 0;
 
