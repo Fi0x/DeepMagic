@@ -246,11 +246,11 @@ public class AIHelperMining
 
         return firstRowGood && secondRowGood;
     }
-    private static boolean isWallBlock(World world, BlockPos pos)
+    public static boolean isWallBlock(World world, BlockPos pos)
     {
         return world.getBlockState(pos).getCollisionBoundingBox(world, pos) != null || world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) != null;
     }
-    private static BlockPos getNextBlock(BlockPos pos, EnumFacing direction)
+    public static BlockPos getNextBlock(BlockPos pos, EnumFacing direction)
     {
         switch(direction)
         {

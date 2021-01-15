@@ -206,6 +206,7 @@ public class EntityAIMining extends EntityAIBase
     protected boolean digAtBlockPos(BlockPos pos)
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
+        if(!hasWalls(floor.up())) return false;
         if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());//TODO: Use block from dwarf inventory
         Block block = world.getBlockState(pos).getBlock();
 
@@ -230,5 +231,37 @@ public class EntityAIMining extends EntityAIBase
         world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
         world.setBlockToAir(pos);
         return true;
+    }
+    private boolean hasWalls(BlockPos floorPos)
+    {
+        BlockPos right = floorPos.east().south();
+        BlockPos left = floorPos.west().south();
+        switch(direction)
+        {
+            case EAST:
+                right = floorPos.south().west();
+                left = floorPos.north().west();
+                break;
+            case SOUTH:
+                right = floorPos.west().north();
+                left = floorPos.east().north();
+                break;
+            case WEST:
+                right = floorPos.north().east();
+                left = floorPos.south().east();
+                break;
+        }
+        boolean rightOK = AIHelperMining.isWallBlock(world, right);
+        boolean leftOK = AIHelperMining.isWallBlock(world, left);
+
+        for(int i = 0; i < 2; i++)
+        {
+            right = AIHelperMining.getNextBlock(right, direction);
+            left = AIHelperMining.getNextBlock(left, direction);
+            rightOK = rightOK || AIHelperMining.isWallBlock(world, right);
+            leftOK = leftOK || AIHelperMining.isWallBlock(world, left);
+        }
+
+        return rightOK && leftOK;
     }
 }
