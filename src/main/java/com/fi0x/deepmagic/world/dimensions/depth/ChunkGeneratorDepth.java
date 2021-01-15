@@ -30,6 +30,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     private final IBlockState FILLER_MAIN = ModBlocks.DEPTH_STONE.getDefaultState();
 
     private final int MAX_HEIGHT = 255;
+    private final int SEA_LEVEL = 200;
     private final World world;
     private final Random rand;
     private MapGenBase ravineGenerator = new MapGenRavine();
@@ -42,7 +43,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
         caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, InitMapGenEvent.EventType.CAVE);
 
-        worldIn.setSeaLevel(63);
+        worldIn.setSeaLevel(SEA_LEVEL);
     }
     @Nonnull
     @Override
