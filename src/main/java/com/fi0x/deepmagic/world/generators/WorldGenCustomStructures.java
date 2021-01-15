@@ -50,7 +50,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		} else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
 		{
 			/*
-			TODO: Adjust structure generating
+			TODO: Adjust custom structure generating
 			 Add stongholds
 			 Add mineshafts
 			 Add Temples
