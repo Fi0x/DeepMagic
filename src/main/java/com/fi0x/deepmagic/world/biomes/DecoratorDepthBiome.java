@@ -35,7 +35,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
             throw new RuntimeException("Already decorating");
         } else
         {
-            this.chunkProviderSettings = ChunkGeneratorSettings.Factory.jsonToFactory(worldIn.getWorldInfo().getGeneratorOptions()).build();
+            this.chunkProviderSettings = ChunkGeneratorSettings.Factory.jsonToFactory(worldIn.getWorldInfo().getGeneratorOptions()).build();//TODO: Adjust ore heights
             this.chunkPos = pos;
             this.dirtGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
             this.gravelOreGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);

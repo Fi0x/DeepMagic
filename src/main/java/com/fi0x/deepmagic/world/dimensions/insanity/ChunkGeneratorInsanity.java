@@ -261,8 +261,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 		BlockPos pos = new BlockPos(i, 0, j);
 		Biome biome = this.world.getBiome(pos.add(16, 0, 16));
 		this.rand.setSeed(this.world.getSeed());
-		long k = this.rand.nextLong() / 2L * 2L + 1L,
-				l = this.rand.nextLong() / 2L * 2L + 1L;
+		long k = this.rand.nextLong() / 2L * 2L + 1L;
+		long l = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
 
 		biome.decorate(world, rand, new BlockPos(i, 0, j));
