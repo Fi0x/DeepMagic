@@ -200,35 +200,71 @@ public class AIHelperMining
     }
     private static boolean isValidStart(World world, BlockPos startPos, EnumFacing direction)
     {
-        //TODO: Similar to old validatePosition
-        return false;
+        BlockPos right = startPos.east();
+        BlockPos left = startPos.west();
+        BlockPos right2 = right.east();
+        BlockPos left2 = left.west();
+
+        switch(direction)
+        {
+            case EAST:
+                right = startPos.south();
+                left = startPos.north();
+                right2 = right.south();
+                left2 = left.north();
+                break;
+            case SOUTH:
+                right = startPos.west();
+                left = startPos.east();
+                right2 = right.west();
+                left2 = left.east();
+                break;
+            case WEST:
+                right = startPos.north();
+                left = startPos.south();
+                right2 = right.north();
+                left2 = left.south();
+                break;
+        }
+
+        boolean rightOK = isWallBlock(world, right);
+        boolean rightNextOK = isWallBlock(world, right2);
+        boolean leftOK = isWallBlock(world, left);
+        boolean leftNextOK = isWallBlock(world, left2);
+        boolean firstRowGood = rightOK && rightNextOK && leftOK && leftNextOK;
+
+        right = getNextBlock(right, direction);
+        right2 = getNextBlock(right2, direction);
+        left = getNextBlock(left, direction);
+        left2 = getNextBlock(left2, direction);
+
+        rightOK = isWallBlock(world, right);
+        rightNextOK = isWallBlock(world, right2);
+        leftOK = isWallBlock(world, left);
+        leftNextOK = isWallBlock(world, left2);
+        boolean secondRowGood = rightOK && rightNextOK && leftOK && leftNextOK;
+
+        return firstRowGood && secondRowGood;
     }
-    //    private static boolean validatePosition(World world, BlockPos pos, BlockPos baseMarker)
-//    {
-//        BlockPos freeBlock = pos.south();
-//        BlockPos rightBlock = pos.east();
-//        BlockPos rightNext = rightBlock.north();
-//        BlockPos leftBlock = pos.west();
-//        BlockPos leftNext = leftBlock.north();
-//
-//        if(world.getBlockState(freeBlock).getCollisionBoundingBox(world, freeBlock) != null || world.getBlockState(freeBlock.up()).getCollisionBoundingBox(world, freeBlock.up()) != null) return false;
-//        if(world.getBlockState(rightBlock).getCollisionBoundingBox(world, rightBlock) == null && world.getBlockState(rightNext).getCollisionBoundingBox(world, rightNext) == null) return false;
-//        if(world.getBlockState(leftBlock).getCollisionBoundingBox(world, leftBlock) == null && world.getBlockState(leftNext).getCollisionBoundingBox(world, leftNext) == null) return false;
-//
-//        boolean downAir = world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null;
-//        boolean upAir = world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) == null;
-//        boolean downBlock = mineableBlocks.contains(world.getBlockState(pos));
-//        boolean upBlock = mineableBlocks.contains(world.getBlockState(pos.up()));
-//
-//        Block b = world.getBlockState(pos).getBlock();
-//        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
-//        b = world.getBlockState(pos.up()).getBlock();
-//        if(b == Blocks.DIRT || b == Blocks.STONE || b == Blocks.SAND) downBlock = true;
-//
-//        if(downBlock && upAir) return true;
-//        if(downBlock && upBlock) return true;
-//        return downAir && upBlock;
-//    }
+    private static boolean isWallBlock(World world, BlockPos pos)
+    {
+        return world.getBlockState(pos).getCollisionBoundingBox(world, pos) != null || world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) != null;
+    }
+    private static BlockPos getNextBlock(BlockPos pos, EnumFacing direction)
+    {
+        switch(direction)
+        {
+            case NORTH:
+                return pos.north();
+            case EAST:
+                return pos.east();
+            case SOUTH:
+                return pos.south();
+            case WEST:
+                return pos.west();
+        }
+        return pos;
+    }
     private static ArrayList<BlockPos> getNewCheckPositions(World world, BlockPos centerPos, ArrayList<BlockPos> blocksDone)
     {
         ArrayList<BlockPos> positions = new ArrayList<>();
