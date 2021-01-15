@@ -190,7 +190,7 @@ public class AIHelperMining
 
         return checkPos;
     }
-    private static boolean isMineable(World world, BlockPos pos)
+    public static boolean isMineable(World world, BlockPos pos)
     {
         if(mineableBlocks.contains(world.getBlockState(pos)) || oreWhitelist.contains(world.getBlockState(pos)))
         {

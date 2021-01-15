@@ -73,20 +73,6 @@ public class EntityAIMining extends EntityAIBase
     {
         chestPos = AIHelperMining.findChest(world, entity.homePos, entity.getPosition());
 
-        EnumFacing direction = EnumFacing.NORTH;
-        int rand = (int) (Math.random() * 4);
-        switch(rand)
-        {
-            case 0:
-                direction = EnumFacing.EAST;
-                break;
-            case 1:
-                direction = EnumFacing.SOUTH;
-                break;
-            case 2:
-                direction = EnumFacing.WEST;
-                break;
-        }
         startPosition = AIHelperMining.findMiningStartPosition(world, this);
         if(startPosition == null) return;
         else if(startPosition == entity.homePos)
@@ -95,7 +81,6 @@ public class EntityAIMining extends EntityAIBase
             return;
         }
 
-        //TODO: Use direction and new method to dig a tunnel
         destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
         digDelay = 0;
 
@@ -140,11 +125,11 @@ public class EntityAIMining extends EntityAIBase
 
         while(start != end && miningBlocks.size() <= ConfigHandler.aiSearchRange * 2)
         {
-            if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
+            if(AIHelperMining.isMineable(world, start.up())) miningBlocks.add(start.up());
             else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
             else miningBlocks.add(start.up());
 
-            if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
+            if(AIHelperMining.isMineable(world, start)) miningBlocks.add(start);
             else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
             else miningBlocks.add(start);
 
