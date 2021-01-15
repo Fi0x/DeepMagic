@@ -214,9 +214,9 @@ public class ConfigHandler
         generateInsanityRockTrollCaves = worldGeneration.getBoolean("Insanity Rock Troll Caves", category, true, "Enables Rock Troll Caves in the Insanity Dimension");
         generateShrines = worldGeneration.getBoolean("Shrines", category, true, "Enables Shrines in the Insanity Dimension");
         generateInsanityOases = worldGeneration.getBoolean("Insanity Oases", category, true, "Enables Oases in the Insanity Dimension");
-        generateDwarfBases = worldGeneration.getBoolean("Dwarf Bases", category, true, "Enables Dwarf Bases in the Insanity Dimension");
+        generateDwarfBases = worldGeneration.getBoolean("Dwarf Bases", category, true, "Enables Dwarf Bases in the Mod Dimensions");
         generateDragonLairs = worldGeneration.getBoolean("Dragon Lairs", category, true, "Enables Dragon Lairs in the Insanity Dimension");
-        generateDungeons = worldGeneration.getBoolean("Dungeons", category, true, "Enables Dungeons in the Insanity Dimension");
+        generateDungeons = worldGeneration.getBoolean("Dungeons", category, true, "Enables Dungeons in the Mod Dimensions");
 
         worldGeneration.save();
     }
