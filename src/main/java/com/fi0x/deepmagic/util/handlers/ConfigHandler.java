@@ -127,6 +127,7 @@ public class ConfigHandler
     public static int deepCrystalOreParticles;
     public static int manaGeneratorParticles;
     public static int plantParticles;
+    public static int demonStoneParticles;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -334,6 +335,7 @@ public class ConfigHandler
         deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
         manaGeneratorParticles = blocks.getInt("Mana Generator Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Mana Generators");
         plantParticles = blocks.getInt("Plant Particles", category, 10, 0, 100, "The chance that Particles will spawn around Plants");
+        demonStoneParticles = blocks.getInt("Demon Stone Particles", category, 20, 0, 100, "The chance that Particles will spawn at a correct Demon Stone Structure");
 
         blocks.save();
     }
