@@ -28,6 +28,9 @@ public class DecoratorDepthBiome extends BiomeDecorator
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
 
+    private final int MAX_ORE_HEIGHT = 250;
+    private final int MIN_ORE_HEIGHT = 0;
+
     public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
         if(this.decorating)
@@ -62,24 +65,23 @@ public class DecoratorDepthBiome extends BiomeDecorator
 
     protected void generateOres(@Nonnull World worldIn, @Nonnull Random random)
     {
-        //TODO: Spawn ores on every height
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(worldIn, random, chunkPos));
         if(TerrainGen.generateOre(worldIn, random, dirtGen, chunkPos, OreGenEvent.GenerateMinable.EventType.DIRT))
             this.genStandardOre1(worldIn, random, this.chunkProviderSettings.dirtCount, this.dirtGen, this.chunkProviderSettings.dirtMinHeight, this.chunkProviderSettings.dirtMaxHeight);
         if(TerrainGen.generateOre(worldIn, random, gravelOreGen, chunkPos, OreGenEvent.GenerateMinable.EventType.GRAVEL))
             this.genStandardOre1(worldIn, random, this.chunkProviderSettings.gravelCount, this.gravelOreGen, this.chunkProviderSettings.gravelMinHeight, this.chunkProviderSettings.gravelMaxHeight);
         if(TerrainGen.generateOre(worldIn, random, coalGen, chunkPos, OreGenEvent.GenerateMinable.EventType.COAL))
-            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.coalCount, this.coalGen, this.chunkProviderSettings.coalMinHeight, this.chunkProviderSettings.coalMaxHeight);
+            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.coalCount, this.coalGen, MIN_ORE_HEIGHT, MAX_ORE_HEIGHT);
         if(TerrainGen.generateOre(worldIn, random, ironGen, chunkPos, OreGenEvent.GenerateMinable.EventType.IRON))
-            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.ironCount, this.ironGen, this.chunkProviderSettings.ironMinHeight, this.chunkProviderSettings.ironMaxHeight);
+            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.ironCount, this.ironGen, MIN_ORE_HEIGHT, MAX_ORE_HEIGHT);
         if(TerrainGen.generateOre(worldIn, random, goldGen, chunkPos, OreGenEvent.GenerateMinable.EventType.GOLD))
-            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.goldCount, this.goldGen, this.chunkProviderSettings.goldMinHeight, this.chunkProviderSettings.goldMaxHeight);
+            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.goldCount, this.goldGen, MIN_ORE_HEIGHT, MAX_ORE_HEIGHT);
         if(TerrainGen.generateOre(worldIn, random, redstoneGen, chunkPos, OreGenEvent.GenerateMinable.EventType.REDSTONE))
-            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.redstoneCount, this.redstoneGen, this.chunkProviderSettings.redstoneMinHeight, this.chunkProviderSettings.redstoneMaxHeight);
+            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.redstoneCount, this.redstoneGen, MIN_ORE_HEIGHT, MAX_ORE_HEIGHT);
         if(TerrainGen.generateOre(worldIn, random, diamondGen, chunkPos, OreGenEvent.GenerateMinable.EventType.DIAMOND))
-            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.diamondCount, this.diamondGen, this.chunkProviderSettings.diamondMinHeight, this.chunkProviderSettings.diamondMaxHeight);
+            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.diamondCount, this.diamondGen, MIN_ORE_HEIGHT, MAX_ORE_HEIGHT);
         if(TerrainGen.generateOre(worldIn, random, lapisGen, chunkPos, OreGenEvent.GenerateMinable.EventType.LAPIS))
-            this.genStandardOre2(worldIn, random, this.chunkProviderSettings.lapisCount, this.lapisGen, this.chunkProviderSettings.lapisCenterHeight, this.chunkProviderSettings.lapisSpread);
+            this.genStandardOre1(worldIn, random, this.chunkProviderSettings.lapisCount, this.lapisGen, MIN_ORE_HEIGHT, MAX_ORE_HEIGHT);
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(worldIn, random, chunkPos));
     }
 
@@ -99,15 +101,6 @@ public class DecoratorDepthBiome extends BiomeDecorator
         for(int j = 0; j < blockCount; ++j)
         {
             BlockPos blockpos = this.chunkPos.add(random.nextInt(16), random.nextInt(maxHeight - minHeight) + minHeight, random.nextInt(16));
-            generator.generate(worldIn, random, blockpos);
-        }
-    }
-
-    protected void genStandardOre2(@Nonnull World worldIn, @Nonnull Random random, int blockCount, @Nonnull WorldGenerator generator, int centerHeight, int spread)
-    {
-        for(int i = 0; i < blockCount; ++i)
-        {
-            BlockPos blockpos = this.chunkPos.add(random.nextInt(16), random.nextInt(spread) + random.nextInt(spread) + centerHeight - spread, random.nextInt(16));
             generator.generate(worldIn, random, blockpos);
         }
     }
