@@ -81,10 +81,9 @@ public class EntityAIMining extends EntityAIBase
             return;
         }
 
-        destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
+        miningBlocks = AIHelperMining.getMineBlocks(world, startPosition, direction, random);
         digDelay = 0;
 
-        getMiningBlocks(startPosition, destination);
         goHome = false;
     }
     @Override
@@ -108,34 +107,6 @@ public class EntityAIMining extends EntityAIBase
         return true;
     }
 
-    protected void getMiningBlocks(BlockPos start, BlockPos end)
-    {
-        int xDifference = 0;
-        int zDifference = 0;
-
-        if(start.getX() == end.getX())
-        {
-            if(start.getZ() < end.getZ()) zDifference = 1;
-            else zDifference = -1;
-        } else
-        {
-            if(start.getX() < end.getX()) xDifference = 1;
-            else xDifference = -1;
-        }
-
-        while(start != end && miningBlocks.size() <= ConfigHandler.aiSearchRange * 2)
-        {
-            if(AIHelperMining.isMineable(world, start.up())) miningBlocks.add(start.up());
-            else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
-            else miningBlocks.add(start.up());
-
-            if(AIHelperMining.isMineable(world, start)) miningBlocks.add(start);
-            else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
-            else miningBlocks.add(start);
-
-            start = start.add(xDifference, 0, zDifference);
-        }
-    }
     protected void inventoryToChest()
     {
         for(int i = 0; i < entity.itemHandler.getSlots(); i++)
@@ -221,6 +192,11 @@ public class EntityAIMining extends EntityAIBase
         Block block = world.getBlockState(pos).getBlock();
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
+
+        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(pos)))
+        {
+            miningBlocks.addAll(0, AIHelperMining.getOreCluster());
+        }
 
         ItemStack droppedItemStack;
         if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);

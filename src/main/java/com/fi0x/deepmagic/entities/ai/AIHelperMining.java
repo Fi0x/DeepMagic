@@ -24,7 +24,7 @@ import java.util.Random;
 public class AIHelperMining
 {
     private static ArrayList<IBlockState> mineableBlocks = null;
-    private static ArrayList<IBlockState> oreWhitelist = null;
+    public static ArrayList<IBlockState> oreWhitelist = null;
 
     public static void fillMiningWhitelists()
     {
@@ -298,23 +298,59 @@ public class AIHelperMining
 
         return positions;
     }
-    public static BlockPos getRandomPosition(BlockPos start, EnumFacing direction, Random rand)
+    public static ArrayList<BlockPos> getMineBlocks(World world, BlockPos start, EnumFacing direction, Random rand)
     {
         int distance = rand.nextInt(ConfigHandler.aiSearchRange / 2) + ConfigHandler.aiSearchRange / 2;
+        BlockPos end = start.add(0, 0, -distance);
 
         switch(direction)
         {
-            case NORTH:
-                return start.add(0, 0, -distance);
             case EAST:
-                return start.add(distance, 0, 0);
+                end = start.add(distance, 0, 0);
+                break;
             case SOUTH:
-                return start.add(0, 0, distance);
+                end = start.add(0, 0, distance);
+                break;
             case WEST:
-                return start.add(-distance, 0, 0);
+                end = start.add(-distance, 0, 0);
+                break;
         }
 
-        return start;
+        ArrayList<BlockPos> blocks = new ArrayList<>();
+
+        int xDifference = 0;
+        int zDifference = 0;
+
+        if(start.getX() == end.getX())
+        {
+            if(start.getZ() < end.getZ()) zDifference = 1;
+            else zDifference = -1;
+        } else
+        {
+            if(start.getX() < end.getX()) xDifference = 1;
+            else xDifference = -1;
+        }
+
+        while(start != end && blocks.size() <= ConfigHandler.aiSearchRange * 2)
+        {
+            if(AIHelperMining.isMineable(world, start.up())) blocks.add(start.up());
+            else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
+            else blocks.add(start.up());
+
+            if(AIHelperMining.isMineable(world, start)) blocks.add(start);
+            else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
+            else blocks.add(start);
+
+            start = start.add(xDifference, 0, zDifference);
+        }
+
+        return blocks;
+    }
+
+    public static ArrayList<BlockPos> getOreCluster()
+    {
+        ArrayList<BlockPos> ores = new ArrayList<>();
+        return ores;
     }
 
     public static BlockPos findChest(World world, BlockPos... positions)
