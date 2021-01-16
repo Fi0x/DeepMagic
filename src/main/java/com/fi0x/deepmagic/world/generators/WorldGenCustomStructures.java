@@ -55,7 +55,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			 Add mineshafts
 			 Add Temples
 			 */
-			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeDepth.class);
+			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 100, BiomeDepth.class);
 
 			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, BiomeDepth.class);
 		}

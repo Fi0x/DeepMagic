@@ -17,7 +17,7 @@ public class BiomeDepth extends Biome
 
     public BiomeDepth()
     {
-        super(new BiomeProperties("Depth").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(0.1F).setWaterColor(7094447));//TODO: Adjust watercolor
+        super(new BiomeProperties("Depth").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(0.1F).setWaterColor(69));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
 

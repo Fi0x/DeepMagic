@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.generators.dungeon;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -24,11 +25,12 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos position)
     {
-        int maxHeight = 60 + (int) (Math.random() * 10);
+        int maxHeight = 60 + rand.nextInt(10);
+        if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID) maxHeight = 200 + rand.nextInt(40);
 
-        while (position.getY() < maxHeight)
+        while(position.getY() < maxHeight)
         {
-            int room = (int) (Math.random() * rooms.length);
+            int room = rand.nextInt(rooms.length);
 
             rooms[room].generate(world, rand, position);
             position = position.add(0, rooms[room].height, 0);
