@@ -195,7 +195,7 @@ public class EntityAIMining extends EntityAIBase
 
         if(AIHelperMining.oreWhitelist.contains(world.getBlockState(pos)))
         {
-            miningBlocks.addAll(0, AIHelperMining.getOreCluster());
+            miningBlocks.addAll(1, AIHelperMining.getOreCluster(world, pos));
         }
 
         ItemStack droppedItemStack;

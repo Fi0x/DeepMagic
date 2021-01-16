@@ -347,9 +347,42 @@ public class AIHelperMining
         return blocks;
     }
 
-    public static ArrayList<BlockPos> getOreCluster()
+    public static ArrayList<BlockPos> getOreCluster(World world, BlockPos firstOre)
     {
         ArrayList<BlockPos> ores = new ArrayList<>();
+        ArrayList<BlockPos> toCheck = new ArrayList<>();
+        toCheck.add(firstOre);
+
+        while(!toCheck.isEmpty())
+        {
+            ArrayList<BlockPos> found = getSurroundingOres(world, toCheck.get(0), ores);
+            toCheck.remove(0);
+            toCheck.addAll(found);
+            ores.addAll(found);
+        }
+
+        return ores;
+    }
+    private static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos> found)
+    {
+        ArrayList<BlockPos> ores = new ArrayList<>();
+
+        if(oreWhitelist.contains(world.getBlockState(center.up()))) ores.add(center.up());
+        if(oreWhitelist.contains(world.getBlockState(center.down()))) ores.add(center.down());
+        if(oreWhitelist.contains(world.getBlockState(center.north()))) ores.add(center.north());
+        if(oreWhitelist.contains(world.getBlockState(center.east()))) ores.add(center.east());
+        if(oreWhitelist.contains(world.getBlockState(center.south()))) ores.add(center.south());
+        if(oreWhitelist.contains(world.getBlockState(center.west()))) ores.add(center.west());
+
+        for(int i = 0; i < ores.size(); i++)
+        {
+            if(found.contains(ores.get(i)))
+            {
+                ores.remove(i);
+                i--;
+            }
+        }
+
         return ores;
     }
 
