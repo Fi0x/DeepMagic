@@ -38,9 +38,13 @@ public class AIHelperMining
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE));
         mineableBlocks.add(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE));
         mineableBlocks.add(Blocks.NETHERRACK.getDefaultState());
+
         mineableBlocks.add(ModBlocks.INSANITY_STONE.getDefaultState());
         mineableBlocks.add(ModBlocks.INSANITY_DIRT.getDefaultState());
         mineableBlocks.add(ModBlocks.INSANITY_GRASS.getDefaultState());
+
+        mineableBlocks.add(ModBlocks.DEPTH_STONE.getDefaultState());
+        mineableBlocks.add(ModBlocks.DEPTH_DIRT.getDefaultState());
         if(ConfigHandler.dwarfMineResources)
         {
             mineableBlocks.add(Blocks.CLAY.getDefaultState());
@@ -78,8 +82,8 @@ public class AIHelperMining
             oreWhitelist.add(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE.getDefaultState());
 
             oreWhitelist.add(ModBlocks.DEPTH_COAL_ORE.getDefaultState());
-            oreWhitelist.add(ModBlocks.INSANITY_IRON_ORE.getDefaultState());
-            oreWhitelist.add(ModBlocks.INSANITY_REDSTONE_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_IRON_ORE.getDefaultState());
+            oreWhitelist.add(ModBlocks.DEPTH_REDSTONE_ORE.getDefaultState());
             oreWhitelist.add(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState());
             oreWhitelist.add(ModBlocks.DEPTH_GOLD_ORE.getDefaultState());
             oreWhitelist.add(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState());
