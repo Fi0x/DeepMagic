@@ -80,7 +80,7 @@ public class DemonStone extends BlockBase
             double xOff = Math.random() * 3 - 1.5;
             double zOff = Math.random() * 3 - 1.5;
 
-            ParticleSpawner.spawnParticle(ParticleEnum.DEMON_STONE, new BlockPos(xCenter + xOff, y, zCenter + zOff));
+            ParticleSpawner.spawnParticle(ParticleEnum.DEMON_STONE, xCenter + xOff, y, zCenter + zOff);
         }
     }
     private boolean validateStructure(World world, BlockPos pos)

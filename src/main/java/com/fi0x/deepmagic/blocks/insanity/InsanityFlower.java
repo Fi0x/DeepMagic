@@ -54,6 +54,6 @@ public class InsanityFlower extends BlockBush implements IHasModel
 		double y = pos.getY() + Math.random();
 		double z = pos.getZ() + Math.random();
 
-		ParticleSpawner.spawnParticle(ParticleEnum.INSANITY_PLANT, new BlockPos(x, y, z));
+		ParticleSpawner.spawnParticle(ParticleEnum.INSANITY_PLANT, x, y, z);
 	}
 }
