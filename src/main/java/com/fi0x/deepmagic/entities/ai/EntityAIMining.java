@@ -159,6 +159,12 @@ public class EntityAIMining extends EntityAIBase
         for(int i = 0; i < entity.itemHandler.getSlots(); i++)
         {
             if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+            else
+            {
+                chestPos = AIHelperMining.findChest(world, chestPos, entity.getPosition(), entity.homePos);
+                if(chestPos != null) searchChest = true;
+                break;
+            }
         }
     }
     protected void searchAndGoToChest()
