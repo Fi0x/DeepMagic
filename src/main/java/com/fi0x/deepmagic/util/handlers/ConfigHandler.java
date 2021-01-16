@@ -230,7 +230,7 @@ public class ConfigHandler
         npcsGeneral.addCustomCategoryComment(category, "NPC Behavior");
         dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
         trollDefenceState = npcsGeneral.getBoolean("Troll Defence State", category, true, "Allow Trolls to use an invulnerable Defence State");
-        dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines");
+        dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines (Does not apply for depth dimension)");
 
         category = "NPC Whitelist";
         npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
