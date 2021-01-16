@@ -38,6 +38,7 @@ public class EntityAIMining extends EntityAIBase
     private int digDelay;
     private boolean searchChest;
     private boolean goHome;
+    public EnumFacing direction;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -65,34 +66,24 @@ public class EntityAIMining extends EntityAIBase
         if(this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
 
         if(!AIHelperMining.hasHomePosition(world, entity)) return false;
-        return entity.posY < ConfigHandler.dwarfMaxMiningHeight;
+        return entity.posY < ConfigHandler.dwarfMaxMiningHeight || entity.dimension == 43;//TODO: Use config-handler value
     }
     @Override
     public void startExecuting()
     {
         chestPos = AIHelperMining.findChest(world, entity.homePos, entity.getPosition());
 
-        EnumFacing direction = EnumFacing.NORTH;
-        int rand = (int) (Math.random() * 4);
-        switch(rand)
-        {
-            case 0:
-                direction = EnumFacing.EAST;
-                break;
-            case 1:
-                direction = EnumFacing.SOUTH;
-                break;
-            case 2:
-                direction = EnumFacing.WEST;
-                break;
-        }
-        startPosition = AIHelperMining.findMiningStartPosition(world, entity.getPosition(), direction);
+        startPosition = AIHelperMining.findMiningStartPosition(world, this);
         if(startPosition == null) return;
+        else if(startPosition == entity.homePos)
+        {
+            goHome = true;
+            return;
+        }
 
-        destination = AIHelperMining.getRandomPosition(startPosition, direction, random);
+        miningBlocks = AIHelperMining.getMineBlocks(world, startPosition, direction, random);
         digDelay = 0;
 
-        getMiningBlocks(startPosition, destination);
         goHome = false;
     }
     @Override
@@ -116,36 +107,12 @@ public class EntityAIMining extends EntityAIBase
         return true;
     }
 
-    protected void getMiningBlocks(BlockPos start, BlockPos end)
-    {
-        int xDifference = 0;
-        int zDifference = 0;
-
-        if(start.getX() == end.getX())
-        {
-            if(start.getZ() < end.getZ()) zDifference = 1;
-            else zDifference = -1;
-        } else
-        {
-            if(start.getX() < end.getX()) xDifference = 1;
-            else xDifference = -1;
-        }
-
-        while(start != end && miningBlocks.size() <= ConfigHandler.aiSearchRange * 2)
-        {
-            if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start.up()))) miningBlocks.add(start.up());
-            else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
-            else miningBlocks.add(start.up());
-
-            if(AIHelperMining.mineableBlocks.contains(world.getBlockState(start))) miningBlocks.add(start);
-            else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
-            else miningBlocks.add(start);
-
-            start = start.add(xDifference, 0, zDifference);
-        }
-    }
     protected void inventoryToChest()
     {
+        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
+        {
+            if(entity.itemHandler.getStackInSlot(i).isEmpty()) return;
+        }
         if(chestPos == null || entity.getDistanceSq(chestPos) > 64) return;
         searchChest = false;
 
@@ -167,6 +134,12 @@ public class EntityAIMining extends EntityAIBase
         for(int i = 0; i < entity.itemHandler.getSlots(); i++)
         {
             if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+            else
+            {
+                chestPos = AIHelperMining.findChest(world, chestPos, entity.getPosition(), entity.homePos);
+                if(chestPos != null) searchChest = true;
+                break;
+            }
         }
     }
     protected void searchAndGoToChest()
@@ -214,10 +187,16 @@ public class EntityAIMining extends EntityAIBase
     protected boolean digAtBlockPos(BlockPos pos)
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
-        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());
+        if(!hasWalls(floor.up())) return false;
+        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());//TODO: Use block from dwarf inventory
         Block block = world.getBlockState(pos).getBlock();
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
+
+        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(pos)))
+        {
+            miningBlocks.addAll(1, AIHelperMining.getOreCluster(world, pos));
+        }
 
         ItemStack droppedItemStack;
         if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
@@ -238,5 +217,37 @@ public class EntityAIMining extends EntityAIBase
         world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
         world.setBlockToAir(pos);
         return true;
+    }
+    private boolean hasWalls(BlockPos floorPos)
+    {
+        BlockPos right = floorPos.east().south();
+        BlockPos left = floorPos.west().south();
+        switch(direction)
+        {
+            case EAST:
+                right = floorPos.south().west();
+                left = floorPos.north().west();
+                break;
+            case SOUTH:
+                right = floorPos.west().north();
+                left = floorPos.east().north();
+                break;
+            case WEST:
+                right = floorPos.north().east();
+                left = floorPos.south().east();
+                break;
+        }
+        boolean rightOK = AIHelperMining.isWallBlock(world, right);
+        boolean leftOK = AIHelperMining.isWallBlock(world, left);
+
+        for(int i = 0; i < 2; i++)
+        {
+            right = AIHelperMining.getNextBlock(right, direction);
+            left = AIHelperMining.getNextBlock(left, direction);
+            rightOK = rightOK || AIHelperMining.isWallBlock(world, right);
+            leftOK = leftOK || AIHelperMining.isWallBlock(world, left);
+        }
+
+        return rightOK && leftOK;
     }
 }
