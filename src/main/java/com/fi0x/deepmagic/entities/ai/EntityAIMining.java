@@ -138,6 +138,10 @@ public class EntityAIMining extends EntityAIBase
     }
     protected void inventoryToChest()
     {
+        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
+        {
+            if(entity.itemHandler.getStackInSlot(i).isEmpty()) return;
+        }
         if(chestPos == null || entity.getDistanceSq(chestPos) > 64) return;
         searchChest = false;
 

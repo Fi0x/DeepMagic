@@ -23,8 +23,8 @@ import java.util.Random;
 
 public class AIHelperMining
 {
-    public static ArrayList<IBlockState> mineableBlocks = null;
-    public static ArrayList<IBlockState> oreWhitelist = null;
+    private static ArrayList<IBlockState> mineableBlocks = null;
+    private static ArrayList<IBlockState> oreWhitelist = null;
 
     public static void fillMiningWhitelists()
     {
