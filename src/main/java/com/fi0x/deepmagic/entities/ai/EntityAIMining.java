@@ -97,7 +97,11 @@ public class EntityAIMining extends EntityAIBase
                 return !entity.getNavigator().noPath();
             }
             inventoryToChest();
-            if(searchChest) searchAndGoToChest();
+            if(searchChest)
+            {
+                searchAndGoToChest();
+                return true;
+            }
 
             if(digDelay == 0)
             {
