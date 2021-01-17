@@ -38,7 +38,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
-        //TODO: Chech Hell and Overworld generators for values
+        //TODO: Chech Hell and Overworld generators for variables
         world = worldIn;
         rand = new Random(seed);
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
@@ -55,8 +55,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
         ravineGenerator.generate(world, x, z, primer);//TODO: Make generator work
         caveGenerator.generate(world, x, z, primer);//TODO: Make generator work
-        //TODO: Generate patches of dirt or something similar
-        //TODO: Generate ores
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();
@@ -88,7 +86,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     {
         /*
         TODO: Generate something like fire
-         Generate custom glowstone, frozen lava and plants
+         Generate custom glowstone and plants
          Compare with insanity and hell generators
          */
         BlockFalling.fallInstantly = true;

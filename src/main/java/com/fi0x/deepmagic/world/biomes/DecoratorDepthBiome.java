@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.ModBlocks;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -41,7 +42,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
             this.chunkProviderSettings = ChunkGeneratorSettings.Factory.jsonToFactory(worldIn.getWorldInfo().getGeneratorOptions()).build();
             this.chunkPos = pos;
             this.dirtGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
-            this.gravelOreGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.gravelSize);
+            this.gravelOreGen = new WorldGenMinable(Blocks.OBSIDIAN.getDefaultState(), this.chunkProviderSettings.gravelSize);
             this.coalGen = new WorldGenMinable(ModBlocks.DEPTH_COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
             this.ironGen = new WorldGenMinable(ModBlocks.DEPTH_IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
             this.goldGen = new WorldGenMinable(ModBlocks.DEPTH_GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);
