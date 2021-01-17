@@ -193,10 +193,7 @@ public class EntityAIMining extends EntityAIBase
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
 
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(pos)))
-        {
-            miningBlocks.addAll(1, AIHelperMining.getOreCluster(world, pos));
-        }
+        miningBlocks.addAll(1, AIHelperMining.getOreCluster(world, pos));
 
         ItemStack droppedItemStack;
         if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
