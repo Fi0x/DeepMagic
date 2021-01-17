@@ -119,11 +119,16 @@ public class ConfigHandler
     public static int demonSummonCost;
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
-    //Magic Light
-    public static int magicLightParticles;
     //Dwarf Base Marker
-    public static int dwarfBaseMarkerParticles;
     public static int dwarfMarkerSpawnChance;
+    //BlockParticles
+    public static int dwarfBaseMarkerParticles;
+    public static int magicLightParticles;
+    public static int deepCrystalOreParticles;
+    public static int manaGeneratorParticles;
+    public static int plantParticles;
+    public static int demonStoneParticles;
+    public static int spellStoneParticles;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -228,7 +233,7 @@ public class ConfigHandler
         npcsGeneral.addCustomCategoryComment(category, "NPC Behavior");
         dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
         trollDefenceState = npcsGeneral.getBoolean("Troll Defence State", category, true, "Allow Trolls to use an invulnerable Defence State");
-        dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines");
+        dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines (Does not apply for depth dimension)");
 
         category = "NPC Whitelist";
         npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
@@ -320,14 +325,19 @@ public class ConfigHandler
         demonSummonXP = blocks.getInt("Demon Summon XP", category, 100, 0, 10000, "Skill XP gained by summoning the Demon");
         requireDemonStructure = blocks.getBoolean("Require Demon Summoning Structure", category, true, "Require a Structure around the Demon Stone to Summon the Demon");
 
-        category = "Magic Light";
-        blocks.addCustomCategoryComment(category, "Magic Light");
-        magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
-
         category = "Dwarf Base Marker";
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
-        dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
         dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
+
+        category = "Block Particles";
+        blocks.addCustomCategoryComment(category, "Block Particles");
+        dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
+        magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
+        deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
+        manaGeneratorParticles = blocks.getInt("Mana Generator Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Mana Generators");
+        plantParticles = blocks.getInt("Plant Particles", category, 10, 0, 100, "The chance that Particles will spawn around Plants");
+        demonStoneParticles = blocks.getInt("Demon Stone Particles", category, 20, 0, 100, "The Chance that Particles will spawn at a correct Demon Stone Structure");
+        spellStoneParticles = blocks.getInt("Spell Stone Particles", category, 50, 0, 100, "The Chance that Particles will spawn at an active Spell Stone");
 
         blocks.save();
     }
