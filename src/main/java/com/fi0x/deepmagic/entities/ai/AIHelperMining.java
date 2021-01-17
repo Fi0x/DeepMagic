@@ -390,6 +390,20 @@ public class AIHelperMining
         return ores;
     }
 
+    public static ArrayList<BlockPos> getAdjacentWater(World world, BlockPos pos)
+    {
+        ArrayList<BlockPos> water = new ArrayList<>();
+
+        if(world.getBlockState(pos.up()).getBlock() == Blocks.WATER) water.add(pos.up());
+        if(world.getBlockState(pos.down()).getBlock() == Blocks.WATER) water.add(pos.down());
+        if(world.getBlockState(pos.north()).getBlock() == Blocks.WATER) water.add(pos.north());
+        if(world.getBlockState(pos.east()).getBlock() == Blocks.WATER) water.add(pos.east());
+        if(world.getBlockState(pos.south()).getBlock() == Blocks.WATER) water.add(pos.south());
+        if(world.getBlockState(pos.west()).getBlock() == Blocks.WATER) water.add(pos.west());
+
+        return water;
+    }
+
     public static BlockPos findChest(World world, BlockPos... positions)
     {
         if(positions == null || positions.length == 0) return null;

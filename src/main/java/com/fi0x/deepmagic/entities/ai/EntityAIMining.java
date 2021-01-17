@@ -193,6 +193,12 @@ public class EntityAIMining extends EntityAIBase
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
 
+        ArrayList<BlockPos> surroundingWater = AIHelperMining.getAdjacentWater(world, pos);
+        for(BlockPos waterBlock : surroundingWater)
+        {
+            world.setBlockState(waterBlock, ModBlocks.INSANITY_COBBLE.getDefaultState());//TODO: Use block from dwarf inventory
+        }
+
         miningBlocks.addAll(1, AIHelperMining.getOreCluster(world, pos));
 
         ItemStack droppedItemStack;
