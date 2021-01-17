@@ -62,7 +62,6 @@ public class DimensionDepth extends WorldProvider
     @Override
     public MusicType getMusicType()
     {
-        //TODO: Use custom music
         return MusicType.NETHER;
     }
     @Nonnull

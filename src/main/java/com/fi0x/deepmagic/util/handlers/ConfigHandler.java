@@ -225,7 +225,7 @@ public class ConfigHandler
         npcsGeneral = new Configuration(file);
         String category;
 
-        category = "Insanity Biome Spawns";
+        category = "Spawns";
         npcsGeneral.addCustomCategoryComment(category, "Insanity Biome Spawns");
         allowCockroach = npcsGeneral.getBoolean("Allow Cockroach", category, true, "");
         allowInsanityCow = npcsGeneral.getBoolean("Allow Insanity Cow", category, true, "");

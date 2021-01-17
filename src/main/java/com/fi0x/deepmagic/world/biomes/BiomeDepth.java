@@ -1,6 +1,8 @@
 package com.fi0x.deepmagic.world.biomes;
 
+import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,10 +28,10 @@ public class BiomeDepth extends Biome
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
 
-        //TODO: Add spawn-lists
+        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
 
         this.flowers.clear();
-        //TODO: use custom flowers
+        addFlower(ModBlocks.DEPTH_FLOWER.getDefaultState(), 20);
 
         decorator = new DecoratorDepthBiome();
     }
