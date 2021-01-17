@@ -4,7 +4,10 @@ import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
+import com.fi0x.deepmagic.particlesystem.ParticleEnum;
+import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.IHasModel;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.generators.ModTreeGenerator;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -22,6 +25,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -118,5 +123,18 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, STAGE);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
+    {
+        if(rand.nextInt(100) + 1 > ConfigHandler.plantParticles) return;
+
+        double x = pos.getX() + Math.random();
+        double y = pos.getY() + Math.random();
+        double z = pos.getZ() + Math.random();
+
+        ParticleSpawner.spawnParticle(ParticleEnum.INSANITY_PLANT, x, y, z);
     }
 }

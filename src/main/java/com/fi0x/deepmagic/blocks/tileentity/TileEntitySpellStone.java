@@ -526,6 +526,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
         if(flag) markDirty();
     }
 
+    public int getPartCount()
+    {
+        return spellParts.size();
+    }
     public String getSpellParts()
     {
         StringBuilder parts = new StringBuilder();

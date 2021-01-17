@@ -122,7 +122,7 @@ public class AIHelperMining
         {
             int idx = (int) (Math.random() * checkBlocks.size());
             BlockPos pos = checkBlocks.get(idx);
-            if(ConfigHandler.showAISearchParticles) ParticleSpawner.spawnParticle(ParticleEnum.DWARF_SEARCH_MINE, pos);
+            if(ConfigHandler.showAISearchParticles) ParticleSpawner.spawnParticle(ParticleEnum.DWARF_SEARCH_MINE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 
             if((pos.getY() - ai.entity.homePos.getY()) % 3 == 0)
             {

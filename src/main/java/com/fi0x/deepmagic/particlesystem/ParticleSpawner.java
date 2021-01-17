@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.particlesystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Constructor;
@@ -12,9 +11,9 @@ public class ParticleSpawner
 {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
-    public static void spawnParticle(ParticleEnum type, BlockPos pos)
+    public static void spawnParticle(ParticleEnum type, double x, double y, double z)
     {
-        spawnParticle(type, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, 1, false, 16);
+        spawnParticle(type, x, y, z, 0, 0, 0, 1, false, 16);
     }
     public static void spawnParticle(ParticleEnum type, double x, double y, double z, double speedX, double speedY, double speedZ)
     {
