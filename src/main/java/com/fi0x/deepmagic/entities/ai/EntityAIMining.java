@@ -66,7 +66,7 @@ public class EntityAIMining extends EntityAIBase
         if(this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
 
         if(!AIHelperMining.hasHomePosition(world, entity)) return false;
-        return entity.posY < ConfigHandler.dwarfMaxMiningHeight || entity.dimension == 43;//TODO: Use config-handler value
+        return entity.posY < ConfigHandler.dwarfMaxMiningHeight || entity.dimension == ConfigHandler.dimensionIdDepthID;
     }
     @Override
     public void startExecuting()

@@ -3,7 +3,8 @@ package com.fi0x.deepmagic.world.generators;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.biome.BiomeInsanity;
+import com.fi0x.deepmagic.world.biomes.BiomeDepth;
+import com.fi0x.deepmagic.world.biomes.BiomeInsanity;
 import com.fi0x.deepmagic.world.generators.dungeon.SmallDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -31,7 +32,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");
 
 	public static final SmallDungeon DUNGEON = new SmallDungeon();
-	
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
@@ -42,23 +43,34 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			if(ConfigHandler.generateInsanityRockTrollCaves) generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, BiomeInsanity.class);
 			if(ConfigHandler.generateShrines) generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, BiomeInsanity.class);
 			if(ConfigHandler.generateInsanityOases) generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, BiomeInsanity.class);
-			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 300, BiomeInsanity.class);
+			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -5, 300, BiomeInsanity.class);
 			if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, BiomeInsanity.class);
 
-			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -8, 200, BiomeInsanity.class);
+			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, BiomeInsanity.class);
+		} else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
+		{
+			/*
+			TODO: Adjust custom structure generating
+			 Add stongholds
+			 Add mineshafts
+			 Add Temples
+			 */
+			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 100, BiomeDepth.class);
+
+			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, BiomeDepth.class);
 		}
 	}
-	
+
 	private void generateStructure(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int yOffset, int heightDifference, int chance, Class<?>... classes)
 	{
 		ArrayList<Class<?>> classesList = new ArrayList<>(Arrays.asList(classes));
-		
+
 		int x = (chunkX * 16) + random.nextInt(15);
 		int z = (chunkZ * 16) + random.nextInt(15);
-		int y = calculateGenerationHeight(world, x, z)+yOffset;
-		if(heightDifference < 0) y = random.nextInt(40 / Math.abs(heightDifference)) + 10;
+		int y = calculateGenerationHeight(world, x, z) + yOffset;
+		if(heightDifference < 0) y = random.nextInt(200 / Math.abs(heightDifference)) + 10;
 		BlockPos pos = new BlockPos(x, y, z);
-		
+
 		Class<?> biome = world.provider.getBiomeForCoords(pos).getClass();
 
 		Template template = null;
@@ -70,12 +82,12 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			else if(template != null) generator.generate(world, random, pos);
 		}
 	}
-	
+
 	private static int calculateGenerationHeight(World world, int x, int z)
 	{
 		int y = world.getHeight();
 		boolean foundGround = false;
-		
+
 		while(!foundGround && y-- >= 0)
 		{
 			Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
