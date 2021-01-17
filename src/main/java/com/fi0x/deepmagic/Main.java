@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic;
 
-import com.fi0x.deepmagic.entities.ai.AIHelperMining;
+import com.fi0x.deepmagic.entities.ai.helper.AIHelperMining;
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.DimensionInit;
 import com.fi0x.deepmagic.init.EntityInit;
