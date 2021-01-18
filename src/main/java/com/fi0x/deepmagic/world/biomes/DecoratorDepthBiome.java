@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.world.generators.underground.CustomBushGenerator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -9,6 +10,7 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -28,6 +30,8 @@ public class DecoratorDepthBiome extends BiomeDecorator
     public WorldGenerator redstoneGen;
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
+    public WorldGenerator depthFlowerGen = new CustomBushGenerator(ModBlocks.DEPTH_FLOWER, 250);
+    public final int flowersPerChunk = 50;
 
     private final int MAX_ORE_HEIGHT = 250;
     private final int MIN_ORE_HEIGHT = 0;
@@ -54,13 +58,40 @@ public class DecoratorDepthBiome extends BiomeDecorator
         }
     }
 
+    @Override
     protected void genDecorations(@Nonnull Biome biomeIn, @Nonnull World worldIn, @Nonnull Random random)
     {
-        net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos); // actual ChunkPos instead of BlockPos, used for events
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
+        net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
         this.generateOres(worldIn, random);
 
-        //TODO: Generate cave flora
+        if(TerrainGen.decorate(worldIn, random, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.SHROOM))
+        {
+            for(int l3 = 0; l3 < flowersPerChunk; ++l3)
+            {
+                if(random.nextInt(2) == 0)
+                {
+                    int i8 = random.nextInt(16) + 8;
+                    int l11 = random.nextInt(16) + 8;
+                    BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(i8, 0, l11));
+                    depthFlowerGen.generate(worldIn, random, blockpos2);
+                }
+            }
+
+            if(random.nextInt(2) == 0)
+            {
+                int i4 = random.nextInt(16) + 8;
+                int k8 = random.nextInt(16) + 8;
+                int j12 = worldIn.getHeight(chunkPos.add(i4, 0, k8)).getY() * 2;
+
+                if(j12 > 0)
+                {
+                    int k15 = random.nextInt(j12);
+                    depthFlowerGen.generate(worldIn, random, chunkPos.add(i4, k15, k8));
+                }
+            }
+        }
+
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
