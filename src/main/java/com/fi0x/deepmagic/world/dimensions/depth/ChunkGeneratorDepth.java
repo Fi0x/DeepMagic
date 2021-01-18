@@ -2,7 +2,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.world.generators.underground.CustomMineshaftGenerator;
+import com.fi0x.deepmagic.world.generators.underground.CustomGlowstoneGenerator;
 import com.fi0x.deepmagic.world.generators.underground.CustomRavineGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +17,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -35,7 +34,8 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     private final World world;
     private final Random rand;
     private MapGenBase ravineGenerator = new CustomRavineGenerator();
-    private MapGenMineshaft mineshaftGenerator = new CustomMineshaftGenerator();
+
+    private final CustomGlowstoneGenerator glowStoneGen = new CustomGlowstoneGenerator();
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
@@ -43,7 +43,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         rand = new Random(seed);
 
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
-        mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, InitMapGenEvent.EventType.MINESHAFT);
 
         worldIn.setSeaLevel(200);
     }
@@ -55,7 +54,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         fillChunk(primer);
 
         ravineGenerator.generate(world, x, z, primer);
-        mineshaftGenerator.generate(this.world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();
@@ -98,13 +96,11 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         long l = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
 
-        mineshaftGenerator.generateStructure(this.world, this.rand, chunkPos);
-
         if(TerrainGen.populate(this, this.world, this.rand, x, z, false, PopulateChunkEvent.Populate.EventType.GLOWSTONE))
         {
-            for(int j1 = 0; j1 < this.rand.nextInt(this.rand.nextInt(10) + 1); ++j1)
+            for(int j1 = 0; j1 < 10; ++j1)
             {
-                //TODO: Check Hell generator to generate glowstone
+                this.glowStoneGen.generate(this.world, this.rand, blockPos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(230) + 10, this.rand.nextInt(16) + 8));
             }
         }
 

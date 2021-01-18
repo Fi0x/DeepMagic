@@ -171,8 +171,7 @@ public class CustomRavineGenerator extends MapGenBase
 
         if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_STONE || state.getBlock() == ModBlocks.INSANITY_DIRT)
         {
-            if(rand.nextInt(1000) == 0) data.setBlockState(x, y, z, LIGHT);//TODO: Place light in populate phase of chunk generator instead
-            else data.setBlockState(x, y, z, AIR);
+            data.setBlockState(x, y, z, AIR);
         }
     }
 }

@@ -31,7 +31,6 @@ public class CustomBushGenerator extends WorldGenerator
                 worldIn.setBlockState(blockpos, this.block.getDefaultState(), 2);
             }
         }
-
         return true;
     }
 }
