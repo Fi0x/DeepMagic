@@ -3,7 +3,6 @@ package com.fi0x.deepmagic.world.generators.underground;
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -14,12 +13,8 @@ import java.util.Random;
 
 public class CustomRavineGenerator extends MapGenBase
 {
-    /*
-    TODO: Adjust bottom height
-     Adjust top height
-     Add compressed glowstone
-     */
     protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
+    protected static final IBlockState LIGHT = ModBlocks.DEPTH_GLOWSTONE.getDefaultState();
     private final float[] rs = new float[1024];
 
     public CustomRavineGenerator()
@@ -27,11 +22,11 @@ public class CustomRavineGenerator extends MapGenBase
         this.range = 16;
     }
 
-    protected void addTunnel(long p_180707_1_, int p_180707_3_, int p_180707_4_, ChunkPrimer p_180707_5_, double p_180707_6_, double p_180707_8_, double p_180707_10_, float p_180707_12_, float p_180707_13_, float p_180707_14_, int p_180707_15_, int p_180707_16_, double p_180707_17_)
+    protected void addTunnel(long p_180707_1_, int chunkX, int chunkZ, ChunkPrimer primer, double p_180707_6_, double p_180707_8_, double p_180707_10_, float p_180707_12_, float p_180707_13_, float p_180707_14_, int p_180707_15_, int p_180707_16_, double p_180707_17_)
     {
         Random random = new Random(p_180707_1_);
-        double d0 = p_180707_3_ * 16 + 8;
-        double d1 = p_180707_4_ * 16 + 8;
+        double d0 = chunkX * 16 + 8;
+        double d1 = chunkZ * 16 + 8;
         float f = 0.0F;
         float f1 = 0.0F;
 
@@ -57,7 +52,6 @@ public class CustomRavineGenerator extends MapGenBase
             {
                 f2 = 1.0F + random.nextFloat() * random.nextFloat();
             }
-
             this.rs[j] = f2 * f2;
         }
 
@@ -91,12 +85,12 @@ public class CustomRavineGenerator extends MapGenBase
 
                 if(p_180707_6_ >= d0 - 16.0D - d9 * 2.0D && p_180707_10_ >= d1 - 16.0D - d9 * 2.0D && p_180707_6_ <= d0 + 16.0D + d9 * 2.0D && p_180707_10_ <= d1 + 16.0D + d9 * 2.0D)
                 {
-                    int k2 = MathHelper.floor(p_180707_6_ - d9) - p_180707_3_ * 16 - 1;
-                    int k = MathHelper.floor(p_180707_6_ + d9) - p_180707_3_ * 16 + 1;
+                    int k2 = MathHelper.floor(p_180707_6_ - d9) - chunkX * 16 - 1;
+                    int k = MathHelper.floor(p_180707_6_ + d9) - chunkX * 16 + 1;
                     int l2 = MathHelper.floor(p_180707_8_ - d2) - 1;
                     int l = MathHelper.floor(p_180707_8_ + d2) + 1;
-                    int i3 = MathHelper.floor(p_180707_10_ - d9) - p_180707_4_ * 16 - 1;
-                    int i1 = MathHelper.floor(p_180707_10_ + d9) - p_180707_4_ * 16 + 1;
+                    int i3 = MathHelper.floor(p_180707_10_ - d9) - chunkZ * 16 - 1;
+                    int i1 = MathHelper.floor(p_180707_10_ + d9) - chunkZ * 16 + 1;
 
                     if(k2 < 0) k2 = 0;
                     if(k > 16) k = 16;
@@ -105,13 +99,11 @@ public class CustomRavineGenerator extends MapGenBase
                     if(i3 < 0) i3 = 0;
                     if(i1 > 16) i1 = 16;
 
-                    boolean flag2 = false;
-
-                    for(int j1 = k2; !flag2 && j1 < k; ++j1)
+                    for(int j1 = k2; j1 < k; ++j1)
                     {
-                        for(int k1 = i3; !flag2 && k1 < i1; ++k1)
+                        for(int k1 = i3; k1 < i1; ++k1)
                         {
-                            for(int l1 = l + 1; !flag2 && l1 >= l2 - 1; --l1)
+                            for(int l1 = l + 1; l1 >= l2 - 1; --l1)
                             {
                                 if(l1 >= 0 && l1 < 256)
                                 {
@@ -124,34 +116,31 @@ public class CustomRavineGenerator extends MapGenBase
                         }
                     }
 
-                    if(!flag2)
+                    for(int blockX = k2; blockX < k; ++blockX)
                     {
-                        for(int j3 = k2; j3 < k; ++j3)
+                        double d10 = ((double) (blockX + chunkX * 16) + 0.5D - p_180707_6_) / d9;
+
+                        for(int blockZ = i3; blockZ < i1; ++blockZ)
                         {
-                            double d10 = ((double) (j3 + p_180707_3_ * 16) + 0.5D - p_180707_6_) / d9;
+                            double d7 = ((double) (blockZ + chunkZ * 16) + 0.5D - p_180707_10_) / d9;
 
-                            for(int i2 = i3; i2 < i1; ++i2)
+                            if(d10 * d10 + d7 * d7 < 1.0D)
                             {
-                                double d7 = ((double) (i2 + p_180707_4_ * 16) + 0.5D - p_180707_10_) / d9;
-
-                                if(d10 * d10 + d7 * d7 < 1.0D)
+                                for(int blockY = l; blockY > l2; --blockY)
                                 {
-                                    for(int j2 = l; j2 > l2; --j2)
-                                    {
-                                        double d8 = ((double) (j2 - 1) + 0.5D - p_180707_8_) / d2;
+                                    double d8 = ((double) (blockY - 1) + 0.5D - p_180707_8_) / d2;
 
-                                        if((d10 * d10 + d7 * d7) * (double) this.rs[j2 - 1] + d8 * d8 / 6.0D < 1.0D)
-                                        {
-                                            digBlock(p_180707_5_, j3, j2, i2, p_180707_3_, p_180707_4_);
-                                        }
+                                    if((d10 * d10 + d7 * d7) * (double) this.rs[blockY - 1] + d8 * d8 / 6.0D < 1.0D)
+                                    {
+                                        digBlock(primer, blockX, blockY, blockZ);
                                     }
                                 }
                             }
                         }
-                        if(flag1)
-                        {
-                            break;
-                        }
+                    }
+                    if(flag1)
+                    {
+                        break;
                     }
                 }
             }
@@ -163,7 +152,7 @@ public class CustomRavineGenerator extends MapGenBase
         if(this.rand.nextInt(50) == 0)
         {
             double d0 = chunkX * 16 + this.rand.nextInt(16);
-            double d1 = this.rand.nextInt(this.rand.nextInt(40) + 8) + 20;
+            double d1 = this.rand.nextInt(this.rand.nextInt(130) + 100) + 20;
             double d2 = chunkZ * 16 + this.rand.nextInt(16);
 
             for(int j = 0; j < 1; ++j)
@@ -176,22 +165,14 @@ public class CustomRavineGenerator extends MapGenBase
         }
     }
 
-    //Determine if the block at the specified location is the top block for the biome, we take into account
-    //Vanilla bugs to make sure that we generate the map the same way vanilla does.
-    private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ)
-    {
-        net.minecraft.world.biome.Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
-        IBlockState state = data.getBlockState(x, y, z);
-        return state.getBlock().getDefaultState() == biome.topBlock;
-    }
-
-    protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ)
+    protected void digBlock(ChunkPrimer data, int x, int y, int z)
     {
         IBlockState state = data.getBlockState(x, y, z);
 
         if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_STONE || state.getBlock() == ModBlocks.INSANITY_DIRT)
         {
-            data.setBlockState(x, y, z, AIR);
+            if(rand.nextInt(1000) == 0) data.setBlockState(x, y, z, LIGHT);
+            else data.setBlockState(x, y, z, AIR);
         }
     }
 }
