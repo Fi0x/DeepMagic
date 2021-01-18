@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.ModBlocks;
-import net.minecraft.block.BlockBush;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -75,7 +74,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
                     for (int i = 0; i < 64; ++i)
                     {
                         BlockPos blockpos = blockpos1.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-                        if (worldIn.isAirBlock(blockpos) && blockpos.getY() < 255 && ((BlockBush) ModBlocks.INSANITY_FLOWER).canBlockStay(worldIn, blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState()))
+                        if(worldIn.isAirBlock(blockpos) && blockpos.getY() < 255 && ModBlocks.INSANITY_FLOWER.canBlockStay(worldIn, blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState()))
                         {
                             worldIn.setBlockState(blockpos, ModBlocks.INSANITY_FLOWER.getDefaultState(), 2);
                         }
