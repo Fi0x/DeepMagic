@@ -19,6 +19,7 @@ public class DimensionDepth extends WorldProvider
     public DimensionDepth()
     {
         this.biomeProvider = new BiomeProviderSingle(BiomeInit.DEPTH);
+        this.hasSkyLight = false;
     }
 
     @Nonnull
@@ -40,6 +41,30 @@ public class DimensionDepth extends WorldProvider
     }
     @Override
     public boolean isSurfaceWorld()
+    {
+        return false;
+    }
+    @Override
+    public float getSunBrightness(float par1)
+    {
+        return 0;
+    }
+    @Override
+    public float getSunBrightnessFactor(float par1)
+    {
+        return 0;
+    }
+    @Override
+    protected void generateLightBrightnessTable()
+    {
+        for(int i = 0; i <= 15; ++i)
+        {
+            float f1 = 1.0F - (float) i / 15.0F;
+            this.lightBrightnessTable[i] = (0.75F - f1) / (f1 * 3.0F + 1.0F) + 0.0F;
+        }
+    }
+    @Override
+    public boolean hasSkyLight()
     {
         return false;
     }
