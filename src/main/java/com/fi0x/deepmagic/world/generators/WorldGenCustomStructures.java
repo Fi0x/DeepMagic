@@ -49,12 +49,6 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, BiomeInsanity.class);
 		} else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
 		{
-			/*
-			TODO: Adjust custom structure generating
-			 Add stongholds
-			 Add mineshafts
-			 Add Temples
-			 */
 			if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 100, BiomeDepth.class);
 
 			if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, BiomeDepth.class);

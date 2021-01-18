@@ -19,7 +19,7 @@ public class CustomRavineGenerator extends MapGenBase
 
     public CustomRavineGenerator()
     {
-        this.range = 16;
+        this.range = 32;
     }
 
     protected void addTunnel(long p_180707_1_, int chunkX, int chunkZ, ChunkPrimer primer, double p_180707_6_, double p_180707_8_, double p_180707_10_, float p_180707_12_, float p_180707_13_, float p_180707_14_, int p_180707_15_, int p_180707_16_, double p_180707_17_)
@@ -171,7 +171,7 @@ public class CustomRavineGenerator extends MapGenBase
 
         if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_STONE || state.getBlock() == ModBlocks.INSANITY_DIRT)
         {
-            if(rand.nextInt(1000) == 0) data.setBlockState(x, y, z, LIGHT);
+            if(rand.nextInt(1000) == 0) data.setBlockState(x, y, z, LIGHT);//TODO: Place light in populate phase of chunk generator instead
             else data.setBlockState(x, y, z, AIR);
         }
     }

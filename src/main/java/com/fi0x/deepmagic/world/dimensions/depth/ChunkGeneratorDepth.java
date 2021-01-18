@@ -2,12 +2,14 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.world.generators.underground.CustomMineshaftGenerator;
 import com.fi0x.deepmagic.world.generators.underground.CustomRavineGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
@@ -15,6 +17,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -28,20 +31,20 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     private final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     private final IBlockState FILLER_MAIN = ModBlocks.DEPTH_STONE.getDefaultState();
 
-    private final int MAX_HEIGHT = 255;
-    private final int SEA_LEVEL = 200;
     private final World world;
     private final Random rand;
     private MapGenBase ravineGenerator = new CustomRavineGenerator();
+    private MapGenMineshaft mineshaftGenerator = new CustomMineshaftGenerator();
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
-        //TODO: Chech Hell and Overworld generators for variables
         world = worldIn;
         rand = new Random(seed);
-        ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
 
-        worldIn.setSeaLevel(SEA_LEVEL);
+        ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
+        mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, InitMapGenEvent.EventType.MINESHAFT);
+
+        worldIn.setSeaLevel(200);
     }
     @Nonnull
     @Override
@@ -51,6 +54,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         fillChunk(primer);
 
         ravineGenerator.generate(world, x, z, primer);
+        mineshaftGenerator.generate(this.world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();
@@ -70,7 +74,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
                 for(int y = 255; y >= 0; y--)
                 {
                     if(rand.nextInt(5) >= y) primer.setBlockState(x, y, z, BEDROCK);
-                    else if(MAX_HEIGHT - rand.nextInt(5) <= y) primer.setBlockState(x, y, z, BEDROCK);
+                    else if(255 - rand.nextInt(5) <= y) primer.setBlockState(x, y, z, BEDROCK);
                     else primer.setBlockState(x, y, z, FILLER_MAIN);
                 }
             }
@@ -81,20 +85,22 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     public void populate(int x, int z)
     {
         /*
-        TODO: Generate something like fire
-         Generate custom glowstone and plants
-         Compare with insanity and hell generators
+        TODO: Check Insanity, Overworld and Hell generators
+         Generate compressed glowstone and plants
          */
         BlockFalling.fallInstantly = true;
 
         int i = x * 16;
         int j = z * 16;
-        BlockPos pos = new BlockPos(i, 0, j);
-        Biome biome = this.world.getBiome(pos.add(16, 0, 16));
+        BlockPos blockPos = new BlockPos(i, 0, j);
+        ChunkPos chunkPos = new ChunkPos(x, z);
+        Biome biome = this.world.getBiome(blockPos.add(16, 0, 16));
         this.rand.setSeed(this.world.getSeed());
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
+
+        mineshaftGenerator.generateStructure(this.world, this.rand, chunkPos);
 
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
         WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
