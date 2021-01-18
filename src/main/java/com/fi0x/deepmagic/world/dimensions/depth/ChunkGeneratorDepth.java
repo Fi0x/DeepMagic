@@ -19,6 +19,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import javax.annotation.Nonnull;
@@ -99,7 +100,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
         mineshaftGenerator.generateStructure(this.world, this.rand, chunkPos);
 
-        if(net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE))
+        if(TerrainGen.populate(this, this.world, this.rand, x, z, false, PopulateChunkEvent.Populate.EventType.GLOWSTONE))
         {
             for(int j1 = 0; j1 < this.rand.nextInt(this.rand.nextInt(10) + 1); ++j1)
             {
@@ -109,14 +110,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, chunkPos));
-
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(this.world, this.rand, chunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM))
-        {
-            if(this.rand.nextBoolean())
-            {
-                //TODO: Check Hell generator to generate plants
-            }
-        }
 
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
         WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);

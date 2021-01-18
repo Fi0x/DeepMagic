@@ -24,7 +24,7 @@ public class CustomBushGenerator extends WorldGenerator
     {
         for(int i = 0; i < maxHeight; ++i)
         {
-            BlockPos blockpos = position.add(rand.nextInt(8) - 4, rand.nextInt(4) - 2, rand.nextInt(8) - 4);
+            BlockPos blockpos = position.add(rand.nextInt(16) - 8, rand.nextInt(8) - 4, rand.nextInt(16) - 8);
 
             if(worldIn.isAirBlock(blockpos) && blockpos.getY() < worldIn.getHeight() - 1 && this.block.canBlockStay(worldIn, blockpos, this.block.getDefaultState()))
             {

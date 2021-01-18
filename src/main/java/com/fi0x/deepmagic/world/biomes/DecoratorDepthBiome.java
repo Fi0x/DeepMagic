@@ -71,8 +71,8 @@ public class DecoratorDepthBiome extends BiomeDecorator
             {
                 if(random.nextInt(2) == 0)
                 {
-                    int i8 = random.nextInt(16) + 8;
-                    int l11 = random.nextInt(16) + 8;
+                    int i8 = 8;
+                    int l11 = 8;
                     BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(i8, 0, l11));
                     depthFlowerGen.generate(worldIn, random, blockpos2);
                 }
@@ -80,8 +80,8 @@ public class DecoratorDepthBiome extends BiomeDecorator
 
             if(random.nextInt(2) == 0)
             {
-                int i4 = random.nextInt(16) + 8;
-                int k8 = random.nextInt(16) + 8;
+                int i4 = 8;
+                int k8 = 8;
                 int j12 = worldIn.getHeight(chunkPos.add(i4, 0, k8)).getY() * 2;
 
                 if(j12 > 0)
