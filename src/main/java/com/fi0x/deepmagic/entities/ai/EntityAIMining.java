@@ -181,7 +181,7 @@ public class EntityAIMining extends EntityAIBase
                 return true;
             }
             if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-            if(world.getLightBrightness(entity.getPosition()) == 0) AIHelperBuild.placeLightAt(world, entity.getPosition());
+            if(world.getLightBrightness(entity.getPosition()) <= 0) AIHelperBuild.placeLightAt(world, entity.getPosition());
             digDelay = 20;
         } else
         {
