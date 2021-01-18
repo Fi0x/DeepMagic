@@ -1,10 +1,7 @@
 package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.blocks.*;
-import com.fi0x.deepmagic.blocks.depth.DepthCobble;
-import com.fi0x.deepmagic.blocks.depth.DepthDirt;
-import com.fi0x.deepmagic.blocks.depth.DepthFlower;
-import com.fi0x.deepmagic.blocks.depth.DepthStone;
+import com.fi0x.deepmagic.blocks.depth.*;
 import com.fi0x.deepmagic.blocks.effectstones.AttackStone;
 import com.fi0x.deepmagic.blocks.effectstones.DefenceStone;
 import com.fi0x.deepmagic.blocks.effectstones.LevitationStone;
@@ -80,6 +77,7 @@ public class ModBlocks
 	public static final Block DEPTH_COBBLE = new DepthCobble("depth_cobble", Material.ROCK);
 	public static final Block DEPTH_DIRT = new DepthDirt("depth_dirt", Material.GROUND);
 	public static final Block DEPTH_FLOWER = new DepthFlower("depth_flower", Material.PLANTS);
+	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
 	//Depth Ores
 	public static final Block DEPTH_COAL_ORE = new DepthOreCoal("depth_coal_ore", Material.ROCK);
 	public static final Block DEPTH_IRON_ORE = new DepthOreIron("depth_iron_ore", Material.ROCK);

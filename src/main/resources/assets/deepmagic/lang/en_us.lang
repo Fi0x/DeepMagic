@@ -59,6 +59,7 @@ tile.depth_stone.name=Compressed Stone
 tile.depth_cobble.name=Compressed Cobble
 tile.depth_dirt.name=Compressed Dirt
 tile.depth_flower.name=Depth Flower
+tile.depth_glowstone.name=Compressed Glowstone
 
 tile.depth_coal_ore.name=Compressed Coal Ore
 tile.depth_iron_ore.name=Compressed Iron Ore

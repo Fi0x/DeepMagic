@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.world.generators.underground.CustomRavineGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -14,8 +15,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -33,8 +32,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     private final int SEA_LEVEL = 200;
     private final World world;
     private final Random rand;
-    private MapGenBase ravineGenerator = new MapGenRavine();
-    private MapGenBase caveGenerator = new MapGenCaves();
+    private MapGenBase ravineGenerator = new CustomRavineGenerator();
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
@@ -42,7 +40,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         world = worldIn;
         rand = new Random(seed);
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
-        caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, InitMapGenEvent.EventType.CAVE);
 
         worldIn.setSeaLevel(SEA_LEVEL);
     }
@@ -53,8 +50,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         ChunkPrimer primer = new ChunkPrimer();
         fillChunk(primer);
 
-        ravineGenerator.generate(world, x, z, primer);//TODO: Make generator work
-        caveGenerator.generate(world, x, z, primer);//TODO: Make generator work
+        ravineGenerator.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();
