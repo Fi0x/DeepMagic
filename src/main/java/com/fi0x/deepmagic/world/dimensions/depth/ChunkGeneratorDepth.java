@@ -84,11 +84,8 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     @Override
     public void populate(int x, int z)
     {
-        /*
-        TODO: Check Insanity, Overworld and Hell generators
-         Generate compressed glowstone and plants
-         */
         BlockFalling.fallInstantly = true;
+        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
 
         int i = x * 16;
         int j = z * 16;
@@ -101,6 +98,25 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
 
         mineshaftGenerator.generateStructure(this.world, this.rand, chunkPos);
+
+        if(net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE))
+        {
+            for(int j1 = 0; j1 < this.rand.nextInt(this.rand.nextInt(10) + 1); ++j1)
+            {
+                //TODO: Check Hell generator to generate glowstone
+            }
+        }
+
+        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, chunkPos));
+
+        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(this.world, this.rand, chunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM))
+        {
+            if(this.rand.nextBoolean())
+            {
+                //TODO: Check Hell generator to generate plants
+            }
+        }
 
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
         WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
