@@ -131,21 +131,21 @@ public class AIHelperSearch
 
     public static boolean hasWalls(World world, BlockPos floorPos, EnumFacing direction)
     {
-        BlockPos right = floorPos.east().south();
-        BlockPos left = floorPos.west().south();
+        BlockPos right = floorPos.up().east().south();
+        BlockPos left = floorPos.up().west().south();
         switch(direction)
         {
             case EAST:
-                right = floorPos.south().west();
-                left = floorPos.north().west();
+                right = floorPos.up().south().west();
+                left = floorPos.up().north().west();
                 break;
             case SOUTH:
-                right = floorPos.west().north();
-                left = floorPos.east().north();
+                right = floorPos.up().west().north();
+                left = floorPos.up().east().north();
                 break;
             case WEST:
-                right = floorPos.north().east();
-                left = floorPos.south().east();
+                right = floorPos.up().north().east();
+                left = floorPos.up().south().east();
                 break;
         }
         boolean rightOK = AIHelperMining.isWallBlock(world, right);
@@ -160,5 +160,19 @@ public class AIHelperSearch
         }
 
         return rightOK && leftOK;
+    }
+
+    public static boolean isBridge(World world, BlockPos floorPos)
+    {
+        BlockPos center = floorPos.down();
+        int hangingBlocks = 0;
+
+        if(world.getBlockState(center).getCollisionBoundingBox(world, center) == null) hangingBlocks++;
+        if(world.getBlockState(center.north()).getCollisionBoundingBox(world, center.north()) == null) hangingBlocks++;
+        if(world.getBlockState(center.east()).getCollisionBoundingBox(world, center.east()) == null) hangingBlocks++;
+        if(world.getBlockState(center.south()).getCollisionBoundingBox(world, center.south()) == null) hangingBlocks++;
+        if(world.getBlockState(center.west()).getCollisionBoundingBox(world, center.west()) == null) hangingBlocks++;
+
+        return hangingBlocks > 0;
     }
 }

@@ -193,7 +193,7 @@ public class EntityAIMining extends EntityAIBase
     protected boolean digAtBlockPos(BlockPos pos)
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
-        if(!AIHelperSearch.hasWalls(world, floor.up(), direction)) return false;
+        if(!AIHelperSearch.hasWalls(world, floor, direction) && !AIHelperSearch.isBridge(world, floor)) return false;
         if(world.getBlockState(floor).getBlock() instanceof BlockAir) AIHelperBuild.placeInventoryBlock(world, floor, entity.itemHandler);
         Block block = world.getBlockState(pos).getBlock();
 
