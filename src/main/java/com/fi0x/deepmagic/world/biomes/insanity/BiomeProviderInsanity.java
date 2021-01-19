@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.biomes;
+package com.fi0x.deepmagic.world.biomes.insanity;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.world.biomes.layer.CustomGenLayerInsanity;
@@ -30,7 +30,6 @@ public class BiomeProviderInsanity extends BiomeProvider
     {
         GenLayer biomes = new CustomGenLayerInsanity(seed);
 
-        //TODO: Find out what the zoom does
         biomes = new CustomGenLayerInsanityBiomes(1000, biomes);
         biomes = new GenLayerZoom(1000, biomes);
         biomes = new GenLayerZoom(1001, biomes);

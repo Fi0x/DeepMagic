@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.biomes;
+package com.fi0x.deepmagic.world.biomes.insanity;
 
 import com.fi0x.deepmagic.entities.mobs.*;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -17,16 +17,17 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BiomeInsanityPlains extends Biome
+public class BiomeInsanityHills extends Biome
 {
+    //TODO: Make biome more hilly
     private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
     private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
     private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
     private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.89F);
 
-    public BiomeInsanityPlains()
+    public BiomeInsanityHills()
     {
-        super(new BiomeProperties("Insanity").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
+        super(new BiomeProperties("InsanityHills").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
 
@@ -35,11 +36,11 @@ public class BiomeInsanityPlains extends Biome
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
 
-        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityCockroach.class, 20, 1, 3));
-        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
-        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
-        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
-        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGiant.class, 5, 1, 2));
+        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCockroach.class, 20, 1, 3));
+        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
+        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
+        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
+        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 5, 1, 2));
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
@@ -58,40 +59,40 @@ public class BiomeInsanityPlains extends Biome
         IBlockState iblockstate = this.topBlock;
         IBlockState iblockstate1 = this.fillerBlock;
         int j = -1;
-        int k = (int)(noiseVal / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+        int k = (int) (noiseVal / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
         int l = x & 15;
         int i1 = z & 15;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-        for (int j1 = 255; j1 >= 0; --j1)
+        for(int j1 = 255; j1 >= 0; --j1)
         {
-            if (j1 <= rand.nextInt(5))
+            if(j1 <= rand.nextInt(5))
             {
                 chunkPrimerIn.setBlockState(i1, j1, l, BEDROCK);
             } else
             {
                 IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
-                if (iblockstate2.getMaterial() == Material.AIR)
+                if(iblockstate2.getMaterial() == Material.AIR)
                 {
                     j = -1;
-                } else if (iblockstate2.getBlock() == ModBlocks.INSANITY_STONE)
+                } else if(iblockstate2.getBlock() == ModBlocks.INSANITY_STONE)
                 {
-                    if (j == -1)
+                    if(j == -1)
                     {
-                        if (k <= 0)
+                        if(k <= 0)
                         {
                             iblockstate = AIR;
                             iblockstate1 = ModBlocks.INSANITY_STONE.getDefaultState();
-                        } else if (j1 >= i - 4 && j1 <= i + 1)
+                        } else if(j1 >= i - 4 && j1 <= i + 1)
                         {
                             iblockstate = this.topBlock;
                             iblockstate1 = this.fillerBlock;
                         }
 
-                        if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
+                        if(j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
                         {
-                            if (this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F)
+                            if(this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F)
                             {
                                 iblockstate = ICE;
                             } else
@@ -102,10 +103,10 @@ public class BiomeInsanityPlains extends Biome
 
                         j = k;
 
-                        if (j1 >= i - 1)
+                        if(j1 >= i - 1)
                         {
                             chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
-                        } else if (j1 < i - 7 - k)
+                        } else if(j1 < i - 7 - k)
                         {
                             iblockstate = AIR;
                             iblockstate1 = ModBlocks.INSANITY_STONE.getDefaultState();
@@ -114,12 +115,12 @@ public class BiomeInsanityPlains extends Biome
                         {
                             chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
                         }
-                    } else if (j > 0)
+                    } else if(j > 0)
                     {
                         --j;
                         chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 
-                        if (j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1)
+                        if(j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1)
                         {
                             j = rand.nextInt(4) + Math.max(0, j1 - 63);
                             iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? RED_SANDSTONE : SANDSTONE;

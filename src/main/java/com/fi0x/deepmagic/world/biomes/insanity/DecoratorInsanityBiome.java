@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.biomes;
+package com.fi0x.deepmagic.world.biomes.insanity;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.util.math.BlockPos;

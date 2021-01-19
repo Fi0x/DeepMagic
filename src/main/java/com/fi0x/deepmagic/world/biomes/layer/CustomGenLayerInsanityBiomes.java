@@ -73,16 +73,8 @@ public class CustomGenLayerInsanityBiomes extends GenLayer
         this.initChunkSeed(regionX, regionZ);
         int offset = this.nextInt(biomes.length);
 
-        Biome returnBiome = biomes[0];
-        switch((index + offset) % biomes.length)
-        {
-            case 0:
-                returnBiome = biomes[0];
-                break;
-            case 1:
-                returnBiome = biomes[1];
-                break;
-        }
+        Biome returnBiome = biomes[(index + offset) % biomes.length];
+
         return Biome.getIdForBiome(returnBiome);
     }
 }

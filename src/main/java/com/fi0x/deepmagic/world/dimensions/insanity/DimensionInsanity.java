@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.world.dimensions.insanity;
 
 import com.fi0x.deepmagic.init.DimensionInit;
-import com.fi0x.deepmagic.world.biomes.BiomeProviderInsanity;
+import com.fi0x.deepmagic.world.biomes.insanity.BiomeProviderInsanity;
 import net.minecraft.client.audio.MusicTicker.MusicType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -2,8 +2,7 @@ package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biomes.BiomeDepth;
-import com.fi0x.deepmagic.world.biomes.BiomeInsanityForest;
-import com.fi0x.deepmagic.world.biomes.BiomeInsanityPlains;
+import com.fi0x.deepmagic.world.biomes.insanity.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -17,14 +16,21 @@ import java.util.ArrayList;
 public class BiomeInit
 {
 	public static final Biome INSANITY_PLAINS = new BiomeInsanityPlains();
-	public static final Biome INSANITY_FOREST = new BiomeInsanityForest();
+	public static final Biome INSANITY_FOREST_SMALL = new BiomeInsanityForestSmall();
+	public static final Biome INSANITY_FOREST_LARGE = new BiomeInsanityForestLarge();
+	public static final Biome INSANITY_FOREST_MIXED = new BiomeInsanityForestMixed();
+	public static final Biome INSANITY_HILLS = new BiomeInsanityHills();
 
 	public static final Biome DEPTH = new BiomeDepth();
 
 	public static void registerBiomes()
 	{
+		//TODO: Adjust biome types
 		initBiome(INSANITY_PLAINS, "InsanityPlains", BiomeType.WARM, Type.HOT, Type.SPARSE, Type.DRY, Type.SAVANNA, Type.SPOOKY);
-		initBiome(INSANITY_FOREST, "InsanityForest", BiomeType.WARM, Type.DRY);
+		initBiome(INSANITY_FOREST_SMALL, "InsanityForestSmall", BiomeType.WARM, Type.DRY);
+		initBiome(INSANITY_FOREST_LARGE, "InsanityForestLarge", BiomeType.WARM, Type.DRY);
+		initBiome(INSANITY_FOREST_MIXED, "InsanityForestMixed", BiomeType.WARM, Type.DRY);
+		initBiome(INSANITY_HILLS, "InsanityHills", BiomeType.WARM, Type.DRY);
 
 		initBiome(DEPTH, "Depth", BiomeType.COOL, Type.SPOOKY, Type.COLD);
 	}
@@ -44,7 +50,10 @@ public class BiomeInit
 		ArrayList<Biome> biomes = new ArrayList<>();
 
 		biomes.add(INSANITY_PLAINS);
-		biomes.add(INSANITY_FOREST);
+		biomes.add(INSANITY_FOREST_SMALL);
+		biomes.add(INSANITY_FOREST_LARGE);
+		biomes.add(INSANITY_FOREST_MIXED);
+		biomes.add(INSANITY_HILLS);
 
 		return biomes;
 	}
