@@ -26,7 +26,7 @@ public class DwarfSpawner extends BlockBase
     }
 
     @Override
-    public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
+    public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
     {
         for(int i = 0; i < ConfigHandler.dwarfSpawnerSpawns; i++)
         {
@@ -34,20 +34,24 @@ public class DwarfSpawner extends BlockBase
             int x = pos.getX();
             int y = pos.getY();
             int z = pos.getZ();
-            while((x == pos.getX() && z == pos.getZ()) || worldIn.getBlockState(new BlockPos(x, y, z)).getCollisionBoundingBox(worldIn, new BlockPos(x, y, z)) != null)
+
+            while((x == pos.getX() && z == pos.getZ()) || world.getBlockState(new BlockPos(x, y, z)).getCollisionBoundingBox(world, new BlockPos(x, y, z)) != null)
             {
                 x += (int) ((Math.random() * 5) - 2);
                 z += (int) ((Math.random() * 5) - 2);
 
                 tries++;
-                if(tries > 50) return;
+                if(tries > 50) break;
             }
 
-            EntityDwarf dwarf = new EntityDwarf(worldIn);
-            dwarf.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
-            worldIn.spawnEntity(dwarf);
+            if(tries <= 50)
+            {
+                EntityDwarf dwarf = new EntityDwarf(world);
+                dwarf.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
+                world.spawnEntity(dwarf);
+            }
         }
 
-        worldIn.setBlockState(pos, ModBlocks.DWARF_BASE_MARKER.getDefaultState());
+        world.setBlockState(pos, ModBlocks.DWARF_BASE_MARKER.getDefaultState());
     }
 }
