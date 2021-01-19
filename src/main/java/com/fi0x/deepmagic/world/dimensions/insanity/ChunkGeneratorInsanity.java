@@ -81,8 +81,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     {
         this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
-        this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.setBlocksInChunk(x, z, chunkprimer);
+        this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.replaceBiomeBlocks(x, z, chunkprimer, biomesForGeneration);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
@@ -99,6 +99,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
     {
+        this.biomesForGeneration = this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
         this.generateHeightmap(x * 4, z * 4);
 
         for(int i = 0; i < 4; ++i)
