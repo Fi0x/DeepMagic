@@ -7,19 +7,16 @@ import net.minecraft.world.gen.layer.IntCache;
 
 import javax.annotation.Nonnull;
 
-public class CustomGenLayer extends GenLayer
+public class CustomGenLayerInsanity extends GenLayer
 {
-    private Biome[] biomes = new Biome[]{
-            BiomeInit.INSANITY,
-            BiomeInit.INSANITY_FOREST};
+    private final Biome[] biomes = BiomeInit.getInsanityBiomes().toArray(new Biome[0]);
 
-
-    public CustomGenLayer(long seed, GenLayer parent)
+    public CustomGenLayerInsanity(long seed, GenLayer parent)
     {
         super(seed);
         this.parent = parent;
     }
-    public CustomGenLayer(long seed)
+    public CustomGenLayerInsanity(long seed)
     {
         super(seed);
     }

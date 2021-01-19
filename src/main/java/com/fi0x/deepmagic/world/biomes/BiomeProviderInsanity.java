@@ -1,8 +1,8 @@
 package com.fi0x.deepmagic.world.biomes;
 
 import com.fi0x.deepmagic.init.BiomeInit;
-import com.fi0x.deepmagic.world.biomes.layer.CustomGenLayer;
-import com.fi0x.deepmagic.world.biomes.layer.CustomGenLayerBiome;
+import com.fi0x.deepmagic.world.biomes.layer.CustomGenLayerInsanity;
+import com.fi0x.deepmagic.world.biomes.layer.CustomGenLayerInsanityBiomes;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeProvider;
@@ -19,8 +19,7 @@ public class BiomeProviderInsanity extends BiomeProvider
         super(world.getWorldInfo());
 
         allowedBiomes.clear();
-        allowedBiomes.add(BiomeInit.INSANITY);
-        allowedBiomes.add(BiomeInit.INSANITY_FOREST);
+        allowedBiomes.addAll(BiomeInit.getInsanityBiomes());
 
         getBiomesToSpawnIn().clear();
         getBiomesToSpawnIn().addAll(allowedBiomes);
@@ -29,14 +28,15 @@ public class BiomeProviderInsanity extends BiomeProvider
     @Override
     public GenLayer[] getModdedBiomeGenerators(@Nonnull WorldType worldType, long seed, @Nonnull GenLayer[] original)
     {
-        GenLayer biomes = new CustomGenLayer(seed);
+        GenLayer biomes = new CustomGenLayerInsanity(seed);
 
-        biomes = new CustomGenLayerBiome(seed * 1000, biomes);
-        biomes = new GenLayerZoom(seed * 1000, biomes);
-        biomes = new GenLayerZoom(seed * 1001, biomes);
-        biomes = new GenLayerZoom(seed * 1002, biomes);
-        biomes = new GenLayerZoom(seed * 1003, biomes);
-        biomes = new GenLayerZoom(seed * 1004, biomes);
+        //TODO: Find out what the zoom does
+        biomes = new CustomGenLayerInsanityBiomes(1000, biomes);
+        biomes = new GenLayerZoom(1000, biomes);
+        biomes = new GenLayerZoom(1001, biomes);
+        biomes = new GenLayerZoom(1002, biomes);
+        biomes = new GenLayerZoom(1003, biomes);
+        biomes = new GenLayerZoom(1004, biomes);
 
         GenLayer biomeIndexLayer = new GenLayerVoronoiZoom(10, biomes);
         biomeIndexLayer.initWorldGenSeed(seed);

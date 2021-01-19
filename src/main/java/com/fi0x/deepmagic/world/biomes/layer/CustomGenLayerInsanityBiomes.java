@@ -7,15 +7,15 @@ import net.minecraft.world.gen.layer.IntCache;
 
 import javax.annotation.Nonnull;
 
-public class CustomGenLayerBiome extends GenLayer
+public class CustomGenLayerInsanityBiomes extends GenLayer
 {
-    public CustomGenLayerBiome(long seed, GenLayer parent)
+    public CustomGenLayerInsanityBiomes(long seed, GenLayer parent)
     {
         super(seed);
         this.parent = parent;
     }
 
-    public CustomGenLayerBiome(long seed)
+    public CustomGenLayerInsanityBiomes(long seed)
     {
         super(seed);
     }
@@ -68,16 +68,21 @@ public class CustomGenLayerBiome extends GenLayer
         int regionX = (mapX + 4) >> 3;
         int regionZ = (mapZ + 4) >> 3;
 
-        this.initChunkSeed(regionX, regionZ);
-        int offset = this.nextInt(4);
+        Biome[] biomes = BiomeInit.getInsanityBiomes().toArray(new Biome[0]);
 
-        switch((index + offset) % 4)
+        this.initChunkSeed(regionX, regionZ);
+        int offset = this.nextInt(biomes.length);
+
+        Biome returnBiome = biomes[0];
+        switch((index + offset) % biomes.length)
         {
             case 0:
-            default:
-                return Biome.getIdForBiome(BiomeInit.INSANITY);
+                returnBiome = biomes[0];
+                break;
             case 1:
-                return Biome.getIdForBiome(BiomeInit.INSANITY_FOREST);
+                returnBiome = biomes[1];
+                break;
         }
+        return Biome.getIdForBiome(returnBiome);
     }
 }

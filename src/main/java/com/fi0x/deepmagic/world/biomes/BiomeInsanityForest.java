@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -45,10 +44,6 @@ public class BiomeInsanityForest extends Biome
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
-
-        //TODO: Remove the following 2 lines
-        this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCreeper.class, 5, 10, 20));
-        addFlower(Blocks.RED_FLOWER.getDefaultState(), 20);
 
         decorator = new DecoratorInsanityBiome();
     }

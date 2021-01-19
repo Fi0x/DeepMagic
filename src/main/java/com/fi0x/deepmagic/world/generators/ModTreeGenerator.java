@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class ModTreeGenerator extends WorldGenAbstractTree
 {
-    private final IBlockState blockStateWood = ModBlocks.INSANITY_LOG.getDefaultState();
-    private final IBlockState blockStateLeaves = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
+    private final IBlockState WOOD = ModBlocks.INSANITY_LOG.getDefaultState();
+    private final IBlockState LEAVES = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
 
     public ModTreeGenerator(boolean notify)
     {
@@ -65,7 +65,7 @@ public class ModTreeGenerator extends WorldGenAbstractTree
 
                         if (state.getBlock().isAir(state, world, blockPos) || state.getBlock().isLeaves(state, world, blockPos))
                         {
-                            setBlockAndNotifyAdequately(world, blockPos, blockStateLeaves);
+                            setBlockAndNotifyAdequately(world, blockPos, LEAVES);
                         }
                     }
                 }
@@ -82,7 +82,7 @@ public class ModTreeGenerator extends WorldGenAbstractTree
 
             if (state.getBlock().isAir(state, world, upN) || state.getBlock().isLeaves(state, world, upN))
             {
-                setBlockAndNotifyAdequately(world, pos.up(height), blockStateWood.withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
+                setBlockAndNotifyAdequately(world, pos.up(height), WOOD.withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
             }
         }
     }
