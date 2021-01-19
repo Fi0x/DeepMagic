@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class ChunkGeneratorInsanity implements IChunkGenerator
 {
-
+    //TODO: Fix "cuts" at chunk borders
     private final World world;
     private final WorldType terrainType;
     private final Random rand;
