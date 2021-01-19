@@ -123,7 +123,7 @@ public class ConfigHandler
     public static int demonSummonXP;
     public static boolean requireDemonStructure;
     //Dwarf Base Marker
-    public static int dwarfMarkerSpawnChance;
+    public static int dwarfSpawnerSpawns;
     //BlockParticles
     public static int dwarfBaseMarkerParticles;
     public static int magicLightParticles;
@@ -334,7 +334,7 @@ public class ConfigHandler
 
         category = "Dwarf Base Marker";
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
-        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
+        dwarfSpawnerSpawns = blocks.getInt("Dwarf Spawner", category, 2, 0, 16, "The Amount of Dwarfs that will be Spawned by a Dwarf Spawner");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");

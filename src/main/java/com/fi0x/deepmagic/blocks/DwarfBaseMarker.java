@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks;
 
-import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,7 +23,6 @@ public class DwarfBaseMarker extends BlockBase
         setResistance(10.0F);
         setHarvestLevel("pickaxe", 2);
         setLightLevel(0.5F);
-        setTickRandomly(true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -39,29 +37,6 @@ public class DwarfBaseMarker extends BlockBase
             double d2 = (double) pos.getZ() + Math.random();
 
             worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-        }
-    }
-    @Override
-    public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, Random rand)
-    {
-        if(rand.nextInt(63) + 1 <= ConfigHandler.dwarfMarkerSpawnChance)
-        {
-            int tries = 0;
-            int x = pos.getX();
-            int y = pos.getY();
-            int z = pos.getZ();
-            while((x == pos.getX() && z == pos.getZ()) || worldIn.getBlockState(new BlockPos(x, y, z)).getCollisionBoundingBox(worldIn, new BlockPos(x, y, z)) != null)
-            {
-                x += (int) ((Math.random() * 5) - 2);
-                z += (int) ((Math.random() * 5) - 2);
-
-                tries++;
-                if(tries > 10) return;
-            }
-
-            EntityDwarf dwarf = new EntityDwarf(worldIn);
-            dwarf.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
-            worldIn.spawnEntity(dwarf);
         }
     }
 }

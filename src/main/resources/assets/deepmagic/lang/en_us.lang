@@ -28,6 +28,7 @@ tile.dwarf_lamp.name=Dwarf Lamp
 tile.rune.name=Rune
 tile.magic_light.name=Magic Light
 tile.dwarf_base_marker.name=Dwarf Base Marker
+tile.dwarf_spawner.name=Dwarf Spawner
 
 tile.insanity_stone.name=Insanity Stone
 tile.bright_insanity_stone.name=Bright Insanity Stone
