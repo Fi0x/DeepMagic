@@ -1,9 +1,14 @@
 package com.fi0x.deepmagic.blocks;
 
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityDwarfBaseMarker;
+import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,9 +16,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class DwarfBaseMarker extends BlockBase
+public class DwarfBaseMarker extends BlockBase implements ITileEntityProvider
 {
     public DwarfBaseMarker(String name, Material material)
     {
@@ -38,5 +44,18 @@ public class DwarfBaseMarker extends BlockBase
 
             worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
+    }
+
+    @Nonnull
+    @Override
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
+    {
+        return Item.getItemFromBlock(ModBlocks.MANA_ALTAR);
+    }
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
+    {
+        return new TileEntityDwarfBaseMarker();
     }
 }
