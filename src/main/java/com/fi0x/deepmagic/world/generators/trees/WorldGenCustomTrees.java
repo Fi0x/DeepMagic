@@ -1,6 +1,8 @@
-package com.fi0x.deepmagic.world.generators;
+package com.fi0x.deepmagic.world.generators.trees;
 
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestLarge;
+import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestMixed;
 import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestSmall;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,14 +16,19 @@ import java.util.Random;
 
 public class WorldGenCustomTrees implements IWorldGenerator
 {
-    private final WorldGenerator INSANITY = new ModTreeGenerator(true);
+    private final WorldGenerator INSANITY_SMALL = new TreeGenInsanitySmall(true);
+    private final WorldGenerator INSANITY_LARGE = new TreeGenInsanityLarge(true);
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        if (world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
+        if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
         {
-            runGenerator(INSANITY, world, random, chunkX, chunkZ, 10, BiomeInsanityForestSmall.class);
+            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 10, BiomeInsanityForestSmall.class);
+            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestMixed.class);
+
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 5, BiomeInsanityForestLarge.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 1, BiomeInsanityForestMixed.class);
         }
     }
 

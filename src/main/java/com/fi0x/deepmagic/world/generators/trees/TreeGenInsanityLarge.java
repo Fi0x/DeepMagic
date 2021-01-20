@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.generators;
+package com.fi0x.deepmagic.world.generators.trees;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockLeaves;
@@ -14,12 +14,13 @@ import net.minecraftforge.common.IPlantable;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class ModTreeGenerator extends WorldGenAbstractTree
+public class TreeGenInsanityLarge extends WorldGenAbstractTree
 {
+    //TODO: Generate large trees
     private final IBlockState WOOD = ModBlocks.INSANITY_LOG.getDefaultState();
     private final IBlockState LEAVES = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
 
-    public ModTreeGenerator(boolean notify)
+    public TreeGenInsanityLarge(boolean notify)
     {
         super(notify);
     }

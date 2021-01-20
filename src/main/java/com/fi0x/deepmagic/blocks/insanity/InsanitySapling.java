@@ -8,7 +8,8 @@ import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.generators.ModTreeGenerator;
+import com.fi0x.deepmagic.world.generators.trees.TreeGenInsanityLarge;
+import com.fi0x.deepmagic.world.generators.trees.TreeGenInsanitySmall;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -59,10 +60,12 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     public void generateTree(World world, BlockPos pos, Random rand)
     {
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-        WorldGenerator worldGenerator = new ModTreeGenerator(true);
+        WorldGenerator treeGenerator;
+        if(rand.nextInt(20) == 0) treeGenerator = new TreeGenInsanityLarge(true);
+        else treeGenerator = new TreeGenInsanitySmall(true);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-        worldGenerator.generate(world, rand, pos);
+        treeGenerator.generate(world, rand, pos);
     }
 
     @Override
