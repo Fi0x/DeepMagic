@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.generators.trees;
 
+import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestLarge;
 import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestMixed;
@@ -8,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -16,7 +18,8 @@ import java.util.Random;
 
 public class WorldGenCustomTrees implements IWorldGenerator
 {
-    private final WorldGenerator INSANITY_SMALL = new TreeGenInsanitySmall(true);
+    private final WorldGenerator INSANITY_SMALL = new WorldGenTrees(true, 5, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
+    private final WorldGenerator INSANITY_NORMAL = new TreeGenInsanityMedium(true);
     private final WorldGenerator INSANITY_LARGE = new TreeGenInsanityLarge(true);
 
     @Override
@@ -24,11 +27,15 @@ public class WorldGenCustomTrees implements IWorldGenerator
     {
         if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
         {
-            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 10, BiomeInsanityForestSmall.class);
-            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 1, BiomeInsanityForestSmall.class);
+            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 1, BiomeInsanityForestMixed.class);
 
-            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 5, BiomeInsanityForestLarge.class);
+            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 10, BiomeInsanityForestSmall.class);
+            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestLarge.class);
+
             runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 1, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 5, BiomeInsanityForestLarge.class);
         }
     }
 

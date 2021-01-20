@@ -16,7 +16,9 @@ import java.util.Random;
 
 public class TreeGenInsanityLarge extends WorldGenAbstractTree
 {
-    //TODO: Generate large trees
+    /*
+    TODO: Check out WorldGenSavannaTree and huge trees to change shape to mimic giant trees
+     */
     private final IBlockState WOOD = ModBlocks.INSANITY_LOG.getDefaultState();
     private final IBlockState LEAVES = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
 

@@ -14,9 +14,9 @@ import net.minecraftforge.common.IPlantable;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class TreeGenInsanitySmall extends WorldGenAbstractTree
+public class TreeGenInsanityMedium extends WorldGenAbstractTree
 {
-    //TODO: Adjust shape of tree
+    //TODO: Adjust size and shape of tree to look like large oak trees
     private final IBlockState WOOD = ModBlocks.INSANITY_LOG.getDefaultState();
     private final IBlockState LEAVES = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
     private final int MIN_HEIGHT = 7;
@@ -25,7 +25,7 @@ public class TreeGenInsanitySmall extends WorldGenAbstractTree
     private final int CROWN_MIN_HEIGHT = 2;
     private final int DEFAULT_EXTRA_SPACE = 2;
 
-    public TreeGenInsanitySmall(boolean notify)
+    public TreeGenInsanityMedium(boolean notify)
     {
         super(notify);
     }
