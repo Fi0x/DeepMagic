@@ -19,6 +19,7 @@ public class ConfigHandler
 
     //Dimension IDs
     public static int dimensionIdInsanityID;
+    public static int dimensionIdDepthID;
     //Entity IDs
     public static int entityInsanityCowID;
     public static int entityDwarfID;
@@ -45,7 +46,9 @@ public class ConfigHandler
 
     //Biome Generation
     public static boolean overworldInsanityBiome;
+    public static boolean overworldDepthBiome;
     public static int insanityBiomeWeight;
+    public static int depthBiomeWeight;
     //Ore Generation
     public static boolean spawnDeepCrystalOre;
     //Structure Generation
@@ -133,6 +136,7 @@ public class ConfigHandler
     //Mana Costs
     public static int manaBoosterAmount;
     public static int teleportationCrystalManaCost;
+    public static int teleportationCrystalManaCostDepth;
     public static int spellBaseManaCost;
     //Skill XP
     public static int teleportationCrystalSkillXP;
@@ -157,7 +161,8 @@ public class ConfigHandler
 
         category = "Mod Dimensions";
         ids.addCustomCategoryComment(category, "Mod Dimensions");
-        dimensionIdInsanityID = ids.getInt("Insanity Dimension ID", category, 42, -1000, -1000, "");
+        dimensionIdInsanityID = ids.getInt("Insanity Dimension ID", category, 42, -1000, 1000, "");
+        dimensionIdDepthID = ids.getInt("Depth Dimension ID", category, 43, -1000, 1000, "");
 
         category = "Mod NPCs";
         ids.addCustomCategoryComment(category, "Mod NPCs");
@@ -198,7 +203,9 @@ public class ConfigHandler
         category = "Biome Generation";
         worldGeneration.addCustomCategoryComment(category, "Biome Generation");
         overworldInsanityBiome = worldGeneration.getBoolean("Overworld Insanity Biome Spawn", category, false, "Enables Spawn of the Insanity Biome in the Overworld");
+        overworldDepthBiome = worldGeneration.getBoolean("Overworld Depth Biome Spawn", category, false, "Enables Spawn of the Depth Biome in the Overworld");
         insanityBiomeWeight = worldGeneration.getInt("Insanity Biome Weight", category, 10, 1, 1000, "Insanity Biome Spawn Weight");
+        depthBiomeWeight = worldGeneration.getInt("Depth Biome Weight", category, 10, 1, 1000, "Depth Biome Spawn Weight");
 
         category = "Ore Generation";
         worldGeneration.addCustomCategoryComment(category, "Enable Ore Generation");
@@ -210,9 +217,9 @@ public class ConfigHandler
         generateInsanityRockTrollCaves = worldGeneration.getBoolean("Insanity Rock Troll Caves", category, true, "Enables Rock Troll Caves in the Insanity Dimension");
         generateShrines = worldGeneration.getBoolean("Shrines", category, true, "Enables Shrines in the Insanity Dimension");
         generateInsanityOases = worldGeneration.getBoolean("Insanity Oases", category, true, "Enables Oases in the Insanity Dimension");
-        generateDwarfBases = worldGeneration.getBoolean("Dwarf Bases", category, true, "Enables Dwarf Bases in the Insanity Dimension");
+        generateDwarfBases = worldGeneration.getBoolean("Dwarf Bases", category, true, "Enables Dwarf Bases in the Mod Dimensions");
         generateDragonLairs = worldGeneration.getBoolean("Dragon Lairs", category, true, "Enables Dragon Lairs in the Insanity Dimension");
-        generateDungeons = worldGeneration.getBoolean("Dungeons", category, true, "Enables Dungeons in the Insanity Dimension");
+        generateDungeons = worldGeneration.getBoolean("Dungeons", category, true, "Enables Dungeons in the Mod Dimensions");
 
         worldGeneration.save();
     }
@@ -221,7 +228,7 @@ public class ConfigHandler
         npcsGeneral = new Configuration(file);
         String category;
 
-        category = "Insanity Biome Spawns";
+        category = "Spawns";
         npcsGeneral.addCustomCategoryComment(category, "Insanity Biome Spawns");
         allowCockroach = npcsGeneral.getBoolean("Allow Cockroach", category, true, "");
         allowInsanityCow = npcsGeneral.getBoolean("Allow Insanity Cow", category, true, "");
@@ -327,7 +334,7 @@ public class ConfigHandler
 
         category = "Dwarf Base Marker";
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
-        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
+        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Marker Spawn Chance", category, 5, 0, 1000, "The Chance a Dwarf will spawn every 10 seconds at a Dwarf Base Marker");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");
@@ -350,6 +357,7 @@ public class ConfigHandler
         items.addCustomCategoryComment(category, "Mana Costs");
         manaBoosterAmount = items.getInt("Mana Booster Amount", category, 1000, 1, 100000, "Mana Amount a Mana Booster gives");
         teleportationCrystalManaCost = items.getInt("Teleportation Crystal Cost", category, 90, 0, 10000, "Mana Costs for the Teleportation Crystal");
+        teleportationCrystalManaCostDepth = items.getInt("Depth Dimension teleport costs", category, 900, 0, 100000, "Mana Costs for Teleporting in or out of Depth Dimension");
         spellBaseManaCost = items.getInt("Base Spell Cost", category, 10, 1, 1000, "The Costs for a Spell without effect");
 
         category = "Skill XP";

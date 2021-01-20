@@ -1,7 +1,9 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import com.fi0x.deepmagic.entities.ai.helper.AIHelperBuild;
+import com.fi0x.deepmagic.entities.ai.helper.AIHelperMining;
+import com.fi0x.deepmagic.entities.ai.helper.AIHelperSearch;
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
-import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
@@ -27,7 +29,7 @@ public class EntityAIMining extends EntityAIBase
 {
     protected final int executionChance;
     protected final World world;
-    protected final EntityDwarf entity;
+    public final EntityDwarf entity;
     protected final double speed;
     protected final float probability;
     protected final Random random;
@@ -65,13 +67,13 @@ public class EntityAIMining extends EntityAIBase
     {
         if(this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
 
-        if(!AIHelperMining.hasHomePosition(world, entity)) return false;
-        return entity.posY < ConfigHandler.dwarfMaxMiningHeight || entity.dimension == 43;//TODO: Use config-handler value
+        if(!AIHelperSearch.hasHomePosition(world, entity)) return false;
+        return entity.posY < ConfigHandler.dwarfMaxMiningHeight || entity.dimension == ConfigHandler.dimensionIdDepthID;
     }
     @Override
     public void startExecuting()
     {
-        chestPos = AIHelperMining.findChest(world, entity.homePos, entity.getPosition());
+        chestPos = AIHelperSearch.findChest(world, entity.homePos, entity.getPosition());
 
         startPosition = AIHelperMining.findMiningStartPosition(world, this);
         if(startPosition == null) return;
@@ -97,7 +99,11 @@ public class EntityAIMining extends EntityAIBase
                 return !entity.getNavigator().noPath();
             }
             inventoryToChest();
-            if(searchChest) searchAndGoToChest();
+            if(searchChest)
+            {
+                searchAndGoToChest();
+                return true;
+            }
 
             if(digDelay == 0)
             {
@@ -136,7 +142,7 @@ public class EntityAIMining extends EntityAIBase
             if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
             else
             {
-                chestPos = AIHelperMining.findChest(world, chestPos, entity.getPosition(), entity.homePos);
+                chestPos = AIHelperSearch.findChest(world, chestPos, entity.getPosition(), entity.homePos);
                 if(chestPos != null) searchChest = true;
                 break;
             }
@@ -144,7 +150,7 @@ public class EntityAIMining extends EntityAIBase
     }
     protected void searchAndGoToChest()
     {
-        if(chestPos == null) chestPos = AIHelperMining.findChest(world, entity.homePos, entity.getPosition());
+        if(chestPos == null) chestPos = AIHelperSearch.findChest(world, entity.homePos, entity.getPosition());
         if(chestPos != null)
         {
             entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
@@ -175,7 +181,7 @@ public class EntityAIMining extends EntityAIBase
                 return true;
             }
             if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-            if(world.getLightBrightness(entity.getPosition()) == 0) AIHelperMining.placeLightAt(world, entity.getPosition());
+            if(world.getLightBrightness(entity.getPosition()) <= 0) AIHelperBuild.placeLightAt(world, entity.getPosition());
             digDelay = 20;
         } else
         {
@@ -187,16 +193,19 @@ public class EntityAIMining extends EntityAIBase
     protected boolean digAtBlockPos(BlockPos pos)
     {
         BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
-        if(!hasWalls(floor.up())) return false;
-        if(world.getBlockState(floor).getBlock() instanceof BlockAir) world.setBlockState(floor, ModBlocks.INSANITY_COBBLE.getDefaultState());//TODO: Use block from dwarf inventory
+        if(!AIHelperSearch.hasWalls(world, floor, direction) && !AIHelperSearch.isBridge(world, floor)) return false;
+        if(world.getBlockState(floor).getBlock() instanceof BlockAir) AIHelperBuild.placeInventoryBlock(world, floor, entity.itemHandler);
         Block block = world.getBlockState(pos).getBlock();
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
 
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(pos)))
+        ArrayList<BlockPos> surroundingWater = AIHelperSearch.getAdjacentWater(world, pos);
+        for(BlockPos waterBlock : surroundingWater)
         {
-            miningBlocks.addAll(1, AIHelperMining.getOreCluster(world, pos));
+            AIHelperBuild.placeInventoryBlock(world, waterBlock, entity.itemHandler);
         }
+
+        miningBlocks.addAll(1, AIHelperSearch.getOreCluster(world, pos));
 
         ItemStack droppedItemStack;
         if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
@@ -217,37 +226,5 @@ public class EntityAIMining extends EntityAIBase
         world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
         world.setBlockToAir(pos);
         return true;
-    }
-    private boolean hasWalls(BlockPos floorPos)
-    {
-        BlockPos right = floorPos.east().south();
-        BlockPos left = floorPos.west().south();
-        switch(direction)
-        {
-            case EAST:
-                right = floorPos.south().west();
-                left = floorPos.north().west();
-                break;
-            case SOUTH:
-                right = floorPos.west().north();
-                left = floorPos.east().north();
-                break;
-            case WEST:
-                right = floorPos.north().east();
-                left = floorPos.south().east();
-                break;
-        }
-        boolean rightOK = AIHelperMining.isWallBlock(world, right);
-        boolean leftOK = AIHelperMining.isWallBlock(world, left);
-
-        for(int i = 0; i < 2; i++)
-        {
-            right = AIHelperMining.getNextBlock(right, direction);
-            left = AIHelperMining.getNextBlock(left, direction);
-            rightOK = rightOK || AIHelperMining.isWallBlock(world, right);
-            leftOK = leftOK || AIHelperMining.isWallBlock(world, left);
-        }
-
-        return rightOK && leftOK;
     }
 }

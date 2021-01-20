@@ -7,8 +7,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.IPlantable;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -35,5 +37,10 @@ public class DepthStone extends BlockBase
     public boolean isReplaceableOreGen(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Predicate<IBlockState> target)
     {
         return true;
+    }
+    @Override
+    public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable)
+    {
+        return plantable instanceof DepthFlower;
     }
 }
