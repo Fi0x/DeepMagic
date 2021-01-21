@@ -1,13 +1,14 @@
 package com.fi0x.deepmagic.world.biomes.insanity;
 
-import com.fi0x.deepmagic.entities.mobs.*;
+import com.fi0x.deepmagic.entities.mobs.EntityCockroach;
+import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
+import com.fi0x.deepmagic.entities.mobs.EntityHoveringOrb;
+import com.fi0x.deepmagic.entities.mobs.EntityInsanityCow;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -19,7 +20,6 @@ import java.util.Random;
 
 public class BiomeInsanityForestMixed extends Biome
 {
-    //TODO: Make biome more foresty
     private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
     private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
     private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
@@ -27,7 +27,8 @@ public class BiomeInsanityForestMixed extends Biome
 
     public BiomeInsanityForestMixed()
     {
-        super(new BiomeProperties("InsanityForestMixed").setBaseHeight(0.2F).setHeightVariation(0.05F).setTemperature(1F).setWaterColor(7094447));
+        //TODO: Adjust spawns and add more flowers
+        super(new BiomeProperties("InsanityForestMixed").setBaseHeight(0.1F).setHeightVariation(0.2F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
 
@@ -40,7 +41,6 @@ public class BiomeInsanityForestMixed extends Biome
         if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
         if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
         if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
-        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 5, 1, 2));
 
 
         this.flowers.clear();
@@ -120,12 +120,6 @@ public class BiomeInsanityForestMixed extends Biome
                     {
                         --j;
                         chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-
-                        if(j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1)
-                        {
-                            j = rand.nextInt(4) + Math.max(0, j1 - 63);
-                            iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? RED_SANDSTONE : SANDSTONE;
-                        }
                     }
                 }
             }
