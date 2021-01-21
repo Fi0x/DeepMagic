@@ -20,42 +20,38 @@ import java.util.Random;
 
 public class InsanityGrass extends BlockBase implements IGrowable
 {
-    
+
     public InsanityGrass(String name, Material material)
     {
         super(name, material);
         setTickRandomly(true);
         setSoundType(SoundType.GROUND);
         setHardness(0.7F);
-		setHarvestLevel("shovel", 2);
+        setHarvestLevel("shovel", 2);
     }
-    
+
     public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
     {
-        if (!worldIn.isRemote)
+        if(!worldIn.isRemote)
         {
-            if (!worldIn.isAreaLoaded(pos, 3)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-            if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
+            if(!worldIn.isAreaLoaded(pos, 3)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+            if(worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
             {
                 worldIn.setBlockState(pos, ModBlocks.INSANITY_DIRT.getDefaultState());
-            }
-            else
+            } else
             {
-                if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
+                if(worldIn.getLightFromNeighbors(pos.up()) >= 9)
                 {
-                    for (int i = 0; i < 4; ++i)
+                    for(int i = 0; i < 4; ++i)
                     {
                         BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-                        if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
-                        {
-                            return;
-                        }
+                        if(blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos)) return;
 
                         IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == ModBlocks.INSANITY_DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+                        if(iblockstate1.getBlock() == ModBlocks.INSANITY_DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
                         {
                             worldIn.setBlockState(blockpos, ModBlocks.INSANITY_GRASS.getDefaultState());
                         }
@@ -76,24 +72,19 @@ public class InsanityGrass extends BlockBase implements IGrowable
     {
         BlockPos blockpos = pos.up();
 
-        for (int i = 0; i < 128; ++i)
+        for(int i = 0; i < 128; ++i)
         {
             BlockPos blockpos1 = blockpos;
             int j = 0;
 
-            while (true)
+            while(true)
             {
-                if (j >= i / 16)
-                {
-                    break;
-                }
+                if(j >= i / 16) break;
 
                 blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
 
-                if (worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.INSANITY_GRASS || worldIn.getBlockState(blockpos1).isNormalCube())
-                {
-                    break;
-                }
+                if(worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.INSANITY_GRASS || worldIn.getBlockState(blockpos1).isNormalCube()) break;
+
                 ++j;
             }
         }
@@ -102,35 +93,38 @@ public class InsanityGrass extends BlockBase implements IGrowable
     {
         return 0;
     }
-    
+
     @Override
     public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable)
     {
         net.minecraftforge.common.EnumPlantType plantType = plantable.getPlantType(world, pos.offset(direction));
 
-        if (plantable instanceof BlockBush) return true;
+        if(plantable instanceof BlockBush) return true;
 
-        switch (plantType)
+        switch(plantType)
         {
-            case Cave:   return state.isSideSolid(world, pos, EnumFacing.UP);
-            case Plains: return true;
-            case Water:  return state.getMaterial() == Material.WATER && state.getValue(BlockLiquid.LEVEL) == 0;
+            case Cave:
+                return state.isSideSolid(world, pos, EnumFacing.UP);
+            case Plains:
+                return true;
+            case Water:
+                return state.getMaterial() == Material.WATER && state.getValue(BlockLiquid.LEVEL) == 0;
             case Beach:
                 return (world.getBlockState(pos.east()).getMaterial() == Material.WATER || world.getBlockState(pos.west()).getMaterial() == Material.WATER || world.getBlockState(pos.north()).getMaterial() == Material.WATER || world.getBlockState(pos.south()).getMaterial() == Material.WATER);
             default:
-            	return false;
+                return false;
         }
     }
-    
+
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
-		return Item.getItemFromBlock(ModBlocks.INSANITY_DIRT);
+        return Item.getItemFromBlock(ModBlocks.INSANITY_DIRT);
     }
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return random.nextInt(3);
-	}
+    @Override
+    public int quantityDropped(Random random)
+    {
+        return random.nextInt(3);
+    }
 }

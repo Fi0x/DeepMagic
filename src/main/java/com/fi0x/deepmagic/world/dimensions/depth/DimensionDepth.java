@@ -16,12 +16,13 @@ import javax.annotation.Nonnull;
 
 public class DimensionDepth extends WorldProvider
 {
-    public DimensionDepth()
+    @Override
+    protected void init()
     {
+        super.init();
         this.biomeProvider = new BiomeProviderSingle(BiomeInit.DEPTH);
         this.hasSkyLight = false;
     }
-
     @Nonnull
     @Override
     public DimensionType getDimensionType()

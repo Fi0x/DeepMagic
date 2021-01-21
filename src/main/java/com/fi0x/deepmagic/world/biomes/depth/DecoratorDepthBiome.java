@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.biomes;
+package com.fi0x.deepmagic.world.biomes.depth;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.world.generators.underground.CustomBushGenerator;

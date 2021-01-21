@@ -202,7 +202,7 @@ public class ConfigHandler
 
         category = "Biome Generation";
         worldGeneration.addCustomCategoryComment(category, "Biome Generation");
-        overworldInsanityBiome = worldGeneration.getBoolean("Overworld Insanity Biome Spawn", category, false, "Enables Spawn of the Insanity Biome in the Overworld");
+        overworldInsanityBiome = worldGeneration.getBoolean("Overworld Insanity Biome Spawn", category, false, "Enables Spawn of the Insanity Biomes in the Overworld");
         overworldDepthBiome = worldGeneration.getBoolean("Overworld Depth Biome Spawn", category, false, "Enables Spawn of the Depth Biome in the Overworld");
         insanityBiomeWeight = worldGeneration.getInt("Insanity Biome Weight", category, 10, 1, 1000, "Insanity Biome Spawn Weight");
         depthBiomeWeight = worldGeneration.getInt("Depth Biome Weight", category, 10, 1, 1000, "Depth Biome Spawn Weight");
