@@ -334,7 +334,7 @@ public class ConfigHandler
 
         category = "Dwarf Base Marker";
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
-        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Base Marker Spawn Chance", category, 4, 0, 16, "The Chance that Dwarfs will spawn near a Dwarf Base Marker");
+        dwarfMarkerSpawnChance = blocks.getInt("Dwarf Marker Spawn Chance", category, 5, 0, 1000, "The Chance a Dwarf will spawn every 10 seconds at a Dwarf Base Marker");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");
