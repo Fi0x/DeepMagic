@@ -62,7 +62,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
         WorldGenerator treeGenerator;
         if(rand.nextInt(20) == 0) treeGenerator = new TreeGenInsanityMedium(true);
-        else treeGenerator = new WorldGenTrees(true, 5, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
+        else treeGenerator = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
         treeGenerator.generate(world, rand, pos);
