@@ -42,7 +42,6 @@ public class BiomeInsanityForestMixed extends Biome
         if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
         if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
 
-
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
 

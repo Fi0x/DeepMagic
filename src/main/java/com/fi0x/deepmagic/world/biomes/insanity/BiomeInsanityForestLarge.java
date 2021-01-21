@@ -40,7 +40,6 @@ public class BiomeInsanityForestLarge extends Biome
         if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
         if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 5, 1, 2));
 
-
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
 

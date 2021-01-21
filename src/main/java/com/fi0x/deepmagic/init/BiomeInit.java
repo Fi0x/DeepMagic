@@ -25,14 +25,13 @@ public class BiomeInit
 
 	public static void registerBiomes()
 	{
-		//TODO: Adjust biome types
-		initBiome(INSANITY_PLAINS, "InsanityPlains", BiomeType.WARM, Type.HOT, Type.SPARSE, Type.DRY, Type.SAVANNA, Type.SPOOKY);
-		initBiome(INSANITY_FOREST_SMALL, "InsanityForestSmall", BiomeType.WARM, Type.DRY);
-		initBiome(INSANITY_FOREST_LARGE, "InsanityForestLarge", BiomeType.WARM, Type.DRY);
-		initBiome(INSANITY_FOREST_MIXED, "InsanityForestMixed", BiomeType.WARM, Type.DRY);
-		initBiome(INSANITY_HILLS, "InsanityHills", BiomeType.WARM, Type.DRY);
+		initBiome(INSANITY_PLAINS, "InsanityPlains", BiomeType.WARM, Type.PLAINS);
+		initBiome(INSANITY_FOREST_SMALL, "InsanityForestSmall", BiomeType.WARM, Type.FOREST);
+		initBiome(INSANITY_FOREST_LARGE, "InsanityForestLarge", BiomeType.WARM, Type.FOREST);
+		initBiome(INSANITY_FOREST_MIXED, "InsanityForestMixed", BiomeType.WARM, Type.FOREST);
+		initBiome(INSANITY_HILLS, "InsanityHills", BiomeType.COOL, Type.HILLS);
 
-		initBiome(DEPTH, "Depth", BiomeType.COOL, Type.SPOOKY, Type.COLD);
+		initBiome(DEPTH, "Depth", BiomeType.ICY, Type.SPOOKY);
 	}
 
 	private static void initBiome(Biome biome, String name, BiomeType biomeType, Type... types)
