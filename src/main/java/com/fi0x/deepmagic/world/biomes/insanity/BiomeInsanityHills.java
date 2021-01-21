@@ -1,13 +1,11 @@
 package com.fi0x.deepmagic.world.biomes.insanity;
 
-import com.fi0x.deepmagic.entities.mobs.*;
+import com.fi0x.deepmagic.entities.mobs.EntityGiant;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -19,15 +17,15 @@ import java.util.Random;
 
 public class BiomeInsanityHills extends Biome
 {
-    //TODO: Make biome more hilly
     private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
     private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
     private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
-    private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.89F);
+    private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.57F);
 
     public BiomeInsanityHills()
     {
-        super(new BiomeProperties("InsanityHills").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
+        //TODO: Adjust spawns and flowers
+        super(new BiomeProperties("InsanityHills").setBaseHeight(0.75F).setHeightVariation(0.5F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
 
@@ -36,16 +34,13 @@ public class BiomeInsanityHills extends Biome
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
 
-        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCockroach.class, 20, 1, 3));
-        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
-        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
-        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
-        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 5, 1, 2));
+        if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 5, 2, 3));
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
 
         decorator = new DecoratorInsanityBiome();
+        ((DecoratorInsanityBiome) decorator).setOptions(1, 80, 0);
     }
 
     @Override
@@ -119,12 +114,6 @@ public class BiomeInsanityHills extends Biome
                     {
                         --j;
                         chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-
-                        if(j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1)
-                        {
-                            j = rand.nextInt(4) + Math.max(0, j1 - 63);
-                            iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? RED_SANDSTONE : SANDSTONE;
-                        }
                     }
                 }
             }

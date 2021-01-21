@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.biomes;
+package com.fi0x.deepmagic.world.biomes.depth;
 
 import com.fi0x.deepmagic.entities.mobs.EntityDepthMage;
 import com.fi0x.deepmagic.init.ModBlocks;

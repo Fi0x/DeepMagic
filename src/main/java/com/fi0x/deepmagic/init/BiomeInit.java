@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.biomes.BiomeDepth;
+import com.fi0x.deepmagic.world.biomes.depth.BiomeDepth;
 import com.fi0x.deepmagic.world.biomes.insanity.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
