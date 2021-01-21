@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class WorldGenCustomTrees implements IWorldGenerator
 {
-    private final WorldGenerator INSANITY_SMALL = new WorldGenTrees(true, 5, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
+    private final WorldGenerator INSANITY_SMALL = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
     private final WorldGenerator INSANITY_NORMAL = new TreeGenInsanityMedium(true);
     private final WorldGenerator INSANITY_LARGE = new TreeGenInsanityLarge(true);
 
@@ -34,8 +34,8 @@ public class WorldGenCustomTrees implements IWorldGenerator
             runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestMixed.class);
             runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestLarge.class);
 
-            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 1, BiomeInsanityForestMixed.class);
-            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 5, BiomeInsanityForestLarge.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 0.3, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 1, BiomeInsanityForestLarge.class);
         }
     }
 

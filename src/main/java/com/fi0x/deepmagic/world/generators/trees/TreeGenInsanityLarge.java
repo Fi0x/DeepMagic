@@ -2,123 +2,103 @@ package com.fi0x.deepmagic.world.generators.trees;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraftforge.common.IPlantable;
+import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class TreeGenInsanityLarge extends WorldGenAbstractTree
+public class TreeGenInsanityLarge extends WorldGenHugeTrees
 {
-    /*
-    TODO: Check out WorldGenSavannaTree and huge trees to change shape to mimic giant trees
-     */
-    private final IBlockState WOOD = ModBlocks.INSANITY_LOG.getDefaultState();
-    private final IBlockState LEAVES = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
-
     public TreeGenInsanityLarge(boolean notify)
     {
-        super(notify);
+        super(notify, 25, 15, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE));
     }
 
     @Override
-    public boolean generate(@Nonnull World worldIn, Random rand, BlockPos pos)
+    public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position)
     {
-        int minTreeHeight = 7;
-        int minHeight = rand.nextInt(5) + minTreeHeight;
+        int height = this.getHeight(rand);
+        int crownWidth = rand.nextInt(4) + 4;
+        if(!ensureGrowable(worldIn, rand, position, height)) return false;
 
-        if (pos.getY() < 1 || pos.getY() + minHeight + 1 > worldIn.getHeight()) return false;
-        if (!isSuitableLocation(worldIn, pos, minHeight)) return false;
+        createCrown(worldIn, position.up(height), crownWidth);
+        createBranches(worldIn, rand, position, height, 8);
+        createTrunk(worldIn, position, height);
 
-        IBlockState state = worldIn.getBlockState(pos.down());
-        if (!state.getBlock().canSustainPlant(state, worldIn, pos.down(), EnumFacing.UP, (IPlantable) Blocks.SAPLING) || pos.getY() >= worldIn.getHeight() - minHeight - 1) return false;
-
-        state.getBlock().onPlantGrow(state, worldIn, pos.down(), pos);
-        generateLeaves(worldIn, pos, minHeight, rand);
-        generateTrunk(worldIn, pos, minHeight);
         return true;
     }
-
-    private void generateLeaves(World world, BlockPos pos, int height, Random rand)
+    public void createBranches(World worldIn, Random rand, BlockPos position, int height, int branchLength)
     {
-        for (int foliageY = pos.getY() - rand.nextInt(3) + height - 2; foliageY <= pos.getY() + height; ++foliageY)
+        for(int yCheck = position.getY() + height - 1 - rand.nextInt(4); yCheck > position.getY() + height / 2; yCheck -= 1 + rand.nextInt(3))
         {
-            int foliageLayer = foliageY - (pos.getY() + height);
-            int foliageLayerRadius = 1 - foliageLayer / 2;
+            float r = rand.nextFloat() * ((float) Math.PI * 2F);
+            int leavesLayerX = position.getX() + (int) (0.5F + MathHelper.cos(r) * 4.0F);
+            int leavesLayerZ = position.getZ() + (int) (0.5F + MathHelper.sin(r) * 4.0F);
 
-            for (int foliageX = pos.getX() - foliageLayerRadius; foliageX <= pos.getX() + foliageLayerRadius; ++foliageX)
+            for(int logCounter = 0; logCounter < branchLength; logCounter++)
             {
-                int foliageRelativeX = foliageX - pos.getX();
+                leavesLayerX = position.getX() + (int) (1.5F + MathHelper.cos(r) * (float) logCounter);
+                leavesLayerZ = position.getZ() + (int) (1.5F + MathHelper.sin(r) * (float) logCounter);
+                this.setBlockAndNotifyAdequately(worldIn, new BlockPos(leavesLayerX, yCheck - 3 + logCounter / 2, leavesLayerZ), this.woodMetadata);
+            }
 
-                for (int foliageZ = pos.getZ() - foliageLayerRadius; foliageZ <= pos.getZ() + foliageLayerRadius; ++foliageZ)
+            int leaveLayers = 1 + rand.nextInt(2);
+
+            for(int leavesLayerY = yCheck - leaveLayers; leavesLayerY <= yCheck + 1; leavesLayerY++)
+            {
+                int l1 = leavesLayerY - yCheck;
+                this.growLeavesLayer(worldIn, new BlockPos(leavesLayerX, leavesLayerY, leavesLayerZ), 5 - l1);
+            }
+        }
+    }
+
+    private void createCrown(World worldIn, BlockPos center, int width)
+    {
+        for(int j = -3; j <= 0; ++j)
+        {
+            this.growLeavesLayerStrict(worldIn, center.up(j), width + 1 - j);
+        }
+    }
+    private void createTrunk(World world, BlockPos startPos, int height)
+    {
+        for(int y = 0; y < height; y++)
+        {
+            BlockPos centerLog = startPos.up(y);
+            if(this.isAirLeaves(world, centerLog))
+            {
+                this.setBlockAndNotifyAdequately(world, centerLog, this.woodMetadata);
+            }
+
+            if(y < height - 2)
+            {
+                BlockPos adjacentLog = centerLog.east();
+                if(this.isAirLeaves(world, adjacentLog))
                 {
-                    int foliageRelativeZ = foliageZ - pos.getZ();
+                    this.setBlockAndNotifyAdequately(world, adjacentLog, this.woodMetadata);
+                }
 
-                    // Fill in layer with some randomness
-                    if (Math.abs(foliageRelativeX) != foliageLayerRadius || Math.abs(foliageRelativeZ) != foliageLayerRadius || rand.nextInt(2) != 0 && foliageLayer != 0)
-                    {
-                        BlockPos blockPos = new BlockPos(foliageX, foliageY, foliageZ);
-                        IBlockState state = world.getBlockState(blockPos);
+                adjacentLog = centerLog.south().east();
+                if(this.isAirLeaves(world, adjacentLog))
+                {
+                    this.setBlockAndNotifyAdequately(world, adjacentLog, this.woodMetadata);
+                }
 
-                        if (state.getBlock().isAir(state, world, blockPos) || state.getBlock().isLeaves(state, world, blockPos))
-                        {
-                            setBlockAndNotifyAdequately(world, blockPos, LEAVES);
-                        }
-                    }
+                adjacentLog = centerLog.south();
+                if(this.isAirLeaves(world, adjacentLog))
+                {
+                    this.setBlockAndNotifyAdequately(world, adjacentLog, this.woodMetadata);
                 }
             }
         }
     }
 
-    private void generateTrunk(World world, BlockPos pos, int minHeight)
+    private boolean isAirLeaves(World world, BlockPos pos)
     {
-        for (int height = 0; height < minHeight; ++height)
-        {
-            BlockPos upN = pos.up(height);
-            IBlockState state = world.getBlockState(upN);
-
-            if (state.getBlock().isAir(state, world, upN) || state.getBlock().isLeaves(state, world, upN))
-            {
-                setBlockAndNotifyAdequately(world, pos.up(height), WOOD.withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
-            }
-        }
-    }
-
-    private boolean isSuitableLocation(World world, BlockPos pos, int minHeight)
-    {
-        boolean isSuitableLocation = true;
-
-        for (int checkY = pos.getY(); checkY <= pos.getY() + 1 + minHeight; ++checkY)
-        {
-            // Handle increasing space towards top of tree
-            int extraSpaceNeeded = 2;
-            // Handle base location
-            if (checkY == pos.getY())
-            {
-                extraSpaceNeeded = 0;
-            }
-            // Handle top location
-            if (checkY >= pos.getY() + 1 + minHeight - 2)
-            {
-                extraSpaceNeeded = 3;
-            }
-
-            BlockPos.MutableBlockPos blockPos = new BlockPos.MutableBlockPos();
-
-            for (int checkX = pos.getX() - extraSpaceNeeded; checkX <= pos.getX() + extraSpaceNeeded && isSuitableLocation; ++checkX)
-            {
-                for (int checkZ = pos.getZ() - extraSpaceNeeded; checkZ <= pos.getZ() + extraSpaceNeeded && isSuitableLocation; ++checkZ)
-                {
-                    isSuitableLocation = isReplaceable(world,blockPos.setPos(checkX, checkY, checkZ));
-                }
-            }
-        }
-        return isSuitableLocation;
+        IBlockState state = world.getBlockState(pos);
+        return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos);
     }
 }

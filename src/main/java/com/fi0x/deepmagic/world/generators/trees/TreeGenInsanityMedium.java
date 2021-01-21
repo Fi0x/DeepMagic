@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class TreeGenInsanityMedium extends WorldGenAbstractTree
 {
-    //TODO: Adjust size and shape of tree to look like large oak trees
+    //TODO: Adjust size and shape of tree to look like large oak trees or savanna trees
     private final IBlockState WOOD = ModBlocks.INSANITY_LOG.getDefaultState();
     private final IBlockState LEAVES = ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE);
     private final int MIN_HEIGHT = 7;
