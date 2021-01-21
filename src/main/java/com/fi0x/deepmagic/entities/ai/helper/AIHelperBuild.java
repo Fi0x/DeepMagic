@@ -14,7 +14,7 @@ public class AIHelperBuild
     public static void placeLightAt(World world, BlockPos pos)
     {
         BlockPos topBlock = pos.up();
-        if(world.getBlockState(topBlock) == Blocks.AIR.getDefaultState())
+        if(world.isAirBlock(topBlock))
         {
             if(world.getBlockState(topBlock.up()).isFullBlock()) world.setBlockState(topBlock, ModBlocks.DWARF_LAMP.getDefaultState());
             else world.setBlockState(pos, ModBlocks.DWARF_LAMP.getDefaultState().withProperty(DwarfLamp.FACING, EnumFacing.UP));

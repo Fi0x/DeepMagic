@@ -166,7 +166,7 @@ public class EntityAIMining extends EntityAIBase
             while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
             {
                 BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), entity.posY - 1, miningBlocks.get(0).getZ());
-                if(world.getBlockState(floor).getBlock() == Blocks.AIR) break;
+                if(world.isAirBlock(floor)) break;
                 miningBlocks.remove(0);
             }
             if(miningBlocks.isEmpty()) return false;

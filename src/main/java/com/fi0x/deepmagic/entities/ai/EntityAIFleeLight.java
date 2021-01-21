@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.entities.ai;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -62,7 +61,7 @@ public class EntityAIFleeLight extends EntityAIFleeSun
         {
             BlockPos blockpos1 = blockpos.add(random.nextInt(40) - 20, random.nextInt(12) - 6, random.nextInt(40) - 20);
 
-            if (world.getLight(blockpos1) < 7 && world.getBlockState(blockpos1).getBlock() == Blocks.AIR)
+            if(world.getLight(blockpos1) < 7 && world.isAirBlock(blockpos1))
             {
                 return new Vec3d(blockpos1.getX(), blockpos1.getY(), blockpos1.getZ());
             }

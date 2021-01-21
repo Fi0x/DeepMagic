@@ -6,7 +6,6 @@ import com.fi0x.deepmagic.items.spells.SpellPartHandler;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import com.fi0x.deepmagic.items.spells.types.ISpellType;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
@@ -118,6 +117,6 @@ public class TileEntityRune extends TileEntity
             new CastHelper().findAndCastNextSpellType(remainingSections, pos, caster, world);
         }
         remainingCasts--;
-        if(remainingCasts <= 0) world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        if(remainingCasts <= 0) world.setBlockToAir(pos);
     }
 }

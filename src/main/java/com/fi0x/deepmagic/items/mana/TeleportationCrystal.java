@@ -155,8 +155,8 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
         BlockPos pos = new BlockPos(x, y, z);
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) != null && world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) != null)
         {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            world.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
+            world.setBlockToAir(pos);
+            world.setBlockToAir(pos.up());
         }
         return y;
     }
