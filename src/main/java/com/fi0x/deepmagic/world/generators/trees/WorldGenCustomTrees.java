@@ -26,23 +26,22 @@ public class WorldGenCustomTrees implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        //TODO: Fix cascading world-gen
         if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
         {
-            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestSmall.class);
-            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 2, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 16, 7, BiomeInsanityForestSmall.class);
+            runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 16, 4, BiomeInsanityForestMixed.class);
 
-            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 0.3, BiomeInsanityForestSmall.class);
-            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 2, BiomeInsanityForestMixed.class);
-            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 1, BiomeInsanityForestLarge.class);
+            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 8, 0.3, BiomeInsanityForestSmall.class);
+            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 8, 2, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_NORMAL, world, random, chunkX, chunkZ, 8, 1, BiomeInsanityForestLarge.class);
 
-            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 0.3, BiomeInsanityForestMixed.class);
-            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 1, BiomeInsanityForestLarge.class);
-            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 0.02, BiomeInsanityPlains.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 2, 0.3, BiomeInsanityForestMixed.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 2, 1, BiomeInsanityForestLarge.class);
+            runGenerator(INSANITY_LARGE, world, random, chunkX, chunkZ, 2, 0.002, BiomeInsanityPlains.class);
         }
     }
 
-    private void runGenerator(WorldGenerator generator, World world, Random rand, int chunkX, int chunkZ, double chance, Class<?> spawnBiome)
+    private void runGenerator(WorldGenerator generator, World world, Random rand, int chunkX, int chunkZ, int posVariation, double chance, Class<?> spawnBiome)
     {
         if(chance < 1)
         {
@@ -52,7 +51,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
         int heightDiff = 2;
         for(int i = 0; i < chance; i++)
         {
-            BlockPos pos = new BlockPos(chunkX * 16 + 10 + rand.nextInt(15), -1 + rand.nextInt(heightDiff), chunkZ * 16 + 10 + rand.nextInt(15));
+            BlockPos pos = new BlockPos(chunkX * 16 + rand.nextInt(posVariation) + 16 - posVariation / 2, -1 + rand.nextInt(heightDiff), chunkZ * 16 + rand.nextInt(posVariation) + 16 - posVariation / 2);
             pos = world.getHeight(pos);
             Class<?> biome = world.provider.getBiomeForCoords(pos).getClass();
             if(biome == spawnBiome) generator.generate(world, rand, pos);
