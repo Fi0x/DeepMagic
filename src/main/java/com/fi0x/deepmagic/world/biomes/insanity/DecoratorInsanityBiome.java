@@ -8,6 +8,7 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -63,10 +64,10 @@ public class DecoratorInsanityBiome extends BiomeDecorator
     protected void genDecorations(@Nonnull Biome biomeIn, @Nonnull World worldIn, @Nonnull Random random)
     {
         net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
         this.generateOres(worldIn, random);
 
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
+        if(TerrainGen.decorate(worldIn, random, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.FLOWERS))
         {
             for(int flowerCounter = 0; flowerCounter < this.flowersPerChunk; ++flowerCounter)
             {
@@ -84,14 +85,14 @@ public class DecoratorInsanityBiome extends BiomeDecorator
                         BlockPos blockpos = blockpos1.add(random.nextInt(15) - 7, random.nextInt(7) - 3, random.nextInt(15) - 7);
                         if(worldIn.isAirBlock(blockpos) && blockpos.getY() < 255)
                         {
-                            worldIn.getBiome(blockpos).plantFlower(worldIn, random, blockpos);
+                            biomeIn.plantFlower(worldIn, random, blockpos);
                         }
                     }
                 }
             }
         }
 
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS))
+        if(TerrainGen.decorate(worldIn, random, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.GRASS))
         {
             for(int i3 = 0; i3 < this.grassPerChunk; ++i3)
             {
@@ -106,7 +107,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
                 }
             }
         }
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
     protected void generateOres(@Nonnull World worldIn, @Nonnull Random random)
