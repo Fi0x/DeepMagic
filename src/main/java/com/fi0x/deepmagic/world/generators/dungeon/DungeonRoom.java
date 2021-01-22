@@ -14,34 +14,17 @@ public class DungeonRoom extends WorldGenerator implements IStructure
 {
     private final String templateName;
 
-    public BlockPos pos;
-
-    private final int sizeX;
-    private final int sizeZ;
     public final int height;
-    public int offsetX;
-    public int offsetZ;
 
-    public Rotation rotation;
-
-    public DungeonRoom(String name, int sizeX, int sizeZ, int height)
+    public DungeonRoom(String name, int height)
     {
         this.templateName = name;
-
-        this.sizeX = sizeX;
-        this.sizeZ = sizeZ;
         this.height = height;
-
-        offsetX = - sizeX / 2;
-        offsetZ = - sizeZ / 2;
-
-        this.rotation = Rotation.NONE;
     }
 
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos pos)
     {
-        this.pos = pos;
-        return GenerationHelper.templatePlacer(world, rand, this.pos.add(offsetX, 0, offsetZ), templateName, rotation);
+        return GenerationHelper.templatePlacer(world, rand, pos, templateName, Rotation.NONE);
     }
 }

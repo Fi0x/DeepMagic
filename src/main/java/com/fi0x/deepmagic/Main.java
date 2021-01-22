@@ -13,7 +13,7 @@ import com.fi0x.deepmagic.util.handlers.*;
 import com.fi0x.deepmagic.util.recipes.ModRecipes;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
-import com.fi0x.deepmagic.world.generators.trees.WorldGenCustomTrees;
+import com.fi0x.deepmagic.world.generators.plants.WorldGenCustomTrees;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;

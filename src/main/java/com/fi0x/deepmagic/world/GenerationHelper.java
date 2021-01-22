@@ -30,6 +30,19 @@ public class GenerationHelper
         Template template = ((WorldServer) world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(Reference.MOD_ID, templateName));
         if(template == null) return false;
 
+        switch(rotation)
+        {
+            case CLOCKWISE_90:
+                pos = pos.add(template.getSize().getX(), 0, 0);
+                break;
+            case CLOCKWISE_180:
+                pos = pos.add(template.getSize().getX(), 0, template.getSize().getZ());
+                break;
+            case COUNTERCLOCKWISE_90:
+                pos = pos.add(0, 0, template.getSize().getZ());
+                break;
+        }
+
         PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreStructureBlock(false);
         template.addBlocksToWorld(world, pos, settings);
 
