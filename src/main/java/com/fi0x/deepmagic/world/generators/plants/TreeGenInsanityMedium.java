@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.world.generators.trees;
+package com.fi0x.deepmagic.world.generators.plants;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.BlockLeaves;
