@@ -60,20 +60,6 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
         }
     }
 
-    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomes)
-    {
-        if(!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world)) return;
-        this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, x * 16, z * 16, 16, 16, .0625D, .0625D, 1D);
-
-        for(int i = 0; i < 16; ++i)
-        {
-            for(int j = 0; j < 16; ++j)
-            {
-                biomes[j + i * 16].genTerrainBlocks(this.world, this.rand, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
-            }
-        }
-    }
-
     @Nonnull
     @Override
     public Chunk generateChunk(int x, int z)
@@ -94,6 +80,20 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
         chunk.generateSkylightMap();
 
         return chunk;
+    }
+
+    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomes)
+    {
+        if(!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world)) return;
+        this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, x * 16, z * 16, 16, 16, .0625D, .0625D, 1D);
+
+        for(int i = 0; i < 16; ++i)
+        {
+            for(int j = 0; j < 16; ++j)
+            {
+                biomes[j + i * 16].genTerrainBlocks(this.world, this.rand, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
+            }
+        }
     }
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)

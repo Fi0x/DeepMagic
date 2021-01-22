@@ -26,6 +26,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
+        //TODO: Fix cascading world-gen
         if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
         {
             runGenerator(INSANITY_SMALL, world, random, chunkX, chunkZ, 5, BiomeInsanityForestSmall.class);
