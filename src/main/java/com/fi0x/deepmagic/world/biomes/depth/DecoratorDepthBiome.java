@@ -36,6 +36,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
     private final int MAX_ORE_HEIGHT = 250;
     private final int MIN_ORE_HEIGHT = 0;
 
+    @Override
     public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
         if(this.decorating)
@@ -95,6 +96,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
+    @Override
     protected void generateOres(@Nonnull World worldIn, @Nonnull Random random)
     {
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(worldIn, random, chunkPos));
@@ -117,6 +119,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(worldIn, random, chunkPos));
     }
 
+    @Override
     protected void genStandardOre1(@Nonnull World worldIn, @Nonnull Random random, int blockCount, @Nonnull WorldGenerator generator, int minHeight, int maxHeight)
     {
         if(maxHeight < minHeight)

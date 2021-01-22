@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.world.biomes.insanity;
 import com.fi0x.deepmagic.entities.mobs.EntityGiant;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.generators.plants.CustomGrassGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -120,6 +122,12 @@ public class BiomeInsanityHills extends Biome
         }
     }
 
+    @Nonnull
+    @Override
+    public WorldGenerator getRandomWorldGenForGrass(@Nonnull Random rand)
+    {
+        return new CustomGrassGenerator(ModBlocks.INSANITY_TALL_GRASS);
+    }
     @Override
     public int getSkyColorByTemp(float currentTemperature)
     {

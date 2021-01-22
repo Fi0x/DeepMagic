@@ -39,6 +39,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         this.grassPerChunk = grassPerChunk;
     }
 
+    @Override
     public void decorate(@Nonnull World worldIn, @Nonnull Random random, @Nonnull Biome biome, @Nonnull BlockPos pos)
     {
         if(this.decorating)
@@ -61,6 +62,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         }
     }
 
+    @Override
     protected void genDecorations(@Nonnull Biome biomeIn, @Nonnull World worldIn, @Nonnull Random random)
     {
         net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos);
@@ -110,6 +112,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
+    @Override
     protected void generateOres(@Nonnull World worldIn, @Nonnull Random random)
     {
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(worldIn, random, chunkPos));
@@ -132,6 +135,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(worldIn, random, chunkPos));
     }
 
+    @Override
     protected void genStandardOre1(@Nonnull World worldIn, @Nonnull Random random, int blockCount, @Nonnull WorldGenerator generator, int minHeight, int maxHeight)
     {
         if(maxHeight < minHeight)
@@ -152,6 +156,7 @@ public class DecoratorInsanityBiome extends BiomeDecorator
         }
     }
 
+    @Override
     protected void genStandardOre2(@Nonnull World worldIn, @Nonnull Random random, int blockCount, @Nonnull WorldGenerator generator, int centerHeight, int spread)
     {
         for(int i = 0; i < blockCount; ++i)
