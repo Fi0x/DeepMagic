@@ -29,7 +29,6 @@ public class BiomeInsanityPlains extends Biome
 
     public BiomeInsanityPlains()
     {
-        //TODO: Adjust spawns and add more flowers
         super(new BiomeProperties("InsanityPlains").setBaseHeight(0.05F).setHeightVariation(0.001F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
@@ -46,6 +45,8 @@ public class BiomeInsanityPlains extends Biome
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
+        addFlower(ModBlocks.INSANITY_FLOWER4.getDefaultState(), 20);
+        addFlower(ModBlocks.INSANITY_FLOWER5.getDefaultState(), 20);
 
         decorator = new DecoratorInsanityBiome();
     }
