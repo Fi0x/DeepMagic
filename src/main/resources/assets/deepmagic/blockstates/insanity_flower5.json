@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "deepmagic:insanity_flower5",
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "stage=0": [
+      {}
+    ],
+    "stage=1": [
+      {}
+    ],
+    "inventory": [
+      {
+        "model": "builtin/generated",
+        "transform": "forge:default-item",
+        "textures": {
+          "layer0": "deepmagic:blocks/insanity/insanity_flower5"
+        }
+      }
+    ]
+  }
+}

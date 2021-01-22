@@ -29,7 +29,6 @@ public class BiomeInsanityForestMixed extends Biome
 
     public BiomeInsanityForestMixed()
     {
-        //TODO: Adjust spawns and add more flowers
         super(new BiomeProperties("InsanityForestMixed").setBaseHeight(0.1F).setHeightVariation(0.2F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
@@ -46,6 +45,7 @@ public class BiomeInsanityForestMixed extends Biome
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
+        addFlower(ModBlocks.INSANITY_FLOWER3.getDefaultState(), 20);
 
         decorator = new DecoratorInsanityBiome();
     }

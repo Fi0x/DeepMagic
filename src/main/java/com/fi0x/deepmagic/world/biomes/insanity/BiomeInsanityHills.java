@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world.biomes.insanity;
 
+import com.fi0x.deepmagic.entities.mobs.EntityCockroach;
 import com.fi0x.deepmagic.entities.mobs.EntityGiant;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -26,7 +27,6 @@ public class BiomeInsanityHills extends Biome
 
     public BiomeInsanityHills()
     {
-        //TODO: Adjust spawns and flowers
         super(new BiomeProperties("InsanityHills").setBaseHeight(0.75F).setHeightVariation(0.5F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
@@ -36,10 +36,11 @@ public class BiomeInsanityHills extends Biome
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
 
+        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCockroach.class, 20, 1, 3));
         if(ConfigHandler.allowGiant) this.spawnableMonsterList.add(new SpawnListEntry(EntityGiant.class, 5, 2, 3));
 
         this.flowers.clear();
-        addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
+        addFlower(ModBlocks.INSANITY_FLOWER2.getDefaultState(), 20);
 
         decorator = new DecoratorInsanityBiome();
         ((DecoratorInsanityBiome) decorator).setOptions(1, 80, 0);

@@ -28,7 +28,6 @@ public class BiomeInsanityForestLarge extends Biome
 
     public BiomeInsanityForestLarge()
     {
-        //TODO: Adjust spawns and add more flowers
         super(new BiomeProperties("InsanityForestLarge").setBaseHeight(0.1F).setHeightVariation(0.25F).setTemperature(1F).setWaterColor(7094447));
         topBlock = TOP_BLOCK.getDefaultState();
         fillerBlock = FILLER_BLOCK.getDefaultState();
@@ -44,6 +43,8 @@ public class BiomeInsanityForestLarge extends Biome
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);
+        addFlower(ModBlocks.INSANITY_FLOWER2.getDefaultState(), 20);
+        addFlower(ModBlocks.INSANITY_FLOWER3.getDefaultState(), 20);
 
         decorator = new DecoratorInsanityBiome();
     }
