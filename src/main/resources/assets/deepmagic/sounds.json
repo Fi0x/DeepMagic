@@ -238,5 +238,45 @@
         "stream": true
       }
     ]
+  },
+  "entity.depth_mage.ambient": {
+    "category": "entity",
+    "subtitle": "entity.depth_mage.ambient",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/depth_mage/ambient",
+        "stream": true
+      }
+    ]
+  },
+  "entity.depth_mage.hurt": {
+    "category": "entity",
+    "subtitle": "entity.depth_mage.hurt",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/depth_mage/hurt",
+        "stream": true
+      }
+    ]
+  },
+  "entity.depth_mage.death": {
+    "category": "entity",
+    "subtitle": "entity.depth_mage.death",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/depth_mage/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.depth_mage.step": {
+    "category": "entity",
+    "subtitle": "entity.depth_mage.step",
+    "sounds": [
+      {
+        "name": "deepmagic:entity/depth_mage/step",
+        "stream": true
+      }
+    ]
   }
 }
