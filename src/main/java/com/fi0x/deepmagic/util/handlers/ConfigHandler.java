@@ -140,6 +140,9 @@ public class ConfigHandler
     public static int spellBaseManaCost;
     //Skill XP
     public static int teleportationCrystalSkillXP;
+    //Tools
+    public static int deepCrystalMiningLevel;
+    public static int depthMiningLevel;
 
     public static void registerConfig(FMLPreInitializationEvent event)
     {
@@ -363,6 +366,11 @@ public class ConfigHandler
         category = "Skill XP";
         items.addCustomCategoryComment(category, "Skill XP");
         teleportationCrystalSkillXP = items.getInt("Teleportation Crystal Skill XP", category, 5, 0, 10000, "Skill XP gained by using the Teleportation Crystal");
+
+        category = "Tools";
+        items.addCustomCategoryComment(category, "Tools");
+        deepCrystalMiningLevel = items.getInt("Deep Crystal Mining Level", category, 4, 0, 100, "Mining Level for Deep Crystal Tools");
+        depthMiningLevel = items.getInt("Depth Mining Level", category, 4, 0, 100, "Mining Level for Depth Tools");
 
         items.save();
     }

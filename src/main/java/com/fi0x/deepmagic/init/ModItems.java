@@ -9,6 +9,7 @@ import com.fi0x.deepmagic.items.mana.*;
 import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.items.tools.*;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -26,9 +27,9 @@ public class ModItems
 	public static final List<Item> ITEMS = new ArrayList<>();
 
 	//Materials
-	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", 4, 1561, 10.0F, 4.0F, 15);
+	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", ConfigHandler.deepCrystalMiningLevel, 1561, 10.0F, 4.0F, 15);
 	public static final ArmorMaterial ARMOR_MATERIAL_DEEP_CRYSTAL = EnumHelper.addArmorMaterial("armor_material_deep_crystal", Reference.MOD_ID + ":deep_crystal", 16, new int[]{4, 9, 7, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0F);
-	public static final ToolMaterial MATERIAL_DEPTH = EnumHelper.addToolMaterial("material_depth", 4, 2000, 15F, 3, 10);
+	public static final ToolMaterial MATERIAL_DEPTH = EnumHelper.addToolMaterial("material_depth", ConfigHandler.depthMiningLevel, 2000, 15F, 3, 10);
 
 	//Items
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
