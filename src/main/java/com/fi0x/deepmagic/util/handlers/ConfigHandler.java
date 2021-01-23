@@ -129,9 +129,11 @@ public class ConfigHandler
     public static int magicLightParticles;
     public static int deepCrystalOreParticles;
     public static int manaGeneratorParticles;
+    public static int manaConsumerParticles;
     public static int plantParticles;
     public static int demonStoneParticles;
     public static int spellStoneParticles;
+    public static int altarOfKnowledgeParticles;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -342,9 +344,11 @@ public class ConfigHandler
         magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
         deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
         manaGeneratorParticles = blocks.getInt("Mana Generator Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Mana Generators");
+        manaConsumerParticles = blocks.getInt("Mana Consumer Particles", category, 10, 0, 100, "The Chance for Particles to spawn around Mana consuming Blocks");
         plantParticles = blocks.getInt("Plant Particles", category, 10, 0, 100, "The chance that Particles will spawn around Plants");
         demonStoneParticles = blocks.getInt("Demon Stone Particles", category, 20, 0, 100, "The Chance that Particles will spawn at a correct Demon Stone Structure");
         spellStoneParticles = blocks.getInt("Spell Stone Particles", category, 50, 0, 100, "The Chance that Particles will spawn at an active Spell Stone");
+        altarOfKnowledgeParticles = blocks.getInt("Altar of Knowledge Particles", category, 50, 0, 100, "The Chance that Particles will spawn at an Altar of Knowledge");
 
         blocks.save();
     }
