@@ -20,6 +20,9 @@ public class ModRecipes
 		GameRegistry.addSmelting(ModBlocks.INSANITY_EMERALD_ORE, new ItemStack(Items.EMERALD, 1), 1F);
 		GameRegistry.addSmelting(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE, new ItemStack(ModItems.DEEP_CRYSTAL, 1), 1F);
 
+		GameRegistry.addSmelting(ModBlocks.DEPTH_COBBLE, new ItemStack(ModBlocks.DEPTH_STONE, 1), 1F);
+		GameRegistry.addSmelting(ModBlocks.DEEP_CRYSTAL_ORE_COMPRESSED, new ItemStack(ModItems.DEEP_CRYSTAL, 2), 1F);
+
 		GameRegistry.addSmelting(ModItems.RAW_COCKROACH, new ItemStack(ModItems.COOKED_COCKROACH, 1), 1F);
 		GameRegistry.addSmelting(ModItems.RAW_WORM, new ItemStack(ModItems.COOKED_WORM, 1), 1F);
 		GameRegistry.addSmelting(Items.ROTTEN_FLESH, new ItemStack(ModItems.DRY_FLESH, 1), 1F);

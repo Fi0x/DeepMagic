@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:insanity_cobble_slab_half"
+    }
+  },
+  "result": {
+    "item": "deepmagic:insanity_cobble",
+    "count": 1
+  }
+}
