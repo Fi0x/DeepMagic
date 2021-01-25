@@ -132,6 +132,10 @@ item.deep_crystal_helmet.name=Deep Crystal Helmet
 item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
+item.depth_helmet.name=Depth Helmet
+item.depth_chestplate.name=Depth Chestplate
+item.depth_leggings.name=Depth Leggings
+item.depth_boots.name=Depth Boots
 
 item.spell.name=Spell
 item.charged_spell.name=Charged Spell
