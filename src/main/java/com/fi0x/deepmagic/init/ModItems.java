@@ -91,4 +91,5 @@ public class ModItems
 	public static final Item MANA_SEGMENT = new ItemBase("mana_segment");
 	public static final Item DEPTH_STICK = new ItemBase("depth_stick");
 	public static final Item REINFORCED_STICK = new ItemBase("reinforced_stick");
+	public static final Item STRONGEST_DIAMOND = new ItemBase("strongest_diamond");
 }

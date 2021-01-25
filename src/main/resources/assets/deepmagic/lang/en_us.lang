@@ -165,6 +165,7 @@ item.world_interaction_segment.name=World Interaction Segment
 item.mana_segment.name=Mana Segment
 item.depth_stick.name=Compressed Stick
 item.reinforced_stick.name=Reinforced Stick
+item.strongest_diamond.name=Strongest Diamond
 
 entity.insanity_cow.name=Insanity Cow
 entity.dwarf.name=Dwarf
