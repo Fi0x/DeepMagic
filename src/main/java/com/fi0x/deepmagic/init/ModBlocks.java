@@ -86,11 +86,11 @@ public class ModBlocks
 	public static final BlockBush DEPTH_FLOWER = new DepthFlower("depth_flower", Material.PLANTS);
 	public static final Block DEPTH_LOG = new DepthLog("depth_log");
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
-	//	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
-//	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthStoneDoubleSlab("depth_wood_slab_double", Material.WOOD);
+	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthStoneHalfSlab("depth_wood_slab_half", Material.WOOD);
 	public static final BlockStairs DEPTH_STONE_STAIRS = new StairBase("depth_stone_stairs", DEPTH_STONE.getDefaultState());
-	//	public static final BlockSlab DEPTH_COBBLE_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
-//	public static final BlockSlab DEPTH_COBBLE_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockSlab DEPTH_COBBLE_SLAB_DOUBLE = new DepthCobbleDoubleSlab("depth_wood_slab_double", Material.WOOD);
+	public static final BlockSlab DEPTH_COBBLE_SLAB_HALF = new DepthCobbleHalfSlab("depth_wood_slab_half", Material.WOOD);
 	public static final BlockStairs DEPTH_COBBLE_STAIRS = new StairBase("depth_cobble_stairs", DEPTH_COBBLE.getDefaultState());
 	public static final BlockSlab DEPTH_WOOD_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
 	public static final BlockSlab DEPTH_WOOD_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
@@ -116,7 +116,7 @@ public class ModBlocks
 	//Special Blocks
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
-	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3,true);
+	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3, true);
 	public static final Block HEAL_STONE = new PotionEffectStone("heal_stone", Material.ROCK, MobEffects.REGENERATION, 2, 3);
 	public static final Block VISION_STONE = new PotionEffectStone("vision_stone", Material.ROCK, MobEffects.NIGHT_VISION, 11, 1, true);
 	public static final Block SATURATION_STONE = new PotionEffectStone("saturation_stone", Material.ROCK, MobEffects.SATURATION, 60, 3, true);
