@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "axis=x": {
+      "model": "deepmagic:depth_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "deepmagic:depth_log"
+    },
+    "axis=z": {
+      "model": "deepmagic:depth_log",
+      "x": 90
+    },
+    "axis=none": {
+      "model": "deepmagic:depth_log"
+    }
+  }
+}
