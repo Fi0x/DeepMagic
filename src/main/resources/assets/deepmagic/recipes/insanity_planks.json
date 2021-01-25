@@ -1,17 +1,12 @@
-{ 
-    "type": "minecraft:crafting_shapeless",
-
-    "ingredients": 
-    [
-
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
       "item": "deepmagic:insanity_log"
     }
-    ],
-
-    "result": 
-    {
-        "item": "deepmagic:insanity_planks",
-        "count": 4
-    }
+  ],
+  "result": {
+    "item": "deepmagic:insanity_planks",
+    "count": 4
+  }
 }
