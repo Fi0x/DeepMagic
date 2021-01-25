@@ -82,6 +82,7 @@ public class ModBlocks
 	public static final Block DEPTH_STONE = new DepthStone("depth_stone", Material.ROCK);
 	public static final Block DEPTH_COBBLE = new DepthCobble("depth_cobble", Material.ROCK);
 	public static final Block DEPTH_DIRT = new DepthDirt("depth_dirt", Material.GROUND);
+	public static final Block DEPTH_PLANKS = new DepthPlanks("depth_planks", Material.WOOD);
 	public static final BlockBush DEPTH_FLOWER = new DepthFlower("depth_flower", Material.PLANTS);
 	public static final Block DEPTH_LOG = new DepthLog("depth_log");
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
