@@ -67,6 +67,10 @@ tile.depth_planks.name=Compressed Planks
 tile.depth_flower.name=Depth Flower
 tile.depth_log.name=Compressed Log
 tile.depth_glowstone.name=Compressed Glowstone
+tile.depth_stone_slab_half.name=Compressed Stone Slab
+tile.depth_stone_stairs.name=Compressed Stone Stairs
+tile.depth_cobble_slab_half.name=Compressed Cobble Slab
+tile.depth_cobble_stairs.name=Compressed Cobble Stairs
 tile.depth_wood_slab_half.name=Compressed Wood Slab
 tile.depth_wood_stairs.name=Compressed Wood Stairs
 

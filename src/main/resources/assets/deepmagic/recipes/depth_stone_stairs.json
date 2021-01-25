@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S  ",
+    "SS ",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:depth_stone"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_stone_stairs",
+    "count": 4
+  }
+}

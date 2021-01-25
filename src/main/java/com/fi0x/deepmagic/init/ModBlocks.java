@@ -63,7 +63,7 @@ public class ModBlocks
 	public static final BlockStairs INSANITY_STONE_STAIRS = new StairBase("insanity_stone_stairs", INSANITY_STONE.getDefaultState());
 	public static final BlockSlab INSANITY_COBBLE_SLAB_DOUBLE = new InsanityCobbleDoubleSlab("insanity_cobble_slab_double", Material.ROCK);
 	public static final BlockSlab INSANITY_COBBLE_SLAB_HALF = new InsanityCobbleHalfSlab("insanity_cobble_slab_half", Material.ROCK);
-	public static final BlockStairs INSANITY_COBBLE_STAIRS = new StairBase("insanity_cobble_stairs", INSANITY_STONE.getDefaultState());
+	public static final BlockStairs INSANITY_COBBLE_STAIRS = new StairBase("insanity_cobble_stairs", INSANITY_COBBLE.getDefaultState());
 	public static final BlockSlab INSANITY_WOOD_SLAB_DOUBLE = new InsanityWoodDoubleSlab("insanity_wood_slab_double", Material.WOOD);
 	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
@@ -86,6 +86,12 @@ public class ModBlocks
 	public static final BlockBush DEPTH_FLOWER = new DepthFlower("depth_flower", Material.PLANTS);
 	public static final Block DEPTH_LOG = new DepthLog("depth_log");
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
+	//	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
+//	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockStairs DEPTH_STONE_STAIRS = new StairBase("depth_stone_stairs", DEPTH_STONE.getDefaultState());
+	//	public static final BlockSlab DEPTH_COBBLE_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
+//	public static final BlockSlab DEPTH_COBBLE_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockStairs DEPTH_COBBLE_STAIRS = new StairBase("depth_cobble_stairs", DEPTH_COBBLE.getDefaultState());
 	public static final BlockSlab DEPTH_WOOD_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
 	public static final BlockSlab DEPTH_WOOD_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
 	public static final BlockStairs DEPTH_WOOD_STAIRS = new StairBase("depth_wood_stairs", DEPTH_PLANKS.getDefaultState());
