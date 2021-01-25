@@ -107,6 +107,7 @@ tile.mana_grinder.name=Mana Grinder
 tile.mana_furnace.name=Mana Furnace
 
 fluid.insanity_water=Insanity Water
+tile.insanity_water.name=Insanity Water
 
 item.deep_crystal_sword.name=Deep Crystal Sword
 item.deep_crystal_shovel.name=Deep Crystal Shovel
