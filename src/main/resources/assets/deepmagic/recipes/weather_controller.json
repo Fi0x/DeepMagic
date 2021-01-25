@@ -1,40 +1,30 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "SWS",
-        "CIC",
-        "SMS"
-    ],
-    
-    "key":
-    {
-        "S":
-        {
-            "item": "deepmagic:insanity_stone"
-        },
-        "W":
-        {
-        	"item": "minecraft:water_bucket"
-        },
-        "C":
-        {
-            "item": "deepmagic:deep_crystal_block"
-        },
-        "I":
-        {
-            "item": "deepmagic:world_interaction_segment"
-        },
-        "M":
-        {
-            "item": "deepmagic:mana_segment"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "CIC",
+    "SMS"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:weather_controller",
-        "count": 1
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "C": {
+      "item": "deepmagic:deep_crystal_block"
+    },
+    "I": {
+      "item": "deepmagic:world_interaction_segment"
+    },
+    "M": {
+      "item": "deepmagic:mana_segment"
     }
+  },
+  "result": {
+    "item": "deepmagic:weather_controller",
+    "count": 1
+  }
 }

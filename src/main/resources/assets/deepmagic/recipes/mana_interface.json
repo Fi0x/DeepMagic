@@ -1,36 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "ISI",
-        "ICI",
-        "IDI"
-    ],
-    
-    "key":
-    {
-        "C":
-        {
-            "item": "deepmagic:compressed_deep_crystal"
-        },
-        "S":
-        {
-        	"item": "deepmagic:empty_scroll"
-        },
-        "D":
-        {
-            "item": "deepmagic:deep_crystal"
-        },
-        "I":
-        {
-            "item": "minecraft:iron_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ISI",
+    "ICI",
+    "IDI"
+  ],
+  "key": {
+    "C": {
+      "item": "deepmagic:compressed_deep_crystal"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:mana_interface",
-        "count": 1
+    "S": {
+      "item": "deepmagic:empty_scroll"
+    },
+    "D": {
+      "item": "deepmagic:deep_crystal"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
+  },
+  "result": {
+    "item": "deepmagic:mana_interface",
+    "count": 1
+  }
 }

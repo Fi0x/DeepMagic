@@ -1,48 +1,37 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "AIA",
-        "CDF",
-        "BMB"
-    ],
-    
-    "key":
-    {
-        "D":
-        {
-            "item": "deepmagic:dimensional_crystal"
-        },
-        "M":
-        {
-            "item": "deepmagic:mana_battery"
-        },
-        "I":
-        {
-        	"item": "deepmagic:mana_interface"
-        },
-        "C":
-        {
-        	"item": "deepmagic:magic_converter"
-        },
-        "F":
-        {
-            "item": "deepmagic:magic_flow_controller"
-        },
-        "A":
-        {
-            "item": "minecraft:diamond"
-        },
-        "B":
-        {
-            "item": "minecraft:iron_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AIA",
+    "CDF",
+    "BMB"
+  ],
+  "key": {
+    "D": {
+      "item": "deepmagic:dimensional_crystal"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:teleportation_crystal",
-        "count": 1
+    "M": {
+      "item": "deepmagic:mana_battery"
+    },
+    "I": {
+      "item": "deepmagic:mana_interface"
+    },
+    "C": {
+      "item": "deepmagic:magic_converter"
+    },
+    "F": {
+      "item": "deepmagic:magic_flow_controller"
+    },
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
+  },
+  "result": {
+    "item": "deepmagic:teleportation_crystal",
+    "count": 1
+  }
 }
