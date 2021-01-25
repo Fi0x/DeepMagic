@@ -1,40 +1,30 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "SIS",
-        "CMC",
-        "SDS"
-    ],
-    
-    "key":
-    {
-        "S":
-        {
-            "item": "deepmagic:insanity_stone"
-        },
-        "I":
-        {
-        	"item": "deepmagic:mana_interface"
-        },
-        "C":
-        {
-            "item": "deepmagic:deep_crystal_block"
-        },
-        "M":
-        {
-            "item": "deepmagic:mana_segment"
-        },
-        "D":
-        {
-            "item": "deepmagic:dimensional_crystal"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SIS",
+    "CMC",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:mana_altar",
-        "count": 1
+    "I": {
+      "item": "deepmagic:mana_interface"
+    },
+    "C": {
+      "item": "deepmagic:deep_crystal_block"
+    },
+    "M": {
+      "item": "deepmagic:mana_segment"
+    },
+    "D": {
+      "item": "deepmagic:dimensional_crystal"
     }
+  },
+  "result": {
+    "item": "deepmagic:mana_altar",
+    "count": 1
+  }
 }

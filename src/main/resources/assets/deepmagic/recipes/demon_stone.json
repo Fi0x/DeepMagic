@@ -1,36 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "IDI",
-        "CSC",
-        "IDI"
-    ],
-    
-    "key":
-    {
-        "I":
-        {
-            "item": "deepmagic:insanity_stone"
-        },
-        "D":
-        {
-            "item": "deepmagic:dimensional_crystal"
-        },
-        "C":
-        {
-            "item": "deepmagic:demon_crystal"
-        },
-        "S":
-        {
-            "item": "deepmagic:magic_sigil"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IDI",
+    "CSC",
+    "IDI"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:demon_stone",
-        "count": 1
+    "D": {
+      "item": "deepmagic:dimensional_crystal"
+    },
+    "C": {
+      "item": "deepmagic:demon_crystal"
+    },
+    "S": {
+      "item": "deepmagic:magic_sigil"
     }
+  },
+  "result": {
+    "item": "deepmagic:demon_stone",
+    "count": 1
+  }
 }

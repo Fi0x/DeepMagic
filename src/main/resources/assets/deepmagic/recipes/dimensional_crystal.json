@@ -1,36 +1,28 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "DPD",
-        "SES",
-        "DPD"
-    ],
-    
-    "key":
-    {
-        "E":
-        {
-            "item": "minecraft:ender_pearl"
-        },
-        "S":
-        {
-        	"item": "deepmagic:magic_sigil"
-        },
-        "P":
-        {
-            "item": "deepmagic:magic_powder"
-        },
-        "D":
-        {
-            "item": "minecraft:diamond"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DPD",
+    "SES",
+    "DPD"
+  ],
+  "key": {
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "enderpearl"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:dimensional_crystal",
-        "count": 1
+    "S": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "P": {
+      "item": "deepmagic:magic_powder"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
     }
+  },
+  "result": {
+    "item": "deepmagic:dimensional_crystal",
+    "count": 1
+  }
 }

@@ -1,6 +1,8 @@
 package com.fi0x.deepmagic.util.compat;
 
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -10,7 +12,13 @@ public class OreDictionaryRegistry
 
     public static void registerOres()
     {
-        //General Blocks
+        //Minecraft
+        OreDictionary.registerOre("apple", new ItemStack(Items.APPLE, 1, WILDCARD_VALUE));
+
+        //Mod Items
+        OreDictionary.registerOre("apple", new ItemStack(ModItems.INSANITY_APPLE, 1, WILDCARD_VALUE));
+
+        //Mod Blocks
         OreDictionary.registerOre("torch", new ItemStack(ModBlocks.DWARF_LAMP, 1, WILDCARD_VALUE));
         OreDictionary.registerOre("torch", new ItemStack(ModBlocks.MAGIC_LIGHT, 1, WILDCARD_VALUE));
 
