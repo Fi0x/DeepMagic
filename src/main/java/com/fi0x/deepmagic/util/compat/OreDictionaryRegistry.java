@@ -49,6 +49,7 @@ public class OreDictionaryRegistry
         OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.DEPTH_PLANKS, 1, WILDCARD_VALUE));
         OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.DEPTH_LOG, 1, WILDCARD_VALUE));
         OreDictionary.registerOre("glowstone", new ItemStack(ModBlocks.DEPTH_GLOWSTONE, 1, WILDCARD_VALUE));
+        OreDictionary.registerOre("slabWood", new ItemStack(ModBlocks.DEPTH_WOOD_SLAB_HALF, 1, WILDCARD_VALUE));
         //Depth Ores
         OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.DEPTH_COAL_ORE, 1, WILDCARD_VALUE));
         OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.DEPTH_IRON_ORE, 1, WILDCARD_VALUE));

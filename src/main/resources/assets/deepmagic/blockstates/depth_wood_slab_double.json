@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=top": {
+      "model": "deepmagic:depth_planks"
+    },
+    "half=bottom": {
+      "model": "deepmagic:depth_planks"
+    }
+  }
+}
