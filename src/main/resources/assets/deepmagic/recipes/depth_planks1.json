@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "deepmagic:depth_log"
+    }
+  ],
+  "result": {
+    "item": "deepmagic:depth_planks",
+    "count": 4
+  }
+}

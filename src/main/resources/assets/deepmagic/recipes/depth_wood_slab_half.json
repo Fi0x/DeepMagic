@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:depth_planks"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_wood_slab_half",
+    "count": 6
+  }
+}

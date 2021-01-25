@@ -63,8 +63,16 @@ tile.insanity_deep_crystal_ore.name=Insanity Deep Crystal Ore
 tile.depth_stone.name=Compressed Stone
 tile.depth_cobble.name=Compressed Cobble
 tile.depth_dirt.name=Compressed Dirt
+tile.depth_planks.name=Compressed Planks
 tile.depth_flower.name=Depth Flower
+tile.depth_log.name=Compressed Log
 tile.depth_glowstone.name=Compressed Glowstone
+tile.depth_stone_slab_half.name=Compressed Stone Slab
+tile.depth_stone_stairs.name=Compressed Stone Stairs
+tile.depth_cobble_slab_half.name=Compressed Cobble Slab
+tile.depth_cobble_stairs.name=Compressed Cobble Stairs
+tile.depth_wood_slab_half.name=Compressed Wood Slab
+tile.depth_wood_stairs.name=Compressed Wood Stairs
 
 tile.depth_coal_ore.name=Compressed Coal Ore
 tile.depth_iron_ore.name=Compressed Iron Ore
