@@ -1,36 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        " M ",
-        "IFI",
-        "ICI"
-    ],
-    
-    "key":
-    {
-        "C":
-        {
-            "item": "deepmagic:compressed_deep_crystal"
-        },
-        "M":
-        {
-        	"item": "deepmagic:magic_converter"
-        },
-        "F":
-        {
-            "item": "deepmagic:magic_flow_controller"
-        },
-        "I":
-        {
-            "item": "minecraft:iron_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "IFI",
+    "ICI"
+  ],
+  "key": {
+    "C": {
+      "item": "deepmagic:compressed_deep_crystal"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:mana_battery",
-        "count": 1
+    "M": {
+      "item": "deepmagic:magic_converter"
+    },
+    "F": {
+      "item": "deepmagic:magic_flow_controller"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
+  },
+  "result": {
+    "item": "deepmagic:mana_battery",
+    "count": 1
+  }
 }

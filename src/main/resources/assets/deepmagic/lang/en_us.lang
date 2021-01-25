@@ -115,6 +115,11 @@ item.deep_crystal_shovel.name=Deep Crystal Shovel
 item.deep_crystal_hoe.name=Deep Crystal Hoe
 item.deep_crystal_axe.name=Deep Crystal Axe
 item.deep_crystal_pickaxe.name=Deep Crystal Pickaxe
+item.depth_sword.name=Depth Sword
+item.depth_shovel.name=Depth Shovel
+item.depth_hoe.name=Depth Hoe
+item.depth_axe.name=Depth Axe
+item.depth_pickaxe.name=Depth Pickaxe
 
 item.deep_crystal_helmet.name=Deep Crystal Helmet
 item.deep_crystal_chestplate.name=Deep Crystal Chestplate
