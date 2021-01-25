@@ -88,6 +88,7 @@ public class ModBlocks
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
 	public static final BlockSlab DEPTH_WOOD_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
 	public static final BlockSlab DEPTH_WOOD_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockStairs DEPTH_WOOD_STAIRS = new StairBase("depth_wood_stairs", DEPTH_PLANKS.getDefaultState());
 	//Depth Ores
 	public static final Block DEPTH_COAL_ORE = new DepthOreCoal("depth_coal_ore", Material.ROCK);
 	public static final Block DEPTH_IRON_ORE = new DepthOreIron("depth_iron_ore", Material.ROCK);
