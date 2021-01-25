@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:depth_planks"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_stick",
+    "count": 1
+  }
+}

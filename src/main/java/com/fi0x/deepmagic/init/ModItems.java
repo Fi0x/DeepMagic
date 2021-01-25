@@ -89,4 +89,6 @@ public class ModItems
 	public static final Item KNOWLEDGE_SEGMENT = new ItemBase("knowledge_segment");
 	public static final Item WORLD_INTERACTION_SEGMENT = new ItemBase("world_interaction_segment");
 	public static final Item MANA_SEGMENT = new ItemBase("mana_segment");
+	public static final Item DEPTH_STICK = new ItemBase("depth_stick");
+	public static final Item REINFORCED_STICK = new ItemBase("reinforced_stick");
 }

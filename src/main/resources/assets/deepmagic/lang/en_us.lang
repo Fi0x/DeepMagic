@@ -163,6 +163,8 @@ item.mana_interface.name=Mana Interface
 item.knowledge_segment.name=Knowledge Segment
 item.world_interaction_segment.name=World Interaction Segment
 item.mana_segment.name=Mana Segment
+item.depth_stick.name=Compressed Stick
+item.reinforced_stick.name=Reinforced Stick
 
 entity.insanity_cow.name=Insanity Cow
 entity.dwarf.name=Dwarf
