@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CastHelper
 {
-    public boolean findAndCastNextSpellType(ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
+    public boolean findAndCastSpellTypes(ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
         boolean executed = false;
         for(int i = 0; i < remainingSections.size(); i++)
@@ -30,7 +30,6 @@ public class CastHelper
                     break;
                 }
             }
-            if(executed) break;
         }
         return executed;
     }

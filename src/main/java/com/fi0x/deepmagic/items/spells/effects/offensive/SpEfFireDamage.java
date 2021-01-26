@@ -2,14 +2,17 @@ package com.fi0x.deepmagic.items.spells.effects.offensive;
 
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class SpEfFireDamage implements ISpellEffect
 {
     public static final String NAME = "effect_firedamage";
+    private int damage = 1;
 
     @Override
     public String getName()
@@ -19,8 +22,14 @@ public class SpEfFireDamage implements ISpellEffect
     @Override
     public String getPartAsString()
     {
-        String ret = NAME;
+        String ret = NAME + "_attr_";
+        ret += damage;
         return ret;
+    }
+    @Override
+    public void setAttributesFromString(ArrayList<String> attributes)
+    {
+        damage = Integer.parseInt(attributes.get(0));
     }
     @Override
     public ISpellEffect getEffect()
@@ -34,6 +43,17 @@ public class SpEfFireDamage implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
     {
-        //TODO: Use method to apply fire damage to target
+        targetEntity.attackEntityFrom(DamageSource.IN_FIRE, damage);
+    }
+
+    @Override
+    public void setDamage(int value)
+    {
+        this.damage = value;
+    }
+    @Override
+    public int getDamage()
+    {
+        return damage;
     }
 }
