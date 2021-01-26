@@ -48,11 +48,11 @@ public class ModItems
 	public static final ItemAxe DEEP_CRYSTAL_AXE = new ToolAxe("deep_crystal_axe", MATERIAL_DEEP_CRYSTAL, 8, -3.2F);
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 	//Depth
-	public static final ItemSword DEPTH_SWORD = new ToolSword("depth_sword", MATERIAL_DEPTH);
-	public static final ItemSpade DEPTH_SHOVEL = new ToolSpade("depth_shovel", MATERIAL_DEPTH);
-	public static final ItemPickaxe DEPTH_PICKAXE = new ToolPickaxe("depth_pickaxe", MATERIAL_DEPTH);
-	public static final ItemAxe DEPTH_AXE = new ToolAxe("depth_axe", MATERIAL_DEPTH, 1, 3);
-	public static final ItemHoe DEPTH_HOE = new ToolHoe("depth_hoe", MATERIAL_DEPTH);
+	public static final ItemSword DEPTH_SWORD = new DepthSword("depth_sword", MATERIAL_DEPTH);
+	public static final ItemSpade DEPTH_SHOVEL = new DepthSpade("depth_shovel", MATERIAL_DEPTH);
+	public static final ItemPickaxe DEPTH_PICKAXE = new DepthPickaxe("depth_pickaxe", MATERIAL_DEPTH);
+	public static final ItemAxe DEPTH_AXE = new DepthAxe("depth_axe", MATERIAL_DEPTH);
+	public static final ItemHoe DEPTH_HOE = new DepthHoe("depth_hoe", MATERIAL_DEPTH);
 
 	//Spells
 	public static final Item SPELL = new Spell("spell");
