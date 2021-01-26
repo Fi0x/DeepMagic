@@ -19,6 +19,7 @@ public class CustomRavineGenerator extends MapGenBase
 
     public CustomRavineGenerator()
     {
+        //TODO: Fix cascading world-gen
         this.range = 32;
     }
 

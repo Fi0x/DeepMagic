@@ -72,28 +72,24 @@ public class DecoratorDepthBiome extends BiomeDecorator
             {
                 if(random.nextInt(2) == 0)
                 {
-                    int i8 = 8;
-                    int l11 = 8;
-                    BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(i8, 0, l11));
+                    BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(8, 0, 8));
                     depthFlowerGen.generate(worldIn, random, blockpos2);
                 }
             }
 
             if(random.nextInt(2) == 0)
             {
-                int i4 = 8;
-                int k8 = 8;
-                int j12 = worldIn.getHeight(chunkPos.add(i4, 0, k8)).getY() * 2;
+                int j12 = worldIn.getHeight(chunkPos.add(8, 0, 8)).getY() * 2;
 
                 if(j12 > 0)
                 {
                     int k15 = random.nextInt(j12);
-                    depthFlowerGen.generate(worldIn, random, chunkPos.add(i4, k15, k8));
+                    depthFlowerGen.generate(worldIn, random, chunkPos.add(8, k15, 8));
                 }
             }
         }
 
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
     @Override
