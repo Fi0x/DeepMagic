@@ -87,7 +87,7 @@ public class TileEntityRune extends TileEntity
     public void setSpell(@Nullable EntityLivingBase caster, ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections)
     {
         remainingCasts = (int) applicableParts.get(0).getDuration();
-        applicableParts.remove(0);
+        if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
         this.caster = caster;
         this.applicableParts = applicableParts;

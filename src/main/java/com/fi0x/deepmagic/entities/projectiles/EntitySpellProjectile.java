@@ -145,7 +145,7 @@ public class EntitySpellProjectile extends EntityThrowable
 
     public void setSpell(@Nullable EntityLivingBase caster, ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections)
     {
-        applicableParts.remove(0);
+        if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
         this.caster = caster;
         this.applicableParts = applicableParts;
