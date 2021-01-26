@@ -145,6 +145,9 @@ public class ConfigHandler
     //Tools
     public static int deepCrystalMiningLevel;
     public static int depthMiningLevel;
+    //Endgame Equipment
+    public static boolean depthToolsActive;
+    public static boolean depthArmorActive;
 
     public static void registerConfig(FMLPreInitializationEvent event)
     {
@@ -375,6 +378,11 @@ public class ConfigHandler
         items.addCustomCategoryComment(category, "Tools");
         deepCrystalMiningLevel = items.getInt("Deep Crystal Mining Level", category, 4, 0, 100, "Mining Level for Deep Crystal Tools");
         depthMiningLevel = items.getInt("Depth Mining Level", category, 4, 0, 100, "Mining Level for Depth Tools");
+
+        category = "Endgame-Equipment";
+        items.addCustomCategoryComment(category, "Endgame-Equipment");
+        depthToolsActive = items.getBoolean("Depth Tools Abilities", category, true, "Enables the special Abilities of Depth Tools");
+        depthArmorActive = items.getBoolean("Depth Armor Abilities", category, true, "Enables the special Abilities of Depth Armor");
 
         items.save();
     }
