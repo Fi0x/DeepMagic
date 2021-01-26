@@ -1,8 +1,8 @@
 package com.fi0x.deepmagic.init;
 
-import com.fi0x.deepmagic.items.ArmorBase;
 import com.fi0x.deepmagic.items.DemonCrystal;
 import com.fi0x.deepmagic.items.ItemBase;
+import com.fi0x.deepmagic.items.armor.*;
 import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.*;
@@ -64,10 +64,10 @@ public class ModItems
 	public static final Item DEEP_CRYSTAL_LEGGINGS = new ArmorBase("deep_crystal_leggings", ARMOR_MATERIAL_DEEP_CRYSTAL, 2, EntityEquipmentSlot.LEGS);
 	public static final Item DEEP_CRYSTAL_BOOTS = new ArmorBase("deep_crystal_boots", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.FEET);
 	//Depth
-	public static final Item DEPTH_HELMET = new ArmorBase("depth_helmet", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.HEAD);
-	public static final Item DEPTH_CHESTPLATE = new ArmorBase("depth_chestplate", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.CHEST);
-	public static final Item DEPTH_LEGGINGS = new ArmorBase("depth_leggings", ARMOR_MATERIAL_DEPTH, 2, EntityEquipmentSlot.LEGS);
-	public static final Item DEPTH_BOOTS = new ArmorBase("depth_boots", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.FEET);
+	public static final Item DEPTH_HELMET = new DepthHelmet("depth_helmet", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.HEAD);
+	public static final Item DEPTH_CHESTPLATE = new DepthChestplate("depth_chestplate", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.CHEST);
+	public static final Item DEPTH_LEGGINGS = new DepthLeggings("depth_leggings", ARMOR_MATERIAL_DEPTH, 2, EntityEquipmentSlot.LEGS);
+	public static final Item DEPTH_BOOTS = new DepthBoots("depth_boots", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.FEET);
 
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20 * 20), 1, false, true), true);
