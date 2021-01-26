@@ -5,6 +5,8 @@ import com.fi0x.deepmagic.items.spells.effects.offensive.*;
 import com.fi0x.deepmagic.items.spells.effects.util.*;
 import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
+import com.fi0x.deepmagic.util.IManaTileEntity;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -17,8 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TileEntitySpellStone extends TileEntity implements ITickable
+public class TileEntitySpellStone extends TileEntity implements ITickable, IManaTileEntity
 {
+    private double requiredMana = 0;
+    private int manaTick = 0;
+
     private final ArrayList<String> spellParts = new ArrayList<>();
     private final ArrayList<String> consumedItems = new ArrayList<>();
 
@@ -28,6 +33,17 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     @Override
     public void update()
     {
+        manaTick--;
+        if(manaTick < -1000)
+        {
+            if(ConfigHandler.spellStoneExplosion)
+            {
+                boolean env = ConfigHandler.spellStoneEnvironment;
+                world.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), (float) consumedItems.size() / 4 + 1, false, env);
+            }
+        }
+        if(requiredMana <= ConfigHandler.manaToleranceSpellStone && manaTick < 0) manaTick += 100;
+
         AxisAlignedBB aabb = new AxisAlignedBB(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
         List<EntityItem> itemEntities = world.getEntitiesWithinAABB(EntityItem.class, aabb);
 
@@ -47,11 +63,20 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
             updateSpellModifiers();
             updateSpellEffects();
         }
+
+        requiredMana++;
+        if(manaTick % 100 == 0)
+        {
+            requiredMana += consumedItems.size() * 100;
+        }
     }
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
+        compound.setDouble("requiredmana", requiredMana);
+        compound.setInteger("tickdelay", manaTick);
+
         StringBuilder parts = new StringBuilder();
         if(!spellParts.isEmpty())
         {
@@ -79,6 +104,9 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
+        requiredMana = compound.getDouble("requiredmana");
+        manaTick = compound.getInteger("tickdelay");
+
         String parts = compound.getString("parts");
         spellParts.addAll(Arrays.asList(parts.split(":")));
 
@@ -569,5 +597,19 @@ public class TileEntitySpellStone extends TileEntity implements ITickable
     public void resetManaMultiplier()
     {
         manaMultiplier = 0;
+    }
+    @Override
+    public double getSpaceForMana()
+    {
+        return requiredMana;
+    }
+    @Override
+    public double addManaToStorage(double amount)
+    {
+        double ret = amount - requiredMana;
+        if(ret > 0) requiredMana = 0;
+        else requiredMana -= amount;
+        markDirty();
+        return ret > 0 ? ret : 0;
     }
 }
