@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.items.spells.types;
 
-import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
@@ -42,8 +41,6 @@ public class SpTyIterate implements ISpellType
     {
         if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
-        boolean executed = false;
-
         while(!applicableParts.isEmpty() && !(applicableParts.get(0) instanceof ISpellType))
         {
             applicableParts.remove(0);
@@ -51,12 +48,6 @@ public class SpTyIterate implements ISpellType
         if(!applicableParts.isEmpty())
         {
             ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster, world);
-            executed = true;
-        }
-
-        if(!executed)
-        {
-            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster, world);
         }
     }
 

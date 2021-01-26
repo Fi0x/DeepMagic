@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.entities.projectiles;
 
-import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.SpellPartHandler;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
@@ -57,7 +56,7 @@ public class EntitySpellProjectile extends EntityThrowable
 
     }
     @Override
-    protected void onImpact(@Nonnull RayTraceResult result)//TODO: Test
+    protected void onImpact(@Nonnull RayTraceResult result)
     {
         EntityLivingBase target = null;
         BlockPos position = null;
@@ -156,8 +155,6 @@ public class EntitySpellProjectile extends EntityThrowable
     }
     public void executeSpell(@Nullable EntityLivingBase target, BlockPos pos)
     {
-        boolean executed = false;
-
         while(!applicableParts.isEmpty())
         {
             if(applicableParts.get(0) instanceof ISpellEffect)
@@ -167,13 +164,9 @@ public class EntitySpellProjectile extends EntityThrowable
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, pos, caster, world);
-                executed = true;
+                break;
             }
-            if(executed) break;
             applicableParts.remove(0);
         }
-
-        if(!executed) new CastHelper().findAndCastNextSpellType(remainingSections, pos, caster, world);
-
     }
 }

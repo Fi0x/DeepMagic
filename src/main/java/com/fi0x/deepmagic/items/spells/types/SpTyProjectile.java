@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.items.spells.types;
 
 import com.fi0x.deepmagic.entities.projectiles.EntitySpellProjectile;
-import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
@@ -48,8 +47,6 @@ public class SpTyProjectile implements ISpellType
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
-        boolean executed = false;
-
         if(caster != null)
         {
             EntitySpellProjectile projectile = new EntitySpellProjectile(world, caster);
@@ -71,13 +68,10 @@ public class SpTyProjectile implements ISpellType
                 if(applicableParts.get(0) instanceof ISpellType)
                 {
                     ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster, world);
-                    executed = true;
                     break;
                 }
                 applicableParts.remove(0);
             }
-
-            if(!executed) new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster, world);
         }
     }
 
