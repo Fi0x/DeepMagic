@@ -2,9 +2,9 @@ package com.fi0x.deepmagic.items.armor;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 
-public class DepthBoots extends ArmorBase
+public class DepthArmor extends ArmorBase
 {
-    public DepthBoots(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn)
+    public DepthArmor(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn)
     {
         super(name, materialIn, renderIndexIn, equipmentSlotIn);
     }
