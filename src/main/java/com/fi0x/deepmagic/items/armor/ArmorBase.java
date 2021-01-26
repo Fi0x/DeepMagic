@@ -14,13 +14,17 @@ public class ArmorBase extends ItemArmor implements IHasModel
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(DeepMagicTab.ITEMS);
-		
+
 		ModItems.ITEMS.add(this);
 	}
-	
+
 	@Override
 	public void registerModels()
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
+
+	/*
+	TODO: Add NBT data to store mana
+	 */
 }
