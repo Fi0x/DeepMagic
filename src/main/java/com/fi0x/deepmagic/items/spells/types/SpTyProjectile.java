@@ -48,7 +48,6 @@ public class SpTyProjectile implements ISpellType
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
-        if(!applicableParts.isEmpty()) applicableParts.remove(0);
         boolean executed = false;
 
         if(caster != null)
@@ -60,6 +59,10 @@ public class SpTyProjectile implements ISpellType
             projectile.motionX = vector.x * velocity;
             projectile.motionY = vector.y * velocity;
             projectile.motionZ = vector.z * velocity;
+
+            projectile.posX += vector.x;
+            projectile.posY += vector.y;
+            projectile.posZ += vector.z;
             world.spawnEntity(projectile);
         } else
         {

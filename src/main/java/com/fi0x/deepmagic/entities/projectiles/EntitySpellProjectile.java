@@ -49,15 +49,16 @@ public class EntitySpellProjectile extends EntityThrowable
     {
         super.onUpdate();
         if(ticksExisted > 20 * existingSeconds) setDead();
-        double x = posX + Math.random() - 0.5;
-        double y = posY + Math.random() - 0.5;
-        double z = posZ + Math.random() - 0.5;
-        ParticleSpawner.spawnParticle(ParticleEnum.SPELL_PROJECTILE, x, y, z, 0, 0, 0, Math.random() + 0.5, false, 64);
+
+        double xOff = Math.random() - 0.5;
+        double yOff = Math.random() - 0.5;
+        double zOff = Math.random() - 0.5;
+        ParticleSpawner.spawnParticle(ParticleEnum.SPELL_PROJECTILE, posX + xOff, posY + yOff, posZ + zOff, 0, 0, 0, Math.random() + 0.5, false, 64);
+
     }
     @Override
     protected void onImpact(@Nonnull RayTraceResult result)//TODO: Test
     {
-        setDead();
         EntityLivingBase target = null;
         BlockPos position = null;
 
@@ -75,6 +76,7 @@ public class EntitySpellProjectile extends EntityThrowable
                 break;
         }
 
+        if(target == null || target != thrower) setDead();
         executeSpell(target, position);
     }
     @Override
@@ -145,6 +147,7 @@ public class EntitySpellProjectile extends EntityThrowable
 
     public void setSpell(@Nullable EntityLivingBase caster, ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections)
     {
+        existingSeconds = applicableParts.get(0).getDuration();
         if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
         this.caster = caster;
