@@ -50,7 +50,7 @@ public class DwarfBaseMarker extends BlockBase implements ITileEntityProvider
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
     {
-        return Item.getItemFromBlock(ModBlocks.MANA_ALTAR);
+        return Item.getItemFromBlock(ModBlocks.DWARF_BASE_MARKER);
     }
     @Nullable
     @Override
