@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.world.biomes.depth;
 
 import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.world.generators.underground.CustomBushGenerator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,8 +29,6 @@ public class DecoratorDepthBiome extends BiomeDecorator
     public WorldGenerator redstoneGen;
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
-    public WorldGenerator depthFlowerGen = new CustomBushGenerator(ModBlocks.DEPTH_FLOWER, 250);
-    public final int flowersPerChunk = 50;
 
     private final int MAX_ORE_HEIGHT = 250;
     private final int MIN_ORE_HEIGHT = 0;

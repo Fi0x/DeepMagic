@@ -16,7 +16,7 @@ public class CustomGlowstoneGenerator extends WorldGenerator
     {
         for(int i = 0; i < 255; ++i)
         {
-            BlockPos blockpos = position.add(rand.nextInt(16) - 8, rand.nextInt(8) - 4, rand.nextInt(16) - 8);
+            BlockPos blockpos = position.add(rand.nextInt(15) - 7, rand.nextInt(7) - 3, rand.nextInt(15) - 7);
             Block block = worldIn.getBlockState(blockpos).getBlock();
 
             if((block == ModBlocks.DEPTH_STONE || block == ModBlocks.DEPTH_DIRT || worldIn.isAirBlock(blockpos)) && blockpos.getY() < worldIn.getHeight() - 1)
