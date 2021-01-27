@@ -21,11 +21,11 @@ public class DepthShaftGenerator extends MapGenBase
     @Override
     public void generate(@Nonnull World worldIn, int x, int z, @Nonnull ChunkPrimer primer)
     {
-        if(rand.nextInt(50) > 0) return;
+        if(rand.nextInt(25) > 0) return;
         this.world = worldIn;
         this.rand.setSeed(worldIn.getSeed());
 
-        int currentRadius = rand.nextInt(range) + 1;
+        int currentRadius = rand.nextInt(range) + 2;
         int centerX = rand.nextInt(16 - 2 * currentRadius) + currentRadius;
         int centerZ = rand.nextInt(16 - 2 * currentRadius) + currentRadius;
 
@@ -38,7 +38,7 @@ public class DepthShaftGenerator extends MapGenBase
         {
             for(int bz = centerZ - currentRadius; bz <= centerZ + currentRadius; ++bz)
             {
-                if(distSq(bx, centerX, bz, centerZ) > currentRadius * currentRadius) continue;
+                if(distSq(bx, centerX, bz, centerZ) > (currentRadius + 0.5) * (currentRadius + 0.5)) continue;
                 for(int y = 1; y < 255; y++)
                 {
                     this.digBlock(chunkPrimerIn, bx, y, bz);
