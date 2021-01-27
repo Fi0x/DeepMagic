@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.blocks;
 
 import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntitySpellStone;
+import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
@@ -48,8 +49,23 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         TileEntitySpellStone tile = getTileEntity(worldIn, pos);
 
         if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
+        else if(item instanceof ManaLinker)
+        {
+            NBTTagCompound compound;
+            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+            compound = stack.getTagCompound();
+            assert compound != null;
 
-        return false;
+            if(compound.hasKey("x")) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "This block can't send mana"));
+            else
+            {
+                compound.setInteger("x", pos.getX());
+                compound.setInteger("y", pos.getY());
+                compound.setInteger("z", pos.getZ());
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
+            }
+        }
+        return true;
     }
     @Override
     public Class<TileEntitySpellStone> getTileEntityClass()
