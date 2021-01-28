@@ -96,7 +96,6 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
                 particles *= 2;
                 break;
             default:
-                System.out.println(Minecraft.getMinecraft().gameSettings.particleSetting);
                 particles = 0;
         }
 
