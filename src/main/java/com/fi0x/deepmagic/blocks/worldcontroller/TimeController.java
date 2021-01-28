@@ -31,7 +31,7 @@ public class TimeController extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            if(Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).removeMana(100)) worldIn.setWorldTime(worldIn.getWorldTime() + 1000);
+            if(Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).removeMana(playerIn, 100)) worldIn.setWorldTime(worldIn.getWorldTime() + 1000);
             else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough Mana"));
         }
         return true;

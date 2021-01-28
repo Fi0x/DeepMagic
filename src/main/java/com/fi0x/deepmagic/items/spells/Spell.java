@@ -53,19 +53,22 @@ public class Spell extends ItemBase implements IMagicItem
 
         PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playerMana != null;
-        if(compound.hasKey("tier") && playerMana.getSpellTier() < compound.getInteger("tier"))
+
+        if(!playerIn.isCreative() && (compound.hasKey("tier") && playerMana.getSpellTier() < compound.getInteger("tier")))
         {
             playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You are not skilled enough for this spell"));
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
-        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(compound.getDouble("manaCosts"))))
+        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(playerIn, compound.getDouble("manaCosts"))))
         {
             playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
 
         castSpell(compound, playerIn);
+
         if(compound.hasKey("skillXP")) playerMana.addSkillXP(playerIn, compound.getDouble("skillXP"));
+
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
@@ -77,29 +80,12 @@ public class Spell extends ItemBase implements IMagicItem
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         compound = stack.getTagCompound();
         assert compound != null;
-        if(GuiScreen.isShiftKeyDown())
-        {
-            tooltip.add(TextFormatting.GREEN + "Spell Effects:");
-            if(compound.hasKey("damage")) tooltip.add(TextFormatting.GREEN + "Damage: " + compound.getInteger("damage"));
-            if(compound.hasKey("environmentalDamage") && compound.getBoolean("environmentalDamage")) tooltip.add(TextFormatting.GREEN + "Does environmental damage");
-            if(compound.hasKey("explosion") && compound.getBoolean("explosion")) tooltip.add(TextFormatting.GREEN + "Creates an explosion");
-            if(compound.hasKey("heal")) tooltip.add(TextFormatting.GREEN + "Healing amount: " + compound.getInteger("heal"));
-            if(compound.hasKey("time")) tooltip.add(TextFormatting.GREEN + "Add " + compound.getInteger("time") + " timeunits");
-            if(compound.hasKey("weather") && compound.getBoolean("weather")) tooltip.add(TextFormatting.GREEN + "Can toggle downfall");
-            tooltip.add(TextFormatting.WHITE + "Modifications:");
-            if(compound.hasKey("range")) tooltip.add(TextFormatting.WHITE + "Range: " + compound.getInteger("range"));
-            if(compound.hasKey("radius")) tooltip.add(TextFormatting.WHITE + "Radius: " + compound.getInteger("radius"));
-            tooltip.add(TextFormatting.YELLOW + "Targets:");
-            if(compound.hasKey("targetSelf") && compound.getBoolean("targetSelf")) tooltip.add(TextFormatting.YELLOW + "Yourself");
-            if(compound.hasKey("targetSelfPos") && compound.getBoolean("targetSelfPos")) tooltip.add(TextFormatting.YELLOW + "Your Position");
-            if(compound.hasKey("targetFocus") && compound.getBoolean("targetFocus")) tooltip.add(TextFormatting.YELLOW + "Targeted Entity");
-            if(compound.hasKey("targetFocusPos") && compound.getBoolean("targetFocusPos")) tooltip.add(TextFormatting.YELLOW + "Targeted Position");
-        } else tooltip.add(TextFormatting.YELLOW + "Press Shift for more Information");
         if(GuiScreen.isCtrlKeyDown())
         {
             if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.BLUE + "Consumes " + compound.getInteger("manaCosts") + " Mana");
             else tooltip.add(TextFormatting.BLUE + "Consumes " + ConfigHandler.spellBaseManaCost + " Mana");
             if(compound.hasKey("tier")) tooltip.add(TextFormatting.BLUE + "Requires Skill Tier " + compound.getInteger("tier"));
+            if(compound.hasKey("skillXP")) tooltip.add(TextFormatting.BLUE + "Gives " + compound.getDouble("skillXP") + " Skill XP");
         } else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
     }
 

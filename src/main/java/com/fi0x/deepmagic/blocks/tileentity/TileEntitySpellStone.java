@@ -21,6 +21,7 @@ import java.util.List;
 
 public class TileEntitySpellStone extends TileEntity implements ITickable, IManaTileEntity
 {
+    //TODO: Add mana adder and multiplier costs
     private double requiredMana = 0;
     private int manaTick = 0;
 
@@ -69,6 +70,8 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
         {
             requiredMana += consumedItems.size() * 100;
         }
+
+        markDirty();
     }
     @Nonnull
     @Override
@@ -579,7 +582,6 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
             world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 3, false);
             consumedItems.clear();
         }
-        manaMultiplier = 1;
         markDirty();
     }
     public int getManaAdder()
@@ -589,6 +591,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
     public void resetManaAdder()
     {
         manaAdder = 0;
+        markDirty();
     }
     public double getManaMultiplier()
     {
@@ -597,6 +600,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
     public void resetManaMultiplier()
     {
         manaMultiplier = 0;
+        markDirty();
     }
     @Override
     public double getSpaceForMana()

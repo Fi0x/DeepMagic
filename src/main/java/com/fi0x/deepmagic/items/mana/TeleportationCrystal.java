@@ -70,7 +70,7 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
             if(playerIn.isSneaking()) manaCosts = ConfigHandler.teleportationCrystalManaCostDepth;
             else manaCosts = ConfigHandler.teleportationCrystalManaCost;
 
-            if(playerMana.removeMana(manaCosts))
+            if(playerMana.removeMana(playerIn, manaCosts))
             {
                 playerMana.addSkillXP(playerIn, ConfigHandler.teleportationCrystalSkillXP);
                 int x = (int) playerIn.posX;

@@ -349,7 +349,7 @@ public class ConfigHandler
         category = "Spell Stone";
         blocks.addCustomCategoryComment(category, "Spell Stone");
         spellStoneExplosion = blocks.getBoolean("Spell Stone Explosion", category, true, "Weather Spell Stones explode when they are out of mana");
-        spellStoneEnvironment = blocks.getBoolean("Spell Stone Environment", category, true, "If a Spell Stone does Environmental Damage");
+        spellStoneEnvironment = blocks.getBoolean("Spell Stone Environment", category, false, "If a Spell Stone does Environmental Damage");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");
