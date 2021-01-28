@@ -52,6 +52,9 @@ public class DepthShaftGenerator extends MapGenBase
                 radiusWoodMin = currentRadius;
                 radiusWoodMax = currentRadius + 0.6569;
                 break;
+            case 7:
+                radiusWoodMax = currentRadius + 0.8103;
+                break;
         }
         for(int blockX = centerX - currentRadius; blockX <= centerX + currentRadius; ++blockX)
         {
@@ -77,7 +80,11 @@ public class DepthShaftGenerator extends MapGenBase
     {
         IBlockState state = primer.getBlockState(x, y, z);
 
-        if(isReplaceable(state)) primer.setBlockState(x, y, z, AIR);
+        if(isReplaceable(state))
+        {
+            if(y > 10 && y < 245) primer.setBlockState(x, y, z, AIR);
+            else primer.setBlockState(x, y, z, Blocks.OBSIDIAN.getDefaultState());
+        }
     }
     protected void placeLog(ChunkPrimer primer, int x, int y, int z)
     {
