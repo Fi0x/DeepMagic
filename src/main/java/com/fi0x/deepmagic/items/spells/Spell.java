@@ -75,7 +75,6 @@ public class Spell extends ItemBase implements IMagicItem
     @Override
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
     {
-        //TODO: Add correct information about spell effect
         NBTTagCompound compound;
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         compound = stack.getTagCompound();
