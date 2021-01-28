@@ -39,7 +39,7 @@ public class DeepCrystalOreCompressed extends BlockBase
     @Override
     public int quantityDropped(Random rand)
     {
-        return rand.nextInt((8) + 2);
+        return rand.nextInt(8) + 2;
     }
 
     @SideOnly(Side.CLIENT)

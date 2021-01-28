@@ -1,7 +1,6 @@
 package com.fi0x.deepmagic.world.biomes.depth;
 
 import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.world.generators.underground.CustomBushGenerator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,8 +29,6 @@ public class DecoratorDepthBiome extends BiomeDecorator
     public WorldGenerator redstoneGen;
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
-    public WorldGenerator depthFlowerGen = new CustomBushGenerator(ModBlocks.DEPTH_FLOWER, 250);
-    public final int flowersPerChunk = 50;
 
     private final int MAX_ORE_HEIGHT = 250;
     private final int MIN_ORE_HEIGHT = 0;
@@ -66,34 +63,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
         this.generateOres(worldIn, random);
 
-        if(TerrainGen.decorate(worldIn, random, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.SHROOM))
-        {
-            for(int l3 = 0; l3 < flowersPerChunk; ++l3)
-            {
-                if(random.nextInt(2) == 0)
-                {
-                    int i8 = 8;
-                    int l11 = 8;
-                    BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(i8, 0, l11));
-                    depthFlowerGen.generate(worldIn, random, blockpos2);
-                }
-            }
-
-            if(random.nextInt(2) == 0)
-            {
-                int i4 = 8;
-                int k8 = 8;
-                int j12 = worldIn.getHeight(chunkPos.add(i4, 0, k8)).getY() * 2;
-
-                if(j12 > 0)
-                {
-                    int k15 = random.nextInt(j12);
-                    depthFlowerGen.generate(worldIn, random, chunkPos.add(i4, k15, k8));
-                }
-            }
-        }
-
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
     @Override

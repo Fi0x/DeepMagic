@@ -3,7 +3,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.world.generators.underground.CustomGlowstoneGenerator;
-import com.fi0x.deepmagic.world.generators.underground.CustomRavineGenerator;
+import com.fi0x.deepmagic.world.generators.underground.DepthShaftGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -33,7 +33,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
     private final World world;
     private final Random rand;
-    private MapGenBase ravineGenerator = new CustomRavineGenerator();
+    private MapGenBase shaftGenerator = new DepthShaftGenerator();
 
     private final CustomGlowstoneGenerator glowStoneGen = new CustomGlowstoneGenerator();
 
@@ -42,7 +42,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         world = worldIn;
         rand = new Random(seed);
 
-        ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
+        shaftGenerator = TerrainGen.getModdedMapGen(shaftGenerator, InitMapGenEvent.EventType.CUSTOM);
 
         worldIn.setSeaLevel(200);
     }
@@ -53,7 +53,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         ChunkPrimer primer = new ChunkPrimer();
         fillChunk(primer);
 
-        ravineGenerator.generate(world, x, z, primer);
+        shaftGenerator.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();
