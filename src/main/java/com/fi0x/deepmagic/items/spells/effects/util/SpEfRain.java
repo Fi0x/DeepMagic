@@ -30,7 +30,7 @@ public class SpEfRain implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        //TODO: Use method to change weather to rain
+        world.getWorldInfo().setRaining(true);
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)
