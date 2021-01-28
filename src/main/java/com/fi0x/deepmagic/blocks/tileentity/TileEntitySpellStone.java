@@ -542,10 +542,12 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
 
                 manaAdder += 100;
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.contains("item.iron_shovel") && consumedItems.contains("item.iron_pickaxe") && consumedItems.contains("item.iron_axe"))
             {
                 spellParts.add(SpEfDig.NAME);
-                consumedItems.remove(null);
+                consumedItems.remove("item.iron_shovel");
+                consumedItems.remove("item.iron_pickaxe");
+                consumedItems.remove("item.iron_axe");
 
                 manaAdder += 20;
                 flag = true;
