@@ -25,7 +25,7 @@ public class DepthShaftGenerator extends MapGenBase
     @Override
     public void generate(@Nonnull World worldIn, int x, int z, @Nonnull ChunkPrimer primer)
     {
-        if(rand.nextInt(25) > 0) return;
+        if(rand.nextInt(40) > 0) return;
         this.world = worldIn;
         this.rand.setSeed(worldIn.getSeed());
 
@@ -51,9 +51,6 @@ public class DepthShaftGenerator extends MapGenBase
                 radiusAir = currentRadius + 0.0991;
                 radiusWoodMin = currentRadius;
                 radiusWoodMax = currentRadius + 0.6569;
-                break;
-            case 7:
-                radiusWoodMax = currentRadius + 0.8103;
                 break;
         }
         for(int blockX = centerX - currentRadius; blockX <= centerX + currentRadius; ++blockX)
