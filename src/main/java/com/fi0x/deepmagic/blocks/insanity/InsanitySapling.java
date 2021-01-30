@@ -8,6 +8,7 @@ import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.biomes.insanity.*;
 import com.fi0x.deepmagic.world.generators.plants.TreeGenInsanityMedium;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -23,6 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -71,7 +73,8 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     @Override
     public boolean canGrow(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, boolean isClient)
     {
-        return true;
+        Biome biome = worldIn.getBiome(pos);
+        return biome instanceof BiomeInsanityForestLarge || biome instanceof BiomeInsanityForestMixed || biome instanceof BiomeInsanityForestSmall || biome instanceof BiomeInsanityHills || biome instanceof BiomeInsanityPlains;
     }
     @Override
     public boolean canUseBonemeal(World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state)
