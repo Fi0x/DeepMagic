@@ -57,7 +57,7 @@ public class ArmorHelper
         EntityPlayer player = event.player;
         if(!ConfigHandler.depthArmorActive) return;
 
-        if(player.isCreative()) player.capabilities.allowFlying = true;
+        if(player.isCreative() || player.isSpectator()) player.capabilities.allowFlying = true;
         else if(!player.inventory.armorItemInSlot(2).isEmpty() && player.inventory.armorItemInSlot(2).getItem() instanceof ArmorBase)
         {
             if(removeMana(player.inventory.armorItemInSlot(2), ConfigHandler.manaFlightCost, player) >= ConfigHandler.manaFlightCost)
