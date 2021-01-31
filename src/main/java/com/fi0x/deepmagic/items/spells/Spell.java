@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 
 public class Spell extends ItemBase implements IMagicItem
@@ -84,7 +85,7 @@ public class Spell extends ItemBase implements IMagicItem
             if(compound.hasKey("manaCosts")) tooltip.add(TextFormatting.BLUE + "Consumes " + compound.getInteger("manaCosts") + " Mana");
             else tooltip.add(TextFormatting.BLUE + "Consumes " + ConfigHandler.spellBaseManaCost + " Mana");
             if(compound.hasKey("tier")) tooltip.add(TextFormatting.BLUE + "Requires Skill Tier " + compound.getInteger("tier"));
-            if(compound.hasKey("skillXP")) tooltip.add(TextFormatting.BLUE + "Gives " + compound.getDouble("skillXP") + " Skill XP");
+            if(compound.hasKey("skillXP")) tooltip.add(TextFormatting.BLUE + "Gives " + new Formatter(new StringBuilder()).format("%.2f", compound.getDouble("skillXP")).toString() + " Skill XP");
         } else tooltip.add(TextFormatting.BLUE + "Press Ctrl for Mana Information");
     }
 
