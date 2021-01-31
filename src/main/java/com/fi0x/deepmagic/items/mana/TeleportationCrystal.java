@@ -1,8 +1,13 @@
 package com.fi0x.deepmagic.items.mana;
 
 import com.fi0x.deepmagic.Main;
+import com.fi0x.deepmagic.blocks.depth.DepthDirt;
+import com.fi0x.deepmagic.blocks.depth.DepthStone;
+import com.fi0x.deepmagic.blocks.insanity.InsanityDirt;
+import com.fi0x.deepmagic.blocks.insanity.InsanityStone;
 import com.fi0x.deepmagic.commands.Teleport;
 import com.fi0x.deepmagic.init.DeepMagicTab;
+import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
@@ -10,6 +15,7 @@ import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,29 +73,28 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
             assert playerMana != null;
 
             int manaCosts;
-            if(playerIn.isSneaking()) manaCosts = ConfigHandler.teleportationCrystalManaCostDepth;
+            if(playerIn.isSneaking() && playerIn.dimension != ConfigHandler.dimensionIdDepthID) manaCosts = ConfigHandler.teleportationCrystalManaCostDepth;
             else manaCosts = ConfigHandler.teleportationCrystalManaCost;
 
-            if(playerMana.removeMana(manaCosts))
+            if(playerMana.removeMana(playerIn, manaCosts))
             {
                 playerMana.addSkillXP(playerIn, ConfigHandler.teleportationCrystalSkillXP);
                 int x = (int) playerIn.posX;
                 int z = (int) playerIn.posZ;
-                if(playerIn.dimension == 0)
+                if(playerIn.isSneaking())
                 {
-                    if(playerIn.isSneaking())
-                    {
-                        x *= 0.05;
-                        z *= 0.05;
-                        playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
-                        return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
-                    } else
-                    {
-                        x *= 10;
-                        z *= 10;
-                        playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You entered a strange dimension..."));
-                        return teleportEntityTo(playerIn, ConfigHandler.dimensionIdInsanityID, x, z, stack);
-                    }
+                    x *= 0.05;
+                    z *= 0.05;
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                }
+                else if(playerIn.dimension == 0)
+                {
+                    x *= 10;
+                    z *= 10;
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You entered a strange dimension..."));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdInsanityID, x, z, stack);
+
                 } else if(playerIn.dimension == -1)
                 {
                     x *= 8;
@@ -121,8 +126,12 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
         assert server != null;
 
         double y;
-        if(dimensionID == ConfigHandler.dimensionIdDepthID) y = findGoodY(server.getWorld(dimensionID), x, (int) playerIn.posY, z);
-        else y = findSurface(server.getWorld(dimensionID), x, z);
+        if(dimensionID == ConfigHandler.dimensionIdDepthID)
+        {
+            y = findGoodY(server.getWorld(dimensionID), x, (int) playerIn.posY, z);
+            playerIn.setSpawnDimension(ConfigHandler.dimensionIdDepthID);
+            playerIn.setSpawnPoint(new BlockPos(x, y, z), true);
+        } else y = findSurface(server.getWorld(dimensionID), x, z);
 
         server = server.getWorld(dimensionID).getMinecraftServer();
         assert server != null;
@@ -150,14 +159,30 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
         return y;
     }
 
-    private double findGoodY(World world, int x, int y, int z)
+    private double findGoodY(World world, int x, double y, int z)
     {
         BlockPos pos = new BlockPos(x, y, z);
-        if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) != null && world.getBlockState(pos.up()).getCollisionBoundingBox(world, pos.up()) != null)
+        Block block = world.getBlockState(pos).getBlock();
+        Block top = world.getBlockState(pos.up()).getBlock();
+        if((block instanceof DepthStone || block instanceof DepthDirt || world.isAirBlock(pos)) && (top instanceof DepthStone || top instanceof DepthDirt || world.isAirBlock(pos.up())))
         {
             world.setBlockToAir(pos);
             world.setBlockToAir(pos.up());
+        } else
+        {
+            y++;
+            if(y > 230)
+            {
+                pos = new BlockPos(x, y, z);
+                world.setBlockToAir(pos);
+                world.setBlockToAir(pos.up());
+            } else
+            {
+                y = findGoodY(world, x, y, z);
+                pos = new BlockPos(x, y, z);
+            }
         }
+        if(world.getBlockState(pos.down()).getCollisionBoundingBox(world, pos.down()) == null) world.setBlockState(pos.down(), ModBlocks.DEPTH_STONE.getDefaultState());
         return y;
     }
 }

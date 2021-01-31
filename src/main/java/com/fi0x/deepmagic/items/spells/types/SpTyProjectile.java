@@ -1,8 +1,10 @@
 package com.fi0x.deepmagic.items.spells.types;
 
+import com.fi0x.deepmagic.entities.projectiles.EntitySpellProjectile;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -45,8 +47,32 @@ public class SpTyProjectile implements ISpellType
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
-        applicableParts.remove(0);
-        //TODO: Execute spell
+        if(caster != null)
+        {
+            EntitySpellProjectile projectile = new EntitySpellProjectile(world, caster);
+            projectile.setSpell(caster, applicableParts, remainingSections);
+
+            Vec3d vector = caster.getLookVec();
+            projectile.motionX = vector.x * velocity;
+            projectile.motionY = vector.y * velocity;
+            projectile.motionZ = vector.z * velocity;
+
+            projectile.posX += vector.x;
+            projectile.posY += vector.y;
+            projectile.posZ += vector.z;
+            world.spawnEntity(projectile);
+        } else
+        {
+            while(!applicableParts.isEmpty())
+            {
+                if(applicableParts.get(0) instanceof ISpellType)
+                {
+                    ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, castLocation, caster, world);
+                    break;
+                }
+                applicableParts.remove(0);
+            }
+        }
     }
 
     @Override

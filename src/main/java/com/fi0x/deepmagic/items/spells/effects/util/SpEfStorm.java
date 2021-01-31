@@ -30,7 +30,7 @@ public class SpEfStorm implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        //TODO: Use method to change weather to storm
+        world.getWorldInfo().setThundering(true);
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

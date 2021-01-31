@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.items.spells.types;
 
-import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,11 +42,9 @@ public class SpTyAreaOfEffect implements ISpellType
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
-        applicableParts.remove(0);
+        if(!applicableParts.isEmpty()) applicableParts.remove(0);
         ArrayList<BlockPos> targetPositions = getPositions(castLocation);
         ArrayList<EntityLivingBase> targets = getEntities(world, castLocation);
-
-        boolean executed = false;
 
         while(!applicableParts.isEmpty())
         {
@@ -67,15 +64,9 @@ public class SpTyAreaOfEffect implements ISpellType
                 {
                     ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, targetPos, caster, world);
                 }
-                executed = true;
+                break;
             }
-            if(executed) break;
             applicableParts.remove(0);
-        }
-
-        if(!executed)
-        {
-            new CastHelper().findAndCastNextSpellType(remainingSections, castLocation, caster, world);
         }
     }
 

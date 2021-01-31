@@ -39,7 +39,7 @@ public class DeepCrystalOre extends BlockBase
 	@Override
 	public int quantityDropped(Random rand)
 	{
-		return rand.nextInt((4) + 1);
+		return rand.nextInt(4) + 1;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestLarge;
 import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestMixed;
 import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityForestSmall;
 import com.fi0x.deepmagic.world.biomes.insanity.BiomeInsanityPlains;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -19,7 +20,7 @@ import java.util.Random;
 
 public class WorldGenCustomTrees implements IWorldGenerator
 {
-    private final WorldGenerator INSANITY_SMALL = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
+    private final WorldGenerator INSANITY_SMALL = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE), false);
     private final WorldGenerator INSANITY_NORMAL = new TreeGenInsanityMedium(true);
     private final WorldGenerator INSANITY_LARGE = new TreeGenInsanityLarge(true);
 

@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.blocks.insanity;
+package com.fi0x.deepmagic.blocks.depth;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.init.DeepMagicTab;
@@ -8,8 +8,7 @@ import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.biomes.insanity.*;
-import com.fi0x.deepmagic.world.generators.plants.TreeGenInsanityMedium;
+import com.fi0x.deepmagic.world.biomes.depth.BiomeDepth;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.IGrowable;
@@ -25,7 +24,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -36,12 +34,12 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Random;
 
-public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
+public class DepthSapling extends BlockBush implements IGrowable, IHasModel
 {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
 
-    public InsanitySapling(String name, Material material)
+    public DepthSapling(String name, Material material)
     {
         super(material);
         setUnlocalizedName(name);
@@ -49,7 +47,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
         setCreativeTab(DeepMagicTab.BLOCKS);
 
         setSoundType(SoundType.PLANT);
-        setHardness(0.1F);
+        setHardness(1.1F);
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
@@ -63,9 +61,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     public void generateTree(World world, BlockPos pos, Random rand)
     {
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-        WorldGenerator treeGenerator;
-        if(rand.nextInt(20) == 0) treeGenerator = new TreeGenInsanityMedium(true);
-        else treeGenerator = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE), false);
+        WorldGenerator treeGenerator = new WorldGenTrees(true, 5, ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE), false);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
         treeGenerator.generate(world, rand, pos);
@@ -74,8 +70,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     @Override
     public boolean canGrow(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, boolean isClient)
     {
-        Biome biome = worldIn.getBiome(pos);
-        return biome instanceof BiomeInsanityForestLarge || biome instanceof BiomeInsanityForestMixed || biome instanceof BiomeInsanityForestSmall || biome instanceof BiomeInsanityHills || biome instanceof BiomeInsanityPlains;
+        return worldIn.getBiome(pos) instanceof BiomeDepth;
     }
     @Override
     public boolean canUseBonemeal(World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state)
@@ -99,7 +94,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
         if(!worldIn.isRemote)
         {
             super.updateTick(worldIn, pos, state, rand);
-            if(worldIn.getLightFromNeighbors(pos.up()) >= 4 && rand.nextInt(7) == 0)
+            if(rand.nextInt(7) == 0)
             {
                 grow(worldIn, rand, pos, state);
             }
@@ -142,6 +137,6 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
         double y = pos.getY() + Math.random();
         double z = pos.getZ() + Math.random();
 
-        ParticleSpawner.spawnParticle(ParticleEnum.INSANITY_PLANT, x, y, z);
+        ParticleSpawner.spawnParticle(ParticleEnum.DEPTH_PLANT, x, y, z);
     }
 }

@@ -30,7 +30,8 @@ public class SpEfSunshine implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        //TODO: Use method to change weather to clear
+        world.getWorldInfo().setRaining(false);
+        world.getWorldInfo().setThundering(false);
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

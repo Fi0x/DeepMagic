@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.items.spells.types;
 
-import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.client.Minecraft;
@@ -39,8 +38,7 @@ public class SpTyTouch implements ISpellType
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
-        applicableParts.remove(0);
-        boolean executed = false;
+        if(!applicableParts.isEmpty()) applicableParts.remove(0);
         BlockPos targetPos = getTouchedPos(caster, castLocation);
         List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(targetPos));
         EntityLivingBase target = null;
@@ -62,15 +60,9 @@ public class SpTyTouch implements ISpellType
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, targetPos, caster, world);
-                executed = true;
+                break;
             }
-            if(executed) break;
             applicableParts.remove(0);
-        }
-
-        if(!executed)
-        {
-            new CastHelper().findAndCastNextSpellType(remainingSections, targetPos, caster, world);
         }
     }
 

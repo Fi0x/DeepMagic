@@ -113,6 +113,7 @@ public class ConfigHandler
     public static int manaGeneratorManaCapacity;
     public static int manaMachineManaCapacity;
     public static int manaGainFromMob;
+    public static int manaToleranceSpellStone;
     //Block Ranges
     public static int manaBlockTransferRange;
     public static int manaGeneratorMobRange;
@@ -124,6 +125,9 @@ public class ConfigHandler
     public static boolean requireDemonStructure;
     //Dwarf Base Marker
     public static int dwarfMarkerSpawnChance;
+    //Spell Stone
+    public static boolean spellStoneExplosion;
+    public static boolean spellStoneEnvironment;
     //BlockParticles
     public static int dwarfBaseMarkerParticles;
     public static int magicLightParticles;
@@ -324,6 +328,7 @@ public class ConfigHandler
         manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Generator has");
         manaMachineManaCapacity = blocks.getInt("Mana Machine Capacity", category, 1000, 100, 100000, "The Mana Capacity for all Mana consuming Machines");
         manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
+        manaToleranceSpellStone = blocks.getInt("Spell Stone Mana Tolerance", category, 100, 1, 10000, "How much mana a Spell Stone can be short of without explodint");
 
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");
@@ -343,6 +348,11 @@ public class ConfigHandler
         category = "Dwarf Base Marker";
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
         dwarfMarkerSpawnChance = blocks.getInt("Dwarf Marker Spawn Chance", category, 5, 0, 1000, "The Chance a Dwarf will spawn every 10 seconds at a Dwarf Base Marker");
+
+        category = "Spell Stone";
+        blocks.addCustomCategoryComment(category, "Spell Stone");
+        spellStoneExplosion = blocks.getBoolean("Spell Stone Explosion", category, true, "Weather Spell Stones explode when they are out of mana");
+        spellStoneEnvironment = blocks.getBoolean("Spell Stone Environment", category, false, "If a Spell Stone does Environmental Damage");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");

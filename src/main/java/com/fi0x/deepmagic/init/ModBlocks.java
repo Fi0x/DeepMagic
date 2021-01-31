@@ -85,7 +85,9 @@ public class ModBlocks
 	public static final Block DEPTH_PLANKS = new DepthPlanks("depth_planks", Material.WOOD);
 	public static final BlockBush DEPTH_FLOWER = new DepthFlower("depth_flower", Material.PLANTS);
 	public static final Block DEPTH_LOG = new DepthLog("depth_log");
+	public static final Block DEPTH_LEAVES = new DepthLeaves("depth_leaves");
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
+	public static final BlockBush DEPTH_SAPLING = new DepthSapling("depth_sapling", Material.PLANTS);
 	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthStoneDoubleSlab("depth_stone_slab_double", Material.WOOD);
 	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthStoneHalfSlab("depth_stone_slab_half", Material.WOOD);
 	public static final BlockStairs DEPTH_STONE_STAIRS = new StairBase("depth_stone_stairs", DEPTH_STONE.getDefaultState());

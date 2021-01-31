@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks.tileentity;
 
-import com.fi0x.deepmagic.items.spells.CastHelper;
 import com.fi0x.deepmagic.items.spells.ISpellPart;
 import com.fi0x.deepmagic.items.spells.SpellPartHandler;
 import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
@@ -87,7 +86,7 @@ public class TileEntityRune extends TileEntity
     public void setSpell(@Nullable EntityLivingBase caster, ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections)
     {
         remainingCasts = (int) applicableParts.get(0).getDuration();
-        applicableParts.remove(0);
+        if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
         this.caster = caster;
         this.applicableParts = applicableParts;
@@ -95,8 +94,6 @@ public class TileEntityRune extends TileEntity
     }
     public void executeSpell(EntityLivingBase target)
     {
-        boolean executed = false;
-
         while(!applicableParts.isEmpty())
         {
             if(applicableParts.get(0) instanceof ISpellEffect)
@@ -106,15 +103,9 @@ public class TileEntityRune extends TileEntity
             } else if(applicableParts.get(0) instanceof ISpellType)
             {
                 ((ISpellType) applicableParts.get(0)).execute(applicableParts, remainingSections, pos, caster, world);
-                executed = true;
+                break;
             }
-            if(executed) break;
             applicableParts.remove(0);
-        }
-
-        if(!executed)
-        {
-            new CastHelper().findAndCastNextSpellType(remainingSections, pos, caster, world);
         }
         remainingCasts--;
         if(remainingCasts <= 0) world.setBlockToAir(pos);

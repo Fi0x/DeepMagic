@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "deepmagic:deep_crystal_powder"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    }
+  ],
+  "result": {
+    "item": "deepmagic:magic_powder",
+    "count": 1
+  }
+}
