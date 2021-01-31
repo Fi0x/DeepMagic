@@ -36,6 +36,11 @@ tile.insanity_dirt.name=Insanity Dirt
 tile.insanity_grass.name=Insanity Grass
 tile.insanity_planks.name=Insanity Planks
 tile.insanity_flower.name=Insanity Flower
+tile.insanity_flower2.name=Insanity Flower 2
+tile.insanity_flower3.name=Insanity Flower 3
+tile.insanity_flower4.name=Insanity Flower 4
+tile.insanity_flower5.name=Insanity Flower 5
+tile.insanity_tall_grass.name=Insanity Grass
 tile.insanity_log.name=Insanity Log
 tile.insanity_leaves.name=Insanity Leaves
 tile.insanity_sapling.name=Insanity Sapling
@@ -58,8 +63,18 @@ tile.insanity_deep_crystal_ore.name=Insanity Deep Crystal Ore
 tile.depth_stone.name=Compressed Stone
 tile.depth_cobble.name=Compressed Cobble
 tile.depth_dirt.name=Compressed Dirt
+tile.depth_planks.name=Compressed Planks
 tile.depth_flower.name=Depth Flower
+tile.depth_log.name=Compressed Log
+tile.depth_leaves.name=Compressed Leaves
 tile.depth_glowstone.name=Compressed Glowstone
+tile.depth_sapling.name=Compressed Sapling
+tile.depth_stone_slab_half.name=Compressed Stone Slab
+tile.depth_stone_stairs.name=Compressed Stone Stairs
+tile.depth_cobble_slab_half.name=Compressed Cobble Slab
+tile.depth_cobble_stairs.name=Compressed Cobble Stairs
+tile.depth_wood_slab_half.name=Compressed Wood Slab
+tile.depth_wood_stairs.name=Compressed Wood Stairs
 
 tile.depth_coal_ore.name=Compressed Coal Ore
 tile.depth_iron_ore.name=Compressed Iron Ore
@@ -102,12 +117,18 @@ tile.mana_grinder.name=Mana Grinder
 tile.mana_furnace.name=Mana Furnace
 
 fluid.insanity_water=Insanity Water
+tile.insanity_water.name=Insanity Water
 
 item.deep_crystal_sword.name=Deep Crystal Sword
 item.deep_crystal_shovel.name=Deep Crystal Shovel
 item.deep_crystal_hoe.name=Deep Crystal Hoe
 item.deep_crystal_axe.name=Deep Crystal Axe
 item.deep_crystal_pickaxe.name=Deep Crystal Pickaxe
+item.depth_sword.name=Depth Sword
+item.depth_shovel.name=Depth Shovel
+item.depth_hoe.name=Depth Hoe
+item.depth_axe.name=Depth Axe
+item.depth_pickaxe.name=Depth Pickaxe
 
 item.deep_crystal_helmet.name=Deep Crystal Helmet
 item.deep_crystal_chestplate.name=Deep Crystal Chestplate
@@ -121,6 +142,7 @@ item.spell_component.name=Spell Component
 
 item.crystal_infused_apple.name=Crystal Infused Apple
 item.insanity_apple.name=Insanity Apple
+item.depth_apple.name=Compressed Apple
 item.raw_cockroach.name=Raw Cockroach
 item.cooked_cockroach.name=Cooked Cockroach
 item.cockroach_snack.name=Cockroach Snack

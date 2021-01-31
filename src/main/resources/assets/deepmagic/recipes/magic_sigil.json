@@ -1,32 +1,25 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "IPI",
-        "PAP",
-        "IPI"
-    ],
-    
-    "key":
-    {
-        "P":
-        {
-            "item": "deepmagic:magic_powder"
-        },
-        "A":
-        {
-        	"item": "minecraft:paper"
-        },
-        "I":
-        {
-            "item": "minecraft:iron_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "PAP",
+    "IPI"
+  ],
+  "key": {
+    "P": {
+      "item": "deepmagic:magic_powder"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:magic_sigil",
-        "count": 1
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "paper"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
+  },
+  "result": {
+    "item": "deepmagic:magic_sigil",
+    "count": 1
+  }
 }

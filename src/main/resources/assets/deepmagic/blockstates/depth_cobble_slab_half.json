@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=bottom": {
+      "model": "deepmagic:depth_cobble_slab_bottom"
+    },
+    "half=top": {
+      "model": "deepmagic:depth_cobble_slab_top"
+    }
+  }
+}

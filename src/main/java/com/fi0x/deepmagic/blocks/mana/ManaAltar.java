@@ -5,6 +5,8 @@ import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaAltar;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.items.mana.ManaLinker;
+import com.fi0x.deepmagic.particlesystem.ParticleEnum;
+import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -25,6 +27,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -152,7 +156,6 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
     {
         return new TileEntityManaAltar();
     }
-
     @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta)
@@ -161,10 +164,22 @@ public class ManaAltar extends BlockBase implements ITileEntityProvider
         if(facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
         return this.getDefaultState().withProperty(FACING, facing);
     }
-
     @Override
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(FACING).getIndex();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
+    {
+        if(rand.nextInt(100) + 1 > ConfigHandler.manaConsumerParticles) return;
+
+        double x = pos.getX() + Math.random();
+        double y = pos.getY() + 1 + (Math.random() * 0.2);
+        double z = pos.getZ() + Math.random();
+
+        ParticleSpawner.spawnParticle(ParticleEnum.MANA_BLOCK, x, y, z, 0, 0, 0, Math.random() * 0.3 + 0.2, false, 16);
     }
 }

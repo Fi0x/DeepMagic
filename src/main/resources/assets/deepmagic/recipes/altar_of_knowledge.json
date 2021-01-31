@@ -12,7 +12,8 @@
     {
         "S":
         {
-            "item": "deepmagic:insanity_stone"
+            "type": "forge:ore_dict",
+            "ore": "stone"
         },
         "I":
         {

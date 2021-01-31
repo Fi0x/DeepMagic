@@ -23,7 +23,7 @@ public class DepthStone extends BlockBase
         setSoundType(SoundType.STONE);
         setHardness(2.6F);
         setResistance(12F);
-        setHarvestLevel("pickaxe", 2);
+        setHarvestLevel("pickaxe", 4);
     }
 
     @Nonnull

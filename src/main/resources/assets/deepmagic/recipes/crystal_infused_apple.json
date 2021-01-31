@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "deepmagic:deep_crystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "apple"
+    }
+  ],
+  "result": {
+    "item": "deepmagic:crystal_infused_apple",
+    "count": 1
+  }
+}

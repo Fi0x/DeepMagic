@@ -82,5 +82,6 @@ public class RegistryHandler
 
 		GameRegistry.registerTileEntity(TileEntityRune.class, new ResourceLocation("rune"));
 		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
+		GameRegistry.registerTileEntity(TileEntityDwarfBaseMarker.class, new ResourceLocation("dwarf_base_marker"));
 	}
 }

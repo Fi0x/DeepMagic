@@ -19,7 +19,7 @@ public class SpellPartHandler
         for(String p : partNames)
         {
             if(p.isEmpty()) continue;
-            ArrayList<String> attributes = (ArrayList<String>) Arrays.asList(p.split("_attr_"));
+            ArrayList<String> attributes = new ArrayList<>(Arrays.asList(p.split("_attr_")));
             ISpellPart nextPart = getSpellPart(attributes.get(0));
             if(nextPart == null) continue;
             attributes.remove(0);

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S  ",
+    "SS ",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:depth_planks"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_wood_stairs",
+    "count": 4
+  }
+}

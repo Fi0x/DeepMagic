@@ -43,7 +43,7 @@ public class SpTyRune implements ISpellType
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
-        applicableParts.remove(0);
+        if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
         if(world.getBlockState(castLocation) instanceof BlockAir) world.setBlockState(castLocation, ModBlocks.RUNE.getDefaultState());
         else if(world.getBlockState(castLocation.up()) instanceof BlockAir) world.setBlockState(castLocation.up(), ModBlocks.RUNE.getDefaultState());

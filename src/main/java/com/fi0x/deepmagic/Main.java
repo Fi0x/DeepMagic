@@ -9,11 +9,12 @@ import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerPropertyEvents;
 import com.fi0x.deepmagic.proxy.CommonProxy;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.compat.OreDictionaryRegistry;
 import com.fi0x.deepmagic.util.handlers.*;
 import com.fi0x.deepmagic.util.recipes.ModRecipes;
 import com.fi0x.deepmagic.world.generators.ModWorldGen;
 import com.fi0x.deepmagic.world.generators.WorldGenCustomStructures;
-import com.fi0x.deepmagic.world.generators.WorldGenCustomTrees;
+import com.fi0x.deepmagic.world.generators.plants.WorldGenCustomTrees;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
@@ -86,6 +87,7 @@ public class Main
 	public static void init(FMLInitializationEvent event)
 	{
 		ModRecipes.init();
+		OreDictionaryRegistry.registerOres();
 		SoundsHandler.registerSounds();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		proxy.init(event);

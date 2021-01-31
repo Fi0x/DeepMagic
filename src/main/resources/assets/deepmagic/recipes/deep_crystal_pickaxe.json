@@ -1,28 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "CCC",
-        " S ",
-        " S "
-    ],
-    
-    "key":
-    {
-        "C":
-        {
-            "item": "deepmagic:deep_crystal"
-        },
-        "S":
-        {
-            "item": "minecraft:stick"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "C": {
+      "item": "deepmagic:deep_crystal"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:deep_crystal_pickaxe",
-        "count": 1
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
     }
+  },
+  "result": {
+    "item": "deepmagic:deep_crystal_pickaxe",
+    "count": 1
+  }
 }

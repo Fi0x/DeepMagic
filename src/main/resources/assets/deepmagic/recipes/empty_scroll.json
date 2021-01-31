@@ -1,32 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "MMM",
-        "CCC",
-        "PPP"
-    ],
-    
-    "key":
-    {
-        "M":
-        {
-            "item": "deepmagic:magic_powder"
-        },
-        "C":
-        {
-            "item": "deepmagic:deep_crystal_powder"
-        },
-        "P":
-        {
-            "item": "minecraft:paper"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "CCC",
+    "PPP"
+  ],
+  "key": {
+    "M": {
+      "item": "deepmagic:magic_powder"
     },
-    
-    "result":
-    {
-        "item": "deepmagic:empty_scroll",
-        "count": 1
+    "C": {
+      "item": "deepmagic:deep_crystal_powder"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "paper"
     }
+  },
+  "result": {
+    "item": "deepmagic:empty_scroll",
+    "count": 1
+  }
 }

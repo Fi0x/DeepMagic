@@ -8,8 +8,10 @@ import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.generators.ModTreeGenerator;
+import com.fi0x.deepmagic.world.biomes.insanity.*;
+import com.fi0x.deepmagic.world.generators.plants.TreeGenInsanityMedium;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,6 +25,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
@@ -59,16 +63,19 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
     public void generateTree(World world, BlockPos pos, Random rand)
     {
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-        WorldGenerator worldGenerator = new ModTreeGenerator(true);
+        WorldGenerator treeGenerator;
+        if(rand.nextInt(20) == 0) treeGenerator = new TreeGenInsanityMedium(true);
+        else treeGenerator = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE), false);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-        worldGenerator.generate(world, rand, pos);
+        treeGenerator.generate(world, rand, pos);
     }
 
     @Override
     public boolean canGrow(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, boolean isClient)
     {
-        return true;
+        Biome biome = worldIn.getBiome(pos);
+        return biome instanceof BiomeInsanityForestLarge || biome instanceof BiomeInsanityForestMixed || biome instanceof BiomeInsanityForestSmall || biome instanceof BiomeInsanityHills || biome instanceof BiomeInsanityPlains;
     }
     @Override
     public boolean canUseBonemeal(World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state)

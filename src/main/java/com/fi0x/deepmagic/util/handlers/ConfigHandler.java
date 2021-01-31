@@ -113,6 +113,7 @@ public class ConfigHandler
     public static int manaGeneratorManaCapacity;
     public static int manaMachineManaCapacity;
     public static int manaGainFromMob;
+    public static int manaToleranceSpellStone;
     //Block Ranges
     public static int manaBlockTransferRange;
     public static int manaGeneratorMobRange;
@@ -124,14 +125,19 @@ public class ConfigHandler
     public static boolean requireDemonStructure;
     //Dwarf Base Marker
     public static int dwarfMarkerSpawnChance;
+    //Spell Stone
+    public static boolean spellStoneExplosion;
+    public static boolean spellStoneEnvironment;
     //BlockParticles
     public static int dwarfBaseMarkerParticles;
     public static int magicLightParticles;
     public static int deepCrystalOreParticles;
     public static int manaGeneratorParticles;
+    public static int manaConsumerParticles;
     public static int plantParticles;
     public static int demonStoneParticles;
     public static int spellStoneParticles;
+    public static int altarOfKnowledgeParticles;
 
     //Mana Costs
     public static int manaBoosterAmount;
@@ -140,6 +146,9 @@ public class ConfigHandler
     public static int spellBaseManaCost;
     //Skill XP
     public static int teleportationCrystalSkillXP;
+    //Tools
+    public static int deepCrystalMiningLevel;
+    public static int depthMiningLevel;
 
     public static void registerConfig(FMLPreInitializationEvent event)
     {
@@ -202,7 +211,7 @@ public class ConfigHandler
 
         category = "Biome Generation";
         worldGeneration.addCustomCategoryComment(category, "Biome Generation");
-        overworldInsanityBiome = worldGeneration.getBoolean("Overworld Insanity Biome Spawn", category, false, "Enables Spawn of the Insanity Biome in the Overworld");
+        overworldInsanityBiome = worldGeneration.getBoolean("Overworld Insanity Biome Spawn", category, false, "Enables Spawn of the Insanity Biomes in the Overworld");
         overworldDepthBiome = worldGeneration.getBoolean("Overworld Depth Biome Spawn", category, false, "Enables Spawn of the Depth Biome in the Overworld");
         insanityBiomeWeight = worldGeneration.getInt("Insanity Biome Weight", category, 10, 1, 1000, "Insanity Biome Spawn Weight");
         depthBiomeWeight = worldGeneration.getInt("Depth Biome Weight", category, 10, 1, 1000, "Depth Biome Spawn Weight");
@@ -316,6 +325,7 @@ public class ConfigHandler
         manaGeneratorManaCapacity = blocks.getInt("Mana Generator Capacity", category, 1000, 100, 100000, "The Capacity for Mana a Mana Generator has");
         manaMachineManaCapacity = blocks.getInt("Mana Machine Capacity", category, 1000, 100, 100000, "The Mana Capacity for all Mana consuming Machines");
         manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
+        manaToleranceSpellStone = blocks.getInt("Spell Stone Mana Tolerance", category, 100, 1, 10000, "How much mana a Spell Stone can be short of without explodint");
 
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");
@@ -336,15 +346,22 @@ public class ConfigHandler
         blocks.addCustomCategoryComment(category, "Dwarf Base Marker");
         dwarfMarkerSpawnChance = blocks.getInt("Dwarf Marker Spawn Chance", category, 5, 0, 1000, "The Chance a Dwarf will spawn every 10 seconds at a Dwarf Base Marker");
 
+        category = "Spell Stone";
+        blocks.addCustomCategoryComment(category, "Spell Stone");
+        spellStoneExplosion = blocks.getBoolean("Spell Stone Explosion", category, true, "Weather Spell Stones explode when they are out of mana");
+        spellStoneEnvironment = blocks.getBoolean("Spell Stone Environment", category, false, "If a Spell Stone does Environmental Damage");
+
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");
         dwarfBaseMarkerParticles = blocks.getInt("Dwarf Base Marker Particles", category, 4, 0, 16, "The Chance that Particles will spawn at a Dwarf Base Marker");
         magicLightParticles = blocks.getInt("Magic Light Particles", category, 12, 0, 64, "The amount of Particles for Graphics: 'All Particles' ('Decreased Particles' uses half)");
         deepCrystalOreParticles = blocks.getInt("Deep Crystal Ore Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Deep Crystal Ores");
         manaGeneratorParticles = blocks.getInt("Mana Generator Particles", category, 20, 0, 100, "The Chance for Particles to spawn around Mana Generators");
+        manaConsumerParticles = blocks.getInt("Mana Consumer Particles", category, 10, 0, 100, "The Chance for Particles to spawn around Mana consuming Blocks");
         plantParticles = blocks.getInt("Plant Particles", category, 10, 0, 100, "The chance that Particles will spawn around Plants");
         demonStoneParticles = blocks.getInt("Demon Stone Particles", category, 20, 0, 100, "The Chance that Particles will spawn at a correct Demon Stone Structure");
         spellStoneParticles = blocks.getInt("Spell Stone Particles", category, 50, 0, 100, "The Chance that Particles will spawn at an active Spell Stone");
+        altarOfKnowledgeParticles = blocks.getInt("Altar of Knowledge Particles", category, 50, 0, 100, "The Chance that Particles will spawn at an Altar of Knowledge");
 
         blocks.save();
     }
@@ -363,6 +380,11 @@ public class ConfigHandler
         category = "Skill XP";
         items.addCustomCategoryComment(category, "Skill XP");
         teleportationCrystalSkillXP = items.getInt("Teleportation Crystal Skill XP", category, 5, 0, 10000, "Skill XP gained by using the Teleportation Crystal");
+
+        category = "Tools";
+        items.addCustomCategoryComment(category, "Tools");
+        deepCrystalMiningLevel = items.getInt("Deep Crystal Mining Level", category, 4, 0, 100, "Mining Level for Deep Crystal Tools");
+        depthMiningLevel = items.getInt("Depth Mining Level", category, 4, 0, 100, "Mining Level for Depth Tools");
 
         items.save();
     }

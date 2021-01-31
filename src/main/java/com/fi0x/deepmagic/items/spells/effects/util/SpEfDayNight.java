@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.WorldInfo;
 
 import javax.annotation.Nullable;
 
@@ -33,7 +34,8 @@ public class SpEfDayNight implements ISpellEffect
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
-        //TODO: Use method to switch between day and night
+        WorldInfo info = world.getWorldInfo();
+        info.setWorldTotalTime(info.getWorldTotalTime() + 12000);
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

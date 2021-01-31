@@ -50,6 +50,11 @@ public class ModBlocks
 	public static final Block INSANITY_GRASS = new InsanityGrass("insanity_grass", Material.GRASS);
 	public static final Block INSANITY_PLANKS = new InsanityPlanks("insanity_planks", Material.WOOD);
 	public static final BlockBush INSANITY_FLOWER = new InsanityFlower("insanity_flower", Material.PLANTS);
+	public static final BlockBush INSANITY_FLOWER2 = new InsanityFlower("insanity_flower2", Material.PLANTS);
+	public static final BlockBush INSANITY_FLOWER3 = new InsanityFlower("insanity_flower3", Material.PLANTS);
+	public static final BlockBush INSANITY_FLOWER4 = new InsanityFlower("insanity_flower4", Material.PLANTS);
+	public static final BlockBush INSANITY_FLOWER5 = new InsanityFlower("insanity_flower5", Material.PLANTS);
+	public static final BlockBush INSANITY_TALL_GRASS = new InsanityTallGrass("insanity_tall_grass", Material.VINE);
 	public static final Block INSANITY_LOG = new InsanityLog("insanity_log");
 	public static final Block INSANITY_LEAVES = new InsanityLeaves("insanity_leaves");
 	public static final BlockBush INSANITY_SAPLING = new InsanitySapling("insanity_sapling", Material.PLANTS);
@@ -58,7 +63,7 @@ public class ModBlocks
 	public static final BlockStairs INSANITY_STONE_STAIRS = new StairBase("insanity_stone_stairs", INSANITY_STONE.getDefaultState());
 	public static final BlockSlab INSANITY_COBBLE_SLAB_DOUBLE = new InsanityCobbleDoubleSlab("insanity_cobble_slab_double", Material.ROCK);
 	public static final BlockSlab INSANITY_COBBLE_SLAB_HALF = new InsanityCobbleHalfSlab("insanity_cobble_slab_half", Material.ROCK);
-	public static final BlockStairs INSANITY_COBBLE_STAIRS = new StairBase("insanity_cobble_stairs", INSANITY_STONE.getDefaultState());
+	public static final BlockStairs INSANITY_COBBLE_STAIRS = new StairBase("insanity_cobble_stairs", INSANITY_COBBLE.getDefaultState());
 	public static final BlockSlab INSANITY_WOOD_SLAB_DOUBLE = new InsanityWoodDoubleSlab("insanity_wood_slab_double", Material.WOOD);
 	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
@@ -77,8 +82,21 @@ public class ModBlocks
 	public static final Block DEPTH_STONE = new DepthStone("depth_stone", Material.ROCK);
 	public static final Block DEPTH_COBBLE = new DepthCobble("depth_cobble", Material.ROCK);
 	public static final Block DEPTH_DIRT = new DepthDirt("depth_dirt", Material.GROUND);
+	public static final Block DEPTH_PLANKS = new DepthPlanks("depth_planks", Material.WOOD);
 	public static final BlockBush DEPTH_FLOWER = new DepthFlower("depth_flower", Material.PLANTS);
+	public static final Block DEPTH_LOG = new DepthLog("depth_log");
+	public static final Block DEPTH_LEAVES = new DepthLeaves("depth_leaves");
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
+	public static final BlockBush DEPTH_SAPLING = new DepthSapling("depth_sapling", Material.PLANTS);
+	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthStoneDoubleSlab("depth_stone_slab_double", Material.WOOD);
+	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthStoneHalfSlab("depth_stone_slab_half", Material.WOOD);
+	public static final BlockStairs DEPTH_STONE_STAIRS = new StairBase("depth_stone_stairs", DEPTH_STONE.getDefaultState());
+	public static final BlockSlab DEPTH_COBBLE_SLAB_DOUBLE = new DepthCobbleDoubleSlab("depth_cobble_slab_double", Material.WOOD);
+	public static final BlockSlab DEPTH_COBBLE_SLAB_HALF = new DepthCobbleHalfSlab("depth_cobble_slab_half", Material.WOOD);
+	public static final BlockStairs DEPTH_COBBLE_STAIRS = new StairBase("depth_cobble_stairs", DEPTH_COBBLE.getDefaultState());
+	public static final BlockSlab DEPTH_WOOD_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
+	public static final BlockSlab DEPTH_WOOD_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockStairs DEPTH_WOOD_STAIRS = new StairBase("depth_wood_stairs", DEPTH_PLANKS.getDefaultState());
 	//Depth Ores
 	public static final Block DEPTH_COAL_ORE = new DepthOreCoal("depth_coal_ore", Material.ROCK);
 	public static final Block DEPTH_IRON_ORE = new DepthOreIron("depth_iron_ore", Material.ROCK);
@@ -100,7 +118,7 @@ public class ModBlocks
 	//Special Blocks
 	public static final Block DEFENCE_STONE = new DefenceStone("defence_stone", Material.ROCK);
 	public static final Block ATTACK_STONE = new AttackStone("attack_stone", Material.ROCK);
-	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3,true);
+	public static final Block SPEED_STONE = new PotionEffectStone("speed_stone", Material.ROCK, MobEffects.SPEED, 3, 3, true);
 	public static final Block HEAL_STONE = new PotionEffectStone("heal_stone", Material.ROCK, MobEffects.REGENERATION, 2, 3);
 	public static final Block VISION_STONE = new PotionEffectStone("vision_stone", Material.ROCK, MobEffects.NIGHT_VISION, 11, 1, true);
 	public static final Block SATURATION_STONE = new PotionEffectStone("saturation_stone", Material.ROCK, MobEffects.SATURATION, 60, 3, true);
