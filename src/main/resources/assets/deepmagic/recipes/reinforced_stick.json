@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DGD",
+    "TST",
+    "DGD"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:depth_stick"
+    },
+    "T": {
+      "item": "deepmagic:depth_stone"
+    },
+    "G": {
+      "item": "deepmagic:depth_glowstone"
+    },
+    "D": {
+      "item": "deepmagic:deep_crystal"
+    }
+  },
+  "result": {
+    "item": "deepmagic:reinforced_stick",
+    "count": 1
+  }
+}

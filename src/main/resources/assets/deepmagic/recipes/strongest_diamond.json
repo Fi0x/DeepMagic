@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    "CDC",
+    "SCS"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "deepmagic:compressed_deep_crystal"
+    },
+    "S": {
+      "item": "deepmagic:spell"
+    },
+    "R": {
+      "item": "deepmagic:rune"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_axe",
+    "count": 1
+  }
+}

@@ -134,6 +134,10 @@ item.deep_crystal_helmet.name=Deep Crystal Helmet
 item.deep_crystal_chestplate.name=Deep Crystal Chestplate
 item.deep_crystal_leggings.name=Deep Crystal Leggings
 item.deep_crystal_boots.name=Deep Crystal Boots
+item.depth_helmet.name=Depth Helmet
+item.depth_chestplate.name=Depth Chestplate
+item.depth_leggings.name=Depth Leggings
+item.depth_boots.name=Depth Boots
 
 item.spell.name=Spell
 item.charged_spell.name=Charged Spell
@@ -166,6 +170,9 @@ item.mana_interface.name=Mana Interface
 item.knowledge_segment.name=Knowledge Segment
 item.world_interaction_segment.name=World Interaction Segment
 item.mana_segment.name=Mana Segment
+item.depth_stick.name=Compressed Stick
+item.reinforced_stick.name=Reinforced Stick
+item.strongest_diamond.name=Strongest Diamond
 
 entity.insanity_cow.name=Insanity Cow
 entity.dwarf.name=Dwarf

@@ -17,6 +17,7 @@ public class OreDictionaryRegistry
 
         //Mod Items
         OreDictionary.registerOre("apple", new ItemStack(ModItems.INSANITY_APPLE, 1, WILDCARD_VALUE));
+        OreDictionary.registerOre("stickWood", new ItemStack(ModItems.DEPTH_STICK, 1, WILDCARD_VALUE));
 
         //Mod Blocks
         OreDictionary.registerOre("torch", new ItemStack(ModBlocks.DWARF_LAMP, 1, WILDCARD_VALUE));
