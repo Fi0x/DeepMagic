@@ -1,11 +1,16 @@
 package com.fi0x.deepmagic.items.armor;
 
+import com.fi0x.deepmagic.mana.player.PlayerMana;
+import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 
@@ -31,26 +36,81 @@ public class ArmorHelper
 
         event.setCanceled(true);
 
-        float avoidableDamage = event.getAmount() / 4 * armor.size();
-        double requiredMana = avoidableDamage * 100;
+        if(event.getSource() == DamageSource.FALL)
+        {
+            //TODO: Check if player wears boots and negate fall damage if enough mana is provided
+        } else
+        {
+            float avoidableDamage = event.getAmount() / 4 * armor.size();
+            double requiredMana = avoidableDamage * 100;
 
-        double consumedMana = removeMana(armor, requiredMana);
-        float remainingDamage = (float) (event.getAmount() - avoidableDamage * (consumedMana / requiredMana));
+            double consumedMana = removeMana(armor, requiredMana, player);
+            float remainingDamage = (float) (event.getAmount() - avoidableDamage * (consumedMana / requiredMana));
 
-        if(remainingDamage > 0) player.attackEntityFrom(event.getSource(), remainingDamage);
+            if(remainingDamage > 0) player.attackEntityFrom(event.getSource(), remainingDamage);
+        }
     }
 
-    private static double removeMana(ArrayList<ItemStack> armor, double amount)
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
+        EntityPlayer player = event.player;
+        if(!ConfigHandler.depthArmorActive) return;
+
+        if(player.isCreative()) player.capabilities.allowFlying = true;
+        else if(!player.inventory.armorItemInSlot(2).isEmpty() && player.inventory.armorItemInSlot(2).getItem() instanceof ArmorBase)
+        {
+            if(removeMana(player.inventory.armorItemInSlot(2), ConfigHandler.manaFlightCost, player) >= ConfigHandler.manaFlightCost)
+            {
+                player.capabilities.allowFlying = true;
+            } else
+            {
+                player.capabilities.allowFlying = false;
+                player.capabilities.isFlying = false;
+            }
+        } else
+        {
+            player.capabilities.allowFlying = false;
+            player.capabilities.isFlying = false;
+        }
+    }
+
+    private static double removeMana(ArrayList<ItemStack> armor, double amount, EntityPlayer player)
+    {
+        double removedMana = 0;
         for(ItemStack piece : armor)
         {
-            //TODO: Use NBT data to get stored mana and mana link to altar
+            removedMana += removeMana(piece, Math.max(amount - removedMana, 0), player);
         }
-        /*
-        TODO: Remove mana from armor / linked mana altar
-         If not enough mana is available, use player mana
-         Return amount of mana removed
-         */
-        return 0;
+        return removedMana;
+    }
+    private static double removeMana(ItemStack armorPiece, double amount, EntityPlayer player)
+    {
+        if(armorPiece.isEmpty()) return 0;
+
+        double removedMana = 0;
+        NBTTagCompound compound = null;
+        if(armorPiece.hasTagCompound()) compound = armorPiece.getTagCompound();
+
+        if(compound != null)
+        {
+            /*
+            TODO: Get stored mana and mana link to altar from compound
+             Remove mana from armor / linked mana altar
+             Add removed amount to removedMana variable
+             */
+        }
+
+        if(removedMana < amount)
+        {
+            PlayerMana mana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
+            assert mana != null;
+            if(mana.getMana() >= amount - removedMana)
+            {
+                if(mana.removeMana(player, amount - removedMana)) removedMana = amount;
+            }
+        }
+
+        return removedMana;
     }
 }
