@@ -11,17 +11,23 @@ import javax.annotation.Nonnull;
 
 public class DepthShaftGenerator extends MapGenBase
 {
-    protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
+    protected final IBlockState AIR = Blocks.AIR.getDefaultState();
+    private final IBlockState LOG;
+    private final IBlockState LEAVES;
+    private final IBlockState DECORATION;
 
-    public DepthShaftGenerator()
+    public DepthShaftGenerator(IBlockState log, IBlockState leaves, IBlockState decoration)
     {
-        range = 5;
+        range = 6;
+        LOG = log;
+        LEAVES = leaves;
+        DECORATION = decoration;
     }
 
     @Override
     public void generate(@Nonnull World worldIn, int x, int z, @Nonnull ChunkPrimer primer)
     {
-        if(rand.nextInt(25) > 0) return;
+        if(rand.nextInt(40) > 0) return;
         this.world = worldIn;
         this.rand.setSeed(worldIn.getSeed());
 
@@ -34,33 +40,90 @@ public class DepthShaftGenerator extends MapGenBase
 
     protected void digShaft(@Nonnull ChunkPrimer chunkPrimerIn, int centerX, int centerZ, int currentRadius)
     {
-        for(int bx = centerX - currentRadius; bx <= centerX + currentRadius; ++bx)
+        double radiusAir = currentRadius + 0.4032;
+        double radiusWoodMin = currentRadius + 0.4032;
+        double radiusWoodMax = currentRadius + 1.0711;
+        switch(currentRadius)
         {
-            for(int bz = centerZ - currentRadius; bz <= centerZ + currentRadius; ++bz)
+            case 4:
+                radiusAir = currentRadius + 0.1232;
+                radiusWoodMax = currentRadius + 0.4722;
+                break;
+            case 5:
+                radiusAir = currentRadius + 0.0991;
+                radiusWoodMin = currentRadius;
+                radiusWoodMax = currentRadius + 0.6569;
+                break;
+            case 7:
+                radiusWoodMax = currentRadius + 0.8103;
+                break;
+        }
+        for(int blockX = centerX - currentRadius; blockX <= centerX + currentRadius; ++blockX)
+        {
+            for(int blockZ = centerZ - currentRadius; blockZ <= centerZ + currentRadius; ++blockZ)
             {
-                if(distSq(bx, centerX, bz, centerZ) > (currentRadius + 0.5) * (currentRadius + 0.5)) continue;
-                for(int y = 1; y < 255; y++)
+                if(isInside(blockX, centerX, blockZ, centerZ, radiusAir))
                 {
-                    this.digBlock(chunkPrimerIn, bx, y, bz);
+                    for(int blockY = 1; blockY < 255; blockY++)
+                    {
+                        digBlock(chunkPrimerIn, blockX, blockY, blockZ);
+                    }
+                } else if(isOutside(blockX, centerX, blockZ, centerZ, radiusWoodMin) && isInside(blockX, centerX, blockZ, centerZ, radiusWoodMax))
+                {
+                    for(int blockY = 1; blockY < 255; blockY++)
+                    {
+                        placeLog(chunkPrimerIn, blockX, blockY, blockZ);
+                    }
                 }
             }
         }
     }
-    protected void digBlock(ChunkPrimer data, int x, int y, int z)
+    protected void digBlock(ChunkPrimer primer, int x, int y, int z)
     {
-        IBlockState state = data.getBlockState(x, y, z);
+        IBlockState state = primer.getBlockState(x, y, z);
 
-        if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_STONE || state.getBlock() == ModBlocks.INSANITY_DIRT)
+        if(isReplaceable(state))
         {
-            data.setBlockState(x, y, z, AIR);
+            if(y > 10 && y < 245)
+            {
+                if(rand.nextInt(100) == 0) primer.setBlockState(x, y, z, LEAVES);
+                else primer.setBlockState(x, y, z, AIR);
+            } else primer.setBlockState(x, y, z, Blocks.OBSIDIAN.getDefaultState());
+        }
+    }
+    protected void placeLog(ChunkPrimer primer, int x, int y, int z)
+    {
+        IBlockState state = primer.getBlockState(x, y, z);
+
+        if(isReplaceable(state))
+        {
+            if(y % 10 == 0 && rand.nextInt(4) == 0)
+            {
+                primer.setBlockState(x, y, z, DECORATION);
+            } else primer.setBlockState(x, y, z, LOG);
         }
     }
 
-    private int distSq(int x1, int x2, int z1, int z2)
+    private boolean isInside(int x1, int x2, int z1, int z2, double rad)
     {
         int xDiff = x1 - x2;
         int zDiff = z1 - z2;
 
-        return xDiff * xDiff + zDiff * zDiff;
+        int dist = xDiff * xDiff + zDiff * zDiff;
+        return dist < rad * rad;
+    }
+    private boolean isOutside(int x1, int x2, int z1, int z2, double rad)
+    {
+        int xDiff = x1 - x2;
+        int zDiff = z1 - z2;
+
+        int dist = xDiff * xDiff + zDiff * zDiff;
+        return dist > rad * rad;
+    }
+    private boolean isReplaceable(IBlockState state)
+    {
+        if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.INSANITY_STONE) return true;
+        if(state.getBlock() == Blocks.DIRT || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_DIRT) return true;
+        return false;
     }
 }
