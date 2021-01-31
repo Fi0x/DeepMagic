@@ -13,12 +13,14 @@ public class DepthShaftGenerator extends MapGenBase
 {
     protected final IBlockState AIR = Blocks.AIR.getDefaultState();
     private final IBlockState LOG;
+    private final IBlockState LEAVES;
     private final IBlockState DECORATION;
 
-    public DepthShaftGenerator(IBlockState log, IBlockState decoration)
+    public DepthShaftGenerator(IBlockState log, IBlockState leaves, IBlockState decoration)
     {
         range = 6;
         LOG = log;
+        LEAVES = leaves;
         DECORATION = decoration;
     }
 
@@ -82,8 +84,11 @@ public class DepthShaftGenerator extends MapGenBase
 
         if(isReplaceable(state))
         {
-            if(y > 10 && y < 245) primer.setBlockState(x, y, z, AIR);
-            else primer.setBlockState(x, y, z, Blocks.OBSIDIAN.getDefaultState());
+            if(y > 10 && y < 245)
+            {
+                if(rand.nextInt(100) == 0) primer.setBlockState(x, y, z, LEAVES);
+                else primer.setBlockState(x, y, z, AIR);
+            } else primer.setBlockState(x, y, z, Blocks.OBSIDIAN.getDefaultState());
         }
     }
     protected void placeLog(ChunkPrimer primer, int x, int y, int z)
@@ -92,8 +97,10 @@ public class DepthShaftGenerator extends MapGenBase
 
         if(isReplaceable(state))
         {
-            if(y % 10 == 0 && rand.nextInt(4) == 0) primer.setBlockState(x, y, z, DECORATION);
-            else primer.setBlockState(x, y, z, LOG);
+            if(y % 10 == 0 && rand.nextInt(4) == 0)
+            {
+                primer.setBlockState(x, y, z, DECORATION);
+            } else primer.setBlockState(x, y, z, LOG);
         }
     }
 

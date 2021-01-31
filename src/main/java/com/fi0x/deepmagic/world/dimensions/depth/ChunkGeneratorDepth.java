@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.world.generators.underground.DepthShaftGenerator;
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -31,7 +32,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
     private final World world;
     private final Random rand;
-    private MapGenBase shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_GLOWSTONE.getDefaultState());
+    private MapGenBase shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.DECAYABLE, Boolean.FALSE), ModBlocks.DEPTH_GLOWSTONE.getDefaultState());
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
