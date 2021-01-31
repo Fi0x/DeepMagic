@@ -11,6 +11,7 @@ import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biomes.insanity.*;
 import com.fi0x.deepmagic.world.generators.plants.TreeGenInsanityMedium;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -64,7 +65,7 @@ public class InsanitySapling extends BlockBush implements IGrowable, IHasModel
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
         WorldGenerator treeGenerator;
         if(rand.nextInt(20) == 0) treeGenerator = new TreeGenInsanityMedium(true);
-        else treeGenerator = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState(), false);
+        else treeGenerator = new WorldGenTrees(true, 4, ModBlocks.INSANITY_LOG.getDefaultState(), ModBlocks.INSANITY_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE), false);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
         treeGenerator.generate(world, rand, pos);

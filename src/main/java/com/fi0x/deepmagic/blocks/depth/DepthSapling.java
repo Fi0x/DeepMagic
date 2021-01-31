@@ -9,9 +9,8 @@ import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biomes.depth.BiomeDepth;
-import com.fi0x.deepmagic.world.biomes.insanity.*;
-import com.fi0x.deepmagic.world.generators.plants.TreeGenInsanityMedium;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,7 +24,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -63,7 +61,7 @@ public class DepthSapling extends BlockBush implements IGrowable, IHasModel
     public void generateTree(World world, BlockPos pos, Random rand)
     {
         if(!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-        WorldGenerator treeGenerator = new WorldGenTrees(true, 5, ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_GLOWSTONE.getDefaultState(), false);
+        WorldGenerator treeGenerator = new WorldGenTrees(true, 5, ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.FALSE), false);
 
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
         treeGenerator.generate(world, rand, pos);
