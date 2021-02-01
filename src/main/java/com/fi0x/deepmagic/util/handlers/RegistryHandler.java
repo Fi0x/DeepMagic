@@ -70,18 +70,18 @@ public class RegistryHandler
 
 	public static void registerTileEntities()
 	{
-		GameRegistry.registerTileEntity(TileEntityManaGeneratorNormal.class, new ResourceLocation("mana_generator_normal"));
-		GameRegistry.registerTileEntity(TileEntityManaGeneratorInsanity.class, new ResourceLocation("mana_generator_insanity"));
-		GameRegistry.registerTileEntity(TileEntityManaGeneratorMob.class, new ResourceLocation("mana_generator_mob"));
-		GameRegistry.registerTileEntity(TileEntityManaRelay.class, new ResourceLocation("mana_relay"));
+		GameRegistry.registerTileEntity(TileEntityManaGeneratorNormal.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_normal"));
+		GameRegistry.registerTileEntity(TileEntityManaGeneratorInsanity.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_insanity"));
+		GameRegistry.registerTileEntity(TileEntityManaGeneratorMob.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_mob"));
+		GameRegistry.registerTileEntity(TileEntityManaRelay.class, new ResourceLocation(Reference.MOD_ID, "mana_relay"));
 
-		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation("mana_altar"));
-		GameRegistry.registerTileEntity(TileEntityManaInfuser.class, new ResourceLocation("mana_infuser"));
-		GameRegistry.registerTileEntity(TileEntityManaGrinder.class, new ResourceLocation("mana_grinder"));
-		GameRegistry.registerTileEntity(TileEntityManaFurnace.class, new ResourceLocation("mana_furnace"));
+		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation(Reference.MOD_ID, "mana_altar"));
+		GameRegistry.registerTileEntity(TileEntityManaInfuser.class, new ResourceLocation(Reference.MOD_ID, "mana_infuser"));
+		GameRegistry.registerTileEntity(TileEntityManaGrinder.class, new ResourceLocation(Reference.MOD_ID, "mana_grinder"));
+		GameRegistry.registerTileEntity(TileEntityManaFurnace.class, new ResourceLocation(Reference.MOD_ID, "mana_furnace"));
 
-		GameRegistry.registerTileEntity(TileEntityRune.class, new ResourceLocation("rune"));
-		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation("spell_stone"));
-		GameRegistry.registerTileEntity(TileEntityDwarfBaseMarker.class, new ResourceLocation("dwarf_base_marker"));
+		GameRegistry.registerTileEntity(TileEntityRune.class, new ResourceLocation(Reference.MOD_ID, "rune"));
+		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation(Reference.MOD_ID, "spell_stone"));
+		GameRegistry.registerTileEntity(TileEntityDwarfBaseMarker.class, new ResourceLocation(Reference.MOD_ID, "dwarf_base_marker"));
 	}
 }
