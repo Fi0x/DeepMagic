@@ -108,6 +108,7 @@ tile.weather_controller.name=Weather Controller
 
 tile.ritual_base.name=Ritual Base
 tile.ritual_time.name=Time Ritual
+tile.ritual_weather.name=Weather Ritual
 
 tile.mana_altar.name=Mana Altar
 tile.mana_relay.name=Mana Relay

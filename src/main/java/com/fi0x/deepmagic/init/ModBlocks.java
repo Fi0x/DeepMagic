@@ -14,6 +14,7 @@ import com.fi0x.deepmagic.blocks.partial.MagicLight;
 import com.fi0x.deepmagic.blocks.partial.Rune;
 import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
 import com.fi0x.deepmagic.blocks.rituals.RitualTime;
+import com.fi0x.deepmagic.blocks.rituals.RitualWeather;
 import com.fi0x.deepmagic.blocks.rituals.WeatherController;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import net.minecraft.block.Block;
@@ -135,6 +136,7 @@ public class ModBlocks
 	//Ritual Blocks
 	public static final Block RITUAL_BASE = new RitualBuildBlock("ritual_base", Material.ROCK);//TODO: Add recipe
 	public static final Block RITUAL_TIME = new RitualTime("ritual_time", Material.ROCK);//TODO: Add recipe
+	public static final Block RITUAL_WEATHER = new RitualWeather("ritual_weather", Material.ROCK);//TODO: Add recipe
 
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);

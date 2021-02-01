@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.blocks.mana.tile.*;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualTime;
+import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualWeather;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityDwarfBaseMarker;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
@@ -88,5 +89,6 @@ public class RegistryHandler
 		GameRegistry.registerTileEntity(TileEntityDwarfBaseMarker.class, new ResourceLocation("dwarf_base_marker"));
 
 		GameRegistry.registerTileEntity(TileEntityRitualTime.class, new ResourceLocation(Reference.MOD_ID, "ritual_time"));
+		GameRegistry.registerTileEntity(TileEntityRitualWeather.class, new ResourceLocation(Reference.MOD_ID, "ritual_weather"));
 	}
 }
