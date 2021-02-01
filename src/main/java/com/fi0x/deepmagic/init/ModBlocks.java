@@ -15,7 +15,6 @@ import com.fi0x.deepmagic.blocks.partial.Rune;
 import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
 import com.fi0x.deepmagic.blocks.rituals.RitualTime;
 import com.fi0x.deepmagic.blocks.rituals.RitualWeather;
-import com.fi0x.deepmagic.blocks.rituals.WeatherController;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -131,7 +130,6 @@ public class ModBlocks
 	//Interacting Blocks
 	public static final SpellStone SPELL_STONE = new SpellStone("spell_stone", Material.ROCK);
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
-	public static final Block WEATHER_CONTROLLER = new WeatherController("weather_controller", Material.IRON);
 
 	//Ritual Blocks
 	public static final Block RITUAL_BASE = new RitualBuildBlock("ritual_base", Material.ROCK);//TODO: Add recipe
