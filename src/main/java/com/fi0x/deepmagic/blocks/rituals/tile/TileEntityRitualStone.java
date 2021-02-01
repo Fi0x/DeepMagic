@@ -11,6 +11,9 @@ import javax.annotation.Nonnull;
 public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity
 {
     private double storedMana;
+    private int sync;
+    protected double manaCosts = 20;
+    protected int syncTime = 20;
 
     @Nonnull
     @Override
@@ -31,11 +34,22 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     @Override
     public void update()
     {
-        /*
-        TODO: Verify structure
-         Remove Mana
-         Perform action in child-class
-         */
+        sync--;
+        if(sync > 0) return;
+        sync = syncTime;
+
+        //TODO: Check for redstone signal
+
+        if(!verifyStructure()) return;
+
+        if(storedMana >= manaCosts)
+        {
+            storedMana -= manaCosts;
+            syncedUpdate();
+        }
+    }
+    protected void syncedUpdate()
+    {
     }
 
     @Override
@@ -51,5 +65,11 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         else storedMana += amount;
         markDirty();
         return ret > 0 ? ret : 0;
+    }
+
+    private boolean verifyStructure()
+    {
+        //TODO: Verify structure
+        return true;
     }
 }

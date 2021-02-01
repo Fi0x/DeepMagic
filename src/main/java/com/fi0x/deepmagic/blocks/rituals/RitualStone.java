@@ -24,7 +24,7 @@ public abstract class RitualStone extends BlockBase
     {
         super(name, material);
         setSoundType(SoundType.STONE);
-        setHardness(3.0F);
+        setHardness(5.0F);
         setHarvestLevel("pickaxe", 1);
     }
 
