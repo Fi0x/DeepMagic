@@ -39,21 +39,21 @@ public class RitualTime extends RitualStone implements ITileEntityProvider
             {
                 TileEntityRitualTime tile = (TileEntityRitualTime) worldIn.getTileEntity(pos);
                 assert tile != null;
-                double newTime = tile.addTime(1000);
+                int newTime = (int) tile.addTime(1000);
                 playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Ritual time set to " + newTime));
                 stack.shrink(1);
             } else if(item.getUnlocalizedName().equals("item.deep_crystal"))
             {
                 TileEntityRitualTime tile = (TileEntityRitualTime) worldIn.getTileEntity(pos);
                 assert tile != null;
-                double newTime = tile.addTime(10000);
+                int newTime = (int) tile.addTime(10000);
                 playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Ritual time set to " + newTime));
                 stack.shrink(1);
             } else if(item.getUnlocalizedName().equals("item.iron_ingot"))
             {
                 TileEntityRitualTime tile = (TileEntityRitualTime) worldIn.getTileEntity(pos);
                 assert tile != null;
-                double newTime = tile.addTime(100);
+                int newTime = (int) tile.addTime(100);
                 playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Ritual time set to " + newTime));
                 stack.shrink(1);
             }
