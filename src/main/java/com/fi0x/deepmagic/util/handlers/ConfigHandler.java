@@ -119,6 +119,7 @@ public class ConfigHandler
     public static int ritualTimeManaCosts;
     public static int ritualWeatherManaCosts;
     public static int ritualSpawnDenialManaCosts;
+    public static int ritualQuarryManaCosts;
     //Block Ranges
     public static int manaBlockTransferRange;
     public static int manaGeneratorMobRange;
@@ -342,6 +343,7 @@ public class ConfigHandler
         ritualTimeManaCosts = blocks.getInt("Time Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the time with the Time Ritual");
         ritualWeatherManaCosts = blocks.getInt("Weather Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the Weather with the Weather Ritual");
         ritualSpawnDenialManaCosts = blocks.getInt("Spawn Denial Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to deny Spawns with the Spawn Denial Ritual");
+        ritualQuarryManaCosts = blocks.getInt("Quarry Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to Dig with the Quarry Ritual");
 
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");

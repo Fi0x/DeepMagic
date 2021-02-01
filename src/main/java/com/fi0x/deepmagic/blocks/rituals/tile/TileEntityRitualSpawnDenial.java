@@ -15,7 +15,12 @@ public class TileEntityRitualSpawnDenial extends TileEntityRitualStone
         if(storedMana >= manaCosts)
         {
             storedMana -= manaCosts;
-            //TODO: Deny spawns
+            /*
+            TODO: Add a capability to worlds that stores locations of all rituals
+             Add block locations on block adds and remove them on block removes
+             Check for hostile mobs
+             Deny spawns around these locations
+             */
         }
     }
 }

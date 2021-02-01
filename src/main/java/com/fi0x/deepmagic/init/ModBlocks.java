@@ -12,10 +12,7 @@ import com.fi0x.deepmagic.blocks.ores.*;
 import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
 import com.fi0x.deepmagic.blocks.partial.MagicLight;
 import com.fi0x.deepmagic.blocks.partial.Rune;
-import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
-import com.fi0x.deepmagic.blocks.rituals.RitualSpawnDenial;
-import com.fi0x.deepmagic.blocks.rituals.RitualTime;
-import com.fi0x.deepmagic.blocks.rituals.RitualWeather;
+import com.fi0x.deepmagic.blocks.rituals.*;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -137,6 +134,7 @@ public class ModBlocks
 	public static final Block RITUAL_TIME = new RitualTime("ritual_time", Material.ROCK);//TODO: Add recipe
 	public static final Block RITUAL_WEATHER = new RitualWeather("ritual_weather", Material.ROCK);//TODO: Add recipe
 	public static final Block RITUAL_SPAWN_DENIAL = new RitualSpawnDenial("ritual_spawn_denial", Material.ROCK);//TODO: Add recipe
+	public static final Block RITUAL_QUARRY = new RitualQuarry("ritual_quarry", Material.ROCK);//TODO: Add recipe
 
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
