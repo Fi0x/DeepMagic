@@ -9,8 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -31,8 +29,7 @@ public class TimeController extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            if(Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).removeMana(playerIn, 100)) worldIn.setWorldTime(worldIn.getWorldTime() + 1000);
-            else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough Mana"));
+            if(Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).removeMana(playerIn, 100, true)) worldIn.setWorldTime(worldIn.getWorldTime() + 1000);
         }
         return true;
     }
