@@ -50,15 +50,24 @@ public class ArmorHelper
             if(remainingDamage > 0) player.attackEntityFrom(event.getSource(), remainingDamage);
         }
     }
-
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
         EntityPlayer player = event.player;
         if(!ConfigHandler.depthArmorActive) return;
 
-        if(player.isCreative() || player.isSpectator()) player.capabilities.allowFlying = true;
-        else if(!player.inventory.armorItemInSlot(2).isEmpty() && player.inventory.armorItemInSlot(2).getItem() instanceof ArmorBase)
+        flight(player);
+    }
+
+    private static void flight(EntityPlayer player)
+    {
+        if(player.isCreative() || player.isSpectator())
+        {
+            player.capabilities.allowFlying = true;
+            return;
+        }
+
+        if(!player.inventory.armorItemInSlot(2).isEmpty() && player.inventory.armorItemInSlot(2).getItem() instanceof ArmorBase)
         {
             if(removeMana(player.inventory.armorItemInSlot(2), ConfigHandler.manaFlightCost, player) >= ConfigHandler.manaFlightCost)
             {
@@ -70,8 +79,7 @@ public class ArmorHelper
             }
         } else
         {
-            player.capabilities.allowFlying = false;
-            player.capabilities.isFlying = false;
+            //TODO: Check if armor was unequipped in this tick and disable flight if true
         }
     }
 
