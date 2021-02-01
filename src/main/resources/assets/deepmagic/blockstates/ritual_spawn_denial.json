@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "deepmagic:ritual_spawn_denial"
+    }
+  }
+}

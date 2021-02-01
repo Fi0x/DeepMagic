@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.blocks.mana.tile.*;
+import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualSpawnDenial;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualTime;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualWeather;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityDwarfBaseMarker;
@@ -90,5 +91,6 @@ public class RegistryHandler
 
 		GameRegistry.registerTileEntity(TileEntityRitualTime.class, new ResourceLocation(Reference.MOD_ID, "ritual_time"));
 		GameRegistry.registerTileEntity(TileEntityRitualWeather.class, new ResourceLocation(Reference.MOD_ID, "ritual_weather"));
+		GameRegistry.registerTileEntity(TileEntityRitualSpawnDenial.class, new ResourceLocation(Reference.MOD_ID, "ritual_spawn_denial"));
 	}
 }
