@@ -24,6 +24,9 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
         compound.setDouble("stored", storedMana);
+        compound.setInteger("sync", sync);
+        compound.setDouble("manaCosts", manaCosts);
+        compound.setInteger("syncTime", syncTime);
 
         return super.writeToNBT(compound);
     }
@@ -31,6 +34,9 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     public void readFromNBT(NBTTagCompound compound)
     {
         storedMana = compound.getDouble("stored");
+        sync = compound.getInteger("sync");
+        manaCosts = compound.getDouble("manaCosts");
+        syncTime = compound.getInteger("syncTime");
 
         super.readFromNBT(compound);
     }
@@ -42,11 +48,10 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         if(sync > 0) return;
         sync = syncTime;
 
-        if(!hasRedstonePower()) return;
-        if(!verifyStructure()) return;
-
-        syncedUpdate();
-
+        if(hasRedstonePower())
+        {
+            if(RitualStructureLayout.verifyStructure(world, pos)) syncedUpdate();
+        }
     }
     protected void syncedUpdate()
     {
@@ -67,11 +72,6 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         return ret > 0 ? ret : 0;
     }
 
-    private boolean verifyStructure()
-    {
-        //TODO: Verify structure
-        return true;
-    }
     private boolean hasRedstonePower()
     {
         boolean power = world.isBlockPowered(pos);
