@@ -2,8 +2,12 @@ package com.fi0x.deepmagic.blocks.rituals.tile;
 
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.BlockRedstoneWire;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 import javax.annotation.Nonnull;
@@ -38,8 +42,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         if(sync > 0) return;
         sync = syncTime;
 
-        //TODO: Check for redstone signal
-
+        if(!hasRedstonePower()) return;
         if(!verifyStructure()) return;
 
         if(storedMana >= manaCosts)
@@ -71,5 +74,18 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     {
         //TODO: Verify structure
         return true;
+    }
+    private boolean hasRedstonePower()
+    {
+        boolean power = world.isBlockPowered(pos);
+        if(!power)
+        {
+            for(EnumFacing side : EnumFacing.VALUES)
+            {
+                IBlockState state = world.getBlockState(pos.offset(side));
+                if(state.getBlock() == Blocks.REDSTONE_WIRE && state.getValue(BlockRedstoneWire.POWER) > 0) return true;
+            }
+        }
+        return power;
     }
 }

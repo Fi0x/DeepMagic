@@ -114,7 +114,9 @@ public class ConfigHandler
     public static int manaMachineManaCapacity;
     public static int manaGainFromMob;
     public static int manaToleranceSpellStone;
+    //Rituals
     public static int ritualStoneManaCapacity;
+    public static int ritualTimeManaCosts;
     //Block Ranges
     public static int manaBlockTransferRange;
     public static int manaGeneratorMobRange;
@@ -331,7 +333,11 @@ public class ConfigHandler
         manaMachineManaCapacity = blocks.getInt("Mana Machine Capacity", category, 1000, 100, 100000, "The Mana Capacity for all Mana consuming Machines");
         manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
         manaToleranceSpellStone = blocks.getInt("Spell Stone Mana Tolerance", category, 100, 1, 10000, "How much mana a Spell Stone can be short of without explodint");
+
+        category = "Rituals";
+        blocks.addCustomCategoryComment(category, "Rituals");
         ritualStoneManaCapacity = blocks.getInt("Ritual Stone Capacity", category, 5000, 1, 100000, "The Base Capacity of a Ritual");
+        ritualTimeManaCosts = blocks.getInt("Time Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the time with the Time Ritual");
 
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");

@@ -14,9 +14,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class RitualStone extends BlockBase
 {
@@ -54,5 +56,11 @@ public abstract class RitualStone extends BlockBase
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean canConnectRedstone(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nullable EnumFacing side)
+    {
+        return side != null;
     }
 }

@@ -1,11 +1,17 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nonnull;
 
 public class TileEntityRitualTime extends TileEntityRitualStone
 {
+    public TileEntityRitualTime()
+    {
+        manaCosts = ConfigHandler.ritualTimeManaCosts;
+    }
+
     private long time = 0;
     @Override
     protected void syncedUpdate()
