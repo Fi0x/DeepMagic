@@ -17,6 +17,10 @@ public class ParticleSpellProjectile extends Particle
 
         this.particleScale *= 0.5F * scale;
 
+        this.particleRed = (float) Math.random();
+        this.particleGreen = (float) Math.random();
+        this.particleBlue = (float) Math.random();
+
         this.motionX = speedX;
         this.motionY = speedY;
         this.motionZ = speedZ;

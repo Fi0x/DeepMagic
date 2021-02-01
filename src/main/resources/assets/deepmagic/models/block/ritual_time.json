@@ -1,0 +1,6 @@
+{
+  "parent": "deepmagic:block/ritual_stone",
+  "textures": {
+    "rtype": "deepmagic:blocks/ritual/type_time"
+  }
+}

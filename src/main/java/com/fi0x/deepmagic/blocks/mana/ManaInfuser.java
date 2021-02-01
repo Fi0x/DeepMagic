@@ -2,7 +2,7 @@ package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.BlockBase;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
+import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaInfuser;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
