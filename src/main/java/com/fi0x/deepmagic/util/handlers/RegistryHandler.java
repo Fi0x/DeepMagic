@@ -1,6 +1,8 @@
 package com.fi0x.deepmagic.util.handlers;
 
-import com.fi0x.deepmagic.blocks.tileentity.*;
+import com.fi0x.deepmagic.blocks.mana.tile.*;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityDwarfBaseMarker;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;

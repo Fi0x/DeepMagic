@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGeneratorNormal;
+import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaGeneratorNormal;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

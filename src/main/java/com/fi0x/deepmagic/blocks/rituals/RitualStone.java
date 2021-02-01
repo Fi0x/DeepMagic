@@ -1,7 +1,6 @@
-package com.fi0x.deepmagic.blocks.worldcontroller;
+package com.fi0x.deepmagic.blocks.rituals;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
-import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,19 +8,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 
-public class WeatherController extends BlockBase
+public abstract class RitualStone extends BlockBase
 {
-    public WeatherController(String name, Material material)
+    public RitualStone(String name, Material material)
     {
         super(name, material);
-        setSoundType(SoundType.METAL);
+        setSoundType(SoundType.STONE);
         setHardness(3.0F);
         setHarvestLevel("pickaxe", 1);
     }
@@ -31,9 +27,12 @@ public class WeatherController extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            if(Objects.requireNonNull(playerIn.getCapability(PlayerProperties.PLAYER_MANA, null)).removeMana(playerIn, 100)) worldIn.getWorldInfo().setRaining(!worldIn.getWorldInfo().isRaining());
-            else playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough Mana"));
+            /*
+            TODO: Update Mana Linker if necessary
+             */
         }
         return true;
     }
+
+    //TODO: Use ITileEntityProvider in child-classes
 }

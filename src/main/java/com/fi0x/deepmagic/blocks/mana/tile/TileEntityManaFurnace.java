@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.blocks.tileentity;
+package com.fi0x.deepmagic.blocks.mana.tile;
 
 import com.fi0x.deepmagic.blocks.mana.ManaFurnace;
 import com.fi0x.deepmagic.util.IManaTileEntity;

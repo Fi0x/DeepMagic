@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.blocks.worldcontroller;
+package com.fi0x.deepmagic.blocks.rituals;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;

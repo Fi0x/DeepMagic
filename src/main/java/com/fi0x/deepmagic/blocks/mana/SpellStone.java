@@ -1,7 +1,7 @@
-package com.fi0x.deepmagic.blocks;
+package com.fi0x.deepmagic.blocks.mana;
 
+import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
 import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntitySpellStone;
 import com.fi0x.deepmagic.items.mana.ManaLinker;
 import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;

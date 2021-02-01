@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.util.handlers;
 
 import com.fi0x.deepmagic.blocks.containers.*;
-import com.fi0x.deepmagic.blocks.tileentity.*;
+import com.fi0x.deepmagic.blocks.mana.tile.*;
 import com.fi0x.deepmagic.gui.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

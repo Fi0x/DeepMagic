@@ -1,65 +1,78 @@
-package com.fi0x.deepmagic.blocks.tileentity;
+package com.fi0x.deepmagic.blocks.mana.tile;
 
-import com.fi0x.deepmagic.blocks.mana.ManaGeneratorMob;
+import com.fi0x.deepmagic.blocks.mana.ManaGeneratorInsanity;
+import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
-public class TileEntityManaGeneratorMob extends TileEntity implements IInventory, ITickable, IManaTileEntity
+public class TileEntityManaGeneratorInsanity extends TileEntity implements IInventory, ITickable, IManaTileEntity
 {
     private BlockPos manaTargetPos;
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     private String customName;
 
     private TileEntity linkedTE;
-    private int cooldown;
+    private int burnTime;
+    private int currentBurnTime;
     private int storedMana;
 
     @Override
     public int getSizeInventory()
     {
-        return 0;
+        return inventory.size();
     }
     @Override
     public boolean isEmpty()
     {
+        for(ItemStack stack : inventory)
+        {
+            if(!stack.isEmpty()) return false;
+        }
         return true;
     }
     @Nonnull
     @Override
     public ItemStack getStackInSlot(int index)
     {
-        return ItemStack.EMPTY;
+        return inventory.get(index);
     }
     @Nonnull
     @Override
     public ItemStack decrStackSize(int index, int count)
     {
-        return ItemStack.EMPTY;
+        return ItemStackHelper.getAndSplit(inventory, index, count);
     }
     @Nonnull
     @Override
     public ItemStack removeStackFromSlot(int index)
     {
-        return ItemStack.EMPTY;
+        return ItemStackHelper.getAndRemove(inventory, index);
     }
     @Override
     public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
     {
+        inventory.set(index, stack);
+
+        if(stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
     }
     @Override
     public int getInventoryStackLimit()
@@ -82,7 +95,7 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     @Override
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
     {
-        return true;
+        return isItemFuel(stack) || index != 0;
     }
     @Override
     public int getField(int id)
@@ -90,8 +103,10 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
         switch(id)
         {
             case 0:
-                return cooldown;
+                return burnTime;
             case 1:
+                return currentBurnTime;
+            case 2:
                 return storedMana;
         }
         return 0;
@@ -102,9 +117,12 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
         switch(id)
         {
             case 0:
-                cooldown = value;
+                burnTime = value;
                 break;
             case 1:
+                currentBurnTime = value;
+                break;
+            case 2:
                 storedMana = value;
                 break;
         }
@@ -112,11 +130,12 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     @Override
     public int getFieldCount()
     {
-        return 2;
+        return 3;
     }
     @Override
     public void clear()
     {
+        inventory.clear();
     }
     @Override
     public void update()
@@ -125,35 +144,26 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
         boolean dirty = false;
         if(isRunning())
         {
-            cooldown--;
+            burnTime--;
+            if(storedMana - 10 < ConfigHandler.manaGeneratorManaCapacity) storedMana += 10;
             dirty = true;
         }
         if(world.isRemote) return;
 
-        if(storedMana < ConfigHandler.manaGeneratorManaCapacity && cooldown <= 10)
-        {
-            int mobRange = ConfigHandler.manaGeneratorMobRange;
-            AxisAlignedBB area = new AxisAlignedBB(pos.getX() - mobRange, pos.getY() - mobRange, pos.getZ() - mobRange, pos.getX() + mobRange, pos.getY() + mobRange, pos.getZ() + mobRange);
-            List<EntityMob> entities = world.getEntitiesWithinAABB(EntityMob.class, area);
-            if(!entities.isEmpty())
-            {
-                cooldown = 30;
-                int gain = ConfigHandler.manaGainFromMob;
+        ItemStack stack = inventory.get(0);
 
-                for(EntityMob entity : entities)
-                {
-                    entity.attackEntityFrom(DamageSource.MAGIC, 1);
-                    storedMana += gain;
-                }
+        if(!isRunning() && storedMana < ConfigHandler.manaGeneratorManaCapacity)
+        {
+            if(!stack.isEmpty())
+            {
+                burnTime = getItemBurnTime(stack);
+                currentBurnTime = burnTime;
+                stack.shrink(1);
+                inventory.set(0, stack);
                 dirty = true;
             }
         }
-
-        if(isRunning() != wasRunning)
-        {
-            ManaGeneratorMob.setState(isRunning(), world, pos);
-            dirty = true;
-        }
+        if(isRunning() != wasRunning) ManaGeneratorInsanity.setState(isRunning(), world, pos);
         if(storedMana >= 100)
         {
             double sent = ManaHelper.sendMana(world, manaTargetPos, linkedTE, storedMana);
@@ -169,7 +179,7 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     @Override
     public String getName()
     {
-        return hasCustomName() ? customName : "container.mana_generator_mob";
+        return hasCustomName() ? customName : "container.mana_generator_insanity";
     }
     @Override
     public boolean hasCustomName()
@@ -195,8 +205,9 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
             compound.setTag("target", position);
         }
 
-        compound.setInteger("cooldown", cooldown);
+        compound.setInteger("burnTime", burnTime);
         compound.setInteger("storedMana", storedMana);
+        ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
         return super.writeToNBT(compound);
     }
@@ -212,8 +223,11 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
             manaTargetPos = new BlockPos(x, y, z);
         }
 
-        cooldown = compound.getInteger("cooldown");
+        burnTime = compound.getInteger("burnTime");
+        currentBurnTime = getItemBurnTime(inventory.get(0));
         storedMana = compound.getInteger("storedMana");
+        inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(compound, inventory);
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
         super.readFromNBT(compound);
     }
@@ -238,7 +252,34 @@ public class TileEntityManaGeneratorMob extends TileEntity implements IInventory
     }
     public boolean isRunning()
     {
-        return cooldown > 0;
+        return burnTime > 0;
+    }
+    public static int getItemBurnTime(ItemStack fuel)
+    {
+        if(fuel.isEmpty()) return 0;
+
+        Item item = fuel.getItem();
+        if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
+        {
+            Block block = Block.getBlockFromItem(item);
+            if(block == ModBlocks.INSANITY_STONE) return 50;
+            if(block == ModBlocks.INSANITY_COBBLE) return 10;
+            if(block == ModBlocks.INSANITY_DIRT) return 10;
+            if(block == ModBlocks.INSANITY_GRASS) return 25;
+            if(block == ModBlocks.INSANITY_PLANKS) return 10;
+            if(block == ModBlocks.INSANITY_FLOWER) return 30;
+            if(block == ModBlocks.INSANITY_LOG) return 30;
+            if(block == ModBlocks.INSANITY_SAPLING) return 10;
+        } else
+        {
+            if(item == ModItems.INSANITY_APPLE) return 100;
+        }
+        if(item.getUnlocalizedName().contains("insanity")) return 20;
+        return 0;
+    }
+    public static boolean isItemFuel(ItemStack fuel)
+    {
+        return getItemBurnTime(fuel) > 0;
     }
     public boolean setManaTargetPos(BlockPos blockPos)
     {

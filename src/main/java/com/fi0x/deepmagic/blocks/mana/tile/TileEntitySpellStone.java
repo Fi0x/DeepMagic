@@ -1,4 +1,4 @@
-package com.fi0x.deepmagic.blocks.tileentity;
+package com.fi0x.deepmagic.blocks.mana.tile;
 
 import com.fi0x.deepmagic.items.spells.effects.defensive.*;
 import com.fi0x.deepmagic.items.spells.effects.offensive.*;
