@@ -105,7 +105,6 @@ tile.demon_stone.name=Demon Stone
 tile.spell_stone.name=Spell Stone
 tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
-tile.time_controller.name=Time Controller
 
 tile.ritual_base.name=Ritual Base
 tile.ritual_time.name=Time Ritual

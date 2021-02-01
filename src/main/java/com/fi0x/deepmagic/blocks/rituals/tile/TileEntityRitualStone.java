@@ -58,13 +58,13 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     @Override
     public double getSpaceForMana()
     {
-        return ConfigHandler.ritualStoneManaCapacity - storedMana;
+        return Math.max(ConfigHandler.ritualStoneManaCapacity, manaCosts) - storedMana;
     }
     @Override
     public double addManaToStorage(double amount)
     {
-        double ret = amount - (ConfigHandler.ritualStoneManaCapacity - storedMana);
-        if(ret > 0) storedMana = ConfigHandler.manaAltarCapacity;
+        double ret = amount - (Math.max(ConfigHandler.ritualStoneManaCapacity, manaCosts) - storedMana);
+        if(ret > 0) storedMana = Math.max(ConfigHandler.ritualStoneManaCapacity, manaCosts);
         else storedMana += amount;
         markDirty();
         return ret > 0 ? ret : 0;
