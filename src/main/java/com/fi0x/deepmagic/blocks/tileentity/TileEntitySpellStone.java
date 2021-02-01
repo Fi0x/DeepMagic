@@ -528,6 +528,12 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
 
                 manaAdder += 20;
                 flag = true;
+            } else if(consumedItems.remove("item.cookie"))
+            {
+                spellParts.add(SpEfCookie.NAME);
+
+                manaAdder += 20;
+                flag = true;
             } else if(false)
             {
                 spellParts.add(SpEfCharm.NAME);
