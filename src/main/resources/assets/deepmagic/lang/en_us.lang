@@ -107,6 +107,8 @@ tile.altar_of_knowledge.name=Altar of Knowledge
 tile.weather_controller.name=Weather Controller
 tile.time_controller.name=Time Controller
 
+tile.ritual_base.name=Ritual Base
+
 tile.mana_altar.name=Mana Altar
 tile.mana_relay.name=Mana Relay
 tile.mana_generator_normal.name=Normal Mana Generator
