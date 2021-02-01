@@ -1,6 +1,5 @@
 package com.fi0x.deepmagic.blocks.rituals;
 
-import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualTime;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualWeather;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -38,11 +37,10 @@ public class RitualWeather extends RitualStone implements ITileEntityProvider
 
             if(item.getUnlocalizedName().equals("item.diamond"))
             {
-                //TODO: Change weather
-                TileEntityRitualTime tile = (TileEntityRitualTime) worldIn.getTileEntity(pos);
+                TileEntityRitualWeather tile = (TileEntityRitualWeather) worldIn.getTileEntity(pos);
                 assert tile != null;
-                int newTime = (int) tile.addTime(1000);
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Ritual time set to " + newTime));
+                String newWeather = tile.nextWeather();
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Ritual weather set to " + newWeather));
                 stack.shrink(1);
             }
         }

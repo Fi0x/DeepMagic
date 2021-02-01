@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 
 public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity
 {
-    private double storedMana;
+    protected double storedMana;
     private int sync;
     protected double manaCosts = 20;
     protected int syncTime = 20;
@@ -45,11 +45,8 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         if(!hasRedstonePower()) return;
         if(!verifyStructure()) return;
 
-        if(storedMana >= manaCosts)
-        {
-            storedMana -= manaCosts;
-            syncedUpdate();
-        }
+        syncedUpdate();
+
     }
     protected void syncedUpdate()
     {

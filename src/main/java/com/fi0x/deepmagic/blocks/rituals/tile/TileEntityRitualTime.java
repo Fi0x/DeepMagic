@@ -16,7 +16,11 @@ public class TileEntityRitualTime extends TileEntityRitualStone
     @Override
     protected void syncedUpdate()
     {
-        world.getWorldInfo().setWorldTime(time);
+        if(storedMana >= manaCosts)
+        {
+            storedMana -= manaCosts;
+            world.getWorldInfo().setWorldTime(time);
+        }
     }
 
     @Nonnull
