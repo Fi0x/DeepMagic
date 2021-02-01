@@ -70,6 +70,11 @@ public class DepthLeaves extends BlockLeaves implements IHasModel
         return Item.getItemFromBlock(ModBlocks.DEPTH_SAPLING);
     }
     @Override
+    protected int getSaplingDropChance(@Nonnull IBlockState state)
+    {
+        return 10;
+    }
+    @Override
     public boolean isOpaqueCube(@Nonnull IBlockState state)
     {
         return false;

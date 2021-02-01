@@ -30,7 +30,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
     public WorldGenerator diamondGen;
     public WorldGenerator lapisGen;
 
-    private final int MAX_ORE_HEIGHT = 250;
+    private final int MAX_ORE_HEIGHT = 120;
     private final int MIN_ORE_HEIGHT = 0;
 
     @Override
@@ -43,14 +43,14 @@ public class DecoratorDepthBiome extends BiomeDecorator
         {
             this.chunkProviderSettings = ChunkGeneratorSettings.Factory.jsonToFactory(worldIn.getWorldInfo().getGeneratorOptions()).build();
             this.chunkPos = pos;
-            this.dirtGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), this.chunkProviderSettings.dirtSize);
-            this.gravelOreGen = new WorldGenMinable(Blocks.OBSIDIAN.getDefaultState(), this.chunkProviderSettings.gravelSize);
-            this.coalGen = new WorldGenMinable(ModBlocks.DEPTH_COAL_ORE.getDefaultState(), this.chunkProviderSettings.coalSize);
-            this.ironGen = new WorldGenMinable(ModBlocks.DEPTH_IRON_ORE.getDefaultState(), this.chunkProviderSettings.ironSize);
-            this.goldGen = new WorldGenMinable(ModBlocks.DEPTH_GOLD_ORE.getDefaultState(), this.chunkProviderSettings.goldSize);
-            this.redstoneGen = new WorldGenMinable(ModBlocks.DEPTH_REDSTONE_ORE.getDefaultState(), this.chunkProviderSettings.redstoneSize);
-            this.diamondGen = new WorldGenMinable(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState(), this.chunkProviderSettings.diamondSize);
-            this.lapisGen = new WorldGenMinable(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState(), this.chunkProviderSettings.lapisSize);
+            this.dirtGen = new WorldGenMinable(ModBlocks.DEPTH_DIRT.getDefaultState(), 20);
+            this.gravelOreGen = new WorldGenMinable(Blocks.OBSIDIAN.getDefaultState(), 20);
+            this.coalGen = new WorldGenMinable(ModBlocks.DEPTH_COAL_ORE.getDefaultState(), 15);
+            this.ironGen = new WorldGenMinable(ModBlocks.DEPTH_IRON_ORE.getDefaultState(), 13);
+            this.goldGen = new WorldGenMinable(ModBlocks.DEPTH_GOLD_ORE.getDefaultState(), 11);
+            this.redstoneGen = new WorldGenMinable(ModBlocks.DEPTH_REDSTONE_ORE.getDefaultState(), 10);
+            this.diamondGen = new WorldGenMinable(ModBlocks.DEPTH_DIAMOND_ORE.getDefaultState(), 10);
+            this.lapisGen = new WorldGenMinable(ModBlocks.DEPTH_LAPIS_ORE.getDefaultState(), 10);
             this.genDecorations(biome, worldIn, random);
             this.decorating = false;
         }
@@ -99,7 +99,7 @@ public class DecoratorDepthBiome extends BiomeDecorator
             maxHeight = i;
         } else if(maxHeight == minHeight)
         {
-            if(minHeight < 255) ++maxHeight;
+            if(minHeight < 128) ++maxHeight;
             else --minHeight;
         }
 

@@ -13,14 +13,14 @@
       "item": "deepmagic:compressed_deep_crystal"
     },
     "S": {
-      "item": "deepmagic:spell"
+      "item": "deepmagic:empty_scroll"
     },
     "R": {
-      "item": "deepmagic:rune"
+      "item": "deepmagic:magic_sigil"
     }
   },
   "result": {
-    "item": "deepmagic:depth_axe",
+    "item": "deepmagic:strongest_diamond",
     "count": 1
   }
 }

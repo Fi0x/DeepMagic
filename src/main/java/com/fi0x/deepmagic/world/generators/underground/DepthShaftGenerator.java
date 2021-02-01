@@ -64,13 +64,13 @@ public class DepthShaftGenerator extends MapGenBase
             {
                 if(isInside(blockX, centerX, blockZ, centerZ, radiusAir))
                 {
-                    for(int blockY = 1; blockY < 255; blockY++)
+                    for(int blockY = 1; blockY < 128; blockY++)
                     {
                         digBlock(chunkPrimerIn, blockX, blockY, blockZ);
                     }
                 } else if(isOutside(blockX, centerX, blockZ, centerZ, radiusWoodMin) && isInside(blockX, centerX, blockZ, centerZ, radiusWoodMax))
                 {
-                    for(int blockY = 1; blockY < 255; blockY++)
+                    for(int blockY = 1; blockY < 128; blockY++)
                     {
                         placeLog(chunkPrimerIn, blockX, blockY, blockZ);
                     }
@@ -84,7 +84,7 @@ public class DepthShaftGenerator extends MapGenBase
 
         if(isReplaceable(state))
         {
-            if(y > 10 && y < 245)
+            if(y >= 10 && y < 115)
             {
                 if(rand.nextInt(100) == 0) primer.setBlockState(x, y, z, LEAVES);
                 else primer.setBlockState(x, y, z, AIR);
