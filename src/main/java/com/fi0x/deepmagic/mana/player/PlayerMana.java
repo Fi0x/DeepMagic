@@ -53,6 +53,7 @@ public class PlayerMana
 
         if(mana - (value * getManaEfficiencyMultiplier()) < 0)
         {
+            player.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
             return false;
         }
         mana -= (value * getManaEfficiencyMultiplier());

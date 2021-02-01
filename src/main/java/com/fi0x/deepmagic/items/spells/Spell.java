@@ -62,7 +62,6 @@ public class Spell extends ItemBase implements IMagicItem
         }
         if(compound.hasKey("manaCosts") && !(playerMana.removeMana(playerIn, compound.getDouble("manaCosts"))))
         {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
 
