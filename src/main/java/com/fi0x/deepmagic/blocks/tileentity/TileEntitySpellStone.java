@@ -574,12 +574,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 manaAdder += 20;
                 setSpellTier(5);
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.contains("item.wheat") && consumedItems.contains("item.carrots") && consumedItems.contains("item.seeds"))
             {
                 spellParts.add(SpEfCharm.NAME);
-                consumedItems.remove(null);
+                consumedItems.remove("item.wheat");
+                consumedItems.remove("item.carrot");
+                consumedItems.remove("item.wheat_seeds");
 
-                manaAdder += 20;
+                manaAdder += 40;
                 flag = true;
             } else if(false)
             {
