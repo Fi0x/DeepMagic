@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -9,6 +10,7 @@ public class TileEntityRitualTime extends TileEntityRitualStone
 {
     public TileEntityRitualTime()
     {
+        type = RITUAL_TYPE.TIME;
         manaCosts = ConfigHandler.ritualTimeManaCosts;
     }
 

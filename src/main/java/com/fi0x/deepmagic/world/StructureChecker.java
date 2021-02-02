@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world;
 
+import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
@@ -9,7 +10,7 @@ import net.minecraft.world.World;
 
 public class StructureChecker
 {
-    public static boolean verifyRitualStructure(World world, BlockPos pos)
+    public static boolean verifyRitualStructure(World world, BlockPos pos, RITUAL_TYPE type)
     {
         if(!ConfigHandler.requireRitualStructure) return true;
         boolean valid = true;
@@ -59,7 +60,7 @@ public class StructureChecker
         return true;
     }
 
-    private static BlockPos[] ritualFloorLocations = new BlockPos[]{
+    private static final BlockPos[] ritualFloorLocations = new BlockPos[]{
             new BlockPos(0, -1, 0),
             new BlockPos(1, -1, 0),
             new BlockPos(2, -1, 0),
@@ -118,7 +119,7 @@ public class StructureChecker
             new BlockPos(1, -1, -4),
             new BlockPos(-1, -1, -4)
     };
-    private static BlockPos[] ritualArmLocations = new BlockPos[]{
+    private static final BlockPos[] ritualArmLocations = new BlockPos[]{
             new BlockPos(0, 0, 4),
             new BlockPos(0, 1, 4),
             new BlockPos(0, 2, 3),
@@ -141,16 +142,16 @@ public class StructureChecker
             new BlockPos(-1, 3, 0)
     };
 
-    private static BlockPos[] demonLocationsDeepCrystal = new BlockPos[]{
+    private static final BlockPos[] demonLocationsDeepCrystal = new BlockPos[]{
             new BlockPos(1, -1, 0),
             new BlockPos(-1, -1, 0),
             new BlockPos(0, -1, 1),
             new BlockPos(0, -1, -1)
     };
-    private static BlockPos[] demonLocationsDemonCrystal = new BlockPos[]{
+    private static final BlockPos[] demonLocationsDemonCrystal = new BlockPos[]{
             new BlockPos(0, -1, 0)
     };
-    private static BlockPos[] demonLocationsIronBlock = new BlockPos[]{
+    private static final BlockPos[] demonLocationsIronBlock = new BlockPos[]{
             new BlockPos(1, -1, 1),
             new BlockPos(1, -1, -1),
             new BlockPos(-1, -1, 1),

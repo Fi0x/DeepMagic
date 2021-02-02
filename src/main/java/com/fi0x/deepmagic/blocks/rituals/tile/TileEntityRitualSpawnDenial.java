@@ -1,11 +1,13 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 
 public class TileEntityRitualSpawnDenial extends TileEntityRitualStone
 {
     public TileEntityRitualSpawnDenial()
     {
+        type = RITUAL_TYPE.SPAWN_DENIAL;
         manaCosts = ConfigHandler.ritualSpawnDenialManaCosts;
     }
 

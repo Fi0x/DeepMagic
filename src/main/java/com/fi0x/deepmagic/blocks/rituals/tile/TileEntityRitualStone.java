@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.StructureChecker;
@@ -15,6 +16,7 @@ import javax.annotation.Nonnull;
 
 public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity
 {
+    protected RITUAL_TYPE type;
     protected double storedMana;
     private int sync;
     protected double manaCosts = 20;
@@ -51,7 +53,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
 
         if(hasRedstonePower())
         {
-            if(StructureChecker.verifyRitualStructure(world, pos)) syncedUpdate();
+            if(StructureChecker.verifyRitualStructure(world, pos, type)) syncedUpdate();
         }
     }
     protected void syncedUpdate()

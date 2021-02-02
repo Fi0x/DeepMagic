@@ -1,11 +1,13 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 
 public class TileEntityRitualQuarry extends TileEntityRitualStone
 {
     public TileEntityRitualQuarry()
     {
+        type = RITUAL_TYPE.QUARRY;
         manaCosts = ConfigHandler.ritualQuarryManaCosts;
     }
 
