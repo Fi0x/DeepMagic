@@ -2,7 +2,15 @@ package com.fi0x.deepmagic.blocks.rituals.tile;
 
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 
@@ -49,12 +57,30 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     @Override
     protected void syncedUpdate()
     {
+        /*
+        TODO: Use a redstone structure block to have the quarry active
+         */
         switch(currentState)
         {
             case DIG:
                 if(setNextBlock())
                 {
-                    //TODO: Dig block at x, y, z
+                    IBlockState state = world.getBlockState(new BlockPos(digX, digY, digZ));
+                    ItemStack stack = new ItemStack(state.getBlock().getItemDropped(state, world.rand, 0), state.getBlock().quantityDropped(state, 0, world.rand));
+                    if(stack.isEmpty()) return;
+
+                    TileEntity storage = world.getTileEntity(pos.up());
+                    if(storage != null)
+                    {
+                        if(storage.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+                        {
+                            IItemHandler h = storage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                            if(ItemHandlerHelper.insertItemStacked(h, stack, false).isEmpty()) return;
+                        }
+                    }
+                    EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
+                    item.motionY = Math.random() * 10;
+                    world.spawnEntity(item);
                 } else currentState = STATUS.PACK;
                 break;
             case PACK:
@@ -67,9 +93,6 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                 if(!unpackNextBlock()) setReady();
                 break;
         }
-        /*
-        TODO: Use a redstone structure block to have the quarry active
-         */
     }
 
     private void setReady()
@@ -87,7 +110,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean packNextBlock()
     {
-        //TODO: Remove 1 structure block and store it; Return true if successful, false if structure is packed completely
+        //TODO: Remove 1 structure block and store it (Item Capabilities); Return true if successful, false if structure is packed completely
         return false;
     }
     private boolean move()
