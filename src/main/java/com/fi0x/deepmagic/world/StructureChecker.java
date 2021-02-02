@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.world;
 
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
-import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
+import com.fi0x.deepmagic.blocks.rituals.structureblocks.RitualStructure;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -18,14 +18,14 @@ public class StructureChecker
         for(BlockPos offset : ritualFloorLocations)
         {
             BlockPos position = pos.add(offset);
-            if(world.getBlockState(position).getBlock() instanceof RitualBuildBlock) continue;
+            if(world.getBlockState(position).getBlock() instanceof RitualStructure) continue;
             ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : ritualArmLocations)
         {
             BlockPos position = pos.add(offset);
-            if(world.getBlockState(position).getBlock() instanceof RitualBuildBlock) continue;
+            if(world.getBlockState(position).getBlock() instanceof RitualStructure) continue;
             ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }

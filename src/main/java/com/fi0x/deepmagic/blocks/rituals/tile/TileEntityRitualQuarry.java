@@ -4,6 +4,7 @@ import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,6 +21,8 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     private int digY;
     private int digZ;
     private int currentDigRadius;
+    private int maxDigRadius;
+
     private STATUS currentState;
     //TODO: Store packed structure blocks
 
@@ -38,6 +41,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         compound.setInteger("lastDigY", digY);
         compound.setInteger("lastDigZ", digZ);
         compound.setInteger("currentRadius", currentDigRadius);
+        compound.setInteger("maxDigRadius", maxDigRadius);
         compound.setInteger("currentStatus", currentState.ordinal());
 
         return super.writeToNBT(compound);
@@ -49,6 +53,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         digY = compound.getInteger("lastDigY");
         digZ = compound.getInteger("lastDigZ");
         currentDigRadius = compound.getInteger("currentRadius");
+        maxDigRadius = compound.getInteger("maxDigRadius");
         currentState = STATUS.values()[compound.getInteger("currentStatus")];
 
         super.readFromNBT(compound);
@@ -57,9 +62,6 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     @Override
     protected void syncedUpdate()
     {
-        /*
-        TODO: Use a redstone structure block to have the quarry active
-         */
         switch(currentState)
         {
             case DIG:
@@ -67,6 +69,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                 {
                     IBlockState state = world.getBlockState(new BlockPos(digX, digY, digZ));
                     ItemStack stack = new ItemStack(state.getBlock().getItemDropped(state, world.rand, 0), state.getBlock().quantityDropped(state, 0, world.rand));
+                    world.setBlockToAir(new BlockPos(digX, digY, digZ));
                     if(stack.isEmpty()) return;
 
                     TileEntity storage = world.getTileEntity(pos.up());
@@ -101,12 +104,40 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         digY = pos.getY() - 2;
         digZ = pos.getZ();
         currentDigRadius = 0;
+        maxDigRadius = 4;
         currentState = STATUS.DIG;
     }
     private boolean setNextBlock()
     {
-        //TODO: Change x, y, z; Return true if block is not mined, else return false to signal packing
-        return false;
+        while(digY <= 0 || world.isAirBlock(new BlockPos(digX, digY, digZ)) || world.getBlockState(new BlockPos(digX, digY, digZ)).getBlock() == Blocks.BEDROCK)
+        {
+            digY--;
+            if(digY > 0) continue;
+
+            digY = pos.getY() - 2 - currentDigRadius;
+
+            if(digX != pos.getX() + currentDigRadius) digX++;
+            else if(digZ != pos.getZ() + currentDigRadius)
+            {
+                digZ++;
+                digX = pos.getX() - currentDigRadius;
+            } else if(currentDigRadius < maxDigRadius)
+            {
+                currentDigRadius++;
+                digX = pos.getX() - currentDigRadius;
+                digZ = pos.getZ() - currentDigRadius;
+                digY--;
+            } else return false;
+
+            if(digX != pos.getX() - currentDigRadius && digX != pos.getX() + currentDigRadius && digZ != pos.getZ() - currentDigRadius && digZ != pos.getZ() + currentDigRadius)
+            {
+                while(digX < pos.getX() + currentDigRadius)
+                {
+                    digX++;
+                }
+            }
+        }
+        return true;
     }
     private boolean packNextBlock()
     {

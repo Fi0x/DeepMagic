@@ -1,12 +1,12 @@
-package com.fi0x.deepmagic.blocks.rituals;
+package com.fi0x.deepmagic.blocks.rituals.structureblocks;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class RitualBuildBlock extends BlockBase
+public class RitualStructure extends BlockBase
 {
-    public RitualBuildBlock(String name, Material material)
+    public RitualStructure(String name, Material material)
     {
         super(name, material);
         setSoundType(SoundType.STONE);
