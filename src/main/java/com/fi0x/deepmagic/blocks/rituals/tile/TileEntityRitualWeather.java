@@ -16,6 +16,7 @@ public class TileEntityRitualWeather extends TileEntityRitualStone
         type = RITUAL_TYPE.WEATHER;
         manaCosts = ConfigHandler.ritualWeatherManaCosts;
         syncTime = 100;
+        manaOnSync = false;
     }
 
     @Override

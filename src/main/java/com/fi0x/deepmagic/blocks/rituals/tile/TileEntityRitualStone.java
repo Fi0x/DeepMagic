@@ -21,25 +21,30 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     private int sync;
     protected double manaCosts = 20;
     protected int syncTime = 20;
+    protected boolean manaOnSync = true;
 
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
     {
+        compound.setInteger("ritualType", type.ordinal());
         compound.setDouble("stored", storedMana);
         compound.setInteger("sync", sync);
         compound.setDouble("manaCosts", manaCosts);
         compound.setInteger("syncTime", syncTime);
+        compound.setBoolean("manaOnSync", manaOnSync);
 
         return super.writeToNBT(compound);
     }
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
+        type = RITUAL_TYPE.values()[compound.getInteger("ritualType")];
         storedMana = compound.getDouble("stored");
         sync = compound.getInteger("sync");
         manaCosts = compound.getDouble("manaCosts");
         syncTime = compound.getInteger("syncTime");
+        manaOnSync = compound.getBoolean("manaOnSync");
 
         super.readFromNBT(compound);
     }
@@ -53,7 +58,15 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
 
         if(hasRedstonePower())
         {
-            if(StructureChecker.verifyRitualStructure(world, pos, type)) syncedUpdate();
+            if(StructureChecker.verifyRitualStructure(world, pos, type))
+            {
+                if(manaOnSync)
+                {
+                    if(storedMana < manaCosts) return;
+                    else storedMana -= manaCosts;
+                }
+                syncedUpdate();
+            }
         }
     }
     protected void syncedUpdate()
