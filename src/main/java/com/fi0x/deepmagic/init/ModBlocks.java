@@ -12,9 +12,10 @@ import com.fi0x.deepmagic.blocks.ores.*;
 import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
 import com.fi0x.deepmagic.blocks.partial.MagicLight;
 import com.fi0x.deepmagic.blocks.partial.Rune;
+import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
+import com.fi0x.deepmagic.blocks.rituals.RitualTime;
+import com.fi0x.deepmagic.blocks.rituals.RitualWeather;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
-import com.fi0x.deepmagic.blocks.worldcontroller.TimeController;
-import com.fi0x.deepmagic.blocks.worldcontroller.WeatherController;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockSlab;
@@ -129,8 +130,11 @@ public class ModBlocks
 	//Interacting Blocks
 	public static final SpellStone SPELL_STONE = new SpellStone("spell_stone", Material.ROCK);
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
-	public static final Block WEATHER_CONTROLLER = new WeatherController("weather_controller", Material.IRON);
-	public static final Block TIME_CONTROLLER = new TimeController("time_controller", Material.IRON);
+
+	//Ritual Blocks
+	public static final Block RITUAL_BASE = new RitualBuildBlock("ritual_base", Material.ROCK);//TODO: Add recipe
+	public static final Block RITUAL_TIME = new RitualTime("ritual_time", Material.ROCK);//TODO: Add recipe
+	public static final Block RITUAL_WEATHER = new RitualWeather("ritual_weather", Material.ROCK);//TODO: Add recipe
 
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);

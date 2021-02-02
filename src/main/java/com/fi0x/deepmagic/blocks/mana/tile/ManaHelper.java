@@ -1,11 +1,11 @@
-package com.fi0x.deepmagic.blocks.tileentity;
+package com.fi0x.deepmagic.blocks.mana.tile;
 
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-class ManaHelper
+public class ManaHelper
 {
     private static boolean isManaTargetValid(World world, BlockPos targetPos, TileEntity te)
     {

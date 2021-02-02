@@ -2,9 +2,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.world.generators.underground.DepthShaftGenerator;
 import net.minecraft.block.BlockFalling;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -16,9 +14,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.terraingen.TerrainGen;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -32,16 +27,13 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
     private final World world;
     private final Random rand;
-    private MapGenBase shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.DECAYABLE, Boolean.FALSE), ModBlocks.DEPTH_GLOWSTONE.getDefaultState());
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
         world = worldIn;
         rand = new Random(seed);
 
-        shaftGenerator = TerrainGen.getModdedMapGen(shaftGenerator, InitMapGenEvent.EventType.CUSTOM);
-
-        worldIn.setSeaLevel(200);
+        worldIn.setSeaLevel(63);
     }
     @Nonnull
     @Override
@@ -49,8 +41,6 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     {
         ChunkPrimer primer = new ChunkPrimer();
         fillChunk(primer);
-
-        shaftGenerator.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();
@@ -67,10 +57,10 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         {
             for(int z = 0; z < 16; z++)
             {
-                for(int y = 255; y >= 0; y--)
+                for(int y = 128; y >= 0; y--)
                 {
                     if(rand.nextInt(5) >= y) primer.setBlockState(x, y, z, BEDROCK);
-                    else if(255 - rand.nextInt(5) <= y) primer.setBlockState(x, y, z, BEDROCK);
+                    else if(128 - rand.nextInt(5) <= y) primer.setBlockState(x, y, z, BEDROCK);
                     else primer.setBlockState(x, y, z, FILLER_MAIN);
                 }
             }

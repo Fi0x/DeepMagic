@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.items.spells;
 
-import com.fi0x.deepmagic.blocks.SpellStone;
+import com.fi0x.deepmagic.blocks.mana.SpellStone;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.spells.modifiers.ISpellModifier;

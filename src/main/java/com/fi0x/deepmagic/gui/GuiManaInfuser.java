@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.blocks.containers.ContainerManaInfuser;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaInfuser;
+import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaInfuser;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;

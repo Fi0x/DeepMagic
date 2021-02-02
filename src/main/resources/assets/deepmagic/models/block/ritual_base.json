@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "deepmagic:blocks/ritual/ritual_base"
+  }
+}
