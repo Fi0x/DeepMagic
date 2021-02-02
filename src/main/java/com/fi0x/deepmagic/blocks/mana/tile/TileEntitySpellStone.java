@@ -29,6 +29,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
 
     private int manaAdder;
     private double manaMultiplier;
+    private double tier;
 
     @Override
     public void update()
@@ -104,6 +105,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
         }
         compound.setString("items", items.toString());
 
+        compound.setInteger("manaAdder", manaAdder);
+        compound.setDouble("manaMultiplier", manaMultiplier);
+        compound.setDouble("spellTier", tier);
+
         return super.writeToNBT(compound);
     }
     @Override
@@ -117,6 +122,10 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
 
         String items = compound.getString("items");
         consumedItems.addAll(Arrays.asList(items.split("_:_")));
+
+        manaAdder = compound.getInteger("manaAdder");
+        manaMultiplier = compound.getDouble("manaMultiplier");
+        tier = compound.getDouble("spellTier");
 
         super.readFromNBT(compound);
     }
@@ -133,12 +142,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpTyAreaOfEffect.NAME);
 
                 manaMultiplier += 1;
+                tier += 2;
                 flag = true;
             } else if(false)
             {
                 spellParts.add(SpTyBeam.NAME);
 
                 manaMultiplier += 0.3;
+                setSpellTier(3);
                 flag = true;
             } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.comparator"))
             {
@@ -147,6 +158,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.comparator");
 
                 manaMultiplier += 1;
+                tier += 1;
                 flag = true;
             } else if(consumedItems.contains("item.bow") && consumedItems.contains("item.arrow"))
             {
@@ -155,12 +167,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.arrow");
 
                 manaMultiplier += 1;
+                tier += 1;
                 flag = true;
             } else if(consumedItems.remove("item.magic_sigil"))
             {
                 spellParts.add(SpTyRune.NAME);
 
                 manaMultiplier += 0.5;
+                tier += 3;
                 flag = true;
             } else if(consumedItems.remove("item.mana_interface"))
             {
@@ -174,12 +188,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaMultiplier += 0.3;
+                setSpellTier(3);
                 flag = true;
             } else if(consumedItems.remove("tile.button"))
             {
                 spellParts.add(SpTyTouch.NAME);
 
                 manaAdder += 50;
+                setSpellTier(1);
                 flag = true;
             } else
             {
@@ -202,12 +218,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpMoAutoSmelt.NAME);
 
                 manaAdder += 100;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.swordIron"))
             {
                 spellParts.add(SpMoDamage.NAME);
 
                 manaAdder += 100;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.diode"))
             {
@@ -216,6 +234,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.diode");
 
                 manaMultiplier += 0.2;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.contains("item.shovelIron") && consumedItems.contains("item.pickaxeIron") && consumedItems.contains("item.hatchetIron"))
             {
@@ -225,6 +244,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.hatchetIron");
 
                 manaMultiplier += 0.5;
+                setSpellTier(4);
                 flag = true;
             } else if(consumedItems.contains("tile.blockLapis") && consumedItems.contains("item.diamond"))
             {
@@ -233,18 +253,21 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.diamond");
 
                 manaMultiplier += 0.2;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("tile.obsidian"))
             {
                 spellParts.add(SpMoGravity.NAME);
 
                 manaAdder += 20;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.appleGold"))
             {
                 spellParts.add(SpMoHealPower.NAME);
 
                 manaMultiplier += 0.2;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.contains("tile.blockLapis") && consumedItems.contains("item.diamond"))
             {
@@ -253,12 +276,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.diamond");
 
                 manaMultiplier += 0.2;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.swordDiamond"))
             {
                 spellParts.add(SpMoPiercing.NAME);
 
                 manaMultiplier += 0.5;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.contains("item.coal") && consumedItems.contains("item.ingotIron") && consumedItems.contains("item.ingotGold") && consumedItems.contains("item.diamond"))
             {
@@ -269,6 +294,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove("item.diamond");
 
                 manaAdder += 50;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.compass"))
             {
@@ -276,18 +302,21 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 50;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.arrow"))
             {
                 spellParts.add(SpMoRange.NAME);
 
                 manaAdder += 50;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.slimeball"))
             {
                 spellParts.add(SpMoRicochet.NAME);
 
                 manaAdder += 50;
+                setSpellTier(2);
                 flag = true;
             } else if(false)
             {
@@ -295,6 +324,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaMultiplier += 0.5;
+                setSpellTier(4);
                 flag = true;
             } else if(false)
             {
@@ -302,12 +332,14 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaMultiplier += 0.3;
+                setSpellTier(4);
                 flag = true;
             } else if(consumedItems.contains("item.clock") && consumedItems.contains("item.magic_sigil"))
             {
                 spellParts.add(SpMoTickSpeed.NAME);
 
                 manaAdder += 100;
+                setSpellTier(4);
                 flag = true;
             } else
             {
@@ -351,6 +383,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 50;
+                tier += 1;
                 flag = true;
             } else if(false)
             {
@@ -379,6 +412,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 40;
+                tier += 1;
                 flag = true;
             } else if(false)
             {
@@ -434,18 +468,21 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpEfExplosion.NAME);
 
                 manaAdder += 50;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("tile.magma"))
             {
                 spellParts.add(SpEfFireDamage.NAME);
 
                 manaAdder += 30;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("tile.ice"))
             {
                 spellParts.add(SpEfFrostDamage.NAME);
 
                 manaAdder += 30;
+                setSpellTier(2);
                 flag = true;
             } else if(consumedItems.remove("item.flintAndSteel"))
             {
@@ -472,6 +509,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 100;
+                tier += 1;
                 flag = true;
             } else if(false)
             {
@@ -520,6 +558,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpEfBlink.NAME);
 
                 manaAdder += 50;
+                setSpellTier(2);
                 flag = true;
             } else if(false)
             {
@@ -528,12 +567,21 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
 
                 manaAdder += 20;
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.remove("item.cookie"))
             {
-                spellParts.add(SpEfCharm.NAME);
-                consumedItems.remove(null);
+                spellParts.add(SpEfCookie.NAME);
 
                 manaAdder += 20;
+                setSpellTier(5);
+                flag = true;
+            } else if(consumedItems.contains("item.wheat") && consumedItems.contains("item.carrots") && consumedItems.contains("item.seeds"))
+            {
+                spellParts.add(SpEfCharm.NAME);
+                consumedItems.remove("item.wheat");
+                consumedItems.remove("item.carrot");
+                consumedItems.remove("item.wheat_seeds");
+
+                manaAdder += 40;
                 flag = true;
             } else if(false)
             {
@@ -541,6 +589,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 100;
+                setSpellTier(4);
                 flag = true;
             } else if(consumedItems.contains("item.iron_shovel") && consumedItems.contains("item.iron_pickaxe") && consumedItems.contains("item.iron_axe"))
             {
@@ -556,6 +605,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpEfDimensionalTeleport.NAME);
 
                 manaAdder += 50;
+                setSpellTier(3);
                 flag = true;
             } else if(consumedItems.remove("item.bucket"))
             {
@@ -576,6 +626,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 50;
+                tier += 1;
                 flag = true;
             } else if(consumedItems.remove("tile.snow"))
             {
@@ -604,6 +655,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 20;
+                tier += 1;
                 flag = true;
             } else if(consumedItems.remove("tile.lightgem"))
             {
@@ -631,6 +683,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 20;
+                tier += 1;
                 flag = true;
             } else if(false)
             {
@@ -651,6 +704,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpEfRain.NAME);
 
                 manaAdder += 50;
+                setSpellTier(4);
                 flag = true;
             } else if(false)
             {
@@ -678,6 +732,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 80;
+                setSpellTier(4);
                 flag = true;
             } else if(false)
             {
@@ -692,6 +747,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 80;
+                setSpellTier(4);
                 flag = true;
             } else if(false)
             {
@@ -705,6 +761,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 spellParts.add(SpEfTeleport.NAME);
 
                 manaAdder += 50;
+                tier += 2;
                 flag = true;
             } else if(false)
             {
@@ -712,6 +769,7 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
                 consumedItems.remove(null);
 
                 manaAdder += 100;
+                setSpellTier(5);
                 flag = true;
             } else
             {
@@ -766,6 +824,21 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
     public void resetManaMultiplier()
     {
         manaMultiplier = 0;
+        markDirty();
+    }
+    private void setSpellTier(double newTier)
+    {
+        if(newTier > tier) tier = newTier;
+        else tier += newTier / tier;
+        markDirty();
+    }
+    public double getSpellTier()
+    {
+        return tier;
+    }
+    public void resetSpellTier()
+    {
+        tier = 0;
         markDirty();
     }
     @Override

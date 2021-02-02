@@ -4,7 +4,9 @@ import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -57,15 +59,25 @@ public class SpEfDig implements ISpellEffect
             ItemStack drop = ItemStack.EMPTY;
             if(silkTouch)
             {
-                //TODO: Set drop to silk touched block
+                /*
+                TODO: Find out which tool is required
+                 Create itemstack with that tool
+                 Enchant tool with silk touch
+                 Harvest block
+                 check for autoSmelt
+                 return
+                 */
             } else
             {
-                //TODO: Set drop to block-drop with fortune parameter
+                Item item = state.getBlock().getItemDropped(state, world.rand, fortune);
+                int amount = state.getBlock().quantityDropped(state, fortune, world.rand);
+                drop = new ItemStack(item, amount);
             }
 
             if(autoSmelt)
             {
-                //TODO: Change drop to furnace result of drop
+                ItemStack result = FurnaceRecipes.instance().getSmeltingResult(drop);
+                if(result != ItemStack.EMPTY) drop = result;
             }
 
             world.setBlockToAir(targetPos);

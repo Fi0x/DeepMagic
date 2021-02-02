@@ -115,7 +115,7 @@ public class ArmorHelper
             assert mana != null;
             if(mana.getMana() >= amount - removedMana)
             {
-                if(mana.removeMana(player, amount - removedMana)) removedMana = amount;
+                if(mana.removeMana(player, amount - removedMana, false)) removedMana = amount;
             }
         }
 

@@ -47,12 +47,13 @@ public class PlayerMana
             mana += value * (manaRegenRate + 1);
         }
     }
-    public boolean removeMana(EntityPlayer player, double value)
+    public boolean removeMana(EntityPlayer player, double value, boolean verbose)
     {
         if(player.isCreative()) return true;
 
         if(mana - (value * getManaEfficiencyMultiplier()) < 0)
         {
+            if(verbose) player.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
             return false;
         }
         mana -= (value * getManaEfficiencyMultiplier());
