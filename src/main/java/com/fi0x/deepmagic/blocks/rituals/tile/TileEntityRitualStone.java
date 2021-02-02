@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.blocks.rituals.tile;
 
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.StructureChecker;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -50,7 +51,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
 
         if(hasRedstonePower())
         {
-            if(RitualStructureLayout.verifyStructure(world, pos)) syncedUpdate();
+            if(StructureChecker.verifyRitualStructure(world, pos)) syncedUpdate();
         }
     }
     protected void syncedUpdate()

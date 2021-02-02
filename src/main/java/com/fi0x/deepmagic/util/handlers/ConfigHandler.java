@@ -115,6 +115,7 @@ public class ConfigHandler
     public static int manaGainFromMob;
     public static int manaToleranceSpellStone;
     //Rituals
+    public static boolean requireRitualStructure;
     public static int ritualStoneManaCapacity;
     public static int ritualTimeManaCosts;
     public static int ritualWeatherManaCosts;
@@ -339,6 +340,7 @@ public class ConfigHandler
 
         category = "Rituals";
         blocks.addCustomCategoryComment(category, "Rituals");
+        requireRitualStructure = blocks.getBoolean("Require Ritual Structure", category, true, "Require a Structure around Ritual Blocks to make Rituals work");
         ritualStoneManaCapacity = blocks.getInt("Ritual Stone Capacity", category, 5000, 1, 100000, "The Base Capacity of a Ritual");
         ritualTimeManaCosts = blocks.getInt("Time Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the time with the Time Ritual");
         ritualWeatherManaCosts = blocks.getInt("Weather Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the Weather with the Weather Ritual");
