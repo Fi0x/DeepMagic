@@ -24,7 +24,6 @@ public class QuarryHelper
 
     public static BlockPos getRandomFreeStructurePos(World world, BlockPos center)
     {
-        //TODO: Iterate over the whole structure and find a block that is air
         for(BlockPos offset : StructureChecker.ritualFloorLocations)
         {
             BlockPos position = center.add(offset);

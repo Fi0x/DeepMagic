@@ -186,7 +186,22 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean unpackNextBlock()
     {
-        //TODO: Place 1 structure block from stored blocks; Return true if successful, false if no more blocks are stored
+        for(int type = 0; type < structureBlocks.length; type++)
+        {
+            if(structureBlocks[type] == 0) continue;
+            BlockPos position = QuarryHelper.getRandomFreeStructurePos(world, pos);
+            if(position == null) return true;
+            switch(type)
+            {
+                case 0:
+                    world.setBlockState(position, ModBlocks.RITUAL_BASE.getDefaultState());
+                    break;
+                default:
+                    break;
+            }
+            structureBlocks[type]--;
+            return true;
+        }
         return false;
     }
 
