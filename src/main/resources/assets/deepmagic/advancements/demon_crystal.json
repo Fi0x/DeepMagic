@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:demon_crystal"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.demon.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.demon.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:root",
+  "criteria": {
+    "demon_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:demon_crystal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "demon_crafted"
+    ]
+  ]
+}

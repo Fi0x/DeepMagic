@@ -12,7 +12,7 @@
     "frame": "goal",
     "hidden": false
   },
-  "parent": "deepmagic:root",
+  "parent": "deepmagic:teleport_crafting",
   "criteria": {
     "insanity_dimension": {
       "trigger": "minecraft:changed_dimension",

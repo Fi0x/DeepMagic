@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:bucketWater"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.insanity.water.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.insanity.water.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:insanity_dimension",
+  "criteria": {
+    "water_entered": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "deepmagic:insanity_water"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "water_entered"
+    ]
+  ]
+}

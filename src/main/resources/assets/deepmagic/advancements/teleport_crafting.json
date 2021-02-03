@@ -12,7 +12,7 @@
     "frame": "task",
     "hidden": false
   },
-  "parent": "deepmagic:root",
+  "parent": "deepmagic:dimensional_crafting",
   "criteria": {
     "teleport_crafted": {
       "trigger": "minecraft:inventory_changed",
