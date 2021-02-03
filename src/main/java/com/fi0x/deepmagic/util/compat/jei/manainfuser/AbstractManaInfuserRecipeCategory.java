@@ -16,10 +16,14 @@ public abstract class AbstractManaInfuserRecipeCategory<T extends IRecipeWrapper
     protected static final int output = 1;
 
     protected final IDrawableAnimated animatedProcess;
+    protected final IDrawableAnimated animatedMana;
 
     public AbstractManaInfuserRecipeCategory(IGuiHelper helper)
     {
-        IDrawableStatic staticProcess = helper.createDrawable(TEXTURES, 176, 14, 24, 17);
+        IDrawableStatic staticProcess = helper.createDrawable(TEXTURES, 176, 50, 22, 15);
         animatedProcess = helper.createAnimatedDrawable(staticProcess, 200, IDrawableAnimated.StartDirection.LEFT, false);
+
+        IDrawableStatic staticMana = helper.createDrawable(TEXTURES, 176, 0, 16, 50);
+        animatedMana = helper.createAnimatedDrawable(staticMana, 200, IDrawableAnimated.StartDirection.BOTTOM, true);
     }
 }
