@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancement.deepmagic.crystal_pickaxe.crafted.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false
   },
   "parent": "deepmagic:deep_crystal",

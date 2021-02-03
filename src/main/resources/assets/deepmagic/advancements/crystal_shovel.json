@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancement.deepmagic.crystal_shovel.crafted.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false
   },
   "parent": "deepmagic:deep_crystal",
