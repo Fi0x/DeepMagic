@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks.rituals;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
+import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualStone;
 import com.fi0x.deepmagic.items.mana.ManaLinker;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -53,6 +54,12 @@ public abstract class RitualStone extends BlockBase
                     compound.setInteger("z", pos.getZ());
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
                 }
+            } else
+            {
+                TileEntityRitualStone te = (TileEntityRitualStone) worldIn.getTileEntity(pos);
+                assert te != null;
+                if(te.changeRedstoneMode()) playerIn.sendMessage(new TextComponentString(TextFormatting.WHITE + "Redstone mode activated"));
+                else playerIn.sendMessage(new TextComponentString(TextFormatting.WHITE + "Redstone mode deactivated"));
             }
         }
         return true;
