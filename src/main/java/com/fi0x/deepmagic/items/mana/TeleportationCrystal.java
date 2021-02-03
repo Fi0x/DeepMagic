@@ -78,14 +78,29 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
                 playerMana.addSkillXP(playerIn, ConfigHandler.teleportationCrystalSkillXP);
                 int x = (int) playerIn.posX;
                 int z = (int) playerIn.posZ;
-                if(playerIn.isSneaking())
+                if(playerIn.isSneaking() && playerIn.dimension == 0)
                 {
                     x *= 0.05;
                     z *= 0.05;
                     playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
                     return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
-                }
-                else if(playerIn.dimension == 0)
+                } else if(playerIn.isSneaking() && playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
+                {
+                    x *= 0.005;
+                    z *= 0.005;
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                } else if(playerIn.isSneaking() && playerIn.dimension == -1)
+                {
+                    x *= 0.4;
+                    z *= 0.4;
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                } else if(playerIn.isSneaking())
+                {
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                } else if(playerIn.dimension == 0)
                 {
                     x *= 10;
                     z *= 10;
@@ -96,19 +111,16 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
                 {
                     x *= 8;
                     z *= 8;
-                    return teleportEntityTo(playerIn, 0, x, z, stack);
                 } else if(playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
                 {
                     x *= 0.1;
                     z *= 0.1;
                     playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "Your mind clears as you return to the overworld"));
-                    return teleportEntityTo(playerIn, 0, x, z, stack);
-                } else if(playerIn.dimension == ConfigHandler.dimensionIdDepthID && playerIn.isSneaking())
+                } else if(playerIn.dimension == ConfigHandler.dimensionIdDepthID)
                 {
                     x *= 20;
                     z *= 20;
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You feel the pressure dropping as you return to the surface"));
-                    return teleportEntityTo(playerIn, 0, x, z, stack);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "The pressure around you drops as you return to the overworld"));
                 }
 
                 return teleportEntityTo(playerIn, 0, x, z, stack);
