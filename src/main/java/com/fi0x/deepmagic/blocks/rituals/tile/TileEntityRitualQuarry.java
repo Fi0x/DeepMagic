@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
+import com.fi0x.deepmagic.blocks.rituals.structureblocks.RitualStructure;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.state.IBlockState;
@@ -94,16 +95,23 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                     EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
                     item.motionY = Math.random() * 10;
                     world.spawnEntity(item);
-                } else currentState = STATUS.PACK;
+                } else
+                {
+                    currentState = STATUS.PACK;
+                    markDirty();
+                }
                 break;
             case PACK:
                 if(!packNextBlock()) currentState = STATUS.MOVE;
+                markDirty();
                 break;
             case MOVE:
                 if(!move()) currentState = STATUS.UNPACK;
+                markDirty();
                 break;
             case UNPACK:
                 if(!unpackNextBlock()) setReady();
+                markDirty();
                 break;
         }
     }
@@ -116,6 +124,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         currentDigRadius = 0;
         maxDigRadius = 4;
         currentState = STATUS.DIG;
+        structureBlocks = new int[1];
     }
     private boolean setNextBlock()
     {
@@ -151,7 +160,15 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean packNextBlock()
     {
-        //TODO: Remove 1 structure block and store it (Item Capabilities); Return true if successful, false if structure is packed completely
+        BlockPos position = QuarryHelper.getRandomFilledStructurePos(world, pos);
+        if(position == null) return false;
+
+        if(world.getBlockState(position).getBlock() instanceof RitualStructure)
+        {
+            structureBlocks[((RitualStructure) world.getBlockState(position).getBlock()).getStructureType()]++;
+            world.setBlockToAir(position);
+            return true;
+        }
         return false;
     }
     private boolean move()

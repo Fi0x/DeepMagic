@@ -60,7 +60,7 @@ public class StructureChecker
         return true;
     }
 
-    private static final BlockPos[] ritualFloorLocations = new BlockPos[]{
+    public static final BlockPos[] ritualFloorLocations = new BlockPos[]{
             new BlockPos(0, -1, 0),
             new BlockPos(1, -1, 0),
             new BlockPos(2, -1, 0),
@@ -119,7 +119,7 @@ public class StructureChecker
             new BlockPos(1, -1, -4),
             new BlockPos(-1, -1, -4)
     };
-    private static final BlockPos[] ritualArmLocations = new BlockPos[]{
+    public static final BlockPos[] ritualArmLocations = new BlockPos[]{
             new BlockPos(0, 0, 4),
             new BlockPos(0, 1, 4),
             new BlockPos(0, 2, 3),

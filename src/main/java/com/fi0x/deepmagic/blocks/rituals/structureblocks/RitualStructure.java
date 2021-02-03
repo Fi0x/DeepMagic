@@ -13,4 +13,9 @@ public class RitualStructure extends BlockBase
         setHardness(5.0F);
         setHarvestLevel("pickaxe", 0);
     }
+
+    public int getStructureType()
+    {
+        return 0;
+    }
 }
