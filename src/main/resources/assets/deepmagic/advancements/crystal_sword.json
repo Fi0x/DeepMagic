@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_sword"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.crystal_sword.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.crystal_sword.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "crystal_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_sword"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_sword"
+    ]
+  ]
+}

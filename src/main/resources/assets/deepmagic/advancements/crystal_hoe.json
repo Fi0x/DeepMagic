@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_hoe"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.crystal_hoe.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.crystal_hoe.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "crystal_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_hoe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_hoe"
+    ]
+  ]
+}

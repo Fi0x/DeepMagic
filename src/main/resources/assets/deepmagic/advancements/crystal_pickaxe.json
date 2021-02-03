@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_pickaxe"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.crystal_pickaxe.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.crystal_pickaxe.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "crystal_pick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_pick"
+    ]
+  ]
+}

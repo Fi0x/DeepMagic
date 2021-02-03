@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_shovel"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.crystal_shovel.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.crystal_shovel.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "crystal_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_shovel"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_shovel"
+    ]
+  ]
+}
