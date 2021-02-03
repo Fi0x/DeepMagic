@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:insanity_grass"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.insanity.entered.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.insanity.entered.description"
+    },
+    "background": "deepmagic:textures/blocks/deep_crystal_ore.png",
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "insanity_enter": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "dimension": "Insanity"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "insanity_enter"
+    ]
+  ]
+}
