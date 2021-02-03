@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
+import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -8,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -22,14 +24,16 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     private int digZ;
     private int currentDigRadius;
     private int maxDigRadius;
+    private EnumFacing direction;
 
     private STATUS currentState;
-    //TODO: Store packed structure blocks
+    private int[] structureBlocks;
 
     public TileEntityRitualQuarry()
     {
         type = RITUAL_TYPE.QUARRY;
         manaCosts = ConfigHandler.ritualQuarryManaCosts;
+        direction = EnumFacing.Plane.HORIZONTAL.random(world.rand);//TODO: Create a way for the player to set directions
         setReady();
     }
 
@@ -42,7 +46,10 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         compound.setInteger("lastDigZ", digZ);
         compound.setInteger("currentRadius", currentDigRadius);
         compound.setInteger("maxDigRadius", maxDigRadius);
+        compound.setInteger("direction", direction.ordinal());
+
         compound.setInteger("currentStatus", currentState.ordinal());
+        compound.setIntArray("structureBlocks", structureBlocks);
 
         return super.writeToNBT(compound);
     }
@@ -54,7 +61,10 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         digZ = compound.getInteger("lastDigZ");
         currentDigRadius = compound.getInteger("currentRadius");
         maxDigRadius = compound.getInteger("maxDigRadius");
+        direction = EnumFacing.values()[compound.getInteger("direction")];
+
         currentState = STATUS.values()[compound.getInteger("currentStatus")];
+        structureBlocks = compound.getIntArray("structureBlocks");
 
         super.readFromNBT(compound);
     }
@@ -146,7 +156,15 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean move()
     {
-        //TODO: Move quarry in correct direction; If no block of the structure would have bedrock in sight, return false, else true
+        TileEntity te = world.getTileEntity(pos);
+        world.setBlockState(pos.offset(direction), ModBlocks.RITUAL_QUARRY.getDefaultState());
+        world.setTileEntity(pos.offset(direction), te);
+
+        for(BlockPos checkPos = pos.down().offset(direction.getOpposite(), maxDigRadius); checkPos.getY() > 0; checkPos.down())
+        {
+            if(world.isAirBlock(checkPos)) continue;
+            return world.getBlockState(checkPos).getBlock() == Blocks.BEDROCK;
+        }
         return false;
     }
     private boolean unpackNextBlock()
