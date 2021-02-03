@@ -12,7 +12,7 @@
     "frame": "task",
     "hidden": false
   },
-  "parent": "deepmagic:root",
+  "parent": "deepmagic:dimensional_crafting",
   "criteria": {
     "linker_crafted": {
       "trigger": "minecraft:inventory_changed",
