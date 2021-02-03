@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:teleportation_crystal"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.teleport.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.teleport.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:root",
+  "criteria": {
+    "teleport_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:teleportation_crystal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "teleport_crafted"
+    ]
+  ]
+}

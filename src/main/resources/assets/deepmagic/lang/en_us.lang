@@ -194,3 +194,7 @@ advancement.deepmagic.insanity.dimension.title=Am I Insane?
 advancement.deepmagic.insanity.dimension.description=Travel to the Insanity Dimension
 advancement.deepmagic.depth.dimension.title=High Pressure
 advancement.deepmagic.depth.dimension.description=Travel to the deepest Dimension
+advancement.deepmagic.spell.crafted.title=Spell Crafting
+advancement.deepmagic.spell.crafted.description=Craft a Spell
+advancement.deepmagic.teleport.crafted.title=Better than Ender-Pearls
+advancement.deepmagic.teleport.crafted.description=Craft a Teleportation Crystal

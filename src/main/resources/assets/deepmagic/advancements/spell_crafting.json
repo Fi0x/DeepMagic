@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:spell"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.spell.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.spell.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:root",
+  "criteria": {
+    "spell_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:spell"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "spell_crafted"
+    ]
+  ]
+}
