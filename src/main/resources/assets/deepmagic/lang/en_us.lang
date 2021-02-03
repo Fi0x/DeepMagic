@@ -236,3 +236,5 @@ advancement.deepmagic.depth_shovel.crafted.title=Land-Mover
 advancement.deepmagic.depth_shovel.crafted.description=Craft the Depth Shovel
 advancement.deepmagic.depth_sword.crafted.title=Sword for hire
 advancement.deepmagic.depth_sword.crafted.description=Craft the Depth Sword
+advancement.deepmagic.food.title=Gourmet
+advancement.deepmagic.food.description=Eat every food from the mod
