@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:strongest_diamond"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.strongest_diamond.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.strongest_diamond.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:sigil_crafting",
+  "criteria": {
+    "dia_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:strongest_diamond"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "dia_crafted"
+    ]
+  ]
+}

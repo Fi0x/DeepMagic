@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:bucketWater"
+      "item": "deepmagic:insanity_dirt"
     },
     "title": {
       "translate": "advancement.deepmagic.insanity.water.title"
@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancement.deepmagic.insanity.water.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false
   },
   "parent": "deepmagic:insanity_dimension",
