@@ -188,5 +188,7 @@ entity.cockroach.name=Cockroach
 entity.worm.name=Worm
 entity.cyclopes.name=Cyclopes
 
-advancement.deepmagic.insanity.entered.title=Insanity
-advancement.deepmagic.insanity.entered.description=You travelled to the Insanity Dimension
+advancement.deepmagic.deep_crystal_powder.title=It's magic!
+advancement.deepmagic.deep_crystal_powder.description=Find and collect Deep Crystal Powder
+advancement.deepmagic.insanity.dimension.title=Am I Insane?
+advancement.deepmagic.insanity.dimension.description=Travel to the Insanity Dimension
