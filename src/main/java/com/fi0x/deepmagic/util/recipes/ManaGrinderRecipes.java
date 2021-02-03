@@ -12,7 +12,7 @@ import java.util.Map;
 public class ManaGrinderRecipes
 {
     private static final ManaGrinderRecipes INSTANCE = new ManaGrinderRecipes();
-    private final Map<ItemStack, ItemStack> infusionList = Maps.newHashMap();
+    private final Map<ItemStack, ItemStack> grinderList = Maps.newHashMap();
 
     public static ManaGrinderRecipes instance()
     {
@@ -44,20 +44,25 @@ public class ManaGrinderRecipes
     private void addManaGrinderRecipe(ItemStack input, ItemStack result)
     {
         if(getGrinderResult(input) != ItemStack.EMPTY) return;
-        infusionList.put(input, result);
+        grinderList.put(input, result);
     }
 
     public ItemStack getGrinderResult(ItemStack input)
     {
-        for (Map.Entry<ItemStack, ItemStack> entry : infusionList.entrySet())
+        for(Map.Entry<ItemStack, ItemStack> entry : grinderList.entrySet())
         {
-            if (this.compareItemStacks(input, entry.getKey()))
+            if(this.compareItemStacks(input, entry.getKey()))
             {
                 return new ItemStack(entry.getValue().getItem(), entry.getValue().getCount());
             }
         }
         return ItemStack.EMPTY;
     }
+    public Map<ItemStack, ItemStack> getRecipeMap()
+    {
+        return grinderList;
+    }
+
     private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
     {
         return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());

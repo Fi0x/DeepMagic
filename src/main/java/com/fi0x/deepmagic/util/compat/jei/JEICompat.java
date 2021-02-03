@@ -1,7 +1,11 @@
 package com.fi0x.deepmagic.util.compat.jei;
 
+import com.fi0x.deepmagic.blocks.containers.ContainerManaGrinder;
 import com.fi0x.deepmagic.blocks.containers.ContainerManaInfuser;
+import com.fi0x.deepmagic.gui.GuiManaGrinder;
 import com.fi0x.deepmagic.gui.GuiManaInfuser;
+import com.fi0x.deepmagic.util.compat.jei.managrinder.ManaGrinderRecipeCategory;
+import com.fi0x.deepmagic.util.compat.jei.managrinder.ManaGrinderRecipeMaker;
 import com.fi0x.deepmagic.util.compat.jei.manainfuser.ManaInfuserRecipeCategory;
 import com.fi0x.deepmagic.util.compat.jei.manainfuser.ManaInfuserRecipeMaker;
 import mezz.jei.api.*;
@@ -23,6 +27,7 @@ public class JEICompat implements IModPlugin
         final IGuiHelper gui = helpers.getGuiHelper();
 
         registry.addRecipeCategories(new ManaInfuserRecipeCategory(gui));
+        registry.addRecipeCategories(new ManaGrinderRecipeCategory(gui));
     }
     @Override
     public void register(@Nonnull IModRegistry registry)
@@ -32,8 +37,12 @@ public class JEICompat implements IModPlugin
         IRecipeTransferRegistry recipeTransfer = registry.getRecipeTransferRegistry();
 
         registry.addRecipes(ManaInfuserRecipeMaker.getRecipes(helpers), RecipeCategories.MANA_INFUSER);
-        registry.addRecipeClickArea(GuiManaInfuser.class, 110, 0, 50, 50, RecipeCategories.MANA_INFUSER);
+        registry.addRecipeClickArea(GuiManaInfuser.class, 41, 22, 40, 22, RecipeCategories.MANA_INFUSER);
         recipeTransfer.addRecipeTransferHandler(ContainerManaInfuser.class, RecipeCategories.MANA_INFUSER, 0, 1, 2, 36);
+
+        registry.addRecipes(ManaGrinderRecipeMaker.getRecipes(helpers), RecipeCategories.MANA_GRINDER);
+        registry.addRecipeClickArea(GuiManaGrinder.class, 41, 22, 40, 22, RecipeCategories.MANA_GRINDER);
+        recipeTransfer.addRecipeTransferHandler(ContainerManaGrinder.class, RecipeCategories.MANA_GRINDER, 0, 1, 4, 36);
     }
 
     public static String translateToLocal(String key)
