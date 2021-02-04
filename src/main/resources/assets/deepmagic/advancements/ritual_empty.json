@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:ritual_none"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.ritual_none.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.ritual_none.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:ritual_structure",
+  "criteria": {
+    "ritual_none": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:ritual_none"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ritual_none"
+    ]
+  ]
+}

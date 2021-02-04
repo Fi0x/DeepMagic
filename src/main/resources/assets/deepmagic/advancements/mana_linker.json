@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_linker"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.linker.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.linker.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:dimensional_crafting",
+  "criteria": {
+    "linker_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:mana_linker"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "linker_crafted"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "deepmagic:ritual_base"
+      "model": "deepmagic:ritual_structure"
     }
   }
 }

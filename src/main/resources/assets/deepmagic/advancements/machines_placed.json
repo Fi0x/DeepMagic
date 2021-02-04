@@ -1,0 +1,47 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_infuser"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.machines.placed.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.machines.placed.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:mana_segment",
+  "criteria": {
+    "infuser_placed": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_infuser"
+      }
+    },
+    "grinder_placed": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_grinder"
+      }
+    },
+    "furnace_placed": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_furnace"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "infuser_placed"
+    ],
+    [
+      "grinder_placed"
+    ],
+    [
+      "furnace_placed"
+    ]
+  ]
+}

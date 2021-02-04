@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:dimensional_crystal"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.dimensional.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.dimensional.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:sigil_crafting",
+  "criteria": {
+    "dimensional_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:dimensional_crystal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "dimensional_crafted"
+    ]
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "CRC",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "C": {
+      "item": "minecraft:clock"
+    },
+    "R": {
+      "item": "deepmagic:ritual_none"
+    }
+  },
+  "result": {
+    "item": "deepmagic:ritual_time",
+    "count": 1
+  }
+}

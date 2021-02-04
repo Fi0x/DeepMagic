@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class RitualStone extends BlockBase
+public class RitualStone extends BlockBase
 {
     public RitualStone(String name, Material material)
     {

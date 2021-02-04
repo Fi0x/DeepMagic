@@ -49,9 +49,9 @@ public class WorldGenCustomStructures implements IWorldGenerator
             if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
         } else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
         {
-            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);
+            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);//TODO: Use depth blocks
 
-            //TODO: Use customized dungeon
+            //TODO: Use customized dungeon spawns
 //            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeDepth.class);
         }
     }

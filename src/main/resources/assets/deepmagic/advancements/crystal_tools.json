@@ -1,0 +1,85 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_pickaxe"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.crystal_tools.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.crystal_tools.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "crystal_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_sword"
+          }
+        ]
+      }
+    },
+    "crystal_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_shovel"
+          }
+        ]
+      }
+    },
+    "crystal_pick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_pickaxe"
+          }
+        ]
+      }
+    },
+    "crystal_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_axe"
+          }
+        ]
+      }
+    },
+    "crystal_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_hoe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_sword"
+    ],
+    [
+      "crystal_shovel"
+    ],
+    [
+      "crystal_pick"
+    ],
+    [
+      "crystal_axe"
+    ],
+    [
+      "crystal_hoe"
+    ]
+  ]
+}

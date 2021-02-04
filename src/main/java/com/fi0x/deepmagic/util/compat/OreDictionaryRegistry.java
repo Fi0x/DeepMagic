@@ -14,6 +14,12 @@ public class OreDictionaryRegistry
     {
         //Minecraft
         OreDictionary.registerOre("apple", new ItemStack(Items.APPLE, 1, WILDCARD_VALUE));
+        OreDictionary.registerOre("head", new ItemStack(Items.SKULL, 1, 0));
+        OreDictionary.registerOre("head", new ItemStack(Items.SKULL, 1, 1));
+        OreDictionary.registerOre("head", new ItemStack(Items.SKULL, 1, 2));
+        OreDictionary.registerOre("head", new ItemStack(Items.SKULL, 1, 3));
+        OreDictionary.registerOre("head", new ItemStack(Items.SKULL, 1, 4));
+        OreDictionary.registerOre("head", new ItemStack(Items.SKULL, 1, 5));
 
         //Mod Items
         OreDictionary.registerOre("apple", new ItemStack(ModItems.INSANITY_APPLE, 1, WILDCARD_VALUE));

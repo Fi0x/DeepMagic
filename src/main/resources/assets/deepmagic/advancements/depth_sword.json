@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_sword"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth_sword.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth_sword.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:strongest_diamond",
+  "criteria": {
+    "depth_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_sword"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "depth_sword"
+    ]
+  ]
+}

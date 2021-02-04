@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_relay"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.relay.placed.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.relay.placed.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:dimensional_crafting",
+  "criteria": {
+    "relay_placed": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_relay"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "relay_placed"
+    ]
+  ]
+}

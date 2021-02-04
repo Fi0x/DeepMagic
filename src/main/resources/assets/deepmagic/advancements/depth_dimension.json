@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_stone"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth.dimension.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth.dimension.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:teleport_crafting",
+  "criteria": {
+    "depth_dimension": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "Depth"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "depth_dimension"
+    ]
+  ]
+}

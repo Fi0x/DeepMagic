@@ -201,7 +201,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
             switch(type)
             {
                 case 0:
-                    world.setBlockState(position, ModBlocks.RITUAL_BASE.getDefaultState());
+                    world.setBlockState(position, ModBlocks.RITUAL_STRUCTURE.getDefaultState());
                     break;
                 default:
                     break;

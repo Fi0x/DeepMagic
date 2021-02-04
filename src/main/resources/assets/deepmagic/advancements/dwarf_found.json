@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:dwarf_lamp"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.dwarf_lamp.found.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.dwarf_lamp.found.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:teleport_crafting",
+  "criteria": {
+    "dwarf_found": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:dwarf_lamp"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "dwarf_found"
+    ]
+  ]
+}

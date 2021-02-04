@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "WOW",
+    "SWS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:depth_stone"
+    },
+    "W": {
+      "item": "deepmagic:depth_planks"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    }
+  },
+  "result": {
+    "item": "deepmagic:ritual_structure",
+    "count": 1
+  }
+}
