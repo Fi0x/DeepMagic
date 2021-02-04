@@ -39,7 +39,7 @@ public class DemonStone extends BlockBase
                 PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
                 assert playerMana != null;
                 if(!StructureChecker.verifyDemonStructure(worldIn, pos)) return false;
-                if(playerMana.removeMana(playerIn, ConfigHandler.demonSummonCost))
+                if(playerMana.removeMana(playerIn, ConfigHandler.demonSummonCost, true))
                 {
                     playerIn.getHeldItem(hand).shrink(1);
                     playerMana.addSkillXP(playerIn, ConfigHandler.demonSummonXP);

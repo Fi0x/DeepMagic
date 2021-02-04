@@ -3,8 +3,6 @@ package com.fi0x.deepmagic.items.mana;
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.depth.DepthDirt;
 import com.fi0x.deepmagic.blocks.depth.DepthStone;
-import com.fi0x.deepmagic.blocks.insanity.InsanityDirt;
-import com.fi0x.deepmagic.blocks.insanity.InsanityStone;
 import com.fi0x.deepmagic.commands.Teleport;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -15,7 +13,6 @@ import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,7 +73,7 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
             if(playerIn.isSneaking() && playerIn.dimension != ConfigHandler.dimensionIdDepthID) manaCosts = ConfigHandler.teleportationCrystalManaCostDepth;
             else manaCosts = ConfigHandler.teleportationCrystalManaCost;
 
-            if(playerMana.removeMana(playerIn, manaCosts))
+            if(playerMana.removeMana(playerIn, manaCosts, true))
             {
                 playerMana.addSkillXP(playerIn, ConfigHandler.teleportationCrystalSkillXP);
                 int x = (int) playerIn.posX;
