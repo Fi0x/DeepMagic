@@ -134,7 +134,7 @@ public class ModBlocks
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
 
 	//Ritual Blocks
-	public static final Block RITUAL_BASE = new RitualStructure("ritual_base", Material.ROCK);//TODO: Add recipe
+	public static final Block RITUAL_STRUCTURE = new RitualStructure("ritual_structure", Material.ROCK);
 	public static final Block RITUAL_TIME = new RitualTime("ritual_time", Material.ROCK);//TODO: Add recipe
 	public static final Block RITUAL_WEATHER = new RitualWeather("ritual_weather", Material.ROCK);//TODO: Add recipe
 	public static final Block RITUAL_SPAWN_DENIAL = new RitualSpawnDenial("ritual_spawn_denial", Material.ROCK);//TODO: Add recipe
