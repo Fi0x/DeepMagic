@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_segment"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.mana_segment.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.mana_segment.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "segment_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:mana_segment"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "segment_crafted"
+    ]
+  ]
+}

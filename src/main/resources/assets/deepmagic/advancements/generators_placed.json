@@ -1,0 +1,47 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_generator_normal"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.generators.placed.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.generators.placed.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:mana_segment",
+  "criteria": {
+    "normal_generator": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_generator_normal"
+      }
+    },
+    "insanity_generator": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_generator_insanity"
+      }
+    },
+    "mob_generator": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_generator_mob"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "normal_generator"
+    ],
+    [
+      "insanity_generator"
+    ],
+    [
+      "mob_generator"
+    ]
+  ]
+}
