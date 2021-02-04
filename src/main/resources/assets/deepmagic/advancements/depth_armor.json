@@ -1,0 +1,72 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_chestplate"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth_armor.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth_armor.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:strongest_diamond",
+  "criteria": {
+    "depth_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_helmet"
+          }
+        ]
+      }
+    },
+    "depth_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_chestplate"
+          }
+        ]
+      }
+    },
+    "depth_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_leggings"
+          }
+        ]
+      }
+    },
+    "depth_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "depth_helmet"
+    ],
+    [
+      "depth_chestplate"
+    ],
+    [
+      "depth_leggings"
+    ],
+    [
+      "depth_boots"
+    ]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_pickaxe"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth_pickaxe.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth_pickaxe.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:strongest_diamond",
+  "criteria": {
+    "depth_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "depth_pickaxe"
+    ]
+  ]
+}

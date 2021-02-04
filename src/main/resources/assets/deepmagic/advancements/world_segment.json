@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:world_interaction_segment"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.world_segment.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.world_segment.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:sigil_crafting",
+  "criteria": {
+    "segment_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:world_interaction_segment"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "segment_crafted"
+    ]
+  ]
+}

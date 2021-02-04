@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_powder"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.deep_crystal_powder.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.deep_crystal_powder.description"
+    },
+    "background": "deepmagic:textures/blocks/deep_crystal_ore.png",
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "powder_collected": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_powder"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "powder_collected"
+    ]
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:ritual_spawn_denial"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.ritual_spawn.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.ritual_spawn.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:ritual_empty",
+  "criteria": {
+    "ritual_spawn": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:ritual_spawn_denial"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ritual_spawn"
+    ]
+  ]
+}

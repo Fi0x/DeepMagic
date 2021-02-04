@@ -22,8 +22,7 @@
       "ore": "blockGlass"
     },
     "D": {
-      "type": "forge:ore_dict",
-      "ore": "gemDiamond"
+      "item": "deepmagic:dimensional_crystal"
     }
   },
   "result": {

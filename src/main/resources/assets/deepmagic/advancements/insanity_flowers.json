@@ -1,0 +1,85 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:insanity_flower"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.insanity_flowers.found.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.insanity_flowers.found.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:insanity_dimension",
+  "criteria": {
+    "flower1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_flower"
+          }
+        ]
+      }
+    },
+    "flower2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_flower2"
+          }
+        ]
+      }
+    },
+    "flower3": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_flower3"
+          }
+        ]
+      }
+    },
+    "flower4": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_flower4"
+          }
+        ]
+      }
+    },
+    "flower5": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_flower5"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "flower1"
+    ],
+    [
+      "flower2"
+    ],
+    [
+      "flower3"
+    ],
+    [
+      "flower4"
+    ],
+    [
+      "flower5"
+    ]
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:crystal_infused_apple"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.food.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.food.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:root",
+  "criteria": {
+    "crystal_apple": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:crystal_infused_apple"
+          }
+        ]
+      }
+    },
+    "insanity_apple": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_apple"
+          }
+        ]
+      }
+    },
+    "depth_apple": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_apple"
+          }
+        ]
+      }
+    },
+    "raw_cockroach": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:raw_cockroach"
+          }
+        ]
+      }
+    },
+    "cooked_cockroach": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:cooked_cockroach"
+          }
+        ]
+      }
+    },
+    "cockroach_snack": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:cockroach_snack"
+          }
+        ]
+      }
+    },
+    "raw_worm": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:raw_worm"
+          }
+        ]
+      }
+    },
+    "cooked_worm": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:cooked_worm"
+          }
+        ]
+      }
+    },
+    "worm_snack": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:worm_snack"
+          }
+        ]
+      }
+    },
+    "dry_flesh": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:dry_flesh"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_apple"
+    ],
+    [
+      "insanity_apple"
+    ],
+    [
+      "depth_apple"
+    ],
+    [
+      "raw_cockroach"
+    ],
+    [
+      "cooked_cockroach"
+    ],
+    [
+      "cockroach_snack"
+    ],
+    [
+      "raw_worm"
+    ],
+    [
+      "cooked_worm"
+    ],
+    [
+      "worm_snack"
+    ],
+    [
+      "dry_flesh"
+    ]
+  ]
+}

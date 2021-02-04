@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MSM",
+    "PRP",
+    "OAO"
+  ],
+  "key": {
+    "M": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "S": {
+      "item": "deepmagic:depth_shovel"
+    },
+    "P": {
+      "item": "minecraft:sticky_piston"
+    },
+    "R": {
+      "item": "deepmagic:ritual_none"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "A": {
+      "item": "deepmagic:depth_pickaxe"
+    }
+  },
+  "result": {
+    "item": "deepmagic:ritual_quarry",
+    "count": 1
+  }
+}

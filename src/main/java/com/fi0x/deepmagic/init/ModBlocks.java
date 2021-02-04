@@ -12,9 +12,8 @@ import com.fi0x.deepmagic.blocks.ores.*;
 import com.fi0x.deepmagic.blocks.partial.DwarfLamp;
 import com.fi0x.deepmagic.blocks.partial.MagicLight;
 import com.fi0x.deepmagic.blocks.partial.Rune;
-import com.fi0x.deepmagic.blocks.rituals.RitualBuildBlock;
-import com.fi0x.deepmagic.blocks.rituals.RitualTime;
-import com.fi0x.deepmagic.blocks.rituals.RitualWeather;
+import com.fi0x.deepmagic.blocks.rituals.*;
+import com.fi0x.deepmagic.blocks.rituals.structureblocks.RitualStructure;
 import com.fi0x.deepmagic.blocks.slabsstairs.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -132,9 +131,12 @@ public class ModBlocks
 	public static final Block ALTAR_OF_KNOWLEDGE = new AltarOfKnowledge("altar_of_knowledge", Material.ROCK);
 
 	//Ritual Blocks
-	public static final Block RITUAL_BASE = new RitualBuildBlock("ritual_base", Material.ROCK);//TODO: Add recipe
-	public static final Block RITUAL_TIME = new RitualTime("ritual_time", Material.ROCK);//TODO: Add recipe
-	public static final Block RITUAL_WEATHER = new RitualWeather("ritual_weather", Material.ROCK);//TODO: Add recipe
+	public static final Block RITUAL_STRUCTURE = new RitualStructure("ritual_structure", Material.ROCK);
+	public static final Block RITUAL_NONE = new RitualStone("ritual_none", Material.ROCK);
+	public static final Block RITUAL_TIME = new RitualTime("ritual_time", Material.ROCK);
+	public static final Block RITUAL_WEATHER = new RitualWeather("ritual_weather", Material.ROCK);
+	public static final Block RITUAL_SPAWN_DENIAL = new RitualSpawnDenial("ritual_spawn_denial", Material.ROCK);
+	public static final Block RITUAL_QUARRY = new RitualQuarry("ritual_quarry", Material.ROCK);
 
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);

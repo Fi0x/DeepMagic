@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_glowstone",
+    "count": 1
+  }
+}

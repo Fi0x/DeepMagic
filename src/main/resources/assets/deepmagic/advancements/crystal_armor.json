@@ -1,0 +1,72 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal_chestplate"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.crystal_armor.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.crystal_armor.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:deep_crystal",
+  "criteria": {
+    "crystal_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_helmet"
+          }
+        ]
+      }
+    },
+    "crystal_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_chestplate"
+          }
+        ]
+      }
+    },
+    "crystal_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_leggings"
+          }
+        ]
+      }
+    },
+    "crystal_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_helmet"
+    ],
+    [
+      "crystal_chestplate"
+    ],
+    [
+      "crystal_leggings"
+    ],
+    [
+      "crystal_boots"
+    ]
+  ]
+}

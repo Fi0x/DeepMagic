@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_axe"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth_axe.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth_axe.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:strongest_diamond",
+  "criteria": {
+    "depth_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_axe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "depth_axe"
+    ]
+  ]
+}

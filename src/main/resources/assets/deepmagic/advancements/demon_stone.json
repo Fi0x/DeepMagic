@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:demon_stone"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.demon_stone.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.demon_stone.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:demon_crystal",
+  "criteria": {
+    "stone_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:demon_stone"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone_crafted"
+    ]
+  ]
+}

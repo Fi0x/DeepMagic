@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:ritual_time"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.ritual_time.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.ritual_time.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:ritual_empty",
+  "criteria": {
+    "ritual_time": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:ritual_time"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ritual_time"
+    ]
+  ]
+}
