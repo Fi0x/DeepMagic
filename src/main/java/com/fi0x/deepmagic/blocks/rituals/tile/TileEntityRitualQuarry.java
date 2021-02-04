@@ -34,7 +34,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     {
         type = RITUAL_TYPE.QUARRY;
         manaCosts = ConfigHandler.ritualQuarryManaCosts;
-        direction = EnumFacing.Plane.HORIZONTAL.random(world.rand);//TODO: Create a way for the player to set directions
+        direction = EnumFacing.Plane.HORIZONTAL.random(world.rand);
         setReady();
     }
 

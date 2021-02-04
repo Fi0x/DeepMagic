@@ -16,9 +16,8 @@ public class TileEntityRitualSpawnDenial extends TileEntityRitualStone
     {
         /*
         TODO: Add a capability to worlds that stores locations of all rituals
-         Add block locations on block adds and remove them on block removes
-         Check for hostile mobs
-         Deny spawns around these locations
+         Add block locations on block placement and remove them on block destruction
+         Deny spawns around these locations for hostile mobs
          */
     }
 }
