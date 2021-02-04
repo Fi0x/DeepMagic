@@ -1,0 +1,15 @@
+{
+  "name": "Deep Crystal",
+  "icon": "deepmagic:deep_crystal",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:deep_crystal",
+  "secret": true,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "deepmagic:deep_crystal",
+      "link_recipe": true,
+      "text": "TODO"
+    }
+  ]
+}

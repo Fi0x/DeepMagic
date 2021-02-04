@@ -1,0 +1,13 @@
+{
+  "name": "Deep Crystal Powder",
+  "icon": "deepmagic:deep_crystal_powder",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "deepmagic:deep_crystal_powder",
+      "link_recipe": true,
+      "text": "Deep Crystal Powder can be obtained by mining $(l:e_block_deep_crystal_ore)Deep Crystal Ore/el. TODO"
+    }
+  ]
+}

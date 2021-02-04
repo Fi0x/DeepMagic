@@ -1,0 +1,11 @@
+{
+  "name": "Magic from the Depths",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_story",
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    }
+  ]
+}

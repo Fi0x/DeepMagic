@@ -1,0 +1,6 @@
+{
+  "name": "Blocks",
+  "description": "All Blocks you have discovered",
+  "icon": "deepmagic:deep_crystal_ore",
+  "secret": true
+}

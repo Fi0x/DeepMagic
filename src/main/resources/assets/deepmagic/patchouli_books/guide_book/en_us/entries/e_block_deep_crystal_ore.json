@@ -1,0 +1,13 @@
+{
+  "name": "Deep Crystal Ore",
+  "icon": "deepmagic:deep_crystal_ore",
+  "category": "deepmagic:c_blocks",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "deepmagic:deep_crystal_ore",
+      "link_recipe": true,
+      "text": "TODO"
+    }
+  ]
+}

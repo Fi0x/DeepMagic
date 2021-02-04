@@ -1,0 +1,12 @@
+{
+  "name": "Ritual Overview",
+  "icon": "deepmagic:ritual_none",
+  "category": "deepmagic:c_spells",
+  "advancement": "deepmagic:sigil_crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    }
+  ]
+}
