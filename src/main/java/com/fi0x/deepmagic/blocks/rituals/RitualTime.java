@@ -28,8 +28,6 @@ public class RitualTime extends RitualStone implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-
         if(!worldIn.isRemote)
         {
             ItemStack stack = playerIn.getHeldItem(hand);
@@ -59,7 +57,7 @@ public class RitualTime extends RitualStone implements ITileEntityProvider
             }
         }
 
-        return true;
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
     @Nullable
     @Override
