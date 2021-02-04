@@ -115,9 +115,12 @@ public class ConfigHandler
     public static int manaGainFromMob;
     public static int manaToleranceSpellStone;
     //Rituals
+    public static boolean requireRitualStructure;
     public static int ritualStoneManaCapacity;
     public static int ritualTimeManaCosts;
     public static int ritualWeatherManaCosts;
+    public static int ritualSpawnDenialManaCosts;
+    public static int ritualQuarryManaCosts;
     //Block Ranges
     public static int manaBlockTransferRange;
     public static int manaGeneratorMobRange;
@@ -337,9 +340,12 @@ public class ConfigHandler
 
         category = "Rituals";
         blocks.addCustomCategoryComment(category, "Rituals");
+        requireRitualStructure = blocks.getBoolean("Require Ritual Structure", category, true, "Require a Structure around Ritual Blocks to make Rituals work");
         ritualStoneManaCapacity = blocks.getInt("Ritual Stone Capacity", category, 5000, 1, 100000, "The Base Capacity of a Ritual");
         ritualTimeManaCosts = blocks.getInt("Time Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the time with the Time Ritual");
         ritualWeatherManaCosts = blocks.getInt("Weather Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the Weather with the Weather Ritual");
+        ritualSpawnDenialManaCosts = blocks.getInt("Spawn Denial Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to deny Spawns with the Spawn Denial Ritual");
+        ritualQuarryManaCosts = blocks.getInt("Quarry Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to Dig with the Quarry Ritual");
 
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");

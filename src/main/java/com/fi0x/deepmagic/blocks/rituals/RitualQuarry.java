@@ -1,11 +1,12 @@
 package com.fi0x.deepmagic.blocks.rituals;
 
-import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualWeather;
+import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualQuarry;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemCompass;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,9 +19,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class RitualWeather extends RitualStone implements ITileEntityProvider
+public class RitualQuarry extends RitualStone implements ITileEntityProvider
 {
-    public RitualWeather(String name, Material material)
+    public RitualQuarry(String name, Material material)
     {
         super(name, material);
     }
@@ -33,22 +34,20 @@ public class RitualWeather extends RitualStone implements ITileEntityProvider
             ItemStack stack = playerIn.getHeldItem(hand);
             Item item = stack.getItem();
 
-            if(item.getUnlocalizedName().equals("item.diamond"))
+            if(item instanceof ItemCompass)
             {
-                TileEntityRitualWeather tile = (TileEntityRitualWeather) worldIn.getTileEntity(pos);
-                assert tile != null;
-                String newWeather = tile.nextWeather();
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Ritual weather set to " + newWeather));
-                stack.shrink(1);
+                TileEntityRitualQuarry te = (TileEntityRitualQuarry) worldIn.getTileEntity(pos);
+                assert te != null;
+                EnumFacing dir = te.nextDirection();
+                playerIn.sendMessage(new TextComponentString(TextFormatting.WHITE + "Travel direction of quarry changed to " + dir));
             }
         }
-
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
     {
-        return new TileEntityRitualWeather();
+        return new TileEntityRitualQuarry();
     }
 }

@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.storage.WorldInfo;
@@ -12,8 +13,10 @@ public class TileEntityRitualWeather extends TileEntityRitualStone
 
     public TileEntityRitualWeather()
     {
+        type = RITUAL_TYPE.WEATHER;
         manaCosts = ConfigHandler.ritualWeatherManaCosts;
         syncTime = 100;
+        manaOnSync = false;
     }
 
     @Override
