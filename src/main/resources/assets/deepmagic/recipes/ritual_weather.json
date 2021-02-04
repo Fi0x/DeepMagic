@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "LRW",
+    "SBS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "C": {
+      "item": "deepmagic:dimensional_crystal"
+    },
+    "L": {
+      "item": "minecraft:lava_bucket"
+    },
+    "R": {
+      "item": "deepmagic:ritual_none"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "deepmagic:ritual_weather",
+    "count": 1
+  }
+}

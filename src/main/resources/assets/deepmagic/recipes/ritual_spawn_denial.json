@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SHS",
+    "HRH",
+    "SES"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "R": {
+      "item": "deepmagic:ritual_none"
+    },
+    "H": {
+      "type": "forge:ore_dict",
+      "ore": "head"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "deepmagic:ritual_spawn_denial",
+    "count": 1
+  }
+}
