@@ -1,0 +1,15 @@
+{
+  "name": "Mana Grinder",
+  "icon": "deepmagic:mana_grinder",
+  "category": "deepmagic:c_blocks",
+  "advancement": "deepmagic:mana_segment",
+  "secret": true,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "deepmagic:mana_grinder",
+      "link_recipe": true,
+      "text": "TODO"
+    }
+  ]
+}

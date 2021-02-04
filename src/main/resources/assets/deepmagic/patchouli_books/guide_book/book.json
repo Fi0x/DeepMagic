@@ -10,7 +10,7 @@
     "deepmagic"
   ],
   "macros": {
-    "/br": "$(br)",
+    "/br1": "$(br)",
     "/br2": "$(br2)",
     "/li": "$(li)",
     "/player": "$(playername)",
