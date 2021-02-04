@@ -12,7 +12,7 @@
     "frame": "task",
     "hidden": false
   },
-  "parent": "deepmagic:sigil_crafting",
+  "parent": "deepmagic:depth_wood",
   "criteria": {
     "dia_crafted": {
       "trigger": "minecraft:inventory_changed",

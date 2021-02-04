@@ -3,7 +3,7 @@
   "pattern": [
     "RCR",
     "CDC",
-    "SCS"
+    "STS"
   ],
   "key": {
     "D": {
@@ -17,6 +17,9 @@
     },
     "R": {
       "item": "deepmagic:magic_sigil"
+    },
+    "T": {
+      "item": "deepmagic:reinforced_stick"
     }
   },
   "result": {

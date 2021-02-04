@@ -250,3 +250,7 @@ advancement.deepmagic.insanity_ores.found.title=New Ores
 advancement.deepmagic.insanity_ores.found.description=Mine all Ores in the Insanity Dimension with Silk Touch
 advancement.deepmagic.depth_ores.found.title=Precious Dimension
 advancement.deepmagic.depth_ores.found.description=Mine all Ores in the Depth Dimension with Silk Touch
+advancement.deepmagic.insanity_flowers.found.title=Otherworldly Beauty
+advancement.deepmagic.insanity_flowers.found.description=Collect all Flowers of the Insanity Dimension
+advancement.deepmagic.depth_log.found.title=Hardest Wood
+advancement.deepmagic.depth_log.found.description=Collect Compressed Log
