@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.sigil.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.sigil.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:root",
+  "criteria": {
+    "sigil_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:magic_sigil"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sigil_crafted"
+    ]
+  ]
+}

@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.items.spells;
 
-import com.fi0x.deepmagic.blocks.SpellStone;
+import com.fi0x.deepmagic.blocks.mana.SpellStone;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
 import com.fi0x.deepmagic.items.spells.modifiers.ISpellModifier;
@@ -60,9 +60,8 @@ public class Spell extends ItemBase implements IMagicItem
             playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You are not skilled enough for this spell"));
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
-        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(playerIn, compound.getDouble("manaCosts"))))
+        if(compound.hasKey("manaCosts") && !(playerMana.removeMana(playerIn, compound.getDouble("manaCosts"), true)))
         {
-            playerIn.sendMessage(new TextComponentString(TextFormatting.RED + "You don't have enough mana"));
             return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
         }
 

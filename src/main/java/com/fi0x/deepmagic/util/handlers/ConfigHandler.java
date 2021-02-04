@@ -114,6 +114,13 @@ public class ConfigHandler
     public static int manaMachineManaCapacity;
     public static int manaGainFromMob;
     public static int manaToleranceSpellStone;
+    //Rituals
+    public static boolean requireRitualStructure;
+    public static int ritualStoneManaCapacity;
+    public static int ritualTimeManaCosts;
+    public static int ritualWeatherManaCosts;
+    public static int ritualSpawnDenialManaCosts;
+    public static int ritualQuarryManaCosts;
     //Block Ranges
     public static int manaBlockTransferRange;
     public static int manaGeneratorMobRange;
@@ -144,11 +151,15 @@ public class ConfigHandler
     public static int teleportationCrystalManaCost;
     public static int teleportationCrystalManaCostDepth;
     public static int spellBaseManaCost;
+    public static float manaFlightCost;
     //Skill XP
     public static int teleportationCrystalSkillXP;
     //Tools
     public static int deepCrystalMiningLevel;
     public static int depthMiningLevel;
+    //Endgame Equipment
+    public static boolean depthToolsActive;
+    public static boolean depthArmorActive;
 
     public static void registerConfig(FMLPreInitializationEvent event)
     {
@@ -327,6 +338,15 @@ public class ConfigHandler
         manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
         manaToleranceSpellStone = blocks.getInt("Spell Stone Mana Tolerance", category, 100, 1, 10000, "How much mana a Spell Stone can be short of without explodint");
 
+        category = "Rituals";
+        blocks.addCustomCategoryComment(category, "Rituals");
+        requireRitualStructure = blocks.getBoolean("Require Ritual Structure", category, true, "Require a Structure around Ritual Blocks to make Rituals work");
+        ritualStoneManaCapacity = blocks.getInt("Ritual Stone Capacity", category, 5000, 1, 100000, "The Base Capacity of a Ritual");
+        ritualTimeManaCosts = blocks.getInt("Time Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the time with the Time Ritual");
+        ritualWeatherManaCosts = blocks.getInt("Weather Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the Weather with the Weather Ritual");
+        ritualSpawnDenialManaCosts = blocks.getInt("Spawn Denial Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to deny Spawns with the Spawn Denial Ritual");
+        ritualQuarryManaCosts = blocks.getInt("Quarry Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to Dig with the Quarry Ritual");
+
         category = "Ranges";
         blocks.addCustomCategoryComment(category, "Block Ranges");
         manaBlockTransferRange = blocks.getInt("Mana Transfer Range", category, 10, 1, 100, "The maximum Distance between Blocks to be able to transfer Mana");
@@ -376,6 +396,7 @@ public class ConfigHandler
         teleportationCrystalManaCost = items.getInt("Teleportation Crystal Cost", category, 90, 0, 10000, "Mana Costs for the Teleportation Crystal");
         teleportationCrystalManaCostDepth = items.getInt("Depth Dimension teleport costs", category, 900, 0, 100000, "Mana Costs for Teleporting in or out of Depth Dimension");
         spellBaseManaCost = items.getInt("Base Spell Cost", category, 10, 1, 1000, "The Costs for a Spell without effect");
+        manaFlightCost = items.getFloat("Flight Mana Costs", category, 1, 0, 100, "The Amount of Mana consumed every Tick while flying");
 
         category = "Skill XP";
         items.addCustomCategoryComment(category, "Skill XP");
@@ -385,6 +406,11 @@ public class ConfigHandler
         items.addCustomCategoryComment(category, "Tools");
         deepCrystalMiningLevel = items.getInt("Deep Crystal Mining Level", category, 4, 0, 100, "Mining Level for Deep Crystal Tools");
         depthMiningLevel = items.getInt("Depth Mining Level", category, 4, 0, 100, "Mining Level for Depth Tools");
+
+        category = "Endgame-Equipment";
+        items.addCustomCategoryComment(category, "Endgame-Equipment");
+        depthToolsActive = items.getBoolean("Depth Tools Abilities", category, true, "Enables the special Abilities of Depth Tools");
+        depthArmorActive = items.getBoolean("Depth Armor Abilities", category, true, "Enables the special Abilities of Depth Armor");
 
         items.save();
     }

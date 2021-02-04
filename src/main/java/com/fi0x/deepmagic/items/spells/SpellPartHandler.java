@@ -144,6 +144,8 @@ public class SpellPartHandler
                 return new SpEfBuff();
             case SpEfCharm.NAME:
                 return new SpEfCharm();
+            case SpEfCookie.NAME:
+                return new SpEfCookie();
             case SpEfDayNight.NAME:
                 return new SpEfDayNight();
             case SpEfDig.NAME:

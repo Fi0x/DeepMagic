@@ -1,0 +1,56 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:speed_stone"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.utility_stones.placed.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.utility_stones.placed.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:world_segment",
+  "criteria": {
+    "speed_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:speed_stone"
+      }
+    },
+    "vision_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:vision_stone"
+      }
+    },
+    "saturation_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:saturation_stone"
+      }
+    },
+    "levitation_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:levitation_stone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "speed_stone"
+    ],
+    [
+      "vision_stone"
+    ],
+    [
+      "saturation_stone"
+    ],
+    [
+      "levitation_stone"
+    ]
+  ]
+}

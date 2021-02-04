@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    "CDC",
+    "STS"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "deepmagic:compressed_deep_crystal"
+    },
+    "S": {
+      "item": "deepmagic:empty_scroll"
+    },
+    "R": {
+      "item": "deepmagic:magic_sigil"
+    },
+    "T": {
+      "item": "deepmagic:reinforced_stick"
+    }
+  },
+  "result": {
+    "item": "deepmagic:strongest_diamond",
+    "count": 1
+  }
+}

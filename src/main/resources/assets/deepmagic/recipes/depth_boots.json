@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CBC",
+    "C C"
+  ],
+  "key": {
+    "C": {
+      "item": "deepmagic:strongest_diamond"
+    },
+    "B": {
+      "item": "deepmagic:deep_crystal_boots"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_boots",
+    "count": 1
+  }
+}

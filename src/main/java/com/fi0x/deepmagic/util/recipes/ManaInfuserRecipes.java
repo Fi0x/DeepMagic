@@ -30,15 +30,20 @@ public class ManaInfuserRecipes
 
     public ItemStack getInfuserResult(ItemStack input)
     {
-        for (Map.Entry<ItemStack, ItemStack> entry : infusionList.entrySet())
+        for(Map.Entry<ItemStack, ItemStack> entry : infusionList.entrySet())
         {
-            if (this.compareItemStacks(input, entry.getKey()))
+            if(this.compareItemStacks(input, entry.getKey()))
             {
                 return new ItemStack(entry.getValue().getItem(), entry.getValue().getCount());
             }
         }
         return ItemStack.EMPTY;
     }
+    public Map<ItemStack, ItemStack> getRecipeMap()
+    {
+        return infusionList;
+    }
+
     private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
     {
         return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());

@@ -1,0 +1,56 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:attack_stone"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.combat_stones.placed.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.combat_stones.placed.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:world_segment",
+  "criteria": {
+    "defence_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:defence_stone"
+      }
+    },
+    "attack_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:attack_stone"
+      }
+    },
+    "poison_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:poison_stone"
+      }
+    },
+    "heal_stone": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:heal_stone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "defence_stone"
+    ],
+    [
+      "attack_stone"
+    ],
+    [
+      "poison_stone"
+    ],
+    [
+      "heal_stone"
+    ]
+  ]
+}

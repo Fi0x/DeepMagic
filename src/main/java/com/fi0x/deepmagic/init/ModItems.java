@@ -1,8 +1,9 @@
 package com.fi0x.deepmagic.init;
 
-import com.fi0x.deepmagic.items.ArmorBase;
 import com.fi0x.deepmagic.items.DemonCrystal;
 import com.fi0x.deepmagic.items.ItemBase;
+import com.fi0x.deepmagic.items.armor.ArmorBase;
+import com.fi0x.deepmagic.items.armor.DepthArmor;
 import com.fi0x.deepmagic.items.food.FoodBase;
 import com.fi0x.deepmagic.items.food.FoodEffectBase;
 import com.fi0x.deepmagic.items.mana.*;
@@ -30,6 +31,7 @@ public class ModItems
 	public static final ToolMaterial MATERIAL_DEEP_CRYSTAL = EnumHelper.addToolMaterial("material_deep_crystal", ConfigHandler.deepCrystalMiningLevel, 1561, 10.0F, 4.0F, 15);
 	public static final ArmorMaterial ARMOR_MATERIAL_DEEP_CRYSTAL = EnumHelper.addArmorMaterial("armor_material_deep_crystal", Reference.MOD_ID + ":deep_crystal", 16, new int[]{4, 9, 7, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0F);
 	public static final ToolMaterial MATERIAL_DEPTH = EnumHelper.addToolMaterial("material_depth", ConfigHandler.depthMiningLevel, 2000, 15F, 3, 10);
+	public static final ArmorMaterial ARMOR_MATERIAL_DEPTH = EnumHelper.addArmorMaterial("armor_material_depth", Reference.MOD_ID + ":depth", 32, new int[]{8, 18, 14, 8}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.0F);
 
 	//Items
 	public static final Item TELEPORTATION_CRYSTAL = new TeleportationCrystal("teleportation_crystal");
@@ -47,20 +49,26 @@ public class ModItems
 	public static final ItemAxe DEEP_CRYSTAL_AXE = new ToolAxe("deep_crystal_axe", MATERIAL_DEEP_CRYSTAL, 8, -3.2F);
 	public static final ItemHoe DEEP_CRYSTAL_HOE = new ToolHoe("deep_crystal_hoe", MATERIAL_DEEP_CRYSTAL);
 	//Depth
-	public static final ItemSword DEPTH_SWORD = new ToolSword("depth_sword", MATERIAL_DEPTH);
-	public static final ItemSpade DEPTH_SHOVEL = new ToolSpade("depth_shovel", MATERIAL_DEPTH);
-	public static final ItemPickaxe DEPTH_PICKAXE = new ToolPickaxe("depth_pickaxe", MATERIAL_DEPTH);
-	public static final ItemAxe DEPTH_AXE = new ToolAxe("depth_axe", MATERIAL_DEPTH, 1, 3);
-	public static final ItemHoe DEPTH_HOE = new ToolHoe("depth_hoe", MATERIAL_DEPTH);
+	public static final ItemSword DEPTH_SWORD = new DepthSword("depth_sword", MATERIAL_DEPTH);
+	public static final ItemSpade DEPTH_SHOVEL = new DepthSpade("depth_shovel", MATERIAL_DEPTH);
+	public static final ItemPickaxe DEPTH_PICKAXE = new DepthPickaxe("depth_pickaxe", MATERIAL_DEPTH);
+	public static final ItemAxe DEPTH_AXE = new DepthAxe("depth_axe", MATERIAL_DEPTH);
+	public static final ItemHoe DEPTH_HOE = new DepthHoe("depth_hoe", MATERIAL_DEPTH);
 
 	//Spells
 	public static final Item SPELL = new Spell("spell");
 
 	//Armor
+	//Crystal
 	public static final Item DEEP_CRYSTAL_HELMET = new ArmorBase("deep_crystal_helmet", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.HEAD);
 	public static final Item DEEP_CRYSTAL_CHESTPLATE = new ArmorBase("deep_crystal_chestplate", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.CHEST);
 	public static final Item DEEP_CRYSTAL_LEGGINGS = new ArmorBase("deep_crystal_leggings", ARMOR_MATERIAL_DEEP_CRYSTAL, 2, EntityEquipmentSlot.LEGS);
 	public static final Item DEEP_CRYSTAL_BOOTS = new ArmorBase("deep_crystal_boots", ARMOR_MATERIAL_DEEP_CRYSTAL, 1, EntityEquipmentSlot.FEET);
+	//Depth
+	public static final Item DEPTH_HELMET = new DepthArmor("depth_helmet", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.HEAD);
+	public static final Item DEPTH_CHESTPLATE = new DepthArmor("depth_chestplate", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.CHEST);
+	public static final Item DEPTH_LEGGINGS = new DepthArmor("depth_leggings", ARMOR_MATERIAL_DEPTH, 2, EntityEquipmentSlot.LEGS);
+	public static final Item DEPTH_BOOTS = new DepthArmor("depth_boots", ARMOR_MATERIAL_DEPTH, 1, EntityEquipmentSlot.FEET);
 
 	//Food
 	public static final Item CRYSTAL_INFUSED_APPLE = new FoodEffectBase("crystal_infused_apple", 2, 1.0F, false, new PotionEffect(MobEffects.STRENGTH, (20 * 20), 1, false, true), true);
@@ -90,4 +98,7 @@ public class ModItems
 	public static final Item KNOWLEDGE_SEGMENT = new ItemBase("knowledge_segment");
 	public static final Item WORLD_INTERACTION_SEGMENT = new ItemBase("world_interaction_segment");
 	public static final Item MANA_SEGMENT = new ItemBase("mana_segment");
+	public static final Item DEPTH_STICK = new ItemBase("depth_stick");
+	public static final Item REINFORCED_STICK = new ItemBase("reinforced_stick");
+	public static final Item STRONGEST_DIAMOND = new ItemBase("strongest_diamond");
 }

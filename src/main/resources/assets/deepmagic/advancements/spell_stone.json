@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:spell_stone"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.spell_stone.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.spell_stone.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:spell_crafting",
+  "criteria": {
+    "spell_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:spell_stone"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "spell_stone"
+    ]
+  ]
+}

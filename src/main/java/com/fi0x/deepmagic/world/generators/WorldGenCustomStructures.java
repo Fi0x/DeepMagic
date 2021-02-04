@@ -43,15 +43,15 @@ public class WorldGenCustomStructures implements IWorldGenerator
             if(ConfigHandler.generateInsanityRockTrollCaves) generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, 15, 15, BiomeInsanityHills.class);
             if(ConfigHandler.generateShrines) generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, 11, 11, BiomeInsanityPlains.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
             if(ConfigHandler.generateInsanityOases) generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, 21, 21, BiomeInsanityPlains.class);
-            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -5, 300, 9, 9, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
+            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -3, 300, 9, 9, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
 //            if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, 31, 31, BiomeInsanityPlains.class);
 
-            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
+            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
         } else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
         {
-            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);
+            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);//TODO: Use depth blocks
 
-            //TODO: Use customized dungeon
+            //TODO: Use customized dungeon spawns
 //            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeDepth.class);
         }
     }
@@ -63,7 +63,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
         int x = (chunkX * 16) + random.nextInt(32 - sizeX);
         int z = (chunkZ * 16) + random.nextInt(32 - sizeZ);
         int y = calculateGenerationHeight(world, x, z) + yOffset;
-        if(heightDifference < 0) y = random.nextInt(200 / Math.abs(heightDifference)) + 10;
+        if(heightDifference < 0) y = random.nextInt(100 / Math.abs(heightDifference)) + 10;
         BlockPos pos = new BlockPos(x, y, z);
 
         Class<?> biome = world.provider.getBiomeForCoords(pos).getClass();

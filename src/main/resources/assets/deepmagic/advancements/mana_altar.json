@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_altar"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.mana_altar.placed.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.mana_altar.placed.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:mana_segment",
+  "criteria": {
+    "altar_placed": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:mana_altar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "altar_placed"
+    ]
+  ]
+}

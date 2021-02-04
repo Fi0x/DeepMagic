@@ -3,8 +3,6 @@ package com.fi0x.deepmagic.items.mana;
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.depth.DepthDirt;
 import com.fi0x.deepmagic.blocks.depth.DepthStone;
-import com.fi0x.deepmagic.blocks.insanity.InsanityDirt;
-import com.fi0x.deepmagic.blocks.insanity.InsanityStone;
 import com.fi0x.deepmagic.commands.Teleport;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -15,7 +13,6 @@ import com.fi0x.deepmagic.util.IHasModel;
 import com.fi0x.deepmagic.util.IMagicItem;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,19 +73,34 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
             if(playerIn.isSneaking() && playerIn.dimension != ConfigHandler.dimensionIdDepthID) manaCosts = ConfigHandler.teleportationCrystalManaCostDepth;
             else manaCosts = ConfigHandler.teleportationCrystalManaCost;
 
-            if(playerMana.removeMana(playerIn, manaCosts))
+            if(playerMana.removeMana(playerIn, manaCosts, true))
             {
                 playerMana.addSkillXP(playerIn, ConfigHandler.teleportationCrystalSkillXP);
                 int x = (int) playerIn.posX;
                 int z = (int) playerIn.posZ;
-                if(playerIn.isSneaking())
+                if(playerIn.isSneaking() && playerIn.dimension == 0)
                 {
                     x *= 0.05;
                     z *= 0.05;
                     playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
                     return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
-                }
-                else if(playerIn.dimension == 0)
+                } else if(playerIn.isSneaking() && playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
+                {
+                    x *= 0.005;
+                    z *= 0.005;
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                } else if(playerIn.isSneaking() && playerIn.dimension == -1)
+                {
+                    x *= 0.4;
+                    z *= 0.4;
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                } else if(playerIn.isSneaking())
+                {
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                } else if(playerIn.dimension == 0)
                 {
                     x *= 10;
                     z *= 10;
@@ -99,19 +111,16 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
                 {
                     x *= 8;
                     z *= 8;
-                    return teleportEntityTo(playerIn, 0, x, z, stack);
                 } else if(playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
                 {
                     x *= 0.1;
                     z *= 0.1;
                     playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "Your mind clears as you return to the overworld"));
-                    return teleportEntityTo(playerIn, 0, x, z, stack);
-                } else if(playerIn.dimension == ConfigHandler.dimensionIdDepthID && playerIn.isSneaking())
+                } else if(playerIn.dimension == ConfigHandler.dimensionIdDepthID)
                 {
                     x *= 20;
                     z *= 20;
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You feel the pressure dropping as you return to the surface"));
-                    return teleportEntityTo(playerIn, 0, x, z, stack);
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "The pressure around you drops as you return to the overworld"));
                 }
 
                 return teleportEntityTo(playerIn, 0, x, z, stack);

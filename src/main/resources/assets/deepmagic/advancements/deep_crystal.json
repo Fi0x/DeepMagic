@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:deep_crystal"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.deep_crystal.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.deep_crystal.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:root",
+  "criteria": {
+    "crystal_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crystal_crafted"
+    ]
+  ]
+}

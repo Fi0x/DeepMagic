@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CS",
+    " S"
+  ],
+  "key": {
+    "C": {
+      "item": "deepmagic:strongest_diamond"
+    },
+    "S": {
+      "item": "deepmagic:reinforced_stick"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_axe",
+    "count": 1
+  }
+}

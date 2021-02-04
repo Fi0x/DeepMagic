@@ -1,0 +1,124 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:insanity_coal_ore"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.insanity_ores.found.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.insanity_ores.found.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:insanity_dimension",
+  "criteria": {
+    "insanity_coal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_coal_ore"
+          }
+        ]
+      }
+    },
+    "insanity_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_iron_ore"
+          }
+        ]
+      }
+    },
+    "insanity_redstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_redstone_ore"
+          }
+        ]
+      }
+    },
+    "insanity_lapis": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_lapis_ore"
+          }
+        ]
+      }
+    },
+    "insanity_gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_gold_ore"
+          }
+        ]
+      }
+    },
+    "insanity_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_diamond_ore"
+          }
+        ]
+      }
+    },
+    "insanity_emerald": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_emerald_ore"
+          }
+        ]
+      }
+    },
+    "insanity_deep_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:insanity_deep_crystal_ore"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "insanity_coal"
+    ],
+    [
+      "insanity_iron"
+    ],
+    [
+      "insanity_redstone"
+    ],
+    [
+      "insanity_lapis"
+    ],
+    [
+      "insanity_gold"
+    ],
+    [
+      "insanity_diamond"
+    ],
+    [
+      "insanity_emerald"
+    ],
+    [
+      "insanity_deep_crystal"
+    ]
+  ]
+}

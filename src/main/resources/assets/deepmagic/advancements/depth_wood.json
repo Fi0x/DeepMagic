@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_log"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth_log.found.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth_log.found.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:depth_dimension",
+  "criteria": {
+    "log_collected": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_log"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "log_collected"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.blocks.containers.ContainerManaGeneratorMob;
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGeneratorMob;
+import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaGeneratorMob;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;

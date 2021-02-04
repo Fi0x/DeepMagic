@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CBC",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "deepmagic:strongest_diamond"
+    },
+    "B": {
+      "item": "deepmagic:deep_crystal_chestplate"
+    }
+  },
+  "result": {
+    "item": "deepmagic:depth_chestplate",
+    "count": 1
+  }
+}

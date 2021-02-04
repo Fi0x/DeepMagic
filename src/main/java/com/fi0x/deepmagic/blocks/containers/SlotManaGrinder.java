@@ -1,6 +1,6 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.tileentity.TileEntityManaGrinder;
+import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaGrinder;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
