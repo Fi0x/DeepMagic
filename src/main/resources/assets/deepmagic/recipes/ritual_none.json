@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    " D ",
+    "SMS"
+  ],
+  "key": {
+    "S": {
+      "item": "deepmagic:ritual_structure"
+    },
+    "W": {
+      "item": "deepmagic:world_interaction_segment"
+    },
+    "D": {
+      "item": "deepmagic:strongest_diamond"
+    },
+    "M": {
+      "item": "deepmagic:mana_segment"
+    }
+  },
+  "result": {
+    "item": "deepmagic:ritual_none",
+    "count": 1
+  }
+}

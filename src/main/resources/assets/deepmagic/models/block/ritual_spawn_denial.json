@@ -1,5 +1,5 @@
 {
-  "parent": "deepmagic:block/ritual_stone",
+  "parent": "deepmagic:block/ritual_none",
   "textures": {
     "rtype": "deepmagic:blocks/ritual/type_spawn_denial"
   }

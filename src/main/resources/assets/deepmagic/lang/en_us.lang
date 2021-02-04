@@ -106,6 +106,7 @@ tile.spell_stone.name=Spell Stone
 tile.altar_of_knowledge.name=Altar of Knowledge
 
 tile.ritual_structure.name=Ritual Structure Block
+tile.ritual_none.name=Empty Ritual
 tile.ritual_time.name=Time Ritual
 tile.ritual_weather.name=Weather Ritual
 tile.ritual_spawn_denial.name=Spawn Denial Ritual
