@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:ritual_weather"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.ritual_weather.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.ritual_weather.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:ritual_empty",
+  "criteria": {
+    "ritual_weather": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:ritual_weather"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ritual_weather"
+    ]
+  ]
+}

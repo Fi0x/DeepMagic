@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:ritual_quarry"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.ritual_quarry.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.ritual_quarry.crafted.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:ritual_empty",
+  "criteria": {
+    "ritual_quarry": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "deepmagic:ritual_quarry"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ritual_quarry"
+    ]
+  ]
+}
