@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:ritual_structure"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.ritual_structure.crafted.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.ritual_structure.crafted.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "deepmagic:depth_wood",
+  "criteria": {
+    "structure_crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:ritual_structure"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "structure_crafted"
+    ]
+  ]
+}

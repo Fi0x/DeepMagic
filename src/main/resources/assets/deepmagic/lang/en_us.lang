@@ -263,3 +263,7 @@ advancement.deepmagic.utility_stones.placed.title=Useful Stones
 advancement.deepmagic.utility_stones.placed.description=Place all Effect Stones that are not related to combat
 advancement.deepmagic.crystal_tools.crafted.title=Deep Crystal Worker
 advancement.deepmagic.crystal_tools.crafted.description=Craft all Deep Crystal Tools
+advancement.deepmagic.ritual_structure.crafted.title=Ritual Structure
+advancement.deepmagic.ritual_structure.crafted.description=Craft a Ritual Structure Block
+advancement.deepmagic.ritual_none.crafted.title=Rituals
+advancement.deepmagic.ritual_none.crafted.description=Craft an empty Ritual
