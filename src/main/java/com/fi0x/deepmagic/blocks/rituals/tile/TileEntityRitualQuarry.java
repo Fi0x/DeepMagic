@@ -116,6 +116,13 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         }
     }
 
+    public EnumFacing nextDirection()
+    {
+        int idx = (direction.ordinal() - 1) % 4;
+        direction = EnumFacing.Plane.HORIZONTAL.facings()[idx];
+        return direction;
+    }
+
     private void setReady()
     {
         digX = pos.getX();

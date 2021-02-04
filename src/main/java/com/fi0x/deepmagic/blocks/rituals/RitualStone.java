@@ -54,7 +54,7 @@ public abstract class RitualStone extends BlockBase
                     compound.setInteger("z", pos.getZ());
                     playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
                 }
-            } else
+            } else if(stack.isEmpty())
             {
                 TileEntityRitualStone te = (TileEntityRitualStone) worldIn.getTileEntity(pos);
                 assert te != null;
