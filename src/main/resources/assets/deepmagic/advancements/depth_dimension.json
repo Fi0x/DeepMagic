@@ -10,7 +10,7 @@
       "translate": "advancement.deepmagic.depth.dimension.description"
     },
     "frame": "goal",
-    "hidden": true
+    "hidden": false
   },
   "parent": "deepmagic:teleport_crafting",
   "criteria": {

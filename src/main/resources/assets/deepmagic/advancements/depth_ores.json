@@ -1,0 +1,124 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:depth_coal_ore"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.depth_ores.found.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.depth_ores.found.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:depth_dimension",
+  "criteria": {
+    "depth_coal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_coal_ore"
+          }
+        ]
+      }
+    },
+    "depth_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_iron_ore"
+          }
+        ]
+      }
+    },
+    "depth_redstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_redstone_ore"
+          }
+        ]
+      }
+    },
+    "depth_lapis": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_lapis_ore"
+          }
+        ]
+      }
+    },
+    "depth_gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_gold_ore"
+          }
+        ]
+      }
+    },
+    "depth_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_diamond_ore"
+          }
+        ]
+      }
+    },
+    "depth_emerald": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:depth_emerald_ore"
+          }
+        ]
+      }
+    },
+    "depth_deep_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "deepmagic:deep_crystal_ore_compressed"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "depth_coal"
+    ],
+    [
+      "depth_iron"
+    ],
+    [
+      "depth_redstone"
+    ],
+    [
+      "depth_lapis"
+    ],
+    [
+      "depth_gold"
+    ],
+    [
+      "depth_diamond"
+    ],
+    [
+      "depth_emerald"
+    ],
+    [
+      "depth_deep_crystal"
+    ]
+  ]
+}
