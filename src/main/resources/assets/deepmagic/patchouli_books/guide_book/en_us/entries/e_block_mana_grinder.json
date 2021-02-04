@@ -9,7 +9,12 @@
       "type": "spotlight",
       "item": "deepmagic:mana_grinder",
       "link_recipe": true,
-      "text": "TODO"
+      "text": "This block allows the user to grind down blocks and items. When using the Mana Grinder on ores, the result is usually better than when put into a furnace or mined by hand./br2This block requires $(l:e_mana_machine_mana)mana/el to work."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:mana_grinder",
+      "text": "Keep in mind that this machine can not run on its own. You need to provide a $(l:e_mana_machine_sources)mana source/el for it to work."
     }
   ]
 }
