@@ -2,5 +2,6 @@
   "name": "Advanced Magic",
   "description": "After learning the fundamentals of becoming a magician, you can learn some more advanced things in this chapter.",
   "icon": "minecraft:book",
+  "sortnum": 2,
   "secret": true
 }

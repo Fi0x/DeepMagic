@@ -2,5 +2,6 @@
   "name": "Dimensions",
   "description": "Information about the dimensions this mod adds.",
   "icon": "deepmagic:teleportation_crystal",
+  "sortnum": 9,
   "secret": true
 }

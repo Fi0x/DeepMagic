@@ -2,5 +2,6 @@
   "name": "Items",
   "description": "All Items you have discovered.",
   "icon": "deepmagic:deep_crystal",
+  "sortnum": 3,
   "secret": true
 }

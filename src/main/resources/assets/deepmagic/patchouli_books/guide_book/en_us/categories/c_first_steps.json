@@ -2,5 +2,6 @@
   "name": "First Steps",
   "description": "An introduction to 'Deep Magic' and some tips for the journey of becoming a good magician.",
   "icon": "minecraft:book",
+  "sortnum": 1,
   "secret": true
 }

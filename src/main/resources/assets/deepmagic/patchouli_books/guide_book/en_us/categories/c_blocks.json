@@ -2,5 +2,6 @@
   "name": "Blocks",
   "description": "All Blocks you have discovered.",
   "icon": "deepmagic:deep_crystal_ore",
+  "sortnum": 4,
   "secret": true
 }
