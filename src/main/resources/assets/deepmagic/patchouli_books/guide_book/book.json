@@ -5,6 +5,7 @@
   "book_texture": "patchouli:textures/gui/book_gray.png",
   "model": "deepmagic:guide_book",
   "show_progress": false,
+  "filler_texture": "deepmagic:textures/items/deep_crystal_powder.png",
   "creative_tab": "deepmagic_items_tab",
   "advancement_namespaces": [
     "deepmagic"
