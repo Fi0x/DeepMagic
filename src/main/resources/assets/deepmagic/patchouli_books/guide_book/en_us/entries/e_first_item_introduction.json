@@ -6,6 +6,15 @@
     {
       "type": "text",
       "title": "Magical Items",
+      "text": "This entry introduces the most important items you can create with this mod. There are several paths you might want to follow."
+    },
+    {
+      "type": "text",
+      "text": "The following pages will describe each of these paths and what you can expect when following them."
+    },
+    {
+      "type": "text",
+      "title": "Deep Crystal Tools",
       "text": "TODO"
     }
   ]
