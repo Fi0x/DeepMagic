@@ -6,15 +6,27 @@
   "secret": true,
   "pages": [
     {
+      "type": "text",
+      "title": "Mana Grinder",
+      "text": "The Mana Grinder is a machine that allows the user to grind down blocks and items by consuming $(l:e_mana_machine_mana)Mana/el. When using the Mana Grinder on ores, the result is usually better than in a furnace."
+    },
+    {
       "type": "spotlight",
       "item": "deepmagic:mana_grinder",
       "link_recipe": true,
-      "text": "This block allows the user to grind down blocks and items. When using the Mana Grinder on ores, the result is usually better than when put into a furnace or mined by hand./br2This block requires $(l:e_mana_machine_mana)mana/el to work."
+      "text": "To use this block, you need to provide a constant supply of $(l:e_mana_machine_mana)Mana/el. This can be done by $(l:e_mechanic_mana_linking)linking/el a $(l:e_block_mana_relay)Mana Relay/el or a $(l:e_block_mana_generators)Mana Generator/el to it."
     },
     {
       "type": "crafting",
       "recipe": "deepmagic:mana_grinder",
-      "text": "Keep in mind that this machine can not run on its own. You need to provide a $(l:e_mana_machine_sources)mana source/el for it to work."
+      "text": "Keep in mind that this machine can not run on its own. You need to provide a $(l:e_mana_machine_sources)Mana source/el for it to work."
+    },
+    {
+      "type": "image",
+      "images": [
+        "deepmagic:images/mana_grinder.png"
+      ],
+      "border": true
     }
   ]
 }

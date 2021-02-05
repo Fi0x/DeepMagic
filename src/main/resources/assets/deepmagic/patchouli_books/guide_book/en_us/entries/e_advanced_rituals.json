@@ -1,0 +1,14 @@
+{
+  "name": "Ritual Introduction",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_advanced_magic",
+  "advancement": "deepmagic:sigil_crafting",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Ritual Introduction",
+      "text": "TODO"
+    }
+  ]
+}

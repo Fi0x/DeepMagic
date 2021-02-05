@@ -1,0 +1,13 @@
+{
+  "name": "Mana Generators",
+  "icon": "deepmagic:mana_generator_normal",
+  "category": "deepmagic:c_blocks",
+  "advancement": "deepmagic:mana_segment",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    }
+  ]
+}

@@ -4,38 +4,54 @@
   "category": "deepmagic:c_blocks",
   "pages": [
     {
-      "type": "spotlight",
-      "item": "deepmagic:deep_crystal_ore",
-      "link_recipe": true,
+      "type": "text",
+      "title": "Deep Crystal Ore",
       "text": "This ore can be found in every dimension. It drops $(l:e_item_deep_crystal_powder)Deep Crystal Powder/el when mined or the ore itself when mined with silk touch. In a $(l:e_block_mana_grinder)Mana Grinder/el it can be broken down into Deep Crystal Powder and in a furnace it gets smelted into $(l:e_item_deep_crystal)Deep Crystals/el."
     },
     {
       "type": "text",
-      "text": "The spawn heights for this ore are as follows:/liOverworld: 1-12/liNether: 1-200/liEnd: 1-100/li$(l:e_dimension_insanity_dimension)Insanity Dimension/el: 1-64/li$(e_dimension_depth_dimension)Depth Dimension/el: 1-200/liDeep Dark: 1-64/liTwilight Forest: 1-12/liAroma Mining World: 1-64/liOther: 1-12/br2The following pages display all ore variants for different dimensions"
+      "text": "The spawn heights for this ore are as follows:/liOverworld: 1-12/liNether: 1-200/liEnd: 1-100/li$(l:e_dimension_insanity_dimension)Insanity Dimension/el: 1-64/li$(l:e_dimension_depth_dimension)Depth Dimension/el: 1-200/liDeep Dark: 1-64/liTwilight Forest: 1-12/liAroma Mining World: 1-64/liOther: 1-12/br2The following pages display all ore variants for different dimensions"
+    },
+    {
+      "type": "spotlight",
+      "item": "deepmagic:deep_crystal_ore",
+      "link_recipe": true,
+      "text": "This variant of the ore can be found in the Overworld and all dimensions that are added by mods."
     },
     {
       "type": "spotlight",
       "item": "deepmagic:deep_crystal_nether_ore",
-      "link_recipe": true,
-      "text": "This variant of the ore can only be found in the Nether dimension"
+      "title": "Nether Version",
+      "text": "This variant of the ore can only be found in the Nether dimension."
     },
     {
       "type": "spotlight",
       "item": "deepmagic:deep_crystal_end_ore",
-      "link_recipe": true,
-      "text": "This variant of the ore can only be found in the End dimension"
+      "title": "End Version",
+      "text": "This variant of the ore can only be found in the End dimension."
     },
     {
       "type": "spotlight",
       "item": "deepmagic:insanity_deep_crystal_ore",
-      "link_recipe": true,
-      "text": "This variant of the ore can only be found in the Insanity dimension"
+      "title": "Insanity Version",
+      "text": "This variant of the ore can only be found in the Insanity dimension."
     },
     {
       "type": "spotlight",
       "item": "deepmagic:deep_crystal_ore_compressed",
-      "link_recipe": true,
-      "text": "This variant of the ore can only be found in the Depth dimension"
+      "title": "Compressed Version",
+      "text": "This variant of the ore can only be found in the Depth dimension."
+    },
+    {
+      "type": "image",
+      "images": [
+        "deepmagic:images/deep_crystal_ore_normal.png",
+        "deepmagic:images/deep_crystal_ore_nether.png",
+        "deepmagic:images/deep_crystal_ore_end.png",
+        "deepmagic:images/deep_crystal_ore_insanity.png",
+        "deepmagic:images/deep_crystal_ore_depth.png"
+      ],
+      "border": true
     }
   ]
 }

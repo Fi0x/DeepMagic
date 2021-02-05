@@ -1,0 +1,14 @@
+{
+  "name": "Dimensional Travel",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_advanced_magic",
+  "advancement": "deepmagic:dimensional_crafting",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Dimensional Travel",
+      "text": "TODO"
+    }
+  ]
+}

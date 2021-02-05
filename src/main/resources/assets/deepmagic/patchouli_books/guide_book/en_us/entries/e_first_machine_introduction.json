@@ -1,0 +1,12 @@
+{
+  "name": "Magic machines",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_first_steps",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Magic machines",
+      "text": "TODO"
+    }
+  ]
+}
