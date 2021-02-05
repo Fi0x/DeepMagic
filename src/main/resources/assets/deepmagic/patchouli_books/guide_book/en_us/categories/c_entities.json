@@ -1,0 +1,6 @@
+{
+  "name": "Creatures",
+  "description": "Information about all the new creatures this mod adds.",
+  "icon": "minecraft:spawn_egg",
+  "secret": true
+}

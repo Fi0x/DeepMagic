@@ -1,6 +1,6 @@
 {
   "name": "Items",
-  "description": "All Items you have discovered",
+  "description": "All Items you have discovered.",
   "icon": "deepmagic:deep_crystal",
   "secret": true
 }
