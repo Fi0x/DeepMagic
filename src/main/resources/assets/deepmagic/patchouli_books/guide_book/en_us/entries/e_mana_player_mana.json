@@ -1,11 +1,11 @@
 {
-  "name": "Machine Mana",
-  "icon": "deepmagic:mana_segment",
+  "name": "Player Mana",
+  "icon": "deepmagic:mana_battery",
   "category": "deepmagic:c_mana",
   "pages": [
     {
       "type": "text",
-      "title": "Machine Mana",
+      "title": "Player Mana",
       "text": "TODO"
     }
   ]
