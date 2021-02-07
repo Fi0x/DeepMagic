@@ -12,7 +12,7 @@
     },
     {
       "type": "text",
-      "text": "Travelling to the Nether and End dimensions is usually done with the help of a portal. But if you decide to travel to one of the mods' dimensions, you need a $(l:e_item_teleportation_crystal)Teleportation Crystal/el. This crystal can teleport you between dimensions by consuming your $(l:e_mana_player_mana)Mana/el."
+      "text": "Travelling to the Nether and End dimensions is usually done with the help of portals. But if you decide to travel to one of the mods' dimensions, you need a $(l:e_item_teleportation_crystal)Teleportation Crystal/el. This crystal can teleport you between dimensions by consuming your $(l:e_mana_player_mana)Mana/el."
     }
   ]
 }
