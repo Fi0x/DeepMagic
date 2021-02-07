@@ -1,11 +1,11 @@
 {
-  "name": "Deep Crystal",
-  "icon": "deepmagic:deep_crystal",
+  "name": "Magic Sigil",
+  "icon": "deepmagic:magic_sigil",
   "category": "deepmagic:c_items",
   "pages": [
     {
       "type": "text",
-      "title": "Deep Crystal",
+      "title": "Magic Sigil",
       "text": "TODO"
     }
   ]

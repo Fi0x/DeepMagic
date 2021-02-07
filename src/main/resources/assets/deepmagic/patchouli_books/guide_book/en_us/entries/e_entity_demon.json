@@ -1,11 +1,13 @@
 {
-  "name": "Deep Crystal Powder",
+  "name": "Demon",
   "icon": "deepmagic:deep_crystal_powder",
   "category": "deepmagic:c_items",
+  "advancement": "deepmagic:sigil_crafting",
+  "secret": true,
   "pages": [
     {
       "type": "text",
-      "title": "Deep Crystal Powder",
+      "title": "Demon",
       "text": "TODO"
     }
   ]
