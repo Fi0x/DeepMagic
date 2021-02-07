@@ -6,15 +6,20 @@
     {
       "type": "text",
       "title": "Magical Items",
-      "text": "This entry introduces the most important items you can create with this mod. There are several paths you might want to follow."
+      "text": "This entry introduces the most important items you can create with this mod. There are several paths you might want to follow. The following pages will describe each of these paths and what you can expect when following them."
     },
     {
       "type": "text",
-      "text": "The following pages will describe each of these paths and what you can expect when following them."
+      "title": "Tools & Armor",
+      "text": "There are two types of tools and armor you can craft. The weaker one is made from $(l:e_item_deep_crystal)Deep Crystals/el and therefore called Deep Crystal items. The second armor and tool-set is made from $(l:e_item_strongest_diamond)Strongest Diamonds/el and has some special abilities that require $(l:e_mana_player_mana)Mana/el to work."
     },
     {
       "type": "text",
-      "title": "Deep Crystal Tools",
+      "text": "This list contains all the tools and armor pieces that can be made with $(l:e_item_deep_crystal)Deep Crystals/el/liDeep Crystal Sword/liDeep Crystal Shovel/liDeep Crystal Pickaxe/liDeep Crystal Axe/liDeep Crystal Hoe/liDeep Crystal Helmet/liDeep Crystal Chestplate/liDeep Crystal Leggings/liDeep Crystal Boots"
+    },
+    {
+      "type": "text",
+      "title": "Magic Tools",
       "text": "TODO"
     }
   ]
