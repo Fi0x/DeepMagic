@@ -1,0 +1,14 @@
+{
+  "name": "Depth Chestplate",
+  "icon": "deepmagic:depth_chestplate",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:depth_wood",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Depth Chestplate",
+      "text": "TODO"
+    }
+  ]
+}

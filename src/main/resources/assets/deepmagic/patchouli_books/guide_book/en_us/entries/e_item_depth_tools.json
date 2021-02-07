@@ -1,0 +1,14 @@
+{
+  "name": "Depth Tools",
+  "icon": "deepmagic:depth_pickaxe",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:depth_wood",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Depth Tools",
+      "text": "TODO"
+    }
+  ]
+}

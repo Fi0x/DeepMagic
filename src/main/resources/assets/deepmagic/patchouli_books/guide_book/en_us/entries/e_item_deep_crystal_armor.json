@@ -1,0 +1,14 @@
+{
+  "name": "Deep Crystal Armor",
+  "icon": "deepmagic:deep_crystal_chestplate",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:deep_crystal",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Deep Crystal Armor",
+      "text": "TODO"
+    }
+  ]
+}

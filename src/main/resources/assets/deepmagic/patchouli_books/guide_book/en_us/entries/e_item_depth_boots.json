@@ -1,0 +1,14 @@
+{
+  "name": "Depth Boots",
+  "icon": "deepmagic:depth_boots",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:depth_wood",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Depth Boots",
+      "text": "TODO"
+    }
+  ]
+}
