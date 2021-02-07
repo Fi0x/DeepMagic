@@ -12,7 +12,7 @@
     },
     {
       "type": "text",
-      "text": "Since the only useful thing you can get from a $(l:e_entity_demon)Demon/el is the loot when killing him, you might want to perform other $(l:e_ritual_overview)Rituals/el that can make your life easier. Unfortunately these Rituals require some rare resources you can only get in the Depth dimension, so you might want to travel there first.TODO"
+      "text": "Since the only useful thing you can get from a $(l:e_entity_demon)Demon/el is the loot when killing him, you might want to perform other $(l:e_ritual_overview)Rituals/el that can make your life easier. Unfortunately these Rituals require some rare resources you can only get in the $(l:e_dimension_depth_dimension)Depth dimension/el, so you might want to travel there first (Introduced in '$(l:e_advanced_dimensional_travel)Dimensional Travel/el')./br1After you gathered all the resources you need, you can start crafting advanced Rituals like the $(l:e_ritual_quarry)Quarry/el, which gathers resources for you."
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "Quarry Ritual",
+  "icon": "deepmagic:ritual_quarry",
+  "category": "deepmagic:c_rituals",
+  "advancement": "deepmagic:ritual_structure",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Quarry Ritual",
+      "text": "TODO"
+    }
+  ]
+}
