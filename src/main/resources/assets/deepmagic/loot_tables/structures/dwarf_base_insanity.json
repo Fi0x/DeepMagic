@@ -1,0 +1,61 @@
+{
+  "pools": [
+    {
+      "name": "poll0",
+      "rolls": {
+        "min": 1,
+        "max": 3
+      },
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:insanity_cobble",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:insanity_dirt",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "poll1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:insanity_sapling"
+        }
+      ],
+      "functions": [
+        {
+          "function": "set_count",
+          "count": {
+            "min": 0,
+            "max": 2
+          }
+        }
+      ]
+    }
+  ]
+}

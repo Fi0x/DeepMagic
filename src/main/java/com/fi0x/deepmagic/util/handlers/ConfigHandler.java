@@ -316,7 +316,7 @@ public class ConfigHandler
         category = "Mana";
         player.addCustomCategoryComment(category, "Mana");
         baseMana = player.getInt("Base Mana", category, 100, 1, 10000, "The Mana Capacity a new Player has");
-        manaXPForLevelup = player.getInt("XP/Skillpoint", category, 100, 1, 10000, "The XP amount needed to get a Skillpoint");
+        manaXPForLevelup = player.getInt("XP/Skillpoint", category, 100, 1, 10000, "The XP amount needed to get the first Skillpoint");
 
         category = "Visuals";
         player.addCustomCategoryComment(category, "Visuals");

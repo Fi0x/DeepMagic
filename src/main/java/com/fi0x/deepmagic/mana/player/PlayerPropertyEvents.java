@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.mana.player;
 import com.fi0x.deepmagic.network.PacketGetPlayerMana;
 import com.fi0x.deepmagic.network.PacketGetSkill;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,9 +51,14 @@ public class PlayerPropertyEvents
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
-    	PlayerMana playermana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
+        double amount = 0.1;
+        if(event.player.dimension == ConfigHandler.dimensionIdInsanityID) amount = 0.05;
+        else if(event.player.dimension == ConfigHandler.dimensionIdDepthID) amount = 0.3;
+        else if(event.player.dimension == -1 || event.player.dimension == 1) amount = 0.2;
+
+        PlayerMana playermana = event.player.getCapability(PlayerProperties.PLAYER_MANA, null);
         assert playermana != null;
-        playermana.addMana(0.1);
+        playermana.addMana(amount);
 
         sync++;
         sync %= 10;
