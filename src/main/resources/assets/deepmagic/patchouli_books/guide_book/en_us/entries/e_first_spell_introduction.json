@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Introduction to Spells",
-      "text": "TODO"
+      "text": "$(l:e_spell_overview)Spells/el are a magicians most important tools. They require $(l:e_mana_player_mana)Mana/el when you cast them and can perform many different actions./br2Before you can use a Spell you need to add some $(l:e_spell_parts)Spell Parts/el to it, which requires a $(l:e_block_spell_stone)Spell Stone/el."
+    },
+    {
+      "type": "text",
+      "text": "After adding $(l:e_spell_parts)Spell Parts/el to your $(l:e_spell_overview)Spell/el, you can see in its tooltip how much of your $(l:e_mana_player_mana)Mana/el it will consume when you cast it. The more Spell Parts you add and the more complicated they are, the more Mana you need to cast the Spell. In addition to the Mana, the caster also needs to have a high enough $(l:e_skill_spell_tier)Spell Tier/el $(l:e_skill_overview)Skill/el, which is also displayed in the tooltip."
     }
   ]
 }

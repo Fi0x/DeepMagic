@@ -1,0 +1,12 @@
+{
+  "name": "Spell Tier",
+  "icon": "deepmagic:skillpoint",
+  "category": "deepmagic:c_skills",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spell Tier",
+      "text": "TODO"
+    }
+  ]
+}

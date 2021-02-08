@@ -1,0 +1,12 @@
+{
+  "name": "Spell Parts",
+  "icon": "deepmagic:spell",
+  "category": "deepmagic:c_spells",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spell Parts",
+      "text": "TODO"
+    }
+  ]
+}
