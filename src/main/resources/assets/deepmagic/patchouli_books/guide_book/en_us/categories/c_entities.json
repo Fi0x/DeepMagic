@@ -2,6 +2,6 @@
   "name": "Creatures",
   "description": "Information about all the new creatures this mod adds.",
   "icon": "minecraft:spawn_egg",
-  "sortnum": 11,
+  "sortnum": 12,
   "secret": true
 }

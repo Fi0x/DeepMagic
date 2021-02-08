@@ -1,0 +1,12 @@
+{
+  "name": "Shrine",
+  "icon": "deepmagic:insanity_planks",
+  "category": "deepmagic:c_structures",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Shrine",
+      "text": "TODO"
+    }
+  ]
+}
