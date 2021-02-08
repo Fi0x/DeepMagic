@@ -1,0 +1,12 @@
+{
+  "name": "Health Regeneration",
+  "icon": "deepmagic:skillpoint",
+  "category": "deepmagic:c_skills",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Health Regeneration",
+      "text": "TODO"
+    }
+  ]
+}

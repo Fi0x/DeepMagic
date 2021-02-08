@@ -1,0 +1,12 @@
+{
+  "name": "Altar of Knowledge",
+  "icon": "deepmagic:altar_of_knowledge",
+  "category": "deepmagic:c_blocks",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Altar of Knowledge",
+      "text": "TODO"
+    }
+  ]
+}

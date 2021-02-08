@@ -1,0 +1,12 @@
+{
+  "name": "Mana Capacity",
+  "icon": "deepmagic:skillpoint",
+  "category": "deepmagic:c_skills",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Mana Capacity",
+      "text": "TODO"
+    }
+  ]
+}

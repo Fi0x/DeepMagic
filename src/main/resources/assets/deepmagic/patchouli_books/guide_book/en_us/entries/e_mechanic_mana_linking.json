@@ -1,5 +1,5 @@
 {
-  "name": "Mana linking",
+  "name": "Mana Linking",
   "icon": "deepmagic:mana_linker",
   "category": "deepmagic:c_mechanics",
   "advancement": "deepmagic:dimensional_crafting",
@@ -7,6 +7,7 @@
   "pages": [
     {
       "type": "text",
+      "title": "Mana Linking",
       "text": "TODO"
     }
   ]

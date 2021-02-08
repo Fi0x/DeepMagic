@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Introduction to Skills",
-      "text": "TODO"
+      "text": "$(e_skill_overview)Skills/el make you more powerful at the cost of $(l:e_mechanic_skillpoints)Skillpoints/el./br1When using your $(l:e_mana_player_mana)Mana/el, you might have noticed that you don't have a lot of it, which makes it impossible to cast stronger $(l:e_spell_overview)Spells/el. To increase the amount of Mana you can have, you need to use an $(l:e_block_altar_of_knowledge)Altar of Knowledge/el and level up your $(l:e_skill_mana_capacity)Mana Capacity/el."
+    },
+    {
+      "type": "text",
+      "text": "But $(l:e_skill_mana_capacity)Mana Capacity/el is not the only $(l:e_skill_overview)Skill/el you can improve. You can for example $(l:e_skill_max_hp)increase your health points/el or $(l:e_skill_hp_regen)reduce your regeneration time/el. All Skills are explained in the 'Skills' chapter."
     }
   ]
 }

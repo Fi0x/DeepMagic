@@ -1,0 +1,12 @@
+{
+  "name": "Skillpoints",
+  "icon": "deepmagic:skillpoint",
+  "category": "deepmagic:c_mechanics",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Skillpoints",
+      "text": "TODO"
+    }
+  ]
+}
