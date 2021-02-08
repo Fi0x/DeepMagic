@@ -1,0 +1,12 @@
+{
+  "name": "Introduction to Skills",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_first_steps",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Introduction to Skills",
+      "text": "TODO"
+    }
+  ]
+}

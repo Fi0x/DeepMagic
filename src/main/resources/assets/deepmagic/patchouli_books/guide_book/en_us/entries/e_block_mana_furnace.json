@@ -1,0 +1,14 @@
+{
+  "name": "Mana Furnace",
+  "icon": "deepmagic:mana_furnace",
+  "category": "deepmagic:c_blocks",
+  "advancement": "deepmagic:mana_segment",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Mana Furnace",
+      "text": "TODO"
+    }
+  ]
+}

@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Magic machines",
-      "text": "TODO"
+      "text": "This entry gives you an overview of the machines this mod adds and which of these you should try to get as soon as possible./br1The machines this mod adds are the $(l:e_block_mana_furnace)Mana Furnace/el, $(l:e_block_mana_grinder)Mana Grinder/el and $(l:e_block_mana_infuser)Mana Infuser/el. Each of them requires $(l:e_mana_machine_mana)Mana/el to work."
+    },
+    {
+      "type": "text",
+      "text": "You probably want to craft the $(l:e_block_mana_grinder)Mana Grinder/el first, since it can be used to increase the yield of your ores. But keep in mind that all of these machines require a lot of $(l:e_item_deep_crystal)Deep Crystals/el to craft."
     }
   ]
 }
