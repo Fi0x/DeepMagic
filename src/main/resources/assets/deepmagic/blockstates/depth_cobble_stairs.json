@@ -113,30 +113,35 @@
       "y": 270,
       "uvlock": true
     },
-    "facing=east,half=top,shape=outer_right": {
-      "model": "deepmagic:depth_cobble_outer_stairs",
-      "x": 180,
-      "uvlock": true
-    },
     "facing=west,half=top,shape=outer_right": {
-      "model": "deepmagic:depth_cobble_outer_stairs",
-      "x": 180,
-      "y": 180,
-      "uvlock": true
-    },
-    "facing=south,half=top,shape=outer_right": {
-      "model": "deepmagic:depth_cobble_outer_stairs",
-      "x": 180,
-      "y": 90,
-      "uvlock": true
-    },
-    "facing=north,half=top,shape=outer_right": {
       "model": "deepmagic:depth_cobble_outer_stairs",
       "x": 180,
       "y": 270,
       "uvlock": true
     },
+    "facing=north,half=top,shape=outer_right": {
+      "model": "deepmagic:depth_cobble_outer_stairs",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_right": {
+      "model": "deepmagic:depth_cobble_outer_stairs",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_right": {
+      "model": "deepmagic:depth_cobble_outer_stairs",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
     "facing=east,half=top,shape=outer_left": {
+      "model": "deepmagic:depth_cobble_outer_stairs",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_left": {
       "model": "deepmagic:depth_cobble_outer_stairs",
       "x": 180,
       "y": 90,
@@ -145,44 +150,44 @@
     "facing=west,half=top,shape=outer_left": {
       "model": "deepmagic:depth_cobble_outer_stairs",
       "x": 180,
-      "y": 270,
-      "uvlock": true
-    },
-    "facing=south,half=top,shape=outer_left": {
-      "model": "deepmagic:depth_cobble_outer_stairs",
-      "x": 180,
       "y": 180,
       "uvlock": true
     },
     "facing=north,half=top,shape=outer_left": {
       "model": "deepmagic:depth_cobble_outer_stairs",
       "x": 180,
-      "uvlock": true
-    },
-    "facing=east,half=top,shape=inner_right": {
-      "model": "deepmagic:depth_cobble_inner_stairs",
-      "x": 180,
+      "y": 270,
       "uvlock": true
     },
     "facing=west,half=top,shape=inner_right": {
       "model": "deepmagic:depth_cobble_inner_stairs",
       "x": 180,
-      "y": 180,
-      "uvlock": true
-    },
-    "facing=south,half=top,shape=inner_right": {
-      "model": "deepmagic:depth_cobble_inner_stairs",
-      "x": 180,
-      "y": 90,
+      "y": 270,
       "uvlock": true
     },
     "facing=north,half=top,shape=inner_right": {
       "model": "deepmagic:depth_cobble_inner_stairs",
       "x": 180,
-      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=inner_right": {
+      "model": "deepmagic:depth_cobble_inner_stairs",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_right": {
+      "model": "deepmagic:depth_cobble_inner_stairs",
+      "x": 180,
+      "y": 180,
       "uvlock": true
     },
     "facing=east,half=top,shape=inner_left": {
+      "model": "deepmagic:depth_cobble_inner_stairs",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_left": {
       "model": "deepmagic:depth_cobble_inner_stairs",
       "x": 180,
       "y": 90,
@@ -191,18 +196,13 @@
     "facing=west,half=top,shape=inner_left": {
       "model": "deepmagic:depth_cobble_inner_stairs",
       "x": 180,
-      "y": 270,
-      "uvlock": true
-    },
-    "facing=south,half=top,shape=inner_left": {
-      "model": "deepmagic:depth_cobble_inner_stairs",
-      "x": 180,
       "y": 180,
       "uvlock": true
     },
     "facing=north,half=top,shape=inner_left": {
       "model": "deepmagic:depth_cobble_inner_stairs",
       "x": 180,
+      "y": 270,
       "uvlock": true
     }
   }
