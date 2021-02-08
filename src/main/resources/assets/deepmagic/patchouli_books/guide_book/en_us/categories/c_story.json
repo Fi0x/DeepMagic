@@ -1,0 +1,7 @@
+{
+  "name": "Story",
+  "description": "The story of the Deep Magic mod.",
+  "icon": "minecraft:book",
+  "sortnum": 12,
+  "secret": true
+}

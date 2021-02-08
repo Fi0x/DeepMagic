@@ -1,0 +1,12 @@
+{
+  "name": "Magic Sigil",
+  "icon": "deepmagic:magic_sigil",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Magic Sigil",
+      "text": "TODO"
+    }
+  ]
+}

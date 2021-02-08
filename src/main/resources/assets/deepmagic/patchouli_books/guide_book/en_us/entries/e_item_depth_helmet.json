@@ -1,0 +1,14 @@
+{
+  "name": "Depth Helmet",
+  "icon": "deepmagic:depth_helmet",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:depth_wood",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Depth Helmet",
+      "text": "TODO"
+    }
+  ]
+}

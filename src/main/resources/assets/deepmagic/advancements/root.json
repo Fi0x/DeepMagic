@@ -29,5 +29,10 @@
     [
       "powder_collected"
     ]
-  ]
+  ],
+  "rewards": {
+    "loot": [
+      "deepmagic:rewards/guide"
+    ]
+  }
 }

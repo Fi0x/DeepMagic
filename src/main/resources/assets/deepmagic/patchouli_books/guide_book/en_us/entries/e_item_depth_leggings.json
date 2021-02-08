@@ -1,0 +1,14 @@
+{
+  "name": "Depth Leggings",
+  "icon": "deepmagic:depth_leggings",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:depth_wood",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Depth Leggings",
+      "text": "TODO"
+    }
+  ]
+}

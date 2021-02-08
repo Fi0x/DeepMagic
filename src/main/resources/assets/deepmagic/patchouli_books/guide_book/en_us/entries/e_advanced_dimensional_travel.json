@@ -1,0 +1,18 @@
+{
+  "name": "Dimensional Travel",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_advanced_magic",
+  "advancement": "deepmagic:dimensional_crafting",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Dimensional Travel",
+      "text": "If you are interested in dimensional travel, this is the right entry in this book to learn the basics./br2The first thing you should know is which dimensions this mod has to offer. In addition to the Overworld, Nether and End dimensions, this mod adds the $(l:e_dimension_insanity_dimension)Insanity/el and $(l:e_dimension_depth_dimension)Depth/el dimensions."
+    },
+    {
+      "type": "text",
+      "text": "Travelling to the Nether and End dimensions is usually done with the help of portals. But if you decide to travel to one of the mods' dimensions, you need a $(l:e_item_teleportation_crystal)Teleportation Crystal/el. This crystal can teleport you between dimensions by consuming your $(l:e_mana_player_mana)Mana/el."
+    }
+  ]
+}

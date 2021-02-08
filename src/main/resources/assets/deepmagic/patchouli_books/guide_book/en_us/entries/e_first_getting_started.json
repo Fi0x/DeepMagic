@@ -1,0 +1,21 @@
+{
+  "name": "Getting Started",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_first_steps",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Getting Started",
+      "text": "To get started in this mod, you need to collect $(l:e_item_deep_crystal_powder)Deep Crystal Powder/el. This item is required in many crafting recipes and can be smelted into $(l:e_item_deep_crystal)Deep Crystals/el which are equally useful./br2To get a deeper understanding about the magic this mod has to offer, you might want to read $(l:e_story_depth_magic)this entry/el."
+    },
+    {
+      "type": "text",
+      "title": "Resource Farming",
+      "text": "The only way to collect $(l:e_item_deep_crystal_powder)Deep Crystal Powder/el is by finding and mining $(l:e_block_deep_crystal_ore)Deep Crystal Ore/el./br1You might have noticed that these ores are very rare and hard to find in the Overworld. If you are having trouble collecting enough Deep Crystal Powder for your crafting recipes, you might want to visit the Nether and End. In these dimensions it is easier to find Deep Crystal Ores."
+    },
+    {
+      "type": "text",
+      "text": "After mining all these ores, you might wonder what you should do with them. To learn more about the usages of $(l:e_item_deep_crystal_powder)Deep Crystal Powder/el, you might want to visit the following links./li$(l:e_first_spell_introduction)Spells/el/li$(l:e_first_machine_introduction)Magic machines/el/li$(l:e_advanced_rituals)Rituals/el/li$(l:e_first_item_introduction)Tools and Armor/el/li$(l:e_advanced_dimensional_travel)Dimensional travel/el"
+    }
+  ]
+}

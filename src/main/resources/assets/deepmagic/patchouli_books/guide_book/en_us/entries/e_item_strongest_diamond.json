@@ -1,0 +1,14 @@
+{
+  "name": "Strongest Diamond",
+  "icon": "deepmagic:strongest_diamond",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:strongest_diamond",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Strongest Diamond",
+      "text": "TODO"
+    }
+  ]
+}

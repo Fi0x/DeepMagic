@@ -1,0 +1,7 @@
+{
+  "name": "Mechanics",
+  "description": "Important mechanics that you might need to advance further in this mod.",
+  "icon": "deepmagic:mana_linker",
+  "sortnum": 5,
+  "secret": true
+}

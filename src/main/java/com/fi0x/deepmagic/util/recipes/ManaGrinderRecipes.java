@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.init.ModItems;
 import com.google.common.collect.Maps;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 
 import java.util.Map;
@@ -26,9 +27,18 @@ public class ManaGrinderRecipes
         addManaGrinderRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_NETHER_ORE, 1), new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 2));
 
         addManaGrinderRecipe(new ItemStack(ModBlocks.INSANITY_COAL_ORE, 1), new ItemStack(Items.COAL, 2));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.INSANITY_REDSTONE_ORE, 1), new ItemStack(Items.REDSTONE, 4));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.INSANITY_LAPIS_ORE, 1), new ItemStack(Items.DYE, 6, EnumDyeColor.BLUE.getDyeDamage()));
         addManaGrinderRecipe(new ItemStack(ModBlocks.INSANITY_DIAMOND_ORE, 1), new ItemStack(Items.DIAMOND, 2));
         addManaGrinderRecipe(new ItemStack(ModBlocks.INSANITY_EMERALD_ORE, 1), new ItemStack(Items.EMERALD, 2));
         addManaGrinderRecipe(new ItemStack(ModBlocks.INSANITY_DEEP_CRYSTAL_ORE, 1), new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 2));
+
+        addManaGrinderRecipe(new ItemStack(ModBlocks.DEPTH_COAL_ORE, 1), new ItemStack(Items.COAL, 3));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.DEPTH_REDSTONE_ORE, 1), new ItemStack(Items.REDSTONE, 6));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.DEPTH_LAPIS_ORE, 1), new ItemStack(Items.DYE, 9, EnumDyeColor.BLUE.getDyeDamage()));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.DEPTH_DIAMOND_ORE, 1), new ItemStack(Items.DIAMOND, 3));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.DEPTH_EMERALD_ORE, 1), new ItemStack(Items.EMERALD, 3));
+        addManaGrinderRecipe(new ItemStack(ModBlocks.DEEP_CRYSTAL_ORE_COMPRESSED, 1), new ItemStack(ModItems.DEEP_CRYSTAL_POWDER, 3));
 
         addManaGrinderRecipe(new ItemStack(ModItems.COOKED_WORM, 1), new ItemStack(ModItems.WORM_SNACK, 1));
         addManaGrinderRecipe(new ItemStack(ModItems.COOKED_COCKROACH, 1), new ItemStack(ModItems.COCKROACH_SNACK, 1));
@@ -36,6 +46,7 @@ public class ManaGrinderRecipes
 
         addManaGrinderRecipe(new ItemStack(Blocks.COAL_ORE, 1), new ItemStack(Items.COAL, 4));
         addManaGrinderRecipe(new ItemStack(Blocks.REDSTONE_ORE, 1), new ItemStack(Items.REDSTONE, 8));
+        addManaGrinderRecipe(new ItemStack(Blocks.LAPIS_ORE, 1), new ItemStack(Items.DYE, 12, EnumDyeColor.BLUE.getDyeDamage()));
         addManaGrinderRecipe(new ItemStack(Blocks.DIAMOND_ORE, 1), new ItemStack(Items.DIAMOND, 4));
         addManaGrinderRecipe(new ItemStack(Blocks.EMERALD_ORE, 1), new ItemStack(Items.EMERALD, 4));
         addManaGrinderRecipe(new ItemStack(Blocks.QUARTZ_ORE, 1), new ItemStack(Items.QUARTZ, 4));

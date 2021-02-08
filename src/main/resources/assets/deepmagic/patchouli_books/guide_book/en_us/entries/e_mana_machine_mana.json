@@ -1,0 +1,12 @@
+{
+  "name": "Machine Mana",
+  "icon": "deepmagic:mana_segment",
+  "category": "deepmagic:c_mana",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Machine Mana",
+      "text": "TODO"
+    }
+  ]
+}

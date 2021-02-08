@@ -1,0 +1,14 @@
+{
+  "name": "Mana Infuser",
+  "icon": "deepmagic:mana_infuser",
+  "category": "deepmagic:c_blocks",
+  "advancement": "deepmagic:mana_segment",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Mana Infuser",
+      "text": "TODO"
+    }
+  ]
+}

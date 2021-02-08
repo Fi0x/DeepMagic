@@ -1,0 +1,7 @@
+{
+  "name": "Rituals",
+  "description": "Information about rituals.",
+  "icon": "deepmagic:ritual_none",
+  "sortnum": 9,
+  "secret": true
+}
