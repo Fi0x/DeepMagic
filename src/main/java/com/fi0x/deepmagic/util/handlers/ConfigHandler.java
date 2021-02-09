@@ -41,6 +41,7 @@ public class ConfigHandler
     public static int guiManaInfuserID;
     public static int guiManaGrinderID;
     public static int guiManaFurnaceID;
+    public static int guiSpellStoneID;
     //Particle IDs
     public static int firstParticleID;
 
@@ -208,6 +209,7 @@ public class ConfigHandler
         guiManaInfuserID = ids.getInt("Mana Infuser GUI ID", category, 424, -1000, 1000, "");
         guiManaGrinderID = ids.getInt("Mana Grinder GUI ID", category, 425, -1000, 1000, "");
         guiManaFurnaceID = ids.getInt("Mana Furnace GUI ID", category, 426, -1000, 1000, "");
+        guiSpellStoneID = ids.getInt("Spell Stone GUI ID", category, 427, -1000, 1000, "");
 
         category = "Particles";
         ids.addCustomCategoryComment(category, "Particles");

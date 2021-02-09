@@ -7,32 +7,38 @@ import com.fi0x.deepmagic.items.spells.modifiers.*;
 import com.fi0x.deepmagic.items.spells.types.*;
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class TileEntitySpellStone extends TileEntity implements ITickable, IManaTileEntity
+public class TileEntitySpellStone extends TileEntity implements ITickable, IInventory, IManaTileEntity
 {
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(7, ItemStack.EMPTY);
+    private String customName;
+
     private double requiredMana = 0;
     private int manaTick = 100;
 
     private final ArrayList<String> spellParts = new ArrayList<>();
-    private final ArrayList<String> consumedItems = new ArrayList<>();
 
     private int manaAdder;
     private double manaMultiplier;
     private double tier;
 
     @Override
-    public void update()
+    public void update()//TODO: Re-make
     {
         manaTick--;
         if(manaTick < -1000)
@@ -47,26 +53,6 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
             }
         }
         if(requiredMana <= ConfigHandler.manaToleranceSpellStone && manaTick < 0) manaTick += 100;
-
-        AxisAlignedBB aabb = new AxisAlignedBB(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
-        List<EntityItem> itemEntities = world.getEntitiesWithinAABB(EntityItem.class, aabb);
-
-        for(EntityItem i : itemEntities)
-        {
-            String name = i.getItem().getUnlocalizedName();
-            for(int j = 0; j < i.getItem().getCount(); j++)
-            {
-                consumedItems.add(name);
-            }
-            world.removeEntity(i);
-            markDirty();
-        }
-        if(!itemEntities.isEmpty())
-        {
-            updateSpellTypes();
-            updateSpellModifiers();
-            updateSpellEffects();
-        }
 
         requiredMana++;
         if(manaTick % 100 == 0)
@@ -94,20 +80,12 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
         }
         compound.setString("parts", parts.toString());
 
-        StringBuilder items = new StringBuilder();
-        if(!consumedItems.isEmpty())
-        {
-            items.append(consumedItems.get(0));
-            for(int i = 1; i < consumedItems.size(); i++)
-            {
-                items.append("_:_").append(consumedItems.get(i));
-            }
-        }
-        compound.setString("items", items.toString());
-
         compound.setInteger("manaAdder", manaAdder);
         compound.setDouble("manaMultiplier", manaMultiplier);
         compound.setDouble("spellTier", tier);
+
+        ItemStackHelper.saveAllItems(compound, inventory);
+        if(hasCustomName()) compound.setString("customName", customName);
 
         return super.writeToNBT(compound);
     }
@@ -120,12 +98,13 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
         String parts = compound.getString("parts");
         spellParts.addAll(Arrays.asList(parts.split(":")));
 
-        String items = compound.getString("items");
-        consumedItems.addAll(Arrays.asList(items.split("_:_")));
-
         manaAdder = compound.getInteger("manaAdder");
         manaMultiplier = compound.getDouble("manaMultiplier");
         tier = compound.getDouble("spellTier");
+
+        inventory = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(compound, inventory);
+        if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
 
         super.readFromNBT(compound);
     }
@@ -854,5 +833,109 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
         else requiredMana -= amount;
         markDirty();
         return ret > 0 ? ret : 0;
+    }
+    @Override
+    public int getSizeInventory()
+    {
+        return inventory.size();
+    }
+    @Override
+    public boolean isEmpty()
+    {
+        for(ItemStack stack : inventory)
+        {
+            if(!stack.isEmpty()) return false;
+        }
+        return true;
+    }
+    @Nonnull
+    @Override
+    public ItemStack getStackInSlot(int index)
+    {
+        return inventory.get(index);
+    }
+    @Nonnull
+    @Override
+    public ItemStack decrStackSize(int index, int count)
+    {
+        return ItemStackHelper.getAndSplit(inventory, index, count);
+    }
+    @Nonnull
+    @Override
+    public ItemStack removeStackFromSlot(int index)
+    {
+        return ItemStackHelper.getAndRemove(inventory, index);
+    }
+    @Override
+    public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
+    {
+        inventory.set(index, stack);
+
+        if(stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
+    }
+    @Override
+    public int getInventoryStackLimit()
+    {
+        return 64;
+    }
+    @Override
+    public boolean isUsableByPlayer(@Nonnull EntityPlayer player)
+    {
+        return world.getTileEntity(pos) == this && player.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D) <= 64;
+    }
+    @Override
+    public void openInventory(@Nonnull EntityPlayer player)
+    {
+    }
+    @Override
+    public void closeInventory(@Nonnull EntityPlayer player)
+    {
+    }
+    @Override
+    public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
+    {
+        return index != 1;
+    }
+    @Override
+    public int getField(int id)
+    {
+        return 0;
+    }
+    @Override
+    public void setField(int id, int value)
+    {
+
+    }
+    @Override
+    public int getFieldCount()
+    {
+        return 0;
+    }
+    @Override
+    public void clear()
+    {
+        inventory.clear();
+    }
+    @Nonnull
+    @Override
+    public String getName()
+    {
+        return hasCustomName() ? customName : "container.spell_stone";
+    }
+    @Override
+    public boolean hasCustomName()
+    {
+        return customName != null && !customName.isEmpty();
+    }
+    @Nonnull
+    @Override
+    public ITextComponent getDisplayName()
+    {
+        return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
+    }
+
+    public void setCustomName(String customName)
+    {
+        this.customName = customName;
     }
 }

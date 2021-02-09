@@ -9,6 +9,7 @@ container.mana_generator_mob=Mob Mana Generator
 container.mana_infuser=Mana Infuser
 container.mana_grinder=Mana Grinder
 container.mana_furnace=Mana Furnace
+container.spell_stone=Spell Stone
 
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
