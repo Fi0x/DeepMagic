@@ -57,6 +57,7 @@ public class ArmorHelper
         if(!ConfigHandler.depthArmorActive) return;
 
         flight(player);
+        nightVision(player);
     }
 
     private static void flight(EntityPlayer player)
@@ -80,6 +81,22 @@ public class ArmorHelper
         } else
         {
             //TODO: Check if armor was unequipped in this tick and disable flight if true
+        }
+    }
+    private static void nightVision(EntityPlayer player)
+    {
+        if(!player.inventory.armorItemInSlot(3).isEmpty() && player.inventory.armorItemInSlot(3).getItem() instanceof ArmorBase)
+        {
+            if(removeMana(player.inventory.armorItemInSlot(3), ConfigHandler.manaNightVisionCost, player) >= ConfigHandler.manaNightVisionCost)
+            {
+                //TODO: Add night vision to player
+            } else
+            {
+                //TODO: Disable night vision
+            }
+        } else
+        {
+            //TODO: Disable night vision
         }
     }
 

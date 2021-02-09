@@ -152,6 +152,7 @@ public class ConfigHandler
     public static int teleportationCrystalManaCostDepth;
     public static int spellBaseManaCost;
     public static float manaFlightCost;
+    public static float manaNightVisionCost;
     //Skill XP
     public static int teleportationCrystalSkillXP;
     //Tools
@@ -397,6 +398,7 @@ public class ConfigHandler
         teleportationCrystalManaCostDepth = items.getInt("Depth Dimension teleport costs", category, 900, 0, 100000, "Mana Costs for Teleporting in or out of Depth Dimension");
         spellBaseManaCost = items.getInt("Base Spell Cost", category, 10, 1, 1000, "The Costs for a Spell without effect");
         manaFlightCost = items.getFloat("Flight Mana Costs", category, 1, 0, 100, "The Amount of Mana consumed every Tick while flying");
+        manaNightVisionCost = items.getFloat("Night Vision Mana Costs", category, 0.1f, 0, 100, "The Amount of Mana consumed every Tick while night vision is active");
 
         category = "Skill XP";
         items.addCustomCategoryComment(category, "Skill XP");
