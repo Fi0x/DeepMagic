@@ -1,9 +1,8 @@
 package com.fi0x.deepmagic.blocks.mana;
 
+import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
 import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
-import com.fi0x.deepmagic.items.mana.ManaLinker;
-import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -12,7 +11,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -43,28 +41,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
     @Override
     public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(worldIn.isRemote) return false;
-        ItemStack stack = playerIn.getHeldItem(hand);
-        Item item = stack.getItem();
-        TileEntitySpellStone tile = getTileEntity(worldIn, pos);
-
-        if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
-        else if(item instanceof ManaLinker)
-        {
-            NBTTagCompound compound;
-            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-            compound = stack.getTagCompound();
-            assert compound != null;
-
-            if(compound.hasKey("x")) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "This block can't send mana"));
-            else
-            {
-                compound.setInteger("x", pos.getX());
-                compound.setInteger("y", pos.getY());
-                compound.setInteger("z", pos.getZ());
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
-            }
-        }
+        if(!worldIn.isRemote) playerIn.openGui(Main.instance, ConfigHandler.guiSpellStoneID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
     @Override
