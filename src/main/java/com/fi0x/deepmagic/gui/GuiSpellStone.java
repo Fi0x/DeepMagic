@@ -19,6 +19,7 @@ public class GuiSpellStone extends GuiContainer
     public GuiSpellStone(InventoryPlayer player, TileEntitySpellStone tileentity)
     {
         super(new ContainerSpellStone(player, tileentity));
+        ySize = 222;
         this.player = player;
         te = tileentity;
     }

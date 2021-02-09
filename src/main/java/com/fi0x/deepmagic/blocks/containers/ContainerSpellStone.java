@@ -1,7 +1,7 @@
 package com.fi0x.deepmagic.blocks.containers;
 
-import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaAltar;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
+import com.fi0x.deepmagic.items.spells.Spell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,24 +14,28 @@ import javax.annotation.Nonnull;
 public class ContainerSpellStone extends Container
 {
     private final TileEntitySpellStone te;
-    private int storedMana;
 
     public ContainerSpellStone(InventoryPlayer player, TileEntitySpellStone tileEntity)
     {
         te = tileEntity;
 
-        addSlotToContainer(new SlotSpellStoneSpellInput(te, 0, 80, 30));//TODO: Add missing slots
+        addSlotToContainer(new SlotSpellStoneSpellInput(te, 0, 148, 20));
+        addSlotToContainer(new SlotSpellStoneSpellOutput(te, 1, 148, 84));
+        for(int idx = 2; idx <= 6; idx++)
+        {
+            addSlotToContainer(new Slot(te, idx, 12 + 18 * (idx - 2), 20));
+        }
 
         for(int y = 0; y < 3; y++)
         {
             for(int x = 0; x < 9; x++)
             {
-                addSlotToContainer(new Slot(player, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
+                addSlotToContainer(new Slot(player, x + y * 9 + 9, 8 + x * 18, 140 + y * 18));
             }
         }
         for(int x = 0; x < 9; x++)
         {
-            addSlotToContainer(new Slot(player, x, 8 + x * 18, 142));
+            addSlotToContainer(new Slot(player, x, 8 + x * 18, 198));
         }
     }
 
@@ -48,7 +52,7 @@ public class ContainerSpellStone extends Container
     }
     @Nonnull
     @Override
-    public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)//TODO: Set correct slots
+    public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
@@ -58,19 +62,19 @@ public class ContainerSpellStone extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if(index == 0)
+            if(index <= 6)
             {
-                if(!this.mergeItemStack(itemstack1, 1, 37, true)) return ItemStack.EMPTY;
+                if(!this.mergeItemStack(itemstack1, 7, 43, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(itemstack1, itemstack);
             } else
             {
-                if(TileEntityManaAltar.isItemChargeable(itemstack1))
+                if(itemstack1.getItem() instanceof Spell)
                 {
                     if(!this.mergeItemStack(itemstack1, 0, 0, false)) return ItemStack.EMPTY;
-                } else if(index < 28)
+                } else if(index < 34)
                 {
-                    if(!this.mergeItemStack(itemstack1, 28, 37, false)) return ItemStack.EMPTY;
-                } else if(index < 37 && !this.mergeItemStack(itemstack1, 1, 28, false)) return ItemStack.EMPTY;
+                    if(!this.mergeItemStack(itemstack1, 34, 43, false)) return ItemStack.EMPTY;
+                } else if(index < 43 && !this.mergeItemStack(itemstack1, 7, 34, false)) return ItemStack.EMPTY;
             }
             if(itemstack1.isEmpty()) slot.putStack(ItemStack.EMPTY);
             else slot.onSlotChanged();
