@@ -35,7 +35,7 @@ public class MinerStash extends BlockBase implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(!worldIn.isRemote) playerIn.openGui(Main.instance, ConfigHandler.guiManaInfuserID, worldIn, pos.getX(), pos.getY(), pos.getZ());//TODO: Use correct gui
+        if(!worldIn.isRemote) playerIn.openGui(Main.instance, ConfigHandler.guiMinerStashID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
