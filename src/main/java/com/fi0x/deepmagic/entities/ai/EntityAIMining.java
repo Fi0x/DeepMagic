@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import com.fi0x.deepmagic.blocks.MinerStash;
 import com.fi0x.deepmagic.entities.ai.helper.AIHelperBuild;
 import com.fi0x.deepmagic.entities.ai.helper.AIHelperMining;
 import com.fi0x.deepmagic.entities.ai.helper.AIHelperSearch;
@@ -7,12 +8,13 @@ import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.block.BlockChest;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -36,9 +38,9 @@ public class EntityAIMining extends EntityAIBase
     protected BlockPos startPosition;
     protected BlockPos destination;
     protected ArrayList<BlockPos> miningBlocks;
-    protected BlockPos chestPos;
+    protected BlockPos storagePos;
     private int digDelay;
-    private boolean searchChest;
+    private boolean searchStorage;
     private boolean goHome;
     public EnumFacing direction;
 
@@ -73,7 +75,7 @@ public class EntityAIMining extends EntityAIBase
     @Override
     public void startExecuting()
     {
-        chestPos = AIHelperSearch.findChest(world, entity.homePos, entity.getPosition());
+        storagePos = AIHelperSearch.findStorage(world, entity.homePos, entity.getPosition());
 
         startPosition = AIHelperMining.findMiningStartPosition(world, this);
         if(startPosition == null) return;
@@ -98,10 +100,10 @@ public class EntityAIMining extends EntityAIBase
                 entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
                 return !entity.getNavigator().noPath();
             }
-            inventoryToChest();
-            if(searchChest)
+            inventoryToStorage();
+            if(searchStorage)
             {
-                searchAndGoToChest();
+                searchAndGoToStorage();
                 return true;
             }
 
@@ -113,48 +115,51 @@ public class EntityAIMining extends EntityAIBase
         return true;
     }
 
-    protected void inventoryToChest()
+    protected void inventoryToStorage()
     {
         for(int i = 0; i < entity.itemHandler.getSlots(); i++)
         {
             if(entity.itemHandler.getStackInSlot(i).isEmpty()) return;
         }
-        if(chestPos == null || entity.getDistanceSq(chestPos) > 64) return;
-        searchChest = false;
+        if(storagePos == null || entity.getDistanceSq(storagePos) > 64) return;
+        searchStorage = false;
 
-        TileEntityChest te = null;
+        TileEntity te = null;
         try
         {
-            te = (TileEntityChest) world.getTileEntity(chestPos);
+            te = world.getTileEntity(storagePos);
         } catch(Exception ignored)
         {
         }
         if(te == null)
         {
-            chestPos = null;
+            storagePos = null;
             return;
         }
 
-        IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if(te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+        {
+            IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
-        {
-            if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
-            else
+            for(int i = 0; i < entity.itemHandler.getSlots(); i++)
             {
-                chestPos = AIHelperSearch.findChest(world, chestPos, entity.getPosition(), entity.homePos);
-                if(chestPos != null) searchChest = true;
-                break;
+                if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+                else
+                {
+                    storagePos = AIHelperSearch.findStorage(world, storagePos, entity.getPosition(), entity.homePos);
+                    if(storagePos != null) searchStorage = true;
+                    break;
+                }
             }
-        }
+        } else System.out.println("Capability not found");
     }
-    protected void searchAndGoToChest()
+    protected void searchAndGoToStorage()
     {
-        if(chestPos == null) chestPos = AIHelperSearch.findChest(world, entity.homePos, entity.getPosition());
-        if(chestPos != null)
+        if(storagePos == null) storagePos = AIHelperSearch.findStorage(world, entity.homePos, entity.getPosition());
+        if(storagePos != null)
         {
-            entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-            if(entity.getNavigator().noPath()) searchChest = false;
+            entity.getNavigator().tryMoveToXYZ(storagePos.getX(), storagePos.getY(), storagePos.getZ(), 1);
+            if(entity.getNavigator().noPath()) searchStorage = false;
         }
     }
     protected boolean tryToMine()
@@ -214,10 +219,12 @@ public class EntityAIMining extends EntityAIBase
 
         if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, droppedItemStack, false).isEmpty())
         {
-            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST)
+            System.out.println("Inventory full");
+            if(storagePos != null && (world.getBlockState(storagePos).getBlock() instanceof BlockChest || world.getBlockState(storagePos).getBlock() instanceof MinerStash))
             {
-                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-                searchChest = true;
+                System.out.println("Moving to storage");
+                entity.getNavigator().tryMoveToXYZ(storagePos.getX(), storagePos.getY(), storagePos.getZ(), 1);
+                searchStorage = true;
                 return true;
             } else return false;
         }

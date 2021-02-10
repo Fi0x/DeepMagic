@@ -1,11 +1,13 @@
 package com.fi0x.deepmagic.entities.ai.helper;
 
 import com.fi0x.deepmagic.blocks.DwarfBaseMarker;
+import com.fi0x.deepmagic.blocks.MinerStash;
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 
 public class AIHelperSearch
 {
-    public static BlockPos findChest(World world, BlockPos... positions)
+    public static BlockPos findStorage(World world, BlockPos... positions)
     {
         if(positions == null || positions.length == 0) return null;
         for(BlockPos pos : positions)
@@ -28,9 +30,10 @@ public class AIHelperSearch
                     {
                         for(int z = -range; z <= range; z++)
                         {
-                            if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest)
+                            Block block = world.getBlockState(pos.add(x, y, z)).getBlock();
+                            if(block instanceof BlockChest || block instanceof MinerStash)
                             {
-                                if(hasChestSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
+                                if(hasContainerSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
                             }
                         }
                     }
@@ -39,9 +42,9 @@ public class AIHelperSearch
         }
         return null;
     }
-    private static boolean hasChestSpace(World world, BlockPos pos)
+    private static boolean hasContainerSpace(World world, BlockPos pos)
     {
-        TileEntityChest te = ((TileEntityChest) world.getTileEntity(pos));
+        IInventory te = ((IInventory) world.getTileEntity(pos));
         if(te == null) return false;
 
         for(int checkSlot = 0; checkSlot < te.getSizeInventory(); checkSlot++)
