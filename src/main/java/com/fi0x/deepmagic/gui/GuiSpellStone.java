@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -29,7 +30,7 @@ public class GuiSpellStone extends GuiContainer
     private CustomGuiButton btnPrevParts;
     private CustomGuiButton btnNextParts;
 
-    private String newPartName;
+    private String newPartName;//TODO: Update as soon as items change
     private ArrayList<String> addedParts;
     private int firstRowIdx;
 
@@ -60,8 +61,10 @@ public class GuiSpellStone extends GuiContainer
 
         btnPrevParts = new CustomGuiButton(nextID(), guiLeft + 125, guiTop + 62, TEXTURES, 192, 0);
         buttonList.add(btnPrevParts);
+        btnPrevParts.visible = firstRowIdx > 0;
         btnNextParts = new CustomGuiButton(nextID(), guiLeft + 125, guiTop + 82, TEXTURES, 203, 0);
         buttonList.add(btnNextParts);
+        btnNextParts.visible = firstRowIdx + 4 < addedParts.size();
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -97,19 +100,36 @@ public class GuiSpellStone extends GuiContainer
 
         if(button == btnBind)
         {
-            //TODO: Add spell parts to spell
+            ItemStack boundSpell = te.chargeSpell();
+            if(boundSpell != ItemStack.EMPTY)
+            {
+                inventorySlots.putStackInSlot(1, boundSpell);
+                inventorySlots.putStackInSlot(0, ItemStack.EMPTY);
+                inventorySlots.getSlot(0).inventory.markDirty();
+                inventorySlots.getSlot(1).inventory.markDirty();
+                firstRowIdx = 0;
+                addedParts.clear();
+            }
         } else if(button == btnAddPart)
         {
-            //TODO: Get part and add to list
+            String partName = "";//TODO: Store part-name in variable if item combination is valid
+            if(partName.equals("")) return;
+            newPartName = "";
+            addedParts.add(((ContainerSpellStone) inventorySlots).transformItemsToPart(partName));
         } else if(button == btnClearParts)
         {
-            //TODO: Remove all parts and drop items
+            firstRowIdx = 0;
+            addedParts.clear();
+            /*
+            TODO: Get a list of items that were used to create the parts (from tile entity)
+             Drop all items from the list
+             */
         } else if(button == btnPrevParts)
         {
-            //TODO: Change displayed parts
+            if(firstRowIdx > 0) firstRowIdx--;
         } else if(button == btnNextParts)
         {
-            //TODO: Change displayed parts
+            if(firstRowIdx + 4 < addedParts.size()) firstRowIdx++;
         }
 
         btnPrevParts.visible = firstRowIdx > 0;

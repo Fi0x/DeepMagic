@@ -38,6 +38,19 @@ public class ContainerSpellStone extends Container
             addSlotToContainer(new Slot(player, x, 8 + x * 18, 198));
         }
     }
+    public String transformItemsToPart(String partName)
+    {
+        for(int idx = 2; idx <= 6; idx++)
+        {
+            inventorySlots.get(idx).putStack(ItemStack.EMPTY);
+        }
+
+        /*
+        TODO: Add part to tile entity
+         Return part-name
+         */
+        return "";
+    }
 
     @Override
     public void addListener(@Nonnull IContainerListener listener)

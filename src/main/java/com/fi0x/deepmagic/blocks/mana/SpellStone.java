@@ -17,8 +17,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -85,9 +83,8 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
             ParticleSpawner.spawnParticle(ParticleEnum.SPELL_STONE, x, y, z);
         }
     }
-    private boolean chargeSpell(EntityPlayer playerIn, ItemStack stack, TileEntitySpellStone tile)
+    public ItemStack chargeSpell(ItemStack stack, TileEntitySpellStone tile)
     {
-        playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Spell Stone used"));
         NBTTagCompound compound;
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         compound = stack.getTagCompound();
@@ -120,6 +117,6 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         tile.resetSpellTier();
 
         compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
-        return true;
+        return stack.copy();
     }
 }

@@ -1,5 +1,7 @@
 package com.fi0x.deepmagic.blocks.mana.tile;
 
+import com.fi0x.deepmagic.blocks.mana.SpellStone;
+import com.fi0x.deepmagic.items.spells.Spell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -107,12 +109,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory
         manaMultiplier = 0;
         markDirty();
     }
-    private void setSpellTier(double newTier)
-    {
-        if(newTier > tier) tier = newTier;
-        else tier += newTier / tier;
-        markDirty();
-    }
     public double getSpellTier()
     {
         return tier;
@@ -122,6 +118,16 @@ public class TileEntitySpellStone extends TileEntity implements IInventory
         tier = 0;
         markDirty();
     }
+
+    public ItemStack chargeSpell()
+    {
+        if(inventory.get(1).isEmpty() && inventory.get(0).getItem() instanceof Spell)
+        {
+            return ((SpellStone) blockType).chargeSpell(inventory.get(0), this);
+        }
+        return ItemStack.EMPTY;
+    }
+
     @Override
     public int getSizeInventory()
     {
