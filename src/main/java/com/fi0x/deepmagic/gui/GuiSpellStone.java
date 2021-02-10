@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.gui;
 
 import com.fi0x.deepmagic.blocks.containers.ContainerSpellStone;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
+import com.fi0x.deepmagic.gui.elements.CustomGuiButton;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -11,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GuiSpellStone extends GuiContainer
@@ -24,12 +26,12 @@ public class GuiSpellStone extends GuiContainer
     private GuiButton btnBind;
     private GuiButton btnAddPart;
     private GuiButton btnClearParts;
+    private CustomGuiButton btnPrevParts;
+    private CustomGuiButton btnNextParts;
 
-    private String currentPart;
-    private String part1;
-    private String part2;
-    private String part3;
-    private String part4;
+    private String newPartName;
+    private ArrayList<String> addedParts;
+    private int firstRowIdx;
 
     public GuiSpellStone(InventoryPlayer player, TileEntitySpellStone tileentity)
     {
@@ -45,11 +47,9 @@ public class GuiSpellStone extends GuiContainer
         super.initGui();
         buttonList.clear();
         labelList.clear();
-        currentPart = "";
-        part1 = "";
-        part2 = "";
-        part3 = "";
-        part4 = "";
+        newPartName = "";
+        addedParts = new ArrayList<>();
+        firstRowIdx = 0;
 
         btnBind = new GuiButton(nextID(), guiLeft + 125, guiTop + 104, 40, 20, "Bind");
         buttonList.add(btnBind);
@@ -57,6 +57,11 @@ public class GuiSpellStone extends GuiContainer
         buttonList.add(btnAddPart);
         btnClearParts = new GuiButton(nextID(), guiLeft + 11, guiTop + 104, 75, 20, "Clear Parts");
         buttonList.add(btnClearParts);
+
+        btnPrevParts = new CustomGuiButton(nextID(), guiLeft + 125, guiTop + 62, TEXTURES, 192, 0);
+        buttonList.add(btnPrevParts);
+        btnNextParts = new CustomGuiButton(nextID(), guiLeft + 125, guiTop + 82, TEXTURES, 203, 0);
+        buttonList.add(btnNextParts);
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -72,11 +77,11 @@ public class GuiSpellStone extends GuiContainer
         fontRenderer.drawString(tileName, xSize / 2 - fontRenderer.getStringWidth(tileName) / 2, 6, 4210752);
         fontRenderer.drawString(player.getDisplayName().getUnformattedText(), 7, ySize - 94, 4210752);
 
-        fontRenderer.drawString(currentPart, 13, 39, 3289650);
-        fontRenderer.drawString(part1, 13, 52, 3289650);
-        fontRenderer.drawString(part2, 13, 65, 3289650);
-        fontRenderer.drawString(part3, 13, 78, 3289650);
-        fontRenderer.drawString(part4, 13, 91, 3289650);
+        fontRenderer.drawString(newPartName, 13, 39, 3289650);
+        if(addedParts.size() > firstRowIdx) fontRenderer.drawString(addedParts.get(firstRowIdx), 13, 52, 3289650);
+        if(addedParts.size() > firstRowIdx + 1) fontRenderer.drawString(addedParts.get(firstRowIdx + 1), 13, 65, 3289650);
+        if(addedParts.size() > firstRowIdx + 2) fontRenderer.drawString(addedParts.get(firstRowIdx + 2), 13, 78, 3289650);
+        if(addedParts.size() > firstRowIdx + 3) fontRenderer.drawString(addedParts.get(firstRowIdx + 3), 13, 91, 3289650);
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
@@ -99,13 +104,18 @@ public class GuiSpellStone extends GuiContainer
         } else if(button == btnClearParts)
         {
             //TODO: Remove all parts and drop items
+        } else if(button == btnPrevParts)
+        {
+            //TODO: Change displayed parts
+        } else if(button == btnNextParts)
+        {
+            //TODO: Change displayed parts
         }
+
+        btnPrevParts.visible = firstRowIdx > 0;
+        btnNextParts.visible = firstRowIdx + 4 < addedParts.size();
     }
-    @Override
-    public void handleMouseInput() throws IOException
-    {
-        super.handleMouseInput();
-    }
+
     private int nextID()
     {
         return elementID++;
