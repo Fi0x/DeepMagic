@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.blocks.containers.ContainerSpellStone;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
 import com.fi0x.deepmagic.util.Reference;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -46,23 +47,25 @@ public class GuiSpellStone extends GuiContainer
         buttonList.clear();
         labelList.clear();
 
-        btnStart = new GuiButton(nextID(), guiLeft + 147, guiTop + 104, 18, 18, "GO");
+        btnStart = new GuiButton(nextID(), guiLeft + 105, guiTop + 104, 60, 20, "Bind");
         buttonList.add(btnStart);
-        btnAddPart = new GuiButton(nextID(), guiLeft + 104, guiTop + 19, 27, 18, "Add");
+        btnAddPart = new GuiButton(nextID(), guiLeft + 104, guiTop + 18, 30, 20, "Add");
         buttonList.add(btnAddPart);
-        btnClearParts = new GuiButton(nextID(), guiLeft + 11, guiTop + 104, 45, 18, "Clear");
+        btnClearParts = new GuiButton(nextID(), guiLeft + 11, guiTop + 104, 60, 20, "Clear");
         buttonList.add(btnClearParts);
 
-        lblPart1 = new GuiLabel(this.fontRenderer, nextID(), guiLeft + 11, guiTop + 50, 114, 12, 0);
+        FontRenderer labelFont = fontRenderer;
+        labelFont.FONT_HEIGHT = 12;
+        lblPart1 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 50, 114, 12, 0);
         lblPart1.addLine("First Part");
         labelList.add(lblPart1);
-        lblPart2 = new GuiLabel(this.fontRenderer, nextID(), guiLeft + 11, guiTop + 63, 114, 12, 0);
+        lblPart2 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 63, 114, 12, 0);
         lblPart2.addLine("Second Part");
         labelList.add(lblPart2);
-        lblPart3 = new GuiLabel(this.fontRenderer, nextID(), guiLeft + 11, guiTop + 76, 114, 12, 0);
+        lblPart3 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 76, 114, 12, 0);
         lblPart3.addLine("Third Part");
         labelList.add(lblPart3);
-        lblPart4 = new GuiLabel(this.fontRenderer, nextID(), guiLeft + 11, guiTop + 89, 114, 12, 0);
+        lblPart4 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 89, 114, 12, 0);
         lblPart4.addLine("Fourth Part");
         labelList.add(lblPart4);
     }
