@@ -3,9 +3,7 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.blocks.containers.ContainerSpellStone;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
 import com.fi0x.deepmagic.util.Reference;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,14 +21,15 @@ public class GuiSpellStone extends GuiContainer
 
     private int elementID = 1;
 
-    private GuiButton btnStart;
+    private GuiButton btnBind;
     private GuiButton btnAddPart;
     private GuiButton btnClearParts;
 
-    private GuiLabel lblPart1;
-    private GuiLabel lblPart2;
-    private GuiLabel lblPart3;
-    private GuiLabel lblPart4;
+    private String currentPart;
+    private String part1;
+    private String part2;
+    private String part3;
+    private String part4;
 
     public GuiSpellStone(InventoryPlayer player, TileEntitySpellStone tileentity)
     {
@@ -46,28 +45,18 @@ public class GuiSpellStone extends GuiContainer
         super.initGui();
         buttonList.clear();
         labelList.clear();
+        currentPart = "";
+        part1 = "";
+        part2 = "";
+        part3 = "";
+        part4 = "";
 
-        btnStart = new GuiButton(nextID(), guiLeft + 105, guiTop + 104, 60, 20, "Bind");
-        buttonList.add(btnStart);
+        btnBind = new GuiButton(nextID(), guiLeft + 125, guiTop + 104, 40, 20, "Bind");
+        buttonList.add(btnBind);
         btnAddPart = new GuiButton(nextID(), guiLeft + 104, guiTop + 18, 30, 20, "Add");
         buttonList.add(btnAddPart);
-        btnClearParts = new GuiButton(nextID(), guiLeft + 11, guiTop + 104, 60, 20, "Clear");
+        btnClearParts = new GuiButton(nextID(), guiLeft + 11, guiTop + 104, 75, 20, "Clear Parts");
         buttonList.add(btnClearParts);
-
-        FontRenderer labelFont = fontRenderer;
-        labelFont.FONT_HEIGHT = 12;
-        lblPart1 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 50, 114, 12, 0);
-        lblPart1.addLine("First Part");
-        labelList.add(lblPart1);
-        lblPart2 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 63, 114, 12, 0);
-        lblPart2.addLine("Second Part");
-        labelList.add(lblPart2);
-        lblPart3 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 76, 114, 12, 0);
-        lblPart3.addLine("Third Part");
-        labelList.add(lblPart3);
-        lblPart4 = new GuiLabel(labelFont, nextID(), guiLeft + 11, guiTop + 89, 114, 12, 0);
-        lblPart4.addLine("Fourth Part");
-        labelList.add(lblPart4);
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -82,6 +71,12 @@ public class GuiSpellStone extends GuiContainer
         String tileName = Objects.requireNonNull(te.getDisplayName()).getUnformattedText();
         fontRenderer.drawString(tileName, xSize / 2 - fontRenderer.getStringWidth(tileName) / 2, 6, 4210752);
         fontRenderer.drawString(player.getDisplayName().getUnformattedText(), 7, ySize - 94, 4210752);
+
+        fontRenderer.drawString(currentPart, 13, 39, 3289650);
+        fontRenderer.drawString(part1, 13, 52, 3289650);
+        fontRenderer.drawString(part2, 13, 65, 3289650);
+        fontRenderer.drawString(part3, 13, 78, 3289650);
+        fontRenderer.drawString(part4, 13, 91, 3289650);
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
@@ -95,7 +90,7 @@ public class GuiSpellStone extends GuiContainer
     {
         super.actionPerformed(button);
 
-        if(button == btnStart)
+        if(button == btnBind)
         {
             //TODO: Add spell parts to spell
         } else if(button == btnAddPart)
@@ -105,6 +100,11 @@ public class GuiSpellStone extends GuiContainer
         {
             //TODO: Remove all parts and drop items
         }
+    }
+    @Override
+    public void handleMouseInput() throws IOException
+    {
+        super.handleMouseInput();
     }
     private int nextID()
     {
