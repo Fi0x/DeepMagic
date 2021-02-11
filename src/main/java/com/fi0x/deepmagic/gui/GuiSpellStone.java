@@ -104,8 +104,7 @@ public class GuiSpellStone extends GuiContainer
 
         if(button == btnBind)
         {
-            te.setField(2, 1);
-            btnBind.visible = false;//TODO: Make visible again when process finished
+            te.setField(2, 1);//TODO: Use Packets
             //TODO: Clear part-list when process finishes
         } else if(button == btnAddPart)
         {
