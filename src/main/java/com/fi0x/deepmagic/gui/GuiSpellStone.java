@@ -8,7 +8,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -92,6 +91,11 @@ public class GuiSpellStone extends GuiContainer
         GlStateManager.color(1, 1, 1, 1);
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+        int p = getProgressScaled(46);
+        drawTexturedModalRect(guiLeft + 148, guiTop + 37, 176, 0, 16, p);
+
+        btnBind.visible = p == 0;
     }
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) throws IOException
@@ -100,16 +104,9 @@ public class GuiSpellStone extends GuiContainer
 
         if(button == btnBind)
         {
-            ItemStack boundSpell = te.chargeSpell();
-            if(boundSpell != ItemStack.EMPTY)
-            {
-                inventorySlots.putStackInSlot(1, boundSpell);
-                inventorySlots.putStackInSlot(0, ItemStack.EMPTY);
-                inventorySlots.getSlot(0).inventory.markDirty();
-                inventorySlots.getSlot(1).inventory.markDirty();
-                firstRowIdx = 0;
-                addedParts.clear();
-            }
+            te.setField(2, 1);
+            btnBind.visible = false;//TODO: Make visible again when process finished
+            //TODO: Clear part-list when process finishes
         } else if(button == btnAddPart)
         {
             String partName = "";//TODO: Store part-name in variable if item combination is valid
@@ -136,6 +133,12 @@ public class GuiSpellStone extends GuiContainer
         btnNextParts.visible = firstRowIdx + 4 < addedParts.size();
     }
 
+    private int getProgressScaled(int pixels)
+    {
+        int i = te.getField(0);
+        if(i == 0) return 0;
+        return i - te.getField(1) * pixels / i;
+    }
     private int nextID()
     {
         return elementID++;

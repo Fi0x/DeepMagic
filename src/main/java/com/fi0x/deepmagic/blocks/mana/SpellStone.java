@@ -83,7 +83,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
             ParticleSpawner.spawnParticle(ParticleEnum.SPELL_STONE, x, y, z);
         }
     }
-    public ItemStack chargeSpell(ItemStack stack, TileEntitySpellStone tile)
+    public void chargeSpell(ItemStack stack, TileEntitySpellStone tile)
     {
         NBTTagCompound compound;
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
@@ -117,6 +117,5 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         tile.resetSpellTier();
 
         compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
-        return stack.copy();
     }
 }

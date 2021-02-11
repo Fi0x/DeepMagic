@@ -8,6 +8,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -17,16 +18,64 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TileEntitySpellStone extends TileEntity implements IInventory
+public class TileEntitySpellStone extends TileEntity implements IInventory, ITickable
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(7, ItemStack.EMPTY);
     private String customName;
+
+    private int totalTime;
+    private int remainingTime;
+    private int buttonHandling;
 
     private final ArrayList<String> spellParts = new ArrayList<>();
 
     private int manaAdder;
     private double manaMultiplier;
     private double tier;
+
+    @Override
+    public void update()
+    {
+        boolean dirty = false;
+
+        if(!world.isRemote)
+        {
+            if(remainingTime > 0)
+            {
+                remainingTime--;
+                if(!(inventory.get(0).getItem() instanceof Spell) || !inventory.get(1).isEmpty())
+                {
+                    totalTime = 0;
+                    remainingTime = 0;
+                } else if(remainingTime == 0)
+                {
+                    ItemStack inputSpell = inventory.get(0).copy();
+                    ((SpellStone) blockType).chargeSpell(inputSpell, this);
+                    inventory.set(1, inputSpell);
+                    inventory.set(0, ItemStack.EMPTY);
+                }
+                dirty = true;
+            } else if(buttonHandling != 0)
+            {
+                switch(buttonHandling)
+                {
+                    case 1:
+                        totalTime = spellParts.size() * 100;
+                        remainingTime = totalTime;
+                        break;
+                    case 2:
+                        //TODO: Add part to list
+                        break;
+                    case 3:
+                        //TODO: Clear list
+                }
+                buttonHandling = 0;
+                dirty = true;
+            }
+        }
+
+        if(dirty) markDirty();
+    }
 
     @Nonnull
     @Override
@@ -50,6 +99,10 @@ public class TileEntitySpellStone extends TileEntity implements IInventory
         ItemStackHelper.saveAllItems(compound, inventory);
         if(hasCustomName()) compound.setString("customName", customName);
 
+        compound.setInteger("totalTime", totalTime);
+        compound.setInteger("remainingTime", remainingTime);
+        compound.setInteger("buttonPress", buttonHandling);
+
         return super.writeToNBT(compound);
     }
     @Override
@@ -66,8 +119,13 @@ public class TileEntitySpellStone extends TileEntity implements IInventory
         ItemStackHelper.loadAllItems(compound, inventory);
         if(compound.hasKey("customName")) setCustomName(compound.getString("customName"));
 
+        totalTime = compound.getInteger("totalTime");
+        remainingTime = compound.getInteger("remainingTime");
+        buttonHandling = compound.getInteger("buttonPress");
+
         super.readFromNBT(compound);
     }
+
 
     public int getPartCount()
     {
@@ -119,13 +177,16 @@ public class TileEntitySpellStone extends TileEntity implements IInventory
         markDirty();
     }
 
-    public ItemStack chargeSpell()
+    public boolean chargeSpell()
     {
         if(inventory.get(1).isEmpty() && inventory.get(0).getItem() instanceof Spell)
         {
-            return ((SpellStone) blockType).chargeSpell(inventory.get(0), this);
+            ((SpellStone) blockType).chargeSpell(inventory.get(0), this);
+            inventory.set(1, inventory.get(0));
+            inventory.set(0, ItemStack.EMPTY);
+            return true;
         }
-        return ItemStack.EMPTY;
+        return false;
     }
 
     @Override
@@ -193,17 +254,37 @@ public class TileEntitySpellStone extends TileEntity implements IInventory
     @Override
     public int getField(int id)
     {
+        switch(id)
+        {
+            case 0:
+                return totalTime;
+            case 1:
+                return remainingTime;
+            case 2:
+                return buttonHandling;
+        }
         return 0;
     }
     @Override
     public void setField(int id, int value)
     {
-
+        switch(id)
+        {
+            case 0:
+                totalTime = value;
+                break;
+            case 1:
+                remainingTime = value;
+                break;
+            case 2:
+                buttonHandling = value;
+                break;
+        }
     }
     @Override
     public int getFieldCount()
     {
-        return 0;
+        return 3;
     }
     @Override
     public void clear()

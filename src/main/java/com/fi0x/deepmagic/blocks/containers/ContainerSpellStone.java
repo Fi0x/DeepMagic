@@ -13,14 +13,15 @@ import javax.annotation.Nonnull;
 
 public class ContainerSpellStone extends Container
 {
-    private final TileEntitySpellStone te;
+    public final TileEntitySpellStone te;
+    private int totalTime, remainingTime, pressedButton;
 
     public ContainerSpellStone(InventoryPlayer player, TileEntitySpellStone tileEntity)
     {
         te = tileEntity;
 
         addSlotToContainer(new SlotSpellStoneSpellInput(te, 0, 148, 20));
-        addSlotToContainer(new SlotSpellStoneSpellOutput(te, 1, 148, 84));
+        addSlotToContainer(new SlotOutput(te, 1, 148, 84));
         for(int idx = 2; idx <= 6; idx++)
         {
             addSlotToContainer(new Slot(te, idx, 12 + 18 * (idx - 2), 20));
@@ -57,6 +58,27 @@ public class ContainerSpellStone extends Container
     {
         super.addListener(listener);
         listener.sendAllWindowProperties(this, te);
+    }
+    @Override
+    public void detectAndSendChanges()
+    {
+        super.detectAndSendChanges();
+
+        for(IContainerListener listener : listeners)
+        {
+            if(totalTime != te.getField(0)) listener.sendWindowProperty(this, 0, te.getField(0));
+            if(remainingTime != te.getField(1)) listener.sendWindowProperty(this, 1, te.getField(1));
+            if(pressedButton != te.getField(2)) listener.sendWindowProperty(this, 2, te.getField(2));
+        }
+
+        totalTime = te.getField(0);
+        remainingTime = te.getField(1);
+        pressedButton = te.getField(2);
+    }
+    @Override
+    public void updateProgressBar(int id, int data)
+    {
+        te.setField(id, data);
     }
     @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
