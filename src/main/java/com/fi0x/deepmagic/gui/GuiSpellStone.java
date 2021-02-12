@@ -137,8 +137,8 @@ public class GuiSpellStone extends GuiContainer
     private int getProgressScaled(int pixels)
     {
         int i = te.getField(0);
-        if(i == 0) return 0;
-        return i - te.getField(1) * pixels / i;
+        if(i <= 0) return 0;
+        return (i - te.getField(1)) * pixels / i;
     }
     private int nextID()
     {
