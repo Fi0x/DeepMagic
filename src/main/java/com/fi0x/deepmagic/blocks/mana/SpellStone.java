@@ -12,8 +12,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -90,40 +88,5 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
 
             ParticleSpawner.spawnParticle(ParticleEnum.SPELL_STONE, x, y, z);
         }
-    }
-    public void chargeSpell(ItemStack stack, TileEntitySpellStone tile)
-    {
-        NBTTagCompound compound;
-        if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-        compound = stack.getTagCompound();
-        assert compound != null;
-
-        int sectionNumber = 0;
-        while(compound.hasKey("section" + sectionNumber)) sectionNumber++;
-        compound.setString("section" + sectionNumber, tile.getSpellParts());
-        tile.resetParts();
-
-        int manaBase = ConfigHandler.spellBaseManaCost;
-        if(compound.hasKey("manaBase")) manaBase = compound.getInteger("manaBase");
-        manaBase += tile.getManaAdder();
-        compound.setInteger("manaBase", manaBase);
-        tile.resetManaAdder();
-
-        double manaMult = 1;
-        if(compound.hasKey("manaMultiplier")) manaMult = compound.getDouble("manaMultiplier");
-        manaMult += tile.getManaMultiplier();
-        compound.setDouble("manaMultiplier", manaMult);
-        tile.resetManaMultiplier();
-
-        int manaCosts = (int) (manaBase * manaMult);
-        compound.setInteger("manaCosts", manaCosts);
-
-        double tier = Math.min(Math.log(Math.pow(manaCosts, 2.4)), 0.01 * Math.pow(manaCosts, 0.7));
-        if(compound.hasKey("tier")) tier = compound.getInteger("tier");
-        tier += tile.getSpellTier();
-        compound.setInteger("tier", (int) tier);
-        tile.resetSpellTier();
-
-        compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
     }
 }

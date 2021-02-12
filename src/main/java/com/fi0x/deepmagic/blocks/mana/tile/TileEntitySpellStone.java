@@ -1,10 +1,10 @@
 package com.fi0x.deepmagic.blocks.mana.tile;
 
-import com.fi0x.deepmagic.blocks.mana.SpellStone;
 import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
 import com.fi0x.deepmagic.mana.spells.SpellPartVerifier;
 import com.fi0x.deepmagic.network.PacketGetSpellStone;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -63,7 +63,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                 } else if(remainingTime == 0)
                 {
                     ItemStack inputSpell = inventory.get(0).copy();
-                    ((SpellStone) blockType).chargeSpell(inputSpell, this);
+                    chargeSpell(inputSpell);
                     inventory.set(1, inputSpell);
                     inventory.set(0, ItemStack.EMPTY);
                     totalTime = 0;
@@ -110,6 +110,43 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         }
 
         if(dirty) markDirty();
+    }
+
+    public void chargeSpell(ItemStack stack)
+    {
+        NBTTagCompound compound;
+        if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+        compound = stack.getTagCompound();
+        assert compound != null;
+
+        int sectionNumber = 0;
+        while(compound.hasKey("section" + sectionNumber)) sectionNumber++;
+        compound.setString("section" + sectionNumber, getSpellParts());
+        spellParts.clear();
+        partNames.clear();
+
+        int manaBase = ConfigHandler.spellBaseManaCost;
+        if(compound.hasKey("manaBase")) manaBase = compound.getInteger("manaBase");
+        manaBase += manaAdder;
+        compound.setInteger("manaBase", manaBase);
+        manaAdder = 0;
+
+        double manaMult = 1;
+        if(compound.hasKey("manaMultiplier")) manaMult = compound.getDouble("manaMultiplier");
+        manaMult += manaMultiplier;
+        compound.setDouble("manaMultiplier", manaMult);
+        manaMultiplier = 0;
+
+        int manaCosts = (int) (manaBase * manaMult);
+        compound.setInteger("manaCosts", manaCosts);
+
+        double tier = Math.min(Math.log(Math.pow(manaCosts, 2.4)), 0.01 * Math.pow(manaCosts, 0.7));
+        if(compound.hasKey("tier")) tier = compound.getInteger("tier");
+        tier += this.tier;
+        compound.setInteger("tier", (int) tier);
+        this.tier = 0;
+
+        compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
     }
 
     @Nonnull
@@ -230,37 +267,13 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     {
         return currentPartName;
     }
-    public void resetParts()
-    {
-        spellParts.clear();
-        partNames.clear();
-        markDirty();
-    }
     public void addManaAdder(int value)
     {
         manaAdder += value;
     }
-    public int getManaAdder()
-    {
-        return manaAdder;
-    }
-    public void resetManaAdder()
-    {
-        manaAdder = 0;
-        markDirty();
-    }
     public void addManaMultiplier(double value)
     {
         manaMultiplier += value;
-    }
-    public double getManaMultiplier()
-    {
-        return manaMultiplier;
-    }
-    public void resetManaMultiplier()
-    {
-        manaMultiplier = 0;
-        markDirty();
     }
     public void addSpellTier(double value)
     {
@@ -270,15 +283,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     {
         if(newTier > tier) tier = newTier;
         else tier += newTier / tier;
-        markDirty();
-    }
-    public double getSpellTier()
-    {
-        return tier;
-    }
-    public void resetSpellTier()
-    {
-        tier = 0;
         markDirty();
     }
 
