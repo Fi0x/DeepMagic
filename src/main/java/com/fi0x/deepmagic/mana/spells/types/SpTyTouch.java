@@ -1,10 +1,13 @@
 package com.fi0x.deepmagic.mana.spells.types;
 
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -33,6 +36,16 @@ public class SpTyTouch implements ISpellType
     {
         String ret = NAME;
         return ret;
+    }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_FLOW_CONTROLLER));
+        list.add(new ItemStack(Blocks.STONE_BUTTON));
+
+        return list;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.fi0x.deepmagic.mana.spells.types;
 
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -34,6 +36,16 @@ public class SpTyBeam implements ISpellType
     public void setAttributesFromString(ArrayList<String> attributes)
     {
         range = Double.parseDouble(attributes.get(0));
+    }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_FLOW_CONTROLLER));
+        //TODO: Recipe missing
+
+        return list;
     }
 
     @Override

@@ -2,10 +2,12 @@ package com.fi0x.deepmagic.blocks.mana.tile;
 
 import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import com.fi0x.deepmagic.mana.spells.SpellPartHandler;
 import com.fi0x.deepmagic.mana.spells.SpellPartVerifier;
 import com.fi0x.deepmagic.network.PacketGetSpellStone;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -88,11 +90,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         }
                         break;
                     case 3:
-                        /*
-                        TODO: Clear part lists (spellParts and partNames)
-                         Get a list of items that were used to create the parts
-                         Drop all items from the list
-                         */
+                        clearPartLists();
                 }
                 buttonHandling = 0;
                 dirty = true;
@@ -111,7 +109,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         if(dirty) markDirty();
     }
 
-    public void chargeSpell(ItemStack stack)
+    private void chargeSpell(ItemStack stack)
     {
         NBTTagCompound compound;
         if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
@@ -146,6 +144,24 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         this.tier = 0;
 
         compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
+    }
+    private void clearPartLists()
+    {
+        ArrayList<ItemStack> consumedItems = new ArrayList<>();
+        ArrayList<ISpellPart> partsToRemove = SpellPartHandler.getSectionParts(getSpellParts());
+        for(ISpellPart removePart : partsToRemove)
+        {
+            consumedItems.addAll(removePart.getRequiredItems());
+        }
+
+        spellParts.clear();
+        partNames.clear();
+
+        for(ItemStack stack : consumedItems)
+        {
+            EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, stack);
+            world.spawnEntity(entityItem);
+        }
     }
 
     @Nonnull

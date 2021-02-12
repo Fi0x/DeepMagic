@@ -12,10 +12,7 @@ public interface ISpellPart
     default void setAttributesFromString(ArrayList<String> attributes)
     {
     }
-    default ArrayList<ItemStack> getRequiredItems()
-    {
-        return null;
-    }
+    ArrayList<ItemStack> getRequiredItems();
 
     default void setAutoSmelt(boolean state)
     {

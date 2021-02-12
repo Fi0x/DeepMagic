@@ -2,9 +2,11 @@ package com.fi0x.deepmagic.mana.spells.types;
 
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
 import net.minecraft.block.BlockAir;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -38,6 +40,16 @@ public class SpTyRune implements ISpellType
     public void setAttributesFromString(ArrayList<String> attributes)
     {
         casts = Integer.parseInt(attributes.get(0));
+    }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_FLOW_CONTROLLER));
+        list.add(new ItemStack(ModItems.MAGIC_SIGIL));
+
+        return list;
     }
 
     @Override

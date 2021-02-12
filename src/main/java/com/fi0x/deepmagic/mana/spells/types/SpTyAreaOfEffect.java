@@ -1,8 +1,11 @@
 package com.fi0x.deepmagic.mana.spells.types;
 
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -37,6 +40,16 @@ public class SpTyAreaOfEffect implements ISpellType
     public void setAttributesFromString(ArrayList<String> attributes)
     {
         radius = Double.parseDouble(attributes.get(0));
+    }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_FLOW_CONTROLLER));
+        list.add(new ItemStack(Items.SPLASH_POTION));
+
+        return list;
     }
 
     @Override
