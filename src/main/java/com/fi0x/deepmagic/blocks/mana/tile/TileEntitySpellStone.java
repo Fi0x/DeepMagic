@@ -713,10 +713,11 @@ public class TileEntitySpellStone extends TileEntity implements ITickable, IMana
 
                 manaAdder += 20;
                 flag = true;
-            } else if(false)
+            } else if(consumedItems.contains("item.pickaxeIron") && consumedItems.contains("item.flintAndSteel"))
             {
                 spellParts.add(SpEfSmelt.NAME);
-                consumedItems.remove(null);
+                consumedItems.remove("item.pickaxeIron");
+                consumedItems.remove("item.flintAndSteel");
 
                 manaAdder += 50;
                 flag = true;
