@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualSpawnDenial;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualTime;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualWeather;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityDwarfBaseMarker;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityMinerStash;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -89,6 +90,7 @@ public class RegistryHandler
 		GameRegistry.registerTileEntity(TileEntityRune.class, new ResourceLocation(Reference.MOD_ID, "rune"));
 		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation(Reference.MOD_ID, "spell_stone"));
 		GameRegistry.registerTileEntity(TileEntityDwarfBaseMarker.class, new ResourceLocation(Reference.MOD_ID, "dwarf_base_marker"));
+		GameRegistry.registerTileEntity(TileEntityMinerStash.class, new ResourceLocation(Reference.MOD_ID, "miner_stash"));
 
 		GameRegistry.registerTileEntity(TileEntityRitualTime.class, new ResourceLocation(Reference.MOD_ID, "ritual_time"));
 		GameRegistry.registerTileEntity(TileEntityRitualWeather.class, new ResourceLocation(Reference.MOD_ID, "ritual_weather"));
