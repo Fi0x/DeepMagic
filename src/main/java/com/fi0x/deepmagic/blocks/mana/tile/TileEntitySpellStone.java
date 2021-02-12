@@ -31,9 +31,9 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     private int remainingTime;
     private int buttonHandling;
 
-    private final ArrayList<String> spellParts = new ArrayList<>();
-    private final ArrayList<String> partNames = new ArrayList<>();
-    private String currentPartName;
+    private ArrayList<String> spellParts = new ArrayList<>();
+    private ArrayList<String> partNames = new ArrayList<>();
+    private String currentPartName = "";
 
     private int manaAdder;
     private double manaMultiplier;
@@ -80,6 +80,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         {
                             inventory.get(i).shrink(1);
                         }
+                        //TODO: Send update packet so client
                         break;
                     case 3:
                         /*
@@ -186,6 +187,30 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     public ArrayList<String> getPartNames()
     {
         return partNames;
+    }
+    public String getPacketParts()
+    {
+        StringBuilder packetString = new StringBuilder();
+        if(spellParts.size() > 0) packetString.append(spellParts.get(0));
+        for(int i = 1; i < spellParts.size(); i++)
+        {
+            packetString.append("_:_").append(spellParts.get(i));
+        }
+        packetString.append("___");
+        if(partNames.size() > 0) packetString.append(partNames.get(0));
+        for(int i = 1; i < partNames.size(); i++)
+        {
+            packetString.append("_:_").append(partNames.get(i));
+        }
+
+        return packetString.toString();
+    }
+    public void setPartsFromPacket(String parts)
+    {
+        String[] partLists = parts.split("___");
+        if(partLists.length < 2) return;
+        spellParts = new ArrayList<>(Arrays.asList(partLists[0].split("_:_")));
+        partNames = new ArrayList<>(Arrays.asList(partLists[1].split("_:_")));
     }
     public String getCurrentPartName()
     {

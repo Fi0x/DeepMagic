@@ -292,7 +292,6 @@ public class SpellPartVerifier
                 }
             }
         }
-        //TODO: Compare inputs with spell-part-recipes and return matching spell part
         return null;
     }
 }
