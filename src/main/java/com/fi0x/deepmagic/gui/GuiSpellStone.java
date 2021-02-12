@@ -14,7 +14,6 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class GuiSpellStone extends GuiContainer
@@ -31,8 +30,6 @@ public class GuiSpellStone extends GuiContainer
     private CustomGuiButton btnPrevParts;
     private CustomGuiButton btnNextParts;
 
-    private String newPartName;//TODO: Update as soon as items change
-    private ArrayList<String> addedParts;
     private int firstRowIdx;
 
     public GuiSpellStone(InventoryPlayer player, TileEntitySpellStone tileentity)
@@ -49,8 +46,6 @@ public class GuiSpellStone extends GuiContainer
         super.initGui();
         buttonList.clear();
         labelList.clear();
-        newPartName = "";
-        addedParts = new ArrayList<>();
         firstRowIdx = 0;
 
         btnBind = new GuiButton(nextID(), guiLeft + 125, guiTop + 104, 40, 20, "Bind");
@@ -65,7 +60,7 @@ public class GuiSpellStone extends GuiContainer
         btnPrevParts.visible = firstRowIdx > 0;
         btnNextParts = new CustomGuiButton(nextID(), guiLeft + 125, guiTop + 82, TEXTURES, 203, 0);
         buttonList.add(btnNextParts);
-        btnNextParts.visible = firstRowIdx + 4 < addedParts.size();
+        btnNextParts.visible = firstRowIdx + 4 < te.getPartCount();
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -81,11 +76,11 @@ public class GuiSpellStone extends GuiContainer
         fontRenderer.drawString(tileName, xSize / 2 - fontRenderer.getStringWidth(tileName) / 2, 6, 4210752);
         fontRenderer.drawString(player.getDisplayName().getUnformattedText(), 7, ySize - 94, 4210752);
 
-        fontRenderer.drawString(newPartName, 13, 39, 3289650);
-        if(addedParts.size() > firstRowIdx) fontRenderer.drawString(addedParts.get(firstRowIdx), 13, 52, 3289650);
-        if(addedParts.size() > firstRowIdx + 1) fontRenderer.drawString(addedParts.get(firstRowIdx + 1), 13, 65, 3289650);
-        if(addedParts.size() > firstRowIdx + 2) fontRenderer.drawString(addedParts.get(firstRowIdx + 2), 13, 78, 3289650);
-        if(addedParts.size() > firstRowIdx + 3) fontRenderer.drawString(addedParts.get(firstRowIdx + 3), 13, 91, 3289650);
+        fontRenderer.drawString(te.getCurrentPartName(), 13, 39, 3289650);
+        if(te.getPartCount() > firstRowIdx) fontRenderer.drawString(te.getPartNames().get(firstRowIdx), 13, 52, 3289650);
+        if(te.getPartCount() > firstRowIdx + 1) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 1), 13, 65, 3289650);
+        if(te.getPartCount() > firstRowIdx + 2) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 2), 13, 78, 3289650);
+        if(te.getPartCount() > firstRowIdx + 3) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 3), 13, 91, 3289650);
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
@@ -109,31 +104,23 @@ public class GuiSpellStone extends GuiContainer
         if(button == btnBind)
         {
             PacketHandler.INSTANCE.sendToServer(new PacketInformGuiChange(te.getWorld().provider.getDimension(), te.getPos(), 1));
-            //TODO: Clear part-list when process finishes
         } else if(button == btnAddPart)
         {
-            String partName = "";//TODO: Store part-name in variable if item combination is valid
-            if(partName.equals("")) return;
-            newPartName = "";
-            addedParts.add(((ContainerSpellStone) inventorySlots).transformItemsToPart(partName));
+            PacketHandler.INSTANCE.sendToServer(new PacketInformGuiChange(te.getWorld().provider.getDimension(), te.getPos(), 2));
         } else if(button == btnClearParts)
         {
+            PacketHandler.INSTANCE.sendToServer(new PacketInformGuiChange(te.getWorld().provider.getDimension(), te.getPos(), 3));
             firstRowIdx = 0;
-            addedParts.clear();
-            /*
-            TODO: Get a list of items that were used to create the parts (from tile entity)
-             Drop all items from the list
-             */
         } else if(button == btnPrevParts)
         {
             if(firstRowIdx > 0) firstRowIdx--;
         } else if(button == btnNextParts)
         {
-            if(firstRowIdx + 4 < addedParts.size()) firstRowIdx++;
+            if(firstRowIdx + 4 < te.getPartCount()) firstRowIdx++;
         }
 
         btnPrevParts.visible = firstRowIdx > 0;
-        btnNextParts.visible = firstRowIdx + 4 < addedParts.size();
+        btnNextParts.visible = firstRowIdx + 4 < te.getPartCount();
     }
 
     private int getProgressScaled(int pixels)

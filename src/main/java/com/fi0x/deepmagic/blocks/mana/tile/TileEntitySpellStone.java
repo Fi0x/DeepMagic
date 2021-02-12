@@ -28,6 +28,8 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     private int buttonHandling;
 
     private final ArrayList<String> spellParts = new ArrayList<>();
+    private final ArrayList<String> partNames = new ArrayList<>();//TODO: Fill with correct display names
+    private String currentPartName;
 
     private int manaAdder;
     private double manaMultiplier;
@@ -63,17 +65,22 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                     case 1:
                         totalTime = spellParts.size() * 100;
                         remainingTime = totalTime;
-                        System.out.println("Spell parts: " + spellParts.toString());
+                        partNames.clear();
                         break;
                     case 2:
                         //TODO: Add part to list
                         break;
                     case 3:
-                        //TODO: Clear list
+                        /*
+                        TODO: Clear part lists
+                         Get a list of items that were used to create the parts (from tile entity)
+                         Drop all items from the list
+                         */
                 }
                 buttonHandling = 0;
                 dirty = true;
             }
+            //TODO: Update currentPartName (get from current items)
         }
 
         if(dirty) markDirty();
@@ -94,6 +101,18 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         }
         compound.setString("parts", parts.toString());
 
+        parts = new StringBuilder();
+        if(!partNames.isEmpty())
+        {
+            parts.append(partNames.get(0));
+            for(int i = 1; i < partNames.size(); i++)
+            {
+                parts.append(":").append(partNames.get(i));
+            }
+        }
+        compound.setString("partNames", parts.toString());
+        compound.setString("currentPartName", currentPartName);
+
         compound.setInteger("manaAdder", manaAdder);
         compound.setDouble("manaMultiplier", manaMultiplier);
         compound.setDouble("spellTier", tier);
@@ -112,6 +131,13 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     {
         String parts = compound.getString("parts");
         spellParts.addAll(Arrays.asList(parts.split(":")));
+        if(spellParts.size() == 1 && spellParts.get(0).equals("")) spellParts.clear();
+
+        parts = compound.getString("partNames");
+        partNames.addAll(Arrays.asList(parts.split(":")));
+        if(partNames.size() == 1 && partNames.get(0).equals("")) partNames.clear();
+
+        currentPartName = compound.getString("currentPartName");
 
         manaAdder = compound.getInteger("manaAdder");
         manaMultiplier = compound.getDouble("manaMultiplier");
@@ -146,9 +172,18 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         }
         return parts.toString();
     }
+    public ArrayList<String> getPartNames()
+    {
+        return partNames;
+    }
+    public String getCurrentPartName()
+    {
+        return currentPartName;
+    }
     public void resetParts()
     {
         spellParts.clear();
+        partNames.clear();
         markDirty();
     }
     public int getManaAdder()
@@ -177,18 +212,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     {
         tier = 0;
         markDirty();
-    }
-
-    public boolean chargeSpell()
-    {
-        if(inventory.get(1).isEmpty() && inventory.get(0).getItem() instanceof Spell)
-        {
-            ((SpellStone) blockType).chargeSpell(inventory.get(0), this);
-            inventory.set(1, inventory.get(0));
-            inventory.set(0, ItemStack.EMPTY);
-            return true;
-        }
-        return false;
     }
 
     @Override

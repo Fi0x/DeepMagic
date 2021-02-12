@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -43,6 +44,14 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         return true;
     }
     @Override
+    public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
+    {
+        TileEntitySpellStone te = (TileEntitySpellStone) worldIn.getTileEntity(pos);
+        assert te != null;
+        InventoryHelper.dropInventoryItems(worldIn, pos, te);
+        super.breakBlock(worldIn, pos, state);
+    }
+    @Override
     public Class<TileEntitySpellStone> getTileEntityClass()
     {
         return TileEntitySpellStone.class;
@@ -60,18 +69,17 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         if(rand.nextInt(100) + 1 > ConfigHandler.spellStoneParticles) return;
 
         TileEntitySpellStone tile = getTileEntity(worldIn, pos);
+        if(tile.getField(0) <= 0) return;
 
-        int particles = tile.getPartCount();
+        int particles = 0;
         switch(Minecraft.getMinecraft().gameSettings.particleSetting)
         {
             case 0:
-                particles *= 1;
+                particles = 2;
                 break;
             case 1:
-                particles *= 2;
+                particles = 4;
                 break;
-            default:
-                particles = 0;
         }
 
         for(int i = 0; i < particles; i++)
