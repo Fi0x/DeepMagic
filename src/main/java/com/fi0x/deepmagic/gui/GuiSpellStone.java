@@ -60,7 +60,7 @@ public class GuiSpellStone extends GuiContainer
         btnPrevParts.visible = firstRowIdx > 0;
         btnNextParts = new CustomGuiButton(nextID(), guiLeft + 125, guiTop + 82, TEXTURES, 203, 0);
         buttonList.add(btnNextParts);
-        btnNextParts.visible = firstRowIdx + 4 < te.getPartCount();
+        btnNextParts.visible = firstRowIdx + 4 < te.getPartNames().size();
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -77,10 +77,10 @@ public class GuiSpellStone extends GuiContainer
         fontRenderer.drawString(player.getDisplayName().getUnformattedText(), 7, ySize - 94, 4210752);
 
         fontRenderer.drawString(te.getCurrentPartName(), 13, 39, 3289650);
-        if(te.getPartCount() > firstRowIdx) fontRenderer.drawString(te.getPartNames().get(firstRowIdx), 13, 52, 3289650);
-        if(te.getPartCount() > firstRowIdx + 1) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 1), 13, 65, 3289650);
-        if(te.getPartCount() > firstRowIdx + 2) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 2), 13, 78, 3289650);
-        if(te.getPartCount() > firstRowIdx + 3) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 3), 13, 91, 3289650);
+        if(te.getPartNames().size() > firstRowIdx) fontRenderer.drawString(te.getPartNames().get(firstRowIdx), 13, 52, 3289650);
+        if(te.getPartNames().size() > firstRowIdx + 1) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 1), 13, 65, 3289650);
+        if(te.getPartNames().size() > firstRowIdx + 2) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 2), 13, 78, 3289650);
+        if(te.getPartNames().size() > firstRowIdx + 3) fontRenderer.drawString(te.getPartNames().get(firstRowIdx + 3), 13, 91, 3289650);
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
@@ -95,6 +95,9 @@ public class GuiSpellStone extends GuiContainer
         btnBind.visible = p == 0 && te.getPartCount() > 0;
         btnAddPart.visible = p == 0;
         btnClearParts.visible = p == 0;
+
+        btnPrevParts.visible = firstRowIdx > 0;
+        btnNextParts.visible = firstRowIdx + 4 < te.getPartNames().size();
     }
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) throws IOException
@@ -116,11 +119,8 @@ public class GuiSpellStone extends GuiContainer
             if(firstRowIdx > 0) firstRowIdx--;
         } else if(button == btnNextParts)
         {
-            if(firstRowIdx + 4 < te.getPartCount()) firstRowIdx++;
+            if(firstRowIdx + 4 < te.getPartNames().size()) firstRowIdx++;
         }
-
-        btnPrevParts.visible = firstRowIdx > 0;
-        btnNextParts.visible = firstRowIdx + 4 < te.getPartCount();
     }
 
     private int getProgressScaled(int pixels)

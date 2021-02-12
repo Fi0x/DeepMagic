@@ -76,7 +76,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                     case 1:
                         totalTime = spellParts.size() * 100;
                         remainingTime = totalTime;
-                        partNames.clear();
                         break;
                     case 2:
                         ISpellPart matchingPart = verifier.getPartFromItems();
@@ -104,7 +103,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
             sync--;
             if(sync < 0)
             {
-                sync = 20;
+                sync = 10;
                 PacketHandler.INSTANCE.sendToServer(new PacketGetSpellStone(world.provider.getDimension(), pos));
             }
         }
@@ -259,7 +258,12 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     public void setPartsFromPacket(String parts)
     {
         String[] partLists = parts.split("___");
-        if(partLists.length < 2) return;
+        if(partLists.length < 2)
+        {
+            spellParts.clear();
+            partNames.clear();
+            return;
+        }
         spellParts = new ArrayList<>(Arrays.asList(partLists[0].split("_:_")));
         partNames = new ArrayList<>(Arrays.asList(partLists[1].split("_:_")));
     }
