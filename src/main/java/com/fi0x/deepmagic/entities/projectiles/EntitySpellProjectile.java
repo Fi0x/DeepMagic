@@ -1,9 +1,9 @@
 package com.fi0x.deepmagic.entities.projectiles;
 
-import com.fi0x.deepmagic.items.spells.ISpellPart;
-import com.fi0x.deepmagic.items.spells.SpellPartHandler;
-import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
-import com.fi0x.deepmagic.items.spells.types.ISpellType;
+import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import com.fi0x.deepmagic.mana.spells.SpellPartHandler;
+import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
+import com.fi0x.deepmagic.mana.spells.types.ISpellType;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import net.minecraft.entity.Entity;

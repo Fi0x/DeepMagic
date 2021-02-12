@@ -2,6 +2,8 @@ package com.fi0x.deepmagic.blocks.mana.tile;
 
 import com.fi0x.deepmagic.blocks.mana.SpellStone;
 import com.fi0x.deepmagic.items.spells.Spell;
+import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import com.fi0x.deepmagic.mana.spells.SpellPartVerifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -68,11 +70,10 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         partNames.clear();
                         break;
                     case 2:
-                        /*
-                        TODO: Get Part id and name from helper class
-                         Add part to spellParts
-                         Add name to partNames
-                         */
+                        ISpellPart matchingPart = SpellPartVerifier.getPartFromItems(inventory.get(2), inventory.get(3), inventory.get(4), inventory.get(5), inventory.get(6));
+                        if(matchingPart == null) break;
+                        spellParts.add(matchingPart.getName());
+                        partNames.add(matchingPart.getDisplayName());
                         break;
                     case 3:
                         /*
@@ -111,7 +112,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
             parts.append(partNames.get(0));
             for(int i = 1; i < partNames.size(); i++)
             {
-                parts.append(":").append(partNames.get(i));
+                parts.append("_:_").append(partNames.get(i));
             }
         }
         compound.setString("partNames", parts.toString());
@@ -138,7 +139,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         if(spellParts.size() == 1 && spellParts.get(0).equals("")) spellParts.clear();
 
         parts = compound.getString("partNames");
-        partNames.addAll(Arrays.asList(parts.split(":")));
+        partNames.addAll(Arrays.asList(parts.split("_:_")));
         if(partNames.size() == 1 && partNames.get(0).equals("")) partNames.clear();
 
         currentPartName = compound.getString("currentPartName");
