@@ -4,6 +4,8 @@ import com.fi0x.deepmagic.blocks.mana.SpellStone;
 import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
 import com.fi0x.deepmagic.mana.spells.SpellPartVerifier;
+import com.fi0x.deepmagic.network.PacketGetSpellStone;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -15,6 +17,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -34,6 +38,9 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     private ArrayList<String> spellParts = new ArrayList<>();
     private ArrayList<String> partNames = new ArrayList<>();
     private String currentPartName = "";
+
+    @SideOnly(Side.CLIENT)
+    private int sync = 0;
 
     private int manaAdder;
     private double manaMultiplier;
@@ -80,7 +87,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         {
                             inventory.get(i).shrink(1);
                         }
-                        //TODO: Send update packet so client
                         break;
                     case 3:
                         /*
@@ -93,6 +99,14 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                 dirty = true;
             }
             //TODO: Update currentPartName (get from current items)
+        } else
+        {
+            sync--;
+            if(sync < 0)
+            {
+                sync = 20;
+                PacketHandler.INSTANCE.sendToServer(new PacketGetSpellStone(world.provider.getDimension(), pos));
+            }
         }
 
         if(dirty) markDirty();

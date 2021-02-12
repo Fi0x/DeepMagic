@@ -7,25 +7,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketUpdateSpellStoneClient implements IMessage
+public class PacketReturnSpellStone implements IMessage
 {
     private boolean messageValid;
     private int dimension;
     private BlockPos blockPos;
     private String parts;
 
-    public PacketUpdateSpellStoneClient()
+    public PacketReturnSpellStone()
     {
         messageValid = false;
     }
-    public PacketUpdateSpellStoneClient(int dimension, BlockPos position, String partList)
+    public PacketReturnSpellStone(int dimension, BlockPos position, String partList)
     {
         this.dimension = dimension;
         this.blockPos = position;
@@ -58,19 +57,20 @@ public class PacketUpdateSpellStoneClient implements IMessage
         ByteBufUtils.writeUTF8String(buf, parts);
     }
 
-    public static class Handler implements IMessageHandler<PacketUpdateSpellStoneClient, IMessage>
+    public static class Handler implements IMessageHandler<PacketReturnSpellStone, IMessage>
     {
         @Override
-        public IMessage onMessage(PacketUpdateSpellStoneClient message, MessageContext ctx)
+        public IMessage onMessage(PacketReturnSpellStone message, MessageContext ctx)
         {
             if(!message.messageValid && ctx.side != Side.CLIENT) return null;
             Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message));
             return null;
         }
 
-        void processMessage(PacketUpdateSpellStoneClient message)
+        void processMessage(PacketReturnSpellStone message)
         {
-            World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
+            World world = Minecraft.getMinecraft().world;
+            world.provider.setDimension(message.dimension);
             TileEntity te = world.getTileEntity(message.blockPos);
             if(te instanceof TileEntitySpellStone)
             {
