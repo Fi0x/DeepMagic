@@ -8,12 +8,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
 public class ContainerSpellStone extends Container
 {
-    public final TileEntitySpellStone te;
+    private final TileEntitySpellStone te;
     private int totalTime, remainingTime, pressedButton;
 
     public ContainerSpellStone(InventoryPlayer player, TileEntitySpellStone tileEntity)
@@ -76,6 +78,7 @@ public class ContainerSpellStone extends Container
         pressedButton = te.getField(2);
     }
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data)
     {
         te.setField(id, data);

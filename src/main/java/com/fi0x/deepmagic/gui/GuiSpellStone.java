@@ -97,7 +97,9 @@ public class GuiSpellStone extends GuiContainer
         int p = getProgressScaled(46);
         drawTexturedModalRect(guiLeft + 148, guiTop + 37, 176, 0, 16, p);
 
-        btnBind.visible = p == 0;
+        btnBind.visible = p == 0 && te.getPartCount() > 0;
+        btnAddPart.visible = p == 0;
+        btnClearParts.visible = p == 0;
     }
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) throws IOException

@@ -53,6 +53,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                     ((SpellStone) blockType).chargeSpell(inputSpell, this);
                     inventory.set(1, inputSpell);
                     inventory.set(0, ItemStack.EMPTY);
+                    totalTime = 0;
                 }
                 dirty = true;
             } else if(buttonHandling != 0)
@@ -62,6 +63,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                     case 1:
                         totalTime = spellParts.size() * 100;
                         remainingTime = totalTime;
+                        System.out.println("Spell parts: " + spellParts.toString());
                         break;
                     case 2:
                         //TODO: Add part to list
