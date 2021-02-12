@@ -1,8 +1,6 @@
 package com.fi0x.deepmagic.mana.spells;
 
-import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
-import com.fi0x.deepmagic.mana.spells.modifiers.ISpellModifier;
-import com.fi0x.deepmagic.mana.spells.types.ISpellType;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -14,15 +12,7 @@ public interface ISpellPart
     default void setAttributesFromString(ArrayList<String> attributes)
     {
     }
-    default ISpellType getType()
-    {
-        return null;
-    }
-    default ISpellModifier getModifier()
-    {
-        return null;
-    }
-    default ISpellEffect getEffect()
+    default ArrayList<ItemStack> getRequiredItems()
     {
         return null;
     }

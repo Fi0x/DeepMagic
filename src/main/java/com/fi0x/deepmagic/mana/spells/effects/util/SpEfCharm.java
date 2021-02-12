@@ -35,11 +35,6 @@ public class SpEfCharm implements ISpellEffect
         return ret;
     }
     @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
-    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }

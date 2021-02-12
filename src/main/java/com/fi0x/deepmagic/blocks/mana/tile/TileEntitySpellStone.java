@@ -22,6 +22,8 @@ import java.util.Arrays;
 
 public class TileEntitySpellStone extends TileEntity implements IInventory, ITickable
 {
+    private final SpellPartVerifier verifier = new SpellPartVerifier(this);
+
     private NonNullList<ItemStack> inventory = NonNullList.withSize(7, ItemStack.EMPTY);
     private String customName;
 
@@ -70,10 +72,14 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         partNames.clear();
                         break;
                     case 2:
-                        ISpellPart matchingPart = SpellPartVerifier.getPartFromItems(inventory.get(2), inventory.get(3), inventory.get(4), inventory.get(5), inventory.get(6));
+                        ISpellPart matchingPart = verifier.getPartFromItems();
                         if(matchingPart == null) break;
                         spellParts.add(matchingPart.getName());
                         partNames.add(matchingPart.getDisplayName());
+                        for(int i = 2; i <= 6; i++)
+                        {
+                            inventory.get(i).shrink(1);
+                        }
                         break;
                     case 3:
                         /*
@@ -191,6 +197,10 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         partNames.clear();
         markDirty();
     }
+    public void addManaAdder(int value)
+    {
+        manaAdder += value;
+    }
     public int getManaAdder()
     {
         return manaAdder;
@@ -200,6 +210,10 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
         manaAdder = 0;
         markDirty();
     }
+    public void addManaMultiplier(double value)
+    {
+        manaMultiplier += value;
+    }
     public double getManaMultiplier()
     {
         return manaMultiplier;
@@ -207,6 +221,16 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     public void resetManaMultiplier()
     {
         manaMultiplier = 0;
+        markDirty();
+    }
+    public void addSpellTier(double value)
+    {
+        tier += value;
+    }
+    public void setSpellTier(double newTier)
+    {
+        if(newTier > tier) tier = newTier;
+        else tier += newTier / tier;
         markDirty();
     }
     public double getSpellTier()

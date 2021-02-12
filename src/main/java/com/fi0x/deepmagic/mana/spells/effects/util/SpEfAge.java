@@ -30,11 +30,6 @@ public class SpEfAge implements ISpellEffect
         String ret = NAME;
         return ret;
     }
-    @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
     //TODO: Use only ONE method to increase tick speed of target or target block
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)

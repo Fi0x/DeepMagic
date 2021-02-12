@@ -39,11 +39,6 @@ public class SpTyRune implements ISpellType
     {
         casts = Integer.parseInt(attributes.get(0));
     }
-    @Override
-    public ISpellType getType()
-    {
-        return this;
-    }
 
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)

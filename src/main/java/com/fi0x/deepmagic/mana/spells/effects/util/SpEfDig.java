@@ -50,11 +50,6 @@ public class SpEfDig implements ISpellEffect
         silkTouch = Boolean.parseBoolean(attributes.get(3));
     }
     @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
-    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         IBlockState state = world.getBlockState(targetPos);

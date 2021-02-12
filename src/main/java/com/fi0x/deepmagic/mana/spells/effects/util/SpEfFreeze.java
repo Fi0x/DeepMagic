@@ -27,11 +27,6 @@ public class SpEfFreeze implements ISpellEffect
         String ret = NAME;
         return ret;
     }
-    @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
     //TODO: Use only ONE method to freeze target or target blocks
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)

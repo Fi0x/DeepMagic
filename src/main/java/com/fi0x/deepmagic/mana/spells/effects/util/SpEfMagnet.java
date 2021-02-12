@@ -28,11 +28,6 @@ public class SpEfMagnet implements ISpellEffect
         return ret;
     }
     @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
-    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         //TODO: Use method to pull items towards the target location

@@ -43,11 +43,6 @@ public class SpTyProjectile implements ISpellType
         range = Double.parseDouble(attributes.get(1));
         velocity = Double.parseDouble(attributes.get(2));
     }
-    @Override
-    public ISpellType getType()
-    {
-        return this;
-    }
 
     @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)

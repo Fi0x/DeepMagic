@@ -24,11 +24,6 @@ public class SpMoDamage implements ISpellModifier
         return ret;
     }
     @Override
-    public ISpellModifier getModifier()
-    {
-        return this;
-    }
-    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setDamage(part.getDamage() + DAMAGE_INCREASE);

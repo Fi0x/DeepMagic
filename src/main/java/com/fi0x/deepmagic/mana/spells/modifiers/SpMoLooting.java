@@ -24,11 +24,6 @@ public class SpMoLooting implements ISpellModifier
         return ret;
     }
     @Override
-    public ISpellModifier getModifier()
-    {
-        return this;
-    }
-    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setLootingLvl(part.getLootingLvl() + LOOTING_INCREASE);

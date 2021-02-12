@@ -36,11 +36,6 @@ public class SpEfHeal implements ISpellEffect
         healPower = Integer.parseInt(attributes.get(0));
     }
     @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
-    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }

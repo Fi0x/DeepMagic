@@ -24,11 +24,6 @@ public class SpMoFortune implements ISpellModifier
         return ret;
     }
     @Override
-    public ISpellModifier getModifier()
-    {
-        return this;
-    }
-    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setFortune(part.getFortuneLvl() + FORTUNE_INCREASE);

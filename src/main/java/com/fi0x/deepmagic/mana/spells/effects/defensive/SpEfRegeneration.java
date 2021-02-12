@@ -41,11 +41,6 @@ public class SpEfRegeneration implements ISpellEffect
         seconds = Double.parseDouble(attributes.get(1));
     }
     @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
-    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }

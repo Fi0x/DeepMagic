@@ -39,11 +39,6 @@ public class SpEfExplosion implements ISpellEffect
         environmentalDamage = Boolean.parseBoolean(attributes.get(1));
     }
     @Override
-    public ISpellEffect getEffect()
-    {
-        return this;
-    }
-    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         world.newExplosion(caster, targetPos.getX(), targetPos.getY(), targetPos.getZ(), power, false, environmentalDamage);
