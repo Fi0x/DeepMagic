@@ -3,7 +3,9 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.blocks.containers.ContainerSpellStone;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
 import com.fi0x.deepmagic.gui.elements.CustomGuiButton;
+import com.fi0x.deepmagic.network.PacketInformGuiChange;
 import com.fi0x.deepmagic.util.Reference;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -104,7 +106,7 @@ public class GuiSpellStone extends GuiContainer
 
         if(button == btnBind)
         {
-            te.setField(2, 1);//TODO: Use Packets
+            PacketHandler.INSTANCE.sendToServer(new PacketInformGuiChange(te.getWorld().provider.getDimension(), te.getPos(), 1));
             //TODO: Clear part-list when process finishes
         } else if(button == btnAddPart)
         {

@@ -27,5 +27,7 @@ public class PacketHandler
 
         INSTANCE.registerMessage(PacketGetMobAnimation.Handler.class, PacketGetMobAnimation.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketReturnMobAnimation.Handler.class, PacketReturnMobAnimation.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketInformGuiChange.Handler.class, PacketInformGuiChange.class, nextID(), Side.SERVER);
     }
 }

@@ -1,31 +1,31 @@
 package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
-import com.fi0x.deepmagic.mana.player.PlayerMana;
-import com.fi0x.deepmagic.mana.player.PlayerProperties;
-import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketGetSpellStone implements IMessage
+public class PacketInformGuiChange implements IMessage
 {
     private boolean messageValid;
+    private int dimension;
     private BlockPos blockPos;
     private int pressedButton;
 
-    public PacketGetSpellStone()
+    public PacketInformGuiChange()
     {
         messageValid = false;
     }
-    public PacketGetSpellStone(BlockPos position, int pressedButton)
+    public PacketInformGuiChange(int dimension, BlockPos position, int pressedButton)
     {
+        this.dimension = dimension;
         this.blockPos = position;
         this.pressedButton = pressedButton;
 
@@ -37,6 +37,7 @@ public class PacketGetSpellStone implements IMessage
     {
         try
         {
+            dimension = buf.readInt();
             blockPos = BlockPos.fromLong(buf.readLong());
             pressedButton = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
@@ -50,29 +51,28 @@ public class PacketGetSpellStone implements IMessage
     public void toBytes(ByteBuf buf)
     {
         if(!messageValid) return;
+        buf.writeInt(dimension);
         buf.writeLong(blockPos.toLong());
         buf.writeInt(pressedButton);
     }
 
-    public static class Handler implements IMessageHandler<PacketGetSpellStone, IMessage>
+    public static class Handler implements IMessageHandler<PacketInformGuiChange, IMessage>
     {
         @Override
-        public IMessage onMessage(PacketGetSpellStone message, MessageContext ctx)
+        public IMessage onMessage(PacketInformGuiChange message, MessageContext ctx)
         {
-            if(!message.messageValid && ctx.side != Side.CLIENT) return null;
+            if(!message.messageValid && ctx.side != Side.SERVER) return null;
             FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> processMessage(message, ctx));
-            Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message, ctx));
             return null;
         }
 
-        void processMessage(PacketGetSpellStone message, MessageContext ctx)
+        void processMessage(PacketInformGuiChange message, MessageContext ctx)
         {
-            EntityPlayer player = ctx.getServerHandler().player.getServerWorld().getPlayerEntityByName(message.playerName);
-            if(player != null && player.hasCapability(PlayerProperties.PLAYER_MANA, null))
+            World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
+            TileEntity te = world.getTileEntity(message.blockPos);
+            if(te instanceof IInventory)
             {
-                PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
-                assert playerMana != null;
-                PacketHandler.INSTANCE.sendTo(new PacketReturnPlayerMana(playerMana.getMana()), ctx.getServerHandler().player);
+                ((IInventory) te).setField(2, message.pressedButton);
             }
         }
     }
