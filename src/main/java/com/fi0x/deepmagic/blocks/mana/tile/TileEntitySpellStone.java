@@ -28,7 +28,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     private int buttonHandling;
 
     private final ArrayList<String> spellParts = new ArrayList<>();
-    private final ArrayList<String> partNames = new ArrayList<>();//TODO: Fill with correct display names
+    private final ArrayList<String> partNames = new ArrayList<>();
     private String currentPartName;
 
     private int manaAdder;
@@ -68,12 +68,16 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         partNames.clear();
                         break;
                     case 2:
-                        //TODO: Add part to list
+                        /*
+                        TODO: Get Part id and name from helper class
+                         Add part to spellParts
+                         Add name to partNames
+                         */
                         break;
                     case 3:
                         /*
-                        TODO: Clear part lists
-                         Get a list of items that were used to create the parts (from tile entity)
+                        TODO: Clear part lists (spellParts and partNames)
+                         Get a list of items that were used to create the parts
                          Drop all items from the list
                          */
                 }
