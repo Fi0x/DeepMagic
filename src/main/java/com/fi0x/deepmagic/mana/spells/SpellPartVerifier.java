@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class SpellPartVerifier
 {
+    //TODO: Update to use method from spell parts instead of hard-coded recipe
     TileEntitySpellStone te;
     public SpellPartVerifier(TileEntitySpellStone tileEntity)
     {

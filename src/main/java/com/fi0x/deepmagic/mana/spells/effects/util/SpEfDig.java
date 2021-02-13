@@ -1,9 +1,11 @@
 package com.fi0x.deepmagic.mana.spells.effects.util;
 
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -49,6 +51,19 @@ public class SpEfDig implements ISpellEffect
         fortune = Integer.parseInt(attributes.get(2));
         silkTouch = Boolean.parseBoolean(attributes.get(3));
     }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
+        list.add(new ItemStack(Items.IRON_SHOVEL));
+        list.add(new ItemStack(Items.IRON_PICKAXE));
+        list.add(new ItemStack(Items.IRON_AXE));
+
+        return list;
+    }
+
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {

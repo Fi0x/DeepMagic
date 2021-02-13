@@ -1,7 +1,10 @@
 package com.fi0x.deepmagic.mana.spells.effects.offensive;
 
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -38,6 +41,17 @@ public class SpEfExplosion implements ISpellEffect
         power = Integer.parseInt(attributes.get(0));
         environmentalDamage = Boolean.parseBoolean(attributes.get(1));
     }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
+        list.add(new ItemStack(Blocks.TNT));
+
+        return list;
+    }
+
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {

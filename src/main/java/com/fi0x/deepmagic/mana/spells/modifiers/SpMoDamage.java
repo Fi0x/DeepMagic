@@ -1,6 +1,11 @@
 package com.fi0x.deepmagic.mana.spells.modifiers;
 
+import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class SpMoDamage implements ISpellModifier
 {
@@ -23,6 +28,17 @@ public class SpMoDamage implements ISpellModifier
         String ret = NAME;
         return ret;
     }
+    @Override
+    public ArrayList<ItemStack> getRequiredItems()
+    {
+        ArrayList<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(ModItems.MAGIC_POWDER));
+        list.add(new ItemStack(Items.IRON_SWORD));
+
+        return list;
+    }
+
     @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
