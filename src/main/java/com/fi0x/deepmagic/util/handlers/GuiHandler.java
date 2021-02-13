@@ -25,6 +25,7 @@ public class GuiHandler implements IGuiHandler
         if(ID == ConfigHandler.guiManaGrinderID) return new ContainerManaGrinder(player.inventory, (TileEntityManaGrinder) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaFurnaceID) return new ContainerManaFurnace(player.inventory, (TileEntityManaFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiMinerStashID) return new ContainerMinerStash(player.inventory, (TileEntityMinerStash) world.getTileEntity(new BlockPos(x, y, z)));
+        if(ID == ConfigHandler.guiSpellStoneID) return new ContainerSpellStone(player.inventory, (TileEntitySpellStone) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 
@@ -40,6 +41,7 @@ public class GuiHandler implements IGuiHandler
         if(ID == ConfigHandler.guiManaGrinderID) return new GuiManaGrinder(player.inventory, (TileEntityManaGrinder) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiManaFurnaceID) return new GuiManaFurnace(player.inventory, (TileEntityManaFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         if(ID == ConfigHandler.guiMinerStashID) return new GuiMinerStash(player.inventory, (TileEntityMinerStash) world.getTileEntity(new BlockPos(x, y, z)));
+        if(ID == ConfigHandler.guiSpellStoneID) return new GuiSpellStone(player.inventory, (TileEntitySpellStone) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 }

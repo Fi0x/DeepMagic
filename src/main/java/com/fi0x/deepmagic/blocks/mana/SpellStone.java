@@ -1,9 +1,8 @@
 package com.fi0x.deepmagic.blocks.mana;
 
+import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
 import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
-import com.fi0x.deepmagic.items.mana.ManaLinker;
-import com.fi0x.deepmagic.items.spells.Spell;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -12,15 +11,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -43,29 +38,16 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
     @Override
     public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(worldIn.isRemote) return false;
-        ItemStack stack = playerIn.getHeldItem(hand);
-        Item item = stack.getItem();
-        TileEntitySpellStone tile = getTileEntity(worldIn, pos);
-
-        if(item instanceof Spell) return chargeSpell(playerIn, stack, tile);
-        else if(item instanceof ManaLinker)
-        {
-            NBTTagCompound compound;
-            if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-            compound = stack.getTagCompound();
-            assert compound != null;
-
-            if(compound.hasKey("x")) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "This block can't send mana"));
-            else
-            {
-                compound.setInteger("x", pos.getX());
-                compound.setInteger("y", pos.getY());
-                compound.setInteger("z", pos.getZ());
-                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
-            }
-        }
+        if(!worldIn.isRemote) playerIn.openGui(Main.instance, ConfigHandler.guiSpellStoneID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
+    }
+    @Override
+    public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
+    {
+        TileEntitySpellStone te = (TileEntitySpellStone) worldIn.getTileEntity(pos);
+        assert te != null;
+        InventoryHelper.dropInventoryItems(worldIn, pos, te);
+        super.breakBlock(worldIn, pos, state);
     }
     @Override
     public Class<TileEntitySpellStone> getTileEntityClass()
@@ -85,18 +67,17 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
         if(rand.nextInt(100) + 1 > ConfigHandler.spellStoneParticles) return;
 
         TileEntitySpellStone tile = getTileEntity(worldIn, pos);
+        if(tile.getField(0) <= 0) return;
 
-        int particles = tile.getPartCount();
+        int particles = 0;
         switch(Minecraft.getMinecraft().gameSettings.particleSetting)
         {
             case 0:
-                particles *= 1;
+                particles = 2;
                 break;
             case 1:
-                particles *= 2;
+                particles = 4;
                 break;
-            default:
-                particles = 0;
         }
 
         for(int i = 0; i < particles; i++)
@@ -107,42 +88,5 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
 
             ParticleSpawner.spawnParticle(ParticleEnum.SPELL_STONE, x, y, z);
         }
-    }
-    private boolean chargeSpell(EntityPlayer playerIn, ItemStack stack, TileEntitySpellStone tile)
-    {
-        playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Spell Stone used"));
-        NBTTagCompound compound;
-        if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-        compound = stack.getTagCompound();
-        assert compound != null;
-
-        int sectionNumber = 0;
-        while(compound.hasKey("section" + sectionNumber)) sectionNumber++;
-        compound.setString("section" + sectionNumber, tile.getSpellParts());
-        tile.resetParts();
-
-        int manaBase = ConfigHandler.spellBaseManaCost;
-        if(compound.hasKey("manaBase")) manaBase = compound.getInteger("manaBase");
-        manaBase += tile.getManaAdder();
-        compound.setInteger("manaBase", manaBase);
-        tile.resetManaAdder();
-
-        double manaMult = 1;
-        if(compound.hasKey("manaMultiplier")) manaMult = compound.getDouble("manaMultiplier");
-        manaMult += tile.getManaMultiplier();
-        compound.setDouble("manaMultiplier", manaMult);
-        tile.resetManaMultiplier();
-
-        int manaCosts = (int) (manaBase * manaMult);
-        compound.setInteger("manaCosts", manaCosts);
-
-        double tier = Math.min(Math.log(Math.pow(manaCosts, 2.4)), 0.01 * Math.pow(manaCosts, 0.7));
-        if(compound.hasKey("tier")) tier = compound.getInteger("tier");
-        tier += tile.getSpellTier();
-        compound.setInteger("tier", (int) tier);
-        tile.resetSpellTier();
-
-        compound.setDouble("skillXP", Math.pow(manaCosts, 0.3));
-        return true;
     }
 }
