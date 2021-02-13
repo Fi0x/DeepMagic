@@ -15,11 +15,14 @@ public class TileEntityDwarfBaseMarker extends TileEntity implements ITickable
     @Override
     public void update()
     {
-        delay--;
-        if(delay > 0) return;
-        delay = 200;
+        if(!world.isRemote)
+        {
+            delay--;
+            if(delay > 0) return;
+            delay = 200;
 
-        if(Math.random() * 1000 + 1 < ConfigHandler.dwarfMarkerSpawnChance) spawnDwarf();
+            if(Math.random() * 1000 + 1 < ConfigHandler.dwarfMarkerSpawnChance) spawnDwarf();
+        }
     }
 
     private void spawnDwarf()

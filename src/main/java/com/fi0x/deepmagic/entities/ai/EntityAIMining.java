@@ -7,7 +7,6 @@ import com.fi0x.deepmagic.entities.ai.helper.AIHelperSearch;
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
@@ -42,6 +41,7 @@ public class EntityAIMining extends EntityAIBase
     private boolean searchStorage;
     private boolean goHome;
     public EnumFacing direction;
+    public int shaftFloor;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -83,6 +83,7 @@ public class EntityAIMining extends EntityAIBase
             goHome = true;
             return;
         }
+        shaftFloor = startPosition.getY() - 1;
 
         miningBlocks = AIHelperMining.getMineBlocks(world, startPosition, direction, random);
         digDelay = 0;
@@ -169,8 +170,11 @@ public class EntityAIMining extends EntityAIBase
         {
             while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
             {
-                BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), entity.posY - 1, miningBlocks.get(0).getZ());
-                if(world.isAirBlock(floor)) break;
+                if(miningBlocks.get(0).getY() > shaftFloor && miningBlocks.get(0).getY() < shaftFloor + 4)
+                {
+                    BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), shaftFloor, miningBlocks.get(0).getZ());
+                    if(world.isAirBlock(floor)) break;
+                }
                 miningBlocks.remove(0);
             }
             if(miningBlocks.isEmpty()) return false;
@@ -196,9 +200,12 @@ public class EntityAIMining extends EntityAIBase
     }
     protected boolean digAtBlockPos(BlockPos pos)
     {
-        BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
+        BlockPos floor = new BlockPos(pos.getX(), shaftFloor, pos.getZ());
         if(!AIHelperSearch.hasWalls(world, floor, direction) && !AIHelperSearch.isBridge(world, floor)) return false;
-        if(world.getBlockState(floor).getBlock() instanceof BlockAir) AIHelperBuild.placeInventoryBlock(world, floor, entity.itemHandler);
+        if(world.isAirBlock(floor) && world.getBlockState(floor.down()).getCollisionBoundingBox(world, floor.down()) == null)
+        {
+            if(entity.getPosition().getY() > floor.getY()) AIHelperBuild.placeInventoryBlock(world, floor, entity.itemHandler);
+        }
         Block block = world.getBlockState(pos).getBlock();
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
@@ -206,7 +213,7 @@ public class EntityAIMining extends EntityAIBase
         if(pos.getY() == floor.getY())
         {
             if(world.getBlockState(pos.up(2)).getCollisionBoundingBox(world, pos.up(2)) != null) miningBlocks.add(0, new BlockPos(pos.up(2)));
-        } else if(pos.getY() == floor.getY() + 3)
+        } else if(pos.getY() == floor.getY() + 3 && world.getBlockState(pos.down()).getCollisionBoundingBox(world, pos.down()) == null)
         {
             if(world.getBlockState(pos.down(2)).getCollisionBoundingBox(world, pos.down(2)) != null) miningBlocks.add(0, new BlockPos(pos.down(2)));
         } else if(pos.getY() == floor.getY() + 1)
@@ -237,7 +244,7 @@ public class EntityAIMining extends EntityAIBase
             AIHelperBuild.placeInventoryBlock(world, waterBlock, entity.itemHandler);
         }
 
-        miningBlocks.addAll(1, AIHelperSearch.getSurroundingOres(world, pos, miningBlocks));
+        miningBlocks.addAll(1, AIHelperSearch.getOreCluster(world, pos));
 
         ItemStack droppedItemStack;
         if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
