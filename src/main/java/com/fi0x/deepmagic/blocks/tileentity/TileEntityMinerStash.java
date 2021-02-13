@@ -6,16 +6,22 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileEntityMinerStash extends TileEntity implements IInventory
 {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(91, ItemStack.EMPTY);
+    IItemHandler itemHandler;
     private String customName;
 
     @Nonnull
@@ -99,6 +105,21 @@ public class TileEntityMinerStash extends TileEntity implements IInventory
         return true;
     }
     @Override
+    @Nullable
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        if(capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return (T) (itemHandler == null ? (itemHandler = createUnSidedHandler()) : itemHandler);
+        }
+        return super.getCapability(capability, facing);
+    }
+    @Override
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
+    {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    }
+    @Override
     public int getField(int id)
     {
         return 0;
@@ -133,5 +154,10 @@ public class TileEntityMinerStash extends TileEntity implements IInventory
     public ITextComponent getDisplayName()
     {
         return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
+    }
+
+    protected net.minecraftforge.items.IItemHandler createUnSidedHandler()
+    {
+        return new net.minecraftforge.items.wrapper.InvWrapper(this);
     }
 }
