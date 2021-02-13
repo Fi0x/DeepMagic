@@ -137,6 +137,7 @@ public class ConfigHandler
     //Spell Stone
     public static boolean spellStoneExplosion;
     public static boolean spellStoneEnvironment;
+    public static boolean requireSpellStoneStructure;
     //BlockParticles
     public static int dwarfBaseMarkerParticles;
     public static int magicLightParticles;
@@ -374,6 +375,7 @@ public class ConfigHandler
         blocks.addCustomCategoryComment(category, "Spell Stone");
         spellStoneExplosion = blocks.getBoolean("Spell Stone Explosion", category, true, "Weather Spell Stones explode when they are out of mana");
         spellStoneEnvironment = blocks.getBoolean("Spell Stone Environment", category, false, "If a Spell Stone does Environmental Damage");
+        requireSpellStoneStructure = blocks.getBoolean("Require Spell Stone Structure", category, true, "Require a Structure around the Spell Stone to bind Spells");
 
         category = "Block Particles";
         blocks.addCustomCategoryComment(category, "Block Particles");

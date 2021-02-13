@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.blocks.tileentity.BlockTileEntity;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.StructureChecker;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -38,7 +39,7 @@ public class SpellStone extends BlockTileEntity<TileEntitySpellStone>
     @Override
     public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(!worldIn.isRemote) playerIn.openGui(Main.instance, ConfigHandler.guiSpellStoneID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        if(!worldIn.isRemote && StructureChecker.verifySpellStoneStructure(worldIn, pos)) playerIn.openGui(Main.instance, ConfigHandler.guiSpellStoneID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
     @Override
