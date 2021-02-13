@@ -39,6 +39,12 @@ public class SpMoGravity implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{20, 0, 0, 2};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setGravity(true);

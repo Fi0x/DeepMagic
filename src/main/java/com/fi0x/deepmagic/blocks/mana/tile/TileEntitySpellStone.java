@@ -82,6 +82,13 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                     case 2:
                         ISpellPart matchingPart = verifier.getPartFromItems();
                         if(matchingPart == null) break;
+
+                        double[] castModifiers = matchingPart.getCastModifiers();
+                        manaAdder += castModifiers[0];
+                        manaMultiplier += castModifiers[1];
+                        tier += castModifiers[2];
+                        if(castModifiers[3] != 0) setSpellTier(castModifiers[3]);
+
                         spellParts.add(matchingPart.getName());
                         partNames.add(matchingPart.getDisplayName());
                         for(int i = 2; i <= 6; i++)
@@ -288,18 +295,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     public String getCurrentPartName()
     {
         return currentPartName;
-    }
-    public void addManaAdder(int value)
-    {
-        manaAdder += value;
-    }
-    public void addManaMultiplier(double value)
-    {
-        manaMultiplier += value;
-    }
-    public void addSpellTier(double value)
-    {
-        tier += value;
     }
     public void setSpellTier(double newTier)
     {

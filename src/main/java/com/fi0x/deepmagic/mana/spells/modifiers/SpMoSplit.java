@@ -42,6 +42,12 @@ public class SpMoSplit implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{0, 0.3, 0, 4};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setSplit(part.getSplit() + SPLIT_ADDER);

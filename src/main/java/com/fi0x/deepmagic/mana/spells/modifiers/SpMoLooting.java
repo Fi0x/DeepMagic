@@ -42,6 +42,12 @@ public class SpMoLooting implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{0, 0.2, 0, 2};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setLootingLvl(part.getLootingLvl() + LOOTING_INCREASE);

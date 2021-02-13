@@ -40,6 +40,12 @@ public class SpMoRadius implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{50, 0, 0, 2};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setRadius(part.getRadius() + RADIUS_INCREASE);

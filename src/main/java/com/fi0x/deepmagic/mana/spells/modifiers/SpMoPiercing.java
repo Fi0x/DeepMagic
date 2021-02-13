@@ -39,6 +39,12 @@ public class SpMoPiercing implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{0, 0.5, 0, 2};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setPiercing(true);

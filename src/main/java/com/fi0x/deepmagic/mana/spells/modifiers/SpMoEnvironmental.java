@@ -44,6 +44,12 @@ public class SpMoEnvironmental implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{0, 0.5, 0, 4};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setEnvironmentalDmg(true);

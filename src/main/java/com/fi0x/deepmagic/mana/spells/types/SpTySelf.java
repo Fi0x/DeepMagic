@@ -43,6 +43,12 @@ public class SpTySelf implements ISpellType
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{50, 0, 0, 0};
+    }
+
+    @Override
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
         if(!applicableParts.isEmpty()) applicableParts.remove(0);

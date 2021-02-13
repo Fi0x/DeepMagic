@@ -40,6 +40,12 @@ public class SpMoHealPower implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{0, 0.2, 0, 2};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setHealPower(part.getHealPower() + HEAL_INCREASE);

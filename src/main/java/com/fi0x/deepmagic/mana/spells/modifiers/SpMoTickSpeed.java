@@ -41,6 +41,12 @@ public class SpMoTickSpeed implements ISpellModifier
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{100, 0, 0, 4};
+    }
+
+    @Override
     public ISpellPart modifyPart(ISpellPart part)
     {
         part.setTickSpeed(part.getTickSpeed() + TICK_INCREASE);

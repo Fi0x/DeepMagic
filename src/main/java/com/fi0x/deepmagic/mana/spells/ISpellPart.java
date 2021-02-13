@@ -14,6 +14,8 @@ public interface ISpellPart
     }
     ArrayList<ItemStack> getRequiredItems();
 
+    double[] getCastModifiers();
+
     default void setAutoSmelt(boolean state)
     {
     }
