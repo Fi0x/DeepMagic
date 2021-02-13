@@ -44,6 +44,12 @@ public class SpEfAge implements ISpellEffect
         return list;
     }
 
+    @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{20, 0, 0, 0};
+    }
+
     //TODO: Use only ONE method to increase tick speed of target or target block
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)

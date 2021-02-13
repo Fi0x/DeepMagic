@@ -54,6 +54,12 @@ public class SpEfRegeneration implements ISpellEffect
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{40, 0, 1, 0};
+    }
+
+    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }

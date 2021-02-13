@@ -42,6 +42,12 @@ public class SpEfSummon implements ISpellEffect
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{100, 0, 0, 0};
+    }
+
+    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         //TODO: Use method to spawn entity

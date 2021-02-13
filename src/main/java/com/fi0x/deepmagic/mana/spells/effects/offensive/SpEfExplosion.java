@@ -53,6 +53,12 @@ public class SpEfExplosion implements ISpellEffect
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{50, 0, 0, 2};
+    }
+
+    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         world.newExplosion(caster, targetPos.getX(), targetPos.getY(), targetPos.getZ(), power, false, environmentalDamage);

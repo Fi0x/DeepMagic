@@ -42,6 +42,12 @@ public class SpEfFreeze implements ISpellEffect
         return list;
     }
 
+    @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{30, 0, 0, 0};
+    }
+
     //TODO: Use only ONE method to freeze target or target blocks
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)

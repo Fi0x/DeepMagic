@@ -44,6 +44,12 @@ public class SpEfTeleport implements ISpellEffect
         return list;
     }
 
+    @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{50, 0, 2, 0};
+    }
+
     //TODO: Use only ONE method to teleport target
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)

@@ -42,6 +42,12 @@ public class SpEfStorm implements ISpellEffect
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{80, 0, 0, 4};
+    }
+
+    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         world.getWorldInfo().setThundering(true);

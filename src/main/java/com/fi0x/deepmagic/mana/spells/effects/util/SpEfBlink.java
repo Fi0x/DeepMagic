@@ -43,6 +43,12 @@ public class SpEfBlink implements ISpellEffect
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{50, 0, 0, 2};
+    }
+
+    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
     }

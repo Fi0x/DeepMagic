@@ -46,6 +46,12 @@ public class SpEfDry implements ISpellEffect
     }
 
     @Override
+    public double[] getCastModifiers()
+    {
+        return new double[]{20, 0, 0, 0};
+    }
+
+    @Override
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         //TODO: Use method to remove liquids
