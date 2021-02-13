@@ -9,9 +9,8 @@ import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -246,10 +245,10 @@ public class EntityAIMining extends EntityAIBase
 
         miningBlocks.addAll(1, AIHelperSearch.getOreCluster(world, pos));
 
-        ItemStack droppedItemStack;
-        if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
-        else if(block == Blocks.STONE) droppedItemStack = new ItemStack(Blocks.COBBLESTONE);
-        else droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
+        Item droppedItem = block.getItemDropped(world.getBlockState(pos), random, 1);
+        int quantity = block.quantityDropped(random);
+        int itemMeta = block.damageDropped(world.getBlockState(pos));
+        ItemStack droppedItemStack = new ItemStack(droppedItem, quantity, itemMeta);
 
         if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, droppedItemStack, false).isEmpty())
         {
