@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -204,13 +203,41 @@ public class EntityAIMining extends EntityAIBase
 
         if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
 
+        if(pos.getY() == floor.getY())
+        {
+            if(world.getBlockState(pos.up(2)).getCollisionBoundingBox(world, pos.up(2)) != null) miningBlocks.add(0, new BlockPos(pos.up(2)));
+        } else if(pos.getY() == floor.getY() + 3)
+        {
+            if(world.getBlockState(pos.down(2)).getCollisionBoundingBox(world, pos.down(2)) != null) miningBlocks.add(0, new BlockPos(pos.down(2)));
+        } else if(pos.getY() == floor.getY() + 1)
+        {
+            for(EnumFacing offset : EnumFacing.Plane.HORIZONTAL)
+            {
+                if(world.getBlockState(pos.offset(offset)).getCollisionBoundingBox(world, pos.offset(offset)) == null)
+                {
+                    if(world.getBlockState(pos.offset(offset).up()).getCollisionBoundingBox(world, pos.offset(offset).up()) != null) miningBlocks.add(0, new BlockPos(pos.offset(offset).up()));
+                    break;
+                }
+            }
+        } else if(pos.getY() == floor.getY() + 2)
+        {
+            for(EnumFacing offset : EnumFacing.Plane.HORIZONTAL)
+            {
+                if(world.getBlockState(pos.offset(offset)).getCollisionBoundingBox(world, pos.offset(offset)) == null)
+                {
+                    if(world.getBlockState(pos.offset(offset).down()).getCollisionBoundingBox(world, pos.offset(offset).down()) != null) miningBlocks.add(0, new BlockPos(pos.offset(offset).down()));
+                    break;
+                }
+            }
+        }
+
         ArrayList<BlockPos> surroundingWater = AIHelperSearch.getAdjacentWater(world, pos);
         for(BlockPos waterBlock : surroundingWater)
         {
             AIHelperBuild.placeInventoryBlock(world, waterBlock, entity.itemHandler);
         }
 
-        miningBlocks.addAll(1, AIHelperSearch.getOreCluster(world, pos));
+        miningBlocks.addAll(1, AIHelperSearch.getSurroundingOres(world, pos, miningBlocks));
 
         ItemStack droppedItemStack;
         if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
@@ -219,18 +246,15 @@ public class EntityAIMining extends EntityAIBase
 
         if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, droppedItemStack, false).isEmpty())
         {
-            System.out.println("Inventory full");
             if(storagePos != null && (world.getBlockState(storagePos).getBlock() instanceof BlockChest || world.getBlockState(storagePos).getBlock() instanceof MinerStash))
             {
-                System.out.println("Moving to storage");
                 entity.getNavigator().tryMoveToXYZ(storagePos.getX(), storagePos.getY(), storagePos.getZ(), 1);
                 searchStorage = true;
                 return true;
             } else return false;
         }
 
-        SoundEvent sound = SoundEvents.BLOCK_STONE_BREAK;
-        world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
+        world.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
         world.setBlockToAir(pos);
         return true;
     }
