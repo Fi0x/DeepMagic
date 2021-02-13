@@ -1,14 +1,11 @@
 package com.fi0x.deepmagic.mana.spells;
 
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
-import com.fi0x.deepmagic.init.ModItems;
-import com.fi0x.deepmagic.mana.spells.effects.defensive.SpEfDeflect;
+import com.fi0x.deepmagic.mana.spells.effects.defensive.*;
 import com.fi0x.deepmagic.mana.spells.effects.offensive.*;
 import com.fi0x.deepmagic.mana.spells.effects.util.*;
 import com.fi0x.deepmagic.mana.spells.modifiers.*;
 import com.fi0x.deepmagic.mana.spells.types.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -16,11 +13,14 @@ import java.util.ArrayList;
 
 public class SpellPartVerifier
 {
-    //TODO: Update to use method from spell parts instead of hard-coded recipe
-    TileEntitySpellStone te;
+    private final TileEntitySpellStone te;
+    private final ArrayList<ISpellPart> spellParts;
+
     public SpellPartVerifier(TileEntitySpellStone tileEntity)
     {
         te = tileEntity;
+        spellParts = new ArrayList<>();
+        initiateSpellPartList();
     }
 
     public ISpellPart getPartFromItems()
@@ -32,267 +32,116 @@ public class SpellPartVerifier
             inputs.add(te.getStackInSlot(i).getItem());
         }
 
-        if(inputs.contains(ModItems.MAGIC_FLOW_CONTROLLER))
+        for(ISpellPart part : spellParts)
         {
-            if(inputs.size() == 2)
+            ArrayList<ItemStack> required = part.getRequiredItems();
+            if(required.size() == inputs.size())
             {
-                if(inputs.contains(Items.SPLASH_POTION))
+                if(required.size() > 0 && inputs.contains(required.get(0).getItem()))
                 {
-                    te.addManaMultiplier(1);
-                    te.addSpellTier(2);
-                    return new SpTyAreaOfEffect();
-                }
-                if(inputs.contains(ModItems.MAGIC_SIGIL))
-                {
-                    te.addManaMultiplier(0.5);
-                    te.addSpellTier(3);
-                    return new SpTyRune();
-                }
-                if(inputs.contains(ModItems.MANA_INTERFACE))
-                {
-                    te.addManaAdder(50);
-                    return new SpTySelf();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.STONE_BUTTON)))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(1);
-                    return new SpTyTouch();
-                }
-            }
-            if(inputs.size() == 3)
-            {
-                if(inputs.contains(Items.CLOCK) && inputs.contains(Items.COMPARATOR))
-                {
-                    te.addManaMultiplier(1);
-                    te.addSpellTier(1);
-                    return new SpTyIterate();
-                }
-                if(inputs.contains(Items.BOW) && inputs.contains(Items.ARROW))
-                {
-                    te.addManaMultiplier(1);
-                    te.addSpellTier(1);
-                    return new SpTyProjectile();
-                }
-            }
-        }
-
-        if(inputs.contains(ModItems.MAGIC_POWDER))
-        {
-            if(inputs.size() == 2)
-            {
-                if(inputs.contains(Items.LAVA_BUCKET))
-                {
-                    te.addManaAdder(100);
-                    te.setSpellTier(2);
-                    return new SpMoAutoSmelt();
-                }
-                if(inputs.contains(Items.IRON_SWORD))
-                {
-                    te.addManaAdder(100);
-                    te.setSpellTier(2);
-                    return new SpMoDamage();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.OBSIDIAN)))
-                {
-                    te.addManaAdder(20);
-                    te.setSpellTier(2);
-                    return new SpMoGravity();
-                }
-                if(inputs.contains(Items.GOLDEN_APPLE))
-                {
-                    te.addManaMultiplier(0.2);
-                    te.setSpellTier(2);
-                    return new SpMoHealPower();
-                }
-                if(inputs.contains(Items.DIAMOND_SWORD))
-                {
-                    te.addManaMultiplier(0.5);
-                    te.setSpellTier(2);
-                    return new SpMoPiercing();
-                }
-                if(inputs.contains(Items.COMPASS))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(2);
-                    return new SpMoRadius();
-                }
-                if(inputs.contains(Items.ARROW))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(2);
-                    return new SpMoRange();
-                }
-                if(inputs.contains(Items.SLIME_BALL))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(2);
-                    return new SpMoRicochet();
-                }
-            }
-            if(inputs.size() == 3)
-            {
-                if(inputs.contains(Items.CLOCK))
-                {
-                    if(inputs.contains(Items.REPEATER))
+                    if(required.size() > 1 && inputs.contains(required.get(1).getItem()))
                     {
-                        te.addManaMultiplier(0.2);
-                        te.setSpellTier(2);
-                        return new SpMoDuration();
-                    }
-                    if(inputs.contains(ModItems.MAGIC_SIGIL))
-                    {
-                        te.addManaAdder(100);
-                        te.setSpellTier(4);
-                        return new SpMoTickSpeed();
-                    }
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.LAPIS_BLOCK)))
-                {
-                    if(inputs.contains(Items.EMERALD))
-                    {
-                        te.addManaMultiplier(0.2);
-                        te.setSpellTier(2);
-                        return new SpMoFortune();
-                    }
-                    if(inputs.contains(Items.DIAMOND))
-                    {
-                        te.addManaMultiplier(0.2);
-                        te.setSpellTier(2);
-                        return new SpMoLooting();
-                    }
-                }
-            }
-            if(inputs.size() == 4)
-            {
-                if(inputs.contains(Items.IRON_SHOVEL) && inputs.contains(Items.IRON_PICKAXE) && inputs.contains(Items.IRON_AXE))
-                {
-                    te.addManaMultiplier(0.5);
-                    te.setSpellTier(4);
-                    return new SpMoEnvironmental();
-                }
-            }
-            if(inputs.size() == 5)
-            {
-                if(inputs.contains(Items.COAL) && inputs.contains(Items.IRON_INGOT) && inputs.contains(Items.GOLD_INGOT) && inputs.contains(Items.DIAMOND))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(2);
-                    return new SpMoPower();
-                }
-            }
-        }
-
-        if(inputs.contains(ModItems.MAGIC_CONVERTER))
-        {
-            if(inputs.size() == 2)
-            {
-                if(inputs.contains(Items.SHIELD))
-                {
-                    te.addManaAdder(20);
-                    return new SpEfDeflect();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.TNT)))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(2);
-                    return new SpEfExplosion();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.MAGMA)))
-                {
-                    te.addManaAdder(30);
-                    te.setSpellTier(2);
-                    return new SpEfFireDamage();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.ICE)))
-                {
-                    te.addManaAdder(30);
-                    te.setSpellTier(2);
-                    return new SpEfFrostDamage();
-                }
-                if(inputs.contains(Items.FLINT_AND_STEEL))
-                {
-                    te.addManaAdder(30);
-                    return new SpEfIgnition();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.PISTON)))
-                {
-                    te.addManaAdder(20);
-                    return new SpEfKnockback();
-                }
-                if(inputs.contains(Items.ENDER_PEARL))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(2);
-                    return new SpEfBlink();
-                }
-                if(inputs.contains(Items.COOKIE))
-                {
-                    te.addManaAdder(20);
-                    te.setSpellTier(5);
-                    return new SpEfCookie();
-                }
-                if(inputs.contains(Items.ENDER_EYE))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(3);
-                    return new SpEfDimensionalTeleport();
-                }
-                if(inputs.contains(Items.BUCKET))
-                {
-                    te.addManaAdder(20);
-                    return new SpEfDry();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.SNOW)))
-                {
-                    te.addManaAdder(30);
-                    return new SpEfFreeze();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.GLOWSTONE)))
-                {
-                    te.addManaAdder(20);
-                    return new SpEfLight();
-                }
-                if(inputs.contains(Items.WATER_BUCKET))
-                {
-                    te.addManaAdder(50);
-                    te.setSpellTier(4);
-                    return new SpEfRain();
-                }
-                if(inputs.contains(Item.getItemFromBlock(Blocks.CHEST)))
-                {
-                    te.addManaAdder(20);
-                    return new SpEfStore();
-                }
-                if(inputs.contains(ModItems.TELEPORTATION_CRYSTAL))
-                {
-                    te.addManaAdder(50);
-                    te.addSpellTier(2);
-                    return new SpEfTeleport();
-                }
-            }
-            if(inputs.size() == 3)
-            {
-                if(inputs.contains(Items.IRON_PICKAXE) && inputs.contains(Items.FLINT_AND_STEEL))
-                {
-                    te.addManaAdder(50);
-                    return new SpEfSmelt();
-                }
-            }
-            if(inputs.size() == 4)
-            {
-                if(inputs.contains(Items.WHEAT) && inputs.contains(Items.CARROT) && inputs.contains(Items.WHEAT_SEEDS))
-                {
-                    te.addManaAdder(40);
-                    return new SpEfCharm();
-                }
-                if(inputs.contains(Items.IRON_SHOVEL) && inputs.contains(Items.IRON_PICKAXE) && inputs.contains(Items.IRON_AXE))
-                {
-                    te.addManaAdder(20);
-                    return new SpEfDig();
+                        if(required.size() > 2 && inputs.contains(required.get(2).getItem()))
+                        {
+                            if(required.size() > 3 && inputs.contains(required.get(3).getItem()))
+                            {
+                                if(required.size() > 4 && inputs.contains(required.get(4).getItem()))
+                                {
+                                    return part;
+                                } else if(required.size() == 4) return part;
+                            } else if(required.size() == 3) return part;
+                        } else if(required.size() == 2) return part;
+                    } else if(required.size() == 1) return part;
                 }
             }
         }
         return null;
+    }
+
+    private void initiateSpellPartList()
+    {
+        spellParts.add(new SpTyAreaOfEffect());
+        spellParts.add(new SpTyBeam());
+        spellParts.add(new SpTyIterate());
+        spellParts.add(new SpTyProjectile());
+        spellParts.add(new SpTyRune());
+        spellParts.add(new SpTySelf());
+        spellParts.add(new SpTyStream());
+        spellParts.add(new SpTyTouch());
+
+        spellParts.add(new SpMoAutoSmelt());
+        spellParts.add(new SpMoDamage());
+        spellParts.add(new SpMoEnvironmental());
+        spellParts.add(new SpMoFortune());
+        spellParts.add(new SpMoGravity());
+        spellParts.add(new SpMoHealPower());
+        spellParts.add(new SpMoLooting());
+        spellParts.add(new SpMoPiercing());
+        spellParts.add(new SpMoPower());
+        spellParts.add(new SpMoRadius());
+        spellParts.add(new SpMoRange());
+        spellParts.add(new SpMoRicochet());
+        spellParts.add(new SpMoSilkTouch());
+        spellParts.add(new SpMoSplit());
+        spellParts.add(new SpMoTickSpeed());
+
+        spellParts.add(new SpEfDeflect());
+        spellParts.add(new SpEfFeatherFall());
+        spellParts.add(new SpEfHaste());
+        spellParts.add(new SpEfHeal());
+        spellParts.add(new SpEfManaShield());
+        spellParts.add(new SpEfMiningSpeed());
+        spellParts.add(new SpEfMirrorShield());
+        spellParts.add(new SpEfRegeneration());
+        spellParts.add(new SpEfRoot());
+        spellParts.add(new SpEfSlowness());
+        spellParts.add(new SpEfWall());
+        spellParts.add(new SpEfWither());
+        spellParts.add(new SpEfAccelerate());
+        spellParts.add(new SpEfBlindness());
+        spellParts.add(new SpEfDrown());
+        spellParts.add(new SpEfExplosion());
+        spellParts.add(new SpEfFireDamage());
+        spellParts.add(new SpEfFrostDamage());
+        spellParts.add(new SpEfIgnition());
+        spellParts.add(new SpEfKnockback());
+        spellParts.add(new SpEfMagicDamage());
+        spellParts.add(new SpEfMidnight());
+        spellParts.add(new SpEfPhysicalDamage());
+        spellParts.add(new SpEfPoison());
+        spellParts.add(new SpEfSink());
+        spellParts.add(new SpEfStun());
+        spellParts.add(new SpEfAge());
+        spellParts.add(new SpEfBind());
+        spellParts.add(new SpEfBlink());
+        spellParts.add(new SpEfBuff());
+        spellParts.add(new SpEfCharm());
+        spellParts.add(new SpEfCookie());
+        spellParts.add(new SpEfDayNight());
+        spellParts.add(new SpEfDig());
+        spellParts.add(new SpEfDimensionalTeleport());
+        spellParts.add(new SpEfDry());
+        spellParts.add(new SpEfExchange());
+        spellParts.add(new SpEfFly());
+        spellParts.add(new SpEfFreeze());
+        spellParts.add(new SpEfGrowth());
+        spellParts.add(new SpEfLevitate());
+        spellParts.add(new SpEfLifeLink());
+        spellParts.add(new SpEfLight());
+        spellParts.add(new SpEfLightning());
+        spellParts.add(new SpEfMagnet());
+        spellParts.add(new SpEfManaLink());
+        spellParts.add(new SpEfMarkLocation());
+        spellParts.add(new SpEfPlace());
+        spellParts.add(new SpEfRain());
+        spellParts.add(new SpEfRepel());
+        spellParts.add(new SpEfSmelt());
+        spellParts.add(new SpEfStore());
+        spellParts.add(new SpEfStorm());
+        spellParts.add(new SpEfSummon());
+        spellParts.add(new SpEfSunshine());
+        spellParts.add(new SpEfSwimSpeed());
+        spellParts.add(new SpEfTeleport());
+        spellParts.add(new SpEfTotalRecall());
     }
 }

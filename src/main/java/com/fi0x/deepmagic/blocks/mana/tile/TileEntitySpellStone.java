@@ -95,7 +95,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                 buttonHandling = 0;
                 dirty = true;
             }
-            //TODO: Update currentPartName (get from current items)
         } else
         {
             sync--;
@@ -103,6 +102,9 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
             {
                 sync = 10;
                 PacketHandler.INSTANCE.sendToServer(new PacketGetSpellStone(world.provider.getDimension(), pos));
+                ISpellPart currentPart = verifier.getPartFromItems();
+                if(currentPart != null) currentPartName = currentPart.getDisplayName();
+                else currentPartName = "";
             }
         }
 
