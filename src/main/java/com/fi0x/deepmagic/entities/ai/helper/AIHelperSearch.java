@@ -67,8 +67,23 @@ public class AIHelperSearch
 
         return water;
     }
+    public static ArrayList<BlockPos> getOreCluster(World world, BlockPos firstOre)
+    {
+        ArrayList<BlockPos> ores = new ArrayList<>();
+        ArrayList<BlockPos> toCheck = new ArrayList<>();
+        toCheck.add(firstOre);
 
-    public static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos> found)
+        while(!toCheck.isEmpty())
+        {
+            ArrayList<BlockPos> found = getSurroundingOres(world, toCheck.get(0), ores);
+            toCheck.remove(0);
+            toCheck.addAll(found);
+            ores.addAll(found);
+        }
+
+        return ores;
+    }
+    private static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos> found)
     {
         ArrayList<BlockPos> ores = new ArrayList<>();
 
