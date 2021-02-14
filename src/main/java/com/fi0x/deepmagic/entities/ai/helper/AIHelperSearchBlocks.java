@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-public class AIHelperSearch
+public class AIHelperSearchBlocks
 {
     public static BlockPos findStorage(World world, BlockPos... positions)
     {
@@ -89,7 +89,7 @@ public class AIHelperSearch
 
         for(EnumFacing direction : EnumFacing.VALUES)
         {
-            if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.offset(direction)))) ores.add(center.offset(direction));
+            if(AIHelperSearchMines.oreWhitelist.contains(world.getBlockState(center.offset(direction)))) ores.add(center.offset(direction));
         }
 
         for(int i = 0; i < ores.size(); i++)
@@ -148,15 +148,15 @@ public class AIHelperSearch
                 left = floorPos.up().south().east();
                 break;
         }
-        boolean rightOK = AIHelperMining.isWallBlock(world, right);
-        boolean leftOK = AIHelperMining.isWallBlock(world, left);
+        boolean rightOK = AIHelperSearchMines.isWallBlock(world, right);
+        boolean leftOK = AIHelperSearchMines.isWallBlock(world, left);
 
         for(int i = 0; i < 2; i++)
         {
-            right = AIHelperMining.getNextBlock(right, direction);
-            left = AIHelperMining.getNextBlock(left, direction);
-            rightOK = rightOK || AIHelperMining.isWallBlock(world, right);
-            leftOK = leftOK || AIHelperMining.isWallBlock(world, left);
+            right = AIHelperSearchMines.getNextBlock(right, direction);
+            left = AIHelperSearchMines.getNextBlock(left, direction);
+            rightOK = rightOK || AIHelperSearchMines.isWallBlock(world, right);
+            leftOK = leftOK || AIHelperSearchMines.isWallBlock(world, left);
         }
 
         return rightOK && leftOK;

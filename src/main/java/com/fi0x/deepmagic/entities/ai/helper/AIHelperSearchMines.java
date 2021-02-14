@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AIHelperMining
+public class AIHelperSearchMines
 {
     private static ArrayList<IBlockState> mineableBlocks = null;
     public static ArrayList<IBlockState> oreWhitelist = null;
@@ -308,11 +308,11 @@ public class AIHelperMining
 
         while(start != end && blocks.size() <= ConfigHandler.aiSearchRange * 2)
         {
-            if(AIHelperMining.isMineable(world, start.up())) blocks.add(start.up());
+            if(AIHelperSearchMines.isMineable(world, start.up())) blocks.add(start.up());
             else if(world.getBlockState(start.up()).getCollisionBoundingBox(world, start.up()) != null) break;
             else blocks.add(start.up());
 
-            if(AIHelperMining.isMineable(world, start)) blocks.add(start);
+            if(AIHelperSearchMines.isMineable(world, start)) blocks.add(start);
             else if(world.getBlockState(start).getCollisionBoundingBox(world, start) != null) break;
             else blocks.add(start);
 
