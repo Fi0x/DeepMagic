@@ -16,12 +16,12 @@ import java.util.ArrayList;
 
 public class AIHelperDig
 {
-    public static boolean digAtBlockPos(EntityAIMining miningAI, ArrayList<BlockPos> miningBlocks, EnumFacing direction, int floorHeight)
+    public static boolean digAtBlockPos(EntityAIMining miningAI)
     {
-        BlockPos pos = miningBlocks.get(0);
-        BlockPos floor = new BlockPos(pos.getX(), floorHeight, pos.getZ());
+        BlockPos pos = miningAI.miningBlocks.get(0);
+        BlockPos floor = new BlockPos(pos.getX(), miningAI.shaftFloor, pos.getZ());
 
-        if(!AIHelperSearchBlocks.hasWalls(miningAI.world, floor, direction) && !AIHelperSearchBlocks.isBridge(miningAI.world, floor)) return false;
+        if(!AIHelperSearchBlocks.hasWalls(miningAI.world, floor, miningAI.direction) && !AIHelperSearchBlocks.isBridge(miningAI.world, floor)) return false;
         if(miningAI.world.isAirBlock(floor) && miningAI.world.getBlockState(floor.down()).getCollisionBoundingBox(miningAI.world, floor.down()) == null)
         {
             if(miningAI.entity.getPosition().getY() > floor.getY()) AIHelperBuild.placeInventoryBlock(miningAI.world, floor, miningAI.entity.itemHandler);
@@ -32,17 +32,17 @@ public class AIHelperDig
 
         if(pos.getY() == floor.getY())
         {
-            if(miningAI.world.getBlockState(pos.up(2)).getCollisionBoundingBox(miningAI.world, pos.up(2)) != null) miningBlocks.add(0, new BlockPos(pos.up(2)));
+            if(miningAI.world.getBlockState(pos.up(2)).getCollisionBoundingBox(miningAI.world, pos.up(2)) != null) miningAI.miningBlocks.add(0, new BlockPos(pos.up(2)));
         } else if(pos.getY() == floor.getY() + 3 && miningAI.world.getBlockState(pos.down()).getCollisionBoundingBox(miningAI.world, pos.down()) == null)
         {
-            if(miningAI.world.getBlockState(pos.down(2)).getCollisionBoundingBox(miningAI.world, pos.down(2)) != null) miningBlocks.add(0, new BlockPos(pos.down(2)));
+            if(miningAI.world.getBlockState(pos.down(2)).getCollisionBoundingBox(miningAI.world, pos.down(2)) != null) miningAI.miningBlocks.add(0, new BlockPos(pos.down(2)));
         } else if(pos.getY() == floor.getY() + 1)
         {
             for(EnumFacing offset : EnumFacing.Plane.HORIZONTAL)
             {
                 if(miningAI.world.getBlockState(pos.offset(offset)).getCollisionBoundingBox(miningAI.world, pos.offset(offset)) == null)
                 {
-                    if(miningAI.world.getBlockState(pos.offset(offset).up()).getCollisionBoundingBox(miningAI.world, pos.offset(offset).up()) != null) miningBlocks.add(0, new BlockPos(pos.offset(offset).up()));
+                    if(miningAI.world.getBlockState(pos.offset(offset).up()).getCollisionBoundingBox(miningAI.world, pos.offset(offset).up()) != null) miningAI.miningBlocks.add(0, new BlockPos(pos.offset(offset).up()));
                     break;
                 }
             }
@@ -52,7 +52,7 @@ public class AIHelperDig
             {
                 if(miningAI.world.getBlockState(pos.offset(offset)).getCollisionBoundingBox(miningAI.world, pos.offset(offset)) == null)
                 {
-                    if(miningAI.world.getBlockState(pos.offset(offset).down()).getCollisionBoundingBox(miningAI.world, pos.offset(offset).down()) != null) miningBlocks.add(0, new BlockPos(pos.offset(offset).down()));
+                    if(miningAI.world.getBlockState(pos.offset(offset).down()).getCollisionBoundingBox(miningAI.world, pos.offset(offset).down()) != null) miningAI.miningBlocks.add(0, new BlockPos(pos.offset(offset).down()));
                     break;
                 }
             }
@@ -64,7 +64,7 @@ public class AIHelperDig
             AIHelperBuild.placeInventoryBlock(miningAI.world, waterBlock, miningAI.entity.itemHandler);
         }
 
-        miningBlocks.addAll(1, AIHelperSearchBlocks.getOreCluster(miningAI.world, pos));
+        miningAI.miningBlocks.addAll(1, AIHelperSearchBlocks.getOreCluster(miningAI.world, pos));
 
         Item droppedItem = block.getItemDropped(miningAI.world.getBlockState(pos), miningAI.random, 1);
         int quantity = block.quantityDropped(miningAI.random);
