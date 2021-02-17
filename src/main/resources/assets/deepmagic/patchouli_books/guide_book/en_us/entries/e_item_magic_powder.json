@@ -1,0 +1,12 @@
+{
+  "name": "Magic Powder",
+  "icon": "deepmagic:magic_powder",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Magic Powder",
+      "text": "TODO"
+    }
+  ]
+}

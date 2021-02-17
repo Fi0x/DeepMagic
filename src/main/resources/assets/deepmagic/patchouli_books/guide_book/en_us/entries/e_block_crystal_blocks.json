@@ -1,0 +1,12 @@
+{
+  "name": "Crystal Blocks",
+  "icon": "deepmagic:deep_crystal_block",
+  "category": "deepmagic:c_blocks",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Crystal Blocks",
+      "text": "TODO"
+    }
+  ]
+}
