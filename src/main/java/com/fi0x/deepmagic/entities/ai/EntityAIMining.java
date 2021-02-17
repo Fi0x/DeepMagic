@@ -23,6 +23,7 @@ public class EntityAIMining extends EntityAIBase
     public final Random random;
     protected BlockPos startPosition;
     public ArrayList<BlockPos> miningBlocks;
+    public ArrayList<BlockPos> additionalBlocks;
     public BlockPos storagePos;
     private int digDelay;
     public boolean searchStorage;
@@ -48,6 +49,7 @@ public class EntityAIMining extends EntityAIBase
         this.executionChance = executionChance;
         random = new Random();
         miningBlocks = new ArrayList<>();
+        additionalBlocks = new ArrayList<>();
     }
 
     @Override
@@ -104,6 +106,20 @@ public class EntityAIMining extends EntityAIBase
 
     protected boolean performAction()
     {
+        if(!additionalBlocks.isEmpty())
+        {
+            if(entity.getDistanceSq(miningBlocks.get(0)) < 64)
+            {
+                AIHelperDig.digAtBlockPos(this, true);
+                additionalBlocks.remove(0);
+                digDelay = getNextDigDelay();
+                return true;
+            } else
+            {
+                entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
+                return !entity.getNavigator().noPath();
+            }
+        }
         if(miningBlocks.isEmpty()) return false;
 
         if(entity.getDistanceSq(miningBlocks.get(0)) < 64)
@@ -124,13 +140,14 @@ public class EntityAIMining extends EntityAIBase
 
     private boolean mineBlock()
     {
-        if(!AIHelperDig.digAtBlockPos(this)) return false;
+        if(!AIHelperDig.digAtBlockPos(this, false)) return false;
         if(!entity.getNavigator().noPath()) return true;
 
         if(entity.getDistanceSq(entity.homePos) > ConfigHandler.dwarfMineRange * ConfigHandler.dwarfMineRange)
         {
             entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
             miningBlocks.clear();
+            additionalBlocks.clear();
             goHome = true;
             return true;
         }
@@ -152,6 +169,7 @@ public class EntityAIMining extends EntityAIBase
         return true;
 
     }
+
     private int getNextDigDelay()
     {
         if(entity.getNavigator().noPath())
@@ -163,10 +181,13 @@ public class EntityAIMining extends EntityAIBase
             assert destination != null;
             if(world.getLightBrightness(new BlockPos(destination.x, destination.y, destination.z)) <= 0) return 10;
         }
-        //TODO: Make delay relative to block hardness
-        if(!miningBlocks.isEmpty())
+
+        if(!additionalBlocks.isEmpty())
         {
-            return (int) (world.getBlockState(miningBlocks.get(0)).getBlockHardness(world, miningBlocks.get(0)) * 10);
+            return (int) (world.getBlockState(additionalBlocks.get(0)).getBlockHardness(world, additionalBlocks.get(0)) * 20);
+        } else if(!miningBlocks.isEmpty())
+        {
+            return (int) (world.getBlockState(miningBlocks.get(0)).getBlockHardness(world, miningBlocks.get(0)) * 20);
         }
         return 20;
     }

@@ -67,7 +67,7 @@ public class AIHelperSearchBlocks
 
         return water;
     }
-    public static ArrayList<BlockPos> getOreCluster(World world, BlockPos firstOre)
+    public static ArrayList<BlockPos> getOreCluster(World world, ArrayList<BlockPos> alreadyFound, BlockPos firstOre)
     {
         ArrayList<BlockPos> ores = new ArrayList<>();
         ArrayList<BlockPos> toCheck = new ArrayList<>();
@@ -75,7 +75,7 @@ public class AIHelperSearchBlocks
 
         while(!toCheck.isEmpty())
         {
-            ArrayList<BlockPos> found = getSurroundingOres(world, toCheck.get(0), ores);
+            ArrayList<BlockPos> found = getSurroundingOres(world, toCheck.get(0), alreadyFound, ores);
             toCheck.remove(0);
             toCheck.addAll(found);
             ores.addAll(found);
@@ -83,7 +83,8 @@ public class AIHelperSearchBlocks
 
         return ores;
     }
-    private static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos> found)
+    @SafeVarargs
+    private static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos>... found)
     {
         ArrayList<BlockPos> ores = new ArrayList<>();
 
@@ -94,10 +95,14 @@ public class AIHelperSearchBlocks
 
         for(int i = 0; i < ores.size(); i++)
         {
-            if(found.contains(ores.get(i)))
+            for(ArrayList<BlockPos> oldPositions : found)
             {
-                ores.remove(i);
-                i--;
+                if(oldPositions.contains(ores.get(i)))
+                {
+                    ores.remove(i);
+                    i--;
+                    break;
+                }
             }
         }
 
