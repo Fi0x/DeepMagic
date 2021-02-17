@@ -1,20 +1,22 @@
 package com.fi0x.deepmagic.entities.ai.helper;
 
 import com.fi0x.deepmagic.blocks.DwarfBaseMarker;
+import com.fi0x.deepmagic.blocks.MinerStash;
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-public class AIHelperSearch
+public class AIHelperSearchBlocks
 {
-    public static BlockPos findChest(World world, BlockPos... positions)
+    public static BlockPos findStorage(World world, BlockPos... positions)
     {
         if(positions == null || positions.length == 0) return null;
         for(BlockPos pos : positions)
@@ -28,9 +30,10 @@ public class AIHelperSearch
                     {
                         for(int z = -range; z <= range; z++)
                         {
-                            if(world.getBlockState(pos.add(x, y, z)).getBlock() instanceof BlockChest)
+                            Block block = world.getBlockState(pos.add(x, y, z)).getBlock();
+                            if(block instanceof BlockChest || block instanceof MinerStash)
                             {
-                                if(hasChestSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
+                                if(hasContainerSpace(world, pos.add(x, y, z))) return pos.add(x, y, z);
                             }
                         }
                     }
@@ -39,9 +42,9 @@ public class AIHelperSearch
         }
         return null;
     }
-    private static boolean hasChestSpace(World world, BlockPos pos)
+    private static boolean hasContainerSpace(World world, BlockPos pos)
     {
-        TileEntityChest te = ((TileEntityChest) world.getTileEntity(pos));
+        IInventory te = ((IInventory) world.getTileEntity(pos));
         if(te == null) return false;
 
         for(int checkSlot = 0; checkSlot < te.getSizeInventory(); checkSlot++)
@@ -64,8 +67,7 @@ public class AIHelperSearch
 
         return water;
     }
-
-    public static ArrayList<BlockPos> getOreCluster(World world, BlockPos firstOre)
+    public static ArrayList<BlockPos> getOreCluster(World world, ArrayList<BlockPos> alreadyFound, BlockPos firstOre)
     {
         ArrayList<BlockPos> ores = new ArrayList<>();
         ArrayList<BlockPos> toCheck = new ArrayList<>();
@@ -73,7 +75,7 @@ public class AIHelperSearch
 
         while(!toCheck.isEmpty())
         {
-            ArrayList<BlockPos> found = getSurroundingOres(world, toCheck.get(0), ores);
+            ArrayList<BlockPos> found = getSurroundingOres(world, toCheck.get(0), alreadyFound, ores);
             toCheck.remove(0);
             toCheck.addAll(found);
             ores.addAll(found);
@@ -81,23 +83,26 @@ public class AIHelperSearch
 
         return ores;
     }
-    private static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos> found)
+    @SafeVarargs
+    private static ArrayList<BlockPos> getSurroundingOres(World world, BlockPos center, ArrayList<BlockPos>... found)
     {
         ArrayList<BlockPos> ores = new ArrayList<>();
 
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.up()))) ores.add(center.up());
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.down()))) ores.add(center.down());
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.north()))) ores.add(center.north());
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.east()))) ores.add(center.east());
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.south()))) ores.add(center.south());
-        if(AIHelperMining.oreWhitelist.contains(world.getBlockState(center.west()))) ores.add(center.west());
+        for(EnumFacing direction : EnumFacing.VALUES)
+        {
+            if(AIHelperSearchMines.oreWhitelist.contains(world.getBlockState(center.offset(direction)))) ores.add(center.offset(direction));
+        }
 
         for(int i = 0; i < ores.size(); i++)
         {
-            if(found.contains(ores.get(i)))
+            for(ArrayList<BlockPos> oldPositions : found)
             {
-                ores.remove(i);
-                i--;
+                if(oldPositions.contains(ores.get(i)))
+                {
+                    ores.remove(i);
+                    i--;
+                    break;
+                }
             }
         }
 
@@ -148,15 +153,15 @@ public class AIHelperSearch
                 left = floorPos.up().south().east();
                 break;
         }
-        boolean rightOK = AIHelperMining.isWallBlock(world, right);
-        boolean leftOK = AIHelperMining.isWallBlock(world, left);
+        boolean rightOK = AIHelperSearchMines.isWallBlock(world, right);
+        boolean leftOK = AIHelperSearchMines.isWallBlock(world, left);
 
         for(int i = 0; i < 2; i++)
         {
-            right = AIHelperMining.getNextBlock(right, direction);
-            left = AIHelperMining.getNextBlock(left, direction);
-            rightOK = rightOK || AIHelperMining.isWallBlock(world, right);
-            leftOK = leftOK || AIHelperMining.isWallBlock(world, left);
+            right = AIHelperSearchMines.getNextBlock(right, direction);
+            left = AIHelperSearchMines.getNextBlock(left, direction);
+            rightOK = rightOK || AIHelperSearchMines.isWallBlock(world, right);
+            leftOK = leftOK || AIHelperSearchMines.isWallBlock(world, left);
         }
 
         return rightOK && leftOK;

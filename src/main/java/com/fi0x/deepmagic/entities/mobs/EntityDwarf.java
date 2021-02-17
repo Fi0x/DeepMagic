@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -111,6 +112,15 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         return 1.2F;
     }
 
+    @Override
+    public void onDeath(DamageSource cause)
+    {
+        for(int i = 0; i < itemHandler.getSlots(); i++)
+        {
+            world.spawnEntity(new EntityItem(world, posX, posY, posZ, itemHandler.getStackInSlot(i)));
+        }
+        super.onDeath(cause);
+    }
     @Override
     public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {

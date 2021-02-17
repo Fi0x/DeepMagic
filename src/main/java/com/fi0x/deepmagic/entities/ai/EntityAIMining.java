@@ -1,46 +1,35 @@
 package com.fi0x.deepmagic.entities.ai;
 
-import com.fi0x.deepmagic.entities.ai.helper.AIHelperBuild;
-import com.fi0x.deepmagic.entities.ai.helper.AIHelperMining;
-import com.fi0x.deepmagic.entities.ai.helper.AIHelperSearch;
+import com.fi0x.deepmagic.entities.ai.helper.*;
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class EntityAIMining extends EntityAIBase
 {
     protected final int executionChance;
-    protected final World world;
+    public final World world;
     public final EntityDwarf entity;
     protected final double speed;
     protected final float probability;
-    protected final Random random;
+    public final Random random;
     protected BlockPos startPosition;
-    protected BlockPos destination;
-    protected ArrayList<BlockPos> miningBlocks;
-    protected BlockPos chestPos;
+    public ArrayList<BlockPos> miningBlocks;
+    public ArrayList<BlockPos> additionalBlocks;
+    public BlockPos storagePos;
     private int digDelay;
-    private boolean searchChest;
+    public boolean searchStorage;
     private boolean goHome;
     public EnumFacing direction;
+    public int shaftFloor;
 
     public EntityAIMining(EntityDwarf entity)
     {
@@ -60,6 +49,7 @@ public class EntityAIMining extends EntityAIBase
         this.executionChance = executionChance;
         random = new Random();
         miningBlocks = new ArrayList<>();
+        additionalBlocks = new ArrayList<>();
     }
 
     @Override
@@ -67,23 +57,24 @@ public class EntityAIMining extends EntityAIBase
     {
         if(this.entity.getIdleTime() >= 100 || this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
 
-        if(!AIHelperSearch.hasHomePosition(world, entity)) return false;
+        if(!AIHelperSearchBlocks.hasHomePosition(world, entity)) return false;
         return entity.posY < ConfigHandler.dwarfMaxMiningHeight || entity.dimension == ConfigHandler.dimensionIdDepthID;
     }
     @Override
     public void startExecuting()
     {
-        chestPos = AIHelperSearch.findChest(world, entity.homePos, entity.getPosition());
+        storagePos = AIHelperSearchBlocks.findStorage(world, entity.homePos, entity.getPosition());
 
-        startPosition = AIHelperMining.findMiningStartPosition(world, this);
+        startPosition = AIHelperSearchMines.findMiningStartPosition(world, this);
         if(startPosition == null) return;
         else if(startPosition == entity.homePos)
         {
             goHome = true;
             return;
         }
+        shaftFloor = startPosition.getY() - 1;
 
-        miningBlocks = AIHelperMining.getMineBlocks(world, startPosition, direction, random);
+        miningBlocks = AIHelperSearchMines.getMineBlocks(world, startPosition, direction, random);
         digDelay = 0;
 
         goHome = false;
@@ -98,133 +89,106 @@ public class EntityAIMining extends EntityAIBase
                 entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
                 return !entity.getNavigator().noPath();
             }
-            inventoryToChest();
-            if(searchChest)
+            AIHelperStorage.inventoryToStorage(this, entity);
+            if(searchStorage)
             {
-                searchAndGoToChest();
+                AIHelperStorage.searchAndGoToStorage(this);
                 return true;
             }
 
             if(digDelay == 0)
             {
-                return tryToMine();
+                return performAction();
             } else digDelay--;
         }
         return true;
     }
 
-    protected void inventoryToChest()
+    protected boolean performAction()
     {
-        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
+        if(!additionalBlocks.isEmpty())
         {
-            if(entity.itemHandler.getStackInSlot(i).isEmpty()) return;
-        }
-        if(chestPos == null || entity.getDistanceSq(chestPos) > 64) return;
-        searchChest = false;
-
-        TileEntityChest te = null;
-        try
-        {
-            te = (TileEntityChest) world.getTileEntity(chestPos);
-        } catch(Exception ignored)
-        {
-        }
-        if(te == null)
-        {
-            chestPos = null;
-            return;
-        }
-
-        IItemHandler h = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-
-        for(int i = 0; i < entity.itemHandler.getSlots(); i++)
-        {
-            if(ItemHandlerHelper.insertItemStacked(h, entity.itemHandler.getStackInSlot(i), false).isEmpty()) entity.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
-            else
+            if(entity.getDistanceSq(miningBlocks.get(0)) < 64)
             {
-                chestPos = AIHelperSearch.findChest(world, chestPos, entity.getPosition(), entity.homePos);
-                if(chestPos != null) searchChest = true;
-                break;
+                AIHelperDig.digAtBlockPos(this, true);
+                additionalBlocks.remove(0);
+                digDelay = getNextDigDelay();
+                return true;
+            } else
+            {
+                entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
+                return !entity.getNavigator().noPath();
             }
         }
-    }
-    protected void searchAndGoToChest()
-    {
-        if(chestPos == null) chestPos = AIHelperSearch.findChest(world, entity.homePos, entity.getPosition());
-        if(chestPos != null)
-        {
-            entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-            if(entity.getNavigator().noPath()) searchChest = false;
-        }
-    }
-    protected boolean tryToMine()
-    {
-        if(miningBlocks.isEmpty()) return true;
+        if(miningBlocks.isEmpty()) return false;
 
         if(entity.getDistanceSq(miningBlocks.get(0)) < 64)
         {
-            while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
+            if(world.getLightBrightness(entity.getPosition()) <= 0)
             {
-                BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), entity.posY - 1, miningBlocks.get(0).getZ());
-                if(world.isAirBlock(floor)) break;
-                miningBlocks.remove(0);
-            }
-            if(miningBlocks.isEmpty()) return false;
-
-            if(!digAtBlockPos(miningBlocks.get(0))) return false;
-            if(!entity.getNavigator().noPath()) return true;
-            if(entity.getDistanceSq(entity.homePos) > ConfigHandler.dwarfMineRange * ConfigHandler.dwarfMineRange)
-            {
-                entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
-                miningBlocks.clear();
-                goHome = true;
+                AIHelperBuild.placeLightAt(world, entity.getPosition());
+                digDelay = getNextDigDelay();
                 return true;
             }
-            if(entity.getNavigator().noPath()) entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
-            if(world.getLightBrightness(entity.getPosition()) <= 0) AIHelperBuild.placeLightAt(world, entity.getPosition());
-            digDelay = 20;
+            return mineBlock();
         } else
         {
             entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX(), miningBlocks.get(0).getY(), miningBlocks.get(0).getZ(), 1);
             return !entity.getNavigator().noPath();
         }
-        return true;
     }
-    protected boolean digAtBlockPos(BlockPos pos)
+
+    private boolean mineBlock()
     {
-        BlockPos floor = new BlockPos(pos.getX(), entity.posY - 1, pos.getZ());
-        if(!AIHelperSearch.hasWalls(world, floor, direction) && !AIHelperSearch.isBridge(world, floor)) return false;
-        if(world.getBlockState(floor).getBlock() instanceof BlockAir) AIHelperBuild.placeInventoryBlock(world, floor, entity.itemHandler);
-        Block block = world.getBlockState(pos).getBlock();
+        if(!AIHelperDig.digAtBlockPos(this, false)) return false;
+        if(!entity.getNavigator().noPath()) return true;
 
-        if(world.getBlockState(pos).getCollisionBoundingBox(world, pos) == null) return true;
-
-        ArrayList<BlockPos> surroundingWater = AIHelperSearch.getAdjacentWater(world, pos);
-        for(BlockPos waterBlock : surroundingWater)
+        if(entity.getDistanceSq(entity.homePos) > ConfigHandler.dwarfMineRange * ConfigHandler.dwarfMineRange)
         {
-            AIHelperBuild.placeInventoryBlock(world, waterBlock, entity.itemHandler);
+            entity.getNavigator().tryMoveToXYZ(entity.homePos.getX(), entity.homePos.getY(), entity.homePos.getZ(), 1);
+            miningBlocks.clear();
+            additionalBlocks.clear();
+            goHome = true;
+            return true;
         }
 
-        miningBlocks.addAll(1, AIHelperSearch.getOreCluster(world, pos));
+        entity.getNavigator().tryMoveToXYZ(miningBlocks.get(0).getX() + 0.5, miningBlocks.get(0).getY(), miningBlocks.get(0).getZ() + 0.5, 1);
 
-        ItemStack droppedItemStack;
-        if(block == Blocks.LAPIS_ORE) droppedItemStack = new ItemStack(Items.DYE, block.quantityDropped(random), 4);
-        else if(block == Blocks.STONE) droppedItemStack = new ItemStack(Blocks.COBBLESTONE);
-        else droppedItemStack = new ItemStack(block.getItemDropped(world.getBlockState(pos), random, 1), block.quantityDropped(random));
-
-        if(!ItemHandlerHelper.insertItemStacked(entity.itemHandler, droppedItemStack, false).isEmpty())
+        while(!miningBlocks.isEmpty() && world.getBlockState(miningBlocks.get(0)).getCollisionBoundingBox(world, miningBlocks.get(0)) == null)
         {
-            if(chestPos != null && world.getBlockState(chestPos).getBlock() == Blocks.CHEST)
+            if(miningBlocks.get(0).getY() > shaftFloor && miningBlocks.get(0).getY() < shaftFloor + 4)
             {
-                entity.getNavigator().tryMoveToXYZ(chestPos.getX(), chestPos.getY(), chestPos.getZ(), 1);
-                searchChest = true;
-                return true;
-            } else return false;
+                BlockPos floor = new BlockPos(miningBlocks.get(0).getX(), shaftFloor, miningBlocks.get(0).getZ());
+                if(world.isAirBlock(floor)) break;
+            }
+            miningBlocks.remove(0);
+        }
+        if(miningBlocks.isEmpty()) return false;
+
+        digDelay = getNextDigDelay();
+        return true;
+
+    }
+
+    private int getNextDigDelay()
+    {
+        if(entity.getNavigator().noPath())
+        {
+            if(world.getLightBrightness(entity.getPosition()) <= 0) return 10;
+        } else
+        {
+            PathPoint destination = Objects.requireNonNull(entity.getNavigator().getPath()).getFinalPathPoint();
+            assert destination != null;
+            if(world.getLightBrightness(new BlockPos(destination.x, destination.y, destination.z)) <= 0) return 10;
         }
 
-        SoundEvent sound = SoundEvents.BLOCK_STONE_BREAK;
-        world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1, (float) (0.9 + random.nextFloat() * 0.1));
-        world.setBlockToAir(pos);
-        return true;
+        if(!additionalBlocks.isEmpty())
+        {
+            return (int) (world.getBlockState(additionalBlocks.get(0)).getBlockHardness(world, additionalBlocks.get(0)) * 20);
+        } else if(!miningBlocks.isEmpty())
+        {
+            return (int) (world.getBlockState(miningBlocks.get(0)).getBlockHardness(world, miningBlocks.get(0)) * 20);
+        }
+        return 20;
     }
 }
