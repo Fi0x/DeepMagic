@@ -16,6 +16,7 @@ public class ParticleSpellStream extends Particle
         super(worldIn, x, y, z, speedX, speedY, speedZ);
 
         this.particleScale *= 0.5F * scale;
+        particleMaxAge = (int) (Math.random() * 30) + 10;
 
         this.particleRed = (float) Math.random();
         this.particleGreen = (float) Math.random();

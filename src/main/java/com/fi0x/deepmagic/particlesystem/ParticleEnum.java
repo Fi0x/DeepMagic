@@ -22,7 +22,7 @@ public enum ParticleEnum
     private final int particleID;
     private final boolean shouldIgnoreRange;
 
-    private ParticleEnum(String textureName, int particleIDIn, boolean shouldIgnoreRangeIn, Class clazz)
+    ParticleEnum(String textureName, int particleIDIn, boolean shouldIgnoreRangeIn, Class clazz)
     {
         particleClass = clazz;
         this.textureName = textureName;
