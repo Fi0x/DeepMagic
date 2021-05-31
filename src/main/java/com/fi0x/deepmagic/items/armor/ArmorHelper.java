@@ -38,7 +38,13 @@ public class ArmorHelper
 
         if(event.getSource() == DamageSource.FALL)
         {
-            //TODO: Check if player wears boots and negate fall damage if enough mana is provided
+            if(!player.inventory.armorItemInSlot(0).isEmpty() && player.inventory.armorItemInSlot(0).getItem() instanceof ArmorBase)
+            {
+                ArrayList<ItemStack> boots = new ArrayList<>();
+                boots.add(player.inventory.armorItemInSlot(0));
+                double requiredMana = event.getAmount() * 200;
+                if(removeMana(boots, requiredMana, player) <= requiredMana) player.attackEntityFrom(event.getSource(), event.getAmount());
+            }
         } else
         {
             float avoidableDamage = event.getAmount() / 4 * armor.size();
@@ -80,6 +86,8 @@ public class ArmorHelper
             }
         } else
         {
+            player.capabilities.allowFlying = false;
+            player.capabilities.isFlying = false;
             //TODO: Check if armor was unequipped in this tick and disable flight if true
         }
     }
