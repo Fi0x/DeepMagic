@@ -55,6 +55,8 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     @Override
     public void update()
     {
+        if(!ConfigHandler.allowRituals) return;
+
         sync--;
         if(sync > 0) return;
         sync = syncTime;
