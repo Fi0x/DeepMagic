@@ -160,6 +160,8 @@ public class ConfigHandler
     //Tools
     public static int deepCrystalMiningLevel;
     public static int depthMiningLevel;
+    public static boolean allowInsanityTeleport;
+    public static boolean allowDepthTeleport;
     //Endgame Equipment
     public static boolean depthToolsActive;
     public static boolean depthArmorActive;
@@ -412,6 +414,8 @@ public class ConfigHandler
         items.addCustomCategoryComment(category, "Tools");
         deepCrystalMiningLevel = items.getInt("Deep Crystal Mining Level", category, 4, 0, 100, "Mining Level for Deep Crystal Tools");
         depthMiningLevel = items.getInt("Depth Mining Level", category, 4, 0, 100, "Mining Level for Depth Tools");
+        allowInsanityTeleport = items.getBoolean("Teleport to Insanity Dimension", category, true, "Allow teleportation to Insanity dimension with the Teleportation Crystal");
+        allowDepthTeleport = items.getBoolean("Teleport to Depth Dimension", category, true, "Allow teleportation to Depth dimension with the Teleportation Crystal");
 
         category = "Endgame-Equipment";
         items.addCustomCategoryComment(category, "Endgame-Equipment");

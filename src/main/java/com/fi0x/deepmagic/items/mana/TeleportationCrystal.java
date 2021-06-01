@@ -78,30 +78,35 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
                 playerMana.addSkillXP(playerIn, ConfigHandler.teleportationCrystalSkillXP);
                 int x = (int) playerIn.posX;
                 int z = (int) playerIn.posZ;
-                if(playerIn.isSneaking() && playerIn.dimension == 0)
+                if(playerIn.isSneaking() && ConfigHandler.allowDepthTeleport)
                 {
-                    x *= 0.05;
-                    z *= 0.05;
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
-                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
-                } else if(playerIn.isSneaking() && playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
-                {
-                    x *= 0.005;
-                    z *= 0.005;
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
-                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
-                } else if(playerIn.isSneaking() && playerIn.dimension == -1)
-                {
-                    x *= 0.4;
-                    z *= 0.4;
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
-                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
-                } else if(playerIn.isSneaking())
-                {
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
-                    return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                    if(playerIn.dimension == 0)
+                    {
+                        x *= 0.05;
+                        z *= 0.05;
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                        return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                    } else if(playerIn.dimension == ConfigHandler.dimensionIdInsanityID)
+                    {
+                        x *= 0.005;
+                        z *= 0.005;
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                        return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                    } else if(playerIn.dimension == -1)
+                    {
+                        x *= 0.4;
+                        z *= 0.4;
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                        return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                    } else
+                    {
+                        playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You went below hell"));
+                        return teleportEntityTo(playerIn, ConfigHandler.dimensionIdDepthID, x, z, stack);
+                    }
                 } else if(playerIn.dimension == 0)
                 {
+                    if(!ConfigHandler.allowInsanityTeleport) return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+
                     x *= 10;
                     z *= 10;
                     playerIn.sendMessage(new TextComponentString(TextFormatting.BOLD + "You entered a strange dimension..."));
