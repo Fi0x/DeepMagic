@@ -1,0 +1,7 @@
+{
+  "name": "Mana",
+  "description": "Everything about Mana.",
+  "icon": "deepmagic:magic_powder",
+  "sortnum": 6,
+  "secret": true
+}

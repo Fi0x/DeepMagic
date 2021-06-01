@@ -29,6 +29,8 @@ public class WorldGenCustomStructures implements IWorldGenerator
     public static final ModWorldGenStructure SHRINE = new ModWorldGenStructure("shrine");
     public static final ModWorldGenStructure INSANITY_OASIS = new ModWorldGenStructure("insanity_oasis");
     public static final ModWorldGenStructure DWARF_BASE = new ModWorldGenStructure("dwarf_base");
+    public static final ModWorldGenStructure DWARF_BASE_INSANITY = new ModWorldGenStructure("dwarf_base_insanity");
+    public static final ModWorldGenStructure DWARF_BASE_DEPTH = new ModWorldGenStructure("dwarf_base_depth");
     public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");//TODO: Reduce size
 
     public static final SmallDungeon DUNGEON = new SmallDungeon();
@@ -43,13 +45,13 @@ public class WorldGenCustomStructures implements IWorldGenerator
             if(ConfigHandler.generateInsanityRockTrollCaves) generateStructure(INSANITY_ROCK_TROLL_CAVE, world, random, chunkX, chunkZ, -1, 0, 500, 15, 15, BiomeInsanityHills.class);
             if(ConfigHandler.generateShrines) generateStructure(SHRINE, world, random, chunkX, chunkZ, 0, 0, 1000, 11, 11, BiomeInsanityPlains.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
             if(ConfigHandler.generateInsanityOases) generateStructure(INSANITY_OASIS, world, random, chunkX, chunkZ, -1, 2, 500, 21, 21, BiomeInsanityPlains.class);
-            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -3, 300, 9, 9, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
+            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE_INSANITY, world, random, chunkX, chunkZ, 0, -3, 300, 9, 9, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
 //            if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, 31, 31, BiomeInsanityPlains.class);
 
             if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
         } else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
         {
-            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);//TODO: Use depth blocks
+            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE_DEPTH, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);
 
             //TODO: Use customized dungeon spawns
 //            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeDepth.class);

@@ -1,0 +1,12 @@
+{
+  "name": "Deep Crystal",
+  "icon": "deepmagic:deep_crystal",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Deep Crystal",
+      "text": "TODO"
+    }
+  ]
+}

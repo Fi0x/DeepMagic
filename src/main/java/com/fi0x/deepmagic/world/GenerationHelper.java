@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.world;
 
+import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.CustomNameGenerator;
 import com.fi0x.deepmagic.util.Reference;
 import net.minecraft.block.Block;
@@ -75,6 +76,12 @@ public class GenerationHelper
                         logic.setEntityId(CustomNameGenerator.getRandomSpawnableMob());
                     }
                     spawner.update();
+                } else if(data[0].equals("Dwarf"))
+                {
+                    world.setBlockToAir(entry.getKey());
+                    EntityDwarf dwarf = new EntityDwarf(world);
+                    dwarf.setLocationAndAngles(entry.getKey().getX(), entry.getKey().getY(), entry.getKey().getZ(), 0, 0);
+                    world.spawnEntity(dwarf);
                 } else if(data.length > 1)
                 {
                     Block block = Block.getBlockFromName(data[0]);
@@ -86,7 +93,7 @@ public class GenerationHelper
                         {
                             if(data.length > 2)
                             {
-                                switch (data[2])
+                                switch(data[2])
                                 {
                                     case "0":
                                     case "west":
@@ -114,7 +121,9 @@ public class GenerationHelper
                     if(te == null) continue;
                     if(te instanceof TileEntityLockableLoot) ((TileEntityLockableLoot) te).setLootTable(new ResourceLocation(data[1]), rand.nextLong());
                 }
-            } catch (Exception ignored) { }
+            } catch(Exception ignored)
+            {
+            }
         }
     }
 }

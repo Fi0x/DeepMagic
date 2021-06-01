@@ -1,0 +1,14 @@
+{
+  "name": "Teleportation Crystal",
+  "icon": "deepmagic:teleportation_crystal",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:dimensional_crafting",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Teleportation Crystal",
+      "text": "TODO"
+    }
+  ]
+}

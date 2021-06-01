@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.items.spells;
 
-import com.fi0x.deepmagic.items.spells.types.ISpellType;
+import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import com.fi0x.deepmagic.mana.spells.types.ISpellType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

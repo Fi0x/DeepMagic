@@ -1,0 +1,30 @@
+{
+  "name": "Magical Items",
+  "icon": "minecraft:book",
+  "category": "deepmagic:c_first_steps",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Magical Items",
+      "text": "This entry introduces the most important items you can create with this mod. There are several paths you might want to follow. The following pages will describe each of these paths and what you can expect when following them."
+    },
+    {
+      "type": "text",
+      "title": "Tools & Armor",
+      "text": "There are two types of tools and armor you can craft. The weaker one is made from $(l:e_item_deep_crystal)Deep Crystals/el and therefore called Deep Crystal items. The second armor and tool-set is made from $(l:e_item_strongest_diamond)Strongest Diamonds/el and has some special abilities that require $(l:e_mana_player_mana)Mana/el to work."
+    },
+    {
+      "type": "text",
+      "text": "This list contains all the tools and armor pieces that can be made with $(l:e_item_deep_crystal)Deep Crystals/el/li$(l:e_item_deep_crystal_tools)Deep Crystal Sword/el/li$(l:e_item_deep_crystal_tools)Deep Crystal Shovel/el/li$(l:e_item_deep_crystal_tools)Deep Crystal Pickaxe/el/li$(l:e_item_deep_crystal_tools)Deep Crystal Axe/el/li$(l:e_item_deep_crystal_tools)Deep Crystal Hoe/el/li$(l:e_item_deep_crystal_armor)Deep Crystal Helmet/el/li$(l:e_item_deep_crystal_armor)Deep Crystal Chestplate/el/li$(l:e_item_deep_crystal_armor)Deep Crystal Leggings/el/li$(l:e_item_deep_crystal_armor)Deep Crystal Boots/el"
+    },
+    {
+      "type": "text",
+      "text": "This list contains all the tools and armor pieces that can be made with $(l:e_item_strongest_diamond)Strongest Diamonds/el/li$(l:e_item_depth_tools)Depth Sword/el/li$(l:e_item_depth_tools)Depth Shovel/el/li$(l:e_item_depth_tools)Depth Pickaxe/el/li$(l:e_item_depth_tools)Depth Axe/el/li$(l:e_item_depth_tools)Depth Hoe/el/li$(l:e_item_depth_helmet)Depth Helmet/el/li$(l:e_item_depth_chestplate)Depth Chestplate/el/li$(l:e_item_depth_leggings)Depth Leggings/el/li$(l:e_item_depth_boots)Depth Boots/el"
+    },
+    {
+      "type": "text",
+      "title": "Magic Tools",
+      "text": "The most important tools of a magician are his $(l:e_spell_overview)Spells/el. But there are other tools that can't be replaced with Spells./br1Often a magician needs to travel to a different $(l:e_dimension_overview)dimension/el or manipulate the flow of $(l:e_mana_machine_mana)Mana/el around blocks. To do this he can use the $(l:e_item_mana_linker)Mana Linker/el and the $(l:e_item_teleportation_crystal)Teleportation Crystal/el."
+    }
+  ]
+}

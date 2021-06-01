@@ -1,0 +1,12 @@
+{
+  "name": "Spell Overview",
+  "icon": "deepmagic:spell",
+  "category": "deepmagic:c_spells",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spell Overview",
+      "text": "TODO"
+    }
+  ]
+}

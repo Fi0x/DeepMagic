@@ -1,0 +1,20 @@
+{
+  "name": "Deep Magic Guide",
+  "landing_text": "Hello /player! Welcome to the Deep Magic Guide. This book contains information about all the features the Deep Magic mod has to offer. As you progress, there will be more and more chapters available./br2--Fi0x",
+  "version": 1,
+  "book_texture": "patchouli:textures/gui/book_gray.png",
+  "model": "deepmagic:guide_book",
+  "show_progress": false,
+  "filler_texture": "deepmagic:textures/items/deep_crystal_powder.png",
+  "creative_tab": "deepmagic_items_tab",
+  "advancement_namespaces": [
+    "deepmagic"
+  ],
+  "macros": {
+    "/br1": "$(br)",
+    "/br2": "$(br2)",
+    "/li": "$(li)",
+    "/player": "$(playername)",
+    "/el": "$(/l)"
+  }
+}

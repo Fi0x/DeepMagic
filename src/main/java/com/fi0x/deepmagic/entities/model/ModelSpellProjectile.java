@@ -24,10 +24,4 @@ public class ModelSpellProjectile extends ModelBase
     {
         this.body.render(f5);
     }
-
-    @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entityIn)
-    {
-        this.body.rotateAngleY += (ageInTicks * 0.067F) * 10;
-    }
 }

@@ -1,0 +1,7 @@
+{
+  "name": "Spells",
+  "description": "Information on how to create new spells and what effects they have.",
+  "icon": "deepmagic:spell",
+  "sortnum": 7,
+  "secret": true
+}

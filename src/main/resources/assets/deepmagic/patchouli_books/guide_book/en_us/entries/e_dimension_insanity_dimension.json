@@ -1,0 +1,13 @@
+{
+  "name": "Insanity Dimension",
+  "icon": "deepmagic:teleportation_crystal",
+  "category": "deepmagic:c_dimensions",
+  "advancement": "deepmagic:teleport_crafting",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    }
+  ]
+}

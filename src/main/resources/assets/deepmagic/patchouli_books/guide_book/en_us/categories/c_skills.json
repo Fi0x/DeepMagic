@@ -1,0 +1,7 @@
+{
+  "name": "Skills",
+  "description": "This chapter contains information about all the skills you can get and what their effect is.",
+  "icon": "deepmagic:skillpoint",
+  "sortnum": 8,
+  "secret": true
+}

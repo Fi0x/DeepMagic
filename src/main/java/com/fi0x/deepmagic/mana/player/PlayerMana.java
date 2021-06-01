@@ -16,6 +16,7 @@ public class PlayerMana
 
     private double skillXP = 0;
     private int skillpoints = 1;
+    private int skillLevel = 1;
 
     //Skills
     private double manaRegenRate = 0;
@@ -79,19 +80,16 @@ public class PlayerMana
     public void addSkillXP(EntityPlayer player, double addAmount)
     {
         skillXP += addAmount;
-        while(skillXP >= ConfigHandler.manaXPForLevelup)
+        while(skillXP >= ConfigHandler.manaXPForLevelup + 5 * Math.pow(skillLevel, 1.5))
         {
             addSkillpoint(player);
-            skillXP -= ConfigHandler.manaXPForLevelup;
+            skillXP -= (ConfigHandler.manaXPForLevelup + 5 * Math.pow(skillLevel, 1.5));
+            skillLevel++;
         }
     }
     public int getSkillpoints()
     {
         return skillpoints;
-    }
-    public void setSkillpoints(int newAmount)
-    {
-        this.skillpoints = newAmount;
     }
     public void addSkillpoint(EntityPlayer player)
     {
@@ -159,6 +157,7 @@ public class PlayerMana
 
         skillXP = 0;
         skillpoints = 1;
+        skillLevel = 1;
 
         manaRegenRate = 0;
         manaEfficiency = 0;
@@ -173,6 +172,7 @@ public class PlayerMana
         mana = source.mana;
         skillXP = source.skillXP;
         skillpoints = source.skillpoints;
+        skillLevel = source.skillLevel;
         manaRegenRate = source.manaRegenRate;
         manaEfficiency = source.manaEfficiency;
         maxManaMultiplier = source.maxManaMultiplier;
@@ -185,6 +185,7 @@ public class PlayerMana
         compound.setDouble("mana", mana);
         compound.setDouble("skillXP", skillXP);
         compound.setInteger("skillpoints", skillpoints);
+        compound.setInteger("skillLevel", skillLevel);
         compound.setDouble("manaRegenerationRate", manaRegenRate);
         compound.setDouble("manaEfficiency", manaEfficiency);
         compound.setInteger("maxManaMultiplier", maxManaMultiplier);
@@ -197,6 +198,7 @@ public class PlayerMana
         mana = compound.getDouble("mana");
         skillXP = compound.getDouble("skillXP");
         skillpoints = compound.getInteger("skillpoints");
+        skillLevel = compound.getInteger("skillLevel");
         manaRegenRate = compound.getDouble("manaRegenerationRate");
         manaEfficiency = compound.getDouble("manaEfficiency");
         maxManaMultiplier = compound.getInteger("maxManaMultiplier");

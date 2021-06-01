@@ -9,6 +9,8 @@ container.mana_generator_mob=Mob Mana Generator
 container.mana_infuser=Mana Infuser
 container.mana_grinder=Mana Grinder
 container.mana_furnace=Mana Furnace
+container.miner_stash=Miners' Stash
+container.spell_stone=Spell Stone
 
 item.teleportation_crystal.name=Teleportation Crystal
 item.mana_booster.name=Mana Booster
@@ -28,6 +30,7 @@ tile.dwarf_lamp.name=Dwarf Lamp
 tile.rune.name=Rune
 tile.magic_light.name=Magic Light
 tile.dwarf_base_marker.name=Dwarf Base Marker
+tile.miner_stash.name=Miner Stash
 
 tile.insanity_stone.name=Insanity Stone
 tile.bright_insanity_stone.name=Bright Insanity Stone

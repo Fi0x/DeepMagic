@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.blocks.partial;
 
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -9,6 +10,8 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -44,6 +47,12 @@ public class Rune extends BlockBase implements ITileEntityProvider
         assert te != null;
         if(entityIn instanceof EntityLivingBase) te.executeSpell((EntityLivingBase) entityIn);
     }
+    @Nonnull
+    @Override
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
+    {
+        return Items.AIR;
+    }
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
@@ -76,6 +85,20 @@ public class Rune extends BlockBase implements ITileEntityProvider
     public boolean isFullCube(@Nonnull IBlockState state)
     {
         return false;
+    }
+    public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos)
+    {
+        IBlockState state = worldIn.getBlockState(pos.down());
+        return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
+    }
+    @Override
+    public void neighborChanged(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos)
+    {
+        if(!canPlaceBlockAt(worldIn, pos))
+        {
+            worldIn.setBlockToAir(pos);
+            worldIn.newExplosion(null, pos.getX() + 0.5, pos.getZ() + 0.5, pos.getY() + 0.5, 2, false, true);
+        }
     }
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, BlockPos pos, @Nonnull Random rand)

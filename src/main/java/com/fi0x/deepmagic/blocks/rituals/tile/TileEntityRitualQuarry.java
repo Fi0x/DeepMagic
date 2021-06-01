@@ -17,6 +17,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class TileEntityRitualQuarry extends TileEntityRitualStone
 {
@@ -34,7 +35,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     {
         type = RITUAL_TYPE.QUARRY;
         manaCosts = ConfigHandler.ritualQuarryManaCosts;
-        direction = EnumFacing.Plane.HORIZONTAL.random(world.rand);
+        direction = EnumFacing.Plane.HORIZONTAL.random(new Random());
         setReady();
     }
 
@@ -93,7 +94,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                         }
                     }
                     EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
-                    item.motionY = Math.random() * 10;
+                    item.motionY = Math.random() * 0.25 + 0.25;
                     world.spawnEntity(item);
                 } else
                 {

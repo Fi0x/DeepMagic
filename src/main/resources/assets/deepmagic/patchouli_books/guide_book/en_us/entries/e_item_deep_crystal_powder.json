@@ -1,0 +1,12 @@
+{
+  "name": "Deep Crystal Powder",
+  "icon": "deepmagic:deep_crystal_powder",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Deep Crystal Powder",
+      "text": "TODO"
+    }
+  ]
+}

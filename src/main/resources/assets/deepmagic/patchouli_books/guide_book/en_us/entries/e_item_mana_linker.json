@@ -1,0 +1,14 @@
+{
+  "name": "Mana Linker",
+  "icon": "deepmagic:mana_linker",
+  "category": "deepmagic:c_items",
+  "advancement": "deepmagic:sigil_crafting",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Mana Linker",
+      "text": "TODO"
+    }
+  ]
+}

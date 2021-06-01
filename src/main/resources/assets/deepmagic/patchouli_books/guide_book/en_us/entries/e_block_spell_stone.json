@@ -1,0 +1,14 @@
+{
+  "name": "Spell Stone",
+  "icon": "deepmagic:spell_stone",
+  "category": "deepmagic:c_blocks",
+  "advancement": "deepmagic:deep_crystal",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spell Stone",
+      "text": "TODO"
+    }
+  ]
+}

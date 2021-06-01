@@ -1,0 +1,12 @@
+{
+  "name": "Skill Overview",
+  "icon": "deepmagic:skillpoint",
+  "category": "deepmagic:c_skills",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Skill Overview",
+      "text": "TODO"
+    }
+  ]
+}

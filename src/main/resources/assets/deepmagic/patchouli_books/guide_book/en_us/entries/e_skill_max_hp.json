@@ -1,0 +1,12 @@
+{
+  "name": "Maximum Health",
+  "icon": "deepmagic:skillpoint",
+  "category": "deepmagic:c_skills",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Maximum Health",
+      "text": "TODO"
+    }
+  ]
+}
