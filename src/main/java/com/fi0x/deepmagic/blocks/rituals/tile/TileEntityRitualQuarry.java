@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -77,26 +78,8 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         switch(currentState)
         {
             case DIG:
-                if(setNextBlock())
-                {
-                    IBlockState state = world.getBlockState(new BlockPos(digX, digY, digZ));
-                    ItemStack stack = new ItemStack(state.getBlock().getItemDropped(state, world.rand, 0), state.getBlock().quantityDropped(state, 0, world.rand));
-                    world.setBlockToAir(new BlockPos(digX, digY, digZ));
-                    if(stack.isEmpty()) return;
-
-                    TileEntity storage = world.getTileEntity(pos.up());
-                    if(storage != null)
-                    {
-                        if(storage.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
-                        {
-                            IItemHandler h = storage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                            if(ItemHandlerHelper.insertItemStacked(h, stack, false).isEmpty()) return;
-                        }
-                    }
-                    EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
-                    item.motionY = Math.random() * 0.25 + 0.25;
-                    world.spawnEntity(item);
-                } else
+                if(setNextBlock()) digNextBlock();
+                else
                 {
                     currentState = STATUS.PACK;
                     markDirty();
@@ -136,7 +119,10 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean setNextBlock()
     {
-        while(digY <= 0 || world.isAirBlock(new BlockPos(digX, digY, digZ)) || world.getBlockState(new BlockPos(digX, digY, digZ)).getBlock() == Blocks.BEDROCK)
+        while(digY <= 0
+                || world.isAirBlock(new BlockPos(digX, digY, digZ))
+                || world.getBlockState(new BlockPos(digX, digY, digZ)).getBlock() == Blocks.BEDROCK
+                || world.containsAnyLiquid(new AxisAlignedBB(digX, digY, digZ, digX + 1, digY + 1, digZ + 1)))
         {
             digY--;
             if(digY > 0) continue;
@@ -165,6 +151,30 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
             }
         }
         return true;
+    }
+    private boolean digNextBlock()
+    {
+        System.out.println("Digging block at " + digX + ", " + digY + ", " + digZ);
+        IBlockState state = world.getBlockState(new BlockPos(digX, digY, digZ));
+        ItemStack stack = new ItemStack(state.getBlock().getItemDropped(state, world.rand, 0), state.getBlock().quantityDropped(state, 0, world.rand));
+        world.setBlockToAir(new BlockPos(digX, digY, digZ));
+        if(stack.isEmpty()) return true;
+
+        TileEntity storage = world.getTileEntity(pos.up());
+        if(storage != null)
+        {
+            if(storage.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+            {
+                IItemHandler h = storage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                if(ItemHandlerHelper.insertItemStacked(h, stack, false).isEmpty()) return true;
+                System.out.println("Quarry ritual could not store stack in inventory");
+            }
+        }
+        EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
+        item.motionY = Math.random() * 0.25 + 0.25;
+        world.spawnEntity(item);
+
+        return false;
     }
     private boolean packNextBlock()
     {

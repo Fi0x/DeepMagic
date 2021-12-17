@@ -68,7 +68,9 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
                 if(manaOnSync)
                 {
                     if(storedMana < manaCosts) return;
-                    else storedMana -= manaCosts;
+
+                    storedMana -= manaCosts;
+                    markDirty();
                 }
                 syncedUpdate();
             }
