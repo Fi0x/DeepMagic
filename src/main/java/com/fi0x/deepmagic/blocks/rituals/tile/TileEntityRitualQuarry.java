@@ -3,7 +3,9 @@ package com.fi0x.deepmagic.blocks.rituals.tile;
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.blocks.rituals.structureblocks.RitualStructure;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.network.PacketGetRitualQuarry;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -18,6 +20,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class TileEntityRitualQuarry extends TileEntityRitualStone
@@ -73,6 +77,38 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
 
     @Override
+    public String getPacketParts()
+    {
+        StringBuilder packetString = new StringBuilder();
+        if(spellParts.size() > 0) packetString.append(spellParts.get(0));
+        for(int i = 1; i < spellParts.size(); i++)
+        {
+            packetString.append("_:_").append(spellParts.get(i));
+        }
+        packetString.append("___");
+        if(partNames.size() > 0) packetString.append(partNames.get(0));
+        for(int i = 1; i < partNames.size(); i++)
+        {
+            packetString.append("_:_").append(partNames.get(i));
+        }
+
+        return packetString.toString();
+    }
+    @Override
+    public void setPartsFromPacket(String parts)
+    {
+        String[] partLists = parts.split("___");
+        if(partLists.length < 2)
+        {
+            spellParts.clear();
+            partNames.clear();
+            return;
+        }
+        spellParts = new ArrayList<>(Arrays.asList(partLists[0].split("_:_")));
+        partNames = new ArrayList<>(Arrays.asList(partLists[1].split("_:_")));
+    }
+
+    @Override
     protected void syncedUpdate()
     {
         switch(currentState)
@@ -98,6 +134,8 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                 markDirty();
                 break;
         }
+
+        PacketHandler.INSTANCE.sendToServer(new PacketGetRitualQuarry(world.provider.getDimension(), pos));
     }
 
     public EnumFacing nextDirection()

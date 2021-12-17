@@ -13,6 +13,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity
 {
@@ -50,6 +52,13 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         needsRedstone = compound.getBoolean("redstoneMode");
 
         super.readFromNBT(compound);
+    }
+    public String getPacketParts()
+    {
+        return null;
+    }
+    public void setPartsFromPacket(String parts)
+    {
     }
 
     @Override
