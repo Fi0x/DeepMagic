@@ -19,7 +19,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
 {
     protected RITUAL_TYPE type;
     protected double storedMana;
-    private int sync;
+    protected int sync;
     protected double manaCosts = 20;
     protected int syncTime = 20;
     protected boolean manaOnSync = true;

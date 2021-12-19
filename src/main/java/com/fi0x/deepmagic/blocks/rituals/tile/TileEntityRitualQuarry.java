@@ -117,12 +117,21 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     @Override
     public void syncedUpdate()
     {
+        if(digY == -100)
+        {
+            digX = pos.getX();
+            digY = pos.getY() - 2;
+            digZ = pos.getZ();
+        }
         if(!world.isRemote)
         {
             switch(currentState)
             {
                 case DIG:
-                    if(setNextBlock()) digNextBlock();
+                    if(setNextBlock())
+                    {
+                        if(!digNextBlock()) sync *= 4;
+                    }
                     else
                     {
                         currentState = STATUS.PACK;
@@ -155,9 +164,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
 
     private void setReady()
     {
-        digX = pos.getX();
-        digY = pos.getY() - 2;
-        digZ = pos.getZ();
+        digY = -100;
         currentDigRadius = 0;
         maxDigRadius = 4;
         currentState = STATUS.DIG;
@@ -213,7 +220,6 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
             {
                 IItemHandler h = storage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if(ItemHandlerHelper.insertItemStacked(h, stack, false).isEmpty()) return true;
-                System.out.println("Quarry ritual could not store stack in inventory");
             }
         }
         EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
