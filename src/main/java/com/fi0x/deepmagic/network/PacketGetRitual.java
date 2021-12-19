@@ -2,33 +2,31 @@ package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualQuarry;
+import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketReturnRitualQuarry implements IMessage
+public class PacketGetRitual implements IMessage
 {
     private boolean messageValid;
     private int dimension;
     private BlockPos blockPos;
-    private String parts;
 
-    public PacketReturnRitualQuarry()
+    public PacketGetRitual()
     {
         messageValid = false;
     }
-    public PacketReturnRitualQuarry(int dimension, BlockPos position, String partList)
+    public PacketGetRitual(int dimension, BlockPos position)
     {
         this.dimension = dimension;
         this.blockPos = position;
-        this.parts = partList;
 
         messageValid = true;
     }
@@ -40,7 +38,6 @@ public class PacketReturnRitualQuarry implements IMessage
         {
             dimension = buf.readInt();
             blockPos = BlockPos.fromLong(buf.readLong());
-            parts = ByteBufUtils.readUTF8String(buf);
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -54,27 +51,26 @@ public class PacketReturnRitualQuarry implements IMessage
         if(!messageValid) return;
         buf.writeInt(dimension);
         buf.writeLong(blockPos.toLong());
-        ByteBufUtils.writeUTF8String(buf, parts);
     }
 
-    public static class Handler implements IMessageHandler<PacketReturnRitualQuarry, IMessage>
+    public static class Handler implements IMessageHandler<PacketGetRitual, IMessage>
     {
+
         @Override
-        public IMessage onMessage(PacketReturnRitualQuarry message, MessageContext ctx)
+        public IMessage onMessage(PacketGetRitual message, MessageContext ctx)
         {
-            if(!message.messageValid && ctx.side != Side.CLIENT) return null;
-            Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message));
+            if(!message.messageValid && ctx.side != Side.SERVER) return null;
+            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> processMessage(message, ctx));
             return null;
         }
 
-        void processMessage(PacketReturnRitualQuarry message)
+        void processMessage(PacketGetRitual message, MessageContext ctx)
         {
-            World world = Minecraft.getMinecraft().world;
-            world.provider.setDimension(message.dimension);
+            World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
             TileEntity te = world.getTileEntity(message.blockPos);
             if(te instanceof TileEntityRitualQuarry)
             {
-                ((TileEntityRitualQuarry) te).setPartsFromPacket(message.parts);
+                PacketHandler.INSTANCE.sendTo(new PacketReturnRitual(message.dimension, message.blockPos, ((TileEntityRitualQuarry) te).getPacketData()), ctx.getServerHandler().player);
             }
         }
     }

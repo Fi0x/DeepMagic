@@ -3,7 +3,7 @@ package com.fi0x.deepmagic.blocks.rituals.tile;
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.blocks.rituals.structureblocks.RitualStructure;
 import com.fi0x.deepmagic.init.ModBlocks;
-import com.fi0x.deepmagic.network.PacketGetRitualQuarry;
+import com.fi0x.deepmagic.network.PacketGetRitual;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.block.state.IBlockState;
@@ -20,8 +20,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class TileEntityRitualQuarry extends TileEntityRitualStone
@@ -77,65 +75,75 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
 
     @Override
-    public String getPacketParts()
+    public String getPacketData()
     {
         StringBuilder packetString = new StringBuilder();
-        if(spellParts.size() > 0) packetString.append(spellParts.get(0));
-        for(int i = 1; i < spellParts.size(); i++)
+
+        packetString.append(digX).append("-");
+        packetString.append(digY).append("-");
+        packetString.append(digZ).append("-");
+        packetString.append(currentDigRadius).append("-");
+        packetString.append(maxDigRadius).append("-");
+        packetString.append(direction.ordinal()).append("-");
+        packetString.append(currentState.ordinal());
+
+        for (int structureBlock : structureBlocks)
         {
-            packetString.append("_:_").append(spellParts.get(i));
-        }
-        packetString.append("___");
-        if(partNames.size() > 0) packetString.append(partNames.get(0));
-        for(int i = 1; i < partNames.size(); i++)
-        {
-            packetString.append("_:_").append(partNames.get(i));
+            packetString.append("-");
+            packetString.append(structureBlock);
         }
 
         return packetString.toString();
     }
     @Override
-    public void setPartsFromPacket(String parts)
+    public void setDataFromPacket(String data)
     {
-        String[] partLists = parts.split("___");
-        if(partLists.length < 2)
+        String[] packetData = data.split("-");
+
+        digX = Integer.parseInt(packetData[0]);
+        digY = Integer.parseInt(packetData[1]);
+        digZ = Integer.parseInt(packetData[2]);
+        currentDigRadius = Integer.parseInt(packetData[3]);
+        maxDigRadius = Integer.parseInt(packetData[4]);
+        direction = EnumFacing.values()[Integer.parseInt(packetData[5])];
+        currentState = STATUS.values()[Integer.parseInt(packetData[6])];
+
+        for (int i = 0; i < structureBlocks.length; i++)
         {
-            spellParts.clear();
-            partNames.clear();
-            return;
+            structureBlocks[i] = Integer.parseInt(packetData[i + 7]);
         }
-        spellParts = new ArrayList<>(Arrays.asList(partLists[0].split("_:_")));
-        partNames = new ArrayList<>(Arrays.asList(partLists[1].split("_:_")));
     }
 
     @Override
-    protected void syncedUpdate()
+    public void syncedUpdate()
     {
-        switch(currentState)
+        if(!world.isRemote)
         {
-            case DIG:
-                if(setNextBlock()) digNextBlock();
-                else
-                {
-                    currentState = STATUS.PACK;
+            switch(currentState)
+            {
+                case DIG:
+                    if(setNextBlock()) digNextBlock();
+                    else
+                    {
+                        currentState = STATUS.PACK;
+                        markDirty();
+                    }
+                    break;
+                case PACK:
+                    if(!packNextBlock()) currentState = STATUS.MOVE;
                     markDirty();
-                }
-                break;
-            case PACK:
-                if(!packNextBlock()) currentState = STATUS.MOVE;
-                markDirty();
-                break;
-            case MOVE:
-                if(!move()) currentState = STATUS.UNPACK;
-                markDirty();
-                break;
-            case UNPACK:
-                if(!unpackNextBlock()) setReady();
-                markDirty();
-                break;
+                    break;
+                case MOVE:
+                    if(!move()) currentState = STATUS.UNPACK;
+                    markDirty();
+                    break;
+                case UNPACK:
+                    if(!unpackNextBlock()) setReady();
+                    markDirty();
+                    break;
+            }
         }
-
-        PacketHandler.INSTANCE.sendToServer(new PacketGetRitualQuarry(world.provider.getDimension(), pos));
+        else PacketHandler.INSTANCE.sendToServer(new PacketGetRitual(world.provider.getDimension(), pos));
     }
 
     public EnumFacing nextDirection()
