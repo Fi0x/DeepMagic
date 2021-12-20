@@ -6,7 +6,10 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+
+import java.util.List;
 
 public class TileEntityDwarfBaseMarker extends TileEntity implements ITickable
 {
@@ -21,12 +24,17 @@ public class TileEntityDwarfBaseMarker extends TileEntity implements ITickable
             if(delay > 0) return;
             delay = 200;
 
-            if(Math.random() * 1000 + 1 < ConfigHandler.dwarfMarkerSpawnChance) spawnDwarf();
+            AxisAlignedBB aabb = new AxisAlignedBB(pos.add(-16, -5, -16), pos.add(16, 5, 16));
+            List<EntityDwarf> existingDwarfs = world.getEntitiesWithinAABB(EntityDwarf.class, aabb);
+            if(existingDwarfs.size() > 10) return;
+
+            if(existingDwarfs.size() < 2 || Math.random() * 1000 + 1 < ConfigHandler.dwarfMarkerSpawnChance) spawnDwarf();
         }
     }
 
     private void spawnDwarf()
     {
+        //TODO: Change to avoid cascading worldgen-lag
         int tries = 0;
         int x = pos.getX();
         int y = pos.getY();
