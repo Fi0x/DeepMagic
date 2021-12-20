@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.ITileEntityRitualStone;
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -14,11 +15,11 @@ import net.minecraft.util.ITickable;
 
 import javax.annotation.Nonnull;
 
-public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity
+public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity, ITileEntityRitualStone
 {
     protected RITUAL_TYPE type;
     protected double storedMana;
-    private int sync;
+    protected int sync;
     protected double manaCosts = 20;
     protected int syncTime = 20;
     protected boolean manaOnSync = true;
@@ -68,14 +69,13 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
                 if(manaOnSync)
                 {
                     if(storedMana < manaCosts) return;
-                    else storedMana -= manaCosts;
+
+                    storedMana -= manaCosts;
+                    markDirty();
                 }
                 syncedUpdate();
             }
         }
-    }
-    protected void syncedUpdate()
-    {
     }
 
     public boolean changeRedstoneMode()

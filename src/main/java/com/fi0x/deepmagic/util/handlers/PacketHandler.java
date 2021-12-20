@@ -32,5 +32,8 @@ public class PacketHandler
 
         INSTANCE.registerMessage(PacketGetSpellStone.Handler.class, PacketGetSpellStone.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketReturnSpellStone.Handler.class, PacketReturnSpellStone.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketGetRitual.Handler.class, PacketGetRitual.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketReturnRitual.Handler.class, PacketReturnRitual.class, nextID(), Side.CLIENT);
     }
 }
