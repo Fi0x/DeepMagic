@@ -207,7 +207,6 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean digNextBlock()
     {
-        System.out.println("Digging block at " + digX + ", " + digY + ", " + digZ);
         IBlockState state = world.getBlockState(new BlockPos(digX, digY, digZ));
         ItemStack stack = new ItemStack(state.getBlock().getItemDropped(state, world.rand, 0), state.getBlock().quantityDropped(state, 0, world.rand));
         world.setBlockToAir(new BlockPos(digX, digY, digZ));
