@@ -27,11 +27,6 @@ import java.util.Random;
 
 public class ChunkGeneratorDepth implements IChunkGenerator
 {
-    /*
-    TODO: Re-make completely from scratch to reduce lag
-     Maybe copy nether
-     Add option in config to disable dimension
-     */
     private final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     private final IBlockState FILLER_MAIN = ModBlocks.DEPTH_STONE.getDefaultState();
 
@@ -54,7 +49,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         ChunkPrimer primer = new ChunkPrimer();
         fillChunk(primer);
 
-        shaftGenerator.generate(world, x, z, primer);
+        if(rand.nextInt(40) == 0) shaftGenerator.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
         byte[] biomeArray = chunk.getBiomeArray();

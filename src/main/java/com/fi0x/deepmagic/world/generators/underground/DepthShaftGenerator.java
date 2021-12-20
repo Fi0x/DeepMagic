@@ -27,7 +27,6 @@ public class DepthShaftGenerator extends MapGenBase
     @Override
     public void generate(@Nonnull World worldIn, int x, int z, @Nonnull ChunkPrimer primer)
     {
-        if(rand.nextInt(40) > 0) return;
         this.world = worldIn;
         this.rand.setSeed(worldIn.getSeed());
 
