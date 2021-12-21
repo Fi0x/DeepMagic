@@ -122,7 +122,6 @@ public class DepthShaftGenerator extends MapGenBase
     private boolean isReplaceable(IBlockState state)
     {
         if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.INSANITY_STONE) return true;
-        if(state.getBlock() == Blocks.DIRT || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_DIRT) return true;
-        return false;
+        return state.getBlock() == Blocks.DIRT || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_DIRT;
     }
 }
