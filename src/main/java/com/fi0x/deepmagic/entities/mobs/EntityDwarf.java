@@ -113,7 +113,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     }
 
     @Override
-    public void onDeath(DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         for(int i = 0; i < itemHandler.getSlots(); i++)
         {
