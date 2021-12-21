@@ -54,7 +54,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1, false));
-//        if(ConfigHandler.dwarfMining) this.tasks.addTask(2, new EntityAIMining(this));
+        if(ConfigHandler.dwarfMining) this.tasks.addTask(2, new EntityAIMining(this));
         this.tasks.addTask(2, new EntityAIWanderAvoidWater(this, 1));
         this.tasks.addTask(5, new EntityAIWatchClosest(this, Entity.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
@@ -113,7 +113,7 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
     }
 
     @Override
-    public void onDeath(DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         for(int i = 0; i < itemHandler.getSlots(); i++)
         {

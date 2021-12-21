@@ -3,18 +3,40 @@ package com.fi0x.deepmagic.blocks.tileentity;
 import com.fi0x.deepmagic.entities.mobs.EntityDwarf;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class TileEntityDwarfBaseMarker extends TileEntity implements ITickable
 {
     private int delay = 200;
-    private int playerActivationRange = 48;
+    private final int PLAYER_ACTIVATION_RANGE = 48;
+    private boolean initialSpawnDone = false;
+
+    @Nonnull
+    @Override
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
+    {
+        compound.setInteger("delay", delay);
+        compound.setBoolean("initialSpawnDone", initialSpawnDone);
+
+        return super.writeToNBT(compound);
+    }
+
+    @Override
+    public void readFromNBT(@Nonnull NBTTagCompound compound)
+    {
+        delay = compound.getInteger("delay");
+        initialSpawnDone = compound.getBoolean("initialSpawnDone");
+
+        super.readFromNBT(compound);
+    }
 
     @Override
     public void update()
@@ -30,13 +52,17 @@ public class TileEntityDwarfBaseMarker extends TileEntity implements ITickable
         AxisAlignedBB aabb = new AxisAlignedBB(pos.add(-16, -5, -16), pos.add(16, 5, 16));
         List<EntityDwarf> existingDwarfs = world.getEntitiesWithinAABB(EntityDwarf.class, aabb);
         if(existingDwarfs.size() > 10) return;
+        if(!initialSpawnDone && existingDwarfs.size() < 2) spawnDwarf();
 
-        if(existingDwarfs.size() < 2 || Math.random() * 1000 + 1 < ConfigHandler.dwarfMarkerSpawnChance) spawnDwarf();
+        initialSpawnDone = true;
+        markDirty();
+
+        if(Math.random() * 1000 + 1 < ConfigHandler.dwarfMarkerSpawnChance) spawnDwarf();
     }
 
     private boolean isActive()
     {
-        return world.isAnyPlayerWithinRangeAt((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, playerActivationRange);
+        return world.isAnyPlayerWithinRangeAt((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, PLAYER_ACTIVATION_RANGE);
     }
 
     private void spawnDwarf()
