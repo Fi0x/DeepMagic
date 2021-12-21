@@ -30,7 +30,7 @@ public class DepthShaftGenerator extends MapGenBase
         this.world = worldIn;
         this.rand.setSeed(worldIn.getSeed());
 
-        int currentRadius = rand.nextInt(range) + 2;
+        int currentRadius = (int) (Math.random() * range) + 2;
         int centerX = rand.nextInt(16 - 2 * currentRadius) + currentRadius;
         int centerZ = rand.nextInt(16 - 2 * currentRadius) + currentRadius;
 
