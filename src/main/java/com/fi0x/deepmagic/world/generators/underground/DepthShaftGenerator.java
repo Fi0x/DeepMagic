@@ -30,7 +30,7 @@ public class DepthShaftGenerator extends MapGenBase
         this.world = worldIn;
         this.rand.setSeed(worldIn.getSeed());
 
-        int currentRadius = rand.nextInt(range) + 2;
+        int currentRadius = (int) (Math.random() * range) + 2;
         int centerX = rand.nextInt(16 - 2 * currentRadius) + currentRadius;
         int centerZ = rand.nextInt(16 - 2 * currentRadius) + currentRadius;
 
@@ -122,7 +122,6 @@ public class DepthShaftGenerator extends MapGenBase
     private boolean isReplaceable(IBlockState state)
     {
         if(state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.DEPTH_STONE || state.getBlock() == ModBlocks.INSANITY_STONE) return true;
-        if(state.getBlock() == Blocks.DIRT || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_DIRT) return true;
-        return false;
+        return state.getBlock() == Blocks.DIRT || state.getBlock() == ModBlocks.DEPTH_DIRT || state.getBlock() == ModBlocks.INSANITY_DIRT;
     }
 }
