@@ -33,6 +33,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     private final World world;
     private final Random rand;
     private MapGenBase shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.DECAYABLE, Boolean.FALSE), ModBlocks.DEPTH_GLOWSTONE.getDefaultState());
+//    private final CustomGlowstoneGenerator glowStoneGen = new CustomGlowstoneGenerator();
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
@@ -91,6 +92,11 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
+
+//        if(TerrainGen.populate(this, this.world, this.rand, x, z, false, PopulateChunkEvent.Populate.EventType.GLOWSTONE))
+//        {
+//            this.glowStoneGen.generate(this.world, this.rand, blockPos.add(8, 50, 8));
+//        }
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, chunkPos));
