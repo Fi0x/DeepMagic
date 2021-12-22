@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.world.generators.underground.CustomGlowstoneGenerator;
 import com.fi0x.deepmagic.world.generators.underground.DepthShaftGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockLeaves;
@@ -18,6 +19,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import javax.annotation.Nonnull;
@@ -32,7 +34,8 @@ public class ChunkGeneratorDepth implements IChunkGenerator
 
     private final World world;
     private final Random rand;
-    private MapGenBase shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.DECAYABLE, Boolean.FALSE), ModBlocks.DEPTH_GLOWSTONE.getDefaultState());
+    private MapGenBase shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.DECAYABLE, Boolean.FALSE), Blocks.AIR.getDefaultState());
+    private final CustomGlowstoneGenerator glowStoneGen = new CustomGlowstoneGenerator();
 
     public ChunkGeneratorDepth(World worldIn, long seed)
     {
@@ -91,6 +94,9 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
+
+        if(TerrainGen.populate(this, this.world, this.rand, x, z, false, PopulateChunkEvent.Populate.EventType.GLOWSTONE))
+            this.glowStoneGen.generate(this.world, this.rand, blockPos.add(8, 55, 8));
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, chunkPos));
