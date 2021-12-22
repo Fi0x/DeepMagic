@@ -36,7 +36,7 @@ public class ModBlocks
 	public static final Block DEEP_CRYSTAL_BLOCK = new CrystalBlock("deep_crystal_block", Material.GLASS);
 	public static final Block DEMON_CRYSTAL_BLOCK = new CrystalBlock("demon_crystal_block", Material.GLASS);
 	public static final BlockSlab CLEAN_STONE_SLAB_DOUBLE = new CleanStoneDoubleSlab("clean_stone_slab_double", Material.ROCK);
-	public static final BlockSlab CLEAN_STONE_SLAB_HALF = new CleanStoneHalfSlab("clean_stone_slab_half", Material.ROCK);
+	public static final BlockSlab CLEAN_STONE_SLAB_HALF = new CleanStoneHalfSlab("clean_stone_slab_half", Material.ROCK, CLEAN_STONE_SLAB_DOUBLE);
 	public static final BlockStairs CLEAN_STONE_STAIRS = new StairBase("clean_stone_stairs", Blocks.STONE.getDefaultState());
 	public static final Block DWARF_LAMP = new DwarfLamp("dwarf_lamp", Material.CIRCUITS);
 	public static final Block RUNE = new Rune("rune", Material.CIRCUITS);
@@ -60,13 +60,13 @@ public class ModBlocks
 	public static final Block INSANITY_LEAVES = new InsanityLeaves("insanity_leaves");
 	public static final BlockBush INSANITY_SAPLING = new InsanitySapling("insanity_sapling", Material.PLANTS);
 	public static final BlockSlab INSANITY_STONE_SLAB_DOUBLE = new InsanityStoneDoubleSlab("insanity_stone_slab_double", Material.ROCK);
-	public static final BlockSlab INSANITY_STONE_SLAB_HALF = new InsanityStoneHalfSlab("insanity_stone_slab_half", Material.ROCK);
+	public static final BlockSlab INSANITY_STONE_SLAB_HALF = new InsanityStoneHalfSlab("insanity_stone_slab_half", Material.ROCK, INSANITY_STONE_SLAB_DOUBLE);
 	public static final BlockStairs INSANITY_STONE_STAIRS = new StairBase("insanity_stone_stairs", INSANITY_STONE.getDefaultState());
 	public static final BlockSlab INSANITY_COBBLE_SLAB_DOUBLE = new InsanityCobbleDoubleSlab("insanity_cobble_slab_double", Material.ROCK);
-	public static final BlockSlab INSANITY_COBBLE_SLAB_HALF = new InsanityCobbleHalfSlab("insanity_cobble_slab_half", Material.ROCK);
+	public static final BlockSlab INSANITY_COBBLE_SLAB_HALF = new InsanityCobbleHalfSlab("insanity_cobble_slab_half", Material.ROCK, INSANITY_COBBLE_SLAB_DOUBLE);
 	public static final BlockStairs INSANITY_COBBLE_STAIRS = new StairBase("insanity_cobble_stairs", INSANITY_COBBLE.getDefaultState());
 	public static final BlockSlab INSANITY_WOOD_SLAB_DOUBLE = new InsanityWoodDoubleSlab("insanity_wood_slab_double", Material.WOOD);
-	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD);
+	public static final BlockSlab INSANITY_WOOD_SLAB_HALF = new InsanityWoodHalfSlab("insanity_wood_slab_half", Material.WOOD, INSANITY_WOOD_SLAB_DOUBLE);
 	public static final BlockStairs INSANITY_WOOD_STAIRS = new StairBase("insanity_wood_stairs", INSANITY_PLANKS.getDefaultState());
 	public static final Block INSANITY_WATER = new BlockFluid("insanity_water", ModFluids.INSANITY_WATER, Material.WATER);
 	//Insanity Ores
@@ -89,14 +89,14 @@ public class ModBlocks
 	public static final Block DEPTH_LEAVES = new DepthLeaves("depth_leaves");
 	public static final Block DEPTH_GLOWSTONE = new DepthGlowstone("depth_glowstone", Material.GLASS);
 	public static final BlockBush DEPTH_SAPLING = new DepthSapling("depth_sapling", Material.PLANTS);
-	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthStoneDoubleSlab("depth_stone_slab_double", Material.WOOD);
-	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthStoneHalfSlab("depth_stone_slab_half", Material.WOOD);
+	public static final BlockSlab DEPTH_STONE_SLAB_DOUBLE = new DepthStoneDoubleSlab("depth_stone_slab_double", Material.ROCK);
+	public static final BlockSlab DEPTH_STONE_SLAB_HALF = new DepthStoneHalfSlab("depth_stone_slab_half", Material.ROCK, DEPTH_STONE_SLAB_DOUBLE);
 	public static final BlockStairs DEPTH_STONE_STAIRS = new StairBase("depth_stone_stairs", DEPTH_STONE.getDefaultState());
-	public static final BlockSlab DEPTH_COBBLE_SLAB_DOUBLE = new DepthCobbleDoubleSlab("depth_cobble_slab_double", Material.WOOD);
-	public static final BlockSlab DEPTH_COBBLE_SLAB_HALF = new DepthCobbleHalfSlab("depth_cobble_slab_half", Material.WOOD);
+	public static final BlockSlab DEPTH_COBBLE_SLAB_DOUBLE = new DepthCobbleDoubleSlab("depth_cobble_slab_double", Material.ROCK);
+	public static final BlockSlab DEPTH_COBBLE_SLAB_HALF = new DepthCobbleHalfSlab("depth_cobble_slab_half", Material.ROCK, DEPTH_COBBLE_SLAB_DOUBLE);
 	public static final BlockStairs DEPTH_COBBLE_STAIRS = new StairBase("depth_cobble_stairs", DEPTH_COBBLE.getDefaultState());
 	public static final BlockSlab DEPTH_WOOD_SLAB_DOUBLE = new DepthWoodDoubleSlab("depth_wood_slab_double", Material.WOOD);
-	public static final BlockSlab DEPTH_WOOD_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD);
+	public static final BlockSlab DEPTH_WOOD_SLAB_HALF = new DepthWoodHalfSlab("depth_wood_slab_half", Material.WOOD, DEPTH_WOOD_SLAB_DOUBLE);
 	public static final BlockStairs DEPTH_WOOD_STAIRS = new StairBase("depth_wood_stairs", DEPTH_PLANKS.getDefaultState());
 	//Depth Ores
 	public static final Block DEPTH_COAL_ORE = new DepthOreCoal("depth_coal_ore", Material.ROCK);

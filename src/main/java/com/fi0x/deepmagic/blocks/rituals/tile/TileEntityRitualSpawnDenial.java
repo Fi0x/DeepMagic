@@ -12,8 +12,22 @@ public class TileEntityRitualSpawnDenial extends TileEntityRitualStone
     }
 
     @Override
-    protected void syncedUpdate()
+    public String getPacketData()
     {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public void setDataFromPacket(String parts)
+    {
+        //TODO
+    }
+
+    @Override
+    public void syncedUpdate()
+    {
+        //TODO Check if packet is required
         /*
         TODO: Add a capability to worlds that stores locations of all rituals
          Add block locations on block placement and remove them on block destruction

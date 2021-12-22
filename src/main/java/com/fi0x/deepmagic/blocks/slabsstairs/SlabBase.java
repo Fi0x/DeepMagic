@@ -1,14 +1,17 @@
 package com.fi0x.deepmagic.blocks.slabsstairs;
 
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.init.ModItems;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public abstract class SlabBase extends BlockSlab
 {
@@ -25,6 +28,12 @@ public abstract class SlabBase extends BlockSlab
         this.useNeighborBrightness = true;
 
         ModBlocks.BLOCKS.add(this);
+    }
+
+    public SlabBase(String name, Material materialIn, BlockSlab doubleSlab)
+    {
+        this(name, materialIn);
+        ModItems.ITEMS.add(new ItemSlab(this, this, doubleSlab).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Nonnull

@@ -15,9 +15,24 @@ public class TileEntityRitualTime extends TileEntityRitualStone
     }
 
     private long time = 0;
+
     @Override
-    protected void syncedUpdate()
+    public String getPacketData()
     {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public void setDataFromPacket(String parts)
+    {
+        //TODO
+    }
+
+    @Override
+    public void syncedUpdate()
+    {
+        //TODO Check if packet is required
         world.getWorldInfo().setWorldTime(time);
     }
 
