@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.util.IHasModel;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -16,11 +17,10 @@ import java.util.Random;
 
 public class InsanityCobbleHalfSlab extends SlabBase implements IHasModel
 {
-    public InsanityCobbleHalfSlab(String name, Material materialIn)
+    public InsanityCobbleHalfSlab(String name, Material materialIn, BlockSlab doubleSlab)
     {
-        super(name, materialIn);
+        super(name, materialIn, doubleSlab);
         setCreativeTab(DeepMagicTab.BLOCKS);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override
