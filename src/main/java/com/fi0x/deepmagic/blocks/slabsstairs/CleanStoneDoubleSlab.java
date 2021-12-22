@@ -4,6 +4,9 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -19,6 +22,13 @@ public class CleanStoneDoubleSlab extends SlabBase
     public boolean isDouble()
     {
         return true;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getItem(@Nonnull World p_185473_1_, @Nonnull BlockPos p_185473_2_, @Nonnull IBlockState p_185473_3_)
+    {
+        return new ItemStack(ModBlocks.CLEAN_STONE_SLAB_HALF);
     }
 
     @Nonnull
