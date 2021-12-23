@@ -78,6 +78,13 @@ public class ModBlocks
 	public static final Block INSANITY_DIAMOND_ORE = new InsanityOreDiamond("insanity_diamond_ore", Material.ROCK);
 	public static final Block INSANITY_EMERALD_ORE = new InsanityOreEmerald("insanity_emerald_ore", Material.ROCK);
 	public static final Block INSANITY_DEEP_CRYSTAL_ORE = new DeepCrystalOre("insanity_deep_crystal_ore", Material.ROCK);
+	//Insanity Dungeon Blocks
+	public static final Block INSANITY_DUNGEON_STONE = new DungeonStone("insanity_dungeon_stone", Material.ROCK);
+	public static final Block INSANITY_DUNGEON_COBBLE = new DungeonStone("insanity_dungeon_cobble", Material.ROCK);
+	public static final Block INSANITY_DUNGEON_COBBLE_MOSSY = new DungeonStone("insanity_dungeon_cobble_mossy", Material.ROCK);
+	public static final Block INSANITY_DUNGEON_BRICK = new DungeonStone("insanity_dungeon_brick", Material.ROCK);
+	public static final Block INSANITY_DUNGEON_BRICK_MOSSY = new DungeonStone("insanity_dungeon_brick_mossy", Material.ROCK);
+	public static final Block INSANITY_DUNGEON_BRICK_CRACKED = new DungeonStone("insanity_dungeon_brick_cracked", Material.ROCK);
 
 	//Depth Blocks
 	public static final Block DEPTH_STONE = new DepthStone("depth_stone", Material.ROCK);
@@ -107,6 +114,13 @@ public class ModBlocks
 	public static final Block DEPTH_DIAMOND_ORE = new DepthOreDiamond("depth_diamond_ore", Material.ROCK);
 	public static final Block DEPTH_EMERALD_ORE = new DepthOreEmerald("depth_emerald_ore", Material.ROCK);
 	public static final Block DEEP_CRYSTAL_ORE_COMPRESSED = new DeepCrystalOreCompressed("deep_crystal_ore_compressed", Material.ROCK);
+	//Depth Dungeon Blocks
+	public static final Block DEPTH_DUNGEON_STONE = new DungeonStone("depth_dungeon_stone", Material.ROCK);
+	public static final Block DEPTH_DUNGEON_COBBLE = new DungeonStone("depth_dungeon_cobble", Material.ROCK);
+	public static final Block DEPTH_DUNGEON_COBBLE_MOSSY = new DungeonStone("depth_dungeon_cobble_mossy", Material.ROCK);
+	public static final Block DEPTH_DUNGEON_BRICK = new DungeonStone("depth_dungeon_brick", Material.ROCK);
+	public static final Block DEPTH_DUNGEON_BRICK_MOSSY = new DungeonStone("depth_dungeon_brick_mossy", Material.ROCK);
+	public static final Block DEPTH_DUNGEON_BRICK_CRACKED = new DungeonStone("depth_dungeon_brick_cracked", Material.ROCK);
 
 	//Dungeon Blocks
 	public static final Block DUNGEON_STONE = new DungeonStone("dungeon_stone", Material.ROCK);

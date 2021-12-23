@@ -18,6 +18,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
+import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
@@ -27,6 +29,10 @@ import java.util.Random;
 public class GenerationHelper
 {
     public static boolean templatePlacer(World world, Random rand, BlockPos pos, String templateName, Rotation rotation)
+    {
+        return templatePlacer(world, rand, pos, templateName, rotation, null);
+    }
+    public static boolean templatePlacer(World world, Random rand, BlockPos pos, String templateName, Rotation rotation, ITemplateProcessor templateProcessor)
     {
         Template template = ((WorldServer) world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(Reference.MOD_ID, templateName));
         if(template == null) return false;
@@ -45,7 +51,8 @@ public class GenerationHelper
         }
 
         PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreStructureBlock(false);
-        template.addBlocksToWorld(world, pos, settings);
+        if(templateProcessor == null) templateProcessor = new BlockRotationProcessor(pos, settings);
+        template.addBlocksToWorld(world, pos, templateProcessor, settings, 2);
 
         Map<BlockPos, String> dataBlocks = template.getDataBlocks(pos, settings);
         dataBlockReplacer(world, rand, rotation, dataBlocks);
