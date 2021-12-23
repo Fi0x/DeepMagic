@@ -6,9 +6,10 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.network.PacketGetRitual;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -130,7 +131,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                 case DIG:
                     if(setNextBlock())
                     {
-                        if(!digNextBlock()) sync *= 4;
+                        if(!digNextBlock(new BlockPos(digX, digY, digZ))) sync *= 4;
                     }
                     else
                     {
@@ -205,10 +206,14 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         }
         return true;
     }
-    private boolean digNextBlock()
+    private boolean digNextBlock(BlockPos position)
     {
-        IBlockState state = world.getBlockState(new BlockPos(digX, digY, digZ));
-        ItemStack stack = new ItemStack(state.getBlock().getItemDropped(state, world.rand, 0), state.getBlock().quantityDropped(state, 0, world.rand));
+        Block block = world.getBlockState(position).getBlock();
+        Item droppedItem = block.getItemDropped(world.getBlockState(position), world.rand, 0);
+        int quantity = block.quantityDropped(world.rand);
+        int itemMeta = block.damageDropped(world.getBlockState(position));
+        ItemStack stack = new ItemStack(droppedItem, quantity, itemMeta);
+
         world.setBlockToAir(new BlockPos(digX, digY, digZ));
         if(stack.isEmpty()) return true;
 

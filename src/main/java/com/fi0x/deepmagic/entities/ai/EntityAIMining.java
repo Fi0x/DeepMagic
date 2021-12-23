@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class EntityAIMining extends EntityAIBase
 {
-    //TODO: Fix to avoid cascading world-gen
     protected final int executionChance;
     public final World world;
     public final EntityDwarf entity;
