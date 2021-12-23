@@ -33,7 +33,9 @@ public class WorldGenCustomStructures implements IWorldGenerator
     public static final ModWorldGenStructure DWARF_BASE_DEPTH = new ModWorldGenStructure("dwarf_base_depth");
     public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");//TODO: Reduce size
 
-    public static final SmallDungeon DUNGEON = new SmallDungeon();
+    public static final SmallDungeon SMALL_DUNGEON = new SmallDungeon(SmallDungeon.Version.NORMAL);
+    public static final SmallDungeon SMALL_DUNGEON_INSANITY = new SmallDungeon(SmallDungeon.Version.INSANITY);
+    public static final SmallDungeon SMALL_DUNGEON_DEPTH = new SmallDungeon(SmallDungeon.Version.DEPTH);
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
@@ -48,7 +50,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
             if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE_INSANITY, world, random, chunkX, chunkZ, 0, -3, 300, 9, 9, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class, BiomeInsanityHills.class);
 //            if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, 31, 31, BiomeInsanityPlains.class);
 
-            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
+            if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON_INSANITY, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
         } else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
         {
             if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE_DEPTH, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);

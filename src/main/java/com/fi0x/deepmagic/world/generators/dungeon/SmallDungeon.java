@@ -23,17 +23,12 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
     private final DungeonRoom[] rooms;
     private final DungeonRoom ceiling;
 
-    public SmallDungeon()
+    public SmallDungeon(Version variant)
     {
         ArrayList<IBlockState> replaceableBlocks = new ArrayList<>();
         replaceableBlocks.add(ModBlocks.DUNGEON_BRICK.getDefaultState());
 
-        Map<Float, Template.BlockInfo> replacementBlocks = new HashMap<>();
-        replacementBlocks.put(0.05F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_COBBLE_MOSSY.getDefaultState()));
-        replacementBlocks.put(0.1F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_COBBLE.getDefaultState()));
-        replacementBlocks.put(0.15F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_STONE.getDefaultState()));
-        replacementBlocks.put(0.25F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_BRICK_CRACKED.getDefaultState()));
-        replacementBlocks.put(0.3F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_BRICK_MOSSY.getDefaultState()));
+        Map<Float, Template.BlockInfo> replacementBlocks = getReplacementBlocksFor(variant);
 
         rooms = new DungeonRoom[]{
                 new DungeonRoom("small_dungeon_room0", 7, replaceableBlocks, replacementBlocks),
@@ -64,8 +59,49 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
         return true;
     }
 
+    private Map<Float, Template.BlockInfo> getReplacementBlocksFor(Version variant)
+    {
+        Map<Float, Template.BlockInfo> blocks = new HashMap<>();
+
+        switch (variant)
+        {
+            case NORMAL:
+                blocks.put(0.05F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_COBBLE_MOSSY.getDefaultState()));
+                blocks.put(0.1F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_COBBLE.getDefaultState()));
+                blocks.put(0.15F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_STONE.getDefaultState()));
+                blocks.put(0.25F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_BRICK_CRACKED.getDefaultState()));
+                blocks.put(0.3F, CustomTemplateProcessor.blockToInfo(ModBlocks.DUNGEON_BRICK_MOSSY.getDefaultState()));
+                break;
+            case INSANITY:
+                blocks.put(0.05F, CustomTemplateProcessor.blockToInfo(ModBlocks.INSANITY_DUNGEON_COBBLE_MOSSY.getDefaultState()));
+                blocks.put(0.1F, CustomTemplateProcessor.blockToInfo(ModBlocks.INSANITY_DUNGEON_COBBLE.getDefaultState()));
+                blocks.put(0.15F, CustomTemplateProcessor.blockToInfo(ModBlocks.INSANITY_DUNGEON_STONE.getDefaultState()));
+                blocks.put(0.25F, CustomTemplateProcessor.blockToInfo(ModBlocks.INSANITY_DUNGEON_BRICK_CRACKED.getDefaultState()));
+                blocks.put(0.3F, CustomTemplateProcessor.blockToInfo(ModBlocks.INSANITY_DUNGEON_BRICK_MOSSY.getDefaultState()));
+                blocks.put(1F, CustomTemplateProcessor.blockToInfo(ModBlocks.INSANITY_DUNGEON_BRICK.getDefaultState()));
+                break;
+            case DEPTH:
+                blocks.put(0.05F, CustomTemplateProcessor.blockToInfo(ModBlocks.DEPTH_DUNGEON_COBBLE_MOSSY.getDefaultState()));
+                blocks.put(0.1F, CustomTemplateProcessor.blockToInfo(ModBlocks.DEPTH_DUNGEON_COBBLE.getDefaultState()));
+                blocks.put(0.15F, CustomTemplateProcessor.blockToInfo(ModBlocks.DEPTH_DUNGEON_STONE.getDefaultState()));
+                blocks.put(0.25F, CustomTemplateProcessor.blockToInfo(ModBlocks.DEPTH_DUNGEON_BRICK_CRACKED.getDefaultState()));
+                blocks.put(0.3F, CustomTemplateProcessor.blockToInfo(ModBlocks.DEPTH_DUNGEON_BRICK_MOSSY.getDefaultState()));
+                blocks.put(1F, CustomTemplateProcessor.blockToInfo(ModBlocks.DEPTH_DUNGEON_BRICK.getDefaultState()));
+                break;
+        }
+
+        return blocks;
+    }
+
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
+    }
+
+    public enum Version
+    {
+        NORMAL,
+        INSANITY,
+        DEPTH
     }
 }
