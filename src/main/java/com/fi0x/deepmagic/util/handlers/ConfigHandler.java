@@ -72,6 +72,7 @@ public class ConfigHandler
     public static boolean dwarfMining;
     public static boolean trollDefenceState;
     public static int dwarfMaxMiningHeight;
+    public static boolean npcRaceCombat;
     //Whitelist
     public static boolean dwarfMineOres;
     public static boolean dwarfMineResources;
@@ -269,6 +270,7 @@ public class ConfigHandler
         dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
         trollDefenceState = npcsGeneral.getBoolean("Troll Defence State", category, true, "Allow Trolls to use an invulnerable Defence State");
         dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines (Does not apply for depth dimension)");
+        npcRaceCombat = npcsGeneral.getBoolean("NPC Race Combat", category, false, "Weather or not NPCs should fight each other, like Mages vs. Mobs");
 
         category = "NPC Whitelist";
         npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
