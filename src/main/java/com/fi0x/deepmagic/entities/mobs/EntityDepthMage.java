@@ -51,7 +51,8 @@ public class EntityDepthMage extends EntityCreature implements IRangedAttackMob,
         this.tasks.addTask(5, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityMob.class, false));
+        if(ConfigHandler.npcRaceCombat)
+            this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityMob.class, false));
     }
 
     @Override
