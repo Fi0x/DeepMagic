@@ -54,7 +54,6 @@ public class EntityAIRandomFly extends EntityAIWanderAvoidWater
     @Override
     public boolean shouldContinueExecuting()
     {
-        entity.motionY *= -1;
         return !entity.getNavigator().noPath();
     }
 

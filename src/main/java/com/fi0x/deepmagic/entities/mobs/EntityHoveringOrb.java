@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.entities.mobs;
 
 import com.fi0x.deepmagic.entities.ai.EntityAIRandomFly;
+import com.fi0x.deepmagic.entities.ai.helper.CustomFlyHelper;
 import com.fi0x.deepmagic.entities.ai.navigation.FlightNavigator;
 import com.fi0x.deepmagic.util.IMagicCreature;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -34,6 +35,7 @@ public class EntityHoveringOrb extends EntityMob implements IMagicCreature
         super(worldIn);
         setSize(1F, 1F);
         this.isImmuneToFire = true;
+        this.moveHelper = new CustomFlyHelper(this);
     }
 
     @Override
@@ -50,8 +52,11 @@ public class EntityHoveringOrb extends EntityMob implements IMagicCreature
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
+        getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.healthHoveringOrb);
         getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27);
+        getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.4);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
         getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.1);
@@ -101,12 +106,12 @@ public class EntityHoveringOrb extends EntityMob implements IMagicCreature
     {
         return LootTableHandler.HOVERING_ORB;
     }
-    @Override
-    public void onUpdate()
-    {
-        super.onUpdate();
-        this.motionY *= 0.6000000238418579D;
-    }
+//    @Override
+//    public void onUpdate()
+//    {
+//        super.onUpdate();
+//        this.motionY *= 0.6000000238418579D;
+//    }
     @Override
     public boolean doesEntityNotTriggerPressurePlate()
     {
