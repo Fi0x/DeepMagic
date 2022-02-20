@@ -1,9 +1,12 @@
 package com.fi0x.deepmagic.entities.ai;
 
+import com.fi0x.deepmagic.entities.ai.navigation.CustomPositionGenerator;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.util.math.Vec3d;
+
+import javax.annotation.Nullable;
 
 public class EntityAIRandomFly extends EntityAIWanderAvoidWater
 {
@@ -22,12 +25,16 @@ public class EntityAIRandomFly extends EntityAIWanderAvoidWater
     {
         if (!this.mustUpdate)
         {
-            if (this.entity.getIdleTime() >= 100) return false;
-            if (this.entity.getRNG().nextInt(this.executionChance) != 0) return false;
+            if (this.entity.getIdleTime() >= 100)
+                return false;
+
+            if (this.entity.getRNG().nextInt(this.executionChance) != 0)
+                return false;
         }
 
         Vec3d vec3d = this.getPosition();
-        if (vec3d == null) return false;
+        if (vec3d == null)
+            return false;
         else
         {
             this.x = vec3d.x;
@@ -49,5 +56,14 @@ public class EntityAIRandomFly extends EntityAIWanderAvoidWater
     {
         entity.motionY *= -1;
         return !entity.getNavigator().noPath();
+    }
+
+    @Nullable
+    @Override
+    protected Vec3d getPosition()
+    {
+        return this.entity.getRNG().nextFloat() >= this.probability
+                ? CustomPositionGenerator.getLandPos((EntityCreature) this.entity, 10, 7)
+                : CustomPositionGenerator.findRandomTarget((EntityCreature) this.entity, 10, 7);
     }
 }
