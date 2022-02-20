@@ -102,6 +102,17 @@ public class EntityHoveringOrb extends EntityMob implements IMagicCreature
         return LootTableHandler.HOVERING_ORB;
     }
     @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+        this.motionY *= 0.6000000238418579D;
+    }
+    @Override
+    public boolean doesEntityNotTriggerPressurePlate()
+    {
+        return true;
+    }
+    @Override
     public void fall(float distance, float damageMultiplier)
     {
     }
