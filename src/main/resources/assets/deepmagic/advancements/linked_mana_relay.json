@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:mana_linker"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.mana_relay.linked.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.mana_relay.linked.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "deepmagic:mana_linker",
+  "criteria": {
+    "relay_linked": {
+      "trigger": "link_mana_relay",
+      "conditions": {
+      }
+    }
+  },
+  "requirements": [
+    [
+      "relay_linked"
+    ]
+  ]
+}

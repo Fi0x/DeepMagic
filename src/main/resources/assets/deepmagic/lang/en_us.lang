@@ -294,3 +294,5 @@ advancement.deepmagic.ritual_quarry.crafted.title=Master of Mining
 advancement.deepmagic.ritual_quarry.crafted.description=Craft and place a Quarry Ritual
 advancement.deepmagic.spell.used.title="Magician"
 advancement.deepmagic.spell.used.description="Use a spell"
+advancement.deepmagic.mana_relay.linked.title="Magic Networker"
+advancement.deepmagic.mana_relay.linked.description="Link a Mana Relay"
