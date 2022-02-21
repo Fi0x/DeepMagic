@@ -296,3 +296,7 @@ advancement.deepmagic.spell.used.title="Magician"
 advancement.deepmagic.spell.used.description="Use a spell"
 advancement.deepmagic.mana_relay.linked.title="Magic Networker"
 advancement.deepmagic.mana_relay.linked.description="Link a Mana Relay"
+advancement.deepmagic.altar_of_knowledge.opened.title="Level up!"
+advancement.deepmagic.altar_of_knowledge.opened.description="Open the Altar of Knowledge UI"
+advancement.deepmagic.knowledge_segment.crafted.title=Knowledge Blocks
+advancement.deepmagic.knowledge_segment.crafted.description=Craft a Knowledge Segment

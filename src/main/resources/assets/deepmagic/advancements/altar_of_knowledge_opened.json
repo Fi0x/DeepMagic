@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:altar_of_knowledge"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.altar_of_knowledge.opened.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.altar_of_knowledge.opened.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:knowledge_segment",
+  "criteria": {
+    "ui_opened": {
+      "trigger": "altar_of_knowledge_ui_opened",
+      "conditions": {
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ui_opened"
+    ]
+  ]
+}
