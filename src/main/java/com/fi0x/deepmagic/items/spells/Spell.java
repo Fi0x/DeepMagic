@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.items.spells;
 
+import com.fi0x.deepmagic.advancements.ModTriggers;
 import com.fi0x.deepmagic.blocks.mana.SpellStone;
 import com.fi0x.deepmagic.init.DeepMagicTab;
 import com.fi0x.deepmagic.items.ItemBase;
@@ -13,6 +14,7 @@ import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -70,6 +72,8 @@ public class Spell extends ItemBase implements IMagicItem
         castSpell(compound, playerIn);
 
         if(compound.hasKey("skillXP")) playerMana.addSkillXP(playerIn, compound.getDouble("skillXP"));
+
+        ModTriggers.RIGHT_CLICK_SPELL.trigger((EntityPlayerMP) playerIn);
 
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }

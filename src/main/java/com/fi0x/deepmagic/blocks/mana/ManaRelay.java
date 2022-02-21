@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.mana;
 
+import com.fi0x.deepmagic.advancements.ModTriggers;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntityManaRelay;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -11,6 +12,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,8 +67,13 @@ public class ManaRelay extends BlockBase implements ITileEntityProvider
                 int y = compound.getInteger("y");
                 int z = compound.getInteger("z");
 
-                if(te.addOrRemoveTarget(new BlockPos(x, y, z))) playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
-                else playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked " + x + ", " + y + ", " + z));
+                if(te.addOrRemoveTarget(new BlockPos(x, y, z)))
+                {
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Linked to " + x + ", " + y + ", " + z));
+                    ModTriggers.LINK_MANA_RELAY.trigger((EntityPlayerMP) playerIn);
+                }
+                else
+                    playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Unlinked " + x + ", " + y + ", " + z));
             } else
             {
                 compound.setInteger("x", pos.getX());
