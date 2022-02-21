@@ -292,3 +292,5 @@ advancement.deepmagic.ritual_spawn.crafted.title=Master of the Dead
 advancement.deepmagic.ritual_spawn.crafted.description=Craft and place a Spawn Denial Ritual
 advancement.deepmagic.ritual_quarry.crafted.title=Master of Mining
 advancement.deepmagic.ritual_quarry.crafted.description=Craft and place a Quarry Ritual
+advancement.deepmagic.spell.used.title="Magician"
+advancement.deepmagic.spell.used.description="Use a spell"

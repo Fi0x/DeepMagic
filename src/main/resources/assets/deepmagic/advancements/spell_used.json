@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "deepmagic:spell"
+    },
+    "title": {
+      "translate": "advancement.deepmagic.spell.used.title"
+    },
+    "description": {
+      "translate": "advancement.deepmagic.spell.used.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "deepmagic:spell_crafting",
+  "criteria": {
+    "spell_used": {
+      "trigger": "right_click_spell",
+      "conditions": {
+      }
+    }
+  },
+  "requirements": [
+    [
+      "spell_used"
+    ]
+  ]
+}
