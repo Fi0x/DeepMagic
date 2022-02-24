@@ -156,6 +156,7 @@ public class ModBlocks
 	//Mana System Blocks
 	public static final ManaAltar MANA_ALTAR = new ManaAltar("mana_altar", Material.ROCK);
 	public static final ManaRelay MANA_RELAY = new ManaRelay("mana_relay", Material.ROCK);
+	public static final ManaBattery MANA_BATTERY = new ManaBattery("mana_battery", Material.ROCK);
 	public static final ManaGeneratorNormal MANA_GENERATOR_NORMAL = new ManaGeneratorNormal("mana_generator_normal", Material.ROCK);
 	public static final ManaGeneratorInsanity MANA_GENERATOR_INSANITY = new ManaGeneratorInsanity("mana_generator_insanity", Material.ROCK);
 	public static final ManaGeneratorMob MANA_GENERATOR_MOB = new ManaGeneratorMob("mana_generator_mob", Material.ROCK);
