@@ -131,6 +131,7 @@ tile.ritual_quarry.name=Quarry Ritual
 
 tile.mana_altar.name=Mana Altar
 tile.mana_relay.name=Mana Relay
+tile.mana_battery_block.name=Mana Battery
 tile.mana_generator_normal.name=Normal Mana Generator
 tile.mana_generator_insanity.name=Insanity Mana Generator
 tile.mana_generator_mob.name=Mob Mana Generator

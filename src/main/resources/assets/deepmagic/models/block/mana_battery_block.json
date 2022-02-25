@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "top": "deepmagic:blocks/mana/battery_block/mana_battery_block_top",
+    "bottom": "deepmagic:blocks/mana/battery_block/mana_battery_block_bottom",
+    "side": "deepmagic:blocks/mana/battery_block/mana_battery_block_side",
+    "particle": "deepmagic:blocks/mana/battery_block/mana_battery_block_side"
+  }
+}

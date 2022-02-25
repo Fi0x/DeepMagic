@@ -101,6 +101,19 @@ public class TileEntityManaBattery extends TileEntity implements IManaTileEntity
     {
         return !manaTargets.isEmpty();
     }
+    public double getStoredMana()
+    {
+        return storedMana;
+    }
+    public void makeCreative()
+    {
+        isCreative = true;
+        markDirty();
+    }
+    public boolean isCreative()
+    {
+        return isCreative;
+    }
     @Override
     public double getSpaceForMana()
     {

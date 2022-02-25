@@ -75,6 +75,18 @@ public class ManaBattery extends BlockBase implements ITileEntityProvider
                 playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Location stored"));
             }
         }
+        else if(playerIn.isCreative() && item.getUnlocalizedName().equals("item.dimensional_crystal"))
+        {
+            if(te.isCreative())
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Battery already in creative mode"));
+            else
+            {
+                te.makeCreative();
+                playerIn.sendMessage(new TextComponentString(TextFormatting.YELLOW + "Upgraded Battery to creative mode"));
+            }
+        } else if(stack.isEmpty())
+            playerIn.sendMessage(new TextComponentString(TextFormatting.BLUE + "Stored Mana: " + te.getStoredMana()));
+
         return false;
     }
     @Nonnull

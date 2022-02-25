@@ -81,7 +81,7 @@ public class RegistryHandler
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorInsanity.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_insanity"));
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorMob.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_mob"));
 		GameRegistry.registerTileEntity(TileEntityManaRelay.class, new ResourceLocation(Reference.MOD_ID, "mana_relay"));
-		GameRegistry.registerTileEntity(TileEntityManaBattery.class, new ResourceLocation(Reference.MOD_ID, "mana_battery"));
+		GameRegistry.registerTileEntity(TileEntityManaBattery.class, new ResourceLocation(Reference.MOD_ID, "mana_battery_block"));
 
 		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation(Reference.MOD_ID, "mana_altar"));
 		GameRegistry.registerTileEntity(TileEntityManaInfuser.class, new ResourceLocation(Reference.MOD_ID, "mana_infuser"));
