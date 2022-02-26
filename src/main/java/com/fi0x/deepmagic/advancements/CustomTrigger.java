@@ -43,27 +43,27 @@ public class CustomTrigger implements ICriterionTrigger<CustomTrigger.Instance>
     @Override
     public void addListener(@Nonnull PlayerAdvancements playerAdvancementsIn, @Nonnull ICriterionTrigger.Listener listener)
     {
-        CustomTrigger.Listeners myCustomTrigger$listeners = listeners.get(playerAdvancementsIn);
+        CustomTrigger.Listeners customTriggerListeners = listeners.get(playerAdvancementsIn);
 
-        if (myCustomTrigger$listeners == null)
+        if (customTriggerListeners == null)
         {
-            myCustomTrigger$listeners = new CustomTrigger.Listeners(playerAdvancementsIn);
-            listeners.put(playerAdvancementsIn, myCustomTrigger$listeners);
+            customTriggerListeners = new CustomTrigger.Listeners(playerAdvancementsIn);
+            listeners.put(playerAdvancementsIn, customTriggerListeners);
         }
 
-        myCustomTrigger$listeners.add(listener);
+        customTriggerListeners.add(listener);
     }
 
     @Override
     public void removeListener(@Nonnull PlayerAdvancements playerAdvancementsIn, @Nonnull ICriterionTrigger.Listener listener)
     {
-        CustomTrigger.Listeners tameanimaltrigger$listeners = listeners.get(playerAdvancementsIn);
+        CustomTrigger.Listeners customTriggerListeners = listeners.get(playerAdvancementsIn);
 
-        if (tameanimaltrigger$listeners != null)
+        if (customTriggerListeners != null)
         {
-            tameanimaltrigger$listeners.remove(listener);
+            customTriggerListeners.remove(listener);
 
-            if (tameanimaltrigger$listeners.isEmpty())
+            if (customTriggerListeners.isEmpty())
                 listeners.remove(playerAdvancementsIn);
         }
     }
@@ -83,10 +83,10 @@ public class CustomTrigger implements ICriterionTrigger<CustomTrigger.Instance>
 
     public void trigger(EntityPlayerMP parPlayer)
     {
-        CustomTrigger.Listeners tameanimaltrigger$listeners = listeners.get(parPlayer.getAdvancements());
+        CustomTrigger.Listeners customTriggerListeners = listeners.get(parPlayer.getAdvancements());
 
-        if (tameanimaltrigger$listeners != null)
-            tameanimaltrigger$listeners.trigger(parPlayer);
+        if (customTriggerListeners != null)
+            customTriggerListeners.trigger(parPlayer);
     }
 
     public static class Instance extends AbstractCriterionInstance
