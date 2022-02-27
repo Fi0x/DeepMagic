@@ -5,6 +5,7 @@ import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biomes.depth.BiomeDepth;
 import com.fi0x.deepmagic.world.biomes.insanity.*;
+import com.fi0x.deepmagic.world.generators.dungeon.Dungeon;
 import com.fi0x.deepmagic.world.generators.dungeon.SmallDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -37,10 +38,16 @@ public class WorldGenCustomStructures implements IWorldGenerator
     public static final SmallDungeon SMALL_DUNGEON_INSANITY = new SmallDungeon(SmallDungeon.Version.INSANITY);
     public static final SmallDungeon SMALL_DUNGEON_DEPTH = new SmallDungeon(SmallDungeon.Version.DEPTH);
 
+    public static final Dungeon DUNGEON = new Dungeon();
+
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
+        if(ConfigHandler.allowOverworldGeneration && world.provider.getDimension() == 0)
+        {
+            if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -3, 300, 9, 9, true);
+            if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, true);
+        } else if(world.provider.getDimension() == ConfigHandler.dimensionIdInsanityID)
         {
             if(ConfigHandler.generateMageHouses) generateStructure(MAGE_HOUSE_SMALL, world, random, chunkX, chunkZ, -4, 0, 500, 11, 13, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
             if(ConfigHandler.generateMageHouses) generateStructure(MAGE_HOUSE, world, random, chunkX, chunkZ, -2, 1, 1000, 24, 31, BiomeInsanityPlains.class);
@@ -51,16 +58,21 @@ public class WorldGenCustomStructures implements IWorldGenerator
 //            if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, 31, 31, BiomeInsanityPlains.class);
 
             if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON_INSANITY, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
+            if(ConfigHandler.generateDungeons) ;//TODO: Check how the large dungeon should be generated
         } else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
         {
             if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE_DEPTH, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);
 
-            //TODO: Use customized dungeon spawns
-//            if(ConfigHandler.generateDungeons) generateStructure(DUNGEON, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeDepth.class);
+            if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON_DEPTH, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeDepth.class);
+            if(ConfigHandler.generateDungeons) ;//TODO: Check how the large dungeon should be generated
         }
     }
 
     private void generateStructure(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int yOffset, int heightDifference, int chance, int sizeX, int sizeZ, Class<?>... classes)
+    {
+        generateStructure(generator, world, random, chunkX, chunkZ, yOffset, heightDifference, chance, sizeX, sizeZ, false, classes);
+    }
+    private void generateStructure(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int yOffset, int heightDifference, int chance, int sizeX, int sizeZ, boolean allBiomes, Class<?>... classes)
     {
         ArrayList<Class<?>> classesList = new ArrayList<>(Arrays.asList(classes));
 

@@ -54,6 +54,7 @@ public class ConfigHandler
     //Ore Generation
     public static boolean spawnDeepCrystalOre;
     //Structure Generation
+    public static boolean allowOverworldGeneration;
     public static boolean generateMageHouses;
     public static boolean generateInsanityRockTrollCaves;
     public static boolean generateShrines;
@@ -243,6 +244,7 @@ public class ConfigHandler
 
         category = "Structure Generation";
         worldGeneration.addCustomCategoryComment(category, "Structure Generation");
+        allowOverworldGeneration = worldGeneration.getBoolean("Overworld Structure Generation", category, false, "Allow structures to spawn in the overworld");
         generateMageHouses = worldGeneration.getBoolean("Mage Houses", category, true, "Enables Mage Houses in the Insanity Dimension");
         generateInsanityRockTrollCaves = worldGeneration.getBoolean("Insanity Rock Troll Caves", category, true, "Enables Rock Troll Caves in the Insanity Dimension");
         generateShrines = worldGeneration.getBoolean("Shrines", category, true, "Enables Shrines in the Insanity Dimension");
