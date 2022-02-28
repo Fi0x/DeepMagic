@@ -43,6 +43,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
+        //TODO: Move some structures to the Chunk generators like the large dungeon
         if(ConfigHandler.allowOverworldGeneration && world.provider.getDimension() == 0)
         {
             if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE, world, random, chunkX, chunkZ, 0, -3, 300, 9, 9, true);
@@ -58,13 +59,11 @@ public class WorldGenCustomStructures implements IWorldGenerator
 //            if(ConfigHandler.generateDragonLairs) generateStructure(DRAGON_LAIR, world, random, chunkX, chunkZ, -2, 1, 1000, 31, 31, BiomeInsanityPlains.class);
 
             if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON_INSANITY, world, random, chunkX, chunkZ, 0, -20, 200, 16, 16, BiomeInsanityPlains.class, BiomeInsanityForestSmall.class, BiomeInsanityForestMixed.class, BiomeInsanityForestLarge.class);
-            if(ConfigHandler.generateDungeons) ;//TODO: Check how the large dungeon should be generated
         } else if(world.provider.getDimension() == ConfigHandler.dimensionIdDepthID)
         {
             if(ConfigHandler.generateDwarfBases) generateStructure(DWARF_BASE_DEPTH, world, random, chunkX, chunkZ, 0, -1, 20, 9, 9, BiomeDepth.class);
 
             if(ConfigHandler.generateDungeons) generateStructure(SMALL_DUNGEON_DEPTH, world, random, chunkX, chunkZ, 0, -40, 200, 16, 16, BiomeDepth.class);
-            if(ConfigHandler.generateDungeons) ;//TODO: Check how the large dungeon should be generated
         }
     }
 

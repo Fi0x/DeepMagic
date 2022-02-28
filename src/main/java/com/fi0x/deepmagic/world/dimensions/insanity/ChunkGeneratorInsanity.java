@@ -1,9 +1,12 @@
 package com.fi0x.deepmagic.world.dimensions.insanity;
 
 import com.fi0x.deepmagic.init.ModBlocks;
+import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.generators.dungeon.LargeDungeon;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
@@ -15,6 +18,8 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraftforge.event.terraingen.InitMapGenEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -36,6 +41,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     private final float[] biomeWeights;
     double[] mainNoiseRegion, minLimitRegion, maxLimitRegion, depthRegion;
 
+    private LargeDungeon largeDungeonGenerator = new LargeDungeon(this);
+
     public ChunkGeneratorInsanity(World world, long seed)
     {
         this.world = world;
@@ -49,6 +56,8 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
         this.depthNoise = new NoiseGeneratorOctaves(this.rand, 16);
         this.heightMap = new double[825];
         this.biomeWeights = new float[25];
+
+        largeDungeonGenerator = (LargeDungeon) TerrainGen.getModdedMapGen(largeDungeonGenerator, InitMapGenEvent.EventType.CUSTOM);
 
         for(int i = -2; i <= 2; ++i)
         {
@@ -69,6 +78,9 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
         this.setBlocksInChunk(x, z, chunkprimer);
         this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.replaceBiomeBlocks(x, z, chunkprimer, biomesForGeneration);
+
+        if(world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+            largeDungeonGenerator.generate(world, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
         byte[] abyte = chunk.getBiomeArray();
@@ -261,6 +273,13 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     public void populate(int x, int z)
     {
         BlockFalling.fallInstantly = true;
+
+        if(world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        {
+            largeDungeonGenerator.generateStructure(world, rand, new ChunkPos(x, z));
+            world.getChunkFromChunkCoords(x, z).resetRelightChecks();
+        }
+
         int i = x * 16;
         int j = z * 16;
         BlockPos pos = new BlockPos(i, 0, j);
@@ -291,15 +310,26 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     @Override
     public BlockPos getNearestStructurePos(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos position, boolean findUnexplored)
     {
+        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons && largeDungeonGenerator.getStructureName().equals(structureName))
+            return largeDungeonGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
+
         return null;
     }
     @Override
     public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z)
     {
+        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+            largeDungeonGenerator.generate(world, x, z, null);
     }
     @Override
     public boolean isInsideStructure(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos pos)
     {
+        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        {
+            if (largeDungeonGenerator != null && largeDungeonGenerator.getStructureName().equals(structureName))
+                return largeDungeonGenerator.isInsideStructure(pos);
+        }
+
         return false;
     }
 }
