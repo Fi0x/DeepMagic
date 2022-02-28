@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Random;
 
+@Deprecated
 public class Dungeon extends WorldGenerator implements IWorldGenerator
 {
     private BlockPos dungeonCenter;

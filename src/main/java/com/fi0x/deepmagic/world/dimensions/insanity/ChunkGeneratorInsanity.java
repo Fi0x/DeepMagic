@@ -2,7 +2,7 @@ package com.fi0x.deepmagic.world.dimensions.insanity;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.generators.dungeon.LargeDungeon;
+import com.fi0x.deepmagic.world.generators.dungeon.large.LargeDungeon;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;

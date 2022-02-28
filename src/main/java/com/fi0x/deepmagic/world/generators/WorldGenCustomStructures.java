@@ -5,7 +5,6 @@ import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.world.biomes.depth.BiomeDepth;
 import com.fi0x.deepmagic.world.biomes.insanity.*;
-import com.fi0x.deepmagic.world.generators.dungeon.Dungeon;
 import com.fi0x.deepmagic.world.generators.dungeon.SmallDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -37,8 +36,6 @@ public class WorldGenCustomStructures implements IWorldGenerator
     public static final SmallDungeon SMALL_DUNGEON = new SmallDungeon(SmallDungeon.Version.NORMAL);
     public static final SmallDungeon SMALL_DUNGEON_INSANITY = new SmallDungeon(SmallDungeon.Version.INSANITY);
     public static final SmallDungeon SMALL_DUNGEON_DEPTH = new SmallDungeon(SmallDungeon.Version.DEPTH);
-
-    public static final Dungeon DUNGEON = new Dungeon();
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
@@ -86,7 +83,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
         Template template = null;
         if(generator instanceof ModWorldGenStructure) template = ((WorldServer) world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(Reference.MOD_ID, ((ModWorldGenStructure) generator).structureName));
 
-        if(classesList.contains(biome) && random.nextInt(chance) == 0 && y > 10 && canSpawnHere(template, pos, heightDifference))
+        if(allBiomes || (classesList.contains(biome)) && random.nextInt(chance) == 0 && y > 10 && canSpawnHere(template, pos, heightDifference))
         {
             if(generator instanceof SmallDungeon) generator.generate(world, random, pos);
             else if(template != null) generator.generate(world, random, pos);

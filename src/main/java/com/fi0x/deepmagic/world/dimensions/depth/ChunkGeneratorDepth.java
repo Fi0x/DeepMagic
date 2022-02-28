@@ -3,7 +3,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
-import com.fi0x.deepmagic.world.generators.dungeon.LargeDungeon;
+import com.fi0x.deepmagic.world.generators.dungeon.large.LargeDungeon;
 import com.fi0x.deepmagic.world.generators.underground.CustomGlowstoneGenerator;
 import com.fi0x.deepmagic.world.generators.underground.DepthShaftGenerator;
 import net.minecraft.block.BlockFalling;
