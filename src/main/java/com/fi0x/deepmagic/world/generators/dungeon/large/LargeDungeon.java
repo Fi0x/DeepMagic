@@ -79,6 +79,7 @@ public class LargeDungeon extends MapGenStructure
         if(biomeprovider.isFixedBiome() && !BIOMES.contains(biomeprovider.getFixedBiome()))
             return null;
 
+        assert pos != null;
         return findNearestStructurePosBySpacing(worldIn, this, pos, SPACING, MIN_SPACING, 10387319, true, 100, findUnexplored);
     }
 
@@ -126,7 +127,7 @@ public class LargeDungeon extends MapGenStructure
             {
                 BlockPos pos = new BlockPos(chunkX * 16 + 8, minHeight + 1, chunkZ * 16 + 8);
                 List<LargeDungeonComponent> pieces = new ArrayList<>();
-                LargeDungeonComponentPlacer.generate(world, generator, world.getSaveHandler().getStructureTemplateManager(), pos, rot, random, pieces);
+                LargeDungeonComponentPlacer.generate(world.getSaveHandler().getStructureTemplateManager(), pos, rot, random, pieces);
                 components.addAll(pieces);
                 updateBoundingBox();
                 isValid = true;
