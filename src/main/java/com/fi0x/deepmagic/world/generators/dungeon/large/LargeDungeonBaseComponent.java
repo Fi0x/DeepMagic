@@ -21,7 +21,6 @@
 package com.fi0x.deepmagic.world.generators.dungeon.large;
 
 import com.fi0x.deepmagic.util.Reference;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -51,19 +50,6 @@ public class LargeDungeonBaseComponent extends LargeDungeonComponent
         super(templateManager.get(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(Reference.MOD_ID, templateName)), templateName, fillBelow, position, rot, mi);
     }
 
-    protected boolean isEldritchBlock(IBlockState state)
-    {
-        return state.getBlock() == BlocksTC.stoneEldritchTile || state.getBlock() == BlocksTC.slabEldritch || state.getBlock() == BlocksTC.doubleSlabEldritch || state.getBlock() == TABlocks.STAIRS_ELDRITCH_TILE;
-    }
-
-    protected void setWardedBlockState(World world, BlockPos pos, IBlockState toPlace)
-    {
-        world.setBlockState(pos, toPlace, 2);
-        IWardStorage storage = world.getChunk(pos).getCapability(CapabilityWardStorage.WARD_STORAGE, null);
-        if(storage instanceof IWardStorageServer)
-            ((IWardStorageServer) storage).setWard(pos, ward, world);
-    }
-
     @Override
     public void onPostGeneration(World world, StructureBoundingBox structurebb)
     {
@@ -78,18 +64,12 @@ public class LargeDungeonBaseComponent extends LargeDungeonComponent
                     mutable.setPos(x, minY, z);
                     if(boundingBox.isVecInside(mutable) && !world.isAirBlock(mutable))
                     {
-                        IBlockState place = BlocksTC.stoneAncient.getDefaultState();
-                        IBlockState above = world.getBlockState(mutable);
-                        if(isEldritchBlock(above))
-                            place = BlocksTC.stoneEldritchTile.getDefaultState();
-
                         for(int y = minY - 1; y >= 0; --y)
                         {
                             mutable.setY(y);
-                            if(!world.isAirBlock(mutable) && !world.getBlockState(mutable).getMaterial().isLiquid())
+                            if(!world.isAirBlock(mutable)
+                                    && !world.getBlockState(mutable).getMaterial().isLiquid())
                                 break;
-
-                            setWardedBlockState(world, mutable, place);
                         }
                     }
                 }

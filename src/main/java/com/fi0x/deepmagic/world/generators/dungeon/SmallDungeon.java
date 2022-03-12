@@ -31,13 +31,13 @@ public class SmallDungeon extends WorldGenerator implements IWorldGenerator
         Map<Float, Template.BlockInfo> replacementBlocks = getReplacementBlocksFor(variant);
 
         rooms = new DungeonRoom[]{
-                new DungeonRoom("small_dungeon_room0", 7, replaceableBlocks, replacementBlocks),
-                new DungeonRoom("small_dungeon_room1", 6, replaceableBlocks, replacementBlocks),
-                new DungeonRoom("small_dungeon_room2", 6, replaceableBlocks, replacementBlocks),
-                new DungeonRoom("small_dungeon_room3", 8, replaceableBlocks, replacementBlocks),
-                new DungeonRoom("small_dungeon_room4", 7, replaceableBlocks, replacementBlocks),
-                new DungeonRoom("small_dungeon_room5", 6, replaceableBlocks, replacementBlocks)};
-        ceiling = new DungeonRoom("small_dungeon_ceiling", 1, replaceableBlocks, replacementBlocks);
+                new DungeonRoom("dungeon/small/small_dungeon_room0", 7, replaceableBlocks, replacementBlocks),
+                new DungeonRoom("dungeon/small/small_dungeon_room1", 6, replaceableBlocks, replacementBlocks),
+                new DungeonRoom("dungeon/small/small_dungeon_room2", 6, replaceableBlocks, replacementBlocks),
+                new DungeonRoom("dungeon/small/small_dungeon_room3", 8, replaceableBlocks, replacementBlocks),
+                new DungeonRoom("dungeon/small/small_dungeon_room4", 7, replaceableBlocks, replacementBlocks),
+                new DungeonRoom("dungeon/small/small_dungeon_room5", 6, replaceableBlocks, replacementBlocks)};
+        ceiling = new DungeonRoom("dungeon/small/small_dungeon_ceiling", 1, replaceableBlocks, replacementBlocks);
 
     }
 
