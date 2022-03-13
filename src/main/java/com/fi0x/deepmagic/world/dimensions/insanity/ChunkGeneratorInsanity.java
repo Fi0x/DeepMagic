@@ -2,6 +2,7 @@ package com.fi0x.deepmagic.world.dimensions.insanity;
 
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.dimensions.ICustomChunkGenerator;
 import com.fi0x.deepmagic.world.generators.dungeon.large.LargeDungeon;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -15,7 +16,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
-public class ChunkGeneratorInsanity implements IChunkGenerator
+public class ChunkGeneratorInsanity implements ICustomChunkGenerator
 {
     private final World world;
     private final WorldType terrainType;
@@ -79,7 +79,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
         this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.replaceBiomeBlocks(x, z, chunkprimer, biomesForGeneration);
 
-        if(world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if(ConfigHandler.generateDungeons)
             largeDungeonGenerator.generate(world, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
@@ -274,7 +274,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     {
         BlockFalling.fallInstantly = true;
 
-        if(world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if(ConfigHandler.generateDungeons)
         {
             largeDungeonGenerator.generateStructure(world, rand, new ChunkPos(x, z));
             world.getChunkFromChunkCoords(x, z).resetRelightChecks();
@@ -310,7 +310,7 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     @Override
     public BlockPos getNearestStructurePos(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos position, boolean findUnexplored)
     {
-        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons && largeDungeonGenerator.getStructureName().equals(structureName))
+        if (ConfigHandler.generateDungeons && largeDungeonGenerator.getStructureName().equals(structureName))
             return largeDungeonGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
 
         return null;
@@ -318,13 +318,13 @@ public class ChunkGeneratorInsanity implements IChunkGenerator
     @Override
     public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z)
     {
-        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if (ConfigHandler.generateDungeons)
             largeDungeonGenerator.generate(world, x, z, null);
     }
     @Override
     public boolean isInsideStructure(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos pos)
     {
-        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if (ConfigHandler.generateDungeons)
         {
             if (largeDungeonGenerator != null && largeDungeonGenerator.getStructureName().equals(structureName))
                 return largeDungeonGenerator.isInsideStructure(pos);

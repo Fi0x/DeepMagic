@@ -1,6 +1,7 @@
 package com.fi0x.deepmagic.world.generators.dungeon.large;
 
 import com.fi0x.deepmagic.init.BiomeInit;
+import com.fi0x.deepmagic.world.dimensions.ICustomChunkGenerator;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
@@ -9,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.*;
 
 import javax.annotation.Nonnull;
@@ -24,8 +24,10 @@ public class LargeDungeon extends MapGenStructure
     private static final int SPACING = 20;
     private static final int MIN_SPACING = 10;
 
-    protected static final ImmutableList<Biome> BIOMES = ImmutableList.of(BiomeInit.DEPTH, BiomeInit.INSANITY_PLAINS, BiomeInit.INSANITY_HILLS);
-    private final IChunkGenerator generator;
+    protected static final ImmutableList<Biome> BIOMES = ImmutableList.of(
+            BiomeInit.DEPTH, BiomeInit.INSANITY_PLAINS, BiomeInit.INSANITY_HILLS, BiomeInit.INSANITY_FOREST_SMALL,
+            BiomeInit.INSANITY_FOREST_MIXED, BiomeInit.INSANITY_FOREST_LARGE);
+    private final ICustomChunkGenerator generator;
 
     static
     {
@@ -33,7 +35,7 @@ public class LargeDungeon extends MapGenStructure
         LargeDungeonComponentPlacer.register();
     }
 
-    public LargeDungeon(IChunkGenerator providerIn)
+    public LargeDungeon(ICustomChunkGenerator providerIn)
     {
         this.generator = providerIn;
     }
@@ -96,14 +98,16 @@ public class LargeDungeon extends MapGenStructure
 
         public Start()
         {
+            super();
         }
 
-        public Start(World world, IChunkGenerator generator, Random random, int chunkX, int chunkZ)
+        public Start(World world, ICustomChunkGenerator generator, Random random, int chunkX, int chunkZ)
         {
             super(chunkX, chunkZ);
 
             Rotation rot = Rotation.values()[random.nextInt(Rotation.values().length)];
-            generator.populate(chunkX, chunkZ);
+            ChunkPrimer primer = new ChunkPrimer();
+            generator.setBlocksInChunk(chunkX, chunkZ, primer);
 
             int x = 5, z = 5;
             if (rot == Rotation.CLOCKWISE_90)
@@ -116,7 +120,6 @@ public class LargeDungeon extends MapGenStructure
             else if (rot == Rotation.COUNTERCLOCKWISE_90)
                 z = -5;
 
-            ChunkPrimer primer = new ChunkPrimer();
             int height1 = primer.findGroundBlockIdx(7, 7);
             int height2 = primer.findGroundBlockIdx(7, 7 + z);
             int height3 = primer.findGroundBlockIdx(7 + x, 7);
@@ -148,6 +151,7 @@ public class LargeDungeon extends MapGenStructure
 
         public boolean isSizeableStructure()
         {
+            System.out.println("Structure is sizeable: " + isValid);
             return this.isValid;
         }
 

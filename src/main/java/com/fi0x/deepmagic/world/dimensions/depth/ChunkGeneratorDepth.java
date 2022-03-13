@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.world.dimensions.depth;
 import com.fi0x.deepmagic.init.BiomeInit;
 import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import com.fi0x.deepmagic.world.dimensions.ICustomChunkGenerator;
 import com.fi0x.deepmagic.world.generators.dungeon.large.LargeDungeon;
 import com.fi0x.deepmagic.world.generators.underground.CustomGlowstoneGenerator;
 import com.fi0x.deepmagic.world.generators.underground.DepthShaftGenerator;
@@ -18,7 +19,6 @@ import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class ChunkGeneratorDepth implements IChunkGenerator
+public class ChunkGeneratorDepth implements ICustomChunkGenerator
 {
     private final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     private final IBlockState FILLER_MAIN = ModBlocks.DEPTH_STONE.getDefaultState();
@@ -58,7 +58,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         if(rand.nextInt(40) == 0)
             shaftGenerator.generate(world, x, z, primer);
 
-        if(world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if(ConfigHandler.generateDungeons)
             largeDungeonGenerator.generate(world, x, z, primer);
 
         Chunk chunk = new Chunk(world, primer, x, z);
@@ -86,13 +86,17 @@ public class ChunkGeneratorDepth implements IChunkGenerator
         }
     }
 
+    public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
+    {
+    }
+
     @Override
     public void populate(int x, int z)
     {
         BlockFalling.fallInstantly = true;
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
 
-        if(world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if(ConfigHandler.generateDungeons)
         {
             largeDungeonGenerator.generateStructure(world, rand, new ChunkPos(x, z));
             world.getChunkFromChunkCoords(x, z).resetRelightChecks();
@@ -136,7 +140,7 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     @Override
     public BlockPos getNearestStructurePos(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos position, boolean findUnexplored)
     {
-        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons && largeDungeonGenerator.getStructureName().equals(structureName))
+        if (ConfigHandler.generateDungeons && largeDungeonGenerator.getStructureName().equals(structureName))
             return largeDungeonGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
 
         return null;
@@ -144,13 +148,13 @@ public class ChunkGeneratorDepth implements IChunkGenerator
     @Override
     public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z)
     {
-        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if (ConfigHandler.generateDungeons)
             largeDungeonGenerator.generate(world, x, z, null);
     }
     @Override
     public boolean isInsideStructure(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos pos)
     {
-        if (world.getWorldInfo().isMapFeaturesEnabled() && ConfigHandler.generateDungeons)
+        if (ConfigHandler.generateDungeons)
         {
             if (largeDungeonGenerator != null && largeDungeonGenerator.getStructureName().equals(structureName))
                 return largeDungeonGenerator.isInsideStructure(pos);

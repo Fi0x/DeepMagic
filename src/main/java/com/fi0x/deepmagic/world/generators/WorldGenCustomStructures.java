@@ -31,7 +31,7 @@ public class WorldGenCustomStructures implements IWorldGenerator
     public static final ModWorldGenStructure DWARF_BASE = new ModWorldGenStructure("dwarf_base");
     public static final ModWorldGenStructure DWARF_BASE_INSANITY = new ModWorldGenStructure("dwarf_base_insanity");
     public static final ModWorldGenStructure DWARF_BASE_DEPTH = new ModWorldGenStructure("dwarf_base_depth");
-    public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");//TODO: Reduce size
+    public static final ModWorldGenStructure DRAGON_LAIR = new ModWorldGenStructure("dragon_lair");//TODO: Reduce size or use a custom structuregenerator like the large dungeon
 
     public static final SmallDungeon SMALL_DUNGEON = new SmallDungeon(SmallDungeon.Version.NORMAL);
     public static final SmallDungeon SMALL_DUNGEON_INSANITY = new SmallDungeon(SmallDungeon.Version.INSANITY);
