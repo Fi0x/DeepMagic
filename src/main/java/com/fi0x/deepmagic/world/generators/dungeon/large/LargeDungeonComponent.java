@@ -36,15 +36,11 @@ public class LargeDungeonComponent extends StructureComponentTemplate
 
     public LargeDungeonComponent(Template template, String templateName, boolean fillBelow, BlockPos position, Rotation rot, Mirror mi)
     {
-        super(0);
-        if(template == null) // TODO add fallback in case user template is removed
-            throw new NullPointerException("Structure template is null (removed template?): " + templateName);
-
         name = templateName;
         fillBlocks = fillBelow;
         templatePosition = position;
         PlacementSettings settings = new PlacementSettings().setIgnoreEntities(true).setRotation(rot).setMirror(mi);
-        setup(new LargeDungeonTemplate(template), templatePosition, settings);
+        setup(template, templatePosition, settings);
     }
 
     public LargeDungeonComponent(TemplateManager templateManager, String templateName, boolean fillBelow, BlockPos position, Rotation rot, Mirror mi)
@@ -90,7 +86,8 @@ public class LargeDungeonComponent extends StructureComponentTemplate
         Mirror mi = Mirror.valueOf(tag.getString("mi"));
         Template template = templateManager.get(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(Reference.MOD_ID, name));
         PlacementSettings settings = new PlacementSettings().setIgnoreEntities(true).setRotation(rot).setMirror(mi);
-        setup(new LargeDungeonTemplate(template), templatePosition, settings);
+        assert template != null;
+        setup(template, templatePosition, settings);
     }
 
     @Override

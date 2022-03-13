@@ -27,7 +27,6 @@ public class LargeDungeonComponentPlacer
 
     public static void generate(TemplateManager templateManager, BlockPos position, Rotation rot, Random random, List<LargeDungeonComponent> pieces)
     {
-        //TODO: Fix this so that the blocks are actually placed
         Mirror mirror = Mirror.values()[random.nextInt(Mirror.values().length)];
         BlockPos.MutableBlockPos currentRoomCenter = new BlockPos.MutableBlockPos(position);
 
@@ -47,6 +46,7 @@ public class LargeDungeonComponentPlacer
 
     private static void generateConnector(TemplateManager templateManager, BlockPos.MutableBlockPos lastRoomCenter, BlockPos lastRoomSize, Rotation rot, EnumFacing lastRoomDoorSide, Mirror mirror, Random random, List<LargeDungeonComponent> pieces)
     {
+        //TODO: Find out why these are not placed or if they are placed at the wrong location
         String tName = pickTemplate(CONNECTOR, random);
         assert tName != null;
         Template template = templateManager.get(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(Reference.MOD_ID, tName));
@@ -101,7 +101,7 @@ public class LargeDungeonComponentPlacer
             CENTER, ROOM, CONNECTOR
     ).build();
 
-    protected static ImmutableMap<String, Integer> templateCounts = ImmutableMap.of();//FIXME: Probably not initialized when used
+    protected static ImmutableMap<String, Integer> templateCounts = ImmutableMap.of();
 
     public static void findTemplateVariants(TemplateManager manager)
     {

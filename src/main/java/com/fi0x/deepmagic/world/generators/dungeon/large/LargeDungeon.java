@@ -98,7 +98,6 @@ public class LargeDungeon extends MapGenStructure
 
         public Start()
         {
-            super();
         }
 
         public Start(World world, ICustomChunkGenerator generator, Random random, int chunkX, int chunkZ)

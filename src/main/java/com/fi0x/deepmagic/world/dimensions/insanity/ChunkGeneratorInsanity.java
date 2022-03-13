@@ -273,13 +273,6 @@ public class ChunkGeneratorInsanity implements ICustomChunkGenerator
     public void populate(int x, int z)
     {
         BlockFalling.fallInstantly = true;
-
-        if(ConfigHandler.generateDungeons)
-        {
-            largeDungeonGenerator.generateStructure(world, rand, new ChunkPos(x, z));
-            world.getChunkFromChunkCoords(x, z).resetRelightChecks();
-        }
-
         int i = x * 16;
         int j = z * 16;
         BlockPos pos = new BlockPos(i, 0, j);
@@ -288,6 +281,12 @@ public class ChunkGeneratorInsanity implements ICustomChunkGenerator
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
+
+        if(ConfigHandler.generateDungeons)
+        {
+            largeDungeonGenerator.generateStructure(world, rand, new ChunkPos(x, z));
+            world.getChunkFromChunkCoords(x, z).resetRelightChecks();
+        }
 
         biome.decorate(world, rand, new BlockPos(i, 0, j));
         WorldEntitySpawner.performWorldGenSpawning(world, biome, i + 8, j + 8, 16, 16, rand);
