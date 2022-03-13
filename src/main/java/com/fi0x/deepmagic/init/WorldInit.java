@@ -17,8 +17,9 @@ public class WorldInit
         if(event.getWorld().isRemote)
             return;
 
-        int id = event.getWorld().provider.getDimension();
+        WorldServer world = (WorldServer) event.getWorld();
+        int id = world.provider.getDimension();
         if(id == ConfigHandler.dimensionIdInsanityID || id == ConfigHandler.dimensionIdDepthID)
-            LargeDungeonComponentPlacer.findTemplateVariants(((WorldServer) event.getWorld()).getStructureTemplateManager());
+            LargeDungeonComponentPlacer.findTemplateVariants(world.getStructureTemplateManager());
     }
 }

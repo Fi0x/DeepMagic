@@ -21,8 +21,8 @@ import java.util.Random;
 public class LargeDungeon extends MapGenStructure
 {
     private static final String STRUCTURE_NAME = "DMLargeDungeon";
-    private static final int SPACING = 20;
-    private static final int MIN_SPACING = 10;
+    private static final int SPACING = 10;
+    private static final int MIN_SPACING = 1;
 
     protected static final ImmutableList<Biome> BIOMES = ImmutableList.of(
             BiomeInit.DEPTH, BiomeInit.INSANITY_PLAINS, BiomeInit.INSANITY_HILLS, BiomeInit.INSANITY_FOREST_SMALL,
@@ -151,7 +151,6 @@ public class LargeDungeon extends MapGenStructure
 
         public boolean isSizeableStructure()
         {
-            System.out.println("Structure is sizeable: " + isValid);
             return this.isValid;
         }
 
