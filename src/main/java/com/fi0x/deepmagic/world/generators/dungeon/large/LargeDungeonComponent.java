@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class LargeDungeonComponent extends StructureComponentTemplate
 {
-    //TODO: Fix code below (Check out EldritchSpire from ThaumicAugmentation)
+    //TODO: Compare with EldritchSpire from ThaumicAugmentation
 
     protected String name;
     protected boolean fillBlocks;
@@ -96,7 +96,10 @@ public class LargeDungeonComponent extends StructureComponentTemplate
         //TODO: Replace structure-blocks with correct block
     }
 
-    public void onPostGeneration(World world, StructureBoundingBox structurebb) {}
+    public void onPostGeneration(World world, StructureBoundingBox structurebb)
+    {
+        //TODO: Find out what needs to be here
+    }
 
     public static class TemplateProcessor implements ITemplateProcessor
     {

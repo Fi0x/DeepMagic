@@ -22,7 +22,6 @@ public class LargeDungeonComponentPlacer
     public static void register()
     {
         MapGenStructureIO.registerStructureComponent(LargeDungeonComponent.class, "ldt");
-        MapGenStructureIO.registerStructureComponent(LargeDungeonBaseComponent.class, "ldtb");
     }
 
     public static void generate(TemplateManager templateManager, BlockPos position, Rotation rot, Random random, List<LargeDungeonComponent> pieces)
@@ -38,7 +37,7 @@ public class LargeDungeonComponentPlacer
     private static BlockPos generateCenter(TemplateManager templateManager, BlockPos.MutableBlockPos currentDungeonCenter, Rotation rot, Mirror mirror, Random random, List<LargeDungeonComponent> pieces)
     {
         BlockPos original = currentDungeonCenter.toImmutable();
-        LargeDungeonComponent center = new LargeDungeonBaseComponent(templateManager, pickTemplate(CENTER, random), false, original, rot, mirror);
+        LargeDungeonComponent center = new LargeDungeonComponent(templateManager, pickTemplate(ROOM, random), false, original, rot, mirror);
         pieces.add(center);
 
         return center.getTemplate().getSize();
@@ -93,12 +92,14 @@ public class LargeDungeonComponentPlacer
         return c > 0 ? type + rand.nextInt(c) : null;
     }
 
-    protected static final String CENTER = "dungeon/large/dungeon_center";
-    protected static final String ROOM = "dungeon/large/dungeon_room";
-    protected static final String CONNECTOR = "dungeon/large/dungeon_connector";
+    protected static final String ROOM = "dungeon/large/room";
+    protected static final String CONNECTOR = "dungeon/large/connector";
+    protected static final String STAIRS = "dungeon/large/stairs";
+    protected static final String CORNER = "dungeon/large/corner";
+    protected static final String CROSSING = "dungeon/large/crossing";
 
     protected static final ImmutableSet<String> TEMPLATE_PATHS = ImmutableSet.<String>builder().add(
-            CENTER, ROOM, CONNECTOR
+            ROOM, CONNECTOR, STAIRS, CORNER, CROSSING
     ).build();
 
     protected static ImmutableMap<String, Integer> templateCounts = ImmutableMap.of();

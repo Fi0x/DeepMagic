@@ -35,6 +35,7 @@ public class ChunkGeneratorDepth implements ICustomChunkGenerator
 
     private final World world;
     private final Random rand;
+
     private DepthShaftGenerator shaftGenerator = new DepthShaftGenerator(ModBlocks.DEPTH_LOG.getDefaultState(), ModBlocks.DEPTH_LEAVES.getDefaultState().withProperty(BlockLeaves.DECAYABLE, Boolean.FALSE), Blocks.AIR.getDefaultState());
     private final CustomGlowstoneGenerator glowStoneGen = new CustomGlowstoneGenerator();
     private LargeDungeon largeDungeonGenerator = new LargeDungeon(this);
