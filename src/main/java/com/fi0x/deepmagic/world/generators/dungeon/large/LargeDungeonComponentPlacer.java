@@ -57,12 +57,15 @@ public class LargeDungeonComponentPlacer
         String tName = pickTemplate(CONNECTOR, random);
         assert tName != null;
         Template template = templateManager.get(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(Reference.MOD_ID, tName));
-        BlockPos previousCenter = lastRoomCenter.toImmutable();
-        BlockPos placementPosition = getTemplateCenterShift(previousCenter.getX(), previousCenter.getZ(), rot, mirror, lastRoomDoorSide, lastRoomSize);
-        LargeDungeonComponent connector = new LargeDungeonComponent(template, tName, false, placementPosition, rot, mirror);
+        assert template != null;
+        BlockPos placementPosition = lastRoomCenter.add(getTemplateCenterShift(lastRoomDoorSide, lastRoomSize, template.getSize()));
+        LargeDungeonComponent connector = new LargeDungeonComponent(template, tName, false, placementPosition, getAdjustedRotation(rot, lastRoomDoorSide), mirror);
+
+        BlockPos offset = getGenerationOffset(rot, mirror, template.getSize());
+        connector.offset(offset.getX(), offset.getY(), offset.getZ());
+
         pieces.add(connector);
 
-        assert template != null;
         BlockPos add = getGenerationOffset(rot, mirror, lastRoomSize);
         BlockPos.MutableBlockPos thisPos = new BlockPos.MutableBlockPos(placementPosition.add(add));
 
@@ -75,7 +78,7 @@ public class LargeDungeonComponentPlacer
         //TODO: Implement this; might need to generateConnector recursive for open paths
     }
 
-    protected static BlockPos getTemplateCenterShift(int x, int z, Rotation rot, Mirror mi, EnumFacing offsetDirection, BlockPos lastRoomSize)
+    protected static BlockPos getTemplateCenterShift(EnumFacing offsetDirection, BlockPos lastRoomSize, BlockPos currentRoomSize)
     {
         int xOffset = 0;
         int zOffset = 0;
@@ -83,20 +86,41 @@ public class LargeDungeonComponentPlacer
         switch (offsetDirection)
         {
             case NORTH:
-                zOffset = -lastRoomSize.getZ() / 2;
+                zOffset = (-lastRoomSize.getZ() - currentRoomSize.getZ()) / 2;
                 break;
             case EAST:
-                xOffset = lastRoomSize.getX() / 2;
+                xOffset = (lastRoomSize.getX() + currentRoomSize.getX()) / 2;
                 break;
             case SOUTH:
-                zOffset = lastRoomSize.getZ() / 2;
+                zOffset = (lastRoomSize.getZ() + currentRoomSize.getZ()) / 2;
                 break;
             case WEST:
-                xOffset = -lastRoomSize.getX() / 2;
+                xOffset = (-lastRoomSize.getX() - currentRoomSize.getX()) / 2;
                 break;
         }
         //TODO: Check if rotation and mirror values are correct
         return new BlockPos(xOffset, 0, zOffset);
+    }
+    protected static Rotation getAdjustedRotation(Rotation originalRotation, EnumFacing roomDirection)
+    {
+        Rotation addedRot = Rotation.NONE;
+
+        switch (roomDirection)
+        {
+            case NORTH:
+                addedRot = Rotation.COUNTERCLOCKWISE_90;
+                break;
+            case EAST:
+                break;
+            case SOUTH:
+                addedRot = Rotation.CLOCKWISE_90;
+                break;
+            case WEST:
+                addedRot = Rotation.CLOCKWISE_180;
+                break;
+        }
+
+        return originalRotation.add(addedRot);
     }
     protected static BlockPos getGenerationOffset(Rotation rotation, Mirror mi, BlockPos templateSize)
     {
