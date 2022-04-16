@@ -29,6 +29,8 @@ public class LargeDungeonComponentPlacer
         Mirror mirror = Mirror.values()[random.nextInt(Mirror.values().length)];
         BlockPos.MutableBlockPos currentRoomCenter = new BlockPos.MutableBlockPos(position);
 
+        System.out.println("Generating at " + position.getX() + ", " + position.getY() + ", " + position.getZ() + " with rotation " + rot + " and mirror " + mirror);
+
         BlockPos centerSize = generateCenter(templateManager, currentRoomCenter, rot, mirror, random, pieces);
         for(EnumFacing side : EnumFacing.HORIZONTALS)
             generateConnector(templateManager, currentRoomCenter, centerSize, rot, side, mirror, random, pieces);
@@ -38,24 +40,31 @@ public class LargeDungeonComponentPlacer
     {
         BlockPos original = currentDungeonCenter.toImmutable();
         LargeDungeonComponent center = new LargeDungeonComponent(templateManager, pickTemplate(ROOM, random), false, original, rot, mirror);
+
+        BlockPos size = center.getTemplate().getSize();
+
+        BlockPos offset = getGenerationOffset(rot, mirror, size);
+        center.offset(offset.getX(), offset.getY(), offset.getZ());
+
         pieces.add(center);
 
-        return center.getTemplate().getSize();
+        return size;
     }
 
     private static void generateConnector(TemplateManager templateManager, BlockPos.MutableBlockPos lastRoomCenter, BlockPos lastRoomSize, Rotation rot, EnumFacing lastRoomDoorSide, Mirror mirror, Random random, List<LargeDungeonComponent> pieces)
     {
-        //TODO: Find out why these are not placed or if they are placed at the wrong location
+        //TODO: maybe place stairs or edges instead at random
         String tName = pickTemplate(CONNECTOR, random);
         assert tName != null;
         Template template = templateManager.get(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(Reference.MOD_ID, tName));
-        BlockPos original = lastRoomCenter.toImmutable();
-        LargeDungeonComponent connector = new LargeDungeonComponent(template, tName, false, original, rot, mirror);
+        BlockPos previousCenter = lastRoomCenter.toImmutable();
+        BlockPos placementPosition = getTemplateCenterShift(previousCenter.getX(), previousCenter.getZ(), rot, mirror, lastRoomDoorSide, lastRoomSize);
+        LargeDungeonComponent connector = new LargeDungeonComponent(template, tName, false, placementPosition, rot, mirror);
         pieces.add(connector);
 
         assert template != null;
-        BlockPos add = transformOffset((lastRoomSize.getX() - template.getSize().getX()) / 2, (lastRoomSize.getZ() - template.getSize().getZ()) / 2, rot, mirror);
-        BlockPos.MutableBlockPos thisPos = new BlockPos.MutableBlockPos(original.add(add));
+        BlockPos add = getGenerationOffset(rot, mirror, lastRoomSize);
+        BlockPos.MutableBlockPos thisPos = new BlockPos.MutableBlockPos(placementPosition.add(add));
 
         generateRoom(templateManager, thisPos, connector.getTemplate().getSize(), rot, lastRoomDoorSide, mirror, random, pieces);
         //TODO: Check if position is correct
@@ -66,9 +75,40 @@ public class LargeDungeonComponentPlacer
         //TODO: Implement this; might need to generateConnector recursive for open paths
     }
 
-    protected static BlockPos transformOffset(int x, int z, Rotation rot, Mirror mi)
+    protected static BlockPos getTemplateCenterShift(int x, int z, Rotation rot, Mirror mi, EnumFacing offsetDirection, BlockPos lastRoomSize)
     {
-        return new BlockPos(mi == Mirror.FRONT_BACK ? -x : x, 0, mi == Mirror.LEFT_RIGHT ? -z : z).rotate(rot);
+        int xOffset = 0;
+        int zOffset = 0;
+
+        switch (offsetDirection)
+        {
+            case NORTH:
+                zOffset = -lastRoomSize.getZ() / 2;
+                break;
+            case EAST:
+                xOffset = lastRoomSize.getX() / 2;
+                break;
+            case SOUTH:
+                zOffset = lastRoomSize.getZ() / 2;
+                break;
+            case WEST:
+                xOffset = -lastRoomSize.getX() / 2;
+                break;
+        }
+        //TODO: Check if rotation and mirror values are correct
+        return new BlockPos(xOffset, 0, zOffset);
+    }
+    protected static BlockPos getGenerationOffset(Rotation rotation, Mirror mi, BlockPos templateSize)
+    {
+        int xOffset = -templateSize.getX() / 2;
+        int zOffset = -templateSize.getZ() / 2;
+
+        if(mi == Mirror.FRONT_BACK)
+            xOffset *= -1;
+        else if(mi == Mirror.LEFT_RIGHT)
+            zOffset *= -1;
+
+        return new BlockPos(xOffset, 0, zOffset).rotate(rotation);
     }
 
     protected static Rotation fromFacing(EnumFacing face)
