@@ -25,9 +25,9 @@ import java.util.Random;
 
 public class TileEntityRitualQuarry extends TileEntityRitualStone
 {
-    private int digX;
-    private int digY;
-    private int digZ;
+    private int digX = 0;
+    private int digY = -2;
+    private int digZ = 0;
     private int currentDigRadius;
     private int maxDigRadius;
     private EnumFacing direction;
