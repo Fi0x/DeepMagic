@@ -25,14 +25,14 @@ import java.util.Random;
 
 public class TileEntityRitualQuarry extends TileEntityRitualStone
 {
-    private int digX;
-    private int digY;
-    private int digZ;
-    private int currentDigRadius;
-    private int maxDigRadius;
+    private int digX = 0;
+    private int digY = -2;
+    private int digZ = 0;
+    private int currentDigRadius = 0;
+    private int maxDigRadius = 4;
     private EnumFacing direction;
 
-    private STATUS currentState;
+    private STATUS currentState = STATUS.DIG;
     private int[] structureBlocks;
 
     public TileEntityRitualQuarry()
@@ -76,42 +76,59 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
 
     @Override
-    public String getPacketData()
+    public String getPacketData()//TODO: Find out why so many packets are sent
     {
         StringBuilder packetString = new StringBuilder();
 
-        packetString.append(digX).append("-");
-        packetString.append(digY).append("-");
-        packetString.append(digZ).append("-");
-        packetString.append(currentDigRadius).append("-");
-        packetString.append(maxDigRadius).append("-");
-        packetString.append(direction.ordinal()).append("-");
+        packetString.append(digX).append("###");
+        packetString.append(digY).append("###");
+        packetString.append(digZ).append("###");
+        packetString.append(currentDigRadius).append("###");
+        packetString.append(maxDigRadius).append("###");
+        packetString.append(direction.ordinal()).append("###");
         packetString.append(currentState.ordinal());
 
         for (int structureBlock : structureBlocks)
         {
-            packetString.append("-");
+            packetString.append("###");
             packetString.append(structureBlock);
         }
-
         return packetString.toString();
     }
     @Override
     public void setDataFromPacket(String data)
     {
-        String[] packetData = data.split("-");
+        String[] packetData = data.split("###");
 
-        digX = Integer.parseInt(packetData[0]);
-        digY = Integer.parseInt(packetData[1]);
-        digZ = Integer.parseInt(packetData[2]);
-        currentDigRadius = Integer.parseInt(packetData[3]);
-        maxDigRadius = Integer.parseInt(packetData[4]);
-        direction = EnumFacing.values()[Integer.parseInt(packetData[5])];
-        currentState = STATUS.values()[Integer.parseInt(packetData[6])];
+        if(!packetData[0].equals(""))
+            digX = Integer.parseInt(packetData[0]);
+        if(!packetData[1].equals(""))
+            digY = Integer.parseInt(packetData[1]);
+        if(!packetData[2].equals(""))
+            digZ = Integer.parseInt(packetData[2]);
+        if(!packetData[3].equals(""))
+            currentDigRadius = Integer.parseInt(packetData[3]);
+        if(!packetData[4].equals(""))
+            maxDigRadius = Integer.parseInt(packetData[4]);
+        if(!packetData[5].equals(""))
+            try
+            {
+                direction = EnumFacing.values()[Integer.parseInt(packetData[5])];
+            } catch(IndexOutOfBoundsException ignored)
+            {
+            }
+        if(!packetData[6].equals(""))
+            try
+            {
+                currentState = STATUS.values()[Integer.parseInt(packetData[6])];
+            } catch(IndexOutOfBoundsException ignored)
+            {
+            }
 
-        for (int i = 0; i < structureBlocks.length; i++)
+        for (int i = 0; i < packetData.length - 7 && i < structureBlocks.length; i++)
         {
-            structureBlocks[i] = Integer.parseInt(packetData[i + 7]);
+            if(!packetData[i + 7].equals(""))
+                structureBlocks[i] = Integer.parseInt(packetData[i + 7]);
         }
     }
 
@@ -120,9 +137,9 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     {
         if(digY == -100)
         {
-            digX = pos.getX();
-            digY = pos.getY() - 2;
-            digZ = pos.getZ();
+            digX = 0;
+            digY = -2;
+            digZ = 0;
         }
         if(!world.isRemote)
         {
@@ -131,23 +148,27 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                 case DIG:
                     if(setNextBlock())
                     {
-                        if(!digNextBlock(new BlockPos(digX, digY, digZ))) sync *= 4;
+                        if(!digNextBlock(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ))) sync *= 4;
                     }
                     else
                     {
                         currentState = STATUS.PACK;
+                        needsStructure = false;
                         markDirty();
                     }
                     break;
                 case PACK:
+                    needsStructure = false;
                     if(!packNextBlock()) currentState = STATUS.MOVE;
                     markDirty();
                     break;
                 case MOVE:
+                    needsStructure = false;
                     if(!move()) currentState = STATUS.UNPACK;
                     markDirty();
                     break;
                 case UNPACK:
+                    needsStructure = false;
                     if(!unpackNextBlock()) setReady();
                     markDirty();
                     break;
@@ -170,35 +191,36 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         maxDigRadius = 4;
         currentState = STATUS.DIG;
         structureBlocks = new int[1];
+        needsStructure = true;
     }
     private boolean setNextBlock()
     {
-        while(digY <= 0
-                || world.isAirBlock(new BlockPos(digX, digY, digZ))
-                || world.getBlockState(new BlockPos(digX, digY, digZ)).getBlock() == Blocks.BEDROCK
-                || world.containsAnyLiquid(new AxisAlignedBB(digX, digY, digZ, digX + 1, digY + 1, digZ + 1)))
+        while(pos.getY() + digY <= 0
+                || world.isAirBlock(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ))
+                || QuarryHelper.isBlacklistedBlock(world, new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ))
+                || world.containsAnyLiquid(new AxisAlignedBB(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ, pos.getX() + digX + 1, pos.getY() + digY + 1, pos.getZ() + digZ + 1)))
         {
             digY--;
-            if(digY > 0) continue;
+            if(pos.getY() + digY > 0) continue;
 
-            digY = pos.getY() - 2 - currentDigRadius;
+            digY = - 2 - currentDigRadius;
 
-            if(digX != pos.getX() + currentDigRadius) digX++;
-            else if(digZ != pos.getZ() + currentDigRadius)
+            if(digX != currentDigRadius) digX++;
+            else if(digZ != currentDigRadius)
             {
                 digZ++;
-                digX = pos.getX() - currentDigRadius;
+                digX = -currentDigRadius;
             } else if(currentDigRadius < maxDigRadius)
             {
                 currentDigRadius++;
-                digX = pos.getX() - currentDigRadius;
-                digZ = pos.getZ() - currentDigRadius;
+                digX = -currentDigRadius;
+                digZ = -currentDigRadius;
                 digY--;
             } else return false;
 
-            if(digX != pos.getX() - currentDigRadius && digX != pos.getX() + currentDigRadius && digZ != pos.getZ() - currentDigRadius && digZ != pos.getZ() + currentDigRadius)
+            if(digX != -currentDigRadius && digX != currentDigRadius && digZ != -currentDigRadius && digZ != currentDigRadius)
             {
-                while(digX < pos.getX() + currentDigRadius)
+                while(digX < currentDigRadius)
                 {
                     digX++;
                 }
@@ -208,13 +230,16 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean digNextBlock(BlockPos position)
     {
+        if(QuarryHelper.isBlacklistedBlock(world, position))
+            return true;
+
         Block block = world.getBlockState(position).getBlock();
         Item droppedItem = block.getItemDropped(world.getBlockState(position), world.rand, 0);
         int quantity = block.quantityDropped(world.rand);
         int itemMeta = block.damageDropped(world.getBlockState(position));
         ItemStack stack = new ItemStack(droppedItem, quantity, itemMeta);
 
-        world.setBlockToAir(new BlockPos(digX, digY, digZ));
+        world.setBlockToAir(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ));
         if(stack.isEmpty()) return true;
 
         TileEntity storage = world.getTileEntity(pos.up());
