@@ -138,9 +138,9 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     {
         if(digY == -100)
         {
-            digX = pos.getX();
-            digY = pos.getY() - 2;
-            digZ = pos.getZ();
+            digX = 0;
+            digY = - 2;
+            digZ = 0;
         }
         if(!world.isRemote)
         {
@@ -149,7 +149,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
                 case DIG:
                     if(setNextBlock())
                     {
-                        if(!digNextBlock(new BlockPos(digX, digY, digZ))) sync *= 4;
+                        if(!digNextBlock(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ))) sync *= 4;
                     }
                     else
                     {
@@ -191,32 +191,32 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     }
     private boolean setNextBlock()
     {
-        while(digY <= 0
-                || world.isAirBlock(new BlockPos(digX, digY, digZ))
-                || world.getBlockState(new BlockPos(digX, digY, digZ)).getBlock() == Blocks.BEDROCK
-                || world.containsAnyLiquid(new AxisAlignedBB(digX, digY, digZ, digX + 1, digY + 1, digZ + 1)))
+        while(pos.getY() + digY <= 0
+                || world.isAirBlock(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ))
+                || world.getBlockState(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ)).getBlock() == Blocks.BEDROCK
+                || world.containsAnyLiquid(new AxisAlignedBB(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ, pos.getX() + digX + 1, pos.getY() + digY + 1, pos.getZ() + digZ + 1)))
         {
             digY--;
-            if(digY > 0) continue;
+            if(pos.getY() + digY > 0) continue;
 
-            digY = pos.getY() - 2 - currentDigRadius;
+            digY = - 2 - currentDigRadius;
 
-            if(digX != pos.getX() + currentDigRadius) digX++;
-            else if(digZ != pos.getZ() + currentDigRadius)
+            if(digX != currentDigRadius) digX++;
+            else if(digZ != currentDigRadius)
             {
                 digZ++;
-                digX = pos.getX() - currentDigRadius;
+                digX = -currentDigRadius;
             } else if(currentDigRadius < maxDigRadius)
             {
                 currentDigRadius++;
-                digX = pos.getX() - currentDigRadius;
-                digZ = pos.getZ() - currentDigRadius;
+                digX = -currentDigRadius;
+                digZ = -currentDigRadius;
                 digY--;
             } else return false;
 
-            if(digX != pos.getX() - currentDigRadius && digX != pos.getX() + currentDigRadius && digZ != pos.getZ() - currentDigRadius && digZ != pos.getZ() + currentDigRadius)
+            if(digX != -currentDigRadius && digX != currentDigRadius && digZ != -currentDigRadius && digZ != currentDigRadius)
             {
-                while(digX < pos.getX() + currentDigRadius)
+                while(digX < currentDigRadius)
                 {
                     digX++;
                 }
@@ -232,7 +232,7 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
         int itemMeta = block.damageDropped(world.getBlockState(position));
         ItemStack stack = new ItemStack(droppedItem, quantity, itemMeta);
 
-        world.setBlockToAir(new BlockPos(digX, digY, digZ));
+        world.setBlockToAir(new BlockPos(pos.getX() + digX, pos.getY() + digY, pos.getZ() + digZ));
         if(stack.isEmpty()) return true;
 
         TileEntity storage = world.getTileEntity(pos.up());
