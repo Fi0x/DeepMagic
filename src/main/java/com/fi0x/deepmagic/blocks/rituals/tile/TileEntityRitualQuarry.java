@@ -101,17 +101,35 @@ public class TileEntityRitualQuarry extends TileEntityRitualStone
     {
         String[] packetData = data.split("-");
 
-        digX = Integer.parseInt(packetData[0]);
-        digY = Integer.parseInt(packetData[1]);
-        digZ = Integer.parseInt(packetData[2]);
-        currentDigRadius = Integer.parseInt(packetData[3]);
-        maxDigRadius = Integer.parseInt(packetData[4]);
-        direction = EnumFacing.values()[Integer.parseInt(packetData[5])];
-        currentState = STATUS.values()[Integer.parseInt(packetData[6])];
+        if(!packetData[0].equals(""))
+            digX = Integer.parseInt(packetData[0]);
+        if(!packetData[1].equals(""))
+            digY = Integer.parseInt(packetData[1]);
+        if(!packetData[2].equals(""))
+            digZ = Integer.parseInt(packetData[2]);
+        if(!packetData[3].equals(""))
+            currentDigRadius = Integer.parseInt(packetData[3]);
+        if(!packetData[4].equals(""))
+            maxDigRadius = Integer.parseInt(packetData[4]);
+        if(!packetData[5].equals(""))
+            try
+            {
+                direction = EnumFacing.values()[Integer.parseInt(packetData[5])];
+            } catch(IndexOutOfBoundsException ignored)
+            {
+            }
+        if(!packetData[6].equals(""))
+            try
+            {
+                currentState = STATUS.values()[Integer.parseInt(packetData[6])];
+            } catch(IndexOutOfBoundsException ignored)
+            {
+            }
 
-        for (int i = 0; i < structureBlocks.length; i++)
+        for (int i = 0; i < packetData.length - 7 && i < structureBlocks.length; i++)
         {
-            structureBlocks[i] = Integer.parseInt(packetData[i + 7]);
+            if(!packetData[i + 7].equals(""))
+                structureBlocks[i] = Integer.parseInt(packetData[i + 7]);
         }
     }
 
