@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class ParticleSpawner
+public class ParticleSpawner//TODO: Fix everywhere: currently no particles visible due to client-side check
 {
     private static final Minecraft mc = Minecraft.getMinecraft();
 

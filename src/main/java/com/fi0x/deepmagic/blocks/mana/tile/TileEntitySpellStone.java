@@ -19,8 +19,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -41,7 +39,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     private ArrayList<String> partNames = new ArrayList<>();
     private String currentPartName = "";
 
-    @SideOnly(Side.CLIENT)
     private int sync = 0;
 
     private int manaAdder;

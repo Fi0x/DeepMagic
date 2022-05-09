@@ -22,14 +22,16 @@ public class StructureChecker
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof RitualStructure) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : ritualArmLocations)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof RitualStructure) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
 
@@ -44,21 +46,24 @@ public class StructureChecker
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : demonLocationsDeepCrystal)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : demonLocationsIronBlock)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.blockIron")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
 
@@ -73,28 +78,32 @@ public class StructureChecker
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof ManaRelay) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : spellStoneLocationsGlowstone)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof BlockGlowstone) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : spellStoneLocationsDeepCrystal)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : spellStoneLocationsObsidian)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof BlockObsidian) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
 
