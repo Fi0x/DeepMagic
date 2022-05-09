@@ -6,12 +6,14 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.Objects;
 
 public class PacketReturnSpellStone implements IMessage
 {
@@ -69,9 +71,8 @@ public class PacketReturnSpellStone implements IMessage
 
         void processMessage(PacketReturnSpellStone message)
         {
-            World world = Minecraft.getMinecraft().world;
-            world.provider.setDimension(message.dimension);
-            TileEntity te = world.getTileEntity(message.blockPos);
+            WorldServer dim = Objects.requireNonNull(Minecraft.getMinecraft().getIntegratedServer()).getWorld(message.dimension);
+            TileEntity te = dim.getTileEntity(message.blockPos);
             if(te instanceof TileEntitySpellStone)
             {
                 ((TileEntitySpellStone) te).setPartsFromPacket(message.parts);
