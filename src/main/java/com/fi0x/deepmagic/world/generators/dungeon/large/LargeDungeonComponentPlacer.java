@@ -32,8 +32,10 @@ public class LargeDungeonComponentPlacer
         System.out.println("Generating at " + position.getX() + ", " + position.getY() + ", " + position.getZ() + " with rotation " + rot + " and mirror " + mirror);
 
         BlockPos centerSize = generateCenter(templateManager, currentRoomCenter, rot, mirror, random, pieces);
-        for(EnumFacing side : EnumFacing.HORIZONTALS)
-            generateConnector(templateManager, currentRoomCenter, centerSize, rot, side, mirror, random, pieces);
+//        for(EnumFacing side : EnumFacing.HORIZONTALS)
+//            generateConnector(templateManager, currentRoomCenter, centerSize, rot, side, mirror, random, pieces);
+        generateConnector(templateManager, currentRoomCenter, centerSize, rot, EnumFacing.EAST, mirror, random, pieces);
+        generateConnector(templateManager, currentRoomCenter, centerSize, rot, EnumFacing.WEST, mirror, random, pieces);
     }
 
     private static BlockPos generateCenter(TemplateManager templateManager, BlockPos.MutableBlockPos currentDungeonCenter, Rotation rot, Mirror mirror, Random random, List<LargeDungeonComponent> pieces)
@@ -58,18 +60,19 @@ public class LargeDungeonComponentPlacer
         assert tName != null;
         Template template = templateManager.get(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(Reference.MOD_ID, tName));
         assert template != null;
-        BlockPos placementPosition = lastRoomCenter.add(getTemplateCenterShift(lastRoomDoorSide, lastRoomSize, template.getSize()));
-        LargeDungeonComponent connector = new LargeDungeonComponent(template, tName, false, placementPosition, getAdjustedRotation(rot, lastRoomDoorSide), mirror);
+        BlockPos placementPosition = lastRoomCenter.add(getTemplateCenterShift(lastRoomDoorSide, lastRoomSize, template.getSize(), mirror));
+        LargeDungeonComponent connector = new LargeDungeonComponent(template, tName, false, placementPosition, getAdjustedRotation(mirror, lastRoomDoorSide), mirror);
 
-        BlockPos offset = getGenerationOffset(rot, mirror, template.getSize());
-        connector.offset(offset.getX(), offset.getY(), offset.getZ());
+        //TODO: Fix mirror changes
+//        BlockPos offset = getGenerationOffset(rot, mirror, template.getSize());
+//        connector.offset(offset.getX(), offset.getY(), offset.getZ());
 
         pieces.add(connector);
 
-        BlockPos add = getGenerationOffset(rot, mirror, lastRoomSize);
-        BlockPos.MutableBlockPos thisPos = new BlockPos.MutableBlockPos(placementPosition.add(add));
-
-        generateRoom(templateManager, thisPos, connector.getTemplate().getSize(), rot, lastRoomDoorSide, mirror, random, pieces);
+//        BlockPos add = getGenerationOffset(rot, mirror, lastRoomSize);
+//        BlockPos.MutableBlockPos thisPos = new BlockPos.MutableBlockPos(placementPosition.add(add));
+//
+//        generateRoom(templateManager, thisPos, connector.getTemplate().getSize(), rot, lastRoomDoorSide, mirror, random, pieces);
         //TODO: Check if position is correct
     }
 
@@ -78,7 +81,7 @@ public class LargeDungeonComponentPlacer
         //TODO: Implement this; might need to generateConnector recursive for open paths
     }
 
-    protected static BlockPos getTemplateCenterShift(EnumFacing offsetDirection, BlockPos lastRoomSize, BlockPos currentRoomSize)
+    protected static BlockPos getTemplateCenterShift(EnumFacing offsetDirection, BlockPos lastRoomSize, BlockPos currentRoomSize, Mirror mirror)
     {
         int xOffset = 0;
         int zOffset = 0;
@@ -98,10 +101,9 @@ public class LargeDungeonComponentPlacer
                 xOffset = (-lastRoomSize.getX() - currentRoomSize.getX()) / 2;
                 break;
         }
-        //TODO: Check if rotation and mirror values are correct
         return new BlockPos(xOffset, 0, zOffset);
     }
-    protected static Rotation getAdjustedRotation(Rotation originalRotation, EnumFacing roomDirection)
+    protected static Rotation getAdjustedRotation(Mirror mirror, EnumFacing roomDirection)
     {
         Rotation addedRot = Rotation.NONE;
 
@@ -120,7 +122,10 @@ public class LargeDungeonComponentPlacer
                 break;
         }
 
-        return originalRotation.add(addedRot);
+        if(mirror == Mirror.FRONT_BACK)
+            addedRot = addedRot.add(Rotation.CLOCKWISE_180);
+
+        return addedRot;
     }
     protected static BlockPos getGenerationOffset(Rotation rotation, Mirror mi, BlockPos templateSize)
     {
