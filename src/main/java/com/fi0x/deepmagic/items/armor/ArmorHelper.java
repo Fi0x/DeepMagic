@@ -28,8 +28,8 @@ public class ArmorHelper
         ArrayList<ItemStack> armor = new ArrayList<>();
         for(int i = 0; i < 4; i++)
         {
-            if(player.inventory.armorItemInSlot(i).isEmpty()) continue;
-            if(player.inventory.armorItemInSlot(i).getItem() instanceof ArmorBase) armor.add((player.inventory.armorItemInSlot(i)));
+//            if(player.inventory.armorItemInSlot(i).isEmpty()) continue;//TODO: Find alternative to armorItemInSlot for server-side
+//            if(player.inventory.armorItemInSlot(i).getItem() instanceof ArmorBase) armor.add((player.inventory.armorItemInSlot(i)));
         }
 
         if(armor.isEmpty()) return;
@@ -56,7 +56,7 @@ public class ArmorHelper
         EntityPlayer player = event.player;
         if(!ConfigHandler.depthArmorActive) return;
 
-        flight(player);
+        //flight(player);
     }
 
     private static void flight(EntityPlayer player)
@@ -67,7 +67,7 @@ public class ArmorHelper
             return;
         }
 
-        if(!player.inventory.armorItemInSlot(2).isEmpty() && player.inventory.armorItemInSlot(2).getItem() instanceof ArmorBase)
+        if(!player.inventory.armorItemInSlot(2).isEmpty() && player.inventory.armorItemInSlot(2).getItem() instanceof ArmorBase)//TODO: Check client-sided armorItemInSlot
         {
             if(removeMana(player.inventory.armorItemInSlot(2), ConfigHandler.manaFlightCost, player) >= ConfigHandler.manaFlightCost)
             {
