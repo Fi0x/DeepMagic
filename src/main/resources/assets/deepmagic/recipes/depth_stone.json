@@ -6,7 +6,8 @@
   ],
   "key": {
     "S": {
-      "item": "deepmagic:depth_stone_slab_half"
+      "item": "deepmagic:depth_stone_slab_half",
+      "data": 0
     }
   },
   "result": {
