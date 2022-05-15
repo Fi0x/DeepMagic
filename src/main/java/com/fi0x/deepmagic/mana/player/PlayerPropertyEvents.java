@@ -20,36 +20,34 @@ public class PlayerPropertyEvents
 {
     public static PlayerPropertyEvents instance = new PlayerPropertyEvents();
     private static int playerSync = 0;
-    
+
     @SubscribeEvent
     public void onEntityConstructing(AttachCapabilitiesEvent<Entity> event)
     {
-        if (event.getObject() instanceof EntityPlayer)
+        if(event.getObject() instanceof EntityPlayer)
         {
-            if (!event.getObject().hasCapability(PlayerProperties.PLAYER_MANA, null))
+            if(!event.getObject().hasCapability(PlayerProperties.PLAYER_MANA, null))
             {
                 event.addCapability(new ResourceLocation(Reference.MOD_ID, "Mana"), new PropertiesDispatcher());
-            }
+            } else if(event.getObject().world.isRemote)
+                PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getObject().getName()));
         }
     }
     @SubscribeEvent
     public void onPlayerCloned(PlayerEvent.Clone event)
     {
-        if (event.isWasDeath())
+        if(event.getOriginal().hasCapability(PlayerProperties.PLAYER_MANA, null))
         {
-            if (event.getOriginal().hasCapability(PlayerProperties.PLAYER_MANA, null))
-            {
-                PlayerMana oldStore = event.getOriginal().getCapability(PlayerProperties.PLAYER_MANA, null);
-                PlayerMana newStore = PlayerProperties.getPlayerMana(event.getEntityPlayer());
-                assert oldStore != null;
-                newStore.copyFrom(oldStore);
-                newStore.updatePlayerHP(event.getEntityPlayer());
-                if(event.getEntityPlayer().world.isRemote)
-                    PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntityPlayer().getName(), newStore.getMaxMana(), newStore.getSkillXP(), newStore.getSkillpoints(), newStore.getManaRegenRate(), newStore.getManaEfficiencyValue(), newStore.addedHP, newStore.hpRegeneration, newStore.getSpellTier()));
-            }
+            PlayerMana oldStore = event.getOriginal().getCapability(PlayerProperties.PLAYER_MANA, null);
+            PlayerMana newStore = PlayerProperties.getPlayerMana(event.getEntityPlayer());
+            assert oldStore != null;
+            newStore.copyFrom(oldStore);
+            newStore.updatePlayerHP(event.getEntityPlayer());
+            if(event.getEntityPlayer().world.isRemote)
+                PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntityPlayer().getName()));
         }
     }
-    
+
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
@@ -82,7 +80,7 @@ public class PlayerPropertyEvents
         assert playerMana != null;
         playerMana.updatePlayerHP(event.player);
         if(event.player.world.isRemote)
-            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.player.getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
+            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.player.getName()));
     }
     @SubscribeEvent
     public void onPlayerJoin(EntityJoinWorldEvent event)
@@ -93,7 +91,7 @@ public class PlayerPropertyEvents
             assert playerMana != null;
             playerMana.updatePlayerHP((EntityPlayer) event.getEntity());
             if(event.getWorld().isRemote)
-                PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntity().getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
+                PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(event.getEntity().getName()));
         }
     }
     @SubscribeEvent

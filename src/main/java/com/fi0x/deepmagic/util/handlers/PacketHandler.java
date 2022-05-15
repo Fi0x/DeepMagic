@@ -35,5 +35,6 @@ public class PacketHandler
         INSTANCE.registerMessage(PacketReturnRitual.Handler.class, PacketReturnRitual.class, nextID(), Side.CLIENT);
 
         INSTANCE.registerMessage(PacketInformGuiChange.Handler.class, PacketInformGuiChange.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketInformSkillUpgrade.Handler.class, PacketInformSkillUpgrade.class, nextID(), Side.SERVER);
     }
 }

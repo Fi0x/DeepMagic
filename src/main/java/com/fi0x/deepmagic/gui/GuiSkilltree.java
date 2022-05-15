@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.gui;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import com.fi0x.deepmagic.network.PacketGetSkill;
+import com.fi0x.deepmagic.network.PacketInformSkillUpgrade;
 import com.fi0x.deepmagic.util.Reference;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.client.gui.GuiButton;
@@ -165,18 +166,45 @@ public class GuiSkilltree extends GuiScreen
         {
             playerMana.updatePlayerHP(player);
             mc.displayGuiScreen(null);
+            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName));
         }
         else
         {
-            if(button == buttonAddMaxMana) playerMana.maxManaMultiplier++;
-            else if(button == buttonAddManaRegenRate) playerMana.setManaRegenRate(playerMana.getManaRegenRate() + 1);
-            else if(button == buttonAddManaEfficiency) playerMana.setManaEfficiencyValue(playerMana.getManaEfficiencyValue() + 1);
-            else if(button == buttonAddMaxHP) playerMana.addedHP++;
-            else if(button == buttonAddHPRegen) playerMana.hpRegeneration++;
-            else if(button == buttonAddSpellTier) playerMana.addSpellTier();
-            playerMana.removeSkillpoint();
+            int skillID = 0;
+            if(button == buttonAddMaxMana)
+            {
+                playerMana.maxManaMultiplier++;
+                skillID = 1;
+            }
+            else if(button == buttonAddManaRegenRate)
+            {
+                playerMana.setManaRegenRate(playerMana.getManaRegenRate() + 1);
+                skillID = 2;
+            }
+            else if(button == buttonAddManaEfficiency)
+            {
+                playerMana.setManaEfficiencyValue(playerMana.getManaEfficiencyValue() + 1);
+                skillID = 3;
+            }
+            else if(button == buttonAddMaxHP)
+            {
+                playerMana.addedHP++;
+                skillID = 4;
+            }
+            else if(button == buttonAddHPRegen)
+            {
+                playerMana.hpRegeneration++;
+                skillID = 5;
+            }
+            else if(button == buttonAddSpellTier)
+            {
+                playerMana.addSpellTier();
+                skillID = 6;
+            }
+
+            if(skillID != 0)
+                PacketHandler.INSTANCE.sendToServer(new PacketInformSkillUpgrade(playerName, skillID));
         }
-        PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerName, playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
         updateStats();
         updateTextBoxes();
     }
