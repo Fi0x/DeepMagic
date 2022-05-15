@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.block.BlockAir;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -42,7 +43,8 @@ public class SpEfLight implements ISpellEffect
         ArrayList<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
-        list.add(new ItemStack(Blocks.GLOWSTONE));
+        list.add(new ItemStack(Items.GLOWSTONE_DUST));
+        list.add(new ItemStack(Blocks.TORCH));
 
         return list;
     }
@@ -58,6 +60,7 @@ public class SpEfLight implements ISpellEffect
     {
         if(world.getBlockState(targetPos) instanceof BlockAir) world.setBlockState(targetPos, ModBlocks.MAGIC_LIGHT.getDefaultState());
         else if(world.getBlockState(targetPos.up()) instanceof BlockAir) world.setBlockState(targetPos, ModBlocks.MAGIC_LIGHT.getDefaultState());
+        //TODO: Find out why light is not placed
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

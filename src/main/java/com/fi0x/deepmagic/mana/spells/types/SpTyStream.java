@@ -2,10 +2,15 @@ package com.fi0x.deepmagic.mana.spells.types;
 
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import com.fi0x.deepmagic.particlesystem.ParticleEnum;
+import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -65,7 +70,26 @@ public class SpTyStream implements ISpellType
     public void execute(ArrayList<ISpellPart> applicableParts, ArrayList<ArrayList<ISpellPart>> remainingSections, BlockPos castLocation, @Nullable EntityLivingBase caster, World world)
     {
         if(!applicableParts.isEmpty()) applicableParts.remove(0);
+
+        if(world.isRemote)
+            createParticles(castLocation, caster.getLookVec());
         //TODO: Execute spell
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void createParticles(BlockPos position, Vec3d direction)
+    {
+        int xPos = position.getX();
+        int yPos = position.getY();
+        int zPos = position.getZ();
+        double xDir = direction.x;
+        double yDir = direction.y;
+        double zDir = direction.z;
+
+        for(int i = 0; i < 10; i++)
+        {
+            ParticleSpawner.spawnParticle(ParticleEnum.SPELL_STREAM, xPos, yPos, zPos, xDir + Math.random() * 0.2 - 0.1, yDir + Math.random() * 0.2 - 0.1, zDir + Math.random() * 0.2 - 0.1, 1, true, 48);
+        }
     }
 
     @Override

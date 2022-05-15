@@ -17,7 +17,8 @@ public enum ParticleEnum
     DEPTH_PLANT("depth_plant", ConfigHandler.firstParticleID + 6, false, ParticlePlant.class),
     DEMON_STONE("demon_stone", ConfigHandler.firstParticleID + 7, false, ParticleDemonStone.class),
     SPELL_STONE("spell_stone", ConfigHandler.firstParticleID + 8, false, ParticleSpellStone.class),
-    RITUAL_MISSING("ritual_missing", ConfigHandler.firstParticleID + 9, false, ParticleRitualMissing.class);
+    RITUAL_MISSING("ritual_missing", ConfigHandler.firstParticleID + 9, false, ParticleRitualMissing.class),
+    SPELL_STREAM("spell_stream", ConfigHandler.firstParticleID + 10, false, ParticleSpellStream.class);
 
     private final Class particleClass;
     private final String textureName;

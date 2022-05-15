@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.mana.spells.effects.defensive;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -48,7 +49,8 @@ public class SpEfHaste implements ISpellEffect
         ArrayList<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
-        //TODO: Recipe missing
+        list.add(new ItemStack(Items.BLAZE_POWDER));
+        list.add(new ItemStack(Items.GLOWSTONE_DUST));
 
         return list;
     }

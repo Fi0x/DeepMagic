@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.mana.spells.effects.offensive;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -46,7 +47,8 @@ public class SpEfAccelerate implements ISpellEffect
         ArrayList<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
-        //TODO: Recipe missing
+        list.add(new ItemStack(Blocks.REDSTONE_BLOCK));
+        list.add(new ItemStack(Blocks.PISTON));
 
         return list;
     }
