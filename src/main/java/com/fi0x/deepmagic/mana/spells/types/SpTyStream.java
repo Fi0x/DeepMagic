@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -69,10 +71,12 @@ public class SpTyStream implements ISpellType
     {
         if(!applicableParts.isEmpty()) applicableParts.remove(0);
 
-        createParticles(castLocation, caster.getLookVec());
+        if(world.isRemote)
+            createParticles(castLocation, caster.getLookVec());
         //TODO: Execute spell
     }
 
+    @SideOnly(Side.CLIENT)
     private void createParticles(BlockPos position, Vec3d direction)
     {
         int xPos = position.getX();
