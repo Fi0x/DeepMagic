@@ -2,7 +2,10 @@ package com.fi0x.deepmagic.particlesystem;
 
 import com.fi0x.deepmagic.particlesystem.particles.*;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public enum ParticleEnum
 {
     MAGIC_LIGHT("magic_light", ConfigHandler.firstParticleID, true, ParticleMagicLight.class),

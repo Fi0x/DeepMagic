@@ -60,8 +60,7 @@ public class Main
 		PacketHandler.registerMessages(Reference.MOD_ID);
 		ModFluids.registerFluids();
 		EntityInit.registerEntities();
-		RenderHandler.registerEntityRenders();
-		RenderHandler.registerCustomMeshesAndStates();
+		proxy.preInit2(event);
 		BiomeInit.registerBiomes();
 		DimensionInit.registerDimensions();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);

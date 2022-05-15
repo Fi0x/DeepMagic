@@ -63,6 +63,13 @@ tile.insanity_diamond_ore.name=Insanity Diamond Ore
 tile.insanity_emerald_ore.name=Insanity Emerald Ore
 tile.insanity_deep_crystal_ore.name=Insanity Deep Crystal Ore
 
+tile.insanity_dungeon_stone.name=Insanity Dungeon Stone
+tile.insanity_dungeon_cobble.name=Insanity Dungeon Cobble
+tile.insanity_dungeon_cobble_mossy.name=Insanity Mossy Dungeon Cobble
+tile.insanity_dungeon_brick.name=Insanity Dungeon Brick
+tile.insanity_dungeon_brick_mossy.name=Insanity Mossy Dungeon Brick
+tile.insanity_dungeon_brick_cracked.name=Insanity Cracked Dungeon Brick
+
 tile.depth_stone.name=Compressed Stone
 tile.depth_cobble.name=Compressed Cobble
 tile.depth_dirt.name=Compressed Dirt
@@ -87,6 +94,13 @@ tile.depth_gold_ore.name=Compressed Gold Ore
 tile.depth_diamond_ore.name=Compressed Diamond Ore
 tile.depth_emerald_ore.name=Compressed Emerald Ore
 tile.deep_crystal_ore_compressed.name=Compressed Deep Crystal Ore
+
+tile.depth_dungeon_stone.name=Compressed Dungeon Stone
+tile.depth_dungeon_cobble.name=Compressed Dungeon Cobble
+tile.depth_dungeon_cobble_mossy.name=Compressed Mossy Dungeon Cobble
+tile.depth_dungeon_brick.name=Compressed Dungeon Brick
+tile.depth_dungeon_brick_mossy.name=Compressed Mossy Dungeon Brick
+tile.depth_dungeon_brick_cracked.name=Compressed Cracked Dungeon Brick
 
 tile.dungeon_stone.name=Dungeon Stone
 tile.dungeon_cobble.name=Dungeon Cobble
@@ -117,6 +131,7 @@ tile.ritual_quarry.name=Quarry Ritual
 
 tile.mana_altar.name=Mana Altar
 tile.mana_relay.name=Mana Relay
+tile.mana_battery_block.name=Mana Battery
 tile.mana_generator_normal.name=Normal Mana Generator
 tile.mana_generator_insanity.name=Insanity Mana Generator
 tile.mana_generator_mob.name=Mob Mana Generator
@@ -278,3 +293,11 @@ advancement.deepmagic.ritual_spawn.crafted.title=Master of the Dead
 advancement.deepmagic.ritual_spawn.crafted.description=Craft and place a Spawn Denial Ritual
 advancement.deepmagic.ritual_quarry.crafted.title=Master of Mining
 advancement.deepmagic.ritual_quarry.crafted.description=Craft and place a Quarry Ritual
+advancement.deepmagic.spell.used.title="Magician"
+advancement.deepmagic.spell.used.description="Use a spell"
+advancement.deepmagic.mana_relay.linked.title="Magic Networker"
+advancement.deepmagic.mana_relay.linked.description="Link a Mana Relay"
+advancement.deepmagic.altar_of_knowledge.opened.title="Level up!"
+advancement.deepmagic.altar_of_knowledge.opened.description="Open the Altar of Knowledge UI"
+advancement.deepmagic.knowledge_segment.crafted.title=Knowledge Blocks
+advancement.deepmagic.knowledge_segment.crafted.description=Craft a Knowledge Segment

@@ -20,8 +20,22 @@ public class TileEntityRitualWeather extends TileEntityRitualStone
     }
 
     @Override
-    protected void syncedUpdate()
+    public String getPacketData()
     {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public void setDataFromPacket(String parts)
+    {
+        //TODO
+    }
+
+    @Override
+    public void syncedUpdate()
+    {
+        //TODO Check if packet is required
         WorldInfo info = world.getWorldInfo();
         switch(weather)
         {

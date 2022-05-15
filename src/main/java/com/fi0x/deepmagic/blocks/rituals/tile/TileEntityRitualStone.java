@@ -1,5 +1,6 @@
 package com.fi0x.deepmagic.blocks.rituals.tile;
 
+import com.fi0x.deepmagic.blocks.rituals.ITileEntityRitualStone;
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.util.IManaTileEntity;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
@@ -14,15 +15,16 @@ import net.minecraft.util.ITickable;
 
 import javax.annotation.Nonnull;
 
-public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity
+public abstract class TileEntityRitualStone extends TileEntity implements ITickable, IManaTileEntity, ITileEntityRitualStone
 {
     protected RITUAL_TYPE type;
     protected double storedMana;
-    private int sync;
+    protected int sync;
     protected double manaCosts = 20;
     protected int syncTime = 20;
     protected boolean manaOnSync = true;
     protected boolean needsRedstone = true;
+    protected boolean needsStructure = true;
 
     @Nonnull
     @Override
@@ -35,6 +37,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         compound.setInteger("syncTime", syncTime);
         compound.setBoolean("manaOnSync", manaOnSync);
         compound.setBoolean("redstoneMode", needsRedstone);
+        compound.setBoolean("structureRequired", needsStructure);
 
         return super.writeToNBT(compound);
     }
@@ -48,6 +51,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         syncTime = compound.getInteger("syncTime");
         manaOnSync = compound.getBoolean("manaOnSync");
         needsRedstone = compound.getBoolean("redstoneMode");
+        needsStructure = compound.getBoolean("structureRequired");
 
         super.readFromNBT(compound);
     }
@@ -55,25 +59,26 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     @Override
     public void update()
     {
+        if(!ConfigHandler.allowRituals) return;
+
         sync--;
         if(sync > 0) return;
         sync = syncTime;
 
         if(!needsRedstone || hasRedstonePower())
         {
-            if(StructureChecker.verifyRitualStructure(world, pos, type))
+            if(!needsStructure || StructureChecker.verifyRitualStructure(world, pos, type))
             {
                 if(manaOnSync)
                 {
                     if(storedMana < manaCosts) return;
-                    else storedMana -= manaCosts;
+
+                    storedMana -= manaCosts;
+                    markDirty();
                 }
                 syncedUpdate();
             }
         }
-    }
-    protected void syncedUpdate()
-    {
     }
 
     public boolean changeRedstoneMode()

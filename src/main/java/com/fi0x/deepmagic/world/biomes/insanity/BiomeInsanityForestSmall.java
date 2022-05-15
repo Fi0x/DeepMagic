@@ -11,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -24,8 +23,8 @@ public class BiomeInsanityForestSmall extends Biome
 {
     private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
     private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
-    private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
-    private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.89F);
+    private static final int SKY_COLOR = 8396555;
+    private static final int FOLIAGE_COLOR = 14907648;
 
     public BiomeInsanityForestSmall()
     {
@@ -38,10 +37,10 @@ public class BiomeInsanityForestSmall extends Biome
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
 
-        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCockroach.class, 20, 1, 3));
-        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 5, 2, 3));
-        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 15, 1, 2));
-        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 2, 6));
+        if(ConfigHandler.allowCockroach) this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityCockroach.class, 20, 1, 2));
+        if(ConfigHandler.allowInsanityCow) this.spawnableCreatureList.add(new SpawnListEntry(EntityInsanityCow.class, 5, 1, 3));
+        if(ConfigHandler.allowDepthMage) this.spawnableCreatureList.add(new SpawnListEntry(EntityDepthMage.class, 1, 1, 2));
+        if(ConfigHandler.allowHoveringOrb) this.spawnableMonsterList.add(new SpawnListEntry(EntityHoveringOrb.class, 5, 1, 2));
 
         this.flowers.clear();
         addFlower(ModBlocks.INSANITY_FLOWER.getDefaultState(), 20);

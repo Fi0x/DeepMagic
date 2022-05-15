@@ -72,6 +72,7 @@ public class ConfigHandler
     public static boolean dwarfMining;
     public static boolean trollDefenceState;
     public static int dwarfMaxMiningHeight;
+    public static boolean npcRaceCombat;
     //Whitelist
     public static boolean dwarfMineOres;
     public static boolean dwarfMineResources;
@@ -116,7 +117,9 @@ public class ConfigHandler
     public static int manaMachineManaCapacity;
     public static int manaGainFromMob;
     public static int manaToleranceSpellStone;
+    public static int manaBatteryCapacity;
     //Rituals
+    public static boolean allowRituals;
     public static boolean requireRitualStructure;
     public static int ritualStoneManaCapacity;
     public static int ritualTimeManaCosts;
@@ -160,6 +163,8 @@ public class ConfigHandler
     //Tools
     public static int deepCrystalMiningLevel;
     public static int depthMiningLevel;
+    public static boolean allowInsanityTeleport;
+    public static boolean allowDepthTeleport;
     //Endgame Equipment
     public static boolean depthToolsActive;
     public static boolean depthArmorActive;
@@ -266,6 +271,7 @@ public class ConfigHandler
         dwarfMining = npcsGeneral.getBoolean("Dwarf Mining", category, true, "Allow Dwarfs to dig tunnels");
         trollDefenceState = npcsGeneral.getBoolean("Troll Defence State", category, true, "Allow Trolls to use an invulnerable Defence State");
         dwarfMaxMiningHeight = npcsGeneral.getInt("Max Dwarf Mining Height", category, 50, 20, 250, "Maximum Height in which dwarfs dig mines (Does not apply for depth dimension)");
+        npcRaceCombat = npcsGeneral.getBoolean("NPC Race Combat", category, false, "Weather or not NPCs should fight each other, like Mages vs. Mobs");
 
         category = "NPC Whitelist";
         npcsGeneral.addCustomCategoryComment(category, "NPC Whitelist");
@@ -342,9 +348,11 @@ public class ConfigHandler
         manaMachineManaCapacity = blocks.getInt("Mana Machine Capacity", category, 1000, 100, 100000, "The Mana Capacity for all Mana consuming Machines");
         manaGainFromMob = blocks.getInt("Mana From Mob", category, 10, 1, 1000, "Mana gained by inflicting 1HP damage to a Mob with the Mob Generator");
         manaToleranceSpellStone = blocks.getInt("Spell Stone Mana Tolerance", category, 100, 1, 10000, "How much mana a Spell Stone can be short of without explodint");
+        manaBatteryCapacity = blocks.getInt("Mana Battery Capacity", category, 1000000, 100, 10000000, "The Capacity of a Mana Battery");
 
         category = "Rituals";
         blocks.addCustomCategoryComment(category, "Rituals");
+        allowRituals = blocks.getBoolean("Allow Rituals", category, true, "Allow rituals to work");
         requireRitualStructure = blocks.getBoolean("Require Ritual Structure", category, true, "Require a Structure around Ritual Blocks to make Rituals work");
         ritualStoneManaCapacity = blocks.getInt("Ritual Stone Capacity", category, 5000, 1, 100000, "The Base Capacity of a Ritual");
         ritualTimeManaCosts = blocks.getInt("Time Ritual Costs", category, 1000, 0, 1000000, "Mana Costs to change the time with the Time Ritual");
@@ -412,6 +420,8 @@ public class ConfigHandler
         items.addCustomCategoryComment(category, "Tools");
         deepCrystalMiningLevel = items.getInt("Deep Crystal Mining Level", category, 4, 0, 100, "Mining Level for Deep Crystal Tools");
         depthMiningLevel = items.getInt("Depth Mining Level", category, 4, 0, 100, "Mining Level for Depth Tools");
+        allowInsanityTeleport = items.getBoolean("Teleport to Insanity Dimension", category, true, "Allow teleportation to Insanity dimension with the Teleportation Crystal");
+        allowDepthTeleport = items.getBoolean("Teleport to Depth Dimension", category, true, "Allow teleportation to Depth dimension with the Teleportation Crystal");
 
         category = "Endgame-Equipment";
         items.addCustomCategoryComment(category, "Endgame-Equipment");
