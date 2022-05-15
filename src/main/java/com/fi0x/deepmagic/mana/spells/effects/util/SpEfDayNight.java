@@ -58,6 +58,7 @@ public class SpEfDayNight implements ISpellEffect
     {
         WorldInfo info = world.getWorldInfo();
         info.setWorldTotalTime(info.getWorldTotalTime() + 12000);
+        //TODO: Fix it, not working right now
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

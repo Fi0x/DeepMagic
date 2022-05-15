@@ -78,7 +78,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         break;
                     case 2:
                         ISpellPart matchingPart = verifier.getPartFromItems();
-                        if(matchingPart == null) break;
+                        if(matchingPart == null) break; //TODO: Find out why this is sometimes null when a recipe should be available
 
                         double[] castModifiers = matchingPart.getCastModifiers();
                         manaAdder += castModifiers[0];
@@ -107,7 +107,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                 sync = 10;
                 PacketHandler.INSTANCE.sendToServer(new PacketGetSpellStone(world.provider.getDimension(), pos));
                 ISpellPart currentPart = verifier.getPartFromItems();
-                if(currentPart != null) currentPartName = currentPart.getDisplayName();//TODO: Find out why this is no longer working
+                if(currentPart != null) currentPartName = currentPart.getDisplayName();
                 else currentPartName = "Unknown";
             }
         }

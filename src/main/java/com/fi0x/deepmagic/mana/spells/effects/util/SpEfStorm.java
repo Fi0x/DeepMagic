@@ -53,6 +53,7 @@ public class SpEfStorm implements ISpellEffect
     public void applyEffect(@Nullable EntityLivingBase caster, BlockPos targetPos, World world)
     {
         world.getWorldInfo().setThundering(true);
+        //TODO: Find out why this is not working
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

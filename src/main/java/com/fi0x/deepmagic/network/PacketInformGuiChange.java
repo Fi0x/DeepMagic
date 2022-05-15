@@ -2,7 +2,6 @@ package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.blocks.mana.tile.TileEntitySpellStone;
-import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -74,7 +73,6 @@ public class PacketInformGuiChange implements IMessage
             if(te instanceof TileEntitySpellStone)
             {
                 ((TileEntitySpellStone) te).setField(2, message.pressedButton);
-                PacketHandler.INSTANCE.sendTo(new PacketReturnSpellStone(message.dimension, message.blockPos, ((TileEntitySpellStone) te).getPacketParts()), ctx.getServerHandler().player);
             }
         }
     }
