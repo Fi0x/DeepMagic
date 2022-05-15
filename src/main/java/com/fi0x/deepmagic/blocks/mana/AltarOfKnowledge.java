@@ -5,7 +5,7 @@ import com.fi0x.deepmagic.advancements.ModTriggers;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
-import com.fi0x.deepmagic.network.PacketGetSkill;
+import com.fi0x.deepmagic.network.PacketReturnSkill;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.block.SoundType;
@@ -42,10 +42,10 @@ public class AltarOfKnowledge extends BlockBase
         {
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
-            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerIn.getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
-            Main.proxy.openSkilltreeGui(playerIn);
+            PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(playerMana.maxManaMultiplier, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()), (EntityPlayerMP) playerIn);
             ModTriggers.KNOWLEDGE_UI_OPENED.trigger((EntityPlayerMP) playerIn);
         }
+        Main.proxy.openSkilltreeGui(playerIn);
         return true;
     }
 

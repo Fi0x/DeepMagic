@@ -77,6 +77,10 @@ public class PlayerMana
     {
         return skillXP;
     }
+    public void setSkillXP(double newValue)
+    {
+        skillXP = newValue;
+    }
     public void addSkillXP(EntityPlayer player, double addAmount)
     {
         skillXP += addAmount;
@@ -90,6 +94,10 @@ public class PlayerMana
     public int getSkillpoints()
     {
         return skillpoints;
+    }
+    public void setSkillpoints(int newCount)
+    {
+        skillpoints = newCount;
     }
     public void addSkillpoint(EntityPlayer player)
     {
@@ -130,6 +138,10 @@ public class PlayerMana
     public int getHpRegenerationAmount()
     {
         return (int) (Math.pow(hpRegeneration, 0.5));
+    }
+    public void setSpellTier(int newTier)
+    {
+        spellTier = newTier;
     }
     public void addSpellTier()
     {
