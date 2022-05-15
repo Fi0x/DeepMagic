@@ -38,6 +38,7 @@ public class SpEfRain implements ISpellEffect
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
         list.add(new ItemStack(Items.WATER_BUCKET));
+        list.add(new ItemStack(Items.BOAT));
 
         return list;
     }

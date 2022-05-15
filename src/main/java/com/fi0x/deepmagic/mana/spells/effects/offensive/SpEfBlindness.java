@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.mana.spells.effects.offensive;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -45,7 +46,7 @@ public class SpEfBlindness implements ISpellEffect
         ArrayList<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
-        //TODO: Recipe missing
+        list.add(new ItemStack(Blocks.OBSIDIAN));
 
         return list;
     }
