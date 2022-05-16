@@ -17,6 +17,41 @@
     {
       "type": "crafting",
       "recipe": "deepmagic:spell_stone"
+    },
+    {
+      "type": "multiblock",
+      "name": "Spell Stone",
+      "multiblock_id": "",
+      "multiblock":
+      {
+        "pattern":
+        [
+          [
+            "     ",
+            " CGC ",
+            " GSG ",
+            " CGC ",
+            "     "
+          ],
+          [
+            "O O O",
+            "     ",
+            "O 0 O",
+            "     ",
+            "O O O"
+          ]
+        ],
+        "mapping":
+        {
+          " ": "ANY",
+          "0": "deepmagic:mana_relay",
+          "G": "minecraft:glowstone",
+          "C": "deepmagic:deep_crystal_block",
+          "O": "minecraft:obsidian",
+          "S": "deepmagic:spell_stone"
+        },
+        "symmetrical": true
+      }
     }
   ]
 }

@@ -13,6 +13,107 @@
     {
       "type": "text",
       "text": "you might want to perform other $(l:e_ritual_overview)Rituals/el that can make your life easier. Unfortunately these Rituals require some rare resources you can only get in the $(l:e_dimension_depth_dimension)Depth dimension/el, so you might want to travel there first (Introduced in '$(l:e_advanced_dimensional_travel)Dimensional Travel/el')./br1After you gathered all the resources you need, you can start crafting advanced Rituals. A list of them can be found in the 'Rituals' chapter."
+    },
+    {
+      "type": "multiblock",
+      "name": "Demon Ritual",
+      "multiblock_id": "",
+      "multiblock":
+      {
+        "pattern":
+        [
+          [
+            "   ",
+            " D ",
+            "   "
+          ],
+          [
+            "IBI",
+            "B0B",
+            "IBI"
+          ]
+        ],
+        "mapping":
+        {
+          " ": "ANY",
+          "D": "deepmagic:demon_stone",
+          "0": "deepmagic:demon_crystal_block",
+          "I": "minecraft:iron_block",
+          "B": "deepmagic:deep_crystal_block"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "multiblock",
+      "name": "Normal Rituals",
+      "multiblock_id": "",
+      "multiblock": {
+        "pattern": [
+          [
+            "         ",
+            "         ",
+            "    S    ",
+            "    S    ",
+            "  SS SS  ",
+            "    S    ",
+            "    S    ",
+            "         ",
+            "         "
+          ],
+          [
+            "         ",
+            "    S    ",
+            "         ",
+            "         ",
+            " S     S ",
+            "         ",
+            "         ",
+            "    S    ",
+            "         "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S       S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S   R   S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "   SSS   ",
+            "  SSSSS  ",
+            " SSSSSSS ",
+            "SSSSSSSSS",
+            "SSSS0SSSS",
+            "SSSSSSSSS",
+            " SSSSSSS ",
+            "  SSSSS  ",
+            "   SSS   "
+          ]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "deepmagic:ritual_structure",
+          "S": "deepmagic:ritual_structure",
+          "R": "deepmagic:ritual_none"
+        },
+        "symmetrical": true
+      }
     }
   ]
 }
