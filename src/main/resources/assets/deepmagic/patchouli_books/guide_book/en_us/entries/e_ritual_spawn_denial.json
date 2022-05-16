@@ -1,0 +1,14 @@
+{
+  "name": "Spawn Denial Ritual",
+  "icon": "deepmagic:ritual_spawn_denial",
+  "category": "deepmagic:c_rituals",
+  "advancement": "deepmagic:ritual_structure",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spawn Denial Ritual",
+      "text": "TODO"
+    }
+  ]
+}

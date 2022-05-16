@@ -1,14 +1,14 @@
 {
   "name": "Demon",
-  "icon": "deepmagic:deep_crystal_powder",
-  "category": "deepmagic:c_items",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
   "advancement": "deepmagic:sigil_crafting",
   "secret": true,
   "pages": [
     {
       "type": "text",
       "title": "Demon",
-      "text": "TODO"
+      "text": "The Demon is a mob that can be summoned with the $(l:e_block_demon_stone)Demon Ritual/el. To do so, you have to build the ritual structure first and then right-click the $(l:e_block_demon_stone)Demon Stone/el with a $(l:e_item_demon_crystal)Demon Crystal/el."
     }
   ]
 }

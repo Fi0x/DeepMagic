@@ -1,0 +1,14 @@
+{
+  "name": "Weather Ritual",
+  "icon": "deepmagic:ritual_weather",
+  "category": "deepmagic:c_rituals",
+  "advancement": "deepmagic:ritual_structure",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Weather Ritual",
+      "text": "TODO"
+    }
+  ]
+}
