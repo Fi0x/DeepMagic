@@ -1,0 +1,12 @@
+{
+  "name": "Dimensional Crystal",
+  "icon": "deepmagic:dimensional_crystal",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Dimensional Crystal",
+      "text": "TODO"
+    }
+  ]
+}

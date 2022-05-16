@@ -1,0 +1,12 @@
+{
+  "name": "Demon Crystal",
+  "icon": "deepmagic:demon_crystal",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Demon Crystal",
+      "text": "TODO"
+    }
+  ]
+}
