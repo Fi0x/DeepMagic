@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "parent": "block/cube",
+  "textures": {
+    "particle": "deepmagic:blocks/miner_stash/miner_stash_side",
+    "up": "deepmagic:blocks/miner_stash/miner_stash_top",
+    "down": "deepmagic:blocks/miner_stash/miner_stash_bottom",
+    "north": "deepmagic:blocks/miner_stash/miner_stash_side",
+    "east": "deepmagic:blocks/miner_stash/miner_stash_side",
+    "south": "deepmagic:blocks/miner_stash/miner_stash_side",
+    "west": "deepmagic:blocks/miner_stash/miner_stash_side"
+  }
+}

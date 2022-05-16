@@ -1,10 +1,13 @@
 package com.fi0x.deepmagic.world;
 
+import com.fi0x.deepmagic.blocks.mana.ManaRelay;
 import com.fi0x.deepmagic.blocks.rituals.RITUAL_TYPE;
 import com.fi0x.deepmagic.blocks.rituals.structureblocks.RitualStructure;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
+import net.minecraft.block.BlockGlowstone;
+import net.minecraft.block.BlockObsidian;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,14 +22,16 @@ public class StructureChecker
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof RitualStructure) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
         for(BlockPos offset : ritualArmLocations)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock() instanceof RitualStructure) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
             valid = false;
         }
 
@@ -35,29 +40,74 @@ public class StructureChecker
     public static boolean verifyDemonStructure(World world, BlockPos pos)
     {
         if(!ConfigHandler.requireDemonStructure) return true;
+        boolean valid = true;
+
         for(BlockPos offset : demonLocationsDemonCrystal)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.demon_crystal_block")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
-            return false;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
         }
         for(BlockPos offset : demonLocationsDeepCrystal)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
-            return false;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
         }
         for(BlockPos offset : demonLocationsIronBlock)
         {
             BlockPos position = pos.add(offset);
             if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.blockIron")) continue;
-            ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
-            return false;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
         }
 
-        return true;
+        return valid;
+    }
+    public static boolean verifySpellStoneStructure(World world, BlockPos pos)
+    {
+        if(!ConfigHandler.requireSpellStoneStructure) return true;
+        boolean valid = true;
+
+        for(BlockPos offset : spellStoneLocationsRelay)
+        {
+            BlockPos position = pos.add(offset);
+            if(world.getBlockState(position).getBlock() instanceof ManaRelay) continue;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
+        }
+        for(BlockPos offset : spellStoneLocationsGlowstone)
+        {
+            BlockPos position = pos.add(offset);
+            if(world.getBlockState(position).getBlock() instanceof BlockGlowstone) continue;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
+        }
+        for(BlockPos offset : spellStoneLocationsDeepCrystal)
+        {
+            BlockPos position = pos.add(offset);
+            if(world.getBlockState(position).getBlock().getUnlocalizedName().equals("tile.deep_crystal_block")) continue;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
+        }
+        for(BlockPos offset : spellStoneLocationsObsidian)
+        {
+            BlockPos position = pos.add(offset);
+            if(world.getBlockState(position).getBlock() instanceof BlockObsidian) continue;
+            if(world.isRemote)
+                ParticleSpawner.spawnParticle(ParticleEnum.RITUAL_MISSING, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+            valid = false;
+        }
+
+        return valid;
     }
 
     public static final BlockPos[] ritualFloorLocations = new BlockPos[]{
@@ -156,5 +206,31 @@ public class StructureChecker
             new BlockPos(1, -1, -1),
             new BlockPos(-1, -1, 1),
             new BlockPos(-1, -1, -1)
+    };
+
+    private static final BlockPos[] spellStoneLocationsRelay = new BlockPos[]{
+            new BlockPos(0, -1, 0)
+    };
+    private static final BlockPos[] spellStoneLocationsGlowstone = new BlockPos[]{
+            new BlockPos(1, 0, 0),
+            new BlockPos(-1, 0, 0),
+            new BlockPos(0, 0, 1),
+            new BlockPos(0, 0, -1)
+    };
+    private static final BlockPos[] spellStoneLocationsDeepCrystal = new BlockPos[]{
+            new BlockPos(1, 0, 1),
+            new BlockPos(-1, 0, 1),
+            new BlockPos(1, 0, -1),
+            new BlockPos(-1, 0, -1)
+    };
+    private static final BlockPos[] spellStoneLocationsObsidian = new BlockPos[]{
+            new BlockPos(2, -1, 0),
+            new BlockPos(-2, -1, 0),
+            new BlockPos(0, -1, 2),
+            new BlockPos(0, -1, -2),
+            new BlockPos(2, -1, 2),
+            new BlockPos(2, -1, -2),
+            new BlockPos(-2, -1, 2),
+            new BlockPos(-2, -1, -2)
     };
 }

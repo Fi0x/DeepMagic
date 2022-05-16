@@ -27,5 +27,14 @@ public class PacketHandler
 
         INSTANCE.registerMessage(PacketGetMobAnimation.Handler.class, PacketGetMobAnimation.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketReturnMobAnimation.Handler.class, PacketReturnMobAnimation.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketGetSpellStone.Handler.class, PacketGetSpellStone.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketReturnSpellStone.Handler.class, PacketReturnSpellStone.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketGetRitual.Handler.class, PacketGetRitual.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketReturnRitual.Handler.class, PacketReturnRitual.class, nextID(), Side.CLIENT);
+
+        INSTANCE.registerMessage(PacketInformGuiChange.Handler.class, PacketInformGuiChange.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketInformSkillUpgrade.Handler.class, PacketInformSkillUpgrade.class, nextID(), Side.SERVER);
     }
 }

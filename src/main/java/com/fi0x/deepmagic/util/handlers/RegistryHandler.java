@@ -6,6 +6,7 @@ import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualSpawnDenial;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualTime;
 import com.fi0x.deepmagic.blocks.rituals.tile.TileEntityRitualWeather;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityDwarfBaseMarker;
+import com.fi0x.deepmagic.blocks.tileentity.TileEntityMinerStash;
 import com.fi0x.deepmagic.blocks.tileentity.TileEntityRune;
 import com.fi0x.deepmagic.commands.CommandDimTeleport;
 import com.fi0x.deepmagic.init.ModBlocks;
@@ -80,6 +81,7 @@ public class RegistryHandler
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorInsanity.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_insanity"));
 		GameRegistry.registerTileEntity(TileEntityManaGeneratorMob.class, new ResourceLocation(Reference.MOD_ID, "mana_generator_mob"));
 		GameRegistry.registerTileEntity(TileEntityManaRelay.class, new ResourceLocation(Reference.MOD_ID, "mana_relay"));
+		GameRegistry.registerTileEntity(TileEntityManaBattery.class, new ResourceLocation(Reference.MOD_ID, "mana_battery_block"));
 
 		GameRegistry.registerTileEntity(TileEntityManaAltar.class, new ResourceLocation(Reference.MOD_ID, "mana_altar"));
 		GameRegistry.registerTileEntity(TileEntityManaInfuser.class, new ResourceLocation(Reference.MOD_ID, "mana_infuser"));
@@ -89,6 +91,7 @@ public class RegistryHandler
 		GameRegistry.registerTileEntity(TileEntityRune.class, new ResourceLocation(Reference.MOD_ID, "rune"));
 		GameRegistry.registerTileEntity(TileEntitySpellStone.class, new ResourceLocation(Reference.MOD_ID, "spell_stone"));
 		GameRegistry.registerTileEntity(TileEntityDwarfBaseMarker.class, new ResourceLocation(Reference.MOD_ID, "dwarf_base_marker"));
+		GameRegistry.registerTileEntity(TileEntityMinerStash.class, new ResourceLocation(Reference.MOD_ID, "miner_stash"));
 
 		GameRegistry.registerTileEntity(TileEntityRitualTime.class, new ResourceLocation(Reference.MOD_ID, "ritual_time"));
 		GameRegistry.registerTileEntity(TileEntityRitualWeather.class, new ResourceLocation(Reference.MOD_ID, "ritual_weather"));

@@ -18,32 +18,13 @@ public class PacketGetSkill implements IMessage
     private boolean messageValid;
     private String playerName;
 
-    private double maxMana;
-    private double skillXP;
-    private int skillpoints;
-    private double manaRegenRate;
-    private double manaEfficiency;
-    private int addedHP;
-    private int hpRegeneration;
-    private int spellTier;
-    private int spellCastSkill;
-
     public PacketGetSkill()
     {
         messageValid = false;
     }
-    public PacketGetSkill(String playerName, double maxMana, double skillXP, int skillpoints, double manaRegenRate, double manaEfficiency, int addedHP, int hpRegeneration, int spellTier)
+    public PacketGetSkill(String playerName)
     {
         this.playerName = playerName;
-        this.maxMana = maxMana;
-        this.skillXP = skillXP;
-        this.skillpoints = skillpoints;
-        this.manaRegenRate = manaRegenRate;
-        this.manaEfficiency = manaEfficiency;
-        this.addedHP = addedHP;
-        this.hpRegeneration = hpRegeneration;
-        this.spellTier = spellTier;
-        this.spellCastSkill = spellCastSkill;
 
         messageValid = true;
     }
@@ -54,15 +35,6 @@ public class PacketGetSkill implements IMessage
         try
         {
             playerName = ByteBufUtils.readUTF8String(buf);
-            maxMana = buf.readDouble();
-            skillXP = buf.readDouble();
-            skillpoints = buf.readInt();
-            manaRegenRate = buf.readDouble();
-            manaEfficiency = buf.readDouble();
-            addedHP = buf.readInt();
-            hpRegeneration = buf.readInt();
-            spellTier = buf.readInt();
-            spellCastSkill = buf.readInt();
         } catch(IndexOutOfBoundsException exception)
         {
             Main.getLogger().catching(exception);
@@ -75,15 +47,6 @@ public class PacketGetSkill implements IMessage
     {
         if(!messageValid) return;
         ByteBufUtils.writeUTF8String(buf, playerName);
-        buf.writeDouble(maxMana);
-        buf.writeDouble(skillXP);
-        buf.writeInt(skillpoints);
-        buf.writeDouble(manaRegenRate);
-        buf.writeDouble(manaEfficiency);
-        buf.writeInt(addedHP);
-        buf.writeInt(hpRegeneration);
-        buf.writeInt(spellTier);
-        buf.writeInt(spellCastSkill);
     }
 
     public static class Handler implements IMessageHandler<PacketGetSkill, IMessage>

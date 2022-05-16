@@ -2,12 +2,16 @@ package com.fi0x.deepmagic.network;
 
 import com.fi0x.deepmagic.Main;
 import com.fi0x.deepmagic.gui.GuiManaRenderOverlay;
+import com.fi0x.deepmagic.mana.player.PlayerMana;
+import com.fi0x.deepmagic.mana.player.PlayerProperties;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketReturnSkill implements IMessage
 {
@@ -88,11 +92,24 @@ public class PacketReturnSkill implements IMessage
             return null;
         }
 
+        @SideOnly(Side.CLIENT)
         void processMessage(PacketReturnSkill message)
         {
             try
             {
                 GuiManaRenderOverlay.instance.setMaxManaMultiplier(message.maxManaMultiplier);
+
+                EntityPlayer player = Minecraft.getMinecraft().player;
+                PlayerMana playerMana = player.getCapability(PlayerProperties.PLAYER_MANA, null);
+                assert playerMana != null;
+                playerMana.maxManaMultiplier = message.maxManaMultiplier;
+                playerMana.setSkillXP(message.skillXP);
+                playerMana.setSkillpoints(message.skillpoints);
+                playerMana.setManaRegenRate(message.manaRegenRate);
+                playerMana.setManaEfficiencyValue(message.manaEfficiency);
+                playerMana.addedHP = message.addedHP;
+                playerMana.hpRegeneration = message.hpRegeneration;
+                playerMana.setSpellTier(message.spellTier);
             } catch(Exception e)
             {
                 Main.getLogger().catching(e);

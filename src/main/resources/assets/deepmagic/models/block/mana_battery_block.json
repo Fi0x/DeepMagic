@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "parent": "block/cube",
+  "textures": {
+    "particle": "deepmagic:blocks/mana/battery_block/mana_battery_block_side",
+    "up": "deepmagic:blocks/mana/battery_block/mana_battery_block_top",
+    "down": "deepmagic:blocks/mana/battery_block/mana_battery_block_bottom",
+    "north": "deepmagic:blocks/mana/battery_block/mana_battery_block_side",
+    "east": "deepmagic:blocks/mana/battery_block/mana_battery_block_side",
+    "south": "deepmagic:blocks/mana/battery_block/mana_battery_block_side",
+    "west": "deepmagic:blocks/mana/battery_block/mana_battery_block_side"
+  }
+}

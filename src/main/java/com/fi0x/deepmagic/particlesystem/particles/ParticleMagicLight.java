@@ -52,7 +52,6 @@ public class ParticleMagicLight extends Particle
         {
             this.particleAlpha = (float) -((particleAge - particleMaxAge) / (0.2 * particleMaxAge));
         } else this.particleAlpha = 1;
-        if(particleAlpha > 1) System.out.println("Alpha too big");
     }
     @Override
     public int getFXLayer()

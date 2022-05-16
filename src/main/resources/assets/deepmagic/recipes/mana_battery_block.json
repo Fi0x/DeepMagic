@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "BSB",
+        "FRF",
+        "BFB"
+    ],
+    
+    "key":
+    {
+        "B":
+        {
+            "item": "deepmagic:mana_segment"
+        },
+        "S":
+        {
+        	"item": "deepmagic:magic_sigil"
+        },
+        "F":
+        {
+            "item": "deepmagic:magic_flow_controller"
+        },
+        "R":
+        {
+            "item": "deepmagic:mana_relay"
+        }
+    },
+    
+    "result":
+    {
+        "item": "deepmagic:mana_battery_block",
+        "count": 1
+    }
+}

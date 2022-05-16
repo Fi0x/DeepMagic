@@ -1,0 +1,66 @@
+{
+  "pools": [
+    {
+      "name": "poll0",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:depth_cobble",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:depth_dirt",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "poll1",
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "item",
+          "weight": 2,
+          "name": "deepmagic:depth_sapling"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "deepmagic:depth_flower"
+        }
+      ],
+      "functions": [
+        {
+          "function": "set_count",
+          "count": {
+            "min": 1,
+            "max": 2
+          }
+        }
+      ]
+    }
+  ]
+}

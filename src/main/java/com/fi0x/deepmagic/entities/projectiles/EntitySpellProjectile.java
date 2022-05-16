@@ -1,9 +1,9 @@
 package com.fi0x.deepmagic.entities.projectiles;
 
-import com.fi0x.deepmagic.items.spells.ISpellPart;
-import com.fi0x.deepmagic.items.spells.SpellPartHandler;
-import com.fi0x.deepmagic.items.spells.effects.ISpellEffect;
-import com.fi0x.deepmagic.items.spells.types.ISpellType;
+import com.fi0x.deepmagic.mana.spells.ISpellPart;
+import com.fi0x.deepmagic.mana.spells.SpellPartHandler;
+import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
+import com.fi0x.deepmagic.mana.spells.types.ISpellType;
 import com.fi0x.deepmagic.particlesystem.ParticleEnum;
 import com.fi0x.deepmagic.particlesystem.ParticleSpawner;
 import net.minecraft.entity.Entity;
@@ -49,11 +49,13 @@ public class EntitySpellProjectile extends EntityThrowable
         super.onUpdate();
         if(ticksExisted > 20 * existingSeconds) setDead();
 
-        double xOff = Math.random() - 0.5;
-        double yOff = Math.random() - 0.5;
-        double zOff = Math.random() - 0.5;
-        ParticleSpawner.spawnParticle(ParticleEnum.SPELL_PROJECTILE, posX + xOff, posY + yOff, posZ + zOff, 0, 0, 0, Math.random() + 0.5, false, 64);
-
+        if(world.isRemote)
+        {
+            double xOff = Math.random() - 0.5;
+            double yOff = Math.random() - 0.5;
+            double zOff = Math.random() - 0.5;
+            ParticleSpawner.spawnParticle(ParticleEnum.SPELL_PROJECTILE, posX + xOff, posY + yOff, posZ + zOff, 0, 0, 0, Math.random() + 0.5, false, 64);
+        }
     }
     @Override
     protected void onImpact(@Nonnull RayTraceResult result)

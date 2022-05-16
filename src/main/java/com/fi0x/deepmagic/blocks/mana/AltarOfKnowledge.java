@@ -1,16 +1,18 @@
 package com.fi0x.deepmagic.blocks.mana;
 
 import com.fi0x.deepmagic.Main;
+import com.fi0x.deepmagic.advancements.ModTriggers;
 import com.fi0x.deepmagic.blocks.BlockBase;
 import com.fi0x.deepmagic.mana.player.PlayerMana;
 import com.fi0x.deepmagic.mana.player.PlayerProperties;
-import com.fi0x.deepmagic.network.PacketGetSkill;
+import com.fi0x.deepmagic.network.PacketReturnSkill;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import com.fi0x.deepmagic.util.handlers.PacketHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -40,9 +42,10 @@ public class AltarOfKnowledge extends BlockBase
         {
             PlayerMana playerMana = playerIn.getCapability(PlayerProperties.PLAYER_MANA, null);
             assert playerMana != null;
-            PacketHandler.INSTANCE.sendToServer(new PacketGetSkill(playerIn.getName(), playerMana.getMaxMana(), playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()));
-            Main.proxy.openSkilltreeGui(playerIn);
+            PacketHandler.INSTANCE.sendTo(new PacketReturnSkill(playerMana.maxManaMultiplier, playerMana.getSkillXP(), playerMana.getSkillpoints(), playerMana.getManaRegenRate(), playerMana.getManaEfficiencyValue(), playerMana.addedHP, playerMana.hpRegeneration, playerMana.getSpellTier()), (EntityPlayerMP) playerIn);
+            ModTriggers.KNOWLEDGE_UI_OPENED.trigger((EntityPlayerMP) playerIn);
         }
+        Main.proxy.openSkilltreeGui(playerIn);
         return true;
     }
 

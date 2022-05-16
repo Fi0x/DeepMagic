@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -111,26 +112,34 @@ public class EntityDwarf extends EntityCreature implements ICapabilityProvider
         return 1.2F;
     }
 
-    @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    public void onDeath(@Nonnull DamageSource cause)
     {
+        for(int i = 0; i < itemHandler.getSlots(); i++)
+        {
+            world.spawnEntity(new EntityItem(world, posX, posY, posZ, itemHandler.getStackInSlot(i)));
+        }
+        super.onDeath(cause);
+    }
+    @Override
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
         compound.setTag("ItemStackHandler", itemHandler.serializeNBT());
         compound.setInteger("homex", (homePos == null ? 0 : homePos.getX()));
         compound.setInteger("homey", (homePos == null ? 0 : homePos.getY()));
         compound.setInteger("homez", (homePos == null ? 0 : homePos.getZ()));
-        return super.writeToNBT(compound);
     }
     @Override
-    public void readFromNBT(NBTTagCompound compound)
+    public void readEntityFromNBT(@Nonnull NBTTagCompound compound)
     {
+        super.readEntityFromNBT(compound);
         itemHandler.deserializeNBT(compound.getCompoundTag("ItemStackHandler"));
         int x = compound.getInteger("homex");
         int y = compound.getInteger("homey");
         int z = compound.getInteger("homez");
         if(x == 0 && y == 0 && z == 0) homePos = null;
         else homePos = new BlockPos(x, y, z);
-        super.readFromNBT(compound);
     }
     @Nullable
     @Override
