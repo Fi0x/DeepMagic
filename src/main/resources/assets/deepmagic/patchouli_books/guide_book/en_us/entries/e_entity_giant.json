@@ -1,0 +1,16 @@
+{
+  "name": "Giant",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Giant",
+      "text": "Giants are hostile mobs that spawn in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el. They are very tall, strong and slow."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:giant"
+    }
+  ]
+}

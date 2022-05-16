@@ -9,6 +9,10 @@
       "type": "text",
       "title": "Demon",
       "text": "The Demon is a mob that can be summoned with the $(l:e_block_demon_stone)Demon Ritual/el. To do so, you have to build the ritual structure first and then right-click the $(l:e_block_demon_stone)Demon Stone/el with a $(l:e_item_demon_crystal)Demon Crystal/el."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:demon"
     }
   ]
 }

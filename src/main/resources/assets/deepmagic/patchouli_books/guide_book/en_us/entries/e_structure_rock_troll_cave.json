@@ -1,0 +1,12 @@
+{
+  "name": "Rock Troll Cave",
+  "icon": "deepmagic:dwarf_lamp",
+  "category": "deepmagic:c_structures",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Rock Troll Cave",
+      "text": "TODO"
+    }
+  ]
+}
