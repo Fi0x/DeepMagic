@@ -7,7 +7,18 @@
   "pages": [
     {
       "type": "text",
-      "text": "TODO"
+      "text": "This dimension is similar to the overworld, but the time stands still and there are some new $(l:e_entity_overview)NPCs/el. There are also some new $(l:e_structure_overview)Structures/el on the surface as well as underground."
+    },
+    {
+      "type": "text",
+      "text": "To reach this dimension you need to right-click with a $(l:e_item_teleportation_crystal)Teleportation Crystal/el. You will spawn somewhere on the surface of this dimension."
+    },
+    {
+      "type": "image",
+      "images": [
+        "deepmagic:images/altar_of_knowledge.png"TODO: Add correct image
+      ],
+      "border": true
     }
   ]
 }

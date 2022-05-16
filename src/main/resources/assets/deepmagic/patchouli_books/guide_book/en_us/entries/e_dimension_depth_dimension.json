@@ -7,7 +7,18 @@
   "pages": [
     {
       "type": "text",
-      "text": "TODO"
+      "text": "This dimension is very densely packed with depth stone and depth ores and only a few $(l:e_dimension_depth_shafts)Shafts/el and some $(l:e_structure_dwarf_base)Dwarf Bases/el. There are no natural caves and the top and bottom of the world are made out of bedrock."
+    },
+    {
+      "type": "text",
+      "text": "To reach this dimension you need to shift right-click with a $(l:e_item_teleportation_crystal)Teleportation Crystal/el. You will spawn somewhere in the middle of the dimension in a 1x2x1 empty space from where you can start your journey."
+    },
+    {
+      "type": "image",
+      "images": [
+        "deepmagic:images/altar_of_knowledge.png"TODO: Add correct image
+      ],
+      "border": true
     }
   ]
 }

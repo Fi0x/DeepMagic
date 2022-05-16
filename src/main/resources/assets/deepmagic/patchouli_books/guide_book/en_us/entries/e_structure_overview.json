@@ -1,0 +1,12 @@
+{
+  "name": "Structure Overview",
+  "icon": "deepmagic:dwarf_lamp",
+  "category": "deepmagic:c_structures",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Structure Overview",
+      "text": "TODO"
+    }
+  ]
+}

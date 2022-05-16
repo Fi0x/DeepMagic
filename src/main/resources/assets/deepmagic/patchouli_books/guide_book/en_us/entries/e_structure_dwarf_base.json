@@ -1,0 +1,12 @@
+{
+  "name": "Dwarf Base",
+  "icon": "deepmagic:dwarf_lamp",
+  "category": "deepmagic:c_structures",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Dwarf Base",
+      "text": "TODO"
+    }
+  ]
+}
