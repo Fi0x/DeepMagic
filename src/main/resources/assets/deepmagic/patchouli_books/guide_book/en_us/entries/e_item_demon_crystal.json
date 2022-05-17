@@ -6,7 +6,12 @@
     {
       "type": "text",
       "title": "Demon Crystal",
-      "text": "TODO"
+      "text": "These crystals are a modified version of the regular $(l:e_item_deep_crystal)Deep Crystals/el. They contain some evil spirit and are capable of summoning $(l:e_entity_demon)Demons/el with the $(l:e_block_demon_stone)Demon Ritual/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:demon_crystal1",
+      "recipe2": "deepmagic:demon_crystal2"
     }
   ]
 }

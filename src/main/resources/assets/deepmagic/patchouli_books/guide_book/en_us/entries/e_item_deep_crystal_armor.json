@@ -8,7 +8,17 @@
     {
       "type": "text",
       "title": "Deep Crystal Armor",
-      "text": "TODO"
+      "text": "$(l:e_item_deep_crystal)Deep Crystals/el can be crafted into the four armor pieces. Those are not only stronger than armor made of diamond, but can also be enchanted very easily."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:deep_crystal_helmet",
+      "recipe2": "deepmagic:deep_crystal_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:deep_crystal_leggings",
+      "recipe2": "deepmagic:deep_crystal_boots"
     }
   ]
 }
