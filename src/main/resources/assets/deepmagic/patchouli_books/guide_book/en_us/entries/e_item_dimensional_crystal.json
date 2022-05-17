@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Dimensional Crystal",
-      "text": "TODO"
+      "text": "The Dimensional Crystal is mainly a crafting ingredient, but also has a interactive use in combination with $(l:e_block_mana_relay)Mana Relays/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:dimensional_crystal"
     }
   ]
 }

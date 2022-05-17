@@ -53,7 +53,7 @@ public class TeleportationCrystal extends Item implements IHasModel, IMagicItem
     @Override
     public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
     {
-        tooltip.add(TextFormatting.WHITE + "Can teleport the player to the insanity dimension and back");
+        tooltip.add(TextFormatting.WHITE + "Can teleport the player to different dimensions");
         if(GuiScreen.isCtrlKeyDown())
         {
             tooltip.add(TextFormatting.BLUE + "Consumes " + ConfigHandler.teleportationCrystalManaCost + " Mana");

@@ -8,7 +8,7 @@
     {
       "type": "text",
       "title": "Deep Crystal Tools",
-      "text": "$(l:e_item_deep_crystal)Deep Crystals/el can be crafted into the all kinds of tools and weapons. Those are not only stronger than diamond ones, but can also be enchanted very easily."
+      "text": "$(l:e_item_deep_crystal)Deep Crystals/el can be crafted into all kinds of tools and weapons. Those are not only stronger than diamond ones, but can also be enchanted very easily."
     },
     {
       "type": "crafting",

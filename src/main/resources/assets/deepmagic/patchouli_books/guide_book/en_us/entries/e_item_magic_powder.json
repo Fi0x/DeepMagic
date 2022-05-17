@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Magic Powder",
-      "text": "TODO"
+      "text": "Magic Powder is a crafting ingredient which is also important when creating $(l:e_spell_overview)Spells/el. In addition to the crafting recipe, it can also be created by $(l:e_block_mana_infuser)infusing/el some $(l:e_item_deep_crystal_powder)Deep Crystal Powder/el with $(l:e_mana_machine_mana)Mana/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:magic_powder"
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "Empty Scroll",
+  "icon": "deepmagic:empty_scroll",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Empty Scroll",
+      "text": "This item is a crafting ingredient with no further use."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:empty_scroll"
+    }
+  ]
+}

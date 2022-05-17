@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Magic Sigil",
-      "text": "TODO"
+      "text": "This item has no use of its own, but is required as a crafting component in some recipes."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:magic_sigil"
     }
   ]
 }

@@ -8,7 +8,21 @@
     {
       "type": "text",
       "title": "Depth Tools",
-      "text": "TODO"
+      "text": "$(l:e_item_strongest_diamond)Strongest Diamonds/el can be crafted into all kinds of tools and weapons. Those are even stronger than the $(l:e_item_deep_crystal_tools)Deep Crystal/el ones."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:depth_sword",
+      "recipe2": "deepmagic:depth_pickaxe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:depth_shovel",
+      "recipe2": "deepmagic:depth_axe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:depth_hoe"
     }
   ]
 }

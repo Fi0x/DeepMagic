@@ -8,7 +8,11 @@
     {
       "type": "text",
       "title": "Mana Linker",
-      "text": "TODO"
+      "text": "The Mana Linker is a tool that you need to create a $(l:e_mana_machine_mana)Mana Network/el. It can link blocks together that require, relay or provide $(l:e_mana_machine_mana)Mana/el. To link one block to another, first right-click the receiving block to store its location. Then right-click the sending block to link both together. To clear coordinates from the Mana Linker, shift-right-click it."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:mana_linker"
     }
   ]
 }
