@@ -1,0 +1,16 @@
+{
+  "name": "Rock Troll",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Rock Troll",
+      "text": "Trolls are home to the $(l:e_dimension_insanity_dimension)Insanity Dimension/el and usually they don't leave their $(l:e_structure_rock_troll_cave)Caves/el. This is why it can be hard to find one of their kind, but when you do, be aware of their special defence mechanism."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:rock_troll"
+    }
+  ]
+}

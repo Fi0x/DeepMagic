@@ -1,0 +1,17 @@
+{
+  "name": "Crystal Blocks",
+  "icon": "deepmagic:deep_crystal_block",
+  "category": "deepmagic:c_blocks",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Crystal Blocks",
+      "text": "Crystal Blocks can be crafted from their respective crystals ($(l:e_item_deep_crystal)Deep Crystals/el and $(l:e_item_demon_crystal)Demon Crystals/el)."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:deep_crystal_block",
+      "recipe2": "deepmagic:demon_crystal_block"
+    }
+  ]
+}

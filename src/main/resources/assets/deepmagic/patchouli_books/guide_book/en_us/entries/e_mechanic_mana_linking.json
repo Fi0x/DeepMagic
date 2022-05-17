@@ -8,7 +8,7 @@
     {
       "type": "text",
       "title": "Mana Linking",
-      "text": "TODO"
+      "text": "To link multiple blocks together, you need a $(l:e_item_mana_linker)Mana Linker/el. This will allow you to transfer $(l:e_mana_machine_mana)Mana/el between them."
     }
   ]
 }

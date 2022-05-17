@@ -7,7 +7,33 @@
   "pages": [
     {
       "type": "text",
-      "text": "TODO"
+      "title": "Mana Generators",
+      "text": "Mana Generators produce $(l:e_mana_machine_mana)Mana/el by consuming different resources, that depend on the type of generator./br1With the help of a $(l:e_item_mana_linker)Mana Linker/el the Mana can be transferred to other machines that require it to work."
+    },
+    {
+      "type": "spotlight",
+      "item": "deepmagic:mana_generator_normal",
+      "link_recipe": true,
+      "text": "This version of the mana generator consumes regular furnace fuel to produce $(l:e_mana_machine_mana)Mana/el./br1It is slow and not very efficient."
+    },
+    {
+      "type": "spotlight",
+      "item": "deepmagic:mana_generator_insanity",
+      "text": "This version of the mana generator only consumes items from the $(l:e_dimension_insanity_dimension)Insanity dimension/el. If you have access to this dimension, it is very easy to fuel this generator./br1It is not very efficient, but produces $(l:e_mana_machine_mana)Mana/el at a much faster rate."
+    },
+    {
+      "type": "spotlight",
+      "item": "deepmagic:mana_generator_mob",
+      "text": "This version of the mana generator is a bit dangerous. It produces $(l:e_mana_machine_mana)Mana/el by hurting mobs until they are dead. The more mobs it can damage in its range, the more Mana it generates."
+    },
+    {
+      "type": "crafting",
+      "recipe2": "deepmagic:mana_generator_normal",
+      "recipe": "deepmagic:mana_generator_insanity"
+    },
+    {
+      "type": "crafting",
+      "recipe2": "deepmagic:mana_generator_mob"
     }
   ]
 }

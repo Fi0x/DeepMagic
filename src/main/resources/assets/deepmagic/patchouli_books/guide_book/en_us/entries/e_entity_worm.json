@@ -1,0 +1,16 @@
+{
+  "name": "Worm",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Worm",
+      "text": "Worms are like $(l:e_entity_cockroach)Cockroaches/el, they are everywhere in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el, flee when you attack them, and provide a small food source. The only difference is that worms are less common."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:worm"
+    }
+  ]
+}

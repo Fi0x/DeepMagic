@@ -6,7 +6,15 @@
     {
       "type": "text",
       "title": "Spell Overview",
-      "text": "TODO"
+      "text": "Spells are a core part of this mod. They require a $(l:e_item_spell_scroll)Spell Scroll/el to define what a Spell does and how it works. Defining the effect of a Spell can be done in a $(l:e_block_spell_stone)Spell Stone/el. To create a working spell, you need to decide which components you want to use. The available component types are 'Casts', 'Effects' and 'Modifiers'."
+    },
+    {
+      "type": "text",
+      "text": "Each spell requires at least one Cast-component, followed by at least one Effect. Modifiers will be applied to the previous Effect or Cast component, but are not required. To add components to the list in the $(l:e_block_spell_stone)Spell Stone/el GUI, you have to put the required items in the top 5 slots of the GUI and then click the 'Add' button. Once all desired components are added to the list, you can click the 'Bind' button to finalize the Spell."
+    },
+    {
+      "type": "text",
+      "text": "This process can be repeated multiple times for the same spell, in order to add multiple sequences to it."
     }
   ]
 }

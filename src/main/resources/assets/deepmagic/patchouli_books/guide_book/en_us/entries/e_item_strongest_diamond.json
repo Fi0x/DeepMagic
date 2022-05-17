@@ -2,13 +2,17 @@
   "name": "Strongest Diamond",
   "icon": "deepmagic:strongest_diamond",
   "category": "deepmagic:c_items",
-  "advancement": "deepmagic:strongest_diamond",
+  "advancement": "deepmagic:depth_wood",
   "secret": true,
   "pages": [
     {
       "type": "text",
       "title": "Strongest Diamond",
-      "text": "TODO"
+      "text": "This item is a crafting ingredient that is required for the $(l:e_item_depth_tools)Depth Tools/el, armor and the $(l:e_ritual_overview)Rituals/el. It requires crafting materials from the $(l:e_dimension_depth_dimension)Depth Dimension/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:strongest_diamond"
     }
   ]
 }

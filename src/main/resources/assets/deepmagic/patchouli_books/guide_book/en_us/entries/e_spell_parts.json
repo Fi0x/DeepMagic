@@ -4,9 +4,11 @@
   "category": "deepmagic:c_spells",
   "pages": [
     {
-      "type": "text",
+      "type": "link",
       "title": "Spell Parts",
-      "text": "TODO"
+      "text": "This page is not finished yet, but if you want to know what spell components are available, you can visit the DeepMagic Wiki.",//TODO
+      "url": "https://github.com/Fi0x/DeepMagic/wiki/Spell",
+      "link_text": "DeepMagic Wiki"
     }
   ]
 }

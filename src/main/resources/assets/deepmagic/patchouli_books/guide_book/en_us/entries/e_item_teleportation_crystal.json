@@ -8,7 +8,11 @@
     {
       "type": "text",
       "title": "Teleportation Crystal",
-      "text": "TODO"
+      "text": "This item is the only way to enter the $(l:e_dimension_insanity_dimension)Insanity/el and $(l:e_dimension_depth_dimension)Depth/el dimensions. To teleport between dimensions you need to have enough $(l:e_mana_player_mana)Mana/el./br1The $(l:e_dimension_insanity_dimension)Insanity Dimension/el and overworld can be reached with a simple right-click and the $(l:e_dimension_depth_dimension)Depth Dimension/el with a shift-right-click."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:teleportation_crystal"
     }
   ]
 }

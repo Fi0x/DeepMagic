@@ -8,7 +8,11 @@
     {
       "type": "text",
       "title": "Depth Chestplate",
-      "text": "TODO"
+      "text": "Armor made out of $(l:e_item_strongest_diamond)Strongest Diamonds/el is even better than the one made from $(l:e_item_deep_crystal)Deep Crystals/el. While the $(l:e_item_deep_crystal_armor)Deep Crystal Armor/el protects you pretty good from harm, the Depth Chestplate allows the wearer to negate all damage the player receives at the cost of some $(l:e_mana_player_mana)Mana/el instead of durability."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:depth_chestplate"
     }
   ]
 }

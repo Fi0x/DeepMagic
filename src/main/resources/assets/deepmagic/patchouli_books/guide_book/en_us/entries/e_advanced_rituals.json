@@ -12,7 +12,7 @@
     },
     {
       "type": "text",
-      "text": "you might want to perform other $(l:e_ritual_overview)Rituals/el that can make your life easier. Unfortunately these Rituals require some rare resources you can only get in the $(l:e_dimension_depth_dimension)Depth dimension/el, so you might want to travel there first (Introduced in '$(l:e_advanced_dimensional_travel)Dimensional Travel/el')./br1After you gathered all the resources you need, you can start crafting advanced Rituals. A list of them can be found in the 'Rituals' chapter."
+      "text": "you might want to perform other $(l:e_ritual_overview)Rituals/el that can make your life easier. Unfortunately these $(l:e_ritual_overview)Rituals/el require some rare resources you can only get in the $(l:e_dimension_depth_dimension)Depth dimension/el, so you might want to travel there first (Introduced in '$(l:e_advanced_dimensional_travel)Dimensional Travel/el')./br1After you gathered all the resources you need, you can start crafting advanced $(l:e_ritual_overview)Rituals/el."
     }
   ]
 }

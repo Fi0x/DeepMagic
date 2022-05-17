@@ -1,0 +1,17 @@
+{
+  "name": "Insanity Cow",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Insanity Cow",
+      "text": "These NPCs are like normal cows, but with a little 'insane' touch. As their name implies, Insanity Cows spawn in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el on the surface. They flee like normal cows when they are attacked."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:insanity_cow",
+      "scale": 0.9
+    }
+  ]
+}

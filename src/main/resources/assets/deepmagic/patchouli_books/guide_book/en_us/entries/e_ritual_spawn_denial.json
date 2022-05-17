@@ -1,0 +1,85 @@
+{
+  "name": "Spawn Denial Ritual",
+  "icon": "deepmagic:ritual_spawn_denial",
+  "category": "deepmagic:c_rituals",
+  "advancement": "deepmagic:ritual_structure",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spawn Denial Ritual",
+      "text": "This ritual will prevent mobs from spawning in an area around it."
+    },
+    {
+      "type": "multiblock",
+      "name": "Spawn Denial Ritual",
+      "multiblock_id": "",
+      "multiblock": {
+        "pattern": [
+          [
+            "         ",
+            "         ",
+            "    S    ",
+            "    S    ",
+            "  SS SS  ",
+            "    S    ",
+            "    S    ",
+            "         ",
+            "         "
+          ],
+          [
+            "         ",
+            "    S    ",
+            "         ",
+            "         ",
+            " S     S ",
+            "         ",
+            "         ",
+            "    S    ",
+            "         "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S       S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S   R   S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "   SSS   ",
+            "  SSSSS  ",
+            " SSSSSSS ",
+            "SSSSSSSSS",
+            "SSSS0SSSS",
+            "SSSSSSSSS",
+            " SSSSSSS ",
+            "  SSSSS  ",
+            "   SSS   "
+          ]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "deepmagic:ritual_structure",
+          "S": "deepmagic:ritual_structure",
+          "R": "deepmagic:ritual_spawn_denial"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

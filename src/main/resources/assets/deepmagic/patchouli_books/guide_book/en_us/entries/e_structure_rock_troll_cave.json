@@ -1,0 +1,12 @@
+{
+  "name": "Rock Troll Cave",
+  "icon": "deepmagic:insanity_stone",
+  "category": "deepmagic:c_structures",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Rock Troll Cave",
+      "text": "These caves spawn on the surface of the $(l:e_dimension_insanity_dimension)Insanity Dimension/el and inhabit a $(l:e_entity_rock_troll)Rock Troll/el."
+    }
+  ]
+}

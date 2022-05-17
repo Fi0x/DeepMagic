@@ -6,7 +6,26 @@
     {
       "type": "text",
       "title": "Deep Crystal",
-      "text": "TODO"
+      "text": "Deep Crystals are the basic ingredient for most of the crafting-recipes of this mod. They can be crafted into many devices as well as $(l:e_item_deep_crystal_tools)Tools/el and $(l:e_item_deep_crystal_armor)Armor/el. The most common source for Deep Crystals is the $(l:e_block_deep_crystal_ore)Deep Crystal Ore/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:deep_crystal"
+    },
+    {
+      "type": "smelting",
+      "recipe": "deepmagic:deep_crystal_powder",
+      "recipe2": "deepmagic:deep_crystal_ore"
+    },
+    {
+      "type": "smelting",
+      "recipe": "deepmagic:deep_crystal_nether_ore",
+      "recipe2": "deepmagic:deep_crystal_end_ore"
+    },
+    {
+      "type": "smelting",
+      "recipe": "deepmagic:insanity_deep_crystal_ore",
+      "recipe2": "deepmagic:deep_crystal_ore_compressed"
     }
   ]
 }

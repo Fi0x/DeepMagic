@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Deep Crystal Powder",
-      "text": "TODO"
+      "text": "This powder is nearly as often used in crafting recipes as $(l:e_item_deep_crystal)Deep Crystals/el are. It can be obtained from the $(l:e_block_deep_crystal_ore)Deep Crystal Ores/el or by $(l:e_block_mana_grinder)crushing/el $(l:e_item_deep_crystal)Deep Crystals/el."
     }
   ]
 }

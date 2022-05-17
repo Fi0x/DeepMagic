@@ -6,7 +6,24 @@
     {
       "type": "text",
       "title": "Altar of Knowledge",
-      "text": "TODO"
+      "text": "With the help of this block you can spend the $(l:e_mechanic_skillpoints)Skillpoints/el you earned to learn new $(l:e_skill_overview)Skills/el. If you don't have enough resources to craft this altar, you can try to find it instead as part of the $(l:e_structure_shrine)Shrine structure/el."
+    },
+    {
+      "type": "spotlight",
+      "item": "deepmagic:altar_of_knowledge",
+      "link_recipe": true,
+      "text": "This block does not require $(l:e_mana_machine_mana)Mana/el to function."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:altar_of_knowledge"
+    },
+    {
+      "type": "image",
+      "images": [
+        "deepmagic:images/altar_of_knowledge.png"
+      ],
+      "border": true
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "Dwarf Base Marker",
+  "icon": "deepmagic:spell_stone",
+  "category": "deepmagic:c_blocks",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Dwarf Base Marker",
+      "text": "This block can't be crafted and is only found in $(l:e_structure_dwarf_base)Dwarf Bases/el. It has a small chance to spawn new $(l:e_entity_dwarf)Dwarves/el and enables nearby $(l:e_entity_dwarf)Dwarves/el to strip-mine the area."
+    },
+    {
+      "type": "spotlight",
+      "item": "deepmagic:dwarf_base_marker"
+    }
+  ]
+}

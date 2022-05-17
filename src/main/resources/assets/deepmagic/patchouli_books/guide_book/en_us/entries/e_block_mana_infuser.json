@@ -8,7 +8,12 @@
     {
       "type": "text",
       "title": "Mana Infuser",
-      "text": "TODO"
+      "text": "The Mana Infuser is required to infuse items with $(l:e_mana_machine_mana)Mana/el. This can be used to transform a $(l:e_block_crystal_blocks)Deep Crystal Block/el into a $(l:e_block_crystal_blocks)Demon Crystal Block/el or to create $(l:e_item_magic_powder)Magic Powder/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:mana_infuser",
+      "text": "During the infusion process, the machine needs a constant supply of $(l:e_mana_machine_mana)Mana/el. This can be provided by $(l:e_mechanic_mana_linking)linking/el a $(l:e_mana_machine_sources)Mana source/el to the Mana Infuser."
     }
   ]
 }
