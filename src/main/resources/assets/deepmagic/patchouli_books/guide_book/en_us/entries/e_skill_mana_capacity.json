@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Mana Capacity",
-      "text": "TODO"
+      "text": "This $(l:e_skill_overview)Skill/el increases the maximum amount of $(l:e_mana_player_mana)Mana/el a player can have."
     }
   ]
 }

@@ -1,18 +1,18 @@
 {
-  "name": "Weather Ritual",
-  "icon": "deepmagic:ritual_weather",
+  "name": "Time Ritual",
+  "icon": "deepmagic:ritual_time",
   "category": "deepmagic:c_rituals",
   "advancement": "deepmagic:ritual_structure",
   "secret": true,
   "pages": [
     {
       "type": "text",
-      "title": "Weather Ritual",
-      "text": "This ritual can change the weather."
+      "title": "Time Ritual",
+      "text": "This ritual can change the time."
     },
     {
       "type": "multiblock",
-      "name": "Weather Ritual",
+      "name": "Time Ritual",
       "multiblock_id": "",
       "multiblock": {
         "pattern": [
@@ -76,7 +76,7 @@
           " ": "ANY",
           "0": "deepmagic:ritual_structure",
           "S": "deepmagic:ritual_structure",
-          "R": "deepmagic:ritual_weather"
+          "R": "deepmagic:ritual_time"
         },
         "symmetrical": true
       }

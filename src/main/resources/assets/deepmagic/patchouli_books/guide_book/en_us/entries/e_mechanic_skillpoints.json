@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Skillpoints",
-      "text": "TODO"
+      "text": "As you use $(l:e_spell_overview)Spells/el, you learn more and more about the magic you're using. This is represented in the Skillpoints you gain over time. These Skillpoints can then be used at an $(l:e_block_altar_of_knowledge)Altar of Knowledge/el to improve some of your $(l:e_skill_overview)Skills/el."
     }
   ]
 }

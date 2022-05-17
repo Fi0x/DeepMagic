@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Spell Tier",
-      "text": "TODO"
+      "text": "This $(l:e_skill_overview)Skill/el lets the player cast more difficult $(l:e_spell_overview)Spells/el."
     }
   ]
 }

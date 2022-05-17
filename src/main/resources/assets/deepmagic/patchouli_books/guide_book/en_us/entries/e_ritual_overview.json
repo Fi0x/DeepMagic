@@ -8,11 +8,11 @@
     {
       "type": "text",
       "title": "Ritual Overview",
-      "text": "There are multiple rituals that can simplify your life. Each of them requires a structure around them and $(l:e_mana_machine_mana)Mana/el to work./li$(l:e_ritual_quarry)Quarry/el/li$(l:e_ritual_spawn_denial)Spawn Denial/el/li$(l:e_ritual_weather)Weather/el"
+      "text": "There are multiple rituals that can simplify your life. Each of them requires a structure around them and $(l:e_mana_machine_mana)Mana/el to work./li$(l:e_ritual_quarry)Quarry/el/li$(l:e_ritual_spawn_denial)Spawn Denial/el/li$(l:e_ritual_weather)Weather/el."
     },
     {
       "type": "multiblock",
-      "name": "Rituals",
+      "name": "Empty Ritual",
       "multiblock_id": "",
       "multiblock": {
         "pattern": [

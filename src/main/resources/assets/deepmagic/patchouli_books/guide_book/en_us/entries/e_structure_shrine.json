@@ -1,12 +1,12 @@
 {
   "name": "Shrine",
-  "icon": "deepmagic:insanity_planks",
+  "icon": "deepmagic:altar_of_knowledge",
   "category": "deepmagic:c_structures",
   "pages": [
     {
       "type": "text",
       "title": "Shrine",
-      "text": "TODO"
+      "text": "Shrines are useful if you don't want to craft an $(l:e_block_altar_of_knowledge)Altar of Knowledge/el on your own but still want to improve your $(l:e_skill_overview)Skills/el. They can be found on the surface of the $(l:e_dimension_insanity_dimension)Insanity Dimension/el."
     }
   ]
 }
