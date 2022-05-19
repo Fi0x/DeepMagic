@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketReturnRitual implements IMessage
 {
@@ -62,11 +63,12 @@ public class PacketReturnRitual implements IMessage
         @Override
         public IMessage onMessage(PacketReturnRitual message, MessageContext ctx)
         {
-            if(!message.messageValid && ctx.side != Side.CLIENT) return null;
+            if(!message.messageValid || ctx.side != Side.CLIENT) return null;
             Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message));
             return null;
         }
 
+        @SideOnly(Side.CLIENT)
         void processMessage(PacketReturnRitual message)
         {
             World world = Minecraft.getMinecraft().world;

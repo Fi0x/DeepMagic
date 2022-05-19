@@ -5,7 +5,6 @@ import com.fi0x.deepmagic.init.ModBlocks;
 import com.fi0x.deepmagic.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
@@ -14,8 +13,8 @@ public class BiomeDepth extends Biome
 {
     private static final Block TOP_BLOCK = ModBlocks.DEPTH_STONE;
     private static final Block FILLER_BLOCK = ModBlocks.DEPTH_STONE;
-    private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0F, 0F);
-    private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.33F, 0.48F, 0.22F);
+    private static final int SKY_COLOR = 0;
+    private static final int FOLIAGE_COLOR = 3681309;
 
     public BiomeDepth()
     {

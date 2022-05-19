@@ -1,0 +1,46 @@
+{
+  "name": "Demon Stone",
+  "icon": "deepmagic:demon_stone",
+  "category": "deepmagic:c_blocks",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Demon Stone",
+      "text": "This block is required to summon the $(l:e_entity_demon)Demon/el and requires a structure to be build around it. When the structure is built, you can activate the block with a $(l:e_item_demon_crystal)Demon Crystal/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:demon_stone"
+    },
+    {
+      "type": "multiblock",
+      "name": "Demon Ritual",
+      "multiblock_id": "",
+      "multiblock":
+      {
+        "pattern":
+        [
+          [
+            "   ",
+            " D ",
+            "   "
+          ],
+          [
+            "IBI",
+            "B0B",
+            "IBI"
+          ]
+        ],
+        "mapping":
+        {
+          " ": "ANY",
+          "D": "deepmagic:demon_stone",
+          "0": "deepmagic:demon_crystal_block",
+          "I": "minecraft:iron_block",
+          "B": "deepmagic:deep_crystal_block"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

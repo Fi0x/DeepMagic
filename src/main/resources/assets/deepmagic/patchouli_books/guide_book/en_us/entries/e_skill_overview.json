@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Skill Overview",
-      "text": "TODO"
+      "text": "Skills are improvements a player can learn. They cost $(l:e_mechanic_skillpoints)Skillpoints/el to unlock and can be increased infinitely. To learn new Skills, you need to find or craft an $(l:e_block_altar_of_knowledge)Altar of Knowledge/el and interact with its GUI."
     }
   ]
 }

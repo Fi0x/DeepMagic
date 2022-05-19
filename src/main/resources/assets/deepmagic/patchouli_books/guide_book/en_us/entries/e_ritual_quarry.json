@@ -8,7 +8,78 @@
     {
       "type": "text",
       "title": "Quarry Ritual",
-      "text": "TODO"
+      "text": "This Ritual is used to dig out areas. It requires $(l:e_mana_machine_mana)Mana/el to work and a redstone signal. When active, it will dig below the structure in a 4 block radius and pop out the mined items on top or put them into a chest if one is above the ritual-block."
+    },
+    {
+      "type": "multiblock",
+      "name": "Quarry Ritual",
+      "multiblock_id": "",
+      "multiblock": {
+        "pattern": [
+          [
+            "         ",
+            "         ",
+            "    S    ",
+            "    S    ",
+            "  SS SS  ",
+            "    S    ",
+            "    S    ",
+            "         ",
+            "         "
+          ],
+          [
+            "         ",
+            "    S    ",
+            "         ",
+            "         ",
+            " S     S ",
+            "         ",
+            "         ",
+            "    S    ",
+            "         "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S       S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S   R   S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "   SSS   ",
+            "  SSSSS  ",
+            " SSSSSSS ",
+            "SSSSSSSSS",
+            "SSSS0SSSS",
+            "SSSSSSSSS",
+            " SSSSSSS ",
+            "  SSSSS  ",
+            "   SSS   "
+          ]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "deepmagic:ritual_structure",
+          "S": "deepmagic:ritual_structure",
+          "R": "deepmagic:ritual_quarry"
+        },
+        "symmetrical": true
+      }
     }
   ]
 }

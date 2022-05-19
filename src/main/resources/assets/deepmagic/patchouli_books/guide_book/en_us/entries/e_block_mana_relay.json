@@ -8,7 +8,11 @@
     {
       "type": "text",
       "title": "Mana Relay",
-      "text": "TODO"
+      "text": "The Mana Relay can be used to transfer $(l:e_mana_machine_mana)Mana/el over long distances and to power multiple blocks from one source. By default it can transfer $(l:e_mana_machine_mana)Mana/el up to 10 blocks. To increase the range at which this block can operate, add a $(l:e_item_dimensional_crystal)Dimensional Crystal/el to it by right-clicking. $(l:e_mechanic_mana_linking)Linking/el this block with other blocks can be done with the help of a $(l:e_item_mana_linker)Mana Linker/el."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:mana_relay"
     }
   ]
 }

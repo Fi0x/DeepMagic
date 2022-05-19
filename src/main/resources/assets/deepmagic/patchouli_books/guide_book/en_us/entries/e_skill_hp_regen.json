@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Health Regeneration",
-      "text": "TODO"
+      "text": "This $(l:e_skill_overview)Skill/el increases the amount of HP regenerated whenever the player regenerates health."
     }
   ]
 }

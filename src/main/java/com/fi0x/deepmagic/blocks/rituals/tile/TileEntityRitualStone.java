@@ -24,6 +24,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
     protected int syncTime = 20;
     protected boolean manaOnSync = true;
     protected boolean needsRedstone = true;
+    protected boolean needsStructure = true;
 
     @Nonnull
     @Override
@@ -36,6 +37,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         compound.setInteger("syncTime", syncTime);
         compound.setBoolean("manaOnSync", manaOnSync);
         compound.setBoolean("redstoneMode", needsRedstone);
+        compound.setBoolean("structureRequired", needsStructure);
 
         return super.writeToNBT(compound);
     }
@@ -49,6 +51,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
         syncTime = compound.getInteger("syncTime");
         manaOnSync = compound.getBoolean("manaOnSync");
         needsRedstone = compound.getBoolean("redstoneMode");
+        needsStructure = compound.getBoolean("structureRequired");
 
         super.readFromNBT(compound);
     }
@@ -64,7 +67,7 @@ public abstract class TileEntityRitualStone extends TileEntity implements ITicka
 
         if(!needsRedstone || hasRedstonePower())
         {
-            if(StructureChecker.verifyRitualStructure(world, pos, type))
+            if(!needsStructure || StructureChecker.verifyRitualStructure(world, pos, type))
             {
                 if(manaOnSync)
                 {

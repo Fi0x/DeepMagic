@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Player Mana",
-      "text": "TODO"
+      "text": "This type of Mana is used by the Player, and each one has his own pool. Player Mana replenishes automatically over time until the maximum capacity of that player is reached. The Player Mana is consumed by items like $(l:e_spell_overview)Spells/el and $(l:e_item_teleportation_crystal)Teleportation Crystals/el."
     }
   ]
 }

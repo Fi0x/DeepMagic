@@ -8,7 +8,11 @@
     {
       "type": "text",
       "title": "Mana Furnace",
-      "text": "TODO"
+      "text": "The Mana Furnace is pretty similar to a normal furnace. The only difference is that this one does not require any items to fuel it, but instead consumes $(l:e_mana_machine_mana)Mana/el to smelt items."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:mana_furnace"
     }
   ]
 }

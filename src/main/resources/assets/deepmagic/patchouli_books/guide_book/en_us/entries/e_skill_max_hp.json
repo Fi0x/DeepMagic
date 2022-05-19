@@ -6,7 +6,7 @@
     {
       "type": "text",
       "title": "Maximum Health",
-      "text": "TODO"
+      "text": "This $(l:e_skill_overview)Skill/el increases the maximum amount of HP a player can have."
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "Depth Mage",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Depth Mage",
+      "text": "The Depth Mage uses the same magic as you do. Luckily he is friendly if you don't attack him and fights against mobs he encounters. The only place where this entity can spawn is in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:depth_mage"
+    }
+  ]
+}

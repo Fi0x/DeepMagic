@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.mana.spells.effects.offensive;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -44,7 +45,7 @@ public class SpEfPhysicalDamage implements ISpellEffect
         ArrayList<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
-        //TODO: Recipe missing
+        list.add(new ItemStack(Items.STONE_SWORD));
 
         return list;
     }

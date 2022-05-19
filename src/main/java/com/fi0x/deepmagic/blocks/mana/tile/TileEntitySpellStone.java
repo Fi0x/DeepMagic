@@ -19,8 +19,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -41,7 +39,6 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
     private ArrayList<String> partNames = new ArrayList<>();
     private String currentPartName = "";
 
-    @SideOnly(Side.CLIENT)
     private int sync = 0;
 
     private int manaAdder;
@@ -81,7 +78,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                         break;
                     case 2:
                         ISpellPart matchingPart = verifier.getPartFromItems();
-                        if(matchingPart == null) break;
+                        if(matchingPart == null) break; //TODO: Find out why this is sometimes null when a recipe should be available
 
                         double[] castModifiers = matchingPart.getCastModifiers();
                         manaAdder += castModifiers[0];
@@ -111,7 +108,7 @@ public class TileEntitySpellStone extends TileEntity implements IInventory, ITic
                 PacketHandler.INSTANCE.sendToServer(new PacketGetSpellStone(world.provider.getDimension(), pos));
                 ISpellPart currentPart = verifier.getPartFromItems();
                 if(currentPart != null) currentPartName = currentPart.getDisplayName();
-                else currentPartName = "";
+                else currentPartName = "Unknown";
             }
         }
 

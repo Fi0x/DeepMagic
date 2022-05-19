@@ -1,0 +1,16 @@
+{
+  "name": "Spell Scroll",
+  "icon": "deepmagic:spell",
+  "category": "deepmagic:c_items",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Spell Scroll",
+      "text": "This item is the base of all spells. To create a working $(l:e_spell_overview)Spell/el you need to get a Spell Scroll first."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:spell"
+    }
+  ]
+}

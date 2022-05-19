@@ -1,0 +1,16 @@
+{
+  "name": "Cockroach",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Cockroach",
+      "text": "Cockroaches spawn in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el in dark places like mines. They flee instead of attacking and provide a small food source."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:cockroach"
+    }
+  ]
+}

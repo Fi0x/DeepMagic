@@ -1,0 +1,7 @@
+{
+  "name": "Structures",
+  "description": "All Structures that can be found in the world.",
+  "icon": "deepmagic:insanity_planks",
+  "sortnum": 11,
+  "secret": true
+}

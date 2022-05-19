@@ -1,0 +1,13 @@
+{
+  "name": "Nether Worm",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "flag": "debug",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Nether Worm",
+      "text": "This mob is currently not finished and will be the boss of the nether."
+    }
+  ]
+}

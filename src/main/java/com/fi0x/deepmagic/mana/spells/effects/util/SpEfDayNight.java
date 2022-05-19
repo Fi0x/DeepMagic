@@ -3,6 +3,7 @@ package com.fi0x.deepmagic.mana.spells.effects.util;
 import com.fi0x.deepmagic.init.ModItems;
 import com.fi0x.deepmagic.mana.spells.effects.ISpellEffect;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -40,7 +41,8 @@ public class SpEfDayNight implements ISpellEffect
         ArrayList<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(ModItems.MAGIC_CONVERTER));
-        //TODO: Recipe missing
+        list.add(new ItemStack(Items.CLOCK));
+        list.add(new ItemStack(ModItems.EMPTY_SCROLL));
 
         return list;
     }
@@ -56,6 +58,7 @@ public class SpEfDayNight implements ISpellEffect
     {
         WorldInfo info = world.getWorldInfo();
         info.setWorldTotalTime(info.getWorldTotalTime() + 12000);
+        //TODO: Fix it, not working right now
     }
     @Override
     public void applyEffect(@Nullable EntityLivingBase caster, EntityLivingBase targetEntity)

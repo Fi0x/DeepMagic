@@ -6,7 +6,11 @@
     {
       "type": "text",
       "title": "Machine Mana",
-      "text": "TODO"
+      "text": "This type of Mana is produced and used by blocks. These blocks can be linked with a $(l:e_item_mana_linker)Mana Linker/el to transfer Mana between them and create a network. It is very similar to energy like RF in the way it behaves."
+    },
+    {
+      "type": "text",
+      "text": "Important blocks that interact with Mana are the $(l:e_mana_machine_sources)Mana Sources/el and $(l:e_block_mana_relay)Relay/el."
     }
   ]
 }

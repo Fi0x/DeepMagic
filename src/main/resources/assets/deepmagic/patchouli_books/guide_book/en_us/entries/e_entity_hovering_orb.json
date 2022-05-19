@@ -1,0 +1,17 @@
+{
+  "name": "Hovering Orb",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Hovering Orb",
+      "text": "This mob spawns everywhere in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el and attacks the player as soon as it sees him. Even though it is not very fast, it can still be very annoying and even dangerous is larger groups. Due to the flight capability of this mob, it is also very hard to escape him."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:hovering_orb",
+      "scale": 0.8
+    }
+  ]
+}

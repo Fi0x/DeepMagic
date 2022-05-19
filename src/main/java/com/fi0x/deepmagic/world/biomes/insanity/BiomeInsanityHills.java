@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -22,8 +21,8 @@ public class BiomeInsanityHills extends Biome
 {
     private static final Block TOP_BLOCK = ModBlocks.INSANITY_GRASS;
     private static final Block FILLER_BLOCK = ModBlocks.INSANITY_DIRT;
-    private static final int SKY_COLOR = MathHelper.hsvToRGB(0.1F, 0.91F, 0.50F);
-    private static final int FOLIAGE_COLOR = MathHelper.hsvToRGB(0.319F, 1F, 0.57F);
+    private static final int SKY_COLOR = 8396555;
+    private static final int FOLIAGE_COLOR = 9522688;
 
     public BiomeInsanityHills()
     {

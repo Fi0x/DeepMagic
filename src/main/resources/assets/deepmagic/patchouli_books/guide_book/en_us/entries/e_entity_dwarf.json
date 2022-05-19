@@ -1,0 +1,16 @@
+{
+  "name": "Dwarf",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Dwarf",
+      "text": "This entity is usually neutral. It won't attack other NPCs and only attacks the player if he attacks first. If he is near a $(l:e_block_dwarf_base_marker)Dwarf Base Marker/el, he will start strip-mining. The only place where Dwarves can be found is in $(l:e_structure_dwarf_base)Dwarf Bases/el in the $(l:e_dimension_insanity_dimension)Insanity Dimension/el and $(l:e_dimension_depth_dimension)Depth Dimension/el."
+    },
+    {
+      "type": "entity",
+      "entity": "deepmagic:dwarf"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "name": "Time Ritual",
+  "icon": "deepmagic:ritual_time",
+  "category": "deepmagic:c_rituals",
+  "advancement": "deepmagic:ritual_structure",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Time Ritual",
+      "text": "This ritual can change the time."
+    },
+    {
+      "type": "multiblock",
+      "name": "Time Ritual",
+      "multiblock_id": "",
+      "multiblock": {
+        "pattern": [
+          [
+            "         ",
+            "         ",
+            "    S    ",
+            "    S    ",
+            "  SS SS  ",
+            "    S    ",
+            "    S    ",
+            "         ",
+            "         "
+          ],
+          [
+            "         ",
+            "    S    ",
+            "         ",
+            "         ",
+            " S     S ",
+            "         ",
+            "         ",
+            "    S    ",
+            "         "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S       S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S   R   S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "   SSS   ",
+            "  SSSSS  ",
+            " SSSSSSS ",
+            "SSSSSSSSS",
+            "SSSS0SSSS",
+            "SSSSSSSSS",
+            " SSSSSSS ",
+            "  SSSSS  ",
+            "   SSS   "
+          ]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "deepmagic:ritual_structure",
+          "S": "deepmagic:ritual_structure",
+          "R": "deepmagic:ritual_time"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

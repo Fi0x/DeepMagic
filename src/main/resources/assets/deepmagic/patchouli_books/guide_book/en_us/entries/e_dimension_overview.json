@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "TODO"
+      "text": "This mod adds two new dimensions, which can only be reached with a $(l:e_item_teleportation_crystal)Teleportation Crystal/el./br1The first one is the $(l:e_dimension_insanity_dimension)Insanity Dimension/el, which is similar to the overworld./br1The second dimension you can reach is the $(l:e_dimension_depth_dimension)Depth Dimension/el, which is very useful for mining."
     }
   ]
 }

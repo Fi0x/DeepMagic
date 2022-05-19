@@ -8,7 +8,50 @@
     {
       "type": "text",
       "title": "Spell Stone",
-      "text": "TODO"
+      "text": "The Spell Stone is required to create $(l:e_spell_overview)Spells/el. The GUI of this block can only be opened if the correct structure is built around it. Inside the GUI there is a slot for a $(l:e_item_spell_scroll)Spell Scroll/el where you can put an empty or already filled $(l:e_item_spell_scroll)Spell/el. There are also 5 slots for items that need to be filled with the correct items to create different $(l:e_spell_parts)Spell Components/el."
+    },
+    {
+      "type": "text",
+      "text": "The Add-button is used to add the currently selected $(l:e_spell_parts)Spell Component/el to the list below. This action will remove one of each required item. Finally, when you are finished with the list, you have to bind the selected $(l:e_spell_parts)Components/el to the spell by clicking the Bind-button."
+    },
+    {
+      "type": "crafting",
+      "recipe": "deepmagic:spell_stone"
+    },
+    {
+      "type": "multiblock",
+      "name": "Spell Stone",
+      "multiblock_id": "",
+      "multiblock":
+      {
+        "pattern":
+        [
+          [
+            "     ",
+            " CGC ",
+            " GSG ",
+            " CGC ",
+            "     "
+          ],
+          [
+            "O O O",
+            "     ",
+            "O 0 O",
+            "     ",
+            "O O O"
+          ]
+        ],
+        "mapping":
+        {
+          " ": "ANY",
+          "0": "deepmagic:mana_relay",
+          "G": "minecraft:glowstone",
+          "C": "deepmagic:deep_crystal_block",
+          "O": "minecraft:obsidian",
+          "S": "deepmagic:spell_stone"
+        },
+        "symmetrical": true
+      }
     }
   ]
 }

@@ -8,7 +8,79 @@
     {
       "type": "text",
       "title": "Ritual Overview",
-      "text": "TODO"
+      "text": "There are multiple rituals that can simplify your life. Each of them requires a structure around them and $(l:e_mana_machine_mana)Mana/el to work./li$(l:e_ritual_quarry)Quarry/el/li$(l:e_ritual_spawn_denial)Spawn Denial/el/li$(l:e_ritual_weather)Weather/el."
+    },
+    {
+      "type": "multiblock",
+      "name": "Empty Ritual",
+      "multiblock_id": "",
+      "multiblock": {
+        "pattern": [
+          [
+            "         ",
+            "         ",
+            "    S    ",
+            "    S    ",
+            "  SS SS  ",
+            "    S    ",
+            "    S    ",
+            "         ",
+            "         "
+          ],
+          [
+            "         ",
+            "    S    ",
+            "         ",
+            "         ",
+            " S     S ",
+            "         ",
+            "         ",
+            "    S    ",
+            "         "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S       S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "    S    ",
+            "         ",
+            "         ",
+            "         ",
+            "S   R   S",
+            "         ",
+            "         ",
+            "         ",
+            "    S    "
+          ],
+          [
+            "   SSS   ",
+            "  SSSSS  ",
+            " SSSSSSS ",
+            "SSSSSSSSS",
+            "SSSS0SSSS",
+            "SSSSSSSSS",
+            " SSSSSSS ",
+            "  SSSSS  ",
+            "   SSS   "
+          ]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "deepmagic:ritual_structure",
+          "S": "deepmagic:ritual_structure",
+          "R": "deepmagic:ritual_none"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
     }
   ]
 }

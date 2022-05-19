@@ -1,0 +1,13 @@
+{
+  "name": "Cyclopes",
+  "icon": "minecraft:spawn_egg",
+  "category": "deepmagic:c_entities",
+  "flag": "debug",
+  "pages": [
+    {
+      "type": "text",
+      "title": "Cyclopes",
+      "text": "This entity is currently not implemented, so don't bother searching for it."
+    }
+  ]
+}
