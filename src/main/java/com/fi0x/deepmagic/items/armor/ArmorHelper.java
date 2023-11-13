@@ -88,7 +88,7 @@ public class ArmorHelper
         {
             player.capabilities.allowFlying = false;
             player.capabilities.isFlying = false;
-            //TODO: Check if armor was unequipped in this tick and disable flight if true
+            //TODO: Check if armor was unequipped in this tick and disable flight if true (only if the above doesn't suffice)
         }
     }
     private static void nightVision(EntityPlayer player)
