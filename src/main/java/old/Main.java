@@ -1,0 +1,111 @@
+package old;
+
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import old.entities.ai.helper.AIHelperSearchMines;
+import old.init.BiomeInit;
+import old.init.DimensionInit;
+import old.init.EntityInit;
+import old.init.ModFluids;
+import old.mana.player.PlayerMana;
+import old.mana.player.PlayerPropertyEvents;
+import old.proxy.CommonProxy;
+import old.util.Reference;
+import old.util.compat.OreDictionaryRegistry;
+import old.util.recipes.ModRecipes;
+import old.world.generators.ModWorldGen;
+import old.world.generators.WorldGenCustomStructures;
+import old.world.generators.plants.WorldGenCustomTrees;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
+import java.io.File;
+
+@Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
+public class Main
+{
+	private static org.apache.logging.log4j.Logger logger;
+	public static File config;
+
+	@Mod.Instance
+	public static Main instance;
+
+	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
+	public static CommonProxy proxy;
+
+	static
+	{
+		FluidRegistry.enableUniversalBucket();
+	}
+
+	@Mod.EventHandler
+	public static void preInit(FMLPreInitializationEvent event)
+	{
+		ConfigHandler.registerConfig(event);
+		proxy.preInit(event);
+		PacketHandler.registerMessages(Reference.MOD_ID);
+		ModFluids.registerFluids();
+		EntityInit.registerEntities();
+		proxy.preInit2(event);
+		BiomeInit.registerBiomes();
+		DimensionInit.registerDimensions();
+		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
+		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
+		WorldGenCustomTrees.register();
+
+		MinecraftForge.EVENT_BUS.register(PlayerPropertyEvents.instance);
+		CapabilityManager.INSTANCE.register(PlayerMana.class, new Capability.IStorage<PlayerMana>() {
+			@Nullable
+			@Override
+			public NBTBase writeNBT(Capability<PlayerMana> capability, PlayerMana instance, EnumFacing side) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void readNBT(Capability<PlayerMana> capability, PlayerMana instance, EnumFacing side, NBTBase nbt) {
+				throw new UnsupportedOperationException();
+			}
+		}, () -> null);
+	}
+
+	@Mod.EventHandler
+	public static void init(FMLInitializationEvent event)
+	{
+		ModRecipes.init();
+		OreDictionaryRegistry.registerOres();
+		SoundsHandler.registerSounds();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+		proxy.init(event);
+	}
+
+	@Mod.EventHandler
+	public static void PostInit(FMLPostInitializationEvent event)
+    {
+        AIHelperSearchMines.fillMiningWhitelists();
+    }
+
+	@Mod.EventHandler
+	public static void serverInit(FMLServerStartingEvent event)
+	{
+		RegistryHandler.serverRegistries(event);
+	}
+
+	public static Logger getLogger()
+	{
+		if(logger == null) logger = LogManager.getFormatterLogger(Reference.MOD_ID);
+		return logger;
+	}
+}
