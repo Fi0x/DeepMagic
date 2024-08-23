@@ -1,0 +1,6 @@
+{
+   "parent": "minecraft:block/cube_all",
+   "textures": {
+       "all": "deepmagic:block/deep_crystal_block"
+   }
+}

@@ -10,12 +10,36 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModTabs
 {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DeepMagic.MOD_ID);
+	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(
+			Registries.CREATIVE_MODE_TAB, DeepMagic.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> ITEMS = CREATIVE_MODE_TABS.register("deepmagic_items_tab", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(ModItems.DEEP_CRYSTAL.get()))
-            .title(Component.translatable("itemGroup.deepmagic_items_tab"))
-            .displayItems((pParameters, pOutput) -> {
-                pOutput.accept(ModItems.DEEP_CRYSTAL.get());
-            }).build());
+	public static final RegistryObject<CreativeModeTab> ITEMS =
+			CREATIVE_MODE_TABS.register("deepmagic_items_tab",
+										() -> CreativeModeTab.builder().icon(() -> new ItemStack(
+												ModItems.DEEP_CRYSTAL.get())).title(Component.translatable(
+												"itemGroup.deepmagic_items_tab")).displayItems(
+												(pParameters, pOutput) -> {
+													pOutput.accept(
+															ModItems.DEEP_CRYSTAL.get());
+												}).build());
+
+	public static final RegistryObject<CreativeModeTab> BLOCKS =
+			CREATIVE_MODE_TABS.register("deepmagic_blocks_tab",
+										() -> CreativeModeTab.builder().icon(
+																	 () -> new ItemStack(ModBlocks.DEEP_CRYSTAL_BLOCK.get()))
+															 .title(Component.translatable(
+																	 "itemGroup.deepmagic_blocks_tab"))
+															 .displayItems((pParameters, pOutput) -> {
+																 pOutput.accept(ModBlocks.DEEP_CRYSTAL_BLOCK.get());
+															 }).build());
+
+	public static final RegistryObject<CreativeModeTab> SPELLS =
+			CREATIVE_MODE_TABS.register("deepmagic_spells_tab",
+										() -> CreativeModeTab.builder().icon(
+																	 () -> new ItemStack(ModBlocks.DEEP_CRYSTAL_BLOCK.get()))
+															 .title(Component.translatable(
+																	 "itemGroup.deepmagic_spells_tab"))
+															 .displayItems((pParameters, pOutput) -> {
+																 pOutput.accept(ModBlocks.DEEP_CRYSTAL_BLOCK.get());
+															 }).build());
 }
