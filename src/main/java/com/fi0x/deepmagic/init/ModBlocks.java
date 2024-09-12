@@ -22,6 +22,10 @@ public class ModBlocks
 			BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(5.0F).explosionResistance(15.0F)
 									 .requiresCorrectToolForDrops().sound(SoundType.GLASS)));
 
+	public static final RegistryObject<Block> DEEP_CRYSTAL_ORE = registerBlock("deep_crystal_ore", () -> new Block(
+			BlockBehaviour.Properties.of().strength(3.0F).explosionResistance(5.0F)
+									 .requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block)
 	{
 		RegistryObject<T> toReturn = BLOCKS.register(name, block);

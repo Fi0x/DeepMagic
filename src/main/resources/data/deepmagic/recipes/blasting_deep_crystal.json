@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "deep_crystal",
+  "ingredient": {
+    "item": "deepmagic:deep_crystal_ore"
+  },
+  "result": "deepmagic:deep_crystal"
+}

@@ -31,6 +31,7 @@ public class ModTabs
 																	 "itemGroup.deepmagic_blocks_tab"))
 															 .displayItems((pParameters, pOutput) -> {
 																 pOutput.accept(ModBlocks.DEEP_CRYSTAL_BLOCK.get());
+																 pOutput.accept(ModBlocks.DEEP_CRYSTAL_ORE.get());
 															 }).build());
 
 	public static final RegistryObject<CreativeModeTab> SPELLS =
