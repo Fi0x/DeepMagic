@@ -7,5 +7,8 @@
   "ingredient": {
     "item": "deepmagic:deep_crystal_ore"
   },
-  "result": "deepmagic:deep_crystal"
+  "result": {
+    "id": "deepmagic:deep_crystal",
+    "count": 1
+  }
 }
