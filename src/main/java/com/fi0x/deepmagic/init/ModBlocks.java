@@ -1,9 +1,11 @@
 package com.fi0x.deepmagic.init;
 
 import com.fi0x.deepmagic.DeepMagic;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -22,9 +24,9 @@ public class ModBlocks
 			BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(5.0F).explosionResistance(15.0F)
 									 .requiresCorrectToolForDrops().sound(SoundType.GLASS)));
 
-	public static final RegistryObject<Block> DEEP_CRYSTAL_ORE = registerBlock("deep_crystal_ore", () -> new Block(
-			BlockBehaviour.Properties.of().strength(3.0F).explosionResistance(5.0F)
-									 .requiresCorrectToolForDrops().sound(SoundType.STONE)));
+	public static final RegistryObject<Block> DEEP_CRYSTAL_ORE = registerBlock("deep_crystal_ore", () -> new DropExperienceBlock(
+			UniformInt.of(4, 8),
+			BlockBehaviour.Properties.of().strength(3.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block)
 	{
